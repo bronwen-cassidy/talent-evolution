@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="OrdersReport" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="782" leftMargin="30" rightMargin="30"
+              topMargin="30" bottomMargin="30">
+    <style name="Arial_Normal" isDefault="true" fontName="Arial" fontSize="8" isBold="false" isItalic="false" isUnderline="false"
+           isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+    <style name="Arial_Bold" isDefault="false" fontName="Arial" fontSize="8" isBold="true" isItalic="false" isUnderline="false"
+           isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+
+    <field name="gender" class="java.lang.String"/>
+    <field name="highPotential" class="java.lang.String"/>
+
+
+    <summary>
+        <band height="60">
+            <crosstab isRepeatColumnHeaders="false">
+                <reportElement x="0" y="0" width="782" height="60" mode="Opaque"/>
+                <!--<crosstabDataset>-->
+                    <!--<dataset/>-->
+                <!--</crosstabDataset>-->
+
+                <rowGroup name="CountryRow" width="80" totalPosition="End">
+                    <bucket>
+                        <bucketExpression class="java.lang.String">$F{gender}</bucketExpression>
+                    </bucket>
+                    <crosstabRowHeader>
+                        <cellContents>
+                            <box borderColor="black" bottomBorder="1Point" rightBorder="1Point" leftBorder="1Point"/>
+                            <textField>
+                                <reportElement x="5" y="0" width="75" height="20" style="Arial_Bold"/>
+                                <textElement verticalAlignment="Middle"/>
+                                <textFieldExpression><![CDATA[$V{GenderValue}]]></textFieldExpression>
+                            </textField>
+                        </cellContents>
+                    </crosstabRowHeader>
+
+                    <!--<crosstabTotalRowHeader>-->
+                        <!--<cellContents>-->
+                            <!--<box borderColor="black" border="1Point"/>-->
+                            <!--<staticText>-->
+                                <!--<reportElement x="5" y="0" width="75" height="20" style="Arial_Bold"/>-->
+                                <!--<textElement verticalAlignment="Middle">-->
+                                    <!--<font size="12"/>-->
+                                <!--</textElement>-->
+                                <!--<text>TOTAL</text>-->
+                            <!--</staticText>-->
+                        <!--</cellContents>-->
+                    <!--</crosstabTotalRowHeader>-->
+                </rowGroup>
+
+                <columnGroup name="FreightColumn" height="20" totalPosition="End">
+                    <bucket>
+                        <bucketExpression class="java.lang.String">$F{highPotential}</bucketExpression>
+                    </bucket>
+                    <crosstabColumnHeader>
+                        <cellContents>
+                            <box borderColor="black" topBorder="1Point" rightBorder="1Point" bottomBorder="1Point"/>
+                            <textField>
+                                <reportElement x="0" y="0" width="60" height="20" style="Arial_Bold"/>
+                                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                                <textFieldExpression>
+                                    <![CDATA[$V{HighPot}]]></textFieldExpression>
+                            </textField>
+                        </cellContents>
+                    </crosstabColumnHeader>
+
+                    <!--<crosstabTotalColumnHeader>-->
+                        <!--<cellContents>-->
+                            <!--<box borderColor="black" border="1Point"/>-->
+                            <!--<staticText>-->
+                                <!--<reportElement x="0" y="0" width="60" height="20" style="Arial_Bold"/>-->
+                                <!--<textElement textAlignment="Center" verticalAlignment="Middle">-->
+                                    <!--<font size="12"/>-->
+                                <!--</textElement>-->
+                                <!--<text>TOTAL</text>-->
+                            <!--</staticText>-->
+                        <!--</cellContents>-->
+                    <!--</crosstabTotalColumnHeader>-->
+
+                </columnGroup>
+
+                <!-- measures define the variables available it seems -->
+                <measure name="GenderValue" class="java.lang.Integer" calculation="Count">
+                    <measureExpression>$F{gender}</measureExpression>
+                </measure>
+
+                <measure name="HighPot" class="java.lang.Integer" calculation="Count">
+                    <measureExpression>$F{highPotential}</measureExpression>
+                </measure>
+
+                <crosstabCell width="200" height="40">
+                    <cellContents backcolor="#FFFFFF">
+                        <box borderColor="black" bottomBorder="Thin" rightBorder="Thin"/>
+                        <textField>
+                            <reportElement x="0" y="0" width="60" height="10"/>
+                            <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                            <textFieldExpression class="java.lang.Integer">$V{GenderValue}</textFieldExpression>
+                        </textField>
+
+                        <!--<textField isBlankWhenNull="true">-->
+                            <!--<reportElement x="0" y="10" width="60" height="10"/>-->
+                            <!--<textElement textAlignment="Center" verticalAlignment="Middle"/>-->
+                            <!--<textFieldExpression class="java.lang.Integer">$V{HighPot}</textFieldExpression>-->
+                        <!--</textField>-->
+                    </cellContents>
+                </crosstabCell>
+
+                <!--<crosstabCell width="60" height="20" rowTotalGroup="CountryRow">-->
+                    <!--<cellContents backcolor="yellow">-->
+                        <!--<box borderColor="black" bottomBorder="1Point" rightBorder="1Point" topBorder="1Point"/>-->
+                        <!--<textField>-->
+                            <!--<reportElement x="0" y="0" width="60" height="10" style="Arial_Bold"/>-->
+                            <!--<textElement textAlignment="Center" verticalAlignment="Middle"/>-->
+                            <!--<textFieldExpression class="java.lang.Integer">$V{GenderValue}</textFieldExpression>-->
+                        <!--</textField>-->
+                        <!--<textField pattern="MM/dd/yyyy" isBlankWhenNull="true">-->
+                            <!--<reportElement x="0" y="10" width="60" height="10" style="Arial_Bold"/>-->
+                            <!--<textElement textAlignment="Center" verticalAlignment="Middle"/>-->
+                            <!--<textFieldExpression class="java.sql.Timestamp">$V{MaxDate}</textFieldExpression>-->
+                        <!--</textField>-->
+                    <!--</cellContents>-->
+                <!--</crosstabCell>-->
+<!---->
+                <!--<crosstabCell width="60" height="20" columnTotalGroup="FreightColumn">-->
+                    <!--<cellContents backcolor="green">-->
+                        <!--<box borderColor="black" bottomBorder="1Point" leftBorder="1Point" rightBorder="1Point"/>-->
+                        <!--<textField>-->
+                            <!--<reportElement x="0" y="0" width="60" height="10" style="Arial_Bold"/>-->
+                            <!--<textElement textAlignment="Center" verticalAlignment="Middle"/>-->
+                            <!--<textFieldExpression class="java.lang.Integer">$V{GenderValue}</textFieldExpression>-->
+                        <!--</textField>-->
+                        <!--<textField pattern="MM/dd/yyyy" isBlankWhenNull="true">-->
+                            <!--<reportElement x="0" y="10" width="60" height="10" style="Arial_Bold"/>-->
+                            <!--<textElement textAlignment="Center" verticalAlignment="Middle"/>-->
+                            <!--<textFieldExpression class="java.sql.Timestamp">$V{MaxDate}</textFieldExpression>-->
+                        <!--</textField>-->
+                    <!--</cellContents>-->
+                <!--</crosstabCell>-->
+<!---->
+                <!--<crosstabCell width="60" height="20" rowTotalGroup="CountryRow" columnTotalGroup="FreightColumn">-->
+                    <!--<cellContents backcolor="gray">-->
+                        <!--<box borderColor="black" bottomBorder="1Point" rightBorder="1Point"/>-->
+                        <!--<textField>-->
+                            <!--<reportElement x="0" y="0" width="60" height="10" style="Arial_Bold"/>-->
+                            <!--<textElement textAlignment="Center" verticalAlignment="Middle"/>-->
+                            <!--<textFieldExpression class="java.lang.Integer">$V{GenderValue}</textFieldExpression>-->
+                        <!--</textField>-->
+                        <!--<textField pattern="MM/dd/yyyy" isBlankWhenNull="true">-->
+                            <!--<reportElement x="0" y="10" width="60" height="10" style="Arial_Bold"/>-->
+                            <!--<textElement textAlignment="Center" verticalAlignment="Middle"/>-->
+                            <!--<textFieldExpression class="java.sql.Timestamp">$V{MaxDate}</textFieldExpression>-->
+                        <!--</textField>-->
+                    <!--</cellContents>-->
+                <!--</crosstabCell>-->
+
+            </crosstab>
+        </band>
+    </summary>
+</jasperReport>

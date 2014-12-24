@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+    
+<hibernate-mapping>
+<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+
+<class 
+    name="com.zynap.talentstudio.organisation.positions.PositionsHierarchy"
+    table="POSITIONS_HIERARCHY"
+    dynamic-update="false"
+    dynamic-insert="false"
+>
+    <meta attribute="class-description" inherit="false">
+       @hibernate.class
+        table="POSITIONS_HIERARCHY"
+        dynamic-update="true"
+        dynamic-insert="true"
+    </meta>
+
+    <composite-id name="comp_id" class="com.zynap.talentstudio.organisation.positions.PositionsHierarchyPK">
+        <meta attribute="use-in-equals">true</meta>
+        <meta attribute="field-description" inherit="false">
+           @hibernate.id
+            generator-class="assigned"
+        </meta>
+        <key-property 
+            name="rootId" 
+            column="ROOT_ID" 
+            type="long"
+            length="22"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="ROOT_ID"
+                length="22"
+            </meta> 
+        </key-property>
+        <key-property 
+            name="id" 
+            column="ID" 
+            type="long"
+            length="22"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="ID"
+                length="22"
+            </meta> 
+        </key-property>
+    </composite-id>    
+
+    <property
+        name="hlevel"
+        type="java.lang.Integer"
+        column="HLEVEL"
+        length="5"
+    >
+        <meta attribute="use-in-tostring">true</meta>
+        <meta attribute="use-in-equals">true</meta>
+        <meta attribute="field-description">
+           @hibernate.property
+            column="HLEVEL"
+            length="5"
+        </meta>    
+    </property>
+
+
+    <!-- Associations -->
+    <!-- derived association(s) for compound key -->
+    <!-- bi-directional many-to-one association to Position -->
+    <many-to-one
+        name="descendent"
+	    class="com.zynap.talentstudio.organisation.positions.Position"
+	    update="false"
+	    insert="false"
+	>
+        <meta attribute="field-description">
+           @hibernate.many-to-one
+            update="false"
+            insert="false"
+        </meta>
+        <meta attribute="field-description">
+           @hibernate.column
+            name="ID"
+        </meta>
+    	<column name="ID" />
+	</many-to-one>
+	
+    <!-- bi-directional many-to-one association to Position -->
+    <many-to-one
+        name="root"
+	    class="com.zynap.talentstudio.organisation.positions.Position"
+	    update="false"
+	    insert="false"
+	>
+        <meta attribute="field-description">
+           @hibernate.many-to-one
+            update="false"
+            insert="false"
+        </meta>
+        <meta attribute="field-description">
+           @hibernate.column
+            name="ROOT_ID"
+        </meta>
+    	<column name="ROOT_ID" />
+	</many-to-one>
+	
+    <!-- end of derived association(s) -->
+  
+
+</class>
+</hibernate-mapping>

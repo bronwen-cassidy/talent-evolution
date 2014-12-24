@@ -1,0 +1,43 @@
+#!/bin/sh
+
+if [ -z "$1" -o -z "$2" ]
+then
+	echo usage $0 [DB User] [Dump file name]
+	exit 2
+fi
+
+set -u
+
+DBUSER=$1
+DMPFILE=$2
+
+# Validate parameters
+
+if [ -z "$ORACLE_HOME" ]
+then
+	echo Please ensure ORACLE_HOME environment variable is set.
+	echo E.g. ORACLE_HOME=/home/oracle/product/9.2.0.4.0
+	exit 3
+fi
+
+# Make the dumpfile directory
+
+if [ ! -d $DMPFILE ]
+then
+	mkdir ${DMPFILE}
+fi
+
+# Export TS schema
+
+$ORACLE_HOME/bin/exp $DBUSER/$DBUSER LOG=${DMPFILE}/ts.log CONSISTENT=y CONSTRAINTS=y GRANTS=y INDEXES=y ROWS=y STATISTICS=NONE FILE=$DMPFILE/ts.dmp
+result=$?
+
+echo RESULT = $result
+
+if [ "$result" -ne 0 ]
+then
+	echo ****** Database dump failed *******
+	exit $result
+fi
+
+

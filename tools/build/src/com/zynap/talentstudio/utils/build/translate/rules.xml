@@ -1,0 +1,31 @@
+<!DOCTYPE digester-rules PUBLIC "-//Jakarta Apache //DTD digester-rules XML V1.0//EN" "http://jakarta.apache.org/commons/digester/dtds/digester-rules.dtd">
+<digester-rules>
+
+    <pattern value="tg4w">
+
+        <pattern value="actions">
+            <object-create-rule classname="com.zynap.talentstudio.utils.build.translate.elements.Actions"/>
+
+            <pattern value="action">
+                <object-create-rule classname="com.zynap.talentstudio.utils.build.translate.elements.Action"/>
+                <set-properties-rule>
+                    <alias attr-name="type" prop-name="type"/>
+                    <alias attr-name="refresh" prop-name="refresh"/>
+                    <alias attr-name="step" prop-name="step"/>
+                </set-properties-rule>
+
+                <pattern value="xpath">
+                    <bean-property-setter-rule propertyname="xpath"/>
+                </pattern>
+
+                <pattern value="value">
+                    <bean-property-setter-rule propertyname="value"/>
+                </pattern>
+
+                <set-next-rule methodname="addAction"/>
+            </pattern>
+        </pattern>
+
+    </pattern>
+
+</digester-rules>

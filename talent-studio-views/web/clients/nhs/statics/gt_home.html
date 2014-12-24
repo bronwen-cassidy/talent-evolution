@@ -1,0 +1,23 @@
+<html>
+<head>
+    <title>Talent Studio - Home</title>
+    <script type="text/javascript">
+	    $(function() {
+	        $.get('http://localhost:8888/talent-studio/talentarena/viewmyhomepagedetails.htm', function(data) {
+	                $('#practpgId1').html(data);
+	        });
+	    });
+
+	    function showPage() {
+	    	$.get('http://localhost:8888/talent-studio/statics/grahome2.html', function(data) {
+	                $('#helpPageDvId').html(data);
+	        });
+	        $('#practpgId1').css("display", "none");
+	    }
+	</script>
+</head>
+<body>
+	<div id="helpPageDvId"><a href="#" onclick="showPage();">Training info</a></div>
+	<div id="practpgId1"></div>
+</body>
+</html>

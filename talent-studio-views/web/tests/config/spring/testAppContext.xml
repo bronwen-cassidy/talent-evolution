@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+    <bean id="zynapIdMapper" class="com.zynap.talentstudio.integration.delegate.ZynapIdMapper">
+        <property name="externalRefMappingDao" ref="externalRefMappingDao"/>
+        <property name="defaultPresetIds">
+            <map>
+                <entry key="#DEFAULT_ORGUNIT#">
+                    <bean class="java.lang.Long">
+                        <constructor-arg value="0"/>
+                    </bean>
+                </entry>
+                <entry key="#DEFAULT_POSITION#">
+                    <bean class="java.lang.Long">
+                        <constructor-arg value="1"/>
+                    </bean>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+
+    <bean id="taapiAdapter" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="target">
+            <bean id="taapiAdapterTarget" class="com.zynap.talentstudio.integration.adapter.TaapiAdapter">
+                <property name="idMapper" ref="zynapIdMapper"/>
+                <property name="taapiClient" ref="taapiClient"/>
+                <property name="dynamicAttributeService" ref="dynamicAttrService"/>
+                <property name="subjectService" ref="subjectService"/>
+                <property name="populationEngine" ref="populationEngine"/>
+            </bean>
+        </property>
+        <property name="proxyInterfaces" value="com.zynap.talentstudio.integration.adapter.IAdapter"/>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="taapiClient" class="com.zynap.talentstudio.middleware.soap.taapi.TaapiClient">
+        <property name="username" value="${taapi.username}"/>
+        <property name="password" value="${taapi.password}"/>
+        <property name="client" value="${taapi.client}"/>
+        <property name="callbackUrl" value="${taapi.url}"/>
+    </bean>
+
+</beans>

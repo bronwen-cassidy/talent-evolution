@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tg4w version="0.38.2">
+    <actions>
+        <action type="goto" refresh="true" step="0">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/orgbuilder/addorganisation.htm?navigator.notSubmit=true]]></value>
+        </action>
+        <action type="verify-title" step="1">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Add Organisation Unit]]></value>
+        </action>
+        <action type="click" refresh="true" step="2">
+            <xpath><![CDATA[*/FORM[@ID="_add"]/*/INPUT[@NAME="_add" and @VALUE="Save"]]]></xpath>
+            <value><![CDATA[_add]]></value>
+        </action>
+        <action type="verify-title" step="3">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Add Organisation Unit]]></value>
+        </action>
+        <action type="assert-text-exists" step="4">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Name is a required field]]></value>
+        </action>
+        <action type="assert-text-exists" step="5">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[You must select a parent organisation unit.]]></value>
+        </action>
+        <action type="fill" step="6">
+            <xpath><![CDATA[*/FORM[@ID="_add"]/*/INPUT[@TYPE="hidden" @ID="oufld5"]]]></xpath>
+            <value><![CDATA[0]]></value>
+        </action>
+        <action type="click" refresh="true" step="7">
+            <xpath><![CDATA[*/FORM[@ID="_add"]/*/INPUT[@NAME="_add" and @VALUE="Save"]]]></xpath>
+            <value><![CDATA[_add]]></value>
+        </action>
+        <action type="verify-title" step="8">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Add Organisation Unit]]></value>
+        </action>
+        <action type="assert-text-exists" step="9">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Name is a required field]]></value>
+        </action>
+        <action type="fill" step="10">
+            <xpath><![CDATA[*/FORM[@ID="_add"]/*/INPUT[@TYPE="text" and @NAME="label"]]]></xpath>
+            <value><![CDATA[OU1]]></value>
+        </action>
+        <action type="click" refresh="true" step="11">
+            <xpath><![CDATA[*/FORM[@ID="_add"]/*/INPUT[@NAME="_cancel" and @VALUE="Cancel"]]]></xpath>
+            <value><![CDATA[_cancel]]></value>
+        </action>
+        <action type="verify-title" step="12">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Menu]]></value>
+        </action>
+        <action type="assert-text-exists" step="13">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Add an Organisation Unit]]></value>
+        </action>
+    </actions>
+</tg4w>

@@ -1,0 +1,5 @@
+openssl genrsa -des3 -out talentscope2011.key 2048
+openssl req -new -key talentscope2011.key -out talentscope2011.csr
+
+
+openssl pkcs12 -noiter -nodes -export -certfile ./gd_bundle.crt -inkey ./talentscope2011.key -in ./talentscope.co.uk.crt -name 'friendly name' -nodes -noiter -out ./ewallet.p12

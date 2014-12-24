@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+
+    <class
+            name="com.zynap.talentstudio.dashboard.DashboardParticipant"
+            table="DASHBOARD_PARTICIPANTS"
+            dynamic-update="true"
+            dynamic-insert="true"
+            >
+
+        <composite-id>
+            <key-property
+                    name="subjectId"
+                    column="SUBJECT_ID"
+                    type="java.lang.Long"
+                    length="22"
+                    />
+            <key-property
+                    name="dashboardId"
+                    column="DASHBOARD_ID"
+                    type="java.lang.Long"
+                    length="22"
+                    />
+        </composite-id>
+
+    </class>
+
+</hibernate-mapping>

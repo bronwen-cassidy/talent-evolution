@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+    <!--
+        Created by the Middlegen Hibernate plugin 2.1
+
+        http://boss.bekk.no/boss/middlegen/
+        http://www.hibernate.org/
+    -->
+
+    <class
+            name="com.zynap.talentstudio.performance.PerformanceReview"
+            table="PERFORMANCE_REVIEWS"
+            dynamic-update="true"
+            dynamic-insert="true"
+            >
+
+        <id
+                name="id"
+                type="java.lang.Long"
+                column="ID"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <generator class="sequence">
+                <param name="sequence">WF_SQ</param>
+            </generator>
+        </id>
+
+        <property
+                name="label"
+                type="java.lang.String"
+                column="LABEL"
+                not-null="true"
+                length="100"
+               />
+
+        <property
+                name="status"
+                type="java.lang.String"
+                column="STATUS"
+                not-null="false"
+                />
+
+        <property
+                name="appraisalType"
+                type="java.lang.String"
+                column="APPRAISAL_TYPE"
+                not-null="false"
+                />
+
+        <property
+                name="notifiable"
+                type="true_false"
+                column="IS_NOTIFIABLE"
+                not-null="true"
+                />
+
+        <property
+                name="userManaged"
+                type="true_false"
+                column="IS_USER_MANAGED"
+                not-null="true"
+                />
+
+        <!--  bi-directional one-to-many association to QueWorkflow
+         -->
+        <set name="queWorkflows"
+             lazy="true"
+             inverse="true"
+             cascade="all-delete-orphan"
+             order-by="workflow_type desc"
+             batch-size="1"
+             outer-join="auto">
+            <key>
+                <column name="PERFORMANCE_ID"/>
+            </key>
+            <one-to-many class="com.zynap.talentstudio.questionnaires.QuestionnaireWorkflow"/>
+        </set>
+
+    </class>
+</hibernate-mapping>

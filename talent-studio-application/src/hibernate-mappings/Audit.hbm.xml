@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+    <!--
+        Created by the Middlegen Hibernate plugin 2.1
+
+        http://boss.bekk.no/boss/middlegen/
+        http://www.hibernate.org/
+    -->
+
+    <class
+        name="com.zynap.talentstudio.audit.Audit"
+        table="AUDITS"
+        dynamic-update="true"
+        dynamic-insert="true"
+        >
+
+        <id
+            name="id"
+            type="long"
+            column="ID"
+            unsaved-value="null"
+            >
+            <meta attribute="use-in-equals">true</meta>
+            <meta attribute="use-in-tostring">true</meta>
+            <generator class="sequence">
+                <param name="sequence">AUDITS_SQ</param>
+            </generator>
+        </id>
+
+        <property
+            name="modifiedById"
+            type="java.lang.Long"
+            column="MODIFIED_BY_ID"
+            />
+
+        <property name="modifiedByUsername"
+            type="java.lang.String"
+            column="MODIFIED_BY_USERNAME"/>
+
+        <property name="objectId"
+            type="java.lang.Long"
+            column="OBJECT_ID"/>
+
+        <property name="modifiedDate"
+            type="java.util.Date"
+            column="MODIFIED_DATE"/>
+
+        <property name="tableName"
+            type="java.lang.String"
+            column="TABLE_NAME"/>
+
+        <property name="actionPerformed"
+            type="java.lang.String"
+            column="ACTION_PERFORMED"/>
+
+        <property name="description"
+            type="java.lang.String"
+            column="DESCRIPTION"/>
+
+        <property
+                name="serializedObject"
+                type="org.springframework.orm.hibernate.support.BlobSerializableType"
+                column="SERIALIZED_OBJECT"/>
+
+    </class>
+
+</hibernate-mapping>

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<commands>
+    <command action='create'>
+        <organisationUnit>
+            <id>10000</id>
+            <label>Adapter OU Branch</label>
+            <parent><id>#DEFAULT_ORGUNIT#</id></parent>
+        </organisationUnit>
+    </command>
+
+    <command action='create'>
+        <position>
+            <id>19000004</id>
+            <title>Manager-Employment/Recruitment/Adapter</title>
+            <organisationUnit>
+                <id>10000</id>
+            </organisationUnit>
+            <sourceAssociations>
+                <ptpAssociation type='DIRECT'>
+                    <target>
+                        <id>#DEFAULT_POSITION#</id>
+                    </target>
+                </ptpAssociation>
+            </sourceAssociations>
+            <competency>1006</competency>
+            <developmentrole>YES</developmentrole>
+            <keyposition>YES</keyposition>
+            <comments>Manager-Employment/Recruitment</comments>
+        </position>
+    </command>
+
+    <command action='create'>
+        <position>
+            <id>19000210</id>
+            <title>ManagerHead-Employment/Recruitment/Adapter</title>
+            <organisationUnit>
+                <id>10000</id>
+            </organisationUnit>
+            <sourceAssociations>
+                <ptpAssociation type='DIRECT'>
+                    <target>
+                        <id>#DEFAULT_POSITION#</id>
+                    </target>
+                </ptpAssociation>
+            </sourceAssociations>
+            <competency>600065</competency>
+            <developmentrole>YES</developmentrole>
+            <keyposition>YES</keyposition>
+            <comments>ManagerHead-Employment/Recruitment</comments>
+        </position>
+    </command>
+
+    <command action='update'>
+        <position>
+            <id>19000004</id>
+            <title>Manager-Employment/Recruitment/Adapter</title>
+            <organisationUnit>
+                <id>10000</id>
+            </organisationUnit>
+            <sourceAssociations>
+                <ptpAssociation type='DIRECT'>
+                    <target>
+                        <id>19000210</id>
+                    </target>
+                </ptpAssociation>
+            </sourceAssociations>
+            <competency>600065</competency>
+            <developmentrole>YES</developmentrole>
+            <keyposition>YES</keyposition>
+            <comments>Manager-Employment/Recruitment</comments>
+        </position>
+    </command>
+
+    <command action='update'>
+        <position>
+            <id>19000004</id>
+            <title>Manager-Employment/Recruitment/Adapter</title>
+            <organisationUnit>
+                <id>10000</id>
+            </organisationUnit>
+            <sourceAssociations>
+                <ptpAssociation type='DIRECT'>
+                    <target>
+                        <id>19000210</id>
+                    </target>
+                </ptpAssociation>
+            </sourceAssociations>
+            <competency>600065</competency>
+            <developmentrole>YES</developmentrole>
+            <keyposition>YES</keyposition>
+            <comments>Manager-Employment/Recruitment</comments>
+        </position>
+    </command>
+
+    <command action='update'>
+        <position>
+            <id>19000004</id>
+            <title>Manager-Employment/Recruitment/Adapter</title>
+            <organisationUnit>
+                <id>10000</id>
+            </organisationUnit>
+            <competency>600065</competency>
+            <developmentrole>YES</developmentrole>
+            <keyposition>YES</keyposition>
+            <comments>Testing Updating without associaitons does not remove them</comments>
+        </position>
+    </command>
+
+    <command action='create'>
+        <person>
+            <id>PER00002</id>
+            <firstName>Benny</firstName>
+            <secondName>Xanado</secondName>
+            <title>Mr</title>
+            <subjectAssociations>
+                <stpAssociation type="ACTING">
+                    <target>
+                        <id>19000004</id>
+                    </target>
+                </stpAssociation>
+            </subjectAssociations>
+
+            <country>GB</country>
+            <criticalskillholder>YES</criticalskillholder>
+            <gender>MALE</gender>
+            <highpotential>YES</highpotential>
+            <keycontributor>NO</keycontributor>
+            <keysuccessor>NO</keysuccessor>
+            <postalcode>NW22</postalcode>
+            <middlename1>Benedictine</middlename1>
+        </person>
+    </command>
+
+    <command action='update'>
+        <person>
+            <id>PER00002</id>
+            <firstName>Philip</firstName>
+            <secondName>Xanado</secondName>
+            <title>Mr</title>
+            <subjectAssociations>
+                <stpAssociation type="ACTING">
+                    <target>
+                        <id>19000004</id>
+                    </target>
+                </stpAssociation>
+            </subjectAssociations>
+
+            <country>GB</country>
+            <criticalskillholder>NO</criticalskillholder>
+            <gender>MALE</gender>
+            <highpotential>YES</highpotential>
+            <keycontributor>NO</keycontributor>
+            <keysuccessor>NO</keysuccessor>
+            <postalcode>NW22</postalcode>
+            <middlename1>Benedictine</middlename1>
+        </person>
+    </command>
+
+    <command action='update'>
+        <person>
+            <id>PER00002</id>
+            <firstName>Philip</firstName>
+            <secondName>Xanado</secondName>
+            <title>Mr</title>
+            <subjectAssociations>
+                <stpAssociation type="PERMANENT">
+                    <target>
+                        <id>19000004</id>
+                    </target>
+                </stpAssociation>
+            </subjectAssociations>
+
+            <country>GB</country>
+            <criticalskillholder>NO</criticalskillholder>
+            <gender>MALE</gender>
+            <highpotential>YES</highpotential>
+            <keycontributor>NO</keycontributor>
+            <keysuccessor>NO</keysuccessor>
+            <postalcode>NW22</postalcode>
+            <middlename1>Benedictine</middlename1>
+        </person>
+    </command>
+
+    <command action='update'>
+        <person>
+            <id>PER00002</id>
+            <firstName>Philip</firstName>
+            <secondName>Xanado</secondName>
+            <title>Mr</title>
+            <country>GB</country>
+            <criticalskillholder>NO</criticalskillholder>
+            <gender>MALE</gender>
+            <highpotential>YES</highpotential>
+            <keycontributor>NO</keycontributor>
+            <keysuccessor>NO</keysuccessor>
+            <postalcode>NW22</postalcode>
+            <middlename1>Benedictine</middlename1>
+        </person>
+    </command>
+
+</commands>

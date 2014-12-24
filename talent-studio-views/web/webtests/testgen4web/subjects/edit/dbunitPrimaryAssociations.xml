@@ -1,0 +1,199 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tg4w version="0.38.2">
+    <actions>
+        <action type="goto" refresh="true" step="0">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/orgbuilder/listsubject.htm?navigator.notSubmit=true]]></value>
+        </action>
+        <action type="verify-title" step="1">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - People Search]]></value>
+        </action>
+
+        <!-- search for "John Bonham" -->
+       <action type="fill" step="2">
+            <xpath><![CDATA[*/FORM[@ID="subject"]/*/INPUT[@TYPE="hidden" and @NAME="filter.secondName"]]]></xpath>
+            <value><![CDATA[Bonham]]></value>
+        </action>
+        <action type="click" refresh="true" step="3">
+            <xpath><![CDATA[*/FORM[@ID="subject"]/*/INPUT[@NAME="_target3" and @VALUE="Search"]]]></xpath>
+            <value><![CDATA[_target3]]></value>
+        </action>
+        <action type="verify-title" step="4">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - People Search]]></value>
+        </action>
+
+        <!-- go to John Bonham and check current job -->
+        <action type="click" refresh="true" step="5">
+            <xpath><![CDATA[TABLE[@ID="subjecttable"]/TBODY[1]/TR[7]/TD[1]/A[@CDATA="Bonham"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" step="6">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - People Search]]></value>
+        </action>
+        <action type="assert-text-exists" step="7">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Summary of John Bonham]]></value>
+        </action>
+        <action type="click" step="8">
+            <xpath><![CDATA[A[@ID="a_currentjobs"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="assert-text-does-not-exist" step="9">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Current Job Type]]></value>
+        </action>
+        <action type="assert-text-exists" step="10">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[None defined.]]></value>
+        </action>
+
+        <!-- click button to edit current job -->
+        <action type="click" refresh="true" step="11">
+            <xpath><![CDATA[*/FORM[@ID="currentjobs_assfrm"]/INPUT[@ID="btn_currentjobs"]]]></xpath>
+            <value><![CDATA[currentjobs_assfrm]]></value>
+        </action>
+        <action type="verify-title" step="12">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Edit Person]]></value>
+        </action>
+
+        <!-- add new association and save - will produce validation errors -->
+        <action type="click" refresh="true" step="13">
+            <xpath><![CDATA[*/FORM[@ID="addSubPAssoc"]/*/INPUT[@ID="addAssoc"]]]></xpath>
+            <value><![CDATA[_target1]]></value>
+        </action>
+        <action type="verify-title" step="14">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Edit Person]]></value>
+        </action>
+        <action type="click" refresh="true" step="15">
+            <xpath><![CDATA[*/FORM[@ID="addSubPAssoc"]/*/INPUT[@NAME="_finish" and @VALUE="Save"]]]></xpath>
+            <value><![CDATA[_finish]]></value>
+        </action>
+        <action type="verify-title" step="16">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Edit Person]]></value>
+        </action>
+        <action type="assert-text-exists" step="17">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[You must select a qualifier for the association.]]></value>
+        </action>
+        <action type="assert-text-exists" step="18">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Please select a valid target for the association.]]></value>
+        </action>
+
+        <!-- add 2nd association and set qualifier and set target to be same for both assocs - will produce validation errors -->
+        <action type="click" refresh="true" step="19">
+            <xpath><![CDATA[*/FORM[@ID="addSubPAssoc"]/*/INPUT[@ID="addAssoc"]]]></xpath>
+            <value><![CDATA[_target1]]></value>
+        </action>
+        <action type="select" step="20">
+            <xpath><![CDATA[*/FORM[@ID="addSubPAssoc"]/*/SELECT[@NAME="subjectPrimaryAssociations[0].qualifierId"]]]></xpath>
+            <value><![CDATA[402]]></value>
+        </action>
+        <action type="select" step="21">
+            <xpath><![CDATA[*/FORM[@ID="addSubPAssoc"]/*/INPUT[@TYPE="hidden" and @NAME="subjectPrimaryAssociations[0].targetId"]]]></xpath>
+            <value><![CDATA[20]]></value>
+        </action>
+        <action type="select" step="22">
+            <xpath><![CDATA[*/FORM[@ID="addSubPAssoc"]/*/SELECT[@NAME="subjectPrimaryAssociations[1].qualifierId"]]]></xpath>
+            <value><![CDATA[402]]></value>
+        </action>
+        <action type="select" step="23">
+            <xpath><![CDATA[*/FORM[@ID="addSubPAssoc"]/*/INPUT[@TYPE="hidden" and @NAME="subjectPrimaryAssociations[1].targetId"]]]></xpath>
+            <value><![CDATA[20]]></value>
+        </action>
+        <action type="click" refresh="true" step="24">
+            <xpath><![CDATA[*/FORM[@ID="addSubPAssoc"]/*/INPUT[@NAME="_finish" and @VALUE="Save"]]]></xpath>
+            <value><![CDATA[_finish]]></value>
+        </action>
+        <action type="verify-title" step="25">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Edit Person]]></value>
+        </action>
+        <action type="assert-text-exists" step="26">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[The association target must be unique.]]></value>
+        </action>
+
+        <!-- change qualifier - will produce validation errors as the target is the duplicate -->
+        <action type="select" step="27">
+            <xpath><![CDATA[*/FORM[@ID="addSubPAssoc"]/*/SELECT[@NAME="subjectPrimaryAssociations[1].qualifierId"]]]></xpath>
+            <value><![CDATA[399]]></value>
+        </action>
+        <action type="click" refresh="true" step="28">
+            <xpath><![CDATA[*/FORM[@ID="addSubPAssoc"]/*/INPUT[@NAME="_finish" and @VALUE="Save"]]]></xpath>
+            <value><![CDATA[_finish]]></value>
+        </action>
+        <action type="verify-title" step="29">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Edit Person]]></value>
+        </action>
+        <action type="assert-text-exists" step="30">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[The association target must be unique.]]></value>
+        </action>
+
+        <!-- add new association by clicking button -->
+        <action type="click" refresh="true" step="31">
+            <xpath><![CDATA[*/FORM[@ID="addSubPAssoc"]/*/INPUT[@ID="addAssoc"]]]></xpath>
+            <value><![CDATA[_target1]]></value>
+        </action>
+
+        <!-- check validation does not occur - only occurs when save is clicked -->
+        <action type="assert-text-does-not-exist" step="32">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[The association target must be unique.]]></value>
+        </action>
+
+        <!-- delete last association and check validation does not occur -->
+        <action type="select" step="33">
+            <xpath><![CDATA[*/FORM[@ID="addSubPAssoc"]/*/INPUT[@TYPE="hidden" and @NAME="_deleteAssoc:2"]]]></xpath>
+            <value><![CDATA[2]]></value>
+        </action>
+        <action type="click" refresh="true" step="34">
+            <xpath><![CDATA[*/FORM[@ID="addSubPAssoc"]/*/INPUT[@ID="delSubAssoc2"]]]></xpath>
+            <value><![CDATA[_target3]]></value>
+        </action>
+        <action type="assert-text-does-not-exist" step="35">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[The association target must be unique.]]></value>
+        </action>
+        <action type="assert-text-does-not-exist" step="36">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[subjectPrimaryAssociations[2]]]></value>
+        </action>
+
+        <!-- change target and qualifier for new association to stop validation errors -->
+        <action type="select" step="37">
+            <xpath><![CDATA[*/FORM[@ID="addSubPAssoc"]/*/INPUT[@TYPE="hidden" and @NAME="subjectPrimaryAssociations[1].targetId"]]]></xpath>
+            <value><![CDATA[17]]></value>
+        </action>
+        <action type="select" step="38">
+            <xpath><![CDATA[*/FORM[@ID="addSubPAssoc"]/*/SELECT[@NAME="subjectPrimaryAssociations[1].qualifierId"]]]></xpath>
+            <value><![CDATA[400]]></value>
+        </action>
+
+        <!-- cancel and check no associations added -->
+        <action type="click" refresh="true" step="39">
+            <xpath><![CDATA[*/FORM[@ID="addSubPAssoc"]/*/INPUT[@NAME="_cancel" and @VALUE="Cancel"]]]></xpath>
+            <value><![CDATA[_cancel]]></value>
+        </action>
+        <action type="verify-title" step="40">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - People Search]]></value>
+        </action>
+        <action type="assert-text-does-not-exist" step="41">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Current Job Type]]></value>
+        </action>
+        <action type="assert-text-does-not-exist" step="42">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Drums]]></value>
+        </action>
+    </actions>
+</tg4w>

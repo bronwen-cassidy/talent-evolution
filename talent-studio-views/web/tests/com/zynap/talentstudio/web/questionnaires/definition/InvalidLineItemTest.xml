@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+    <questionnaire name="AllQuestions" title="allq">
+        <group name="Dynamic line-item" title="Dynamic line-item">
+            <multi-question name=" ">
+                <line-item dynamic="Y">Dynamic line-item</line-item>
+                <question id="54" type="Sum" name="Country" title="Country"/>
+                <question id="55" type="Select" name="Duration" title="Duration"/>
+                <question id="56" type="PositiveInteger" name="Years" title="Years"/>
+                <question id="57" type="Text" name="Working Language" title="Working Language"/>
+                <question id="58" type="TextBox" name="Additional Comments" title="Additional Comments"/>
+            </multi-question>
+        </group>
+    </questionnaire>
+</xml>

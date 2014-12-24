@@ -1,0 +1,11 @@
+To ${user.label}
+
+You have a new message in your Talent Studio Inbox.
+#if ($url && $url != "") 
+Please click to go to your inbox ${url} 
+#end
+
+Sent on behalf of
+${from.label}.
+
+[Note: This is an automated reply sent from Talent Studio, please do not respond]

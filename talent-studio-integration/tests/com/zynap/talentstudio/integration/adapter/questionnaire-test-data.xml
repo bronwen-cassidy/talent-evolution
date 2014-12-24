@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<commands>
+    <command action='create'>
+        <questionnaire>
+            <subjectId>2</subjectId>
+            <questionnaireWorkflowId>12</questionnaireWorkflowId>
+            <questionnaireWorkflow>
+                <id>12</id>
+            </questionnaireWorkflow>
+            <blank_title>MyTestTitle</blank_title>
+            <space_title>Miss</space_title>
+            <no_title>no_title</no_title>
+            <first_title>first_title</first_title>
+            <text>text name</text>
+            <date>date</date>
+            <integer>integer</integer>
+            <positiveinteger>positiveinteger</positiveinteger>
+            <textbox>textbox</textbox>
+            <image>image</image>
+            <organisation>0</organisation>
+            <subject>1562</subject>
+            <multi_radio_0>Radio Value 1</multi_radio_0>
+            <multi_radio_1>Radio Value 1</multi_radio_1>
+            <multi_radio_2>Radio Value 1</multi_radio_2>
+            <long_radio>Radio Value1</long_radio>
+            <comment_0>comment 0</comment_0>
+            <commentII_0>comment 2</commentII_0>
+            <commentIII_0>comment 3</commentIII_0>
+            <other_image>some image path</other_image>
+            <scaler_0>100</scaler_0>
+            <scalerII_0>1</scalerII_0>
+            <scalerIII_0>100</scalerIII_0>
+            <target_0>target 0</target_0>
+            <targetII_0>target 2</targetII_0>
+            <targetIII_0>target 3</targetIII_0>
+            <long_check>Checkbox Value1</long_check>
+            <multi_radio_copy_0>Radio Value 1</multi_radio_copy_0>
+            <multi_text_copy_0>multi_text_copy_0</multi_text_copy_0>
+            <multi_text_0>multi_text_0</multi_text_0>
+            <multi_text_1>multi_text_1</multi_text_1>
+            <multi_text_2>multi_text_2</multi_text_2>
+        </questionnaire>
+    </command>
+</commands>

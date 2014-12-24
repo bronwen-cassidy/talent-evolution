@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+    <!--
+        Created by the Middlegen Hibernate plugin 2.1
+
+        http://boss.bekk.no/boss/middlegen/
+        http://www.hibernate.org/
+    -->
+
+    <class
+        name="com.zynap.talentstudio.security.SecurityAttribute"
+        table="SECURITY_ATTRIBUTES"
+        dynamic-update="true"
+        dynamic-insert="true"
+        >
+
+        <id
+            name="id"
+            type="long"
+            column="ID"
+            >
+            <meta attribute="use-in-equals">true</meta>
+            <generator class="sequence">
+                <param name="sequence">SEC_ATTR_SQ</param>
+            </generator>
+        </id>
+
+        <property
+            name="individualRead"
+            type="true_false"
+            column="INDIVIDUAL_READ"
+            not-null="true"
+            length="1"
+            >
+            <meta attribute="use-in-tostring">true</meta>
+        </property>
+
+        <property
+            name="individualWrite"
+            type="true_false"
+            column="INDIVIDUAL_WRITE"
+            not-null="true"
+            length="1"
+            >
+            <meta attribute="use-in-tostring">true</meta>
+        </property>
+
+        <property
+            name="managerRead"
+            type="true_false"
+            column="MANAGER_READ"
+            not-null="true"
+            length="1"
+            >
+            <meta attribute="use-in-tostring">true</meta>
+        </property>
+
+        <property
+            name="managerWrite"
+            type="true_false"
+            column="MANAGER_WRITE"
+            not-null="true"
+            length="1"
+            >
+            <meta attribute="use-in-tostring">true</meta>
+        </property>
+
+        <property
+            name="publicRead"
+            type="true_false"
+            column="PUBLIC_READ"
+            not-null="true"
+            length="1"
+            >
+            <meta attribute="use-in-tostring">true</meta>
+        </property>
+
+    </class>
+</hibernate-mapping>

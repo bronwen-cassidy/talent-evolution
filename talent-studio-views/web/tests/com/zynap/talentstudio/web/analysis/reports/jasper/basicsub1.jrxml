@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="Basic_Sub_1" pageWidth="450" pageHeight="842" columnWidth="150" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0"
+        columnCount="2">
+
+    <style name="pager" isDefault="true" fontName="Arial" fontSize="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"
+           pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+    <style name="infomessage" isDefault="false" fontName="Arial" fontSize="12" isBold="true" isItalic="false" isUnderline="false"
+           isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+
+    <parameter name="subjectUrl" class="java.lang.String"/>
+    <parameter name="positionUrl" class="java.lang.String"/>
+    <parameter name="report" class="com.zynap.talentstudio.analysis.reports.Report"/>
+    <parameter name="subReportchildren" class="net.sf.jasperreports.engine.JasperReport"/>
+
+    <field name="id" class="java.lang.String"/>
+    <field name="title" class="java.lang.String"/>
+    <field name="children" class="java.util.Collection"/>
+
+    <detail>
+
+        <band height="40">
+            <textField hyperlinkType="Reference">
+                <reportElement style="pager" x="0" y="0" width="150" height="15"/>
+                <textElement/>
+                <textFieldExpression class="java.lang.String">
+                    <![CDATA[com.zynap.talentstudio.analysis.reports.DataFormatter.formatValue((com.zynap.talentstudio.analysis.reports.Column)$P{report}.getColumns().get(1),$F{title})]]></textFieldExpression>
+                <hyperlinkReferenceExpression><![CDATA[$P{positionUrl} + $F{id}]]></hyperlinkReferenceExpression>
+            </textField>
+            <subreport>
+                <reportElement style="pager" x="150" y="0" width="150" height="15" isRemoveLineWhenBlank="true"/>
+                <subreportParameter name="positionUrl">
+                    <subreportParameterExpression><![CDATA[$P{positionUrl}]]></subreportParameterExpression>
+                </subreportParameter>
+                <subreportParameter name="report">
+                    <subreportParameterExpression><![CDATA[$P{report}]]></subreportParameterExpression>
+                </subreportParameter>
+                <subreportParameter name="subjectUrl">
+                    <subreportParameterExpression><![CDATA[$P{subjectUrl}]]></subreportParameterExpression>
+                </subreportParameter>
+                <dataSourceExpression>
+                    <![CDATA[new com.zynap.talentstudio.analysis.reports.jasper.JRCollectionDataSource($F{children})]]>
+                </dataSourceExpression>
+                <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subReportchildren}]]></subreportExpression>
+            </subreport>
+        </band>
+
+    </detail>
+
+</jasperReport>

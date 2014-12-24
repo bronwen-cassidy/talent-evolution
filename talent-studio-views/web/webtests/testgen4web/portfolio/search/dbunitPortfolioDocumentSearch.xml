@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tg4w version="0.38.2">
+    <actions>
+        <action type="goto" refresh="true" step="0">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/orgbuilder/browseposition.htm?navigator.notSubmit=true]]></value>
+        </action>
+        <action type="verify-title" step="1">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Browse Positions]]></value>
+        </action>
+        <action type="click" step="2">
+            <xpath><![CDATA[A[@ID="a_portfolio"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="click" refresh="true" step="3">
+            <xpath><![CDATA[*/FORM[@ID="d_search"]/INPUT[@NAME="d_search" and @VALUE="Document Search"]]]></xpath>
+            <value><![CDATA[d_search]]></value>
+        </action>
+        <action type="verify-title" step="4">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Position Document Search]]></value>
+        </action>
+        <action type="assert-text-does-not-exist" step="5">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[a_browse]]></value>
+        </action>
+        <action type="assert-text-does-not-exist" step="6">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[a_results]]></value>
+        </action>
+        <action type="assert-text-exists" step="7">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Select one or more portfolio items and/or enter search text.]]></value>
+        </action>
+        <action type="assert-text-exists" step="8">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Position Description doc 1]]></value>
+        </action>
+
+        <action type="goto" refresh="true" step="9">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/orgbuilder/browseposition.htm?navigator.notSubmit=true]]></value>
+        </action>
+        <action type="click" step="10">
+            <xpath><![CDATA[A[@ID="a_portfolio"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="click" refresh="true" step="11">
+            <xpath><![CDATA[*/FORM[@ID="d_search"]/INPUT[@NAME="d_search" and @VALUE="Document Search"]]]></xpath>
+            <value><![CDATA[d_search]]></value>
+        </action>
+        <action type="verify-title" step="12">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Position Document Search]]></value>
+        </action>
+        <action type="fill" step="13">
+            <xpath><![CDATA[*/FORM[@ID="search"]/*/TEXTAREA[@NAME="queryText"]]]></xpath>
+            <value><![CDATA[*]]></value>
+        </action>
+        <action type="click" refresh="true" step="14">
+            <xpath><![CDATA[*/FORM[@ID="search"]/*/INPUT[@NAME="_target1" and @VALUE="Search"]]]></xpath>
+            <value><![CDATA[_target1]]></value>
+        </action>
+        <action type="verify-title" step="15">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Position Document Search]]></value>
+        </action>
+        <action type="assert-text-exists" step="16">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[No results to display.]]></value>
+        </action>
+        <action type="assert-text-exists" step="17">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[a_results]]></value>
+        </action>
+        <action type="assert-text-does-not-exist" step="18">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[a_browse]]></value>
+        </action>
+    </actions>
+</tg4w>

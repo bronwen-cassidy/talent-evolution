@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+    <!--
+        Created by the Middlegen Hibernate plugin 2.1
+
+        http://boss.bekk.no/boss/middlegen/
+        http://www.hibernate.org/
+    -->
+
+    <class
+            name="com.zynap.talentstudio.organisation.attributes.NodeExtendedAttribute"
+            table="NODE_DAS"
+            dynamic-update="true"
+            dynamic-insert="true"
+            >
+
+        <id
+                name="id"
+                type="java.lang.Long"
+                column="ID"
+                unsaved-value="null"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <generator class="sequence">
+                <param name="sequence">DA_SQ</param>
+            </generator>
+        </id>
+
+        <property
+                name="value"
+                type="java.lang.String"
+                column="VALUE"
+                not-null="true"
+                length="4000"
+                />
+
+        <property
+                name="dynamicPosition"
+                type="java.lang.Integer"
+                column="DYNAMIC_POSITION"
+                length="22"
+                >
+        </property>
+        <property
+                name="disabled"
+                type="true_false"
+                column="DISABLED"
+                not-null="true"
+                length="1"
+                >
+        </property>
+        <property
+                name="dateAdded"
+                type="java.util.Date"
+                column="DATE_ADDED"
+                length="7"
+                />
+
+        <property
+                name="lineItemId"
+                type="java.lang.Long"
+                column="LINE_ITEM_ID"                
+                />
+        
+        <property
+                name="maxDynamicPosition"
+                type="java.lang.Integer"
+                formula="(select max(nd.dynamic_position) from node_das nd where nd.line_item_id is not null and nd.line_item_id=line_item_id and nd.node_id=node_id)"
+                />
+
+        <!-- bi-directional many-to-one association to Node -->
+        <many-to-one
+                name="node"
+                class="com.zynap.talentstudio.organisation.Node"
+                update="true"
+                insert="true"
+                >
+            <column name="NODE_ID"/>
+        </many-to-one>
+
+        <!-- bi-directional many-to-one association to DynamicAttribute -->
+        <many-to-one
+                name="dynamicAttribute"
+                class="com.zynap.talentstudio.organisation.attributes.DynamicAttribute"
+                update="true"
+                insert="true"
+                >
+            <column name="DA_ID"/>
+        </many-to-one>
+
+        <many-to-one
+                name="addedBy"
+                class="com.zynap.domain.admin.User"
+                update="true"
+                insert="true"
+                >
+            <column name="ADDED_BY"/>
+        </many-to-one>
+
+
+        <!-- end of derived association(s) -->
+        <joined-subclass name="com.zynap.talentstudio.organisation.attributes.NodeExtendedAttributeFile" table="NODE_DA_FILES">
+            <key column="NODE_DA_ID"/>
+            <property
+                    name="blobValue"
+                    type="org.springframework.orm.hibernate.support.BlobByteArrayType"
+                    column="BLOB_VALUE"
+                    >
+                <meta attribute="use-in-tostring">true</meta>
+                <meta attribute="use-in-equals">true</meta>
+            </property>
+        </joined-subclass>
+
+    </class>
+</hibernate-mapping>

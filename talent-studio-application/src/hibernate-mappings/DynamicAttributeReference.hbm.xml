@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+    <!--
+            Created by the Middlegen Hibernate plugin 2.1
+
+            http://boss.bekk.no/boss/middlegen/
+            http://www.hibernate.org/
+        -->
+
+    <class
+            name="com.zynap.talentstudio.organisation.attributes.DynamicAttributeReference"
+            table="DYNAMIC_ATTR_REFERENCES"
+            dynamic-update="true"
+            dynamic-insert="true"
+            >
+        <cache usage="nonstrict-read-write"/>
+
+        <id
+                name="id"
+                type="java.lang.Long"
+                column="ID"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <generator class="sequence">
+                <param name="sequence">DA_REF_SQ</param>
+            </generator>
+        </id>
+
+        <property
+                name="type"
+                type="java.lang.String"
+                column="TYPE"
+                not-null="true"
+                length="50"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+
+        <property
+                name="upperBound"
+                type="java.lang.Integer"
+                column="UPPER_BOUND"
+                length="20"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+        <property
+                name="lowerBound"
+                type="java.lang.Integer"
+                column="LOWER_BOUND"
+                length="20"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+
+        <!-- Associations -->
+        <many-to-one
+                name="referenceDa"
+                class="com.zynap.talentstudio.organisation.attributes.DynamicAttribute"
+                cascade="save-update"
+                unique="true"
+                access="field"
+                outer-join="true"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <column name="REFERENCE_DA_ID"/>
+        </many-to-one>
+
+        <many-to-one
+                name="parentDa"
+                class="com.zynap.talentstudio.organisation.attributes.DynamicAttribute"
+                cascade="save-update"
+                unique="true"
+                access="field"
+                outer-join="true"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <column name="PARENT_DA_ID"/>
+        </many-to-one>
+
+        <many-to-one
+                name="lookupValue"
+                class="com.zynap.talentstudio.common.lookups.LookupValue"
+                cascade="save-update"
+                outer-join="true">
+            <meta attribute="use-in-equals">true</meta>
+            <column name="LOOKUP_VALUE_ID"/>
+        </many-to-one>
+
+        <bag name="children"
+             lazy="false"
+             inverse="true"
+             cascade="delete-orphan"
+             outer-join="true"
+             batch-size="50"
+                >
+            <key>
+                <column name="PARENT_MAPPING_ID"/>
+            </key>
+            <one-to-many
+                    class="com.zynap.talentstudio.organisation.attributes.DynamicAttributeReference"
+                    />
+        </bag>
+
+        <many-to-one
+                name="parent"
+                class="com.zynap.talentstudio.organisation.attributes.DynamicAttributeReference"
+                not-null="false"
+                outer-join="true"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <column name="PARENT_MAPPING_ID"/>
+        </many-to-one>
+
+    </class>
+
+</hibernate-mapping>

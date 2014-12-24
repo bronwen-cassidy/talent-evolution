@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+    <!--
+        Created by the Middlegen Hibernate plugin 2.1
+
+        http://boss.bekk.no/boss/middlegen/
+        http://www.hibernate.org/
+    -->
+
+    <class
+            name="com.zynap.talentstudio.display.DisplayConfig"
+            table="DISPLAY_CONFIGS"
+            dynamic-update="true"
+            dynamic-insert="true"
+            >
+        <cache usage="nonstrict-read-write"/>
+        <id
+                name="id"
+                type="java.lang.Long"
+                column="ID"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <generator class="assigned"/>
+        </id>
+
+        <property
+                name="nodeType"
+                type="java.lang.String"
+                column="NODE_TYPE"
+                not-null="true"
+                length="1"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+
+        <property
+                name="label"
+                type="java.lang.String"
+                column="LABEL"
+                not-null="true"
+                length="255"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+
+        <property
+                name="index"
+                type="java.lang.Integer"
+                column="POSITION"
+                not-null="true"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+
+        <property
+                name="type"
+                type="java.lang.String"
+                column="TYPE"
+                not-null="true"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+        <!-- Associations -->
+
+        <!-- bi-directional one-to-many association to ArenaConfigItem -->
+        <bag
+                name="displayConfigItems"
+                inverse="true"
+                cascade="all"
+                lazy="false"
+                order-by="SORT_ORDER"
+                batch-size="50"
+                >
+            <cache usage="nonstrict-read-write"/>
+            <key>
+                <column name="DISPLAY_CONFIG_ID"/>
+            </key>
+            <one-to-many
+                    class="com.zynap.talentstudio.display.DisplayConfigItem"
+                    />
+        </bag>
+
+    </class>
+</hibernate-mapping>

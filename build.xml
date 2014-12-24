@@ -1,0 +1,1660 @@
+<?xml version="1.0"?>
+<project name="talent-studio" default="all" basedir=".">
+
+    <tstamp>
+        <format property="build.date.time" pattern="dd-MMM-yyyy HH:mm"/>
+        <format property="build.year" pattern="yyyy"/>
+    </tstamp>
+
+    <tstamp>
+        <format property="build.date" pattern="dd-MM-yy_HH-mm"/>
+    </tstamp>
+
+    <property name="build.version" value="V5.4.5-mt"/>
+    <property name="build.info" value="dhanson"/>
+    <property name="build.number" value="${build.version} ${build.info} ${build.date.time}"/>
+
+    <property name="copyright" value="Copyright Talentscope., 2004-${build.year}."/>
+
+    <!-- load properties from environment and properties files -->
+    <property environment="env"/>
+    <property file="${user.home}/.ant-user.properties"/>
+
+    <!-- load property file that indicates versions of 3rd party libraries -->
+    <property file="library_versions.properties"/>
+
+    <!-- client specific info webapp instance info -->
+    <property name="client" value=""/>
+
+    <property name="taapi.username" value="bronwen.cassidy@talentscope.com"/>
+    <property name="taapi.password" value="4321TS1234"/>
+
+
+    <!-- application name -->
+    <property name="project.name" value="talent-studio"/>
+
+    <!-- display errors to end user in webapp -->
+    <property name="displayErrors" value="true"/>
+
+    <!-- compilation properties -->
+    <property name="javac.debug" value="true"/>
+    <property name="javac.failonerror" value="true"/>
+    <property name="javac.deprecation" value="false"/>
+    <property name="javac.optimize" value="true"/>
+    <property name="javac.version" value="1.6"/>
+
+    <!-- junit properties -->
+    <property name="junit.haltonerror" value="false"/>
+    <property name="junit.haltonfailure" value="false"/>
+    <property name="junit.showoutput" value="false"/>
+    <property name="junit.printsummary" value="true"/>
+    <property name="junit.fork" value="true"/>
+    <property name="junit.fork.mode" value="once"/>
+    <property name="junit.maxmemory" value="512m"/>
+
+    <!-- Default Mail properties for the build server -->
+    <property name="sender.email" value="info@talentscope.net"/>
+    <property name="mail.jndi.name" value="mail/TSMSession"/>
+    <property name="client.path" value="${client}"/>
+
+    <!-- EMMA properties -->
+    <property name="emma.coverage.dir" value="${basedir}/coverage"/>
+    <property name="emma.jar.name" value="${emma.version}.jar"/>
+
+    <!-- directory for the tools jars -->
+    <property name="tools.lib" value="lib/tools"/>
+
+    <!-- directory for the runtime jars -->
+    <property name="runtime.lib" value="lib/runtime"/>
+
+    <!-- directory for the runtime jars provided by J2EE container -->
+    <property name="j2ee.lib" value="lib/j2ee"/>
+    <!--<property name="j2ee.lib" value="lib/j2ee"/>-->
+
+    <!-- directory for the jars required for tomcat - also contains commons-dbcp used in application tests -->
+    <property name="tomcat.lib" value="lib/tomcat"/>
+
+    <!-- Where build things are put -->
+    <property name="build.dir" value="build"/>
+    <property name="build.metainf.dir" value="${build.dir}/META_INF"/>
+
+    <!-- Directory application classes are compiled to -->
+    <property name="build.app.dir" value="${build.dir}/application"/>
+    <property name="build.app.classes.dir" value="${build.app.dir}/classes"/>
+
+    <!-- Directory webview classes are compiled to -->
+    <property name="build.webview.dir" value="${build.dir}/webview"/>
+    <property name="build.webview.classes.dir" value="${build.webview.dir}/classes"/>
+    <property name="build.webview.properties.dir" value="${build.webview.dir}/properties"/>
+
+    <!-- Directory integration classes are compiled to -->
+    <property name="build.integration.dir" value="${build.dir}/integration"/>
+    <property name="build.integration.classes.dir" value="${build.integration.dir}/classes"/>
+
+    <!-- Directory standalone integration classes are compiled to -->
+    <property name="build.standalone.dir" value="${build.dir}/standalone"/>
+    <property name="build.standalone.classes.dir" value="${build.standalone.dir}/classes"/>
+
+    <!-- Directory webview configuration files are copied to -->
+    <property name="build.webview.war.dir" value="${build.webview.dir}/war"/>
+    <property name="build.webview.war.webinf.dir" value="${build.webview.war.dir}/WEB-INF"/>
+    <property name="build.webview.metainf.dir" value="${build.webview.war.dir}/META-INF"/>
+    <property name="build.webview.war.classes.dir" value="${build.webview.war.webinf.dir}/classes"/>
+
+    <property name="build.styles.dir" value="${build.webview.war.dir}/styles"/>
+    <property name="build.images.dir" value="${build.webview.war.dir}/images"/>
+    <property name="build.help.dir" value="${build.webview.war.dir}/help"/>
+    <property name="build.templates.dir" value="${build.webview.war.classes.dir}/templates"/>
+    <property name="build.statics.dir" value="${build.webview.war.dir}/statics"/>
+
+    <!-- Where build distribution is put -->
+    <property name="dist.tar.file" value="${project.name}_${build.version}_${build.date}.tar"/>
+    <property name="dist.dir" value="distribution"/>
+    <property name="dist.db.dir" value="${dist.dir}/db"/>
+    <property name="dist.webapp.dir" value="${dist.dir}/webapp"/>
+    <property name="dist.standalone.dir" value="${dist.dir}/standalone"/>
+
+    <!-- JAR files -->
+    <property name="app.jar" value="${build.dir}/talent-studio-app.jar"/>
+    <property name="webview.jar" value="${build.dir}/talent-studio-webview.jar"/>
+    <property name="integration.jar" value="${build.dir}/talent-studio-integration.jar"/>
+    <property name="standalone.jar" value="${build.standalone.dir}/talent-studio-standalone.jar"/>
+
+    <!-- Integration Module -->
+    <property name="integration.module" value="talent-studio-integration"/>
+    <property name="integration.src.dir" value="${integration.module}/src"/>
+    <property name="integration.lib.dir" value="${integration.module}/lib"/>
+    <property name="integration.config.dir" value="${integration.module}/config"/>
+
+    <!-- Standalone Moddule -->
+    <property name="standalone.src.dir" value="${integration.module}/client"/>
+    <property name="build.standalone.lib.dir" value="${build.standalone.dir}/lib"/>
+    <property name="build.standalone.config.dir" value="${build.standalone.classes.dir}/config"/>
+
+    <!-- Application module (EAR, JAR)-->
+    <property name="application.module" value="talent-studio-application"/>
+    <property name="app.db.dir" value="${application.module}/db"/>
+    <property name="app.src.dir" value="${application.module}/src"/>
+    <property name="templates.dir" value="templates"/>
+    <property name="app.templates.dir" value="${application.module}/templates"/>
+    <property name="app.config.dir" value="${application.module}/config"/>
+    <property name="app.config.spring.dir" value="${app.config.dir}/spring"/>
+    <property name="app.metainf.dir" value="${application.module}/META-INF"/>
+
+    <!--  directory where hibernate mapping files are located -->
+    <property name="hibernate-mappings.dir" value="hibernate-mappings"/>
+
+    <!--  directory where digester rules files are located -->
+    <property name="digester.dir" value="digester"/>
+
+    <!-- Web View Module (Source) -->
+    <property name="webview.module" value="talent-studio-views/web"/>
+    <property name="webview.src.dir" value="${webview.module}/src"/>
+
+    <!-- client directory -->
+    <property name="webview.client.dir" value="${webview.module}/clients"/>
+
+    <!-- Web Module (WAR) -->
+    <property name="war.dir" value="${webview.module}/war"/>
+
+    <!-- Web Module config directories -->
+    <property name="war.config.dir" value="${webview.module}/config"/>
+    <property name="war.config.spring.dir" value="${war.config.dir}/spring"/>
+    <property name="war.config.common.dir" value="${war.config.dir}/common"/>
+    <property name="war.config.logging.dir" value="${war.config.dir}/logging"/>
+    <property name="war.config.server.dir" value="${war.config.dir}/server"/>
+
+    <!-- Config file used by Spring to map views to actual JSPs -->
+    <property name="war.config.spring.file" value="ts-views.properties"/>
+
+    <!-- Config file for Axis for integration interface web service -->
+    <property name="war.config.axis.file" value="server-config.wsdd"/>
+
+    <!-- Web Module resources directories -->
+    <property name="war.resources.dir" value="${webview.module}/resources"/>
+    <property name="war.resources.properties.dir" value="${war.resources.dir}/properties"/>
+    <property name="client.resources.properties.dir" value="${client.path}/properties"/>
+
+    <!-- Search tool files (Source) -->
+    <property name="server" value=""/>
+    <property name="release.dir" value="../backup/live_distributions/U.K"/>
+
+    <!-- todo search stuff -->
+    <property name="autonomy.position.database" value="${project.name}positiondata"/>
+    <property name="autonomy.subject.database" value="${project.name}subjectdata"/>
+    <property name="result.mapper" value="xmlMapper"/>
+    <property name="multi.tenant" value="true"/>
+    <!--<property name="host.name" value="ynshosting"/>-->
+
+    <property name="lobHandler.extractor" value="simpleNativeJdbcExtractor"/>
+
+    <!-- JUnit Tests -->
+    <property name="test.classes.dir" value="${build.dir}/test-classes"/>
+    <property name="test.classes.config.dir" value="${test.classes.dir}/config"/>
+
+    <property name="test.app.src.dir" value="${application.module}/tests"/>
+    <property name="test.webview.src.dir" value="${webview.module}/tests"/>
+    <property name="test.webtest.src.dir" value="${webview.module}/webtests"/>
+    <property name="test.integration.src.dir" value="${integration.module}/tests"/>
+    <property name="test.testgen4web.src.dir" value="${test.webtest.src.dir}/testgen4web"/>
+
+    <property name="test.webtest.gensrc.dir" value="${build.dir}/genwebtests"/>
+
+    <property name="test.app.config.dir" value="${test.app.src.dir}/config"/>
+    <property name="test.app.config.logging.dir" value="${test.app.config.dir}/logging"/>
+    <property name="test.app.config.spring.dir" value="${test.app.config.dir}/spring"/>
+
+    <property name="test.reports.dir" value="test-reports"/>
+    <property name="test.app.reports.dir" value="${test.reports.dir}/app"/>
+    <property name="test.webview.reports.dir" value="${test.reports.dir}/web"/>
+    <property name="test.webtest.reports.dir" value="${test.reports.dir}/webtest"/>
+    <property name="test.testgen4web.reports.dir" value="${test.reports.dir}/testgen4web"/>
+    <property name="test.integration.reports.dir" value="${test.reports.dir}/integration"/>
+
+    <!-- FindBugs dirs -->
+    <property name="findbugs.report.dir" value="findbugs-report"/>
+    <property name="findbugs.home" value="${tools.lib}/findbugs-0.9.1"/>
+
+    <!-- CheckStyle report dir -->
+    <property name="checkstyle.report.dir" value="checkstyle-report"/>
+
+    <!-- JavaDocs dir -->
+    <property name="javadocs.dir" value="docs/api"/>
+
+    <!-- orion(oc4j) properties -->
+    <property name="glassfish.deploy.dir" value="${glassfish.home.dir}/glassfish/domains/domain1/autodeploy"/>
+
+    <!-- build utilities properties -->
+    <property name="build.tools.dir" value="tools/build"/>
+    <property name="build.tools.src.dir" value="${build.tools.dir}/src"/>
+    <property name="build.tools.config.dir" value="${build.tools.dir}/config"/>
+    <property name="build.tools.classes.dir" value="${build.dir}/tools/classes"/>
+    <property name="csv.properties.file" value="csv.properties"/>
+
+    <property name="xml.upload.file" value=""/>
+
+    <path id="build.app.classpath">
+        <pathelement location="${build.app.classes.dir}"/>
+        <fileset dir="${runtime.lib}">
+            <include name="**/*.jar"/>
+        </fileset>
+        <fileset dir="${j2ee.lib}">
+            <include name="*.jar"/>
+        </fileset>
+        <fileset dir="${tomcat.lib}">
+            <include name="*.jar"/>
+        </fileset>
+    </path>
+
+    <path id="build.webview.classpath">
+        <pathelement location="${build.webview.classes.dir}"/>
+        <fileset dir="${j2ee.lib}">
+            <include name="*.jar"/>
+        </fileset>
+        <fileset dir="${tomcat.lib}">
+            <include name="*.jar"/>
+        </fileset>
+        <path refid="build.app.classpath"/>
+        <path refid="build.integration.classpath"/>
+    </path>
+
+    <path id="build.integration.classpath">
+        <pathelement location="${build.integration.classes.dir}"/>
+        <fileset dir="${j2ee.lib}">
+            <include name="*.jar"/>
+        </fileset>
+        <fileset dir="${tomcat.lib}">
+            <include name="*.jar"/>
+        </fileset>
+        <fileset dir="${integration.lib.dir}">
+            <include name="**/*.jar"/>
+        </fileset>
+        <path refid="build.app.classpath"/>
+    </path>
+
+    <path id="build.standalone.classpath">
+        <fileset dir="${build.standalone.lib.dir}">
+            <include name="**/*.jar"/>
+        </fileset>
+        <fileset dir="${runtime.lib}">
+            <include name="**/*.jar"/>
+        </fileset>
+    </path>
+
+    <path id="test.app.classpath">
+        <pathelement location="${test.classes.dir}"/>
+        <path refid="build.app.classpath"/>
+        <fileset dir="${tools.lib}">
+            <include name="**/*.jar"/>
+        </fileset>
+        <fileset dir="${j2ee.lib}">
+            <include name="*.jar"/>
+        </fileset>
+        <fileset dir="${tomcat.lib}">
+            <include name="${commons-dbcp.version}.jar"/>
+        </fileset>
+    </path>
+
+    <path id="test.webview.classpath">
+        <path refid="test.app.classpath"/>
+        <path refid="build.webview.classpath"/>
+        <path refid="build.integration.classpath"/>
+        <pathelement location="${build.integration.classes.dir}"/>
+        <pathelement location="${war.resources.properties.dir}"/>
+        <pathelement location="${war.resources.dir}"/>
+        <pathelement location="${test.webview.src.dir}"/>
+    </path>
+
+    <path id="test.integration.classpath">
+        <path refid="test.app.classpath"/>
+        <path refid="build.integration.classpath"/>
+        <pathelement location="${build.integration.classes.dir}"/>
+    </path>
+
+    <path id="tools.classpath">
+        <fileset dir="${tools.lib}">
+            <include name="**/*.jar"/>
+            <exclude name="**/checkstyle-all-3.5.jar"/>
+        </fileset>
+        <fileset dir="${runtime.lib}">
+            <include name="**/*.jar"/>
+        </fileset>
+    </path>
+
+    <condition property="db.url" value="jdbc:oracle:thin:@31.222.181.54:1521:orcl">
+        <equals arg1="${server}" arg2="tc"/>
+    </condition>
+    <condition property="db.url" value="jdbc:oracle:thin:@poseidon:1521:XE">
+        <equals arg1="${server}" arg2=""/>
+    </condition>
+
+    <condition property="smpt.host" value="smtp.sendgrid.net">
+        <equals arg1="${server}" arg2="tc"/>
+    </condition>
+    <condition property="smpt.host" value="smtp.ynshosting.com">
+        <equals arg1="${server}" arg2=""/>
+    </condition>
+    <condition property="logFilePath" value="/usr/share/apache-tomcat-7.0.27/logs/">
+        <equals arg1="${server}" arg2="tc"/>
+    </condition>
+    <condition property="logFilePath" value="">
+        <equals arg1="${server}" arg2=""/>
+    </condition>
+
+    <condition property="host.name" value="ynshosting">
+        <equals arg1="${server}" arg2="tc"/>
+    </condition>
+    <condition property="host.name" value="bcassidy-HP">
+        <equals arg1="${server}" arg2=""/>
+    </condition>
+    <condition property="taapi.part.url" value="https://www.ynshosting.com">
+        <equals arg1="${server}" arg2="tc"/>
+    </condition>
+    <condition property="taapi.part.url" value="http://50.62.12.106">
+        <equals arg1="${server}" arg2="gd"/>
+    </condition>
+    <condition property="taapi.part.url" value="http://localhost:8888">
+        <equals arg1="${server}" arg2=""/>
+    </condition>
+    <condition property="server.url" value="https://www.ynshosting.com">
+        <equals arg1="${server}" arg2="tc"/>
+    </condition>
+    <condition property="server.url" value="localhost:8888">
+        <equals arg1="${server}" arg2=""/>
+    </condition>
+
+    <target name="init">
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${build.metainf.dir}"/>
+        <mkdir dir="${dist.dir}"/>
+        <mkdir dir="${dist.webapp.dir}"/>
+        <mkdir dir="${dist.standalone.dir}"/>
+        <mkdir dir="${dist.db.dir}"/>
+        <mkdir dir="${build.app.classes.dir}"/>
+        <mkdir dir="${build.webview.classes.dir}"/>
+        <mkdir dir="${build.webview.properties.dir}"/>
+        <mkdir dir="${build.integration.classes.dir}"/>
+        <mkdir dir="${build.webview.war.webinf.dir}"/>
+        <mkdir dir="${build.webview.metainf.dir}"/>
+        <mkdir dir="${build.webview.war.classes.dir}"/>
+        <mkdir dir="${build.standalone.dir}"/>
+        <mkdir dir="${build.standalone.lib.dir}"/>
+        <mkdir dir="${build.standalone.config.dir}"/>
+        <mkdir dir="${build.standalone.classes.dir}"/>
+        <mkdir dir="${build.tools.classes.dir}"/>
+
+        <mkdir dir="${test.classes.dir}"/>
+        <mkdir dir="${test.classes.config.dir}"/>
+
+        <echo message="autonomy.host property = ${autonomy.host}"/>
+        <echo message="host name property = ${host.name}"/>
+        <echo message="server set = ${server}"/>
+        <echo message="db url = ${db.url}"/>
+        <echo message="autonomy position database set = ${autonomy.position.database}"/>
+        <echo message="autonomy subject database set = ${autonomy.subject.database}"/>
+        <echo message="autonomy searcher = ${autonomy.searcher}"/>
+        <!-- todo when the oracle search has been set up we need to bring the result mapper into conditional properties-->
+        <echo message="result mapper = ${result.mapper}"/>
+        <echo message="server url = ${server.url}"/>
+        <echo message="client = ${client}"/>
+        <echo message="multi tenant = ${multi.tenant}"/>
+
+    </target>
+
+    <!-- global filterset used for templating application configuration files -->
+    <filterset id="app.config.filterset">
+
+        <filter token="buildNo" value="${build.number}"/>
+        <filter token="buildYear" value="${build.year}"/>
+
+        <filter token="_applicationName_" value="${project.name}"/>
+        <filter token="_logFilePath_" value="${logFilePath}${project.name}"/>
+        <filter token="lobHandler.extractor" value="${lobHandler.extractor}"/>
+
+        <filter token="_db.url_" value="${db.url}"/>
+        <filter token="_db.username_" value="${db.username}"/>
+        <filter token="_db.password_" value="${db.username}"/>
+
+        <filter token="autonomy.host" value="${autonomy.host}"/>
+        <filter token="autonomy.position.database" value="${client}PositionData"/>
+        <filter token="autonomy.subject.database" value="${client}SubjectData"/>
+        <filter token="autonomy.searcher" value="${autonomy.searcher}"/>
+        <filter token="autonomy.searcher" value="${autonomy.searcher}"/>
+
+        <filter token="taapi.username" value="${taapi.username}"/>
+        <filter token="taapi.password" value="${taapi.password}"/>
+        <filter token="taapi.client" value="${client}"/>
+        <filter token="taapi.url" value="${taapi.part.url}/${client}/orgbuilder/editsubjectcallback.htm"/>
+
+        <filter token="multi.tenant" value="${multi.tenant}"/>
+
+        <filter token="result.mapper" value="${result.mapper}"/>
+        <filter token="search.engine" value="${search.engine}"/>
+        <!--<filter token="search.gateway" value="${search.engine}Gateway"/>-->
+        <filter token="host.name" value="${host.name}"/>
+        <filter token="sender.email" value="${sender.email}"/>
+        <filter token="server.url" value="${server.url}/${client.path}"/>
+        <filter token="mail.jndi.name" value="${mail.jndi.name}"/>
+        <filter token="displayErrors" value="${displayErrors}"/>
+
+        <filter token="smpt.host" value="${smpt.host}"/>
+
+    </filterset>
+
+    <!-- global patternset used to select hibernate config files only -->
+    <patternset id="hibernate.files">
+        <include name="${hibernate-mappings.dir}/*.hbm.xml"/>
+    </patternset>
+
+    <!-- global patternset used to select digester config files only -->
+    <patternset id="digester.files">
+        <include name="${digester.dir}/*.xml"/>
+        <include name="${digester.dir}/*.xsd"/>
+    </patternset>
+
+    <patternset id="mail.properties">
+        <include name="${app.config.spring.dir}/mail.properties"/>
+    </patternset>
+
+    <!-- global patternset used to select additional files for app.jar such as Jasper and Velocity config files -->
+    <patternset id="app.src.files">
+        <include name="**/*.jrxml"/>
+        <include name="**/*.vm"/>
+        <include name="**/ehcache.xml"/>
+    </patternset>
+
+    <patternset id="standalone.application.config.fileset">
+
+        <!-- main config file -->
+        <include name="**/applicationContext.xml"/>
+
+        <!-- use application hibernate and tx config -->
+        <include name="**/applicationContext-hibernate.xml"/>
+        <include name="**/applicationContext-tx.xml"/>
+
+
+        <!-- use the test mail configuration -->
+        <include name="**/testApplicationContext-mail.xml"/>
+
+        <!-- BUT use test JDBC config as we are running standalone and the application JDBC config requires an application server -->
+        <include name="**/testApplicationContext-jdbc.xml"/>
+
+        <!-- exclude the other config files -->
+        <exclude name="**/testApplicationContext-hibernate.xml"/>
+        <exclude name="**/applicationContext-jdbc.xml"/>
+
+        <!-- exclude the properties files as we use sys properties to run the standalone -->
+        <exclude name="**/autonomy.properties"/>
+        <exclude name="**/jdbc.properties"/>
+    </patternset>
+
+    <patternset id="test.application.config.fileset">
+
+        <!-- main config file -->
+        <include name="**/applicationContext.xml"/>
+
+        <!-- use test specific hibernate and jdbc config -->
+        <include name="**/testApplicationContext-jdbc.xml"/>
+        <include name="**/testApplicationContext-hibernate.xml"/>
+
+        <!-- use application tx config -->
+        <include name="**/applicationContext-tx.xml"/>
+
+        <!-- use the mail configuration -->
+        <include name="**/testApplicationContext-mail.xml"/>
+
+        <!--use the scheduling config -->
+        <include name="**/applicationContext-scheduling.xml"/>
+
+        <!-- exclude all other application config files -->
+        <exclude name="**/applicationContext-hibernate.xml"/>
+        <exclude name="**/applicationContext-jdbc.xml"/>
+
+        <!-- exclude the properties files as we use sys properties to run the tests -->
+        <exclude name="**/autonomy.properties"/>
+        <exclude name="**/jdbc.properties"/>
+        
+    </patternset>
+
+    <patternset id="client.ovewrite.files">
+        <include name="help/**"/>
+        <include name="images/**"/>
+        <include name="styles/**"/>
+        <include name="templates/**"/>
+        <include name="statics/**"/>
+        <include name="properties/**"/>
+    </patternset>
+
+    <!-- Teach Ant how to use FindBugs -->
+    <taskdef name="findbugs" classname="edu.umd.cs.findbugs.anttask.FindBugsTask" classpathref="tools.classpath"/>
+
+    <!-- Teach Ant how to use CheckStyle -->
+    <taskdef resource="checkstyletask.properties" classpath="${tools.lib}/checkstyle-all-3.5.jar"/>
+
+    <!-- Teach Ant how to use Contrib Tasks such as <if> (http://ant-contrib.sourceforge.net) -->
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties" classpathref="tools.classpath"/>
+
+    <!-- Teach Ant how to use the EMMA code coverage tool -->
+    <taskdef resource="emma_ant.properties" classpathref="tools.classpath"/>
+
+    <!-- Check if JUnit classes are available - must be in Ant's classpath -->
+    <if>
+        <not>
+            <available classname="junit.framework.Test"/>
+        </not>
+        <then>
+            <echo>
+                JUNIT CLASSES NOT IN CLASSPATH
+                Please ensure junit.jar is in ants classpath.
+                You can copy ${tools.lib}/junit.jar to ANT_HOME/lib
+            </echo>
+            <fail>JUnit classes not in classpath</fail>
+        </then>
+    </if>
+
+
+    <!--
+        =================== CORE TARGETS =========================================================
+    -->
+
+    <target name="clean" depends="emma-clean">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+        <delete dir="${test.reports.dir}"/>
+        <delete dir="${javadocs.dir}"/>
+        <delete dir="${checkstyle.report.dir}"/>
+        <delete dir="${findbugs.report.dir}"/>
+        <delete file="${webview.module}/war/favicon.ico"/>
+        <delete file="${dist.tar.file}"/>
+        <delete>
+            <fileset dir="${basedir}" includes="*.log"/>
+        </delete>
+
+        <delete dir="${build.tools.classes.dir}"/>
+    </target>
+
+    <target name="compile-app" depends="init">
+        <javac destdir="${build.app.classes.dir}" source="${javac.version}" target="${javac.version}" debug="${javac.debug}"
+               deprecation="${javac.deprecation}" optimize="${javac.optimize}" failonerror="${javac.failonerror}" includeAntRuntime="no">
+            <classpath refid="build.app.classpath"/>
+            <src path="${app.src.dir}"/>
+        </javac>
+
+        <!-- copy additional files -->
+        <copy todir="${build.app.classes.dir}" overwrite="true" filtering="true">
+            <fileset dir="${app.src.dir}">
+                <patternset refid="app.src.files"/>
+            </fileset>
+            <filterset refid="app.config.filterset"/>
+        </copy>
+
+    </target>
+
+    <target name="compile-webview" depends="compile-app" description="compile the web view classes">
+        <javac destdir="${build.webview.classes.dir}" source="${javac.version}" target="${javac.version}" debug="${javac.debug}"
+               deprecation="${javac.deprecation}" optimize="${javac.optimize}" failonerror="${javac.failonerror}" includeAntRuntime="no">
+            <classpath refid="build.webview.classpath"/>
+            <src path="${webview.src.dir}"/>
+        </javac>
+    </target>
+
+    <target name="compile-integration" depends="compile-app" description="compile the integration webapp classes">
+        <javac destdir="${build.integration.classes.dir}" source="${javac.version}" target="${javac.version}" debug="${javac.debug}"
+               deprecation="${javac.deprecation}" optimize="${javac.optimize}" failonerror="${javac.failonerror}" includeAntRuntime="no">
+            <classpath refid="build.integration.classpath"/>
+            <src path="${integration.src.dir}"/>
+        </javac>
+    </target>
+
+    <target name="build-app-jar" depends="compile-app">
+        <!-- Create manifest -->
+        <antcall target="-create-manifest" inheritAll="false">
+            <param name="src-mf-dir" value="${app.metainf.dir}"/>
+            <param name="dest-mf-dir" value="${build.app.dir}"/>
+        </antcall>
+
+        <delete file="${app.jar}"/>
+        <jar jarfile="${app.jar}" compress="false" basedir="${build.app.classes.dir}" duplicate="fail" manifest="${build.app.dir}/MANIFEST.MF">
+            <metainf dir="${app.metainf.dir}" excludes="MANIFEST.MF"/>
+        </jar>
+    </target>
+
+    <target name="build-web-jar" depends="compile-webview">
+        <delete file="${webview.jar}"/>
+        <jar jarfile="${webview.jar}" compress="false" basedir="${build.webview.classes.dir}" duplicate="fail"/>
+    </target>
+
+    <target name="build-integration-jar" depends="compile-integration">
+        <delete file="${integration.jar}"/>
+        <jar jarfile="${integration.jar}" compress="false" basedir="${build.integration.classes.dir}" duplicate="fail"/>
+    </target>
+
+    <target name="build-jars" depends="build-app-jar, build-integration-jar, build-web-jar"/>
+
+    <target name="build-webapp" depends="init" description="Set template properties on config files and copy them into the build directory">
+
+        <!-- copy application configuration -->
+        <antcall target="-copy-app-config" inheritrefs="true">
+            <param name="webinf-dir" value="${build.webview.war.webinf.dir}"/>
+            <param name="webclasses-dir" value="${build.webview.war.classes.dir}"/>
+        </antcall>
+
+        <!-- copy additional integration configuration -->
+        <antcall target="-copy-integration-config">
+            <param name="intconfig-dir" value="${build.webview.war.webinf.dir}"/>
+            <param name="intclasses-dir" value="${build.webview.war.classes.dir}"/>
+        </antcall>
+
+        <!-- copy and filter web app config files excluding the ts-views file which needs to go into WEB-INF/classes -->
+        <copy todir="${build.webview.war.webinf.dir}" filtering="true" overwrite="true">
+            <fileset dir="${war.config.spring.dir}" excludes="**/${war.config.spring.file}"/>
+            <filterset refid="app.config.filterset"/>
+        </copy>
+
+        <!-- copy and filter webapp config files (web.xml) -->
+        <copy todir="${build.webview.war.webinf.dir}" filtering="true" overwrite="true">
+            <fileset dir="${war.config.server.dir}"/>
+            <fileset dir="${war.config.common.dir}"/>
+            <filterset refid="app.config.filterset"/>
+        </copy>
+
+        <!-- copy and filter orion specific config files -->
+        <copy todir="${build.webview.metainf.dir}" filtering="true" overwrite="true">
+            <fileset dir="${war.config.server.dir}"/>
+            <filterset refid="app.config.filterset"/>
+        </copy>
+        
+        <!-- copy and filter Axis config file for integration interface to webinf directory -->
+        <copy todir="${build.webview.war.classes.dir}" file="${integration.config.dir}/${war.config.axis.file}" filtering="true" overwrite="true">
+            <filterset refid="app.config.filterset"/>
+        </copy>
+
+        <!-- copy and filter web app resource bundle files -->
+        <copy tofile="${build.webview.war.classes.dir}/messages.properties" file="${war.resources.dir}/language/en/messages.properties" filtering="true" overwrite="true">
+            <filterset refid="app.config.filterset"/>
+        </copy>
+
+        <!-- copy all other language resource files, e.g french -->
+        <copy todir="${build.webview.war.classes.dir}" filtering="true" overwrite="true">
+            <fileset dir="${war.resources.dir}/language" includes="*.properties"/>
+            <filterset refid="app.config.filterset"/>
+        </copy>
+
+        <!-- copy and filter Spring view config file to classes directory -->
+        <copy todir="${build.webview.war.classes.dir}" file="${war.config.spring.dir}/${war.config.spring.file}" filtering="true" overwrite="true">
+            <filterset refid="app.config.filterset"/>
+        </copy>
+
+        <!-- copy the velocity templates used for emailing -->
+        <copy todir="${build.webview.war.classes.dir}" overwrite="true">
+            <fileset dir="${application.module}">
+                <include name="${templates.dir}/*.vm"/>
+            </fileset>
+        </copy>
+
+        <!-- copy website icon file to correct location -->
+        <copy file="${webview.module}/war/images/zynap.ico" tofile="${webview.module}/war/favicon.ico" overwrite="true"/>
+
+        <!-- copy the default help, images, resources and styles from the war to the build directory -->
+        <copy todir="${build.webview.war.dir}" overwrite="true">
+            <fileset dir="${war.dir}">
+                <patternset refid="client.ovewrite.files"/>
+            </fileset>
+        </copy>
+
+        <!-- copy the jasper dtd -->
+        <copy todir="${build.webview.war.classes.dir}">
+            <fileset dir="${war.resources.dir}" excludes="language/**,properties/**"/>
+        </copy>
+
+        <copy todir="${build.webview.properties.dir}" overwrite="true">
+            <fileset dir="${war.resources.properties.dir}"/>
+        </copy>
+
+        <copy todir="${build.webview.war.classes.dir}" overwrite="true">
+            <fileset dir="${webview.client.dir}">
+                <include name="${templates.dir}/*.vm"/>
+            </fileset>
+        </copy>
+
+        <!-- copy and overwrite client specific files - styles, messages, images -->
+        <if>
+            <not>
+                <equals arg1="${client}" arg2=""/>
+            </not>
+            <then>
+                <available file="${webview.client.dir}/${client}/styles" property="styles.present"/>
+                <available file="${webview.client.dir}/${client}/images" property="images.present"/>
+                <available file="${webview.client.dir}/${client}/help" property="help.present"/>
+                <available file="${webview.client.dir}/${client}/templates" property="templates.present"/>
+                <available file="${webview.client.dir}/${client}/statics" property="statics.present"/>
+                <available file="${webview.client.dir}/${client}/resources/language/en/messages.properties" property="messages.present"/>
+                <available file="${webview.client.dir}/${client}/resources/properties" property="properties.present"/>
+
+                <if>
+                    <equals arg1="${styles.present}" arg2="true"/>
+                    <then>
+                        <copy todir="${build.styles.dir}" overwrite="true">
+                            <fileset dir="${webview.module}/clients/${client}/styles"/>
+                        </copy>
+                    </then>
+                </if>
+                <if>
+                    <equals arg1="${images.present}" arg2="true"/>
+                    <then>
+                        <!-- images -->
+                        <copy todir="${build.images.dir}" overwrite="true">
+                            <fileset dir="${webview.module}/clients/${client}/images"/>
+                        </copy>
+                    </then>
+                </if>
+                <if>
+                    <equals arg1="${help.present}" arg2="true"/>
+                    <then>
+                        <!-- help files -->
+                        <copy todir="${build.help.dir}" overwrite="true">
+                            <fileset dir="${webview.module}/clients/${client}/help"/>
+                        </copy>
+                    </then>
+                </if>
+                <if>
+                    <equals arg1="${templates.present}" arg2="true"/>
+                    <then>
+                        <!-- vm files -->
+                        <copy todir="${build.templates.dir}" overwrite="true">
+                            <fileset dir="${webview.module}/clients/${client}/templates"/>
+                        </copy>
+                    </then>
+                </if>
+                <if>
+                    <equals arg1="${statics.present}" arg2="true"/>
+                    <then>
+                        <!-- statics files -->
+                        <copy todir="${build.statics.dir}" overwrite="true">
+                            <fileset dir="${webview.module}/clients/${client}/statics"/>
+                        </copy>
+                    </then>
+                </if>
+                <if>
+                    <equals arg1="${properties.present}" arg2="true"/>
+                    <then>
+                        <copy todir="${build.webview.properties.dir}" overwrite="true">
+                            <fileset dir="${webview.client.dir}/${client}/resources/properties"/>
+                        </copy>
+                    </then>
+                </if>
+                <if>
+                    <equals arg1="${messages.present}" arg2="true"/>
+                    <then>
+                        <echo message="messages found: ${webview.module}/clients/${client}/resources/language/en/messages.properties"/>
+                        <!-- messages.properties and filtering -->
+                        <copy tofile="${build.webview.war.classes.dir}/clientmessages.properties"
+                                file="${webview.module}/clients/${client}/resources/language/en/messages.properties" filtering="true" overwrite="true">
+                            <filterset refid="app.config.filterset"/>
+                        </copy>
+                        <!-- copy all other language resource files -->
+                        <copy todir="${build.webview.war.classes.dir}" filtering="true" overwrite="true">
+                            <fileset dir="${war.resources.dir}/language" includes="*.properties"/>
+                            <filterset refid="app.config.filterset"/>
+                        </copy>
+                    </then>
+                </if>
+            </then>
+        </if>
+
+    </target>
+
+    <target name="build-war" depends="build-webapp, build-jars, inspect-spring-config" description="Build WAR file">
+
+        <war warfile="${dist.dir}/${project.name}.war" webxml="${build.webview.war.webinf.dir}/web.xml">
+            <!-- copy static resources -->
+            <fileset dir="${war.dir}" excludes="WEB-INF/**,skins/**,help/**,images/**,styles/**,statics/**"/>
+            <fileset dir="${build.webview.war.dir}" excludes="WEB-INF/**,WEB-INF/classes/**"/>
+            <!-- copy properties files -->
+            <classes dir="${build.webview.properties.dir}"/>
+            <!-- copy properties files in view -->
+            <classes dir="${webview.src.dir}" includes="**/*.properties"/>
+            <classes dir="${build.app.classes.dir}" includes="ehcache.xml"/>
+            <!-- copy WEB-INF directory -->
+            <webinf dir="${build.webview.war.webinf.dir}" excludes="web.xml"/>
+            <!-- copy JSPs tlds and services -->
+            <webinf dir="${war.dir}/WEB-INF"/>
+            <!-- copy lib files -->
+            <lib dir="${integration.lib.dir}" includes="*.jar"/>
+            <lib dir="${runtime.lib}" includes="*.jar"/>
+            <lib dir="${runtime.lib}/${xalan.version}" includes="*.jar"/>
+            <lib dir="${runtime.lib}/${jasper.version}" includes="*.jar"/>
+            <lib dir="${runtime.lib}/${velocity.version}" includes="*.jar"/>
+            <lib dir="${runtime.lib}/${jfreechart.version}" includes="*.jar"/>
+            <lib dir="${runtime.lib}/${cewolf.version}" includes="*.jar"/>
+            <lib dir="${runtime.lib}/${spring.version}" includes="*.jar"/>
+            <lib dir="${runtime.lib}/${hibernate.version}" includes="*.jar"/>
+            <lib file="${app.jar}"/>
+            <lib file="${integration.jar}"/>
+            <lib file="${webview.jar}"/>
+        </war>
+        
+    </target>
+    
+    <target name="release" depends="build-war" description="prepares the war file for a release guess we could always figure out how to scp in ant">
+    	<copy file="${dist.dir}/${project.name}.war" tofile="${release.dir}/${project.name}.war" overwrite="true"/>
+    </target>
+    
+    
+    <target name="deploy-us" depends="release" description="copies the war files to the savvis us remote servers">
+    	<scp file="${release.dir}/${project.name}.war" 
+    		todir="s603004@64.14.184.228:/data01/home/s603004/oc4j/10.1.3/OracleAS_1/j2ee/home/applications" 
+    		password="1JRTLU-k"
+    		knownhosts="Z:/.ssh/known_hosts"/>
+    </target>
+
+    <target name="unpack-webapp" depends="build-war" description="Unpacks the war file so that the application can be deployed expanded">
+        <unwar src="${dist.dir}/${project.name}.war" dest="${dist.webapp.dir}"/>
+    </target>
+
+    <target name="all" depends="clean, copy-webapp"/>
+
+    <!-- todo readd when out-of-memory errors handled , emma-report -->
+    <target name="all-tests-and-emma" depends="clean, emma-instrument, run-all-tests"/>
+
+    <!--
+        =================== COPY CONFIGURATIONS =============================================
+    -->
+
+    <target name="-copy-standalone-config" description="Copies configuration files for standalone application to build directories - expects 'config-dir', 'classes-dir' and 'config-patternset'">
+
+        <echo>
+            Copying standalone config to ${config-dir} using ${config-patternset} and ${classes-dir}
+        </echo>
+
+        <!-- check that parameters have been supplied -->
+        <fail unless="classes-dir" message="Please specify a classes directory"/>
+        <fail unless="config-dir" message="Please specify a config directory"/>
+        <fail unless="config-patternset" message="Please specify a config pattern set"/>
+
+        <!-- copy application config files to config directory -->
+        <copy todir="${config-dir}">
+            <fileset dir="${app.config.dir}">
+                <patternset refid="${config-patternset}"/>
+            </fileset>
+        </copy>
+
+        <!-- copy test application config files to config directory -->
+        <copy todir="${config-dir}">
+            <fileset dir="${test.app.config.dir}">
+                <patternset refid="${config-patternset}"/>
+            </fileset>
+        </copy>
+
+        <!-- copy hibernate application config files to classes directory -->
+        <copy todir="${classes-dir}">
+            <fileset dir="${app.src.dir}">
+                <patternset refid="hibernate.files"/>
+            </fileset>
+        </copy>
+
+        <!-- copy digester config files to classes directory -->
+        <copy todir="${classes-dir}">
+            <fileset dir="${app.src.dir}">
+                <patternset refid="digester.files"/>
+            </fileset>
+        </copy>
+
+        <!-- copy the mail properties files -->
+        <copy todir="${classes-dir}">
+            <fileset dir="${app.config.spring.dir}">
+                <patternset refid="mail.properties"/>
+            </fileset>
+        </copy>
+
+    </target>
+
+    <target name="-copy-integration-config"
+            description="Copies configuration for integration application - suitable for integration webapp and standalone client - expects 'intconfig-dir' and 'intclasses-dir' ">
+
+        <echo>
+            Copying integration config to ${intconfig-dir} and ${intclasses-dir}
+        </echo>
+
+        <!-- check that parameters have been supplied -->
+        <fail unless="intclasses-dir" message="Please specify a classes directory"/>
+        <fail unless="intconfig-dir" message="Please specify a config directory"/>
+
+        <!-- copy schema file -->
+        <copy todir="${intclasses-dir}/schema" overwrite="true">
+            <fileset dir="${integration.src.dir}/schema"/>
+        </copy>
+
+        <!-- copy configuration for integration application (eg: integrationContext.xml) -->
+        <copy todir="${intconfig-dir}" overwrite="true">
+            <fileset dir="${integration.config.dir}"/>
+        </copy>
+
+    </target>
+
+    <target name="-copy-app-config"
+            description="Copies application configuration files to webapp-specific build directory - expects 'webinf-dir' and 'webclasses-dir' parameters">
+
+        <echo>
+            Copying application config to ${webinf-dir} and ${webclasses-dir}
+        </echo>
+
+        <!-- check that parameters have been supplied -->
+        <fail unless="webclasses-dir" message="Please specify a classes directory"/>
+        <fail unless="webinf-dir" message="Please specify a WEB-INF directory"/>
+
+        <copy todir="${webinf-dir}" filtering="true" overwrite="true">
+            <fileset dir="${app.config.spring.dir}"/>
+            <filterset refid="app.config.filterset"/>
+        </copy>
+
+        <!-- copy hibernate application config files to classes directory -->
+        <copy todir="${webclasses-dir}" overwrite="true">
+            <fileset dir="${app.src.dir}">
+                <patternset refid="hibernate.files"/>
+            </fileset>
+        </copy>
+
+        <!-- copy digester config files to classes directory -->
+        <copy todir="${webclasses-dir}" overwrite="true">
+            <fileset dir="${app.src.dir}">
+                <patternset refid="digester.files"/>
+            </fileset>
+        </copy>
+
+        <!-- copy and filter logging config files to classes directory -->
+        <copy todir="${webclasses-dir}" filtering="true" overwrite="true">
+            <fileset dir="${war.config.logging.dir}"/>
+            <filterset refid="app.config.filterset"/>
+        </copy>
+
+    </target>
+
+    <target name="-create-manifest" description="Creates manifest with build version details - requires 'src-mf-dir' and 'dest-mf-dir' parameters.">
+
+        <echo>
+            Create MANIFEST.MF in ${dest-mf-dir} directory from file in ${src-mf-dir}
+        </echo>
+
+        <fail unless="src-mf-dir" message="Please specify a source MF directory"/>
+        <fail unless="dest-mf-dir" message="Please specify a destination MF directory"/>
+
+        <copy todir="${dest-mf-dir}" file="${src-mf-dir}/MANIFEST.MF"/>
+
+        <!-- update manifest -->
+        <manifest file="${dest-mf-dir}/MANIFEST.MF" mode="update">
+            <attribute name="Built-By" value="dhanson"/>
+            <attribute name="Implementation-Version" value="${build.version}"/>
+            <attribute name="Build-Number" value="${build.number}"/>
+        </manifest>
+
+    </target>
+
+    <!--
+        =================== TARGETS TO BUILD STANDALONE JAR ==================================
+    -->
+
+    <target name="build-standalone-jar" depends="build-tools, build-integration-jar, build-app-jar">
+
+        <!-- compile classes -->
+        <javac destdir="${build.standalone.classes.dir}" source="${javac.version}" target="${javac.version}" debug="${javac.debug}"
+               deprecation="${javac.deprecation}" optimize="${javac.optimize}" failonerror="${javac.failonerror}" includeAntRuntime="no">
+            <classpath refid="build.app.classpath"/>
+            <classpath refid="build.standalone.classpath"/>
+            <classpath location="${build.integration.classes.dir}"/>
+            <classpath location="${build.app.classes.dir}"/>
+            <src path="${standalone.src.dir}"/>
+        </javac>
+
+        <!-- copy main application config files -->
+
+        <copy todir="${build.standalone.classes.dir}" overwrite="true">
+            <fileset dir="${standalone.src.dir}" includes="**/*.vm"/>
+        </copy>
+
+        <copy todir="${build.standalone.classes.dir}" file="${standalone.src.dir}/log4j.properties"/>
+
+        <copy todir="${build.standalone.classes.dir}" file="${app.src.dir}/ehcache.xml"/>
+
+        <copy todir="${build.standalone.dir}" file="${integration.module}/build.xml"/>
+
+        <antcall target="-copy-standalone-config">
+            <param name="classes-dir" value="${build.standalone.classes.dir}"/>
+            <param name="config-dir" value="${build.standalone.config.dir}"/>
+            <param name="config-patternset" value="standalone.application.config.fileset"/>
+        </antcall>
+
+        <!-- copy additional integration configuration -->
+        <antcall target="-copy-integration-config">
+            <param name="intclasses-dir" value="${build.standalone.classes.dir}"/>
+            <param name="intconfig-dir" value="${build.standalone.config.dir}"/>
+        </antcall>
+
+        <!-- copy lib files -->
+        <copy todir="${build.standalone.lib.dir}" overwrite="true">
+
+            <!-- NOTE: WHEN YOU ADD ANYTHING TO THIS SECTION MAKE SURE YOU ADD IT TO THE SAME SECTION FOR THE INTEGRATION WEBAPP AND TO THE SECTION FOR THE DEFAULT WEBAPP -->
+            <fileset dir="${runtime.lib}" includes="*.jar"/>
+            <fileset dir="${runtime.lib}/${xalan.version}" includes="*.jar"/>
+            <fileset dir="${runtime.lib}/${velocity.version}" includes="*.jar"/>
+            <fileset dir="${runtime.lib}/${jasper.version}" includes="*.jar"/>
+            <fileset dir="${runtime.lib}/${spring.version}" includes="*.jar"/>
+            <fileset dir="${runtime.lib}/${hibernate.version}" includes="*.jar"/>
+            <fileset file="${app.jar}"/>
+
+            <fileset dir="${integration.lib.dir}" includes="*.jar"/>
+            <fileset file="${integration.jar}"/>
+
+            <fileset dir="${tomcat.lib}" includes="${commons-dbcp.version}.jar"/>
+            <fileset dir="${tools.lib}" includes="ojdbc14.jar"/>
+            <fileset dir="${j2ee.lib}" includes="j2ee.jar"/>
+        </copy>
+
+        <!-- define and use task to build classpath for use in manifest -->
+        <taskdef classname="com.zynap.talentstudio.utils.build.ant.ManifestClassPath" name="manifestclasspath">
+            <classpath location="${build.tools.classes.dir}"/>
+        </taskdef>
+
+        <!-- build classpath to put in manifest -->
+        <manifestclasspath directoryPrefix="lib" property="manifest.class.path">
+            <classpath refid="build.standalone.classpath"/>
+        </manifestclasspath>
+
+        <!-- update manifest -->
+
+        <antcall target="-create-manifest">
+            <param name="src-mf-dir" value="${standalone.src.dir}/META-INF"/>
+            <param name="dest-mf-dir" value="${build.standalone.dir}"/>
+        </antcall>
+
+        <manifest file="${build.standalone.dir}/MANIFEST.MF" mode="update">
+            <attribute name="Class-Path" value="${manifest.class.path} schema/"/>
+        </manifest>
+
+        <!-- build clean jar - delete first always -->
+        <delete file="${standalone.jar}"/>
+        <jar jarfile="${standalone.jar}" compress="false" manifest="${build.standalone.dir}/MANIFEST.MF" duplicate="fail">
+            <fileset dir="${build.standalone.classes.dir}"/>
+            <!-- include services file for correct configuration of XML factories -->
+            <fileset dir="${standalone.src.dir}" includes="**/services/*.*"/>
+        </jar>
+    </target>
+
+    <target name="test-standalone-jar" depends="build-standalone-jar"
+            description="Runs standalone jar to generate XSD to ensure that JAR contains all the necessary libraries and configuration files">
+        <java classname="com.zynap.talentstudio.integration.client.GetXsd" failonerror="true" fork="true">
+
+            <classpath location="${standalone.jar}"/>
+            <arg line="-host ${test.db.host} -dbuser ${test.db.username} ${build.dir}/test.xsd"/>
+        </java>
+    </target>
+
+    <!--
+        =================== TARGETS TO RUN AND CONVERT CSV STANDALONE JAR ==================================
+    -->
+    <target name="generate-xsd" depends="build-standalone-jar">
+        <java classname="com.zynap.talentstudio.integration.client.GetXsd" failonerror="true" fork="true">
+            <classpath location="${standalone.jar}"/>
+            <arg line="-host ${db.host} -dbuser ${db.username} -sid ${sid} ${build.dir}/test.xsd"/>
+        </java>
+    </target>
+
+    <target name="generate-csv-templates" depends="build-standalone-jar">
+        <java classname="com.zynap.talentstudio.integration.client.GenerateCSVTemplates" failonerror="true" fork="true">
+            <classpath location="${standalone.jar}"/>
+            <arg line="-host ${db.host} -dbuser ${db.username} -sid ${sid} ${build.dir}/test.xsd"/>
+        </java>
+    </target>
+
+    <target name="run-question-calc" depends="build-standalone-jar">
+        <java classname="com.zynap.talentstudio.integration.client.QuestionnaireCalculationImporter" failonerror="true" fork="true">
+            <classpath location="${standalone.jar}"/>
+            <arg line="-host ${db.host} -dbuser ${db.username} -sid ${sid} ${qwfId}"/>
+        </java>
+    </target>
+
+    <target name="csv-toxml" depends="build-standalone-jar" description="Converts CSV file located in the given properties file to xml">
+        <java classname="com.zynap.talentstudio.integration.conversion.CsvXmlConverter">
+            <sysproperty key="action" value="${action}"/>
+            <classpath refid="build.standalone.classpath"/>
+            <classpath>
+                <pathelement path="${build.standalone.dir}/classes"/>
+            </classpath>
+            <arg value="${csv.properties.file}"/>
+        </java>
+    </target>
+
+    <target name="import-xml-standalone" depends="build-standalone-jar" description="Loads an xml file into the xml adaptor file">
+
+        <java jar="${standalone.jar}" fork="true">
+            <!--<java classname="com.zynap.talentstudio.integration.client.ExecuteXml">-->
+            <classpath refid="build.standalone.classpath"/>
+            <classpath>
+                <pathelement path="${build.standalone.dir}/classes"/>
+            </classpath>
+            <!--<classpath refid="build.standalone.classpath"/>-->
+            <arg line="-dbuser"/>
+            <arg line="${db.username}"/>
+            <arg line="-host"/>
+            <arg line="${host}"/>
+            <arg line="-sid"/>
+            <arg line="${sid}"/>
+            <arg line="-dbpasswd"/>
+            <arg line="${db.password}"/>
+            <arg line="-tsuser"/>
+            <arg line="${tsuser}"/>
+            <arg value="${xml.upload.file}"/>            
+        </java>
+    </target>
+
+    <target name="upgrade-reports" depends="-compile-app-tests">
+        <java classname="com.zynap.talentstudio.ReportUpgrader" failonerror="true" fork="true">
+            <classpath refid="test.app.classpath"/>
+            <arg line="${db.host} ${db.username} ${sid}"/>
+        </java>
+    </target>
+
+    <!--
+        =================== RUN ALL TESTS AND REPORT =============================================
+    -->
+
+    <target name="-prepare-for-tests" description="Prepare for JUnit tests - sets up configuration required by all tests">
+
+        <!-- copy config files -->
+        <antcall target="-copy-standalone-config" inheritAll="false">
+            <param name="classes-dir" value="${test.classes.dir}"/>
+            <param name="config-dir" value="${test.classes.config.dir}"/>
+            <param name="config-patternset" value="test.application.config.fileset"/>
+        </antcall>
+
+        <!-- copy logging config files to classes directory -->
+        <copy todir="${test.classes.dir}" overwrite="true">
+            <fileset dir="${test.app.config.logging.dir}"/>
+        </copy>
+        
+        <!-- copy additional hibernate application config files to test classes directory -->
+        <copy todir="${test.classes.dir}" overwrite="true">
+            <fileset dir="${test.app.src.dir}">
+                <patternset refid="hibernate.files"/>
+            </fileset>
+        </copy>
+
+    </target>
+
+    <target name="-compile-app-tests" depends="compile-app,-prepare-for-tests" description="Compiles test classes for application">
+
+        <!-- compile application test classes -->
+        <javac destdir="${test.classes.dir}" source="${javac.version}" target="${javac.version}" debug="${javac.debug}"
+               deprecation="${javac.deprecation}" optimize="${javac.optimize}" failonerror="${javac.failonerror}" includeAntRuntime="no">
+            <classpath refid="test.app.classpath"/>
+            <src path="${test.app.src.dir}"/>
+        </javac>
+
+        <!-- copy additional resources -->
+        <copy todir="${test.classes.dir}" preservelastmodified="true">
+            <fileset dir="${test.app.src.dir}">
+                <include name="**/*.vm"/>
+                <include name="**/*.xml"/>
+            </fileset>
+        </copy>
+
+    </target>
+
+    <target name="-compile-webview-tests" depends="-compile-app-tests, -compile-integration-tests, compile-webview"
+            description="Compiles test classes for web application">
+
+        <!-- compile presentation test classes -->
+        <javac destdir="${test.classes.dir}" source="${javac.version}" target="${javac.version}" debug="${javac.debug}" includeAntRuntime="no">
+            <classpath refid="test.webview.classpath"/>
+            <src path="${test.webview.src.dir}"/>
+        </javac>
+
+        <!-- copy web application config files to test classes config directory -->
+        <copy todir="${test.classes.config.dir}" overwrite="true">
+            <fileset dir="${war.config.dir}" includes="**/talentstudio-servlet.xml"/>
+        </copy>
+
+       <copy todir="${test.classes.config.dir}" overwrite="true">
+            <fileset dir="${war.config.dir}" includes="**/applicationContext-validation.xml"/>
+        </copy>
+        <!-- copy additional resources -->
+        <copy todir="${test.classes.dir}" preservelastmodified="true">
+            <fileset dir="${webview.src.dir}">
+                <include name="**/*.properties"/>
+            </fileset>
+            <fileset dir="${test.webview.src.dir}">
+                <include name="**/*.properties"/>
+                <include name="**/*.xml"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="-compile-webtest-tests" depends="-compile-webview-tests" description="Compiles the dynamic webtest classes for webapp">
+
+        <!-- copy additional resources -->
+        <copy todir="${test.classes.dir}" preservelastmodified="true">
+            <fileset dir="${test.webview.src.dir}">
+                <include name="**/*.xml"/>
+            </fileset>
+            <fileset dir="${test.app.src.dir}">
+                <include name="**/*.xml"/>
+            </fileset>
+            <fileset dir="${test.webtest.src.dir}">
+                <include name="**/*.xml"/>
+            </fileset>
+        </copy>
+
+        <!-- compile web test classes -->
+        <javac destdir="${test.classes.dir}" source="${javac.version}" target="${javac.version}" debug="${javac.debug}" includeAntRuntime="no">
+            <classpath refid="test.webview.classpath"/>
+            <src path="${test.webtest.src.dir}"/>
+        </javac>
+
+    </target>
+
+
+    <target name="-compile-integration-tests" depends="-compile-app-tests, compile-integration">
+
+        <!-- compile integration test classes -->
+        <javac destdir="${test.classes.dir}" source="${javac.version}" target="${javac.version}" debug="${javac.debug}"
+               deprecation="${javac.deprecation}" optimize="${javac.optimize}" failonerror="${javac.failonerror}" includeAntRuntime="no">
+            <classpath refid="test.integration.classpath"/>
+            <src path="${test.integration.src.dir}"/>
+        </javac>
+
+        <!-- copy resources for integration tests -->
+        <copy todir="${test.classes.dir}">
+            <fileset dir="${integration.src.dir}">
+                <include name="schema/*.*"/>
+            </fileset>
+        </copy>
+
+        <!-- copy additional resources -->
+        <copy todir="${test.classes.dir}" preservelastmodified="true">
+            <fileset dir="${test.integration.src.dir}">
+                <include name="**/*.xml"/>
+            </fileset>
+        </copy>
+
+        <!-- copy test application config files to test classes config directory -->
+        <copy todir="${test.classes.config.dir}" overwrite="true">
+            <fileset dir="${integration.config.dir}" includes="**/*.xml"/>
+        </copy>
+
+    </target>
+
+    <target name="run-app-tests" depends="-compile-app-tests" description="Run JUnit Tests for application">
+
+        <antcall target="-run-unit-tests" inheritAll="false">
+            <param name="test.src.dir" value="${test.app.src.dir}"/>
+            <param name="test.output.dir" value="${test.app.reports.dir}"/>
+            <param name="test.classpath" value="test.app.classpath"/>
+        </antcall>
+
+        <echo>End of run-app-tests</echo>
+    </target>
+
+    <target name="run-integration-tests" depends="-compile-integration-tests" description="Run JUnit Tests for integration classes">
+
+        <antcall target="-run-unit-tests" inheritAll="false">
+            <param name="test.src.dir" value="${test.integration.src.dir}"/>
+            <param name="test.output.dir" value="${test.integration.reports.dir}"/>
+            <param name="test.classpath" value="test.integration.classpath"/>
+        </antcall>
+
+        <echo>End of run-integration-tests</echo>
+    </target>
+
+    <target name="run-webview-tests" depends="-compile-webview-tests" description="Run JUnit Tests for web application">
+
+        <antcall target="-run-unit-tests" inheritAll="false">
+            <param name="test.src.dir" value="${test.webview.src.dir}"/>
+            <param name="test.output.dir" value="${test.webview.reports.dir}"/>
+            <param name="test.classpath" value="test.webview.classpath"/>
+        </antcall>
+
+        <echo>End of run-webview-tests</echo>
+    </target>
+
+    <target name="run-webtest-tests" depends="-compile-webtest-tests" description="Run JWebUnit Tests">
+
+        <antcall target="-run-unit-tests" inheritAll="false">
+            <param name="test.src.dir" value="${test.webtest.src.dir}"/>
+            <param name="test.output.dir" value="${test.webtest.reports.dir}"/>
+            <param name="test.classpath" value="test.webview.classpath"/>
+        </antcall>
+
+        <echo>End of run-webtest-tests</echo>
+    </target>
+
+    <target name="run-all-tests" depends="run-app-tests, run-webview-tests, run-integration-tests" description="Run JUnit tests"/>
+
+    <target name="-run-unit-tests" description="Utility task that runs unit tests - expects 'test.output.dir', 'test.src.dir' and 'test.classpath' parameters">
+
+        <echo>
+            Running unit tests in ${test.src.dir} - reports will be placed in ${test.output.dir}
+        </echo>
+
+        <!-- check that parameters have been supplied -->
+        <fail unless="test.src.dir" message="Please specify the test src directory"/>
+        <fail unless="test.output.dir" message="Please specify a directory for the test reports"/>
+        <fail unless="test.classpath" message="Please specify a classpath for running the reports"/>
+
+        <!-- make directories -->
+        <delete dir="${test.output.dir}" includeEmptyDirs="true" quiet="true"/>
+        <mkdir dir="${test.output.dir}/html"/>
+
+        <!-- run tests -->
+        <junit printsummary="${junit.printsummary}" fork="${junit.fork}" haltonerror="${junit.haltonerror}" haltonfailure="${junit.haltonfailure}"
+               showoutput="${junit.showoutput}" forkmode="${junit.fork.mode}" maxmemory="${junit.maxmemory}">
+
+            <!-- use syspropertyset to get appropriate properties for running tests -->
+            <syspropertyset>
+                <propertyref prefix="test.db."/>
+                <propertyref prefix="autonomy."/>
+            </syspropertyset>
+
+            <!-- system properties for the database connection -->
+            <sysproperty key="test.db.url" value="${test.db.url}"/>
+            <sysproperty key="test.db.username" value="${test.db.username}"/>
+            <sysproperty key="test.db.password" value="${test.db.password}"/>
+
+            <!-- property that indicates that AWT is to be run in headless mode - required for Jasper to run on UNIX / LINUX server -->
+            <sysproperty key="java.awt.headless" value="true"/>
+
+            <!-- Additional system property for JWebUnitTests -->
+            <sysproperty key="test.base.url" value="${test.base.url}"/>
+
+            <!-- Additional system properties for Integration Interface WebService tests -->
+            <sysproperty key="test.webservice.username" value="${test.webservice.username}"/>
+            <sysproperty key="test.webservice.password" value="${test.webservice.password}"/>
+            <sysproperty key="sender.email" value="${sender.email}"/>
+            <sysproperty key="server.url" value="http://localhost:8888"/>
+
+            <sysproperty key="search.gateway" value="${search.engine}Gateway"/>
+            <sysproperty key="search.engine" value="${search.engine}"/>
+            <sysproperty key="result.mapper" value="${result.mapper}"/>
+
+            <!-- Emma stuff -->
+            <jvmarg value="-Demma.coverage.out.file=${emma.coverage.dir}/unit-test-coverage.emma"/>
+            <jvmarg value="-Demma.coverage.out.merge=true"/>
+            <jvmarg value="-Djavax.xml.parsers.SAXParserFactory=org.apache.xerces.jaxp.SAXParserFactoryImpl"/>
+
+            <classpath refid="${test.classpath}"/>
+
+            <formatter type="xml"/>
+
+            <batchtest todir="${test.output.dir}">
+                <fileset dir="${test.src.dir}">
+                    <include name="**/Test*.*"/>
+                </fileset>
+            </batchtest>
+        </junit>
+        
+    </target>
+
+    <target name="generate-test-reports" depends="generate-app-test-reports, generate-web-test-reports, generate-integration-test-reports" description="generates reports for the tests"/>
+
+    <target name="generate-app-test-reports">
+        <!-- generate HTML reports -->
+        <junitreport todir="${test.app.reports.dir}">
+            <fileset dir="${test.app.reports.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+
+            <report format="frames" todir="${test.app.reports.dir}/html"/>
+        </junitreport>
+    </target>
+
+    <target name="generate-web-test-reports">
+        <!-- generate HTML reports -->
+        <junitreport todir="${test.webview.reports.dir}">
+            <fileset dir="${test.webview.reports.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+
+            <report format="frames" todir="${test.webview.reports.dir}/html"/>
+        </junitreport>
+    </target>
+
+    <target name="generate-integration-test-reports">
+        <!-- generate HTML reports -->
+        <junitreport todir="${test.integration.reports.dir}">
+            <fileset dir="${test.integration.reports.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+
+            <report format="frames" todir="${test.integration.reports.dir}/html"/>
+        </junitreport>
+    </target>
+
+    <!--
+        =================== EMMA Instrumented test runs ==========================================
+    -->
+
+    <target name="emma-clean" description="clean all EMMA generated things">
+        <delete dir="${emma.coverage.dir}"/>
+        <delete failonerror="false" file="${runtime.lib}/${emma.jar.name}"/>
+    </target>
+
+    <target name="emma-instrument" depends="compile-webview, compile-integration" description="Generate the EMMA instrumented classes">
+        <if>
+            <isfalse value="${javac.debug}"/>
+            <then>
+                <echo>
+                    Ant property javac.debug does not have the value "true".
+                    The Emma coverage tool can only be used when the java classes have
+                    been compiled with debug data enabled.
+                </echo>
+                <fail>Emma requires java debug info.</fail>
+            </then>
+        </if>
+
+        <emma>
+            <instr metadatafile="${emma.coverage.dir}/metadata.emma" mode="overwrite" merge="true">
+                <instrpath path="${build.app.classes.dir}"/>
+                <instrpath path="${build.webview.classes.dir}"/>
+                <instrpath path="${build.integration.classes.dir}"/>
+                <filter excludes="*.*Exception"/>
+            </instr>
+        </emma>
+
+        <copy file="${tools.lib}/${emma.jar.name}" todir="${runtime.lib}"/>
+    </target>
+
+    <target name="emma-report" description="Generate an EMMA report on results of test runs.">
+        <emma>
+            <report sort="+name,+class">
+                <sourcepath>
+                    <pathelement location="${app.src.dir}"/>
+                    <pathelement location="${webview.src.dir}"/>
+                </sourcepath>
+
+                <fileset dir="${emma.coverage.dir}">
+                    <include name="*.emma"/>
+                </fileset>
+
+                <html outfile="${emma.coverage.dir}/coverage.html"/>
+            </report>
+        </emma>
+    </target>
+
+    <!--
+        =================== MISC TARGETS =========================================================
+    -->
+
+    <target name="build-tools" description="Build classes used by build" depends="init">
+        <javac destdir="${build.tools.classes.dir}" source="${javac.version}" target="${javac.version}" debug="${javac.debug}"
+               deprecation="${javac.deprecation}" optimize="${javac.optimize}" failonerror="${javac.failonerror}" includeAntRuntime="no">
+            <classpath refid="tools.classpath"/>
+            <classpath refid="build.app.classpath"/>
+            <classpath location="${env.ANT_HOME}/lib/ant.jar"/>
+            <src path="${build.tools.src.dir}"/>
+        </javac>
+
+        <!-- copy xml file to test classes config directory -->
+        <copy todir="${build.tools.classes.dir}" overwrite="true">
+            <fileset dir="${build.tools.src.dir}" includes="**/*.xml"/>
+            <fileset dir="${build.tools.src.dir}" includes="**/*.vm"/>
+        </copy>
+    </target>
+
+    <target name="inspect-spring-config" description="Inspects configuration for spring web components" depends="build-tools">
+
+        <!-- stop build -->
+        <java classname="com.zynap.talentstudio.utils.build.spring.ViewResolverConfigurationInspector" failonerror="true">
+            <classpath location="${build.tools.classes.dir}"/>
+            <classpath location="${build.tools.config.dir}"/>
+            <classpath refid="tools.classpath"/>
+
+            <arg value="${basedir}/${war.dir}"/>
+            <arg value="${basedir}/${war.config.spring.dir}/${war.config.spring.file}"/>
+        </java>
+
+    </target>
+
+    <target name="checkstyle" description="Runs CheckStyle against code base">
+        <delete dir="${checkstyle.report.dir}"/>
+        <mkdir dir="${checkstyle.report.dir}"/>
+
+        <checkstyle config="zynap_checks.xml">
+            <fileset dir="${app.src.dir}" includes="**/*.java"/>
+            <fileset dir="${webview.src.dir}" includes="**/*.java"/>
+            <formatter type="xml" toFile="${checkstyle.report.dir}/style-errors.xml"/>
+        </checkstyle>
+    </target>
+
+    <target name="findbugs" depends="compile-webview" description="Runs FindBugs against code base">
+        <delete dir="${findbugs.report.dir}"/>
+        <mkdir dir="${findbugs.report.dir}"/>
+
+        <findbugs home="${findbugs.home}" output="xml:withMessages" outputFile="${findbugs.report.dir}/app-bugs.xml">
+            <class location="${build.app.classes.dir}"/>
+            <class location="${build.webview.classes.dir}"/>
+            <auxClasspath refid="build.webview.classpath"/>
+            <sourcePath path="${app.src.dir}"/>
+            <sourcePath path="${webview.src.dir}"/>
+        </findbugs>
+    </target>
+
+    <!--
+        =================== JAVADOC ==============================================================
+    -->
+
+    <!-- =============================================================	-->
+    <!-- Java Doc														-->
+    <!-- NOTE:	Before these can be run from IntelliJ you must			-->
+    <!--		javadoc.exe in the system PATH							-->
+    <!-- =============================================================	-->
+
+    <target name="-prepare-javadocs" description="Prepare for JavaDoc generation">
+        <delete dir="${javadocs.dir}"/>
+        <mkdir dir="${javadocs.dir}"/>
+    </target>
+
+    <target name="javadocs" depends="-prepare-javadocs" description="Generates all JavaDocs">
+        <javadoc packagenames="com.zynap.*"
+                 sourcepath="${app.src.dir};${webview.src.dir};${integration.src.dir}"
+                 defaultexcludes="yes"
+                 destdir="${javadocs.dir}"
+                 author="true"
+                 version="true"
+                 use="true"
+                 windowtitle="Zynap API">
+            <doctitle><![CDATA[<h1>TalentStudio</h1>]]></doctitle>
+            <bottom><![CDATA[<i>Build ${build.number}<br/>${copyright}</i>]]></bottom>
+            <classpath refid="build.webview.classpath"/>
+            <classpath refid="build.integration.classpath"/>
+            <!-- NOTE: There's a documented bug in Java 1.4.2 where tags with hyphens in them
+                are not handled correctly and generate a "tag unknown" error. This will be fixed
+                in Java 5.
+            -->
+            <tag name="hibernate.array" description="hibernate.array" enabled="false"/>
+            <tag name="hibernate.bag" description="hibernate.bag" enabled="false"/>
+            <tag name="hibernate.cache" description="hibernate.cache" enabled="false"/>
+            <tag name="hibernate.class" description="hibernate.class" enabled="false"/>
+            <tag name="hibernate.collection-cache" description="hibernate.collection-cache" enabled="false"/>
+            <tag name="hibernate.collection-composite-element" description="hibernate.collection-composite-element" enabled="false"/>
+            <tag name="hibernate.collection-element" description="hibernate.collection-element" enabled="false"/>
+            <tag name="hibernate.collection-index" description="hibernate.collection-index" enabled="false"/>
+            <tag name="hibernate.collection-jcs-cache" description="hibernate.collection-jcs-cache" enabled="false"/>
+            <tag name="hibernate.collection-key" description="hibernate.collection-key" enabled="false"/>
+            <tag name="hibernate.collection-many-to-many" description="hibernate.collection-many-to-many" enabled="false"/>
+            <tag name="hibernate.collection-one-to-many" description="hibernate.collection-one-to-many" enabled="false"/>
+            <tag name="hibernate.column" description="hibernate.column" enabled="false"/>
+            <tag name="hibernate.component" description="hibernate.component" enabled="false"/>
+            <tag name="hibernate.discriminator" description="hibernate.discriminator" enabled="false"/>
+            <tag name="hibernate.generator-param" description="hibernate.generator-param" enabled="false"/>
+            <tag name="hibernate.id" description="hibernate.id" enabled="false"/>
+            <tag name="hibernate.index-many-to-many" description="hibernate.index-many-to-many" enabled="false"/>
+            <tag name="hibernate.joined-subclass" description="hibernate.joined-subclass" enabled="false"/>
+            <tag name="hibernate.joined-subclass-key" description="hibernate.joined-subclass-key" enabled="false"/>
+            <tag name="hibernate.jcs-cache" description="hibernate.jcs-cache" enabled="false"/>
+            <tag name="hibernate.list" description="hibernate.list" enabled="false"/>
+            <tag name="hibernate.many-to-one" description="hibernate.many-to-one" enabled="false"/>
+            <tag name="hibernate.map" description="hibernate.map" enabled="false"/>
+            <tag name="hibernate.one-to-one" description="hibernate.one-to-one" enabled="false"/>
+            <tag name="hibernate.primitive-array" description="hibernate.primitive-array" enabled="false"/>
+            <tag name="hibernate.property" description="hibernate.property" enabled="false"/>
+            <tag name="hibernate.query" description="hibernate.query" enabled="false"/>
+            <tag name="hibernate.set" description="hibernate.set" enabled="false"/>
+            <tag name="hibernate.subclass" description="hibernate.subclass" enabled="false"/>
+            <tag name="hibernate.timestamp" description="hibernate.timestamp" enabled="false"/>
+            <tag name="hibernate.version" description="hibernate.version" enabled="false"/>
+        </javadoc>
+    </target>
+    
+    <!--
+    ==========================================================================================
+    ====== OC4J DEPLOY TARGETS
+    ===============================================================================================
+    -->
+    <target name="copy-webapp" depends="build-war" description="developers target">
+        <copy file="${dist.dir}/${project.name}.war" todir="${tomcat.webapps.dir}" overwrite="true"/>
+    </target>
+
+    <!--
+        =================== DBUNIT IMPORT / EXPORT =====================================================
+        export from a non test instance
+        import into a test instance
+    -->
+    <target name="dbunit-export" depends="-compile-app-tests" description="Export data using DBUnit - expects dburl, username, password, output file name, and table list file name">
+
+        <java classname="com.zynap.talentstudio.DatabaseExport" failonerror="true">
+            <classpath refid="test.app.classpath"/>
+            <arg value="${db.url}"/>
+            <arg value="${db.username}"/>
+            <arg value="${db.password}"/>
+            <arg value="${dbunit.file}"/>
+            <arg value="${dbunit.config.file}"/>
+        </java>
+
+    </target>
+
+    <target name="dbunit-import" depends="-compile-app-tests"
+            description="Import data using DBUnit - expects dburl, username, password, input file name">
+
+        <java classname="com.zynap.talentstudio.DatabaseImport" failonerror="true">
+            <classpath refid="test.app.classpath"/>
+            <arg value="${test.db.url}"/>
+            <arg value="${test.db.username}"/>
+            <arg value="${test.db.password}"/>
+            <arg value="${dbunit.file}"/>
+        </java>
+
+    </target>
+
+    <target name="dbunit-clean" depends="-compile-app-tests"
+            description="Import data using DBUnit - expects dburl, username, password, input file name">
+
+        <java classname="com.zynap.talentstudio.DatabaseClean" failonerror="true">
+            <classpath refid="test.app.classpath"/>
+            <arg value="${test.db.url}"/>
+            <arg value="${test.db.username}"/>
+            <arg value="${test.db.password}"/>
+            <arg value="${dbunit.file}"/>
+        </java>
+
+    </target>
+        
+</project>

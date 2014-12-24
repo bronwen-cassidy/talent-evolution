@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<commands>
+
+    <command action='create'>
+        <position>
+            <id>19000046</id>
+            <title><![CDATA[Manager-Employment/Recruitment/Adapter & Test]]></title>
+            <organisationUnit>
+                <id>#DEFAULT_ORGUNIT#</id>
+            </organisationUnit>
+            <sourceAssociations>
+                <ptpAssociation type='DIRECT'>
+                    <target>
+                        <id>#DEFAULT_POSITION#</id>
+                    </target>
+                </ptpAssociation>
+            </sourceAssociations>
+            <competency>1006</competency>
+            <developmentrole>YES</developmentrole>
+            <keyposition>YES</keyposition>
+            <comments><![CDATA[Manager-Employment/Recruitment & Sales]]></comments>
+        </position>
+    </command>
+
+    <command action='create'>
+        <position>
+            <id>19000224</id>
+            <title><![CDATA[ManagerHead-Employment/Recruitment/Adapter & Sales]]></title>
+            <organisationUnit>
+                <id>#DEFAULT_ORGUNIT#</id>
+            </organisationUnit>
+            <sourceAssociations>
+                <ptpAssociation type='DIRECT'>
+                    <target>
+                        <id>19000046</id>
+                    </target>
+                </ptpAssociation>
+            </sourceAssociations>
+            <competency>600065</competency>
+            <developmentrole>YES</developmentrole>
+            <keyposition>YES</keyposition>
+            <comments>ManagerHead-Employment/Recruitment &amp;</comments>
+        </position>
+    </command>
+
+</commands>

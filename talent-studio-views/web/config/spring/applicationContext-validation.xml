@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans>
+<!--=====================================================================-->
+  <!--===== COMPONENT THAT HANDLES EXTENDED ATTRIBUTE VALIDATION   ========-->
+  <!--=====================================================================-->
+  <bean id="attributeValueValidationFactory" class="com.zynap.talentstudio.web.organisation.attributes.AttributeValueValidationFactory">
+      <property name="attributeValueMappings">
+          <map>
+              <entry key="TEXT">
+                  <bean class="com.zynap.talentstudio.web.organisation.attributes.validators.TextAttributeValueValidator"/>
+              </entry>
+              <entry key="TEXTAREA">
+                  <bean class="com.zynap.talentstudio.web.organisation.attributes.validators.TextAttributeValueValidator"/>
+              </entry>
+              <entry key="NUMBER">
+                  <bean class="com.zynap.talentstudio.web.organisation.attributes.validators.IntegerAttributeValueValidator"/>
+              </entry>
+              <entry key="DOUBLE">
+                  <bean class="com.zynap.talentstudio.web.organisation.attributes.validators.DoubleAttributeValueValidator"/>
+              </entry>
+              <entry key="DATE">
+                  <bean class="com.zynap.talentstudio.web.organisation.attributes.validators.DateAttributeValueValidator"/>
+              </entry>
+              <entry key="TIME">
+                  <bean class="com.zynap.talentstudio.web.organisation.attributes.validators.TimeAttributeValueValidator"/>
+              </entry>
+              <entry key="DATETIME">
+                  <bean class="com.zynap.talentstudio.web.organisation.attributes.validators.DateTimeAttributeValueValidator"/>
+              </entry>
+              <entry key="IMG">
+                  <bean class="com.zynap.talentstudio.web.organisation.attributes.validators.ImageAttributeValueValidator"/>
+              </entry>
+              <entry key="LINK">
+                  <bean class="com.zynap.talentstudio.web.organisation.attributes.validators.LinkAttributeValueValidator"/>
+              </entry>
+              <entry key="STRUCT">
+                  <bean class="com.zynap.talentstudio.web.organisation.attributes.validators.StructAttributeValueValidator"/>
+              </entry>
+              <entry key="MULTISELECT">
+                  <bean class="com.zynap.talentstudio.web.organisation.attributes.validators.StructAttributeValueValidator"/>
+              </entry>
+          </map>
+      </property>
+     <property name="attributeService" ref="dynamicAttrService"/>
+  </bean>
+</beans>

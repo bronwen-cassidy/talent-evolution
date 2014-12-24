@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+    <questionnaire name="Leadership Indicators" title="Leadership Indicators">
+	
+		<group name="Status" title="Status">	
+			<question id="1" type="LastUpdated" name="Leadership Indicators Last Updated" />
+			<question id="2" type="LastUpdatedBy" name="Last Updated By" title="Last Updated By" />
+ 			</group>
+						<group name="Assessor Details" title="Assessor Details">
+			<question id="10" type="Text" name="Assessor Name" title="Assessor Name"/>
+			<question id="11" type="Text" name="Assessor Title" title="Assessor Title"/>
+</group>
+<group name="Leadership Indicator Scores" title="Context">
+<narrative>Indicators are scored between 0 and 3; 3 being the highest possible score</narrative>
+<multi-question name="Indicators">
+ <line-item>Vision</line-item> 
+  	<question id="20" type="Select" name="SCORE" title="">
+	  <answer value="0" text="0"/>
+	  <answer value="1" text="1"/>
+	  <answer value="2" text="2"/>
+	  <answer value="3" text="3"/>
+	</question>
+</multi-question>
+<multi-question name="Indicators">
+  <line-item>Managing and Understanding Context</line-item> 
+  	<question id="21" type="Select" name="SCORE" title="">
+	  <answer value="0" text="0"/>
+	  <answer value="1" text="1"/>
+	  <answer value="2" text="2"/>
+	  <answer value="3" text="3"/>
+	</question>
+</multi-question>
+<multi-question name="Indicators">
+  <line-item>Delivery</line-item> 
+  	<question id="22" type="Select" name="SCORE" title="">
+	  <answer value="0" text="0"/>
+	  <answer value="1" text="1"/>
+	  <answer value="2" text="2"/>
+	  <answer value="3" text="3"/>
+	</question>
+</multi-question>
+<multi-question name="Indicators">
+  <line-item>Emotional Intelligence</line-item> 
+  	<question id="23" type="Select" name="SCORE" title="">
+	  <answer value="0" text="0"/>
+	  <answer value="1" text="1"/>
+	  <answer value="2" text="2"/>
+	  <answer value="3" text="3"/>
+	</question>
+</multi-question>
+<multi-question name="Indicators"> 
+  <line-item>Relationship Building</line-item> 
+  	<question id="24" type="Select" name="SCORE" title="">
+	  <answer value="0" text="0"/>
+	  <answer value="1" text="1"/>
+	  <answer value="2" text="2"/>
+	  <answer value="3" text="3"/>
+	</question>
+</multi-question>
+<multi-question name="Indicators">
+  <line-item>Team and People Development</line-item> 
+  	<question id="25" type="Select" name="SCORE" title="">
+	  <answer value="0" text="0"/>
+	  <answer value="1" text="1"/>
+	  <answer value="2" text="2"/>
+	  <answer value="3" text="3"/>
+	</question>
+</multi-question>
+</group>
+<group name="Supporting Evidence: Vision" title="Vision">
+<question id="60" type="TextBox" name="Details" title="Evidence" length="45"/>
+</group>
+<group name="Supporting Evidence: Managing and Understanding Context" title="Context">
+<question id="61" type="TextBox" name="Details" title="Evidence" length="45"/>
+</group>
+<group name="Supporting Evidence: Delivery" title="Delivery">
+<question id="62" type="TextBox" name="Details" title="Evidence" length="45"/>
+</group>
+<group name="Supporting Evidence: Emotional Intelligence" title="EI">	
+<question id="63" type="TextBox" name="Details" title="Evidence" length="45"/>
+</group>
+<group name="Supporting Evidence: Relationship Building" title="Relationship Building">
+<question id="64" type="TextBox" name="Details" title="Evidence" length="45"/>
+</group>
+<group name="Supporting Evidence: Team and People Development" title="Development">		
+<question id="65" type="TextBox" name="Details" title="Evidence" length="45"/>
+</group>		
+<group name="Charcteristics of Potential" title="Potential">
+<narrative>What characteristics make you believe that this candidate has potential for:</narrative>
+<narrative>a. A Chief Execuive role within the next 2-3 years OR</narrative>
+<narrative>b. An executive director role within the next 2-3 years</narrative>
+<question id="70" type="TextBox" name="Details:" title="Details" length="45"/>
+</group>		
+</questionnaire>
+</xml>		

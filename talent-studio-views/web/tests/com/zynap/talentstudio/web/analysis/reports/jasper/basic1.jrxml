@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+        <!-- note the pageWidth must be the number of columns * the column width -->
+<jasperReport name="DataSourceReport" pageWidth="150" pageHeight="842" columnWidth="50" leftMargin="0" rightMargin="0" topMargin="50" bottomMargin="50">
+
+    <style name="pager" isDefault="true" fontName="Arial" fontSize="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+    <style name="infomessage" isDefault="false" fontName="Arial" fontSize="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+    <style name="Arial_Italic" isDefault="false" fontName="Arial" fontSize="12" isBold="false" isItalic="true" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+
+    <field name="label" class="java.lang.String">
+    </field>
+    <field name="id" class="java.lang.String">
+    </field>
+    <field name="organisationUnit.label" class="java.lang.String">
+    </field>
+    <field name="parent.label" class="java.lang.String">
+    </field>
+    <field name="subjectPrimaryAssociations" class="java.util.Collection">
+    </field>
+
+    <pageHeader>
+        <band height="20">
+            <staticText>
+                <reportElement x="0" y="0" width="400" height="15" style="infomessage"/>
+                <text><![CDATA[Label]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="400" y="0" width="400" height="15" style="infomessage"/>
+                <text><![CDATA[ID]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="800" y="0" width="400" height="15" style="infomessage"/>
+                <text><![CDATA[Organisation Unit]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="1200" y="0" width="400" height="15" style="infomessage"/>
+                <text><![CDATA[Reports To]]></text>
+            </staticText>
+        </band>
+    </pageHeader>
+
+    <detail>
+        <band height="50">
+            <textField hyperlinkType="Reference">
+                <reportElement x="0" y="20" width="400" height="15" style="pager"/>
+                <textFieldExpression class="java.lang.String"><![CDATA[$F{label}]]></textFieldExpression>
+                <hyperlinkReferenceExpression><![CDATA["urlprefix" + String.valueOf($F{id})]]></hyperlinkReferenceExpression>
+            </textField>
+            <textField>
+                <reportElement x="400" y="20" width="400" height="15" style="pager"/>
+                <textFieldExpression class="java.lang.String"><![CDATA[$F{id}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="800" y="20" width="400" height="15" style="pager"/>
+                <textFieldExpression class="java.lang.String"><![CDATA[$F{organisationUnit.label}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="1200" y="20" width="400" height="15" style="pager"/>
+                <textFieldExpression class="java.lang.String"><![CDATA[$F{parent.label}]]></textFieldExpression>
+            </textField>            
+        </band>
+    </detail>
+</jasperReport>

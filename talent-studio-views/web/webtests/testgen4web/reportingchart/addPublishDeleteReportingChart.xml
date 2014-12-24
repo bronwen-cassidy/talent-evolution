@@ -1,0 +1,373 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tg4w version="0.38.2">
+    <actions>
+        <action type="goto" refresh="true" step="0">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/analysis/listchartsettings.htm]]></value>
+        </action>
+        <action type="verify-title" step="1">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Reporting Charts]]></value>
+        </action>
+        <action type="click" refresh="true" step="2">
+            <xpath><![CDATA[*/FORM[@ID="_add"]/INPUT[@NAME="_add" and @VALUE="Add"]]]></xpath>
+            <value><![CDATA[_add]]></value>
+        </action>
+        <action type="verify-title" step="3">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Add Reporting Chart]]></value>
+        </action>
+        <action type="fill" step="4">
+            <xpath><![CDATA[*/FORM[@ID="reports"]/*/INPUT[@TYPE="text" and @NAME="viewName"]]]></xpath>
+            <value><![CDATA[Reporting Chart 1]]></value>
+        </action>
+        <action type="fill" step="5">
+            <xpath><![CDATA[*/FORM[@ID="reports"]/*/TEXTAREA[@NAME="description"]]]></xpath>
+            <value><![CDATA[Description for Reporting Chart 1]]></value>
+        </action>
+        <action type="click" step="6">
+            <xpath><![CDATA[*/FORM[@ID="reports"]/*/INPUT[@NAME="SetAll" and @VALUE="Set All"]]]></xpath>
+            <value><![CDATA[SetAll]]></value>
+        </action>
+        <action type="click" refresh="true" step="7">
+            <xpath><![CDATA[*/FORM[@ID="reports"]/*/INPUT[@NAME="_target1" and @VALUE="Next >>"]]]></xpath>
+            <value><![CDATA[_target1]]></value>
+        </action>
+        <action type="verify-title" step="8">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Add Reporting Chart]]></value>
+        </action>
+        <action type="check" step="9">
+            <xpath><![CDATA[*/FORM[@ID="_update"]/*/INPUT[@TYPE="checkbox" and @NAME="ouShow"]]]></xpath>
+            <value><![CDATA[false]]></value>
+        </action>
+        <action type="check" step="10">
+            <xpath><![CDATA[*/FORM[@ID="_update"]/*/INPUT[@TYPE="checkbox" and @NAME="positionPrimaryAssociationShow"]]]></xpath>
+            <value><![CDATA[false]]></value>
+        </action>
+        <action type="click" refresh="true" step="11">
+            <xpath><![CDATA[*/FORM[@ID="_update"]/*/INPUT[@NAME="_target2" and @VALUE="Next >>"]]]></xpath>
+            <value><![CDATA[_target2]]></value>
+        </action>
+        <action type="verify-title" step="12">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Add Reporting Chart]]></value>
+        </action>
+        <action type="click" refresh="true" step="13">
+            <xpath><![CDATA[*/FORM[@ID="_save"]/*/INPUT[@NAME="_finish" and @VALUE="Save"]]]></xpath>
+            <value><![CDATA[_finish]]></value>
+        </action>
+        <action type="verify-title" step="14">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Reporting Chart]]></value>
+        </action>
+        <action type="assert-text-exists" step="15">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Reporting Chart]]></value>
+        </action>
+        <action type="assert-text-exists" step="16">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Chart Details]]></value>
+        </action>
+        <action type="assert-text-exists" step="17">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Name]]></value>
+        </action>
+        <action type="assert-text-exists" step="18">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Description]]></value>
+        </action>
+        <action type="assert-text-exists" step="19">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Assigned Arenas]]></value>
+        </action>
+        <action type="assert-text-exists" step="20">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Organisation Unit]]></value>
+        </action>
+        <action type="assert-text-exists" step="21">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Positions]]></value>
+        </action>
+        <action type="assert-text-exists" step="22">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Position association lines]]></value>
+        </action>
+        <action type="assert-text-exists" step="23">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Primary]]></value>
+        </action>
+        <action type="assert-text-exists" step="24">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[People]]></value>
+        </action>
+        <action type="assert-text-exists" step="25">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Primary]]></value>
+        </action>
+        <action type="assert-text-exists" step="26">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Secondary]]></value>
+        </action>
+        <action type="assert-text-exists" step="27">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Displayed attributes]]></value>
+        </action>
+        <action type="assert-text-exists" step="28">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Reporting Chart 1]]></value>
+        </action>
+        <action type="assert-text-exists" step="29">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Description for Reporting Chart 1]]></value>
+        </action>
+        <action type="assert-text-exists" step="30">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Home]]></value>
+        </action>
+        <action type="assert-text-exists" step="31">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Performance Management]]></value>
+        </action>
+        <action type="assert-text-exists" step="32">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Identifier]]></value>
+        </action>
+        <action type="assert-text-exists" step="33">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Succession Builder]]></value>
+        </action>
+        <action type="assert-text-exists" step="34">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Not displayed.]]></value>
+        </action>
+        <action type="assert-text-exists" step="35">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[None]]></value>
+        </action>
+        <action type="assert-text-exists" step="36">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[default]]></value>
+        </action>
+        <action type="assert-text-exists" step="37">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Permanent]]></value>
+        </action>
+        <action type="assert-text-exists" step="38">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Short Term]]></value>
+        </action>
+        <action type="click" refresh="true" step="39">
+            <xpath><![CDATA[*/FORM[@ID="_back"]/INPUT[@TYPE="button" and @VALUE="Back"]]]></xpath>
+            <value><![CDATA[null]]></value>
+        </action>
+        <action type="verify-title" step="40">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Reporting Charts]]></value>
+        </action>
+        <action type="assert-text-exists" step="41">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Reporting Chart 1]]></value>
+        </action>
+        <action type="click" refresh="true" step="42">
+            <xpath><![CDATA[TABLE[@ID="preference"]/TBODY[1]/TR[2]/TD[1]/A[@CDATA="Reporting Chart 1"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" step="43">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Reporting Chart]]></value>
+        </action>
+        <action type="click" refresh="true" step="44">
+            <xpath><![CDATA[*/FORM[@ID="_run"]/INPUT[@NAME="_run" and @VALUE="Run"]]]></xpath>
+            <value><![CDATA[_run]]></value>
+        </action>
+        <action type="verify-title" step="45">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Reporting Structure]]></value>
+        </action>
+        <action type="assert-text-exists" step="46">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Position]]></value>
+        </action>
+        <action type="click" refresh="true" step="47">
+            <xpath><![CDATA[*/FORM[@NAME="_back"]/INPUT[@ID="back"]]]></xpath>
+            <value><![CDATA[_back]]></value>
+        </action>
+        <action type="verify-title" step="48">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Reporting Chart]]></value>
+        </action>
+        <action type="goto" refresh="true" step="49">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/talentarena/home.htm?a=MYZYNAPMODULE&a_tab=MYZYNAPMODULE]]></value>
+        </action>
+        <action type="verify-title" refresh="true" step="50">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Home]]></value>
+        </action>
+        <action type="assert-text-exists" step="51">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Reporting Chart 1]]></value>
+        </action>
+        <action type="goto" refresh="true" step="52">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/perfman/home.htm?a=PERFMANMODULE&a_tab=PERFMANMODULE]]></value>
+        </action>
+        <action type="verify-title" refresh="true" step="53">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Performance Management Arena Home]]></value>
+        </action>
+        <action type="assert-text-exists" step="54">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Reporting Chart 1]]></value>
+        </action>
+        <action type="goto" refresh="true" step="55">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/perfman/menu.htm?menu_p=REPORTS]]></value>
+        </action>
+        <action type="verify-title" step="56">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Menu]]></value>
+        </action>
+        <action type="assert-text-exists" step="57">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Reporting Chart 1]]></value>
+        </action>
+        <action type="assert-text-exists" step="58">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Description for Reporting Chart 1]]></value>
+        </action>
+        <action type="goto" refresh="true" step="59">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/analysis/listchartsettings.htm]]></value>
+        </action>
+        <action type="verify-title" step="60">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Reporting Charts]]></value>
+        </action>
+        <action type="click" refresh="true" step="61">
+            <xpath><![CDATA[TABLE[@ID="preference"]/TBODY[1]/TR[2]/TD[1]/A[@CDATA="Reporting Chart 1"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" step="62">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Reporting Chart]]></value>
+        </action>
+        <action type="click" refresh="true" step="63">
+            <xpath><![CDATA[*/FORM[@ID="_edit"]/INPUT[@TYPE="button" and @VALUE="Edit"]]]></xpath>
+            <value><![CDATA[null]]></value>
+        </action>
+        <action type="verify-title" step="64">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Edit Reporting Chart]]></value>
+        </action>
+        <action type="click" step="65">
+            <xpath><![CDATA[*/FORM[@ID="reports"]/*/INPUT[@NAME="ClearAll" and @VALUE="Clear All"]]]></xpath>
+            <value><![CDATA[ClearAll]]></value>
+        </action>
+        <action type="fill" step="66">
+            <xpath><![CDATA[*/FORM[@ID="reports"]/*/TEXTAREA[@NAME="description"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="click" refresh="true" step="67">
+            <xpath><![CDATA[*/FORM[@ID="reports"]/*/INPUT[@NAME="_target1" and @VALUE="Next >>"]]]></xpath>
+            <value><![CDATA[_target1]]></value>
+        </action>
+        <action type="verify-title" step="68">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Edit Reporting Chart]]></value>
+        </action>
+        <action type="check" step="69">
+            <xpath><![CDATA[*/FORM[@ID="_update"]/*/INPUT[@TYPE="checkbox" and @NAME="positionPrimaryAssociationShow"]]]></xpath>
+            <value><![CDATA[true]]></value>
+        </action>
+        <action type="click" refresh="true" step="70">
+            <xpath><![CDATA[*/FORM[@ID="_update"]/*/INPUT[@NAME="_target2" and @VALUE="Next >>"]]]></xpath>
+            <value><![CDATA[_target2]]></value>
+        </action>
+        <action type="verify-title" step="71">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Edit Reporting Chart]]></value>
+        </action>
+        <action type="click" refresh="true" step="72">
+            <xpath><![CDATA[*/FORM[@ID="_save"]/*/INPUT[@NAME="_finish" and @VALUE="Save"]]]></xpath>
+            <value><![CDATA[_finish]]></value>
+        </action>
+        <action type="verify-title" step="73">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Reporting Chart]]></value>
+        </action>
+        <action type="click" refresh="true" step="74">
+            <xpath><![CDATA[*/FORM[@ID="_delete"]/INPUT[@TYPE="button" and @VALUE="Delete"]]]></xpath>
+            <value><![CDATA[null]]></value>
+        </action>
+        <action type="verify-title" step="75">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Delete Reporting Chart]]></value>
+        </action>
+        <action type="click" refresh="true" step="76">
+            <xpath><![CDATA[*/FORM[@ID="_cancel"]/INPUT[@NAME="_cancel" and @VALUE="Cancel"]]]></xpath>
+            <value><![CDATA[_cancel]]></value>
+        </action>
+        <action type="verify-title" step="77">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Reporting Chart]]></value>
+        </action>
+        <action type="click" refresh="true" step="78">
+            <xpath><![CDATA[*/FORM[@ID="_reset"]/INPUT[@TYPE="button" and @VALUE="Restore Defaults"]]]></xpath>
+            <value><![CDATA[null]]></value>
+        </action>
+        <action type="verify-title" step="79">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Restore Default Settings]]></value>
+        </action>
+        <action type="click" refresh="true" step="80">
+            <xpath><![CDATA[*/FORM[@ID="_cancel"]/INPUT[@NAME="_cancel" and @VALUE="Cancel"]]]></xpath>
+            <value><![CDATA[_cancel]]></value>
+        </action>
+        <action type="verify-title" step="81">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Reporting Chart]]></value>
+        </action>
+        <action type="click" refresh="true" step="82">
+            <xpath><![CDATA[*/FORM[@ID="_reset"]/INPUT[@TYPE="button" and @VALUE="Restore Defaults"]]]></xpath>
+            <value><![CDATA[null]]></value>
+        </action>
+        <action type="verify-title" step="83">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Restore Default Settings]]></value>
+        </action>
+        <action type="click" refresh="true" step="84">
+            <xpath><![CDATA[*/FORM[@ID="_confirm"]/INPUT[@NAME="_confirm" and @VALUE="Confirm"]]]></xpath>
+            <value><![CDATA[_confirm]]></value>
+        </action>
+        <action type="verify-title" step="85">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Reporting Chart]]></value>
+        </action>
+        <action type="assert-text-exists" step="86">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Organisation Unit Name]]></value>
+        </action>
+        <action type="click" refresh="true" step="87">
+            <xpath><![CDATA[*/FORM[@ID="_delete"]/INPUT[@TYPE="button" and @VALUE="Delete"]]]></xpath>
+            <value><![CDATA[null]]></value>
+        </action>
+        <action type="verify-title" step="88">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Delete Reporting Chart]]></value>
+        </action>
+        <action type="click" refresh="true" step="89">
+            <xpath><![CDATA[*/FORM[@ID="_confirm"]/INPUT[@NAME="_confirm" and @VALUE="Confirm"]]]></xpath>
+            <value><![CDATA[_confirm]]></value>
+        </action>
+        <action type="verify-title" step="90">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Reporting Charts]]></value>
+        </action>
+        <action type="assert-text-does-not-exist" step="91">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Reporting Chart 1]]></value>
+        </action>
+    </actions>
+</tg4w>

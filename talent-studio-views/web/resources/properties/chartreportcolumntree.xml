@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<trees>
+    <tree type="S">
+        <branch id="person" label="Person" type="S" root="true" includeExtendedAttributes="false"/>
+    </tree>
+
+    <attributes type="S" includeDynamicAttributes="false"/>
+
+    <!-- indicates restrictions on attributes -->
+    <extendedattributes searchableOnly="false" type="STRUCT,ENUMMAPPING"/>
+    <dynamiclineitems include="true"/>
+    <derivedattributes include="false"/>
+
+
+</trees>

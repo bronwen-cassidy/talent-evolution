@@ -1,0 +1,18 @@
+release date: 27/02/09
+release version 5.2.4
+-------------------------------------------
+
+New in this release:
+-------------------------------------------
+1) Complete action for performance reviews
+2) We need to be able to email a person their password if they have forgotten it
+3) Normal distribution curve or equivalent for AZ	
+
+
+Bug fixes/Enhancements:
+-------------------------------------------
+1) Succession/Reporting Charts to start with the logged in users position
+2) Security domains should exclude the logged in person always from viewing themselves
+3) Assign Delete Buttons To the Admin Role so only administrators may delete subjects, positions and organisation units
+4) Ability to clear all defined home pages so group will go back to getting the default
+5) AZ only [Function answers copied from person to position]

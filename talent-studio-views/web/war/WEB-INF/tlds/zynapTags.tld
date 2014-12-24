@@ -1,0 +1,978 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN" "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
+
+<taglib>
+    <tlib-version>1.0</tlib-version>
+    <jsp-version>1.2</jsp-version>
+    <short-name>ZynapTags</short-name>
+
+    <tag>
+        <name>jasperTabularReportTag</name>
+        <tag-class>com.zynap.talentstudio.web.analysis.reports.tag.JasperTabularReportTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>jasperPrint</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>report</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>viewSubjectUrl</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>viewPositionUrl</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>viewQuestionnaireUrl</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>drillDownUrl</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>drillDownAltText</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>forCrossTab</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>This value defaults to false i.e it runs a tabular html exporter and not a crosstab html exporter</description>
+        </attribute>
+        <attribute>
+            <name>columnHeadings</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>The headings for the columns (the horizontal axis) of the crosstab</description>
+        </attribute>
+        <attribute>
+            <name>rowHeadings</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>The headings of the vertial axis of the crosstab</description>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>associationViewTag</name>
+        <tag-class>com.zynap.talentstudio.web.display.tag.AssociationViewTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>viewSubjectUrl</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>viewPositionUrl</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>report</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>associations</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>checkNodeAccess</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>inverse</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>displayHelper</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>Helper needed to obtain questionnaire answers</description>
+        </attribute>
+        <attribute>
+            <name>imageUrl</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>Url for the images</description>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>artefactViewTag</name>
+        <tag-class>com.zynap.talentstudio.web.display.tag.ArtefactViewTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>viewSubjectUrl</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>If the information is not to be a link to another artefact then do not provide this value</description>
+        </attribute>
+        <attribute>
+            <name>viewPositionUrl</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>If the information is not to be a link to another artefact then do not provide this value</description>
+        </attribute>
+        <attribute>
+            <name>report</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>node</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>checkNodeAccess</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>cellCount</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>Defaults to 2 (2 incorporates a label and field value as one, so this means four tds)</description>
+        </attribute>
+        <attribute>
+            <name>labelStyle</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>StyleClass value defaults to infolabel</description>
+        </attribute>
+        <attribute>
+            <name>fieldStyle</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>StyleClass value defaults to infodata</description>
+        </attribute>
+        <attribute>
+            <name>imageUrl</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>Url for the images</description>
+        </attribute>
+        <attribute>
+            <name>displayHelper</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>Helper needed to obtain questionnaire answers</description>
+        </attribute>
+        <attribute>
+            <name>viewType</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>Information informing the tag which view is being displayed</description>
+        </attribute>
+        <attribute>
+            <name>executiveSummary</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>is this for the exec summry view</description>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>arenaMenuItem</name>
+        <tag-class>com.zynap.talentstudio.web.arena.ArenaMenuItemTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>menuItem</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>arenaHomePageText</name>
+        <tag-class>com.zynap.talentstudio.web.arena.ArenaHomePageTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>arenaId</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>id</name>
+        <tag-class>com.zynap.talentstudio.web.common.html.IdTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>value</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>form</name>
+        <tag-class>com.zynap.talentstudio.web.common.html.FormTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>method</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>name</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>htmlId</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>action</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>encType</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>onSubmit</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>target</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>excludeHistory</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>link</name>
+        <tag-class>com.zynap.talentstudio.web.common.html.link.LinkTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>var</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>url</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>    
+
+    <tag>
+        <name>param</name>
+        <tag-class>com.zynap.talentstudio.web.common.html.link.LinkParameterTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>value</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>artefactLink</name>
+        <tag-class>com.zynap.talentstudio.web.common.html.BrowseArtefactLinkTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>var</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>url</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>tabName</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>activeTab</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>commandAction</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>artefactForm</name>
+        <tag-class>com.zynap.talentstudio.web.common.html.BrowseArtefactFormTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>method</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>tabName</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>buttonMessage</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>buttonId</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>artefactId</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>name</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>action</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>encType</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>onSubmit</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>target</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>excludeHistory</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>message</name>
+        <tag-class>com.zynap.talentstudio.web.common.html.ZynapMessageTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <description>
+            Retrieves the message with the given code, or text if code isn't resolvable.
+            The HTML escaping flag participates in a page-wide or application-wide setting
+            (i.e. by HtmlEscapeTag or a "defaultHtmlEscape" context-param in web.xml).
+        </description>
+
+        <attribute>
+            <name>message</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>A MessageSourceResolvable argument (direct or through JSP EL).
+                Fits nicely when used in conjunction with Spring's own validation error
+                classes which all implement the MessageSourceResolvable interface. For
+                example, this allows you to iterate over all of the errors in a form,
+                passing each error (using a runtime expression) as the value of this
+                'message' attribute, thus effecting the easy display of such error
+                messages.
+            </description>
+        </attribute>
+
+        <attribute>
+            <name>code</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>The code (key) to use when looking up the message.
+                If code is not provided, the text attribute will be used.
+            </description>
+        </attribute>
+
+        <attribute>
+            <name>text</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>Default text to output when a message for the given code
+                could not be found. If both text and code are not set, the tag will
+                output null.
+            </description>
+        </attribute>
+
+        <attribute>
+            <name>var</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>The string to use when binding the result to the page,
+                request, session or application scope. If not specified, the result
+                gets outputted to the writer (i.e. typically directly to the JSP).
+            </description>
+        </attribute>
+
+        <attribute>
+            <name>scope</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>The scope to use when exporting the result to a variable.
+                This attribute is only used when var is also set. Possible values are
+                page, request, session and application.
+            </description>
+        </attribute>
+
+        <attribute>
+            <name>htmlEscape</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>Set HTML escaping for this tag, as boolean value.
+                Overrides the default HTML escaping setting for the current page.
+            </description>
+        </attribute>
+
+        <attribute>
+            <name>javaScriptEscape</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>Set JavaScript escaping for this tag, as boolean value. Default is false.</description>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>argument</name>
+        <tag-class>com.zynap.talentstudio.web.common.html.MessageParameterTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>value</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>saveUrl</name>
+        <tag-class>com.zynap.talentstudio.web.history.SaveURLTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>url</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>historyLink</name>
+        <tag-class>com.zynap.talentstudio.web.history.HistoryLinkTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>var</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>url</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>evalBack</name>
+        <tag-class>com.zynap.talentstudio.web.history.EvalBackButtonTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>defaultUrl</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>    
+        </attribute>
+    </tag>
+     <tag>
+        <name>isAdminPermission</name>
+        <tag-class>com.zynap.talentstudio.web.history.EvalIsAdminPermissionButtonTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+     <tag>
+        <name>evalButton</name>
+        <tag-class>com.zynap.talentstudio.web.security.tags.SecureButtonTag</tag-class>
+        <body-content>JSP</body-content>
+          <attribute>
+            <name>userId</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    <tag>
+        <name>backButton</name>
+        <tag-class>com.zynap.talentstudio.web.history.BackButtonTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>cssClass</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>label</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>defaultUrl</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>buttonType</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>method</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>infobox</name>
+        <tag-class>com.zynap.web.tag.InfoBoxTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>title</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>id</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>htmlEscape</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>actionbox</name>
+        <tag-class>com.zynap.web.tag.ActionBoxTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>id</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>actionEntry</name>
+        <tag-class>com.zynap.web.tag.ActionEntryTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <name>button</name>
+        <tag-class>com.zynap.talentstudio.web.common.html.ButtonTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>type</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>type of button - should be button or submit</description>
+        </attribute>
+        <attribute>
+            <name>value</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>Label for button</description>
+        </attribute>
+        <attribute>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>Name for button - will be used as id if htmlId is not supplied</description>
+        </attribute>
+        <attribute>
+            <name>cssClass</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>CSS class</description>
+        </attribute>
+        <attribute>
+            <name>htmlId</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>HTML id</description>
+        </attribute>
+        <attribute>
+            <name>onclick</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>for javascript onclick</description>
+        </attribute>
+        <attribute>
+            <name>disableonclick</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>if true button can only be clicked once - default is true</description>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>tab</name>
+        <tag-class>com.zynap.web.tag.TabTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>styleSheetClass</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>defaultTab</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>url</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>includeBody</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>tabParamName</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>id</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>tabName</name>
+        <tag-class>com.zynap.web.tag.TabNameTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>value</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>specificURL</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>onClick</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>permission</name>
+        <tag-class>com.zynap.web.tag.PermissionTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>label</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>permissions</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>bindName</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>editable</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>tree</name>
+        <tag-class>com.zynap.web.tag.TreeTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>composite</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>        
+        <attribute>
+            <name>url</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>viewLink</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>viewParamName</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>serverTree</name>
+        <tag-class>com.zynap.web.tag.TreeServerTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>trees</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>branchIcon</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>emptyBranchIcon</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>leafIcon</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>branchSelectable</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>serverMode</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>selectedBranchId</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>id</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>desc</name>
+        <tag-class>com.zynap.web.tag.DescriptionTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>htmlEscape</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>popup</name>
+        <tag-class>com.zynap.web.tag.PopupTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>id</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>src</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>initialLeaf</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>closeFunction</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>Any other functions to call when the popup closes</description>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>window</name>
+        <tag-class>com.zynap.web.tag.ResizableWindowTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>elementId</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>src</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>initialLeaf</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>closeFunction</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>Any other functions to call when the popup closes</description>
+        </attribute>
+    </tag>
+    
+    <tag>
+        <name>reportingChartTag</name>
+        <tag-class>com.zynap.talentstudio.web.reportingchart.ReportingChartTag</tag-class>
+        <body-content>JSP</body-content>
+        <description>Tag library that generates the basic reporting structure view</description>
+        <attribute>
+            <name>subjectUrl</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>orgUrl</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>positionUrl</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>target</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>viewUrl</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>imageUrl</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>prefBasedReportingChartTag</name>
+        <tag-class>com.zynap.talentstudio.web.reportingchart.PreferenceBasedReportingChartTag</tag-class>
+        <body-content>JSP</body-content>
+        <description>Tag library that generates the reporting structure view using the user's display preferences</description>
+        <attribute>
+            <name>subjectUrl</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>orgUrl</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>positionUrl</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>target</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>viewUrl</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>preferences</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>imageUrl</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>secure</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>errorTag</name>
+        <tag-class>com.zynap.talentstudio.web.utils.ErrorTag</tag-class>
+        <body-content>JSP</body-content>
+        <description>Tag library that displays a message associated with the exception class and optionally the stack trace</description>
+    </tag>
+
+</taglib>
+
+
+
+
+
+
+

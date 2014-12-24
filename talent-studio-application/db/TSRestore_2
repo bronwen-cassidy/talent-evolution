@@ -1,0 +1,56 @@
+#!/bin/sh
+
+if [ -z "$1" -o -z "$2" ]
+then
+	echo usage $0 [DB Admin User] [DB User] [Dump file name]
+	exit 2
+fi
+
+set -u
+
+DBADMIN=$1
+DBUSER=$2
+DMPFILE=$3
+
+if [ ! -d ${DMPFILE} ]
+then
+	echo ${DMPFILE} is not an accessible directory.
+	exit 1
+fi
+
+if [ -z "$ORACLE_HOME" ]
+then
+	echo Please ensure ORACLE_HOME environment variable is set.
+	echo E.g. ORACLE_HOME=/home/oracle/product/9.2.0.4.0
+	exit 3
+fi
+
+# Create TS user
+
+sqlplus $DBADMIN/$DBADMIN@zynts02 @promptAndCreateUser.sql <<XXX
+${DBUSER}
+XXX
+
+result=$?
+echo RESULT = $result
+
+if [ "$result" -ne 0 ]
+then
+	echo ****** User creation failed *******
+	exit $result
+fi
+
+# Import the TS schema and data
+
+$ORACLE_HOME/bin/imp $DBUSER/$DBUSER@zynts02 LOG=${DMPFILE}/ts_restore.log FULL=y COMMIT=y ROWS=y INDEXES=y CONSTRAINTS=y GRANTS=y FILE=${DMPFILE}/ts.dmp
+result=$?
+
+echo RESULT = $result
+
+if [ "$result" -ne 0 ]
+then
+	echo ****** Database restore failed *******
+	exit $result
+fi
+
+echo Restore completed OK.

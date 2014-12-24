@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+    <!--
+         Created by the Middlegen Hibernate plugin 2.1
+
+         http://boss.bekk.no/boss/middlegen/
+         http://www.hibernate.org/
+     -->
+
+    <class
+            name="com.zynap.talentstudio.common.lookups.LookupType"
+            table="LOOKUP_TYPES"
+            dynamic-update="true"
+            dynamic-insert="true"
+            >
+
+        <id
+                name="typeId"
+                type="java.lang.String"
+                column="ID"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <generator class="assigned"/>
+        </id>
+
+        <property
+                name="description"
+                type="java.lang.String"
+                column="DESCRIPTION"
+                not-null="true"
+                length="4000"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+        <property
+                name="type"
+                type="java.lang.String"
+                column="TYPE"
+                not-null="true"
+                length="50"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+        <property
+                name="active"
+                type="true_false"
+                column="IS_ACTIVE"
+                not-null="true"
+                length="1"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+        <property
+                name="uneditable"
+                type="true_false"
+                column="IS_SYSTEM"
+                not-null="true"
+                length="1"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+        <property
+                name="label"
+                type="java.lang.String"
+                column="LABEL"
+                not-null="true"
+                length="80"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+
+        <!-- bi-directional one-to-many association to LookupValue -->
+        <bag
+                name="lookupValues"
+                lazy="true"
+                inverse="true"
+                cascade="all"
+                order-by="SORT_ORDER"
+                batch-size="50"                
+                >
+            <key>
+                <column name="TYPE_ID"/>
+            </key>
+            <one-to-many
+                    class="com.zynap.talentstudio.common.lookups.LookupValue"
+                    />
+        </bag>
+
+    </class>
+
+
+    <query name="findActiveTypes">
+        <![CDATA[from com.zynap.talentstudio.common.lookups.LookupType lookupType where lookupType.uneditable='F' and lookupType.active='T' and lookupType.type != 'QUESTIONNAIRE' order by upper(lookupType.label) ]]>
+    </query>
+    <query name="findEditableTypes">
+        <![CDATA[from com.zynap.talentstudio.common.lookups.LookupType lookupType where lookupType.uneditable='F' and lookupType.type != 'QUESTIONNAIRE' order by upper(lookupType.label) ]]>
+    </query>
+</hibernate-mapping>

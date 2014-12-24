@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+    <!--
+        Created by the Middlegen Hibernate plugin 2.1
+
+        http://boss.bekk.no/boss/middlegen/
+        http://www.hibernate.org/
+    -->
+
+    <class
+            name="com.zynap.talentstudio.objectives.ObjectiveAssessment"
+            table="OBJECTIVE_ASSESSMENTS"
+            dynamic-update="true"
+            dynamic-insert="true"
+            >
+
+        <id
+                name="id"
+                type="java.lang.Long"
+                column="ID"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <generator class="sequence">
+                <param name="sequence">OBJECTIVE_SQ</param>
+            </generator>
+        </id>
+
+        <property
+                name="managerComment"
+                type="java.lang.String"
+                column="MANAGER_COMMENTS"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+
+        <property
+                name="selfComment"
+                type="java.lang.String"
+                column="SELF_COMMENTS"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+
+        <property
+                name="approved"
+                type="true_false"
+                column="IS_APPROVED"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+
+        <property
+                name="dateApproved"
+                type="java.util.Date"
+                column="DATE_APPROVED"
+                length="10"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+
+        <many-to-one
+                name="assessor"
+                class="com.zynap.domain.admin.User"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <column name="ASSESSED_BY_ID"/>
+        </many-to-one>
+
+        <!-- bi-directional many-to-one association to ObjectiveDefinition -->
+        <many-to-one
+                name="objective"
+                class="com.zynap.talentstudio.objectives.Objective"
+                not-null="true"                
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <column name="OBJECTIVE_ID"/>
+        </many-to-one>
+
+        <!-- bi-directional many-to-one association to Subject -->
+        <many-to-one
+                name="selfRating"
+                class="com.zynap.talentstudio.common.lookups.LookupValue"
+                not-null="true"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <column name="SELF_RATING_ID"/>
+        </many-to-one>
+
+        <many-to-one
+                name="managerRating"
+                class="com.zynap.talentstudio.common.lookups.LookupValue"
+                not-null="true"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <column name="MANAGER_RATING_ID"/>
+        </many-to-one>
+
+    </class>
+</hibernate-mapping>

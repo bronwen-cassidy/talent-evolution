@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+    <questionnaire name="Cascading Objectives" title="Objectives">
+        <group name="Sales">
+            <multi-question name="">
+                <line-item dynamic="Y" managerCanDisable="Y">Challenge</line-item>
+                <question id="1" type="Text" name="Target" title="Please enter your Challenge target" mandatory="N"/>
+                <question id="2" type="Select" name="Scaler" title="Scaler">
+                    <answer value="1" text="units"/>
+                    <answer value="100" text="Hundred"/>
+                    <answer value="1000" text="Thousand"/>
+                    <answer value="1000000" text="Million"/>
+                </question>
+                <question id="3" type="Select" name="Symbol" title="Symbol">
+                    <answer value="%" text="%"/>
+                    <answer value="£" text="£"/>
+                    <answer value="€" text="€"/>
+                    <answer value="$" text="$"/>
+                </question>
+                <question id="4" type="Text" name="Comment" title="Please enter your Challenge comment" mandatory="N"/>
+                <question id="55" type="Select" name="Approve" title="Aproves or disapproves the request" managerWrite="Y">
+                    <answer value="APPROVED" text="Approved"/>
+                    <answer value="DISAPPROVED" text="Disapproved"/>    
+                </question>
+            </multi-question>
+
+            <multi-question name="">
+                <line-item managerCanDisable="Y">Contribution</line-item>
+                <question id="5" type="Text" name="Target" title="Please enter your Contribution target" mandatory="N"/>
+                <question id="6" type="Select" name="Scaler" title="Scaler">
+                    <answer value="1" text="units"/>
+                    <answer value="100" text="Hundred"/>
+                    <answer value="1000" text="Thousand"/>
+                    <answer value="1000000" text="Million"/>
+                </question>
+                <question id="7" type="Select" name="Symbol" title="Symbol">
+                    <answer value="%" text="%"/>
+                    <answer value="£" text="£"/>
+                    <answer value="€" text="€"/>
+                    <answer value="$" text="$"/>
+                </question>
+                <question id="8" type="Text" name="Comment" title="Please enter your Contribution comment" mandatory="N"/>
+            </multi-question>
+
+            <multi-question name="">
+                <line-item>Achievement</line-item>
+                <question id="9" type="Text" name="Target" title="Please enter your Achievement target" mandatory="N"/>
+                <question id="10" type="Select" name="Scaler" title="Scaler">
+                    <answer value="1" text="units"/>
+                    <answer value="100" text="Hundred"/>
+                    <answer value="1000" text="Thousand"/>
+                    <answer value="1000000" text="Million"/>
+                </question>
+                <question id="11" type="Select" name="Symbol" title="Symbol">
+                    <answer value="%" text="%"/>
+                    <answer value="£" text="£"/>
+                    <answer value="€" text="€"/>
+                    <answer value="$" text="$"/>
+                </question>
+                <question id="12" type="Text" name="Comment" title="Please enter your Achievement comment" mandatory="N"/>
+            </multi-question>
+        </group>
+
+        <group name="Costs">
+            <multi-question name="">
+                <line-item>Challenge</line-item>
+                <question id="13" type="Text" name="Target" title="Please enter your Challenge target" mandatory="N"/>
+                <question id="14" type="Select" name="Scaler" title="Scaler">
+                    <answer value="1" text="units"/>
+                    <answer value="100" text="Hundred"/>
+                    <answer value="1000" text="Thousand"/>
+                    <answer value="1000000" text="Million"/>
+                </question>
+                <question id="15" type="Select" name="Symbol" title="Symbol">
+                    <answer value="%" text="%"/>
+                    <answer value="£" text="£"/>
+                    <answer value="€" text="€"/>
+                    <answer value="$" text="$"/>
+                </question>
+                <question id="16" type="Text" name="Comment" title="Please enter your Challenge comment" mandatory="N"/>
+            </multi-question>
+
+            <multi-question name="">
+                <line-item>Contribution</line-item>
+                <question id="17" type="Text" name="Target" title="Please enter your Contribution target" mandatory="N"/>
+                <question id="18" type="Select" name="Scaler" title="Scaler">
+                    <answer value="1" text="units"/>
+                    <answer value="100" text="Hundred"/>
+                    <answer value="1000" text="Thousand"/>
+                    <answer value="1000000" text="Million"/>
+                </question>
+                <question id="19" type="Select" name="Symbol" title="Symbol">
+                    <answer value="%" text="%"/>
+                    <answer value="£" text="£"/>
+                    <answer value="€" text="€"/>
+                    <answer value="$" text="$"/>
+                </question>
+                <question id="20" type="Text" name="Comment" title="Please enter your Contribution comment" mandatory="N"/>
+            </multi-question>
+
+            <multi-question name="">
+                <line-item>Achievement</line-item>
+                <question id="24" type="Text" name="Target" title="Please enter your Achievement target" mandatory="N"/>
+                <question id="21" type="Select" name="Scaler" title="Scaler">
+                    <answer value="1" text="units"/>
+                    <answer value="100" text="Hundred"/>
+                    <answer value="1000" text="Thousand"/>
+                    <answer value="1000000" text="Million"/>
+                </question>
+                <question id="22" type="Select" name="Symbol" title="Symbol">
+                    <answer value="%" text="%"/>
+                    <answer value="£" text="£"/>
+                    <answer value="€" text="€"/>
+                    <answer value="$" text="$"/>
+                </question>
+                <question id="23" type="Text" name="Comment" title="Please enter your Achievement comment" mandatory="N"/>
+            </multi-question>
+        </group>
+
+        <group name="Profit">
+            <multi-question name="">
+                <line-item>Challenge</line-item>
+                <question id="25" type="Text" name="Target" title="Please enter your Challenge target" mandatory="N"/>
+                <question id="26" type="Select" name="Scaler" title="Scaler">
+                    <answer value="1" text="units"/>
+                    <answer value="100" text="Hundred"/>
+                    <answer value="1000" text="Thousand"/>
+                    <answer value="1000000" text="Million"/>
+                </question>
+                <question id="27" type="Select" name="Symbol" title="Symbol">
+                    <answer value="%" text="%"/>
+                    <answer value="£" text="£"/>
+                    <answer value="€" text="€"/>
+                    <answer value="$" text="$"/>
+                </question>
+                <question id="28" type="Text" name="Comment" title="Please enter your Challenge comment" mandatory="N"/>
+            </multi-question>
+
+            <multi-question name="">
+                <line-item>Contribution</line-item>
+                <question id="29" type="Text" name="Target" title="Please enter your Contribution target" mandatory="N"/>
+                <question id="30" type="Select" name="Scaler" title="Scaler">
+                    <answer value="1" text="units"/>
+                    <answer value="100" text="Hundred"/>
+                    <answer value="1000" text="Thousand"/>
+                    <answer value="1000000" text="Million"/>
+                </question>
+                <question id="31" type="Select" name="Symbol" title="Symbol">
+                    <answer value="%" text="%"/>
+                    <answer value="£" text="£"/>
+                    <answer value="€" text="€"/>
+                    <answer value="$" text="$"/>
+                </question>
+                <question id="32" type="Text" name="Comment" title="Please enter your Contribution comment" mandatory="N"/>
+            </multi-question>
+
+            <multi-question name="">
+                <line-item>Achievement</line-item>
+                <question id="33" type="Text" name="Target" title="Please enter your Achievement target" mandatory="N"/>
+                <question id="34" type="Select" name="Scaler" title="Scaler">
+                    <answer value="1" text="units"/>
+                    <answer value="100" text="Hundred"/>
+                    <answer value="1000" text="Thousand"/>
+                    <answer value="1000000" text="Million"/>
+                </question>
+                <question id="35" type="Select" name="Symbol" title="Symbol">
+                    <answer value="%" text="%"/>
+                    <answer value="£" text="£"/>
+                    <answer value="€" text="€"/>
+                    <answer value="$" text="$"/>
+                </question>
+                <question id="36" type="Text" name="Comment" title="Please enter your Achievement comment" mandatory="N"/>
+            </multi-question>
+            <multi-question name="">
+                <line-item managerCanDisable="Y">Testing Toggle Abilities</line-item>
+                <question id="63" type="Text" name="Target" title="Please enter your Achievement target" mandatory="N"/>
+                <question id="64" type="Select" name="Scaler" title="Scaler">
+                    <answer value="1" text="units"/>
+                    <answer value="100" text="Hundred"/>
+                    <answer value="1000" text="Thousand"/>
+                    <answer value="1000000" text="Million"/>
+                </question>
+                <question id="65" type="Select" name="Symbol" title="Symbol">
+                    <answer value="%" text="%"/>
+                    <answer value="£" text="£"/>
+                    <answer value="€" text="€"/>
+                    <answer value="$" text="$"/>
+                </question>
+                <question id="66" type="Text" name="Comment" title="Please enter your Achievement comment" mandatory="N"/>
+            </multi-question>
+        </group>
+
+    </questionnaire>
+</xml>

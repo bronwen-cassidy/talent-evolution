@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+    <!--
+        Created by the Middlegen Hibernate plugin 2.1
+
+        http://boss.bekk.no/boss/middlegen/
+        http://www.hibernate.org/
+    -->
+
+    <class
+            name="com.zynap.talentstudio.questionnaires.QuestionnaireDefinitionModel"
+            table="QUE_DEFINITION_MODELS"
+            dynamic-update="true"
+            dynamic-insert="true"
+            >
+        <cache usage="nonstrict-read-write"/>
+        <id
+                name="queDefinitionId"
+                type="java.lang.Long"
+                column="QUE_DEF_ID"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <generator class="assigned"/>
+        </id>
+        
+        <!-- Associations -->
+
+        <!-- bi-directional one-to-one association to QueDefinition -->
+        <one-to-one
+                name="questionnaireDefinition"
+                class="com.zynap.talentstudio.questionnaires.QuestionnaireDefinition"
+                outer-join="false"
+                constrained="true"
+                cascade="none"
+                />
+
+        <bag name="questionGroups"
+             lazy="true"
+             inverse="true"
+             cascade="all"
+             outer-join="true"
+             batch-size="50"
+             order-by="ID">
+            <key>
+                <column name="QUE_DEF_MODEL_ID"/>
+            </key>
+            <one-to-many class="com.zynap.talentstudio.questionnaires.QuestionGroup"/>
+        </bag>
+
+    </class>
+</hibernate-mapping>

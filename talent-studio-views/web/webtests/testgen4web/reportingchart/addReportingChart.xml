@@ -1,0 +1,309 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tg4w version="0.38.2">
+    <actions>
+        <action type="goto" refresh="true" step="0">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/analysis/listchartsettings.htm?navigator.notSubmit=true]]></value>
+        </action>
+        <action type="verify-title" step="1">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Reporting Charts]]></value>
+        </action>
+        <action type="assert-text-exists" step="2">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Reporting Charts]]></value>
+        </action>
+        <action type="assert-text-exists" step="3">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Name]]></value>
+        </action>
+        <action type="assert-text-exists" step="4">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Default Reporting Chart]]></value>
+        </action>
+        <action type="click" refresh="true" step="5">
+            <xpath><![CDATA[TABLE[@ID="preference"]/THEAD[1]/TR[1]/TH[1]/A[@CDATA="Name"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" step="6">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Reporting Charts]]></value>
+        </action>
+        <action type="click" refresh="true" step="7">
+            <xpath><![CDATA[*/FORM[@ID="_add"]/INPUT[@NAME="_add" and @VALUE="Add"]]]></xpath>
+            <value><![CDATA[_add]]></value>
+        </action>
+        <action type="verify-title" step="8">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Add Reporting Chart]]></value>
+        </action>
+        <action type="assert-text-exists" step="9">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Name]]></value>
+        </action>
+        <action type="assert-text-exists" step="10">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Description]]></value>
+        </action>
+        <action type="assert-text-exists" step="11">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Assigned Arenas]]></value>
+        </action>
+        <action type="assert-text-exists" step="12">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Arena]]></value>
+        </action>
+        <action type="assert-text-exists" step="13">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Arena Reports]]></value>
+        </action>
+        <action type="assert-text-exists" step="14">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Home shortcuts]]></value>
+        </action>
+        <action type="assert-text-exists" step="15">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Performance Management]]></value>
+        </action>
+        <action type="assert-text-exists" step="16">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Identifier]]></value>
+        </action>
+        <action type="assert-text-exists" step="17">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Succession Builder]]></value>
+        </action>
+        <action type="click" refresh="true" step="18">
+            <xpath><![CDATA[*/FORM[@ID="reports"]/*/INPUT[@NAME="_target1" and @VALUE="Next >>"]]]></xpath>
+            <value><![CDATA[_target1]]></value>
+        </action>
+        <action type="verify-title" step="19">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Add Reporting Chart]]></value>
+        </action>
+        <action type="assert-text-exists" step="20">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Name is a required field.]]></value>
+        </action>
+        <action type="click" refresh="true" step="21">
+            <xpath><![CDATA[*/FORM[@ID="reports"]/*/INPUT[@NAME="_cancel" and @VALUE="Cancel"]]]></xpath>
+            <value><![CDATA[_cancel]]></value>
+        </action>
+        <action type="verify-title" step="22">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Reporting Charts]]></value>
+        </action>
+        <action type="click" refresh="true" step="23">
+            <xpath><![CDATA[*/FORM[@ID="_add"]/INPUT[@NAME="_add" and @VALUE="Add"]]]></xpath>
+            <value><![CDATA[_add]]></value>
+        </action>
+        <action type="verify-title" step="24">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Add Reporting Chart]]></value>
+        </action>
+        <action type="fill" step="25">
+            <xpath><![CDATA[*/FORM[@ID="reports"]/*/INPUT[@TYPE="text" and @NAME="viewName"]]]></xpath>
+            <value><![CDATA[Default Reporting Chart]]></value>
+        </action>
+        <action type="click" step="26">
+            <xpath><![CDATA[*/FORM[@ID="reports"]/*/INPUT[@NAME="SetAll" and @VALUE="Set All"]]]></xpath>
+            <value><![CDATA[SetAll]]></value>
+        </action>
+        <action type="click" refresh="true" step="27">
+            <xpath><![CDATA[*/FORM[@ID="reports"]/*/INPUT[@NAME="_target1" and @VALUE="Next >>"]]]></xpath>
+            <value><![CDATA[_target1]]></value>
+        </action>
+        <action type="verify-title" step="28">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Add Reporting Chart]]></value>
+        </action>
+        <action type="click" refresh="true" step="29">
+            <xpath><![CDATA[*/FORM[@ID="_update"]/*/INPUT[@NAME="_cancel" and @VALUE="Cancel"]]]></xpath>
+            <value><![CDATA[_cancel]]></value>
+        </action>
+        <action type="verify-title" step="30">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Reporting Charts]]></value>
+        </action>
+        <action type="click" refresh="true" step="31">
+            <xpath><![CDATA[*/FORM[@ID="_add"]/INPUT[@NAME="_add" and @VALUE="Add"]]]></xpath>
+            <value><![CDATA[_add]]></value>
+        </action>
+        <action type="verify-title" step="32">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Add Reporting Chart]]></value>
+        </action>
+        <action type="fill" step="33">
+            <xpath><![CDATA[*/FORM[@ID="reports"]/*/INPUT[@TYPE="text" and @NAME="viewName"]]]></xpath>
+            <value><![CDATA[Default Reporting Chart]]></value>
+        </action>
+        <action type="click" step="34">
+            <xpath><![CDATA[*/FORM[@ID="reports"]/*/INPUT[@NAME="SetAll" and @VALUE="Set All"]]]></xpath>
+            <value><![CDATA[SetAll]]></value>
+        </action>
+        <action type="click" step="35">
+            <xpath><![CDATA[*/FORM[@ID="reports"]/*/INPUT[@NAME="ClearAll" and @VALUE="Clear All"]]]></xpath>
+            <value><![CDATA[ClearAll]]></value>
+        </action>
+        <action type="click" step="36">
+            <xpath><![CDATA[*/FORM[@ID="reports"]/*/INPUT[@NAME="SetAll" and @VALUE="Set All"]]]></xpath>
+            <value><![CDATA[SetAll]]></value>
+        </action>
+        <action type="click" refresh="true" step="37">
+            <xpath><![CDATA[*/FORM[@ID="reports"]/*/INPUT[@NAME="_target1" and @VALUE="Next >>"]]]></xpath>
+            <value><![CDATA[_target1]]></value>
+        </action>
+        <action type="verify-title" step="38">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Add Reporting Chart]]></value>
+        </action>
+        <action type="assert-text-exists" step="39">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Organisation Unit]]></value>
+        </action>
+        <action type="assert-text-exists" step="40">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Display Organisation Unit]]></value>
+        </action>
+        <action type="assert-text-exists" step="41">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Position association lines]]></value>
+        </action>
+        <action type="assert-text-exists" step="42">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Display Primary]]></value>
+        </action>
+        <action type="assert-text-exists" step="43">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[People]]></value>
+        </action>
+        <action type="assert-text-exists" step="44">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Positions]]></value>
+        </action>
+        <action type="assert-text-exists" step="45">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Background colour attribute]]></value>
+        </action>
+        <action type="assert-text-exists" step="46">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Attributes to display]]></value>
+        </action>
+        <action type="assert-text-exists" step="47">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Display Primary]]></value>
+        </action>
+        <action type="assert-text-exists" step="48">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Primary types to display]]></value>
+        </action>
+        <action type="assert-text-exists" step="49">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Permanent]]></value>
+        </action>
+        <action type="assert-text-exists" step="50">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Display Secondary]]></value>
+        </action>
+        <action type="assert-text-exists" step="51">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Secondary types to display]]></value>
+        </action>
+        <action type="assert-text-exists" step="52">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Short Term]]></value>
+        </action>
+        <action type="assert-text-exists" step="53">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Display Attributes]]></value>
+        </action>
+        <action type="assert-text-exists" step="54">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Gender]]></value>
+        </action>
+        <action type="click" refresh="true" step="55">
+            <xpath><![CDATA[*/FORM[@ID="_update"]/*/INPUT[@NAME="_target2" and @VALUE="Next >>"]]]></xpath>
+            <value><![CDATA[_target2]]></value>
+        </action>
+        <action type="verify-title" step="56">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Add Reporting Chart]]></value>
+        </action>
+        <action type="assert-text-exists" step="57">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Background colour]]></value>
+        </action>
+        <action type="assert-text-exists" step="58">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Organisation Unit]]></value>
+        </action>
+        <action type="assert-text-exists" step="59">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Position association lines]]></value>
+        </action>
+        <action type="assert-text-exists" step="60">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Primary]]></value>
+        </action>
+        <action type="assert-text-exists" step="61">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Colour]]></value>
+        </action>
+        <action type="assert-text-exists" step="62">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Line width]]></value>
+        </action>
+        <action type="assert-text-exists" step="63">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[People]]></value>
+        </action>
+        <action type="assert-text-exists" step="64">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Positions]]></value>
+        </action>
+        <action type="assert-text-exists" step="65">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[None]]></value>
+        </action>
+        <action type="assert-text-exists" step="66">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Colour for attribute values]]></value>
+        </action>
+        <action type="assert-text-exists" step="67">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Background colour for primary association type]]></value>
+        </action>
+        <action type="assert-text-exists" step="68">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Primary]]></value>
+        </action>
+        <action type="assert-text-exists" step="69">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Background colour for secondary association type]]></value>
+        </action>
+        <action type="assert-text-exists" step="70">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Secondary]]></value>
+        </action>
+        <action type="click" refresh="true" step="71">
+            <xpath><![CDATA[*/FORM[@ID="_save"]/*/INPUT[@NAME="_finish" and @VALUE="Save"]]]></xpath>
+            <value><![CDATA[_finish]]></value>
+        </action>
+        <action type="verify-title" step="72">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Add Reporting Chart]]></value>
+        </action>
+        <action type="assert-text-exists" step="73">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[A reporting chart with the specified name already exists.]]></value>
+        </action>
+        <action type="click" refresh="true" step="74">
+            <xpath><![CDATA[*/FORM[@ID="reports"]/*/INPUT[@NAME="_cancel" and @VALUE="Cancel"]]]></xpath>
+            <value><![CDATA[_cancel]]></value>
+        </action>
+        <action type="verify-title" step="75">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Reporting Charts]]></value>
+        </action>
+    </actions>
+</tg4w>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE weblogic-web-app PUBLIC "-//BEA Systems, Inc.//DTD Web Application 8.1//EN" "http://www.bea.com/servers/wls810/dtd/weblogic810-web-jar.dtd">
+<weblogic-web-app>
+
+    <!-- indicates that this role is configured by the admin console -->
+    <security-role-assignment>
+        <role-name>webserviceuser</role-name>
+        <externally-defined/>
+    </security-role-assignment>
+    
+    <!-- This makes weblogic precompile jsp when the application is
+        deployed... It does not do much for TalentStudio as we do not
+        keep the jsps in the standard place. That is, it does not
+        look within the WEB-INF directory where we keep them!
+    -->
+
+    <jsp-descriptor>
+        <jsp-param>
+            <param-name>precompile</param-name>
+            <param-value>false</param-value>
+        </jsp-param>
+    </jsp-descriptor>
+
+    <!-- DO NOT REMOVE  - ensures that versions of 3rd party libraries shipped with the app are used rather than ones Weblogic has in its lib directory -->
+    <container-descriptor>
+        <prefer-web-inf-classes>true</prefer-web-inf-classes>
+    </container-descriptor>
+
+    <context-root>@_applicationName_@</context-root>
+
+</weblogic-web-app>

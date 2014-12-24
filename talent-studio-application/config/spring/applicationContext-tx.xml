@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+<beans>
+
+    <!--=====================================================================-->
+    <!--===================      TX CONTEXT FOR MANAGERS     ================-->
+    <!--=====================================================================-->
+
+    <bean id="securityManager" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="target" ref="securityManagerTarget"/>
+        <property name="proxyInterfaces" value="com.zynap.talentstudio.security.ISecurityManager"/>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="create*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="update*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="lookupManager" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="target" ref="lookupManagerTarget"/>
+        <property name="proxyInterfaces" value="com.zynap.talentstudio.common.lookups.ILookupManager"/>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="create*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="update*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="roleManager" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="target" ref="roleManagerTarget"/>
+        <property name="proxyInterfaces" value="com.zynap.talentstudio.security.roles.IRoleManager"/>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="create*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="disable*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="update*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="prefManager" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="target" ref="preferencesManagerTarget"/>
+        <property name="proxyInterfaces" value="com.zynap.talentstudio.preferences.IPreferencesManager"/>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="create*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="update*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="reset*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="arenaManager" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="target" ref="arenaManagerTarget"/>
+        <property name="proxyInterfaces" value="com.zynap.talentstudio.arenas.IArenaManager"/>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="create*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="update*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <!-- required because sorted arenas may have associated reports and without a tx context the reports won't load when the ArenaMenuHandler is first invoked -->
+                <prop key="getSortedArenas">PROPAGATION_REQUIRED,readOnly, -com.zynap.exception.TalentStudioException</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--=====================================================================-->
+    <!--===================      TX CONTEXT FOR SERVICES     ================-->
+    <!--=====================================================================-->
+
+    <bean id="helpTextService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="target" ref="helpTextServiceTarget"/>
+        <property name="proxyInterfaces" value="com.zynap.talentstudio.help.IHelpTextService"/>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="create*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="update*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="objectiveService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="target" ref="objectiveServiceTarget"/>
+        <property name="proxyInterfaces" value="com.zynap.talentstudio.objectives.IObjectiveService"/>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="approve*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="create*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="update*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="publish*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="expire*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="userService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="target" ref="userServiceTarget"/>
+        <property name="proxyInterfaces" value="com.zynap.talentstudio.security.users.IUserService"/>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="delete">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="create">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="update">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="logInUser">PROPAGATION_REQUIRED</prop>
+                <prop key="changePassword">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="logOutUser">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="displayConfigService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="target" ref="displayConfigServiceTarget"/>
+        <property name="proxyInterfaces" value="com.zynap.talentstudio.display.IDisplayConfigService"/>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="update">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="organisationUnitService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="target" ref="organisationUnitServiceTarget"/>
+        <property name="proxyInterfaces" value="com.zynap.talentstudio.organisation.IOrganisationUnitService"/>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="create*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="update*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="subjectService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="target" ref="subjectServiceTarget"/>
+        <property name="proxyInterfaces" value="com.zynap.talentstudio.organisation.subjects.ISubjectService"/>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="create">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="update">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="disable">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="delete">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="queWorkflowService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="target" ref="questionnaireWorkflowServiceTarget"/>
+        <property name="proxyInterfaces" value="com.zynap.talentstudio.questionnaires.IQueWorkflowService"/>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="create">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="start*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="close*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="update">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="reload">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="disable">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="delete">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="republish*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="handleExpiredWorkflowsAndAppraisals">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="questionnaireDefinitionService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="target" ref="questionnaireDefinitionTarget"/>
+        <property name="proxyInterfaces" value="com.zynap.talentstudio.questionnaires.IQueDefinitionService"/>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="create*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="update">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="disable">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="delete">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="questionnaireService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="target" ref="questionnaireServiceTarget"/>
+        <property name="proxyInterfaces" value="com.zynap.talentstudio.questionnaires.IQuestionnaireService"/>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="create*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="delete">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="update">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="loadQuestionnaire">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="unlock*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="findOrCreateQuestionnaire">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="saveUpdate*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="deleteQuestionnaire*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="insertQuestionnaire*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="saveDeleteQuestionnaire*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="removeQuestionnaireDynamicLineItems*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="deleteQuestionnaireAttribute*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="performanceReviewService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="target" ref="performanceReviewServiceTarget"/>
+        <property name="proxyInterfaces" value="com.zynap.talentstudio.performance.IPerformanceReviewService"/>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="create*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="start*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="close*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="save*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="getAppraisalReviewNotifications*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+            </props>
+        </property>
+    </bean>
+
+
+    <bean id="positionService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="target" ref="positionServiceTarget"/>
+        <property name="proxyInterfaces" value="com.zynap.talentstudio.organisation.positions.IPositionService"/>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="create*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="update*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="portfolioService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="target" ref="portfolioServiceTarget"/>
+        <property name="proxyInterfaces" value="com.zynap.talentstudio.organisation.portfolio.IPortfolioService"/>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="create">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="update">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="delete">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="dynamicAttrService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="target" ref="dynamicAttrServiceTarget"/>
+        <property name="proxyInterfaces" value="com.zynap.talentstudio.organisation.attributes.IDynamicAttributeService"/>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="create">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="update*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="delete">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="toggle*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="removeArenaAssociation">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="analysisService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="target" ref="analysisServiceTarget"/>
+        <property name="proxyInterfaces" value="com.zynap.talentstudio.analysis.IAnalysisService"/>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="create*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="update*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="reportService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="target" ref="reportServiceTarget"/>
+        <property name="proxyInterfaces" value="com.zynap.talentstudio.analysis.reports.IReportService"/>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="create*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="update*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="metricService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="target" ref="metricServiceTarget"/>
+        <property name="proxyInterfaces" value="com.zynap.talentstudio.analysis.metrics.IMetricService"/>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="create*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="update*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="configRuleService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="target" ref="configRuleServiceTarget"/>
+        <property name="proxyInterfaces" value="com.zynap.talentstudio.security.rules.IConfigRuleService"/>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="create*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="update*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="messageService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="target" ref="messageServiceTarget"/>
+        <property name="proxyInterfaces" value="com.zynap.talentstudio.messages.IMessageService"/>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="create*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="update*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="markAs*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="groupService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="target" ref="groupServiceTarget"/>
+        <property name="proxyInterfaces" value="com.zynap.talentstudio.common.groups.IGroupService"/>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="create*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="update*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="dashboardService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="target" ref="dashboardServiceTarget"/>
+        <property name="proxyInterfaces" value="com.zynap.talentstudio.dashboard.IDashboardService"/>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="create*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="update*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="spellCheckService" class="com.zynap.talentstudio.questionnaires.GoogleSpellCheckService"/>
+
+    <bean id="serviceDelegate" class="com.zynap.talentstudio.ServiceDelegate"/>
+
+</beans>

@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC '-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN' 'http://java.sun.com/dtd/web-app_2_3.dtd'>
+
+<!--
+  - Web app deployment descriptor that loads both a root application context
+  - and an "springapp" DispatcherServlet with a specific context.
+  -
+  - Any number of additional DispatcherServlets can be added.
+  -
+  - Depends on the following libraries in WEB-INF/lib:
+  - * spring.jar
+  - * commons-logging.jar
+  - * log4j-1.2.x.jar
+-->
+
+<web-app>
+
+    <display-name>Talent Studio</display-name>
+
+    <description>Talent Studio application</description>
+
+    <!--
+        System property that indicates whether or not system errors should be displayed to the end user in this webapp
+        Currently set by build file.
+      -->
+
+    <context-param>
+        <param-name>displayErrors</param-name>
+        <param-value>@displayErrors@</param-value>
+        <description>If set to true will display system errors on the page shown to the user</description>
+    </context-param>
+
+    <!--
+      - Location of the Log4J config file, for initialization and refresh checks.
+      - Applied by Log4jConfigListener.
+      -->
+    <context-param>
+        <param-name>log4jConfigLocation</param-name>
+        <param-value>/WEB-INF/classes/log4j.properties</param-value>
+    </context-param>
+
+    <!--
+      - Location of the XML files that defines the root application context
+      - Applied by ContextLoaderListener.
+    -->
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            /WEB-INF/applicationContext-jdbc.xml
+            /WEB-INF/applicationContext-hibernate.xml
+            /WEB-INF/applicationContext-tx.xml
+            /WEB-INF/applicationContext.xml
+            /WEB-INF/applicationContext-validation.xml
+            /WEB-INF/applicationContext-dwr.xml
+            /WEB-INF/applicationContext-mail.xml
+            /WEB-INF/applicationContext-scheduling.xml
+            /WEB-INF/integrationContext.xml
+        </param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>crossDomainSessionSecurity</param-name>
+        <param-value>false</param-value>
+    </context-param>
+
+    <filter>
+        <filter-name>ResponseOverrideFilter</filter-name>
+        <filter-class>org.displaytag.filter.ResponseOverrideFilter</filter-class>
+    </filter>
+
+    <filter>
+        <filter-name>openSessionFilter</filter-name>
+        <filter-class>org.springframework.orm.hibernate.support.OpenSessionInViewFilter</filter-class>
+        <init-param>
+            <param-name>singleSession</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+
+    <filter>
+        <filter-name>characterEncodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+
+    <!--suppress WebProperties -->
+    <filter-mapping>
+        <filter-name>openSessionFilter</filter-name>
+        <servlet-name>talentstudio</servlet-name>
+    </filter-mapping>
+
+
+    <filter-mapping>
+        <filter-name>ResponseOverrideFilter</filter-name>
+        <url-pattern>*.htm</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>characterEncodingFilter</filter-name>
+        <url-pattern>*.htm</url-pattern>
+    </filter-mapping>
+
+    <!--=========== LISTENER ===========-->
+
+    <listener>
+        <listener-class>com.zynap.web.listener.ZynapSessionListener</listener-class>
+    </listener>
+
+
+    <!-- flushes caches called on contextDestroyed apparently required for OutOfMemoryErrors -->
+    <listener>
+        <listener-class>com.zynap.talentstudio.web.CleanupListener</listener-class>
+    </listener>
+
+    <listener>
+        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+    </listener>
+
+    <!--
+      - Configures Log4J for this web app.
+      - As this context specifies a context-param "log4jConfigLocation", its file path
+      - is used to load the Log4J configuration, including periodic refresh checks.
+      -
+      - Would fall back to default Log4J initialization (non-refreshing) if no special
+      - context-params are given.
+      -
+      - Exports a "web app root key", i.e. a system property that specifies the root
+      - directory of this web app, for usage in log file paths.
+      - This web app specifies "springapp.root" (see log4j.properties file).
+    -->
+    <!-- Leave the listener commented-out if using JBoss -->
+    <!--
+    <listener>
+        <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+    </listener>
+    -->
+
+    <!--
+      - Loads the root application context of this web app at startup,
+      - by default from "/WEB-INF/applicationContext.xml".
+        - Note that it is preferable to use ContextLoaderListener in a servlet leaf
+        - that follows the Servlet 2.4 initialization order (many Servlet 2.3 containers do).
+        -
+      - Use WebApplicationContextUtils.getWebApplicationContext(servletContext)
+      - to access it anywhere in the web application, outside of the framework.
+      -
+      - The root context is the parent of all servlet-specific contexts.
+      - This means that its beans are automatically available in these child contexts,
+      - both for getBean(name) calls and (external) bean references.
+    -->
+    <servlet>
+        <servlet-name>context</servlet-name>
+        <servlet-class>com.zynap.talentstudio.web.TalentStudioContextLoaderServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <!--
+      - DEFAULT AREA
+      - Servlet that dispatches request to registered handlers (Controller implementations).
+      - Has its own application context, by default defined in "{servlet-name}-servlet.xml",
+      - i.e. "talentstudio-servlet.xml".
+      -
+      - A web app can contain any number of such servlets.
+      - Note that this web app has a shared root application context, serving as parent
+      - of all DispatcherServlet contexts.
+    -->
+    <servlet>
+        <servlet-name>talentstudio</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+
+    <servlet>
+        <servlet-name>CewolfServlet</servlet-name>
+        <servlet-class>de.laures.cewolf.CewolfRenderer</servlet-class>
+        <init-param>
+            <param-name>storage</param-name>
+            <param-value>de.laures.cewolf.storage.TransientSessionStorage</param-value>
+        </init-param>
+        <!-- sets overlib.js location relative to webapp -->
+        <init-param>
+            <param-name>overliburl</param-name>
+            <param-value>/scripts/overlib.js</param-value>
+        </init-param>
+        <!-- turn on or off debugging logging -->
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>3</load-on-startup>
+    </servlet>
+
+    <servlet>
+        <servlet-name>AxisServlet</servlet-name>
+        <servlet-class>org.apache.axis.transport.http.AxisServlet</servlet-class>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+
+    <!--
+      - Maps the talentstudio dispatcher to *.htm. All handler mappings in
+      - talent-servlet.xml will by default be applied to this subpath.
+      - If a mapping isn't a /* subpath, the handler mappings are considered
+      - relative to the web app root.
+      -
+      - NOTE: A single dispatcher can be mapped to multiple paths, like any servlet.
+    -->
+
+    <servlet-mapping>
+        <servlet-name>talentstudio</servlet-name>
+        <url-pattern>*.htm</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>talentstudio</servlet-name>
+        <url-pattern>/dwr/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>CewolfServlet</servlet-name>
+        <url-pattern>/cewolf/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>AxisServlet</servlet-name>
+        <url-pattern>/axis/*</url-pattern>
+    </servlet-mapping>
+
+    <!-- Default Session Time out -->
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+
+    <mime-mapping>
+        <extension>doc</extension>
+        <mime-type>application/msword</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>xls</extension>
+        <mime-type>application/vnd.ms-excel</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>csv</extension>
+        <mime-type>text/csv</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>pdf</extension>
+        <mime-type>application/pdf</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>ppt</extension>
+        <mime-type>application/vnd.ms-powerpoint</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>ppsx</extension>
+        <mime-type>application/vnd.openxmlformats-officedocument.presentationml.slideshow</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>xml</extension>
+        <mime-type>text/xml</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>css</extension>
+        <mime-type>text/css</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>htm</extension>
+        <mime-type>text/html;charset=utf-8</mime-type>
+    </mime-mapping>
+    <welcome-file-list>
+        <!-- Redirects to "welcome.htm" for dispatcher handling -->
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/statics/404.html</location>
+    </error-page>
+
+    <error-page>
+        <error-code>500</error-code>
+        <location>/statics/500.html</location>
+    </error-page>
+
+    <!-- Tag libraries -->
+    <taglib>
+        <taglib-uri>/spring</taglib-uri>
+        <taglib-location>/WEB-INF/tlds/spring.tld</taglib-location>
+    </taglib>
+
+    <taglib>
+        <taglib-uri>/zynap</taglib-uri>
+        <taglib-location>/WEB-INF/tlds/zynapTags.tld</taglib-location>
+    </taglib>
+
+    <taglib>
+        <taglib-uri>/cewolf</taglib-uri>
+        <taglib-location>/WEB-INF/tlds/cewolf-1.1.tld</taglib-location>
+    </taglib>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>WebService</web-resource-name>
+            <url-pattern>/axis/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>webserviceuser</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <login-config>
+        <auth-method>BASIC</auth-method>
+        <realm-name>myrealm</realm-name>
+    </login-config>
+
+    <security-role>
+        <role-name>webserviceuser</role-name>
+    </security-role>
+
+</web-app>

@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tg4w version="0.38.2">
+    <actions>
+        <action type="goto" refresh="true" step="0">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/orgbuilder/listposition.htm?navigator.notSubmit=true]]></value>
+        </action>
+        <action type="verify-title" step="1">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Position Search]]></value>
+        </action>
+        <action type="assert-text-does-not-exist" step="2">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Results]]></value>
+        </action>
+        <action type="click" step="3">
+            <xpath><![CDATA[*/FORM[@ID="toggleparams"]/*/INPUT[@ID="btn_toggleparams"]]]></xpath>
+            <value><![CDATA[null]]></value>
+        </action>
+        <action type="assert-text-exists" step="4">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Advanced Search Parameters]]></value>
+        </action>
+        <action type="assert-text-exists" step="5">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Date Created]]></value>
+        </action>
+        <action type="assert-text-exists" step="6">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Required Java Certification]]></value>
+        </action>
+        <action type="assert-text-exists" step="7">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Salary]]></value>
+        </action>
+        <action type="assert-text-does-not-exist" step="8">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Scheduled Review Date]]></value>
+        </action>
+        <action type="assert-text-does-not-exist" step="9">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Strategic Importance]]></value>
+        </action>
+        <action type="fill" step="10">
+            <xpath><![CDATA[*/FORM[@ID="position"]/*/INPUT[@ID="Salary"]]]></xpath>
+            <value><![CDATA[1000]]></value>
+        </action>
+        <action type="click" refresh="true" step="11">
+            <xpath><![CDATA[*/FORM[@ID="position"]/*/INPUT[@NAME="_target3" and @VALUE="Search"]]]></xpath>
+            <value><![CDATA[_target3]]></value>
+        </action>
+        <action type="verify-title" step="12">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Position Search]]></value>
+        </action>
+        <action type="assert-text-exists" step="13">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Nothing found to display.]]></value>
+        </action>
+        <action type="click" step="14">
+            <xpath><![CDATA[A[@ID="a_search"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="fill" step="15">
+            <xpath><![CDATA[*/FORM[@ID="position"]/*/INPUT[@ID="Salary"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="select" step="16">
+            <xpath><![CDATA[*/FORM[@ID="position"]/*/SELECT[@ID="RequiredJavaCertification"]]]></xpath>
+            <value><![CDATA[424]]></value>
+        </action>
+        <action type="click" refresh="true" step="17">
+            <xpath><![CDATA[*/FORM[@ID="position"]/*/INPUT[@NAME="_target3" and @VALUE="Search"]]]></xpath>
+            <value><![CDATA[_target3]]></value>
+        </action>
+        <action type="verify-title" step="18">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Position Search]]></value>
+        </action>
+        <action type="assert-text-exists" step="19">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[One item found.]]></value>
+        </action>
+        <action type="assert-text-exists" step="20">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Head of Java]]></value>
+        </action>
+        <action type="click" step="21">
+            <xpath><![CDATA[A[@ID="a_search"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="select" step="22">
+            <xpath><![CDATA[*/FORM[@ID="position"]/*/SELECT[@ID="RequiredJavaCertification"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="fill" step="23">
+            <xpath><![CDATA[*/FORM[@ID="position"]/*/INPUT[@ID="Salary"]]]></xpath>
+            <value><![CDATA[100000]]></value>
+        </action>
+        <action type="click" refresh="true" step="24">
+            <xpath><![CDATA[*/FORM[@ID="position"]/*/INPUT[@NAME="_target3" and @VALUE="Search"]]]></xpath>
+            <value><![CDATA[_target3]]></value>
+        </action>
+        <action type="verify-title" step="25">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Position Search]]></value>
+        </action>
+        <action type="assert-text-exists" step="26">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[One item found.]]></value>
+        </action>
+        <action type="assert-text-exists" step="27">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Default Position]]></value>
+        </action>
+    </actions>
+</tg4w>

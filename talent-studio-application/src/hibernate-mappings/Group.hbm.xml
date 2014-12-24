@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+    <!--
+        Created by the Middlegen Hibernate plugin 2.1
+
+        http://boss.bekk.no/boss/middlegen/
+        http://www.hibernate.org/
+    -->
+
+    <class
+            name="com.zynap.talentstudio.common.groups.Group"
+            table="GROUPS"
+            dynamic-update="false"
+            dynamic-insert="false"
+            >
+        <cache usage="read-write"/>
+        <id
+                name="id"
+                type="long"
+                column="ID"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <generator class="sequence">
+                <param name="sequence">GROUPS_SQ</param>
+            </generator>
+        </id>
+
+        <property
+                name="type"
+                column="TYPE"
+                type="java.lang.String">
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+
+        <property
+                name="label"
+                column="LABEL"
+                type="java.lang.String">
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+
+        <set name="homePages"
+             lazy="true"
+             inverse="true"
+             cascade="all-delete-orphan"
+             outer-join="true"
+             batch-size="50"
+                >
+            <key>
+                <column name="GROUP_ID"/>
+            </key>
+            <one-to-many
+                    class="com.zynap.talentstudio.security.homepages.HomePage"
+                    />
+        </set>
+
+    </class>
+</hibernate-mapping>

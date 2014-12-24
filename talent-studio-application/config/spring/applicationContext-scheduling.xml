@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+<beans>
+
+    <bean id="expiryTask" class="com.zynap.talentstudio.questionnaires.ExpiryTask">
+        <property name="questionnaireWorkflowService" ref="queWorkflowService"/>
+    </bean>
+
+    <bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail">
+            <bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+                <property name="targetObject" ref="expiryTask"/>
+                <property name="targetMethod" value="run"/>
+            </bean>
+        </property>
+        <!-- seconds minutes hours -->
+        <property name="cronExpression" value="00 00 00 * * ?"/>                      
+    </bean>
+
+    <bean id="objectiveExpiryTask" class="com.zynap.talentstudio.objectives.ExpiryTask">
+        <property name="objectiveService" ref="objectiveService"/>
+    </bean>
+
+    <bean id="objectiveCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail">
+            <bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+                <property name="targetObject" ref="objectiveExpiryTask"/>
+                <property name="targetMethod" value="run"/>
+            </bean>
+        </property>
+        <property name="cronExpression" value="00 00 00 * * ?"/>
+    </bean>
+
+    <bean id="areaElementTask" class="com.zynap.talentstudio.security.areas.AreaElementTask">
+        <property name="securityManager" ref="securityManager"/>
+        <property name="analysisService" ref="analysisService"/>
+        <property name="populationEngine" ref="populationEngine"/>
+    </bean>
+
+    <bean id="areaCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail">
+            <bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+                <property name="targetObject" ref="areaElementTask"/>
+                <property name="targetMethod" value="run"/>
+            </bean>
+        </property>
+        <!-- seconds minutes hours -->
+        <property name="cronExpression" value="0 0 0/1 * * ?"/>
+    </bean>
+
+    <bean id="quartzTimerFactory" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" lazy-init="false">
+        <property name="triggers">
+            <list>
+                <ref local="cronTrigger"/>
+                <ref local="areaCronTrigger"/>
+                <ref local="objectiveCronTrigger"/>
+            </list>
+        </property>
+    </bean>
+
+</beans>

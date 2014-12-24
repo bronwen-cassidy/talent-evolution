@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+    
+<hibernate-mapping>
+<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+
+<class
+    name="com.zynap.talentstudio.analysis.SourceDerivedAttribute"
+    table="NODE_SOURCE_DERIVED_ATTR"
+    dynamic-update="false"
+    dynamic-insert="false"
+>
+    <meta attribute="class-description" inherit="false">
+       @hibernate.class
+        table="NODE_SOURCE_DERIVED_ATTRIBUTES"
+        dynamic-update="false"
+        dynamic-insert="false"
+    </meta>
+    <composite-id>
+        <key-property
+            name="qualifierId"
+            column="QUALIFIER_ID"
+            type="java.lang.Long"
+            length="22"
+        />
+        <key-property
+            name="nodeId"
+            column="NODE_ID"
+            type="java.lang.Long"
+            length="22"
+        />
+        <key-property
+            name="associationNumber"
+            column="ASSOCIATION_NUMBER"
+            type="java.lang.Long"
+            length="22"
+        />
+    </composite-id>
+
+
+
+
+
+    <!-- Associations -->
+    <!-- derived association(s) for compound key -->
+    <!-- end of derived association(s) -->
+
+
+</class>
+</hibernate-mapping>

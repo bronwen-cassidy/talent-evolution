@@ -1,0 +1,174 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+    
+<hibernate-mapping>
+<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+
+<class 
+    name="com.zynap.talentstudio.analysis.populations.PopulationCriteria"
+    table="POPULATION_CRITERIAS"
+    dynamic-update="true"
+    dynamic-insert="true"
+>
+    <meta attribute="class-description" inherit="false">
+       @hibernate.class
+        table="POPULATION_CRITERIAS"
+        dynamic-update="true"
+        dynamic-insert="true"
+    </meta>
+
+    <id
+        name="id"
+        type="long"
+        column="ID"
+        unsaved-value="null"
+    >
+        <meta attribute="field-description">
+           @hibernate.id
+            generator-class="assigned"
+            type="long"
+            column="ID"
+
+        </meta>
+        <meta attribute="use-in-equals">true</meta>
+        <generator class="sequence">
+            <param name="sequence">CRITERIA_SQ</param>
+        </generator>
+    </id>
+
+    <property
+        name="type"
+        type="java.lang.String"
+        column="TYPE"
+        length="1"
+    >
+        <meta attribute="use-in-tostring">true</meta>
+        <meta attribute="use-in-equals">true</meta>
+        <meta attribute="field-description">
+           @hibernate.property
+            column="TYPE"
+            length="1"
+        </meta>    
+    </property>
+    <property
+        name="refValue"
+        type="java.lang.String"
+        column="REF_VALUE"
+        length="1000"
+    >
+        <meta attribute="use-in-tostring">true</meta>
+        <meta attribute="use-in-equals">true</meta>
+        <meta attribute="field-description">
+           @hibernate.property
+            column="REF_VALUE"
+            length="1000"
+        </meta>    
+    </property>
+    <property
+        name="attributeName"
+        type="java.lang.String"
+        column="ATTRIBUTE"
+        length="50"
+    >
+        <meta attribute="use-in-tostring">true</meta>
+        <meta attribute="use-in-equals">true</meta>
+        <meta attribute="field-description">
+           @hibernate.property
+            column="ATTRIBUTE"
+            length="50"
+        </meta>    
+    </property>
+    <property
+        name="operator"
+        type="java.lang.String"
+        column="OPERATOR"
+        length="10"
+    >
+        <meta attribute="use-in-tostring">true</meta>
+        <meta attribute="use-in-equals">true</meta>
+        <meta attribute="field-description">
+           @hibernate.property
+            column="OPERATOR"
+            length="10"
+        </meta>    
+    </property>
+    <property
+        name="comparator"
+        type="java.lang.String"
+        column="COMPARATOR"
+        length="10"
+    >
+        <meta attribute="use-in-tostring">true</meta>
+        <meta attribute="use-in-equals">true</meta>
+        <meta attribute="field-description">
+           @hibernate.property
+            column="COMPARATOR"
+            length="10"
+        </meta>    
+    </property>
+   <property
+        name="position"
+        type="java.lang.Integer"
+        column="POSITION"
+        length="5"
+    >
+        <meta attribute="use-in-tostring">true</meta>
+        <meta attribute="use-in-equals">true</meta>
+        <meta attribute="field-description">
+           @hibernate.property
+            column="POSITION"
+            length="5"
+        </meta>
+    </property>
+
+    <property
+        name="questionnaireWorkflowId"
+        type="java.lang.Long"
+        column="QUE_WF_ID"
+        length="10"
+    >
+        <meta attribute="use-in-tostring">true</meta>
+        <meta attribute="use-in-equals">true</meta>
+        <meta attribute="field-description">
+           @hibernate.property
+            column="OPERATOR"
+            length="10"
+        </meta>
+    </property>
+
+    <property
+        name="role"
+        type="java.lang.String"
+        column="ROLE"
+        length="50"
+    >
+        <meta attribute="use-in-tostring">true</meta>
+        <meta attribute="use-in-equals">true</meta>
+    </property>
+
+    <!-- Associations -->
+  
+    <!-- bi-directional many-to-one association to Population -->
+    <many-to-one
+        name="population"
+        class="com.zynap.talentstudio.analysis.populations.Population"
+        not-null="true"
+    >
+        <meta attribute="use-in-equals">true</meta>
+        <meta attribute="field-description">
+           @hibernate.many-to-one
+            not-null="true"
+           @hibernate.column name="POPULATION_ID"         
+        </meta>
+        <column name="POPULATION_ID" />
+    </many-to-one>
+
+</class>
+</hibernate-mapping>

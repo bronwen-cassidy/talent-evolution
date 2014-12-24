@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+
+    <class
+            name="com.zynap.talentstudio.dashboard.DashboardChartValue"
+            table="DASHBOARD_CHART_VALUES"
+            dynamic-update="true"
+            dynamic-insert="true"
+            >
+        <cache usage="nonstrict-read-write"/>
+        <id
+                name="id"
+                type="java.lang.Long"
+                column="ID"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <generator class="sequence">
+                <param name="sequence">DASHBOARDS_SQ</param>
+            </generator>
+        </id>
+
+        <property name="position"
+                  type="java.lang.Integer"
+                  column="POSITION"
+                  length="5"
+                />
+
+        <property name="expectedValue"
+                  type="java.lang.Integer"
+                  column="EXPECTED_VALUE"
+                  length="5"
+                />
+
+        <!-- Associations -->
+        <many-to-one
+                name="column"
+                class="com.zynap.talentstudio.analysis.reports.Column"
+                not-null="true"
+                cascade="none"
+                >
+            <column name="REPORT_COLUMN_ID"/>
+        </many-to-one>
+
+        <many-to-one
+                name="dashboardItem"
+                class="com.zynap.talentstudio.dashboard.DashboardItem"
+                not-null="true"
+                >
+            <column name="DASHBOARD_ITEM_ID"/>
+        </many-to-one>
+
+    </class>
+</hibernate-mapping>

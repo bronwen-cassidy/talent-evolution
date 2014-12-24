@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+        
+<beans>
+    
+    <!--
+        - this bean specifically maps any dwr requests to the dwr controller
+    -->
+    <bean id="dwrUrlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="alwaysUseFullPath" value="true"/>
+        <property name="mappings">
+            <props>
+                <prop key="/dwr/**/*">dwrController</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- =========== DWR Servlet Controller =========== -->
+
+    <bean id="dwrController" class="org.springframework.web.servlet.mvc.ServletWrappingController" lazy-init="true">
+
+        <property name="servletClass" value="org.directwebremoting.servlet.DwrServlet"/>
+        <property name="initParameters">
+            <props>
+                <prop key="debug">true</prop>
+                <prop key="crossDomainSessionSecurity">false</prop>
+            </props>
+        </property>
+
+    </bean>
+    <bean id="helpTextBean" class="com.zynap.talentstudio.web.questionnaires.HelpTextBean">
+        <property name="helpTextService" ref="helpTextService"/>
+    </bean>
+
+    <bean id="objectivesBean" class="com.zynap.talentstudio.web.objectives.ObjectiveDwrBean">
+        <property name="objectiveService" ref="objectiveService"/>
+        <property name="userService" ref="userService"/>            
+    </bean>
+
+    <bean id="positionsBean" class="com.zynap.talentstudio.web.organisation.positions.PositionTreeBean">
+        <property name="organisationManager" ref="organisationUnitService"/>
+    </bean>
+
+    <bean id="subjectBean" class="com.zynap.talentstudio.web.organisation.subjects.SubjectDwrBean">
+        <property name="subjectService" ref="subjectService"/>                    
+    </bean>
+
+    <bean id="questionnaireBean" class="com.zynap.talentstudio.web.questionnaires.QuestionnaireDwrBean">
+        <property name="queWorkflowService" ref="queWorkflowService"/>
+        <property name="questionnaireService" ref="questionnaireService"/>
+        <property name="messageSource" ref="messageResourceHandler"/>
+        <property name="validationFactory" ref="attributeValueValidationFactory"/>
+        <property name="dynamicAttributeService" ref="dynamicAttrService"/>
+    </bean>
+
+    <bean id="messageItemBean" class="com.zynap.talentstudio.web.messages.MessageItemDwrBean">
+        <property name="messageService" ref="messageService"/>
+        <property name="questionnaireService" ref="questionnaireService"/>
+        <property name="objectiveService" ref="objectiveService"/>
+    </bean>
+
+</beans>

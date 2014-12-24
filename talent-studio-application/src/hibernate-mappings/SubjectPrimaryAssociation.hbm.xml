@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+    
+<hibernate-mapping>
+<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+
+<class 
+    name="com.zynap.talentstudio.organisation.subjects.SubjectPrimaryAssociation"
+    table="SUBJECT_PRIMARY_ASSOCIATIONS"
+    dynamic-update="true"
+    dynamic-insert="true"
+>
+
+    <meta attribute="implement-equals">true</meta>
+
+    <id
+        name="id"
+        type="java.lang.Long"
+        column="ID"
+        unsaved-value="null" 
+    >
+        <meta attribute="use-in-equals">true</meta>
+            <generator class="sequence">
+                <param name="sequence">ASSOC_SQ</param>
+            </generator>
+    </id>
+
+    <property name="rowid"
+        type="java.lang.String"
+        column="rowid"
+        insert="false"
+        update="false"/>
+    
+    <!-- Associations -->
+  
+    <!-- bi-directional many-to-one association to Subject -->
+    <many-to-one
+        name="subject"
+        class="com.zynap.talentstudio.organisation.subjects.Subject"
+        not-null="true"
+    >
+        <meta attribute="use-in-equals">true</meta>
+        <column name="SUBJECT_ID" />
+    </many-to-one>
+    <!-- bi-directional many-to-one association to LookupValue -->
+    <many-to-one
+        name="qualifier"
+        class="com.zynap.talentstudio.common.lookups.LookupValue"
+        not-null="true" 
+    >
+        <meta attribute="use-in-equals">true</meta>
+        <column name="VALUE_ID" />
+    </many-to-one>
+    <!-- bi-directional many-to-one association to Position -->
+    <many-to-one
+        name="position"
+        class="com.zynap.talentstudio.organisation.positions.Position"
+        not-null="true"
+    >
+        <meta attribute="use-in-equals">true</meta>
+        <column name="POSITION_ID" />
+    </many-to-one>
+
+</class>
+</hibernate-mapping>

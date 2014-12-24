@@ -1,0 +1,298 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+    <!-- 
+        Created by the Middlegen Hibernate plugin 2.1
+
+        http://boss.bekk.no/boss/middlegen/
+        http://www.hibernate.org/
+    -->
+
+    <class
+            name="com.zynap.talentstudio.analysis.reports.Report"
+            table="REPORTS"
+            dynamic-update="true"
+            dynamic-insert="true"
+            >
+        <cache usage="nonstrict-read-write"/>
+
+        <id
+                name="id"
+                type="java.lang.Long"
+                column="ID"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <generator class="sequence">
+                <param name="sequence">REPORT_SQ</param>
+            </generator>
+        </id>
+
+        <discriminator column="REP_TYPE"/>
+
+        <property name="label"
+                  type="java.lang.String"
+                  column="LABEL"
+                  length="240"
+                />
+
+        <property name="accessType"
+                  type="java.lang.String"
+                  column="ACCESS_TYPE"
+                  length="50"
+                />
+
+        <property name="description"
+                  type="java.lang.String"
+                  column="DESCRIPTION"
+                  length="500"
+                />
+
+        <property name="populationType"
+                  type="java.lang.String"
+                  column="POPULATION_TYPE"
+                />
+
+        <property name="reportType"
+                  type="java.lang.String"
+                  column="REP_TYPE"
+                  insert="false"
+                  update="false"
+                />
+
+        <property name="jasperDefinition"
+                  type="org.springframework.orm.hibernate.support.BlobSerializableType"
+                  column="JASPER_DEFINITION"
+                />
+
+        <property name="displayOption"
+                  type="java.lang.Integer"
+                  column="display_option"
+                />
+
+        <property name="decimalPlaces"
+                  type="java.lang.Integer"
+                  column="decimal_places"
+                />
+
+        <property name="personal"
+                  type="true_false"
+                  column="IS_PERSONAL"
+                />
+        <property name="operator"
+                  type="java.lang.String"
+                  column="OPERATOR"
+                />
+        <property name="lastLineItem"
+                  type="true_false"
+                  column="LAST_OF"
+                />
+        <property name="userId"
+                  type="java.lang.Long"
+                  column="USER_ID"
+                />
+
+
+        <!-- bi-directional many-to-one association to Population -->
+        <many-to-one
+                name="defaultPopulation"
+                not-null="true"
+                class="com.zynap.talentstudio.analysis.populations.Population"
+                >
+            <column name="DEFAULT_POPULATION_ID"/>
+        </many-to-one>
+
+        <!-- bi-directional many-to-one association to drill down report -->
+        <many-to-one
+                name="drillDownReport"
+                class="com.zynap.talentstudio.analysis.reports.Report"
+                not-null="false"
+                >
+            <column name="DD_REPORT_ID"/>
+        </many-to-one>
+
+        <!-- bi-directional many-to-one association to report used to display artefacts in cross tab report  -->
+        <many-to-one
+                name="displayReport"
+                class="com.zynap.talentstudio.analysis.reports.Report"
+                not-null="false"
+                >
+            <column name="CROSSTAB_VIEW_REPORT_ID"/>
+        </many-to-one>
+
+        <!-- bi-directional one-to-many association to Column -->
+        <list
+                name="columns"
+                lazy="false"
+                inverse="true"
+                cascade="all-delete-orphan"
+                outer-join="true"
+                batch-size="50"
+                >
+
+            <cache usage="nonstrict-read-write"/>
+
+            <key column="REP_ID"/>
+            <index column="POSITION"/>
+            <one-to-many
+                    class="com.zynap.talentstudio.analysis.reports.Column"
+                    />
+        </list>
+
+        <!-- bi-directional many-to-one association to Metric -->
+        <many-to-one
+                name="defaultMetric"
+                class="com.zynap.talentstudio.analysis.metrics.Metric"
+                not-null="false"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <column name="METRIC_ID"/>
+        </many-to-one>
+
+        <!-- bi-directional one-to-many association to MenuItem -->
+        <set
+                name="menuItems"
+                lazy="true"
+                inverse="true"
+                cascade="all-delete-orphan"
+                outer-join="true"
+                batch-size="50"
+                >
+            <key>
+                <column name="REPORT_ID"/>
+            </key>
+            <one-to-many
+                    class="com.zynap.talentstudio.arenas.MenuItem"
+                    />
+        </set>
+
+        <set
+                name="groups"
+                table="REPORT_GROUPS"
+                cascade="none"
+                outer-join="true"
+                lazy="true"
+                batch-size="50">
+            <key>
+                <column name="REPORT_ID"/>
+            </key>
+            <many-to-many class="com.zynap.talentstudio.common.groups.Group" column="GROUP_ID"/>
+        </set>
+
+        <subclass name="com.zynap.talentstudio.analysis.reports.SubjectDisplayReport" discriminator-value="S" dynamic-insert="true" dynamic-update="true"/>
+        <subclass name="com.zynap.talentstudio.analysis.reports.PositionDisplayReport" discriminator-value="P" dynamic-insert="true" dynamic-update="true"/>
+        <subclass name="com.zynap.talentstudio.analysis.reports.TabularReport" discriminator-value="STANDARD" dynamic-insert="true" dynamic-update="true"/>
+
+        <subclass name="com.zynap.talentstudio.analysis.reports.ProgressReport" discriminator-value="PROGRESS" dynamic-insert="true" dynamic-update="true">
+
+            <property name="questionnaireDefinitionId"
+                      type="java.lang.Long"
+                      column="QD_ID"
+                    />
+
+            <many-to-one
+                    name="questionnaireDefinition"
+                    class="com.zynap.talentstudio.questionnaires.QuestionnaireDefinition"
+                    insert="false"
+                    update="false"
+                    >
+                <column name="QD_ID"/>
+            </many-to-one>
+
+            <set
+                    name="workflows"
+                    lazy="false"
+                    table="REPORT_WORKFLOWS"
+                    cascade="all-delete-orphan"
+                    outer-join="true"
+                    inverse="true"
+                    batch-size="50"
+                    order-by="position"
+                    >
+                <key>
+                    <column name="REPORT_ID"/>
+                </key>
+                <one-to-many class="com.zynap.talentstudio.analysis.reports.ReportWorkflow"/>
+            </set>
+
+        </subclass>
+
+        <subclass name="com.zynap.talentstudio.analysis.reports.MetricReport" discriminator-value="METRIC" dynamic-insert="true" dynamic-update="true"/>
+
+        <subclass name="com.zynap.talentstudio.analysis.reports.ChartReport" discriminator-value="CHART" dynamic-insert="true" dynamic-update="true">
+
+            <property name="chartType"
+                      type="java.lang.String"
+                      column="CHART_TYPE"
+                    />
+            <list
+                    name="chartReportAttributes"
+                    table="CHART_REPORT_ATTRIBUTES"
+                    cascade="all-delete-orphan"
+                    outer-join="true"
+                    inverse="true"
+                    lazy="true"
+                    batch-size="50">
+                <key>
+                    <column name="REPORT_ID"/>
+                </key>
+                <index column="POSITION"/>
+                <one-to-many class="com.zynap.talentstudio.analysis.reports.ChartReportAttribute"/>
+            </list>
+        </subclass>
+
+        <subclass name="com.zynap.talentstudio.analysis.reports.CrossTabReport" discriminator-value="CROSSTAB" dynamic-insert="true" dynamic-update="true">
+
+            <property name="displayLimit"
+                      type="java.lang.Integer"
+                      column="DISPLAY_LIMIT"
+                    />
+
+            <!-- bi-directional association to crossTabCellInfos for a crosstab report -->
+            <bag
+                    name="crossTabCellInfos"
+                    lazy="true"
+                    inverse="true"
+                    cascade="all-delete-orphan"
+                    outer-join="true"
+                    batch-size="50"
+                    order-by="ID"
+                    >
+                <key>
+                    <column name="CROSSTAB_ID"/>
+                </key>
+                <one-to-many
+                        class="com.zynap.talentstudio.analysis.reports.crosstab.CrossTabCellInfo"
+                        />
+            </bag>
+
+        </subclass>
+
+        <subclass name="com.zynap.talentstudio.analysis.reports.AppraisalSummaryReport" discriminator-value="APPRAISAL" dynamic-insert="true" dynamic-update="true">
+            <property name="status"
+                      type="java.lang.String"
+                      column="STATUS"
+                    />
+
+
+            <property name="appraisalId"
+                      type="java.lang.Long"
+                      column="APPRAISAL_ID"
+                    />
+
+            <!-- Associations -->
+            <many-to-one
+                    name="performanceReview"
+                    class="com.zynap.talentstudio.performance.PerformanceReview"
+                    insert="false"
+                    update="false"
+                    >
+                <column name="APPRAISAL_ID"/>
+            </many-to-one>
+
+        </subclass>
+
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+    <!--
+        Created by the Middlegen Hibernate plugin 2.1
+
+        http://boss.bekk.no/boss/middlegen/
+        http://www.hibernate.org/
+    -->
+
+    <class
+        name="com.zynap.talentstudio.security.SecurityDomain"
+        table="SECURITY_DOMAINS"
+        dynamic-update="true"
+        dynamic-insert="true"
+        >
+
+        <id
+            name="id"
+            type="long"
+            column="ID"
+            >
+            <meta attribute="use-in-equals">true</meta>
+            <generator class="sequence">
+                <param name="sequence">SECUREDOMAIN_SQ</param>
+            </generator>
+        </id>
+
+        <property
+            name="exclusive"
+            type="true_false"
+            column="IS_EXCLUSIVE"
+            not-null="true"
+            length="1"
+            >
+            <meta attribute="use-in-tostring">true</meta>
+        </property>
+        <property
+            name="label"
+            type="java.lang.String"
+            column="LABEL"
+            not-null="true"
+            length="100"
+            >
+            <meta attribute="use-in-tostring">true</meta>
+        </property>
+        <property
+            name="comments"
+            type="java.lang.String"
+            column="COMMENTS"
+            length="4000"
+            >
+            <meta attribute="use-in-tostring">true</meta>
+        </property>
+        <property
+            name="active"
+            type="true_false"
+            column="IS_ACTIVE"
+            not-null="true"
+            length="1"
+            >
+            <meta attribute="use-in-tostring">true</meta>
+        </property>
+
+        <!-- Associations -->
+        <set
+            name="users"
+            table="SECURITY_DOMAINS_USERS"
+            cascade="save-update"
+            lazy="true"
+            >
+            <key>
+                <column name="SD_ID"/>
+            </key>
+            <many-to-many class="com.zynap.domain.admin.User" column="USER_ID"/>
+        </set>
+        <!--  -->
+        <set
+            name="roles"
+            table="ROLES_SECURITY_DOMAINS"
+            cascade="save-update"
+            lazy="true">
+            <key>
+                <column name="SD_ID"/>
+            </key>
+            <many-to-many class="com.zynap.talentstudio.security.roles.Role" column="ROLE_ID"/>
+        </set>        
+
+        <!-- bi-directional many-to-one association to Node -->
+        <many-to-one
+            name="node"
+            class="com.zynap.talentstudio.organisation.Node"
+            not-null="true"
+            cascade="save-update">
+            <column name="NODE_ID"/>
+        </many-to-one>
+
+    </class>
+</hibernate-mapping>

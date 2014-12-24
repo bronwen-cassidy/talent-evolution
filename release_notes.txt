@@ -1,0 +1,15 @@
+release date: 
+release version 5.4.4
+-------------------------------------------
+
+New in this release:
+-------------------------------------------
+1)
+
+Enhancements:
+-------------------------------------------
+1)
+
+Bug fixes:
+-------------------------------------------
+1) lazy load errors in AreaElementTask -> not replicable in test environment

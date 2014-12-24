@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+    <questionnaire name="1) BUILDING ORGANISATIONAL CAPABILITIES" title="1) BUILDING ORGANISATIONAL CAPABILITIES">
+
+        <group name="Status" title="Status">
+            <question id="1" type="LastUpdated" name="Competency Record Last Updated"/>
+            <question id="2" type="LastUpdatedBy" name="Last Updated By" title="Last Updated By"/>
+        </group>
+        <group name="1.1) Inspiring trust and loyalty, and team building" title="1.1) Inspiring trust and loyalty, and team building">
+            <narrative>Lead a small project team including selection of team members, project initiation and planning, through to delivery and post evaluation, with supportive feedback to individuals and the team.</narrative>
+            <narrative>This includes being held to account for the outcome to a Project Steering Group and the line manager i.e. senior manager or Executive Director or equivalent.</narrative>
+            <narrative>This should be a ‘mainstream’ project with a relatively short timeframe for delivery which, therefore, requires a highly focused team. This can be a sub-component of a larger project e.g. one component of a review of unscheduled care to support Practice Based Commissioners or implementation of service/pathway changes to achieve national targets such as 18 week referral to treatment time or reducing healthcare infections.</narrative>
+            <narrative>The success of the project should rely on effective networking with external stakeholders as well as laterally and vertically within the internal organisation structure.</narrative>
+            <narrative>The required outcome for the project should be important to a wide range of internal and external stakeholders, including the Board.</narrative>
+            <narrative>This should provide experience as to how to build personal networks and a team, and how to maintain an effective team, delegate effectively, inspire trust and commitment, and how to hold team members to account.</narrative>
+            <narrative>This should also develop an awareness of how to tackle ‘difficult people’ issues.</narrative>
+        </group>
+
+        <group name="Level of Competence Required" title="Level of Competence Required">
+            <narrative>Knowledge, Observation and Involvement</narrative>
+            <narrative>For further information on how this competency relates to other qualities and standards please refer to the appropriate Apendix in the Graduate Trainee Handbook</narrative>
+        </group>
+        <group name="Evidence" title="Evidence">
+            <question id="3" type="TextBox" name="Evidence of achievement of competency" title="Evidence of achievement of competency" length="50"/>
+        </group>
+        <group name="Rating" title="Rating">
+            <multi-question name=" ">
+                <line-item dynamic="Y" managerCanDisable="Y">Rating</line-item>
+                <question id="4" type="Select" name="Placement Manager Rating" title="Placement Manager Rating" managerWrite="Y">
+                    <answer value="Not Achieved" text="Not Achieved"/>
+                    <answer value="Partially Achieved" text="Partially Achieved"/>
+                    <answer value="Achieved" text="Achieved"/>
+                </question>
+                <question id="5" type="Date" name="Date of Rating" title="Date of Rating" managerWrite="Y"/>
+                <question id="6" type="TextBox" name="Comments" title="Comments" managerWrite="Y"/>
+            </multi-question>
+        </group>
+    </questionnaire>
+</xml>

@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+
+    <class
+            name="com.zynap.talentstudio.dashboard.DashboardItem"
+            table="DASHBOARD_ITEMS"
+            dynamic-update="true"
+            dynamic-insert="true"
+            >
+        <cache usage="nonstrict-read-write"/>
+        <id
+                name="id"
+                type="java.lang.Long"
+                column="ID"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <generator class="sequence">
+                <param name="sequence">DASHBOARDS_SQ</param>
+            </generator>
+        </id>
+
+        <property
+                name="description"
+                type="java.lang.String"
+                column="DESCRIPTION"
+                length="1"
+                />
+
+        <property
+                name="label"
+                type="java.lang.String"
+                column="LABEL"
+                length="255"
+                />
+
+        <property
+                name="position"
+                type="java.lang.Integer"
+                column="POSITION"
+                not-null="true"
+                />
+
+        <set
+                name="dashboardChartValues"
+                lazy="false"
+                inverse="true"
+                cascade="all-delete-orphan"
+                outer-join="true"
+                batch-size="50"
+                order-by="position"
+                >
+            <cache usage="nonstrict-read-write"/>
+            <key column="DASHBOARD_ITEM_ID"/>
+            <one-to-many class="com.zynap.talentstudio.dashboard.DashboardChartValue"/>
+        </set>
+
+        <!-- Associations -->
+        <many-to-one
+                name="report"
+                class="com.zynap.talentstudio.analysis.reports.Report"
+                not-null="true"
+                cascade="none"
+                >
+            <column name="REPORT_ID"/>
+        </many-to-one>
+
+        <many-to-one
+                name="dashboard"
+                class="com.zynap.talentstudio.dashboard.Dashboard"
+                not-null="true"
+                >
+            <column name="DASHBOARD_ID"/>
+        </many-to-one>
+
+    </class>
+</hibernate-mapping>

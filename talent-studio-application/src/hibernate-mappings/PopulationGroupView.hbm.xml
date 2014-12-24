@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+    <!--
+        Created by the Middlegen Hibernate plugin 2.1
+
+        http://boss.bekk.no/boss/middlegen/
+        http://www.hibernate.org/
+    -->
+
+    <class
+            name="com.zynap.talentstudio.analysis.populations.PopulationGroupView"
+            table="POPULATION_GROUPS_VIEW"
+            dynamic-update="false"
+            dynamic-insert="false"
+            >
+        <id
+                name="populationId"
+                type="long"
+                column="ID"
+                >
+            <generator class="assigned"/>
+        </id>
+
+        <property
+                name="type"
+                type="java.lang.String"
+                column="TYPE"
+                length="12"
+               />
+
+        <property
+                name="userId"
+                type="java.lang.Long"
+                column="USER_ID"
+                />
+        <property
+                name="activeCriteria"
+                type="java.lang.Integer"
+                column="ACTIVE_CRITERIA"
+                />
+        <property
+                name="label"
+                type="java.lang.String"
+                column="LABEL"
+                length="100"
+                />
+
+        <property
+                name="scope"
+                type="java.lang.String"
+                column="SCOPE"
+                length="12"
+                />
+        <property
+                name="description"
+                type="java.lang.String"
+                column="DESCRIPTION"
+                length="1024"
+               />
+        <property
+                name="groupId"
+                type="java.lang.Long"
+                column="GROUP_ID"
+                />
+
+    </class>
+</hibernate-mapping>

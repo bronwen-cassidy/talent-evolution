@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+    <!--
+        Created by the Middlegen Hibernate plugin 2.1
+
+        http://boss.bekk.no/boss/middlegen/
+        http://www.hibernate.org/
+    -->
+
+    <class
+            name="com.zynap.talentstudio.analysis.reports.ChartReportAttribute"
+            table="CHART_REPORT_ATTRIBUTES"
+            dynamic-update="true"
+            dynamic-insert="true"
+            >
+        <cache usage="nonstrict-read-write"/>
+        <id
+                name="id"
+                type="java.lang.Long"
+                column="ID"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <generator class="sequence">
+                <param name="sequence">REP_ATTRS_SQ</param>
+            </generator>
+        </id>
+        
+        <property
+                name="questionnaireWorkflowId"
+                column="QWF_ID"
+                type="java.lang.Long"
+                length="50"
+                />
+        <property
+                name="dynamicAttributeId"
+                column="DA_ID"
+                type="java.lang.Long"
+                length="50"
+                />
+        <property name="position"
+                  type="java.lang.Integer"
+                  column="POSITION"
+                  length="5"
+                />
+        <property name="label"
+                  type="java.lang.String"
+                  column="LABEL"
+                  length="2000"
+                />
+
+        <many-to-one
+                name="report"
+                class="com.zynap.talentstudio.analysis.reports.Report"
+                not-null="true"
+                >
+            <column name="REPORT_ID"/>
+        </many-to-one>
+
+        <many-to-one
+                name="dynamicAttribute"
+                column="DA_ID"
+                class="com.zynap.talentstudio.organisation.attributes.DynamicAttribute"
+                outer-join="true"
+                cascade="none"
+                insert="false"
+                update="false"/>
+                
+    </class>
+
+</hibernate-mapping>

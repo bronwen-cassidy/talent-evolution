@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+    <!--
+        Created by the Middlegen Hibernate plugin 2.1
+
+        http://boss.bekk.no/boss/middlegen/
+        http://www.hibernate.org/
+    -->
+
+    <class
+            name="com.zynap.domain.admin.LoginInfo"
+            table="LOGINS"
+            >
+
+        <id
+                name="id"
+                type="java.lang.Long"
+                column="USER_ID"
+                >
+            <generator class="foreign">
+                <param name="property">user</param>
+            </generator>
+        </id>
+
+        <property
+                name="username"
+                type="java.lang.String"
+                column="USERNAME"
+                not-null="true"
+                unique="true"
+                length="200"
+                />
+        <property
+                name="password"
+                type="java.lang.String"
+                column="PASSWORD"
+                not-null="true"
+                length="50"
+                />
+        <property
+                name="expires"
+                type="java.sql.Date"
+                column="EXPIRES"
+                length="7"
+                />
+
+        <property
+                name="locked"
+                type="true_false"
+                column="LOCKED"
+                not-null="true"
+                length="1"
+                />
+
+        <property
+                name="forcePasswordChange"
+                type="true_false"
+                column="FORCE_PWD_CHANGE"
+                not-null="true"
+                length="1"
+                />
+
+        <property name="numberLoginAttempts"
+                  type="int"
+                  column="FAILED_LOGIN_ATTEMPTS"
+                  not-null="true"
+                  length="10"/>
+
+        <!-- Associations -->
+
+        <!-- bi-directional one-to-one association to User -->
+        <one-to-one
+                name="user"
+                class="com.zynap.domain.admin.User"
+                outer-join="auto"
+                constrained="true"
+                />
+        <!-- bi-directional one-to-many association to PasswordsHistory -->
+        <set
+                name="passwordsHistory"
+                lazy="true"
+                inverse="true"
+                cascade="all"
+                batch-size="50"
+                order-by="ID"
+                >
+            <key>
+                <column name="USER_ID"/>
+            </key>
+            <one-to-many
+                    class="com.zynap.domain.admin.PasswordHistory"
+                    />
+        </set>
+
+    </class>
+</hibernate-mapping>

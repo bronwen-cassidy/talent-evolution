@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+	<questionnaire name="Mug Shot2" title="Images...">
+		<group name="your photo">
+			<question type="Heading" name="Photo" title="Photo"/>
+			<question type="Image" name="Your Picture" title="Please an image"/>
+		</group>		
+	</questionnaire>
+</xml>

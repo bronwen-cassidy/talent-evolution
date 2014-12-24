@@ -1,0 +1,95 @@
+package $packageName;
+
+#if ($useDbUnit)
+import com.zynap.talentstudio.web.ZynapDbUnitWebGenTestCase;
+#else
+import com.zynap.talentstudio.web.ZynapWebGenTestCase;
+#end
+
+public class Test${className} extends #if ($useDbUnit) ZynapDbUnitWebGenTestCase #else ZynapWebGenTestCase #end {
+
+    public Test${className}() {
+        super();
+    }
+
+#if ($useDbUnit)
+    protected String getDataSetFileName() {
+        return "${fileName}-test-data.xml";
+    }
+#end
+
+    public void test${testName}() throws Exception {
+
+        String type;
+        String step;
+        String value;
+        String xpath;
+
+#foreach ($action in ${actions})
+
+    value = "$util.escape(${action.value})";
+    xpath = "$util.escape(${action.xpath})";
+
+    assertNotNull(xpath);
+
+    #if ($action.type == "goto")
+
+        #if ($util.isLoginOrLogout(${action.value}))
+        goToURL(value);
+        #else
+        beginAt(value);
+        #end
+
+    #elseif ($action.type == "verify-title")
+
+        assertTitleEquals(value);
+
+    #elseif ($action.type == "fill")
+
+        setInputParameter(xpath, value);
+
+    #elseif ($action.type == "check")
+
+        setCheckBox(xpath, value);
+
+    #elseif ($action.type == "select")
+
+        setInputParameter(xpath, value);
+
+    #elseif ($action.type == "assert-text-exists")
+
+        assertTextPresent(value);
+
+    #elseif ($action.type == "assert-text-does-not-exist")
+
+        assertTextNotPresent(value);
+
+    #elseif ($action.type == "click" && $util.isFormSubmit(${action.xpath}))
+
+        submitForm(xpath, value);
+
+    #elseif ($action.type == "click" && $util.isButtonSubmit(${action.xpath}))
+
+        #if ($action.refresh == 'true')
+        submitForm(xpath, value);
+        #else
+        clickButton(xpath, value);
+        #end
+
+    #elseif ($action.type == "click" && $util.isLink(${action.xpath}))
+
+        clickLink(xpath, value);
+
+    #else
+
+        step = "${action.step}";
+        type = "${action.type}";
+        fail("Unsupported action \"" + type + "\" for step " + step);
+
+    #end
+
+#end
+
+        logger.debug("Test completed");
+    }
+}

@@ -1,0 +1,176 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+    <!--
+        Created by the Middlegen Hibernate plugin 2.1
+
+        http://boss.bekk.no/boss/middlegen/
+        http://www.hibernate.org/
+    -->
+
+    <class
+            name="com.zynap.talentstudio.questionnaires.QuestionnaireWorkflow"
+            table="QUE_WORKFLOWS"
+            dynamic-update="true"
+            dynamic-insert="true"
+            >
+        <cache usage="nonstrict-read-write"/>
+
+        <id
+                name="id"
+                type="java.lang.Long"
+                column="ID"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <generator class="sequence">
+                <param name="sequence">WF_SQ</param>
+            </generator>
+        </id>
+
+        <property
+                name="workflowType"
+                type="java.lang.String"
+                column="WORKFLOW_TYPE"
+                length="240"
+                />
+        <property
+                name="label"
+                type="java.lang.String"
+                column="LABEL"
+                length="100"
+                />
+        <property
+                name="startDate"
+                type="java.util.Date"
+                column="START_DATE"
+                length="7"
+                />
+        <property
+                name="expiryDate"
+                type="java.util.Date"
+                column="EXPIRED_DATE"
+                length="7"
+                />
+
+        <property
+                name="closedDate"
+                type="java.util.Date"
+                column="CLOSED_DATE"
+                length="7"
+                />
+
+        <property
+                name="status"
+                type="java.lang.String"
+                column="STATUS"
+                length="20"
+                />
+
+        <property
+                name="description"
+                type="java.lang.String"
+                column="DESCRIPTION"
+                length="20"
+                />
+
+        <property
+                name="managerRead"
+                type="true_false"
+                column="MANAGER_READ"
+                length="20"
+                />
+
+        <property
+                name="managerWrite"
+                type="true_false"
+                column="MANAGER_WRITE"
+                length="20"
+                />
+        <property
+                name="individualRead"
+                type="true_false"
+                column="INDIVIDUAL_READ"
+                length="20"
+                />
+
+        <property
+                name="individualWrite"
+                type="true_false"
+                column="INDIVIDUAL_WRITE"
+                length="20"
+                />
+        <property
+                name="lastRepublishedDate"
+                type="java.util.Date"
+                column="LAST_REPUPLISHED_DATE"
+                length="7"
+                />
+        <property
+                name="userId"
+                type="java.lang.Long"
+                column="USER_ID"
+                />
+
+        <!-- Associations -->
+
+        <!-- bi-directional many-to-one association to QueDefinition -->
+        <many-to-one
+                name="questionnaireDefinition"
+                class="com.zynap.talentstudio.questionnaires.QuestionnaireDefinition"
+                not-null="true"
+                outer-join="true"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <column name="QD_ID"/>
+        </many-to-one>
+
+        <!-- bi-directional many-to-one association to PerformanceReview -->
+        <many-to-one
+                name="performanceReview"
+                class="com.zynap.talentstudio.performance.PerformanceReview"
+                not-null="true"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <column name="PERFORMANCE_ID"/>
+        </many-to-one>
+
+        <!-- bi-directional many-to-one association to Population -->
+        <many-to-one
+                name="population"
+                class="com.zynap.talentstudio.analysis.populations.Population"
+                not-null="true"
+                >
+            <column name="POPULATION_ID"/>
+        </many-to-one>
+
+        <!-- uni-directional many-to-one association to Groups -->
+        <many-to-one
+                name="group"
+                class="com.zynap.talentstudio.common.groups.Group"
+                not-null="true"
+                cascade="save-update"
+                >
+            <column name="GROUP_ID"/>
+        </many-to-one>
+
+        <!-- bi-directional one-to-many association to Questionair -->
+        <set
+                name="questionnaires"
+                lazy="true"
+                inverse="true"
+                cascade="all"
+                >
+            <key>
+                <column name="QWF_ID"/>
+            </key>
+            <one-to-many
+                    class="com.zynap.talentstudio.questionnaires.Questionnaire"
+                    />
+        </set>
+
+    </class>
+
+</hibernate-mapping>

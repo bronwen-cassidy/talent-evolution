@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<trees>
+    
+    <tree type="S">
+        <branch id="person" label="Person" type="S" root="true"/>
+    </tree>
+    
+    <tree type="P">
+        <branch id="position" label="Position" type="P" root="true"/>
+    </tree>
+    
+    <attributes type="P" viewType="ADD" includeQuestionnaires="false" includeCalculatedFields="false">
+        <attribute id="title" label="Title" type="TEXT"/>
+        <attribute id="comments" label="Comments" type="TEXT"/>
+        <attribute id="organisationUnit.label" label="Organization Unit" type="TEXT"/>
+    </attributes>
+
+    <attributes type="P" viewType="EXEC" includeQuestionnaires="false">
+        <attribute id="title" label="Title" type="TEXT"/>
+        <attribute id="comments" label="Comments" type="TEXT"/>
+        <attribute id="organisationUnit.label" label="Organization Unit" type="TEXT"/>
+        <attribute id="subjectPrimaryAssociations.subject.coreDetail.name" label="Current Holder" type="TEXT"/>
+        <attribute id="parent.title" label="Reports To Title" type="TEXT"/>
+        <attribute id="parent.organisationUnit.label" label="Reports To Organization Unit" type="TEXT"/>
+        <attribute id="parent.subjectPrimaryAssociations.subject.coreDetail.name" label="Reports To Current Holder" type="TEXT"/>
+    </attributes>
+
+    <attributes type="P" viewType="ATTRIBUTE" includeQuestionnaires="false">
+        <attribute id="title" label="Title" type="TEXT"/>
+        <attribute id="comments" label="Comments" type="TEXT"/>
+        <attribute id="organisationUnit.label" label="Organization Unit" type="TEXT"/>
+        <attribute id="subjectPrimaryAssociations.subject.coreDetail.name" label="Current Holder" type="TEXT"/>
+    </attributes>
+
+    <attributes type="P" viewType="ASSOCIATION" includeQuestionnaires="false">
+        <attribute id="title" label="Title" type="TEXT"/>
+        <attribute id="comments" label="Comments" type="TEXT"/>
+        <attribute id="organisationUnit.label" label="Organization Unit" type="TEXT"/>
+        <attribute id="subjectPrimaryAssociations.subject.coreDetail.name" label="Current Holder" type="TEXT"/>
+        <attribute id="qualifier.label" label="Association Type" type="TEXT"/>
+        <attribute id="subjectSecondaryAssociations.comments" label="Association Comments" type="TEXTAREA"/>
+    </attributes>
+
+    <attributes type="S" viewType="ADD" includeQuestionnaires="false" includeCalculatedFields="false">
+        <attribute id="coreDetail.title" label="Title" type="TEXT"/>
+        <attribute id="coreDetail.firstName" label="First Name" type="TEXT"/>
+        <attribute id="coreDetail.secondName" label="Last Name" type="TEXT"/>
+        <attribute id="coreDetail.prefGivenName" label="Given Name" type="TEXT"/>
+        <attribute id="comments" label="Comments" type="TEXT"/>
+        <attribute id="coreDetail.contactEmail" label="Email" type="TEXT"/>
+        <attribute id="coreDetail.contactTelephone" label="Telephone" type="NUMBER"/>
+        <attribute id="dateOfBirth" label="Date of Birth" type="DATE"/>
+        <attribute id="picture" label="Photograph" type="IMG"/>
+    </attributes>
+
+    <attributes type="S" viewType="ATTRIBUTE">
+        <attribute id="coreDetail.title" label="Title" type="TEXT"/>
+        <attribute id="coreDetail.firstName" label="First Name" type="TEXT"/>
+        <attribute id="coreDetail.name" label="Full Name" type="TEXT"/>
+        <attribute id="coreDetail.secondName" label="Last Name" type="TEXT"/>
+        <attribute id="coreDetail.prefGivenName" label="Given Name" type="TEXT"/>
+        <attribute id="comments" label="Comments" type="TEXT"/>
+        <attribute id="coreDetail.contactEmail" label="Email" type="TEXT"/>
+        <attribute id="coreDetail.contactTelephone" label="Telephone" type="NUMBER"/>
+        <attribute id="dateOfBirth" label="Date of Birth" type="DATE"/>
+        <attribute id="picture" label="Photograph" type="IMG"/>
+        <attribute id="user.loginInfo.username" label="Username" type="TEXT"/>
+        <attribute id="subjectPrimaryAssociations.position.title" label="Job Title" type="TEXT"/>
+        <attribute id="subjectPrimaryAssociations.position.organisationUnit.label" label="Organization Unit" type="TEXT"/>
+    </attributes>
+    
+    <attributes type="S" viewType="ASSOCIATION" includeQuestionnaires="false">
+        <attribute id="coreDetail.title" label="Title" type="TEXT"/>
+        <attribute id="coreDetail.name" label="Full Name" type="TEXT"/>
+        <attribute id="coreDetail.prefGivenName" label="Given Name" type="TEXT"/>
+        <attribute id="coreDetail.contactEmail" label="Email" type="TEXT"/>
+        <attribute id="coreDetail.contactTelephone" label="Telephone" type="NUMBER"/>
+        <attribute id="dateOfBirth" label="Date of Birth" type="DATE"/>
+        <attribute id="picture" label="Photograph" type="IMG"/>
+        <attribute id="user.loginInfo.username" label="Username" type="TEXT"/>
+        <attribute id="subjectPrimaryAssociations.position.title" label="Job Title" type="TEXT"/>
+        <attribute id="subjectPrimaryAssociations.position.organisationUnit.label" label="Organization Unit" type="TEXT"/>
+        <attribute id="qualifier.label" label="Association Type" type="TEXT"/>
+        <attribute id="subjectSecondaryAssociations.comments" label="Association Comments" type="TEXTAREA"/>
+    </attributes>
+
+    <!-- indicates restrictions on attributes -->
+    <extendedattributes searchableOnly="false"/>    
+    <derivedattributes include="false"/>
+    <dynamiclineitems include="true"/>
+
+</trees>

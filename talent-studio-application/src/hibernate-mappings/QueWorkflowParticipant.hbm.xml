@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+
+    <class
+            name="com.zynap.talentstudio.questionnaires.WorkflowParticipant"
+            table="QUE_WF_PARTICIPANTS"
+            dynamic-update="true"
+            dynamic-insert="true"
+            >
+
+        <composite-id name="primaryKey" class="com.zynap.talentstudio.questionnaires.WorkflowParticipantPK">
+            <meta attribute="use-in-equals">true</meta>
+            <key-property
+                    name="subjectId"
+                    column="SUBJECT_ID"
+                    type="java.lang.Long"
+                    length="22"
+                    />
+            <key-property
+                    name="workflowId"
+                    column="QUE_WF_ID"
+                    type="java.lang.Long"
+                    length="22"
+                    />
+        </composite-id>
+
+    </class>
+
+</hibernate-mapping>

@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+    <bean id="propertyConfigurerInt" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>WEB-INF/autonomy.properties</value>
+            </list>
+        </property>
+
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <!--SYSTEM_PROPERTIES_MODE_OVERRIDE -->
+        <property name="systemPropertiesMode" value="2"/>
+        <property name="ignoreResourceNotFound" value="true"/>
+    </bean>
+
+    <bean id="xmlAdapter" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="target">
+            <bean id="xmlAdapterTarget" class="com.zynap.talentstudio.integration.adapter.XmlAdapter">
+                <property name="zynapBusinessDelegate" ref="businessDelegate"/>
+                <property name="transformer" ref="zynapTransformer"/>
+                <!-- todo sort this out later -->
+                <!--                <property name="schema">
+                    <description>Path to xsd used to validate docs</description>
+                    <value>schema/integration.xsd</value>
+                </property>-->
+            </bean>
+        </property>
+        <property name="proxyInterfaces" value="com.zynap.talentstudio.integration.adapter.IXmlAdapter"/>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="templateGenerator" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="target">
+            <bean id="templateGeneratorTarget" class="com.zynap.talentstudio.integration.tools.TemplateGenerator">
+                <property name="dynamicAttributeService" ref="dynamicAttrService"/>
+                <property name="lookupManager" ref="lookupManager"/>
+            </bean>
+        </property>
+        <property name="proxyInterfaces" value="com.zynap.talentstudio.integration.tools.ITemplateGenerator"/>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="questionnaireCalculator" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="target">
+            <bean id="questionnaireCalculatorTarget" class="com.zynap.talentstudio.integration.tools.QuestionnaireCalculator">
+                <property name="questionnaireService" ref="questionnaireService"/>
+                <property name="workflowService" ref="queWorkflowService"/>
+            </bean>
+        </property>
+        <property name="proxyInterfaces" value="com.zynap.talentstudio.integration.tools.IQuestionnaireCalculator"/>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+            </props>
+        </property>
+    </bean>
+  
+    <bean id="xsdGenerator" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="target">
+            <bean id="xsdGeneratorTarget" class="com.zynap.talentstudio.integration.tools.XsdGenerator">
+                <property name="dynamicAttributeService" ref="dynamicAttrService"/>
+                <property name="lookupManager" ref="lookupManager"/>
+                <property name="portfolioService" ref="portfolioService"/>
+                <property name="subjectService" ref="subjectService"/>
+                <property name="questionnaireWorkflowService" ref="queWorkflowService"/>
+            </bean>
+        </property>
+        <property name="proxyInterfaces" value="com.zynap.talentstudio.integration.tools.IXsdGenerator"/>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="businessDelegate" class="com.zynap.talentstudio.integration.delegate.ZynapBusinessDelegate">
+        <property name="transformer" ref="zynapTransformer"/>
+        <property name="serviceLocator" ref="resourcesLocator"/>
+        <property name="idMapper" ref="zynapIdMapper"/>
+        <property name="userService" ref="userService"/>
+    </bean>
+
+    <bean id="zynapTransformer" class="com.zynap.talentstudio.integration.dto.dom.ZynapTransformer">
+        <property name="zynapDtoToDomainTransformer" ref="zynapDtoToDomainTransformer"/>
+    </bean>
+
+    <bean id="zynapDtoToDomainTransformer" class="com.zynap.talentstudio.integration.dto.dom.ZynapDtoToDomainTransformer">
+        <property name="zynapIdMapper" ref="zynapIdMapper"/>
+        <property name="dynamicAttributesService" ref="dynamicAttrService"/>
+        <property name="resourcesLocator" ref="resourcesLocator"/>
+        <property name="lookupManager" ref="lookupManager"/>
+        <property name="propertyFilter" ref="propertyFilter"/>
+    </bean>
+
+    <bean id="resourcesLocator" class="com.zynap.talentstudio.integration.dto.config.ZynapResourcesLocator">
+        <property name="configSet">
+            <set>
+                <bean class="com.zynap.talentstudio.integration.dto.config.ZynapResourcesConfig">
+                    <property name="alias" value="organisationUnit"/>
+                    <property name="service" ref="organisationUnitService"/>
+                    <property name="className" value="com.zynap.talentstudio.organisation.OrganisationUnit"/>
+                    <property name="postProcessor">
+                        <bean class="com.zynap.talentstudio.integration.dto.processors.OrganisationUnitProcessor"/>
+                    </property>
+                </bean>
+                <bean class="com.zynap.talentstudio.integration.dto.config.ZynapResourcesConfig">
+                    <property name="alias" value="position"/>
+                    <property name="service" ref="positionService"/>
+                    <property name="className" value="com.zynap.talentstudio.organisation.positions.Position"/>
+                    <property name="postProcessor">
+                        <bean class="com.zynap.talentstudio.integration.dto.processors.PositionProcessor"/>
+                    </property>
+                </bean>
+                <bean class="com.zynap.talentstudio.integration.dto.config.ZynapResourcesConfig">
+                    <property name="alias" value="person"/>
+                    <property name="service" ref="subjectService"/>
+                    <property name="className" value="com.zynap.talentstudio.organisation.subjects.Subject"/>
+                    <property name="postProcessor">
+                        <bean class="com.zynap.talentstudio.integration.dto.processors.SubjectProcessor"/>
+                    </property>
+                </bean>
+                <bean class="com.zynap.talentstudio.integration.dto.config.ZynapResourcesConfig">
+                    <property name="alias" value="portfolioItem"/>
+                    <property name="service" ref="portfolioService"/>
+                    <property name="className" value="com.zynap.talentstudio.organisation.portfolio.PortfolioItem"/>
+                    <property name="postProcessor">
+                        <bean class="com.zynap.talentstudio.integration.dto.processors.PortfolioItemProcessor"/>
+                    </property>
+                </bean>
+                <bean class="com.zynap.talentstudio.integration.dto.config.ZynapResourcesConfig">
+                    <property name="alias" value="questionnaireWorkflow"/>
+                    <property name="service" ref="questionnaireService"/>
+                    <property name="className" value="com.zynap.talentstudio.questionnaires.QuestionnaireWorkflow"/>
+                    <property name="postProcessor">
+                        <bean class="com.zynap.talentstudio.integration.dto.processors.QuestionnaireProcessor"/>
+                    </property>
+                </bean>
+                <bean class="com.zynap.talentstudio.integration.dto.config.ZynapResourcesConfig">
+                    <property name="alias" value="questionnaireDefinition"/>
+                    <property name="service" ref="questionnaireDefinitionService"/>
+                    <property name="className" value="com.zynap.talentstudio.questionnaires.QuestionnaireDefinition"/>
+                    <property name="postProcessor">
+                        <bean class="com.zynap.talentstudio.integration.dto.processors.QuestionnaireProcessor"/>
+                    </property>
+                </bean>
+                <bean class="com.zynap.talentstudio.integration.dto.config.ZynapResourcesConfig">
+                    <property name="alias" value="questionnaire"/>
+                    <property name="service" ref="questionnaireService"/>
+                    <property name="className" value="com.zynap.talentstudio.questionnaires.Questionnaire"/>
+                    <property name="postProcessor" ref="questionnairePostProcessor"/>
+                </bean>
+                <bean class="com.zynap.talentstudio.integration.dto.config.ZynapResourcesConfig">
+                    <property name="alias" value="ptpAssociation"/>
+                    <property name="className" value="com.zynap.talentstudio.organisation.positions.PositionAssociation"/>
+                </bean>
+                <bean class="com.zynap.talentstudio.integration.dto.config.ZynapResourcesConfig">
+                    <property name="alias" value="stpAssociation"/>
+                    <property name="className" value="com.zynap.talentstudio.organisation.subjects.SubjectAssociation"/>
+                </bean>
+            </set>
+        </property>
+    </bean>
+
+
+    <bean id="zynapIdMapper" class="com.zynap.talentstudio.integration.delegate.ZynapIdMapper">
+        <property name="externalRefMappingDao" ref="externalRefMappingDao"/>
+        <property name="defaultPresetIds">
+            <map>
+                <entry key="#DEFAULT_ORGUNIT#">
+                    <bean class="java.lang.Long">
+                        <constructor-arg value="0"/>
+                    </bean>
+                </entry>
+                <entry key="#DEFAULT_POSITION#">
+                    <bean class="java.lang.Long">
+                        <constructor-arg value="1"/>
+                    </bean>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+
+    <bean id="taapiAdapter" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="target">
+            <bean id="taapiAdapterTarget" class="com.zynap.talentstudio.integration.adapter.TaapiAdapter">
+                <property name="idMapper" ref="zynapIdMapper"/>
+                <property name="taapiClient" ref="taapiClient"/>
+                <property name="dynamicAttributeService" ref="dynamicAttrService"/>
+                <property name="subjectService" ref="subjectService"/>
+                <property name="populationEngine" ref="populationEngine"/>
+            </bean>
+        </property>
+        <property name="proxyInterfaces" value="com.zynap.talentstudio.integration.adapter.IAdapter"/>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="taapiClient" class="com.zynap.talentstudio.middleware.soap.taapi.TaapiClient">
+        <property name="username" value="${taapi.username}"/>
+        <property name="password" value="${taapi.password}"/>
+        <property name="client" value="${taapi.client}"/>
+        <property name="callbackUrl" value="${taapi.url}"/>
+    </bean>
+
+    <bean id="propertyFilter" class="com.zynap.talentstudio.integration.dto.filters.PropertyFilter">
+        <property name="retainedElements">
+            <list>
+                <value>dynamicAttributeValues</value>
+                <value>parent</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean name="exceptionHandlerFactory" class="com.zynap.talentstudio.integration.adapter.ExceptionHandlerFactory">
+        <property name="mappings">
+            <map>
+                <entry key="com.zynap.talentstudio.integration.adapter.InvalidDataException">
+                    <bean class="com.zynap.talentstudio.integration.adapter.InvalidDataExceptionHandler"/>
+                </entry>
+                <entry key="com.zynap.talentstudio.integration.adapter.NoDataForCommandException">
+                    <bean class="com.zynap.talentstudio.integration.adapter.NoDataForCommandExceptionHandler"/>
+                </entry>
+                <entry key="com.zynap.exception.DomainObjectNotFoundException">
+                    <bean class="com.zynap.talentstudio.integration.adapter.DomainObjectNotFoundExceptionHandler"/>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="questionnairePostProcessor" class="com.zynap.talentstudio.integration.dto.processors.QuestionnaireProcessor">
+        <property name="questionnaireWorkflowService" ref="queWorkflowService"/>
+    </bean>
+
+</beans>

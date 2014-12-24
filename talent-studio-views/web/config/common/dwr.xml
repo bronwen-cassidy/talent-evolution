@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE dwr PUBLIC
+        "-//GetAhead Limited//DTD Direct Web Remoting 1.0//EN"
+        "http://www.getahead.ltd.uk/dwr/dwr10.dtd">
+
+<dwr>
+    <allow>
+        <convert converter="bean" match="com.zynap.*"/>
+        
+        <create creator="spring" javascript="helpTextBean">
+            <param name="beanName" value="helpTextBean"/>
+        </create>
+
+        <create creator="spring" javascript="positionsBean">
+            <param name="beanName" value="positionsBean"/>
+        </create>
+
+        <create creator="spring" javascript="objectivesBean">
+            <param name="beanName" value="objectivesBean"/>
+        </create>
+
+        <create creator="spring" javascript="subjectBean">
+            <param name="beanName" value="subjectBean"/>
+        </create>
+
+        <create creator="spring" javascript="questionnaireBean">
+            <param name="beanName" value="questionnaireBean"/>
+        </create>
+        
+        <create creator="spring" javascript="messageItemBean">
+            <param name="beanName" value="messageItemBean"/>
+        </create>
+        
+        <create creator="new" javascript="navSessionBean">
+            <param name="class" value="com.zynap.talentstudio.web.session.NavSessionBean"/>
+        </create>
+    </allow>
+</dwr>

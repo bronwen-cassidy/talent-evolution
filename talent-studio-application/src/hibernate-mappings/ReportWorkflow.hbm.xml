@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+    <!-- 
+        Created by the Middlegen Hibernate plugin 2.1
+
+        http://boss.bekk.no/boss/middlegen/
+        http://www.hibernate.org/
+    -->
+
+    <class
+            name="com.zynap.talentstudio.analysis.reports.ReportWorkflow"
+            table="REPORT_WORKFLOWS"
+            dynamic-update="true"
+            dynamic-insert="true"
+            >
+        <cache usage="nonstrict-read-write"/>
+
+        <id
+                name="id"
+                type="java.lang.Long"
+                column="ID"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <generator class="sequence">
+                <param name="sequence">REPORT_SQ</param>
+            </generator>
+        </id>
+
+        <property name="position"
+                  type="java.lang.Integer"
+                  column="POSITION"
+                  length="500"
+                />
+        <property name="label"
+                  type="java.lang.String"
+                  column="LABEL"
+                />
+        <property name="role"
+                  type="java.lang.String"
+                  column="ROLE"
+                />
+        <many-to-one
+                name="workflow"
+                class="com.zynap.talentstudio.questionnaires.QuestionnaireWorkflow"
+                not-null="false"               
+                >
+            <column name="WORKFLOW_ID"/>
+        </many-to-one>
+
+        <many-to-one
+                name="report"
+                class="com.zynap.talentstudio.analysis.reports.Report"
+                not-null="false"                        
+                >
+            <column name="REPORT_ID"/>
+        </many-to-one>
+
+    </class>
+</hibernate-mapping>

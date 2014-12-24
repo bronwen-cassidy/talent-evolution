@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+    <!--
+        Created by the Middlegen Hibernate plugin 2.1
+
+        http://boss.bekk.no/boss/middlegen/
+        http://www.hibernate.org/
+    -->
+
+    <class
+            name="com.zynap.talentstudio.analysis.reports.crosstab.CrossTabCellInfo"
+            table="CROSSTAB_CELL_INFO"
+            dynamic-update="true"
+            dynamic-insert="true"
+            >
+
+        <id
+                name="id"
+                type="java.lang.Long"
+                column="ID"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <generator class="sequence">
+                <param name="sequence">REPORT_SQ</param>
+            </generator>
+        </id>
+
+        <property
+                name="label"
+                type="java.lang.String"
+                column="LABEL"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+
+        <property
+                name="verticalValueId"
+                type="java.lang.Long"
+                column="VERTICAL_VALUE_ID"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+
+        <property
+                name="horizontalValueId"
+                type="java.lang.Long"
+                column="HORIZONTAL_VALUE_ID"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+        
+        <!-- bi-directional many-to-one association to Report -->
+        <many-to-one
+                name="crosstabReport"
+                class="com.zynap.talentstudio.analysis.reports.Report"
+                not-null="false"
+                outer-join="true"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <column name="CROSSTAB_ID"/>
+        </many-to-one>
+
+    </class>
+</hibernate-mapping>

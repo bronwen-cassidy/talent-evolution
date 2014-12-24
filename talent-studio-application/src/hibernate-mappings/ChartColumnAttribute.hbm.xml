@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+
+    <class
+            name="com.zynap.talentstudio.analysis.reports.ChartColumnAttribute"
+            table="CHART_COLUMN_ATTRIBUTES"
+            dynamic-update="true"
+            dynamic-insert="true"
+            >
+        <cache usage="nonstrict-read-write"/>
+        <id
+                name="id"
+                type="java.lang.Long"
+                column="ID"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <generator class="sequence">
+                <param name="sequence">REP_COLUMN_SQ</param>
+            </generator>
+        </id>
+
+        <property name="attributeName"
+                  type="java.lang.String"
+                  column="ATTRIBUTE"
+                  length="5"
+                />
+        <property name="questionnaireWorkflowId"
+                  type="java.lang.Long"
+                  column="QUE_WF_ID"
+                  length="5"
+                />
+        <property name="expectedValue"
+                  type="java.lang.Integer"
+                  column="EXPECTED_VALUE"
+                  length="5"
+                />
+        <property name="label"
+                  type="java.lang.String"
+                  column="CATEGORY"
+                  length="1024"
+                />
+        <property
+                name="role"
+                type="java.lang.String"
+                column="ROLE"
+                length="50"
+                />
+
+
+        <!-- Associations -->
+        <many-to-one
+                name="column"
+                class="com.zynap.talentstudio.analysis.reports.Column"
+                not-null="true"
+                cascade="none"
+                >
+            <column name="REPORT_COLUMN_ID"/>
+        </many-to-one>
+
+    </class>
+</hibernate-mapping>

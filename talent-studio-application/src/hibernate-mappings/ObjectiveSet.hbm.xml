@@ -1,0 +1,195 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 2.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+    <!--
+        Created by the Middlegen Hibernate plugin 2.1
+
+        http://boss.bekk.no/boss/middlegen/
+        http://www.hibernate.org/
+    -->
+
+    <class
+            name="com.zynap.talentstudio.objectives.ObjectiveSet"
+            table="OBJECTIVE_SETS"
+            dynamic-update="true"
+            dynamic-insert="true"
+            >
+
+        <id
+                name="id"
+                type="java.lang.Long"
+                column="ID"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <generator class="sequence">
+                <param name="sequence">OBJECTIVE_SET_SQ</param>
+            </generator>
+        </id>
+
+        <property
+                name="label"
+                type="java.lang.String"
+                column="LABEL"
+                unique="true"
+                length="500"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+
+        <property
+                name="type"
+                type="java.lang.String"
+                column="TYPE"
+                not-null="true"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+
+        <property
+                name="approved"
+                type="true_false"
+                column="IS_APPROVED"
+                not-null="true"
+                length="1"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+        <property
+                name="publishedDate"
+                type="java.util.Date"
+                column="PUBLISHED_DATE"
+                length="7"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+        <property
+                name="status"
+                type="java.lang.String"
+                column="STATUS"
+                not-null="true"
+                length="20"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+        <property
+                name="expiryDate"
+                type="java.util.Date"
+                column="EXPIRY_DATE"
+                length="7"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+        <property
+                name="lastModifiedDate"
+                type="java.util.Date"
+                column="LAST_MODIFIED_DATE"
+                length="7"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+
+        <property
+                name="actionRequired"
+                type="java.lang.String"
+                column="ACTION_REQUIRED"
+                not-null="true"
+                length="20"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+        <property
+                name="actionGroup"
+                type="java.lang.String"
+                column="ACTION_GROUP"
+                not-null="true"
+                length="20"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+
+        <property
+                name="appearInTodo"
+                type="true_false"
+                column="APPEAR_TODO"
+                length="10"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+
+        <!-- Associations -->
+
+        <!-- bi-directional one-to-many association to Objective -->
+        <bag
+                name="objectives"
+                inverse="true"
+                cascade="all-delete-orphan"
+                order-by="NODE_ID"
+                lazy="false"
+                outer-join="true"
+                batch-size="50"
+                >
+            <key>
+                <column name="OBJECTIVE_SET_ID"/>
+            </key>
+            <one-to-many
+                    class="com.zynap.talentstudio.objectives.Objective"
+                    />
+        </bag>
+
+        <!-- bi-directional many-to-one association to ObjectiveDefinition -->
+        <many-to-one
+                name="objectiveDefinition"
+                class="com.zynap.talentstudio.objectives.ObjectiveDefinition"
+                not-null="true"
+                update="true"
+                insert="true"
+                outer-join="true"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <column name="OBJ_DEF_ID"/>
+        </many-to-one>
+
+        <!-- bi-directional many-to-one association to Subject -->
+        <many-to-one
+                name="subject"
+                class="com.zynap.talentstudio.organisation.subjects.Subject"
+                not-null="true"
+                outer-join="true"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <column name="SUBJECT_ID"/>
+        </many-to-one>
+
+        <many-to-one
+                name="organisationUnit"
+                class="com.zynap.talentstudio.organisation.OrganisationUnit"
+                not-null="true"
+                outer-join="true"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <column name="ORG_UNIT_ID"/>
+        </many-to-one>
+
+        <many-to-one
+                name="corporateObjectiveSet"
+                class="com.zynap.talentstudio.objectives.ObjectiveSet"
+                not-null="true"
+                outer-join="true"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <column name="CORPORATE_OBJECTIVE_ID"/>
+        </many-to-one>
+
+    </class>
+</hibernate-mapping>

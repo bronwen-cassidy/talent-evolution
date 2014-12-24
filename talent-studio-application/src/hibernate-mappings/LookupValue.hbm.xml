@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+    <!--
+        Created by the Middlegen Hibernate plugin 2.1
+
+        http://boss.bekk.no/boss/middlegen/
+        http://www.hibernate.org/
+    -->
+
+    <class
+        name="com.zynap.talentstudio.common.lookups.LookupValue"
+        table="LOOKUP_VALUES"
+        dynamic-update="true"
+        dynamic-insert="true"
+        >
+        <meta attribute="implement-equals">true</meta>
+
+        <id name="id" type="java.lang.Long" column="ID" unsaved-value="null" >
+            <meta attribute="use-in-equals">true</meta>
+            <generator class="sequence">
+                <param name="sequence">LOOKUPVALUE_SQ</param>
+            </generator>
+        </id>
+
+        <property
+            name="valueId"
+            type="java.lang.String"
+            column="VALUE_ID"
+            not-null="true"
+            length="100"
+           />
+
+        <property
+            name="typeId"
+            type="java.lang.String"
+            column="TYPE_ID"
+            not-null="true"
+            length="100"
+            />
+
+        <property
+            name="label"
+            type="java.lang.String"
+            column="SHORT_DESC"
+            not-null="true"
+            length="100"
+            />
+
+        <property
+            name="description"
+            type="java.lang.String"
+            column="DESCRIPTION"
+            not-null="true"
+            length="4000"
+            />
+        
+        <property
+            name="active"
+            type="true_false"
+            column="IS_ACTIVE"
+            not-null="true"
+            length="1"
+            />
+        <property
+            name="blank"
+            type="true_false"
+            column="IS_BLANK"
+            not-null="true"
+            length="1"
+            />
+
+        <property
+            name="system"
+            type="true_false"
+            column="IS_SYSTEM"
+            not-null="true"
+            length="1"
+            />
+
+        <property
+            name="sortOrder"
+            type="int"
+            column="SORT_ORDER"
+            length="22"
+            />
+
+        <!-- Associations -->
+        <!-- bi-directional many-to-one association to LookupType -->
+        <many-to-one
+            name="lookupType"
+            class="com.zynap.talentstudio.common.lookups.LookupType"
+            update="false"
+            insert="false"
+            >
+            <column name="TYPE_ID"/>
+        </many-to-one>
+
+    </class>
+
+    <query name="findByTypeAndValue">
+        <![CDATA[from com.zynap.talentstudio.common.lookups.LookupValue values where values.valueId=? and values.lookupType.typeId=?]]>
+    </query>
+    <query name="findActiveValues">
+        <![CDATA[from com.zynap.talentstudio.common.lookups.LookupValue values where values.lookupType.typeId=? and values.active='T' order by values.sortOrder]]>
+    </query>
+
+</hibernate-mapping>

@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+
+    <class
+            name="com.zynap.talentstudio.security.homepages.HomePage"
+            table="HOME_PAGES"
+            dynamic-update="true"
+            dynamic-insert="true"
+            >
+        <cache usage="read-write"/>
+
+        <id
+                name="id"
+                type="long"
+                column="ID"
+                unsaved-value="null"
+                >
+            <generator class="sequence">
+                <param name="sequence">HOMEPAGE_SQ</param>
+            </generator>
+
+        </id>
+
+        <property
+                name="arenaId"
+                type="java.lang.String"
+                column="ARENA_ID"
+                not-null="true"
+                length="200"
+                />
+        <property
+                name="url"
+                type="java.lang.String"
+                column="PAGE_URL"
+                length="1024"
+                />
+        <property
+                name="internalUrl"
+                type="true_false"
+                column="IS_INTERNAL_URL"
+                />
+        <property
+                name="data"
+                type="org.springframework.orm.hibernate.support.BlobByteArrayType"
+                column="FILE_UPLOAD"
+                />
+
+        <many-to-one
+                name="group"
+                class="com.zynap.talentstudio.common.groups.Group"
+                cascade="none"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <column name="GROUP_ID"/>
+        </many-to-one>
+
+    </class>
+</hibernate-mapping>

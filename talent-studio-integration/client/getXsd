@@ -1,0 +1,5 @@
+#!/bin/sh
+
+${JAVA_HOME}/bin/java -classpath talent-studio-standalone.jar \
+	com.zynap.talentstudio.integration.client.GetXsd $*
+

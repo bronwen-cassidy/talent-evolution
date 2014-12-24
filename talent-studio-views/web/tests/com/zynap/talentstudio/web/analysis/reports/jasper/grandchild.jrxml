@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="grandchild" pageWidth="450" pageHeight="842" columnWidth="150" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<style name="pager" isDefault="true" fontName="Arial" fontSize="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<style name="infomessage" isDefault="false" fontName="Arial" fontSize="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+
+    <parameter name="subjectUrl" class="java.lang.String"/>
+    <parameter name="positionUrl" class="java.lang.String"/>
+    <parameter name="report" class="com.zynap.talentstudio.analysis.reports.Report"/>
+
+    <field name="title" class="java.lang.String"/>
+    <field name="id" class="java.lang.String"/>
+
+    <detail>
+
+        <band height="20">
+            <textField hyperlinkType="Reference">
+                <reportElement style="pager" x="0" y="0" width="150" height="15"/>
+                <textElement/>
+                <textFieldExpression class="java.lang.String">
+                    <![CDATA[com.zynap.talentstudio.analysis.reports.DataFormatter.formatValue((com.zynap.talentstudio.analysis.reports.Column)$P{report}.getColumns().get(1),$F{title})]]></textFieldExpression>
+                <hyperlinkReferenceExpression><![CDATA[$P{positionUrl} + $F{id}]]></hyperlinkReferenceExpression>
+            </textField>
+        </band>
+
+    </detail>
+
+</jasperReport>

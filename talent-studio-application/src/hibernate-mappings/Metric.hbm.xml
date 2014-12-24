@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+    
+<hibernate-mapping>
+<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+
+<class 
+    name="com.zynap.talentstudio.analysis.metrics.Metric"
+    table="METRICS"
+    dynamic-update="true"
+    dynamic-insert="true"
+>
+
+    <id
+        name="id"
+        type="java.lang.Long"
+        column="ID"
+    >
+        <meta attribute="use-in-equals">true</meta>
+         <generator class="sequence">
+                <param name="sequence">REPORT_SQ</param>
+        </generator>
+    </id>
+
+    <property
+        name="accessType"
+        type="java.lang.String"
+        column="ACCESS_TYPE"
+        length="240"
+    >
+        <meta attribute="use-in-tostring">true</meta>
+        <meta attribute="use-in-equals">true</meta>
+    </property>
+    <property
+        name="description"
+        type="java.lang.String"
+        column="DESCRIPTION"
+        length="4000"
+    >
+        <meta attribute="use-in-tostring">true</meta>
+        <meta attribute="use-in-equals">true</meta>
+    </property>
+    <property
+        name="label"
+        type="java.lang.String"
+        column="LABEL"
+        not-null="true"
+        length="240"
+    >
+        <meta attribute="use-in-tostring">true</meta>
+        <meta attribute="use-in-equals">true</meta>
+    </property>
+    <property
+        name="artefactType"
+        type="java.lang.String"
+        column="ARTEFACT_TYPE"
+        length="240"
+    >
+        <meta attribute="use-in-tostring">true</meta>
+        <meta attribute="use-in-equals">true</meta>
+    </property>
+    <property
+        name="operator"
+        type="java.lang.String"
+        column="OPERATOR"
+        length="15"
+    >
+        <meta attribute="use-in-tostring">true</meta>
+        <meta attribute="use-in-equals">true</meta>
+    </property>
+
+    <property
+        name="attributeName"
+        type="java.lang.String"
+        column="ATTRIBUTE"
+        length="100"
+    >
+        <meta attribute="use-in-tostring">true</meta>
+        <meta attribute="use-in-equals">true</meta>
+    </property>
+
+    <property
+        name="value"
+        type="java.lang.String"
+        column="VALUE"
+        length="4000"
+    />
+
+    <property
+        name="role"
+        type="java.lang.String"
+        column="ROLE"
+        length="50"
+    >
+        <meta attribute="use-in-tostring">true</meta>
+        <meta attribute="use-in-equals">true</meta>
+    </property>
+
+    <property
+        name="questionnaireWorkflowId"
+        type="java.lang.Long"
+        column="QUE_WF_ID"
+        length="10"
+    />
+
+    <property
+        name="userId"
+        type="java.lang.Long"
+        column="USER_ID"
+        length="10"
+    />
+    
+</class>
+</hibernate-mapping>

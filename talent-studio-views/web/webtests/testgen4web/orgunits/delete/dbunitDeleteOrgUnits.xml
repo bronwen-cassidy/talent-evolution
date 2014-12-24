@@ -1,0 +1,157 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tg4w version="0.38.2">
+    <actions>
+        <action type="goto" refresh="true" step="0">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/orgbuilder/listorganisations.htm?navigator.notSubmit=true]]></value>
+        </action>
+        <action type="verify-title" step="1">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Organisation Units]]></value>
+        </action>
+        <action type="click" refresh="true" step="2">
+            <xpath><![CDATA[A[@ID="folder_0"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" step="3">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Organisation Units]]></value>
+        </action>
+        <action type="click" refresh="true" step="4">
+            <xpath><![CDATA[A[@ID="folder_2"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" step="5">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Organisation Units]]></value>
+        </action>
+        <action type="check" step="6">
+            <xpath><![CDATA[*/FORM[@ID="_merge"]/*/INPUT[@NAME="mc_id0"]]]></xpath>
+            <value><![CDATA[true]]></value>
+        </action>
+        <action type="check" step="7">
+            <xpath><![CDATA[*/FORM[@ID="_merge"]/*/INPUT[@NAME="mc_id2"]]]></xpath>
+            <value><![CDATA[true]]></value>
+        </action>
+        <action type="click" refresh="true" step="8">
+            <xpath><![CDATA[*/FORM[@ID="_merge"]/INPUT[@NAME="_merge" and @VALUE="Merge"]]]></xpath>
+            <value><![CDATA[_merge]]></value>
+        </action>
+        <action type="verify-title" step="9">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Merge Organisation Units]]></value>
+        </action>
+        <action type="assert-text-exists" step="10">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Cannot merge the default organisation unit.]]></value>
+        </action>
+        <action type="click" refresh="true" step="11">
+            <xpath><![CDATA[*/FORM[@NAME="_back"]/INPUT[@ID="back"]]]></xpath>
+            <value><![CDATA[_back]]></value>
+        </action>
+        <action type="verify-title" step="12">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Organisation Units]]></value>
+        </action>
+        <action type="check" step="13">
+            <xpath><![CDATA[*/FORM[@ID="_merge"]/*/INPUT[@NAME="mc_id2"]]]></xpath>
+            <value><![CDATA[true]]></value>
+        </action>
+        <action type="click" refresh="true" step="14">
+            <xpath><![CDATA[*/FORM[@ID="_merge"]/INPUT[@NAME="_merge" and @VALUE="Merge"]]]></xpath>
+            <value><![CDATA[_merge]]></value>
+        </action>
+        <action type="verify-title" step="15">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Merge Organisation Units]]></value>
+        </action>
+        <action type="assert-text-exists" step="16">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Two organisation units must be selected to merge.]]></value>
+        </action>
+        <action type="click" refresh="true" step="17">
+            <xpath><![CDATA[*/FORM[@NAME="_back"]/INPUT[@ID="back"]]]></xpath>
+            <value><![CDATA[_back]]></value>
+        </action>
+        <action type="verify-title" step="18">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Organisation Units]]></value>
+        </action>
+        <action type="click" refresh="true" step="19">
+            <xpath><![CDATA[A[@ID="item_2"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" step="20">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Organisation Unit]]></value>
+        </action>
+        <action type="click" refresh="true" step="21">
+            <xpath><![CDATA[*/FORM[@ID="_delete"]/INPUT[@NAME="_delete"]]]></xpath>
+            <value><![CDATA[_delete]]></value>
+        </action>
+        <action type="verify-title" step="22">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Delete Organisation Unit]]></value>
+        </action>
+        <action type="assert-text-exists" step="23">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Associated Organisation Units that will be deleted.]]></value>
+        </action>
+        <action type="click" refresh="true" step="24">
+            <xpath><![CDATA[*/FORM[@ID="_delete"]/INPUT[@NAME="_delete" and @VALUE="Confirm"]]]></xpath>
+            <value><![CDATA[_delete]]></value>
+        </action>
+        <action type="verify-title" step="25">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Organisation Units]]></value>
+        </action>
+        <action type="assert-text-does-not-exist" refresh="true" step="26">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[OU1]]></value>
+        </action>
+        <action type="goto" refresh="true" step="27">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/orgbuilder/listposition.htm?navigator.notSubmit=true]]></value>
+        </action>
+        <action type="verify-title" step="28">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Position Search]]></value>
+        </action>
+        <action type="assert-text-does-not-exist" step="29">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[OU1]]></value>
+        </action>
+        <action type="click" refresh="true" step="30">
+            <xpath><![CDATA[*/FORM[@ID="position"]/*/INPUT[@NAME="_target3" and @VALUE="Search"]]]></xpath>
+            <value><![CDATA[_target3]]></value>
+        </action>
+        <action type="verify-title" step="31">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Position Search]]></value>
+        </action>
+        <action type="assert-text-exists" step="32">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[One item found.]]></value>
+        </action>
+        <action type="click" step="33">
+            <xpath><![CDATA[A[@ID="a_search"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="select" step="34">
+            <xpath><![CDATA[*/FORM[@ID="position"]/*/SELECT[@NAME="filter.active"]]]></xpath>
+            <value><![CDATA[all]]></value>
+        </action>
+        <action type="click" refresh="true" step="35">
+            <xpath><![CDATA[*/FORM[@ID="position"]/*/INPUT[@NAME="_target3" and @VALUE="Search"]]]></xpath>
+            <value><![CDATA[_target3]]></value>
+        </action>
+        <action type="verify-title" step="36">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Position Search]]></value>
+        </action>
+        <action type="assert-text-exists" step="37">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[11 items found, displaying all items.]]></value>
+        </action>
+    </actions>
+</tg4w>

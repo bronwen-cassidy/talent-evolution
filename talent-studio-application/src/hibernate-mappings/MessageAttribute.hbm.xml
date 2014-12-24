@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+    
+<hibernate-mapping>
+<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+
+<class 
+    name="com.zynap.talentstudio.workflow.MessageAttribute"
+    table="WF_MESSAGE_ATTRIBUTES"
+    dynamic-update="true"
+    dynamic-insert="true"
+>
+
+    <composite-id name="compositeId" class="com.zynap.talentstudio.workflow.MessageAttributePK">
+        <meta attribute="use-in-equals">true</meta>
+        <key-property 
+            name="messageType" 
+            column="MESSAGE_TYPE" 
+            type="java.lang.String"
+            length="8"
+        />
+        <key-property 
+            name="messageName" 
+            column="MESSAGE_NAME" 
+            type="java.lang.String"
+            length="30"
+        />
+        <key-property 
+            name="name" 
+            column="NAME" 
+            type="java.lang.String"
+            length="30"
+        />
+    </composite-id>    
+
+    <property
+        name="sequence"
+        type="java.lang.Long"
+        column="SEQUENCE"
+        not-null="true"
+        length="22"
+    >
+        <meta attribute="use-in-tostring">true</meta>
+        <meta attribute="use-in-equals">true</meta>
+    </property>
+    <property
+        name="type"
+        type="java.lang.String"
+        column="TYPE"
+        not-null="true"
+        length="8"
+    >
+        <meta attribute="use-in-tostring">true</meta>
+        <meta attribute="use-in-equals">true</meta>
+    </property>
+    <property
+        name="subtype"
+        type="java.lang.String"
+        column="SUBTYPE"
+        not-null="true"
+        length="8"
+    >
+        <meta attribute="use-in-tostring">true</meta>
+        <meta attribute="use-in-equals">true</meta>
+    </property>
+    <property
+        name="attach"
+        type="java.lang.String"
+        column="ATTACH"
+        length="1"
+    >
+        <meta attribute="use-in-tostring">true</meta>
+        <meta attribute="use-in-equals">true</meta>
+    </property>
+    <property
+        name="valueType"
+        type="java.lang.String"
+        column="VALUE_TYPE"
+        not-null="true"
+        length="8"
+    >
+        <meta attribute="use-in-tostring">true</meta>
+        <meta attribute="use-in-equals">true</meta>
+    </property>
+    <property
+        name="protectLevel"
+        type="java.lang.Long"
+        column="PROTECT_LEVEL"
+        not-null="true"
+        length="22"
+    >
+        <meta attribute="use-in-tostring">true</meta>
+        <meta attribute="use-in-equals">true</meta>
+    </property>
+    <property
+        name="customLevel"
+        type="java.lang.Long"
+        column="CUSTOM_LEVEL"
+        not-null="true"
+        length="22"
+    >
+        <meta attribute="use-in-tostring">true</meta>
+        <meta attribute="use-in-equals">true</meta>
+    </property>
+    <property
+        name="format"
+        type="java.lang.String"
+        column="FORMAT"
+        length="240"
+    >
+        <meta attribute="use-in-tostring">true</meta>
+        <meta attribute="use-in-equals">true</meta>
+    </property>
+    <property
+        name="textDefault"
+        type="java.lang.String"
+        column="TEXT_DEFAULT"
+        length="4000"
+    >
+        <meta attribute="use-in-tostring">true</meta>
+        <meta attribute="use-in-equals">true</meta>
+    </property>
+    <property
+        name="numberDefault"
+        type="java.lang.Long"
+        column="NUMBER_DEFAULT"
+        length="22"
+    >
+        <meta attribute="use-in-tostring">true</meta>
+        <meta attribute="use-in-equals">true</meta>
+    </property>
+    <property
+        name="dateDefault"
+        type="java.sql.Date"
+        column="DATE_DEFAULT"
+        length="7"
+    >
+        <meta attribute="use-in-tostring">true</meta>
+        <meta attribute="use-in-equals">true</meta>
+    </property>
+
+    <!-- Associations -->
+    <!-- derived association(s) for compound key -->
+    <!-- end of derived association(s) -->
+  
+
+</class>
+</hibernate-mapping>

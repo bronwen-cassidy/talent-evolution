@@ -1,0 +1,193 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+    <!--
+        Created by the Middlegen Hibernate plugin 2.1
+
+        http://boss.bekk.no/boss/middlegen/
+        http://www.hibernate.org/
+    -->
+
+    <class
+            name="com.zynap.talentstudio.analysis.reports.Column"
+            table="REPORT_COLUMNS"
+            dynamic-update="true"
+            dynamic-insert="true"
+            >
+        <cache usage="nonstrict-read-write"/>
+
+        <id
+                name="id"
+                type="java.lang.Long"
+                column="ID"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <generator class="sequence">
+                <param name="sequence">REP_COLUMN_SQ</param>
+            </generator>
+        </id>
+
+        <property
+                name="label"
+                type="java.lang.String"
+                column="LABEL"
+                length="255"
+                />
+
+        <property
+                name="columnType"
+                type="java.lang.String"
+                column="COLUMN_TYPE"
+                length="255"
+                />
+
+        <property
+                name="attributeName"
+                type="java.lang.String"
+                column="REF_VALUE"
+                length="255"
+                />
+        <property
+                name="value"
+                type="java.lang.String"
+                column="VALUE"
+                length="512"
+                />
+
+        <property
+                name="mandatory"
+                type="true_false"
+                column="MANDATORY"
+                length="1"
+                />
+
+        <property
+                name="grouped"
+                type="true_false"
+                column="IS_GROUPED"
+                length="1"
+                />
+
+        <property
+                name="formula"
+                type="true_false"
+                column="IS_FORMULA"
+                length="1"
+                />
+
+        <property name="colorDisplayable"
+                  type="true_false"
+                  column="IS_COLOR_DISPLAYABLE"
+                  not-null="true"
+                  length="1"
+                />
+
+        <property name="dynamicLineItem"
+                  type="true_false"
+                  column="IS_DYNAMIC_LINEITEM"
+                  not-null="true"
+                  length="1"
+                />
+
+        <property
+                name="columnSource"
+                type="java.lang.String"
+                column="SOURCE"
+                not-null="true"
+                length="15"
+                />
+
+        <property name="position"
+                  type="java.lang.Integer"
+                  column="POSITION"
+                  length="5"
+                />
+
+        <property
+                name="questionnaireWorkflowId"
+                type="java.lang.Long"
+                column="QUE_WF_ID"
+                length="10"
+                />
+
+        <property
+                name="role"
+                type="java.lang.String"
+                column="ROLE"
+                length="50"
+                />
+
+        <property
+                name="weighting"
+                type="java.lang.Integer"
+                column="WEIGHTING"
+                length="50"
+                />
+        <property
+                name="displayColour"
+                type="java.lang.String"
+                column="DISPLAY_COLOUR"/>
+
+        <!-- bi-directional many-to-one association to Report -->
+        <many-to-one
+                name="report"
+                class="com.zynap.talentstudio.analysis.reports.Report"
+                not-null="true"
+                >
+            <column name="REP_ID"/>
+        </many-to-one>
+
+        <many-to-one
+                name="metric"
+                class="com.zynap.talentstudio.analysis.metrics.Metric"
+                >
+            <column name="METRIC_ID"/>
+        </many-to-one>
+
+        <many-to-one
+                name="calculation"
+                class="com.zynap.talentstudio.calculations.Calculation"
+                cascade="all"
+                >
+            <column name="CALCULATION_ID"/>
+        </many-to-one>
+
+        <set
+                name="chartColumnAttributes"
+                lazy="true"
+                inverse="true"
+                order-by="category"
+                cascade="all-delete-orphan"
+                batch-size="50"
+                >
+            <cache usage="nonstrict-read-write"/>
+            <key>
+                <column name="REPORT_COLUMN_ID"/>
+            </key>
+
+            <one-to-many
+                    class="com.zynap.talentstudio.analysis.reports.ChartColumnAttribute"
+                    />
+        </set>
+
+
+        <bag
+                name="columnDisplayImages"
+                lazy="false"
+                inverse="true"
+                cascade="all-delete-orphan"
+                outer-join="true"
+                batch-size="50"
+                >
+            <cache usage="nonstrict-read-write"/>
+            <key>
+                <column name="REPORT_COLUMN_ID"/>
+            </key>
+            <one-to-many class="com.zynap.talentstudio.analysis.reports.ColumnDisplayImage"/>
+        </bag>
+
+    </class>
+</hibernate-mapping>

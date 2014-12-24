@@ -1,0 +1,78 @@
+#!/bin/sh
+
+if [ -z "$1" -o -z "$2" ]
+then
+	echo usage $0 [DB User] [Dump file name]
+	exit 2
+fi
+
+set -u
+
+DBUSER=$1
+DMPFILE=$2
+
+# Validate parameters
+
+if [ -z "$ORACLE_HOME" ]
+then
+	echo Please ensure ORACLE_HOME environment variable is set.
+	echo E.g. ORACLE_HOME=/home/oracle/product/9.2.0.4.0
+	exit 3
+fi
+
+# Make the dumpfile directory
+
+if [ ! -d $DMPFILE ]
+then
+	mkdir ${DMPFILE}
+fi
+
+# Export TS schema
+
+$ORACLE_HOME/bin/exp $DBUSER/$DBUSER LOG=${DMPFILE}/ts.log CONSISTENT=y CONSTRAINTS=y GRANTS=y INDEXES=y ROWS=y STATISTICS=NONE FILE=$DMPFILE/ts.dmp
+result=$?
+
+# Export select tables from the workflow schema
+
+if [ "$result" -eq 0 ]
+then
+	$ORACLE_HOME/bin/exp OWF_${DBUSER}/OWF_${DBUSER} parfile=wf/wf_tables.txt LOG=${DMPFILE}/wf.log CONSISTENT=y CONSTRAINTS=y GRANTS=y INDEXES=y ROWS=y STATISTICS=NONE FILE=${DMPFILE}/wf.dmp
+	result=$?
+fi
+
+# Extract select data from the workflow schema
+
+if [ "$result" -eq 0 ]
+then
+	sqlplus OWF_${DBUSER}/OWF_${DBUSER} @wf/generateInserts.sql <<XXX
+$DMPFILE
+XXX
+	result=$?
+fi
+
+# Edit the wf file to replace all single quotes by two single quotes and then
+# all double quotes by single quotes. First we have to append a single quote
+# to the file so that the first substitution does not fail if there are no single
+# quotes present. This is then deleted after doing the substitutions.
+
+ed $DMPFILE/wf_insert_data.sql <<XXX
+a
+'
+.
+1,\$s/'/''/g
+1,\$s/"/'/g
+\$d
+w
+q
+XXX
+
+
+echo RESULT = $result
+
+if [ "$result" -ne 0 ]
+then
+	echo ****** Database dump failed *******
+	exit $result
+fi
+
+

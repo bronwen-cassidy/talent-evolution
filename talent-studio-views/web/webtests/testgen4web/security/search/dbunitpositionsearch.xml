@@ -1,0 +1,281 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tg4w version="0.38.2">
+    <actions>
+        <action type="goto" refresh="true" step="0">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/login.htm]]></value>
+        </action>
+        <action type="verify-title" step="1">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Login]]></value>
+        </action>
+        <action type="fill" step="2">
+            <xpath><![CDATA[*/FORM[@ID="_login"]/*/INPUT[@TYPE="text" and @NAME="username"]]]></xpath>
+            <value><![CDATA[oosborne]]></value>
+        </action>
+        <action type="fill" step="3">
+            <xpath><![CDATA[*/FORM[@ID="_login"]/*/INPUT[@TYPE="password" and @NAME="password"]]]></xpath>
+            <value><![CDATA[oosborne]]></value>
+        </action>
+        <action type="click" refresh="true" step="4">
+            <xpath><![CDATA[*/FORM[@ID="_login"]/*/INPUT[@ID="loginsubmit"]]]></xpath>
+            <value><![CDATA[null]]></value>
+        </action>
+        <action type="verify-title" step="5">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Policy]]></value>
+        </action>
+        <action type="check" step="6">
+            <xpath><![CDATA[*/FORM[@ID="policyform"]/*/INPUT[@TYPE="checkbox" and @NAME="acceptedPolicy"]]]></xpath>
+            <value><![CDATA[true]]></value>
+        </action>
+        <action type="click" refresh="true" step="7">
+            <xpath><![CDATA[*/FORM[@ID="policyform"]/*/INPUT[@ID="accept"]]]></xpath>
+            <value><![CDATA[Agree]]></value>
+        </action>
+        <action type="verify-title" step="8">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Home]]></value>
+        </action>
+        <action type="goto" refresh="true" step="9">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/orgbuilder/listposition.htm]]></value>
+        </action>
+        <action type="verify-title" step="10">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Position Search]]></value>
+        </action>
+        <action type="select" step="11">
+            <xpath><![CDATA[*/FORM[@ID="position"]/*/SELECT[@ID="pop2"]]]></xpath>
+            <value><![CDATA[-1]]></value>
+        </action>
+        <action type="click" refresh="true" step="12">
+            <xpath><![CDATA[*/FORM[@ID="position"]/*/INPUT[@NAME="_target3" and @VALUE="Search"]]]></xpath>
+            <value><![CDATA[_target3]]></value>
+        </action>
+        <action type="verify-title" step="13">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Position Search]]></value>
+        </action>
+        <action type="assert-text-exists" step="14">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[5 items found, displaying all items.]]></value>
+        </action>
+        <action type="assert-text-exists" step="15">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Head of Engineering]]></value>
+        </action>
+        <action type="assert-text-exists" step="16">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Head of Mechanical Engineering]]></value>
+        </action>
+        <action type="assert-text-exists" step="17">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Head of Petrochemical Engineering]]></value>
+        </action>
+        <action type="assert-text-exists" step="18">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Head of Petrochemical Engineering Nigeria]]></value>
+        </action>
+        <action type="assert-text-exists" step="19">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Head of Petrochemical Engineering Saudi Arabia]]></value>
+        </action>
+        <action type="click" step="20">
+            <xpath><![CDATA[TABLE[@ID="positiontable"]/*/A[@CDATA="Head of Mechanical Engineering"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" step="21">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Position Search]]></value>
+        </action>
+        <action type="assert-text-exists" step="22">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Summary of Head of Mechanical Engineering]]></value>
+        </action>
+        <action type="assert-text-does-not-exist" step="23">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Default Position]]></value>
+        </action>
+        <action type="goto" refresh="true" step="24">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/logout.htm]]></value>
+        </action>
+        <action type="verify-title" step="25">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Login]]></value>
+        </action>
+        <action type="fill" step="26">
+            <xpath><![CDATA[*/FORM[@ID="_login"]/*/INPUT[@TYPE="text" and @NAME="username"]]]></xpath>
+            <value><![CDATA[ellaf]]></value>
+        </action>
+        <action type="fill" step="27">
+            <xpath><![CDATA[*/FORM[@ID="_login"]/*/INPUT[@TYPE="password" and @NAME="password"]]]></xpath>
+            <value><![CDATA[ellaf]]></value>
+        </action>
+        <action type="click" refresh="true" step="28">
+            <xpath><![CDATA[*/FORM[@ID="_login"]/*/INPUT[@ID="loginsubmit"]]]></xpath>
+            <value><![CDATA[null]]></value>
+        </action>
+        <action type="verify-title" step="29">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Policy]]></value>
+        </action>
+        <action type="check" step="30">
+            <xpath><![CDATA[*/FORM[@ID="policyform"]/*/INPUT[@TYPE="checkbox" and @NAME="acceptedPolicy"]]]></xpath>
+            <value><![CDATA[true]]></value>
+        </action>
+        <action type="click" refresh="true" step="31">
+            <xpath><![CDATA[*/FORM[@ID="policyform"]/*/INPUT[@ID="accept"]]]></xpath>
+            <value><![CDATA[Agree]]></value>
+        </action>
+        <action type="verify-title" step="32">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Home]]></value>
+        </action>
+        <action type="goto" refresh="true" step="33">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/orgbuilder/listposition.htm]]></value>
+        </action>
+        <action type="verify-title" step="34">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Position Search]]></value>
+        </action>
+        <action type="click" refresh="true" step="35">
+            <xpath><![CDATA[*/FORM[@ID="position"]/*/INPUT[@NAME="_target3" and @VALUE="Search"]]]></xpath>
+            <value><![CDATA[_target3]]></value>
+        </action>
+        <action type="assert-text-exists" step="36">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[2 items found, displaying all items.]]></value>
+        </action>
+        <action type="assert-text-does-not-exist" step="37">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Default Position]]></value>
+        </action>
+        <action type="assert-text-does-not-exist" step="38">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Head of Engineering]]></value>
+        </action>
+        <action type="assert-text-exists" step="39">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Head of Petrochemical Engineering Nigeria]]></value>
+        </action>
+        <action type="assert-text-exists" step="40">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Head of Petrochemical Engineering Saudi Arabia]]></value>
+        </action>
+        <action type="click" step="41">
+            <xpath><![CDATA[A[@ID="a_browse"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="assert-text-exists" step="42">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Summary of Head of Petrochemical Engineering Nigeria]]></value>
+        </action>
+        <action type="click" refresh="true" step="43">
+            <xpath><![CDATA[TABLE[@ID="details_table"]/TBODY[1]/TR[4]/TD[2]/A[@CDATA="Frank Zappa"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" step="44">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Person]]></value>
+        </action>
+        <action type="assert-text-exists" step="45">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Summary of Frank Zappa]]></value>
+        </action>
+        <action type="click" refresh="true" step="46">
+            <xpath><![CDATA[*/FORM[@NAME="_back"]/INPUT[@ID="back"]]]></xpath>
+            <value><![CDATA[_back]]></value>
+        </action>
+        <action type="verify-title" step="47">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Position Search]]></value>
+        </action>
+        <action type="assert-text-exists" step="48">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[2 items found, displaying all items.]]></value>
+        </action>
+        <action type="click" refresh="true" step="49">
+            <xpath><![CDATA[TABLE[@ID="positiontable"]/TBODY[1]/TR[2]/TD[1]/A[@CDATA="Head of Petrochemical Engineering Saudi Arabia"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" step="50">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Position Search]]></value>
+        </action>
+        <action type="assert-text-exists" step="51">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Summary of Head of Petrochemical Engineering Saudi Arabia]]></value>
+        </action>
+        <action type="click" refresh="true" step="52">
+            <xpath><![CDATA[TABLE[@ID="details_table"]/TBODY[1]/TR[4]/TD[2]/A[@CDATA="Diana Ross"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" step="53">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Person]]></value>
+        </action>
+        <action type="click" refresh="true" step="54">
+            <xpath><![CDATA[*/FORM[@NAME="_back"]/INPUT[@ID="back"]]]></xpath>
+            <value><![CDATA[_back]]></value>
+        </action>
+        <action type="verify-title" step="55">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Position Search]]></value>
+        </action>
+        <action type="goto" refresh="true" step="56">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/logout.htm]]></value>
+        </action>
+        <action type="verify-title" step="57">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Login]]></value>
+        </action>
+        <action type="fill" step="58">
+            <xpath><![CDATA[*/FORM[@ID="_login"]/*/INPUT[@TYPE="text" and @NAME="username"]]]></xpath>
+            <value><![CDATA[fzappa]]></value>
+        </action>
+        <action type="fill" step="59">
+            <xpath><![CDATA[*/FORM[@ID="_login"]/*/INPUT[@TYPE="password" and @NAME="password"]]]></xpath>
+            <value><![CDATA[fzappa]]></value>
+        </action>
+        <action type="click" refresh="true" step="60">
+            <xpath><![CDATA[*/FORM[@ID="_login"]/*/INPUT[@ID="loginsubmit"]]]></xpath>
+            <value><![CDATA[null]]></value>
+        </action>
+        <action type="verify-title" step="61">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Policy]]></value>
+        </action>
+        <action type="check" step="62">
+            <xpath><![CDATA[*/FORM[@ID="policyform"]/*/INPUT[@TYPE="checkbox" and @NAME="acceptedPolicy"]]]></xpath>
+            <value><![CDATA[true]]></value>
+        </action>
+        <action type="click" refresh="true" step="63">
+            <xpath><![CDATA[*/FORM[@ID="policyform"]/*/INPUT[@ID="accept"]]]></xpath>
+            <value><![CDATA[Agree]]></value>
+        </action>
+        <action type="verify-title" step="64">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Home]]></value>
+        </action>
+        <action type="goto" refresh="true" step="65">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/orgbuilder/listposition.htm]]></value>
+        </action>
+        <action type="verify-title" step="66">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Position Search]]></value>
+        </action>
+        <action type="click" refresh="true" step="67">
+            <xpath><![CDATA[*/FORM[@ID="position"]/*/INPUT[@NAME="_target3" and @VALUE="Search"]]]></xpath>
+            <value><![CDATA[_target3]]></value>
+        </action>
+        <action type="assert-text-exists" step="68">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Nothing found to display.]]></value>
+        </action>
+    </actions>
+</tg4w>

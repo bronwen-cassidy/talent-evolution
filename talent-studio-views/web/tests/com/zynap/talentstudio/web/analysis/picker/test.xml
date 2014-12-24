@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<trees>
+    <tree type="S">
+        <branch id="person" label="Person" type="S" root="true">
+            <branch id="subjectPrimaryAssociations.position" label="Current Jobs" type="P" includeQualifierAttributes="true">
+                <branch id="subjectPrimaryAssociations" label="Primary Associations" type="SA"/>
+                <branch id="subjectPrimaryAssociations.position.organisationUnit" label="Organisaion" type="O" includeDynamicAttributes="true"/>
+                <branch id="subjectPrimaryAssociations.position.subjectSecondaryAssociations.subject" label="Successors" type="S">
+                    <branch id="subjectPrimaryAssociations.position.subjectSecondaryAssociations" label="Succession Associations" type="SA"/>
+                </branch>
+            </branch>
+            <branch id="subjectSecondaryAssociations.position" label="Succession Positions" type="P">
+                <branch id="subjectSecondaryAssociations.position.OrganisationUnit" label="Organisation" type="O" includeDynamicAttributes="true"/>
+                <branch id="subjectSecondaryAssociations" label="Succession Associations" type="SA"/>
+                <branch id="subjectSecondaryAssociations.position.subjectPrimaryAssociations.subject" label="Current Holders" type="S" includeQualifierAttributes="true">
+                    <branch id="subjectSecondaryAssociations.position.subjectPrimaryAssociations" label="Succession Associations" type="SA"/>
+                </branch>
+            </branch>
+            <branch id="portfolioItems" label="Documents" type="PI"/>
+        </branch>
+    </tree>
+    <tree type="P">
+        <branch id="position" label="Position" type="P" root="true">
+            <branch id="organisationUnit" label="Organisation Unit" type="O" includeDynamicAttributes="true"/>
+            <branch id="subjectPrimaryAssociations.subject" label="Current Holders" type="S" includeQualifierAttributes="true">
+                <branch id="subjectPrimaryAssociations" label="Primary Associations" type="SA"/>
+                <branch id="subjectPrimaryAssociations.subject.subjectSecondaryAssociations.position" label="Succession Positions" type="P">
+                    <branch id="subjectPrimaryAssociations.subject.subjectSecondaryAssociations.position.organisationUnit" label="Organisation" type="O" includeDynamicAttributes="true"/>
+                    <branch id="subjectPrimaryAssociations.subject.subjectSecondaryAssociations" label="Succession Associations" type="SA"/>
+                </branch>
+            </branch>
+            <branch id="subjectSecondaryAssociations.subject" label="Successors" type="S">
+                <branch id="subjectSecondaryAssociations" label="Succession Associations" type="SA"/>
+                <branch id="subjectSecondaryAssociations.subject.subjectPrimaryAssociations.position" label="Current Jobs" type="P" includeQualifierAttributes="true"/>
+                <branch id="subjectSecondaryAssociations.subject.subjectPrimaryAssociations.position.organisationUnit" label="Organisation Unit" type="O" includeDynamicAttributes="true"/>
+            </branch>
+            <branch id="sourceAssociations.target" label="Reports To" type="P">
+                <branch id="sourceAssociations.target.organisationUnit" label="Organisation Unit" type="O" includeDynamicAttributes="true"/>
+            </branch>
+            <branch id="targetAssociations.source" label="Subordinates" type="P">
+                <branch id="sourceAssociations.source.organisationUnit" label="Organisation Unit" type="O" includeDynamicAttributes="true"/>
+            </branch>
+            <branch id="portfolioItems" label="Documents" type="PI"/>
+        </branch>
+    </tree>
+    
+    <attributes type="P">
+        <attribute id="title" label="Title" type="TEXT"/>
+        <attribute id="comments" label="Comments" type="TEXT"/>
+        <attribute id="organisationUnit.label" label="Organisation Unit" type="TEXT"/>
+    </attributes>
+
+    <attributes type="S">
+        <attribute id="coreDetail.title" label="Title" type="TEXT"/>
+        <attribute id="coreDetail.name" label="Full Name" type="TEXT"/>
+        <attribute id="coreDetail.firstName" label="First Name" type="TEXT"/>
+        <attribute id="coreDetail.prefGivenName" label="Given Name" type="TEXT"/>
+        <attribute id="coreDetail.contactEmail" label="Email" type="TEXT"/>
+        <attribute id="coreDetail.contactTelephone" label="Telephone" type="NUMBER"/>
+        <attribute id="dateOfBirth" label="Date of Birth" type="DATE"/>
+        <attribute id="user.loginInfo.username" label="Username" type="TEXT"/>
+    </attributes>
+
+    <attributes type="O">
+        <attribute id="label" label="Label" type="TEXT"/>
+        <attribute id="id" label="Name" type="NUMBER"/>
+    </attributes>
+
+    <attributes type="S" viewType="ADD" includeQuestionnaires="false">
+        <attribute id="coreDetail.title" label="Title" type="TEXT"/>
+        <attribute id="coreDetail.name" label="Full Name" type="TEXT"/>
+        <attribute id="coreDetail.firstName" label="First Name" type="TEXT"/>
+        <attribute id="coreDetail.prefGivenName" label="Given Name" type="TEXT"/>
+        <attribute id="coreDetail.contactEmail" label="Email" type="TEXT"/>
+        <attribute id="coreDetail.contactTelephone" label="Telephone" type="NUMBER"/>
+        <attribute id="dateOfBirth" label="Date of Birth" type="DATE"/>
+        <attribute id="user.loginInfo.username" label="Username" type="TEXT"/>
+    </attributes>
+
+    <!-- attributes on associations, currently only secondary -->
+    <attributes type="SA">
+        <attribute id="comments" label="Comments" type="TEXTAREA"/>
+        <attribute id="qualifier.label" label="Type" type="TEXT"/>
+    </attributes>
+
+    <attributes type="PI">
+        <attribute id="portfolioItems.label" label="Title" type="TEXT"/>
+        <attribute id="portfolioItems.lastModified" label="Date Last Modified" type="DATE"/>
+        <attribute id="portfolioItems.lastModifiedBy.label" label="Last Modified By" type="TEXT"/>
+    </attributes>
+
+    <!-- indicates what attributes are available for qualifiers -->
+    <qualifierattributes>
+        <attribute id="qualifier.label" label="Type" type="TEXT"/>
+    </qualifierattributes>
+
+    <!-- indicates restrictions on attributes -->
+    <extendedattributes searchableOnly="true" type="STRUCT,TEXT"/>
+    <derivedattributes include="true"/>
+    <dynamiclineitems include="true"/>
+
+</trees>

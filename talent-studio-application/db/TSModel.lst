@@ -1,0 +1,2070 @@
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+Creating Table 'OBJECTIVE_DEFINITIONS'
+
+Table created.
+
+Creating Table 'OBJECTIVE_SETS'
+
+Table created.
+
+Creating Table 'OBJECTIVE_ATTRIBUTES'
+
+Table created.
+
+Creating Table 'OBJECTIVES'
+
+Table created.
+
+Creating Table 'OBJECTIVE_ASSESSMENTS'
+
+Table created.
+
+Creating Table 'OBJECTIVE_ASSESSORS'
+
+Table created.
+
+Creating Table 'PASSWORDS_HISTORY'
+
+Table created.
+
+Creating Table 'OU_HIERARCHY'
+
+Table created.
+
+Creating Table 'NODE_AUDITS'
+
+Table created.
+
+Creating Table 'APP_ROLES_USERS'
+
+Table created.
+
+Creating Table 'MODULE_DISPLAY_CONFIG_ITEMS'
+
+Table created.
+
+Creating Table 'DISPLAY_CONFIGS'
+
+Table created.
+
+Creating Table 'CONTENT_TYPES'
+
+Table created.
+
+Creating Table 'AREA_ELEMENTS'
+
+Table created.
+
+Creating Table 'MENU_ITEMS'
+
+Table created.
+
+Creating Table 'SUBJECT_PRIMARY_ASSOCIATIONS'
+
+Table created.
+
+Creating Table 'LOOKUP_TYPES'
+
+Table created.
+
+Creating Table 'NODE_ITEMS'
+
+Table created.
+
+Creating Table 'ROLES_SECURITY_DOMAINS'
+
+Table created.
+
+Creating Table 'DISPLAY_ITEM_REPORTS'
+
+Table created.
+
+Creating Table 'SECURITY_DOMAINS'
+
+Table created.
+
+Creating Table 'REPORT_COLUMNS'
+
+Table created.
+
+
+Table created.
+
+Creating Table 'COLUMN_DISPLAY_IMAGES'
+
+Table created.
+
+Creating Table 'REPORTS'
+
+Table created.
+
+Creating Table 'AREAS'
+
+Table created.
+
+Creating Table 'RULES'
+
+Table created.
+
+Creating Table 'POSITIONS_HIERARCHY'
+
+Table created.
+
+Creating Table 'POPULATION_CRITERIAS'
+
+Table created.
+
+Creating Table 'DISPLAY_CONFIG_ITEMS'
+
+Table created.
+
+Creating Table 'POSITIONS_HIERARCHY_INC'
+
+Table created.
+
+Creating Table 'EXTERNAL_REF_MAPPINGS'
+
+Table created.
+
+Creating Table 'QUE_WORKFLOWS'
+
+Table created.
+
+Creating Table 'QUE_DEFINITIONS'
+
+Table created.
+
+Creating Table 'QUE_XML_DATA'
+
+Table created.
+
+
+Table created.
+
+Creating Table 'POPULATIONS'
+
+Table created.
+
+Creating Table 'USERS'
+
+Table created.
+
+Creating Table 'PREFERENCES'
+
+Table created.
+
+Creating Table 'SECURITY_DOMAINS_USERS'
+
+Table created.
+
+Creating Table 'ROLES'
+
+Table created.
+
+Creating Table 'METRICS'
+
+Table created.
+
+Creating Table 'PERFORMANCE_REVIEWS'
+
+Table created.
+
+Creating Table 'QUESTIONNAIRES'
+
+Table created.
+
+Creating Table 'LOOKUP_VALUES'
+
+Table created.
+
+Creating Table 'SUBJECTS'
+
+Table created.
+
+Creating Table 'QUE_DEFINITION_MODELS'
+
+Table created.
+
+Creating Table 'ORGANIZATION_UNITS'
+
+Table created.
+
+Creating Table 'LOGINS'
+
+Table created.
+
+Creating Table 'SECURITY_RULES'
+
+Table created.
+
+Creating Table 'POSITION_ASSOCIATIONS'
+
+Table created.
+
+Creating Table 'CONFIGS'
+
+Table created.
+
+Creating Table 'ERRORS'
+
+Table created.
+
+Creating Table 'NODE_DAS'
+
+Table created.
+
+Creating Table 'MENU_SECTIONS'
+
+Table created.
+
+Creating Table 'PERMITS_ROLES'
+
+Table created.
+
+Creating Table 'USER_NODE_DOMAIN_PERMITS'
+
+Table created.
+
+Creating Table 'POSITIONS'
+
+Table created.
+
+Creating Table 'SESSION_LOGS'
+
+Table created.
+
+Creating Table 'PERMITS'
+
+Table created.
+
+Creating Table 'NODE_DA_FILES'
+
+Table created.
+
+Creating Table 'OU_HIERARCHY_INC'
+
+Table created.
+
+Creating Table 'NODES'
+
+Table created.
+
+Creating Table 'MODULES'
+
+Table created.
+
+Creating Table 'CORE_DETAILS'
+
+Table created.
+
+Creating Table 'SESSIONS_OPENED'
+
+Table created.
+
+Creating Table 'PERFORMANCE_EVALUATORS'
+
+Table created.
+
+Creating Table 'PERFORMANCE_MANAGERS'
+
+Table created.
+
+Creating Table 'DYNAMIC_ATTRIBUTES'
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+Creating Table 'SUBJECT_ASSOCIATIONS'
+
+Table created.
+
+Creating Table 'SECURITY_ATTRIBUTES'
+
+Table created.
+
+Creating Table 'QUESTION_GROUPS'
+
+Table created.
+
+Creating Table 'QUESTION_LINE_ITEMS'
+
+Table created.
+
+Creating Table 'QUESTIONS'
+
+Table created.
+
+Creating Table 'MULTI_QUESTIONS'
+
+Table created.
+
+Creating Table 'HOME_PAGES'
+
+Table created.
+
+Creating Table 'DISPLAY_CONFIG_ROLES'
+
+Table created.
+
+Creating Table 'DISPLAY_CONFIG_GROUPS'
+
+Table created.
+
+Creating Table 'INBOX'
+
+Table created.
+
+Creating Table 'GROUPS'
+
+Table created.
+
+Creating Table 'REPORT_GROUPS'
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+Creating Index 'ZPHT_ZLT1_FK_I'
+
+Index created.
+
+Creating Index 'AUD_USER_1_UPDATED_BY_FK_I'
+
+Index created.
+
+Creating Index 'AUD_USER_1_FK_I'
+
+Index created.
+
+Creating Index 'AR_USER_USER_1_FK_I'
+
+Index created.
+
+Creating Index 'AR_USER_ROL_FK_I'
+
+Index created.
+
+Creating Index 'AE_AREA_FK_I'
+
+Index created.
+
+Creating Index 'AE_NODE_FK_I'
+
+Index created.
+
+Creating Index 'ZMIT_ZMST_FK_I'
+
+Index created.
+
+Creating Index 'ZMIT_PER_FK_I'
+
+Index created.
+
+Creating Index 'SAT_PPOS_FK_I'
+
+Index created.
+
+Creating Index 'SAT_PSUB_FK_I'
+
+Index created.
+
+Creating Index 'ZPIT_NODE_FK_I'
+
+Index created.
+
+Creating Index 'ZPIT_USER_1_FK_I'
+
+Index created.
+
+Creating Index 'DR_SA_ROL_FK_I'
+
+Index created.
+
+Creating Index 'DR_SA_SA_FK_I'
+
+Index created.
+
+Creating Index 'SA_NODE_FK_I'
+
+Index created.
+
+Creating Index 'RC_REP_FK_I'
+
+Index created.
+
+Creating Index 'REP_PP_DEF_POPULATION_FK_I'
+
+Index created.
+
+Creating Index 'REP_USER_1_FK_I'
+
+Index created.
+
+Creating Index 'AREA_NODE_FK_I'
+
+Index created.
+
+Creating Index 'CRT_PP_FK_I'
+
+Index created.
+
+Creating Index 'PT_1_USER_1_FK_I'
+
+Index created.
+
+Creating Index 'SA_USER_USER_1_FK_I'
+
+Index created.
+
+Creating Index 'SA_USER_SA_FK_I'
+
+Index created.
+
+Creating Index 'CTYPE_IDX'
+
+Index created.
+
+Creating Index 'MET_USER_1_FK_I'
+
+Index created.
+
+Creating Index 'ZLVT_ZLTT_FK_I'
+
+Index created.
+
+Creating Index 'SUB_NODE_FK_I'
+
+Index created.
+
+Creating Index 'SUB_USER_1_FK_I'
+
+Index created.
+
+Creating Index 'OU_OU_FK_I'
+
+Index created.
+
+Creating Index 'OU_NODE_FK_I'
+
+Index created.
+
+Creating Index 'ZLT1_USER_1_FK_I'
+
+Index created.
+
+Creating Index 'SR_ROL_FK_I'
+
+Index created.
+
+Creating Index 'SR_NODE_FK_I'
+
+Index created.
+
+Creating Index 'SR_USER_1_FK_I'
+
+Index created.
+
+Creating Index 'PAT_POS_POINTS_TARGET_FK_I'
+
+Index created.
+
+Creating Index 'PAT_ZLVT_FK_I'
+
+Index created.
+
+Creating Index 'PAT_POS_FK_I'
+
+Index created.
+
+Creating Index 'ZPDT_ZDT_FK_I'
+
+Index created.
+
+Creating Index 'ZPDT_NODE_FK_I'
+
+Index created.
+
+Creating Index 'ZMST_ZMT_FK_I'
+
+Index created.
+
+Creating Index 'DP_DR_ROL_FK_I'
+
+Index created.
+
+Creating Index 'DP_DR_PER_FK_I'
+
+Index created.
+
+Creating Index 'USERNODE'
+
+Index created.
+
+Creating Index 'POS_POS_FK_I'
+
+Index created.
+
+Creating Index 'POS_NODE_FK_I'
+
+Index created.
+
+Creating Index 'POS_OU_FK_I'
+
+Index created.
+
+Creating Index 'ZSLT_USER_1_FK_I'
+
+Index created.
+
+Creating Index 'SAT_SUB_FK_I'
+
+Index created.
+
+Creating Index 'SAT_POS_FK_I'
+
+Index created.
+
+Creating Index 'Question Groups'
+
+Index created.
+
+Creating Index 'Multi Questions'
+
+Index created.
+
+Creating Index 'QUESTION_LINE_ITEMS'
+
+Index created.
+
+Creating Index 'QUESTIONS'
+
+Index created.
+
+Creating Index 'QUESTIONS'
+
+Index created.
+
+Creating Index 'QUESTIONS'
+
+Index created.
+
+Creating Index ON 'DYNAMIC_ATTR_REFERENCES'
+
+Index created.
+
+Creating Index ON 'DYNAMIC_ATTR_REFERENCES'
+
+Index created.
+
+Creating Index ON 'DYNAMIC_ATTR_REFERENCES' references
+
+Index created.
+
+Creating index on 'OBJECTIVE_SETS' subject_id
+
+Index created.
+
+Creating index on 'OBJECTIVE_SETS' org_unit_id
+
+Index created.
+
+Creating index on 'CALCULATION_EXPRESSIONS' CALCULATION_ID
+
+Index created.
+
+
+Index created.
+
+
+Index created.
+
+Creating index on 'REPORT_COLUMNS' CALCULATION_ID
+
+Index created.
+
+Creating Index ON 'INBOX FROM USERS'
+
+Index created.
+
+Creating Index ON 'INBOX TO USERS'
+
+Index created.
+
+Creating Index ON 'INBOX QUESTIONNAIRE'
+
+Index created.
+
+Creating Index ON 'INBOX OBJECTIVE'
+
+Index created.
+
+Creating Index ON 'REPORT_GROUPS'
+
+Index created.
+
+Creating Index ON 'REPORT_GROUPS'
+
+Index created.
+
+Creating Index ON 'PREFERENCE_GROUPS'
+
+Index created.
+
+Creating Index ON 'PREFERENCE_GROUPS'
+
+Index created.
+
+Creating Index ON 'POPULATION_GROUPS'
+
+Index created.
+
+Creating Index ON 'POPULATION_GROUPS'
+
+Index created.
+
+Creating Primary Key on 'QUE_WF_PARTICIPANTS'
+
+Table altered.
+
+
+Table altered.
+
+Creating Primary Key on 'HELP_TEXT_ITEMS'
+
+Table altered.
+
+Creating Primary Key on 'CHART_COLUMN_ATTRIBUTES'
+
+Table altered.
+
+Creating Primary Key on 'OBJECTIVE_DEFINITIONS'
+
+Table altered.
+
+Creating Primary Key on 'OBJECTIVE_SETS'
+
+Table altered.
+
+Creating Primary Key on 'PERFORMANCE_MANAGERS'
+
+Table altered.
+
+Creating Primary Key on 'OBJECTIVES'
+
+Table altered.
+
+Creating Primary Key on 'OBJECTIVE_ASSESSMENTS'
+
+Table altered.
+
+Creating Primary Key on 'OBJECTIVE_ASSESSORS'
+
+Table altered.
+
+Creating Primary Key on 'PASSWORDS_HISTORY'
+
+Table altered.
+
+Creating Primary Key on 'OU_HIERARCHY'
+
+Table altered.
+
+Creating Primary Key on 'NODE_AUDITS'
+
+Table altered.
+
+Creating Primary Key on 'APP_ROLES_USERS'
+
+Table altered.
+
+Creating Primary Key on 'MODULE_DISPLAY_CONFIG_ITEMS'
+
+Table altered.
+
+Creating Primary Key on 'DISPLAY_CONFIGS'
+
+Table altered.
+
+Creating Primary Key on 'CONTENT_TYPES'
+
+Table altered.
+
+Creating Primary Key on 'AREA_ELEMENTS'
+
+Table altered.
+
+Creating Primary Key on 'MENU_ITEMS'
+
+Table altered.
+
+Creating Primary Key on 'SUBJECT_PRIMARY_ASSOCIATIONS'
+
+Table altered.
+
+Creating Primary Key on 'LOOKUP_TYPES'
+
+Table altered.
+
+Creating Primary Key on 'NODE_ITEMS'
+
+Table altered.
+
+Creating Primary Key on 'ROLES_SECURITY_DOMAINS'
+
+Table altered.
+
+Creating Primary Key on 'DISPLAY_ITEM_REPORTS'
+
+Table altered.
+
+Creating Primary Key on 'SECURITY_DOMAINS'
+
+Table altered.
+
+Creating Primary Key on 'REPORT_COLUMNS'
+
+Table altered.
+
+Creating Primary Key on 'COLUMN_DISPLAY_IMAGES'
+
+Table altered.
+
+Creating Primary Key on 'REPORTS'
+
+Table altered.
+
+Creating Primary Key on 'AREAS'
+
+Table altered.
+
+Creating Primary Key on 'RULES'
+
+Table altered.
+
+Creating Primary Key on 'POSITIONS_HIERARCHY'
+
+Table altered.
+
+Creating Primary Key on 'POPULATION_CRITERIAS'
+
+Table altered.
+
+Creating Primary Key on 'DISPLAY_CONFIG_ITEMS'
+
+Table altered.
+
+Creating Primary Key on 'POSITIONS_HIERARCHY_INC'
+
+Table altered.
+
+Creating Primary Key on 'EXTERNAL_REF_MAPPINGS'
+
+Table altered.
+
+Creating Primary Key on 'CALCULATIONS'
+
+Table altered.
+
+Creating Primary Key on 'CALCULATION_EXPRESSIONS'
+
+Table altered.
+
+Creating Primary Key on 'QUESTION_GROUPS'
+
+Table altered.
+
+Creating Primary Key on 'QUE_WORKFLOWS'
+
+Table altered.
+
+Creating Primary Key on 'GROUPS'
+
+Table altered.
+
+Creating Primary Key on 'QUE_DEFINITIONS'
+
+Table altered.
+
+Creating Primary Key on 'POPULATIONS'
+
+Table altered.
+
+Creating Primary Key on 'USERS'
+
+Table altered.
+
+Creating Primary Key on 'PREFERENCES'
+
+Table altered.
+
+Creating Primary Key on 'SECURITY_DOMAINS_USERS'
+
+Table altered.
+
+Creating Primary Key on 'ROLES'
+
+Table altered.
+
+Creating Primary Key on 'METRICS'
+
+Table altered.
+
+Creating Primary Key on 'PERFORMANCE_REVIEWS'
+
+Table altered.
+
+Creating Primary Key on 'QUESTIONNAIRES'
+
+Table altered.
+
+Creating Primary Key on 'LOOKUP_VALUES'
+
+Table altered.
+
+Creating Primary Key on 'SUBJECTS'
+
+Table altered.
+
+Creating Primary Key on 'QUE_DEFINITION_MODELS'
+
+Table altered.
+
+Creating Primary Key on 'ORGANIZATION_UNITS'
+
+Table altered.
+
+Creating Primary Key on 'LOGINS'
+
+Table altered.
+
+Creating Primary Key on 'SECURITY_RULES'
+
+Table altered.
+
+Creating Primary Key on 'POSITION_ASSOCIATIONS'
+
+Table altered.
+
+Creating Primary Key on 'CONFIGS'
+
+Table altered.
+
+Creating Primary Key on 'NODE_DAS'
+
+Table altered.
+
+Creating Primary Key on 'MENU_SECTIONS'
+
+Table altered.
+
+Creating Primary Key on 'PERMITS_ROLES'
+
+Table altered.
+
+Creating Primary Key on 'POSITIONS'
+
+Table altered.
+
+Creating Primary Key on 'SESSION_LOGS'
+
+Table altered.
+
+Creating Primary Key on 'PERMITS'
+
+Table altered.
+
+Creating Primary Key on 'NODE_DA_FILES'
+
+Table altered.
+
+Creating Primary Key on 'OU_HIERARCHY_INC'
+
+Table altered.
+
+Creating Primary Key on 'NODES'
+
+Table altered.
+
+Creating Primary Key on 'MODULES'
+
+Table altered.
+
+Creating Primary Key on 'CORE_DETAILS'
+
+Table altered.
+
+Creating Primary Key on 'SESSIONS_OPENED'
+
+Table altered.
+
+Creating Primary Key on 'PERFORMANCE_EVALUATORS'
+
+Table altered.
+
+Creating Primary Key on 'DYNAMIC_ATTRIBUTES'
+
+Table altered.
+
+Creating Primary Key on 'SUBJECT_ASSOCIATIONS'
+
+Table altered.
+
+Creating Primary Key on 'QUESTION_LINE_ITEMS'
+
+Table altered.
+
+Creating Primary Key on 'MULTI_QUESTIONS'
+
+Table altered.
+
+Creating Primary Key on 'QUESTIONS'
+
+Table altered.
+
+Creating Primary Key on 'HOME_PAGES'
+
+Table altered.
+
+Creating Primary Key on 'OBJECTIVE_ATTRIBUTES'
+
+Table altered.
+
+Creating Primary Key on 'INBOX'
+
+Table altered.
+
+Creating Primary Key on 'QUE_XML_DATA'
+
+Table altered.
+
+Creating Primary Key on 'NODE_ITEM_BLOBS'
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+Creating Primary Key on 'REPORT_GROUPS'
+
+Table altered.
+
+Creating Unique Key on 'AREA_ELEMENTS'
+
+Table altered.
+
+Creating Unique Key on 'LOOKUP_TYPES'
+
+Table altered.
+
+Creating Unique Key on 'SECURITY_DOMAINS'
+
+Table altered.
+
+Creating Unique Key on 'AREAS'
+
+Table altered.
+
+Creating Unique Key on 'EXTERNAL_REF_MAPPINGS'
+
+Table altered.
+
+Creating Unique Key on 'QUE_DEFINITIONS'
+
+Table altered.
+
+Creating Unique Key on 'PREFERENCES'
+
+Table altered.
+
+Creating Unique Key on 'ROLES'
+
+Table altered.
+
+Creating Unique Key on 'PERFORMANCE_REVIEWS'
+
+Table altered.
+
+Creating Unique Key on 'LOGINS'
+
+Table altered.
+
+Creating Unique Key on 'SECURITY_RULES'
+
+Table altered.
+
+Creating Unique Key on 'DYNAMIC_ATTRIBUTES'
+
+Table altered.
+
+Creating Unique Key on 'NODE_ITEMS'
+
+Table altered.
+
+Creating Unique Key on 'GROUPS'
+
+Table altered.
+
+Creating Unique Key on 'QUE_WORKFLOWS'
+
+Table altered.
+
+Creating Check Constraint on 'AREA_ELEMENTS'
+
+Table altered.
+
+Creating Check Constraint on 'NODE_ITEMS'
+
+Table altered.
+
+Creating Check Constraint on 'NODE_ITEMS'
+
+Table altered.
+
+Creating Check Constraint on 'SECURITY_DOMAINS'
+
+Table altered.
+
+Creating Check Constraint on 'ROLES'
+
+Table altered.
+
+Creating Check Constraint on 'ROLES'
+
+Table altered.
+
+Creating Check Constraint on 'ROLES'
+
+Table altered.
+
+Creating Check Constraint on 'ROLES'
+
+Table altered.
+
+Creating Check Constraint on 'QUESTIONNAIRES'
+
+Table altered.
+
+Creating Check Constraint on 'PERMITS'
+
+Table altered.
+
+Creating Check Constraint on 'NODES'
+
+Table altered.
+
+Creating Foreign Key on 'QUE_WORKFLOWS'
+
+Table altered.
+
+Creating Foreign Key on 'CHART_COLUMN_ATTRIBUTES'
+
+Table altered.
+
+Creating Foreign Key on 'REPORT_GROUPS'
+
+Table altered.
+
+Creating Foreign Key on 'REPORT_GROUPS'
+
+Table altered.
+
+Creating Foreign Key on 'PERFORMANCE_MANAGERS'
+
+Table altered.
+
+Creating Foreign Key on 'PERFORMANCE_MANAGERS'
+
+Table altered.
+
+Creating Foreign Key on 'PERFORMANCE_MANAGERS'
+
+Table altered.
+
+Creating Foreign Key on 'HELP_TEXT_ITEMS'
+
+Table altered.
+
+Creating Foreign Key on 'PASSWORDS_HISTORY'
+
+Table altered.
+
+Creating Foreign Key on 'OU_HIERARCHY'
+
+Table altered.
+
+Creating Foreign Key on 'OU_HIERARCHY'
+
+Table altered.
+
+Creating Foreign Key on 'NODE_AUDITS'
+
+Table altered.
+
+Creating Foreign Key on 'NODE_AUDITS'
+
+Table altered.
+
+Creating Foreign Key on 'NODE_AUDITS'
+
+Table altered.
+
+Creating Foreign Key on 'APP_ROLES_USERS'
+
+Table altered.
+
+Creating Foreign Key on 'APP_ROLES_USERS'
+
+Table altered.
+
+Creating Foreign Key on 'MODULE_DISPLAY_CONFIG_ITEMS'
+
+Table altered.
+
+Creating Foreign Key on 'MODULE_DISPLAY_CONFIG_ITEMS'
+
+Table altered.
+
+Creating Foreign Key on 'AREAS'
+
+Table altered.
+
+Creating Foreign Key on 'AREAS'
+
+Table altered.
+
+Creating Foreign Key on 'AREA_ELEMENTS'
+
+Table altered.
+
+Creating Foreign Key on 'AREA_ELEMENTS'
+
+Table altered.
+
+Creating Foreign Key on 'MENU_ITEMS'
+
+Table altered.
+
+Creating Foreign Key on 'MENU_ITEMS'
+
+Table altered.
+
+Creating Foreign Key on 'MENU_ITEMS'
+
+Table altered.
+
+Creating Foreign Key on 'MENU_ITEMS'
+
+Table altered.
+
+Creating Foreign Key on 'SUBJECT_PRIMARY_ASSOCIATIONS'
+
+Table altered.
+
+Creating Foreign Key on 'SUBJECT_PRIMARY_ASSOCIATIONS'
+
+Table altered.
+
+Creating Foreign Key on 'SUBJECT_PRIMARY_ASSOCIATIONS'
+
+Table altered.
+
+Creating Foreign Key on 'SUBJECT_PRIMARY_ASSOCIATIONS'
+
+Table altered.
+
+Creating Foreign Key on 'NODE_ITEMS'
+
+Table altered.
+
+Creating Foreign Key on 'NODE_ITEMS'
+
+Table altered.
+
+Creating Foreign Key on 'NODE_ITEMS'
+
+Table altered.
+
+Creating Foreign Key on 'ROLES_SECURITY_DOMAINS'
+
+Table altered.
+
+Creating Foreign Key on 'ROLES_SECURITY_DOMAINS'
+
+Table altered.
+
+Creating Foreign Key on 'DISPLAY_ITEM_REPORTS'
+
+Table altered.
+
+Creating Foreign Key on 'DISPLAY_ITEM_REPORTS'
+
+Table altered.
+
+Creating Foreign Key on 'SECURITY_DOMAINS'
+
+Table altered.
+
+Creating Foreign Key on 'REPORT_COLUMNS'
+
+Table altered.
+
+Creating Foreign Key on 'REPORT_COLUMNS'
+
+Table altered.
+
+Creating Foreign Key on 'REPORT_COLUMNS'
+
+Table altered.
+
+Creating Foreign Key on 'REPORT_COLUMNS'
+
+Table altered.
+
+Creating Foreign Key on 'COLUMN_DISPLAY_IMAGES'
+
+Table altered.
+
+Creating Foreign Key on 'COLUMN_DISPLAY_IMAGES'
+
+Table altered.
+
+Creating Foreign Key on 'REPORTS'
+
+Table altered.
+
+Creating Foreign Key on 'REPORTS'
+
+Table altered.
+
+Creating Foreign Key on 'REPORTS'
+
+Table altered.
+
+Creating Foreign Key on 'REPORTS'
+
+Table altered.
+
+Creating Foreign Key on 'REPORTS'
+
+Table altered.
+
+
+Table altered.
+
+Creating Foreign Key on 'AREAS'
+
+Table altered.
+
+Creating Foreign Key on 'RULES'
+
+Table altered.
+
+Creating Foreign Key on 'POSITIONS_HIERARCHY'
+
+Table altered.
+
+Creating Foreign Key on 'POSITIONS_HIERARCHY'
+
+Table altered.
+
+Creating Foreign Key on 'POPULATION_CRITERIAS'
+
+Table altered.
+
+Creating Foreign Key on 'POPULATION_CRITERIAS'
+
+Table altered.
+
+Creating Foreign Key on 'DISPLAY_CONFIG_ITEMS'
+
+Table altered.
+
+Creating Foreign Key on 'DISPLAY_CONFIG_ITEMS'
+
+Table altered.
+
+Creating Foreign Key on 'POSITIONS_HIERARCHY_INC'
+
+Table altered.
+
+Creating Foreign Key on 'POSITIONS_HIERARCHY_INC'
+
+Table altered.
+
+Creating Foreign Key on 'EXTERNAL_REF_MAPPINGS'
+
+Table altered.
+
+Creating Foreign Key on 'QUE_WORKFLOWS'
+
+Table altered.
+
+Creating Foreign Key on 'QUE_WORKFLOWS'
+
+Table altered.
+
+Creating Foreign Key on 'QUE_WORKFLOWS'
+
+Table altered.
+
+Creating Foreign Key on 'QUE_WORKFLOWS'
+
+Table altered.
+
+Creating Foreign Key on 'POPULATIONS'
+
+Table altered.
+
+Creating Foreign Key on 'USERS'
+
+Table altered.
+
+Creating Foreign Key on 'PREFERENCES'
+
+Table altered.
+
+Creating Foreign Key on 'SECURITY_DOMAINS_USERS'
+
+Table altered.
+
+Creating Foreign Key on 'SECURITY_DOMAINS_USERS'
+
+Table altered.
+
+Creating Foreign Key on 'NODE_ITEMS'
+
+Table altered.
+
+Creating Foreign Key on 'METRICS'
+
+Table altered.
+
+Creating Foreign Key on 'METRICS'
+
+Table altered.
+
+Creating Foreign Key on 'QUESTIONNAIRES'
+
+Table altered.
+
+Creating Foreign Key on 'QUESTIONNAIRES'
+
+Table altered.
+
+Creating Foreign Key on 'QUESTIONNAIRES'
+
+Table altered.
+
+Creating Foreign Key on 'QUESTIONNAIRES'
+
+Table altered.
+
+Creating Foreign Key on 'LOOKUP_VALUES'
+
+Table altered.
+
+Creating Foreign Key on 'SUBJECTS'
+
+Table altered.
+
+Creating Foreign Key on 'SUBJECTS'
+
+Table altered.
+
+Creating Foreign Key on 'SUBJECTS'
+
+Table altered.
+
+Creating Foreign Key on 'QUE_DEFINITION_MODELS'
+
+Table altered.
+
+Creating Foreign Key on 'ORGANIZATION_UNITS'
+
+Table altered.
+
+Creating Foreign Key on 'ORGANIZATION_UNITS'
+
+Table altered.
+
+Creating Foreign Key on 'LOGINS'
+
+Table altered.
+
+Creating Foreign Key on 'SECURITY_RULES'
+
+Table altered.
+
+Creating Foreign Key on 'SECURITY_RULES'
+
+Table altered.
+
+Creating Foreign Key on 'SECURITY_RULES'
+
+Table altered.
+
+Creating Foreign Key on 'POSITION_ASSOCIATIONS'
+
+Table altered.
+
+Creating Foreign Key on 'POSITION_ASSOCIATIONS'
+
+Table altered.
+
+Creating Foreign Key on 'POSITION_ASSOCIATIONS'
+
+Table altered.
+
+Creating Foreign Key on 'NODE_DAS'
+
+Table altered.
+
+Creating Foreign Key on 'NODE_DAS'
+
+Table altered.
+
+Creating Foreign Key on 'NODE_DAS'
+
+Table altered.
+
+Creating Foreign Key on 'MENU_SECTIONS'
+
+Table altered.
+
+Creating Foreign Key on 'PERMITS_ROLES'
+
+Table altered.
+
+Creating Foreign Key on 'PERMITS_ROLES'
+
+Table altered.
+
+Creating Foreign Key on 'USER_NODE_DOMAIN_PERMITS'
+
+Table altered.
+
+Creating Foreign Key on 'USER_NODE_DOMAIN_PERMITS'
+
+Table altered.
+
+Creating Foreign Key on 'USER_NODE_DOMAIN_PERMITS'
+
+Table altered.
+
+Creating Foreign Key on 'POSITIONS'
+
+Table altered.
+
+Creating Foreign Key on 'POSITIONS'
+
+Table altered.
+
+Creating Foreign Key on 'POSITIONS'
+
+Table altered.
+
+Creating Foreign Key on 'SESSION_LOGS'
+
+Table altered.
+
+Creating Foreign Key on 'NODE_DA_FILES'
+
+Table altered.
+
+Creating Foreign Key on 'OU_HIERARCHY_INC'
+
+Table altered.
+
+Creating Foreign Key on 'OU_HIERARCHY_INC'
+
+Table altered.
+
+Creating Foreign Key on 'SESSIONS_OPENED'
+
+Table altered.
+
+Creating Foreign Key on 'SESSIONS_OPENED'
+
+Table altered.
+
+Creating Foreign Key on 'PERFORMANCE_EVALUATORS'
+
+Table altered.
+
+Creating Foreign Key on 'PERFORMANCE_EVALUATORS'
+
+Table altered.
+
+Creating Foreign Key on 'PERFORMANCE_EVALUATORS'
+
+Table altered.
+
+Creating Foreign Key on 'DYNAMIC_ATTRIBUTES'
+
+Table altered.
+
+Creating Foreign Key on 'DYNAMIC_ATTRIBUTES'
+
+Table altered.
+
+Creating Foreign Key on 'SUBJECT_ASSOCIATIONS'
+
+Table altered.
+
+Creating Foreign Key on 'SUBJECT_ASSOCIATIONS'
+
+Table altered.
+
+Creating Foreign Key on 'SUBJECT_ASSOCIATIONS'
+
+Table altered.
+
+Creating Foreign Key on 'OBJECTIVE_SETS'
+
+Table altered.
+
+Creating Foreign Keys on 'OBJECTIVE_SETS'
+
+Table altered.
+
+Creating Foreign Keys on 'OBJECTIVE_SETS'
+
+Table altered.
+
+Creating Foreign Keys on 'OBJECTIVE_SETS'
+
+Table altered.
+
+Creating Foreign Key on 'OBJECTIVES'
+
+Table altered.
+
+Creating Foreign Key on 'OBJECTIVES'
+
+Table altered.
+
+Creating Foreign Keys on 'OBJECTIVES'
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+Creating Foreign Keys on 'OBJECTIVE_ASSESSEMENTS'
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+Creating Foreign Keys on 'OBJECTIVE_ASSESSORS'
+
+Table altered.
+
+
+Table altered.
+
+Creating Foreign Key on 'OBJECTIVE_ATTRIBUTES'
+
+Table altered.
+
+Creating Foreign Key on 'OBJECTIVE_ATTRIBUTES'
+
+Table altered.
+
+Creating Foreign Key on 'MULTI_QUESTIONS'
+
+Table altered.
+
+Creating Foreign Key on 'QUESTIONS'
+
+Table altered.
+
+Creating Foreign Key on 'QUESTIONS'
+
+Table altered.
+
+Creating Foreign Key on 'QUESTIONS'
+
+Table altered.
+
+Creating Foreign Key on 'QUESTION_GROUPS'
+
+Table altered.
+
+Creating Foreign Key on 'QUESTION_LINE_ITEMS'
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+Creating Primary Key on 'DISPLAY_CONFIG_ROLES'
+
+Table altered.
+
+Creating Primary Key on 'DISPLAY_CONFIG_GROUPS'
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+Creating Foreign Key on 'DISPLAY_CONFIG_ROLES'
+
+Table altered.
+
+Creating Foreign Key on 'DISPLAY_CONFIG_ROLES'
+
+Table altered.
+
+Creating Foreign Key on 'DISPLAY_CONFIG_GROUPS'
+
+Table altered.
+
+Creating Foreign Key on 'DISPLAY_CONFIG_GROUPS'
+
+Table altered.
+
+Creating Foreign Key on 'CALCULATION_EXPRESSIONS'
+
+Table altered.
+
+Creating Foreign Key on 'CALCULATION_EXPRESSIONS'
+
+Table altered.
+
+Creating Foreign Key on 'CALCULATION_EXPRESSIONS'
+
+Table altered.
+
+
+Table altered.
+
+Creating Check Constraint on 'INBOX'
+
+Table altered.
+
+Creating Foreign Key on 'INBOX FROM USER'
+
+Table altered.
+
+Creating Foreign Key on 'INBOX TO USER'
+
+Table altered.
+
+Creating Foreign Key on 'INBOX OBJECTIVES'
+
+Table altered.
+
+Creating Foreign Key on 'HOME_PAGES'
+
+Table altered.
+
+Creating Foreign Key on 'USERS'
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+Creating Primary Key on 'PREFERENCE_GROUPS'
+
+Table altered.
+
+Creating Foreign Key on 'PREFERENCE_GROUPS'
+
+Table altered.
+
+Creating Foreign Key on 'PREFERENCE_GROUPS'
+
+Table altered.
+
+Creating Primary Key on 'POPULATION_GROUPS'
+
+Table altered.
+
+Creating Foreign Key on 'POPULATION_GROUPS'
+
+Table altered.
+
+Creating Foreign Key on 'POPULATION_GROUPS'
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+Creating Sequence 'OBJECTIVE_SET_SQ'
+
+Sequence created.
+
+Creating Sequence 'OBJECTIVE_SQ'
+
+Sequence created.
+
+Creating Sequence 'REPORT_SQ'
+
+Sequence created.
+
+Creating Sequence 'REP_COLUMN_SQ'
+
+Sequence created.
+
+Creating Sequence 'QUESTIONAIR_SQ'
+
+Sequence created.
+
+Creating Sequence 'PH2_SEQ'
+
+Sequence created.
+
+Creating Sequence 'PERMIT_SQ'
+
+Sequence created.
+
+Creating Sequence 'MDCI_SQ'
+
+Sequence created.
+
+Creating Sequence 'USER_SQ'
+
+Sequence created.
+
+Creating Sequence 'CONFIG_SQ'
+
+Sequence created.
+
+Creating Sequence 'NODE_ITEM_SQ'
+
+Sequence created.
+
+Creating Sequence 'QUE_DEFINITIONS_SQ'
+
+Sequence created.
+
+Creating Sequence 'DETAILS_SQ'
+
+Sequence created.
+
+Creating Sequence 'COL_VAL_SQ'
+
+Sequence created.
+
+Creating Sequence 'CRITERIA_SQ'
+
+Sequence created.
+
+Creating Sequence 'WF_SQ'
+
+Sequence created.
+
+Creating Sequence 'MAPPINGS_SQ'
+
+Sequence created.
+
+Creating Sequence 'POPULATION_SQ'
+
+Sequence created.
+
+Creating Sequence 'ROLE_SQ'
+
+Sequence created.
+
+Creating Sequence 'DA_SQ'
+
+Sequence created.
+
+Creating Sequence 'PASS_HIST_ID'
+
+Sequence created.
+
+Creating Sequence 'PERFORMER_SQ'
+
+Sequence created.
+
+Creating Sequence 'MENUITEM_SQ'
+
+Sequence created.
+
+Creating Sequence 'LOOKUPVALUE_SQ'
+
+Sequence created.
+
+Creating Sequence 'SEC_RULE_SQ'
+
+Sequence created.
+
+Creating Sequence 'NODE_SQ'
+
+Sequence created.
+
+Creating Sequence 'ASSOC_SQ'
+
+Sequence created.
+
+Creating Sequence 'PREFERENCE_SQ'
+
+Sequence created.
+
+Creating Sequence 'SECUREDOMAIN_SQ'
+
+Sequence created.
+
+Creating Sequence 'DA_REF_SQ'
+
+Sequence created.
+
+Creating Sequence 'SEC_ATTR_SQ'
+
+Sequence created.
+
+Creating Sequence 'QUE_MODEL_SQ'
+
+Sequence created.
+
+Creating Sequence 'HOMEPAGE_SQ'
+
+Sequence created.
+
+Creating Sequence 'CALCULATION_SQ'
+
+Sequence created.
+
+Creating Sequence 'ASSESSOR_SQ'
+
+Sequence created.
+
+Creating Sequence 'MESSAGES_SQ'
+
+Sequence created.
+
+Creating Sequence 'GROUPS_SQ'
+
+Sequence created.
+
+Creating Sequence 'AUDITS_SQ'
+
+Sequence created.
+
+Creating Sequence 'AUDITS_SQ'
+
+Sequence created.
+
+Creating Sequence 'DASHBOARDS_SQ'
+
+Sequence created.
+
+Creating Sequence 'SEARCH_TERMS_SQ'
+
+Sequence created.
+

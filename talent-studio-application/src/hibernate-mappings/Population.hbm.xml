@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+    <!--
+        Created by the Middlegen Hibernate plugin 2.1
+
+        http://boss.bekk.no/boss/middlegen/
+        http://www.hibernate.org/
+    -->
+
+    <class name="com.zynap.talentstudio.analysis.populations.Population"
+           table="POPULATIONS"
+           dynamic-update="true"
+           dynamic-insert="true">
+
+        <id name="id"
+            type="long"
+            column="ID">
+            <meta attribute="use-in-equals">true</meta>
+            <generator class="sequence">
+                <param name="sequence">POPULATION_SQ</param>
+            </generator>
+        </id>
+
+        <property
+                name="type"
+                type="java.lang.String"
+                column="TYPE"
+                length="12"
+                />
+
+        <property
+                name="userId"
+                type="java.lang.Long"
+                column="USER_ID"
+                />
+        <property
+                name="activeCriteria"
+                type="java.lang.Integer"
+                column="ACTIVE_CRITERIA"
+                />
+        <property
+                name="label"
+                type="java.lang.String"
+                column="LABEL"
+                length="100"
+                />
+        <property
+                name="scope"
+                type="java.lang.String"
+                column="SCOPE"
+                length="12"
+                />
+        <property
+                name="description"
+                type="java.lang.String"
+                column="DESCRIPTION"
+                length="1024"
+                />
+        <property
+                name="compiledSql"
+                type="java.lang.String"
+                column="COMPILED_SQL"
+                length="2000"
+                />
+
+        <!-- Associations -->
+
+        <!-- bi-directional one-to-many association to PopulationCriteria -->
+        <list name="populationCriterias"
+              lazy="true"
+              inverse="true"
+              cascade="all-delete-orphan"
+              outer-join="true"
+              batch-size="50"
+                >
+            <key column="POPULATION_ID"/>
+            <index column="POSITION"/>
+            <one-to-many class="com.zynap.talentstudio.analysis.populations.PopulationCriteria"/>
+        </list>
+
+        <set name="groups"
+             table="POPULATION_GROUPS"
+             cascade="none"
+             outer-join="true"
+             lazy="true"
+             batch-size="50">
+            <key>
+                <column name="POPULATION_ID"/>
+            </key>
+            <many-to-many class="com.zynap.talentstudio.common.groups.Group" column="GROUP_ID"/>
+        </set>
+
+    </class>
+</hibernate-mapping>
