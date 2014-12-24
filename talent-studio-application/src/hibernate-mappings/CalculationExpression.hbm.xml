@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+
+    <class name="com.zynap.talentstudio.calculations.Expression"
+           table="CALCULATION_EXPRESSIONS"
+           dynamic-update="true"
+           dynamic-insert="true"
+            >
+
+        <cache usage="read-write"/>
+
+        <id
+                name="id"
+                type="java.lang.Long"
+                column="ID"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <generator class="sequence">
+                <param name="sequence">CALCULATION_SQ</param>
+            </generator>
+        </id>
+
+        <property name="value"
+                  type="java.lang.String"
+                  column="VALUE"
+                  length="50"
+                />
+
+        <property name="refValue"
+                  type="java.lang.String"
+                  column="REF_VALUE"
+                  length="50"
+                />
+
+        <property name="format"
+                  type="int"
+                  column="FORMAT"
+                  length="10"
+                />
+
+        <property name="operator"
+                  type="java.lang.String"
+                  column="OPERATOR"
+                  length="3"
+                />
+
+        <property name="leftBracket"
+                  type="java.lang.String"
+                  column="LEFT_BRACKET"
+                  length="1"
+                />
+
+        <property name="rightBracket"
+                  type="java.lang.String"
+                  column="RIGHT_BRACKET"
+                  length="1"
+                />
+
+        <property name="index"
+                  type="int"
+                  column="POSITION"
+                  length="10"
+                />        
+
+        <property name="questionnaireWorkflowId"
+                  type="java.lang.Long"
+                  column="QUE_WF_ID"
+                />
+
+        <property name="role"
+                  type="java.lang.String"
+                  column="ROLE"
+                />
+
+        <many-to-one name="calculation"
+                     class="com.zynap.talentstudio.calculations.Calculation"
+                     cascade="none">
+            <column name="CALCULATION_ID"/>
+        </many-to-one>
+
+        <many-to-one name="attribute"
+                     class="com.zynap.talentstudio.organisation.attributes.DynamicAttribute"
+                     cascade="none">
+            <column name="ATTRIBUTE"/>
+        </many-to-one>
+
+        <many-to-one name="metric"
+                     class="com.zynap.talentstudio.analysis.metrics.Metric"
+                     cascade="none">
+            <column name="METRIC"/>
+        </many-to-one>
+
+    </class>
+
+</hibernate-mapping>

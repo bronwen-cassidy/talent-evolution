@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+    <xs:simpleType name="da">
+        <xs:restriction base="xs:string"></xs:restriction>
+    </xs:simpleType>
+
+    <xs:element name="commands">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="command" minOccurs="1" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:choice>
+                            <xs:element ref="organisationUnit" minOccurs="1" maxOccurs="unbounded"/>
+                            <xs:element ref="position" minOccurs="1" maxOccurs="unbounded"/>
+                            <xs:element ref="person" minOccurs="1" maxOccurs="unbounded"/>
+                            <xs:element ref="portfolioItem" minOccurs="1" maxOccurs="unbounded"/>
+                            <xs:element ref="questionnaire" minOccurs="1" maxOccurs="unbounded"/>
+                            <xs:element ref="questionnaireWorkflow" minOccurs="1" maxOccurs="unbounded"/>
+                        </xs:choice>
+
+                        <xs:attribute name="action" use="required">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:NMTOKEN">
+                                    <xs:enumeration value="create"/>
+                                    <xs:enumeration value="find"/>
+                                    <xs:enumeration value="exists"/>
+                                    <xs:enumeration value="findAll"/>
+                                    <xs:enumeration value="delete"/>
+                                    <xs:enumeration value="update"/>
+                                    <xs:enumeration value="setExternalId"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:attribute>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="organisationUnit">
+        <xs:complexType>
+            <xs:all>
+                <xs:element name="id" type="xs:string" minOccurs="0"/>
+                <xs:element name="label" type="xs:string" minOccurs="0"/>
+                <xs:element name="comments" type="xs:string" minOccurs="0"/>
+                <xs:element ref="parent" minOccurs="0"/>
+            </xs:all>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="position">
+        <xs:complexType>
+            <xs:all>
+                <xs:element name="id" type="xs:string" minOccurs="0"/>
+                <xs:element name="title" type="xs:string" minOccurs="0"/>
+                <xs:element name="comments" type="xs:string" minOccurs="0"/>
+                <xs:element ref="organisationUnit" minOccurs="0" />
+                <xs:element name="portfolioItems" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element ref="portfolioItem" minOccurs="1" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                #foreach ($posAttr in ${positionAttributes})
+                <xs:element name="${posAttr.externalRefLabel}" minOccurs="0" #if (${posAttr.selectionType}) >
+                    <xs:simpleType>
+                        <xs:restriction base="da">
+                        #foreach ($val in ${posAttr.refersToType.lookupValues})
+                        <xs:enumeration value="${val.valueId}"/>
+                        #end
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                    #else
+                    type="da" />
+                    #end
+                #end
+                <xs:element ref="sourceAssociations" minOccurs="0"/>
+            </xs:all>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="sourceAssociations">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ptpAssociation" minOccurs="1" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ptpAssociation">
+        <xs:complexType>
+            <xs:all>
+                <xs:element name="target" minOccurs="0">
+                    <xs:complexType>
+                        <xs:all>
+                            <xs:element name="id" type="xs:string" minOccurs="1"/>
+                        </xs:all>
+                    </xs:complexType>
+                </xs:element>
+            </xs:all>
+            <xs:attribute name="type">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        #foreach($posAssocValue in ${positionsAssociationValues})
+                        <xs:enumeration value="${posAssocValue.valueId}"/>
+                        #end
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="person">
+        <xs:complexType>
+            <xs:all>
+                <xs:element name="id" minOccurs="0" type="xs:string"/>
+                <xs:element name="dateOfBirth" minOccurs="0" type="xs:date"/>
+                <xs:element name="firstName" minOccurs="0" type="xs:string"/>
+                <xs:element name="title" minOccurs="0" type="xs:string"/>
+                <xs:element name="prefGivenName" minOccurs="0" type="xs:string"/>
+                <xs:element name="secondName" minOccurs="0" type="xs:string"/>
+                <xs:element name="telephone" minOccurs="0" type="xs:string"/>
+                <xs:element name="email" minOccurs="0" type="xs:string"/>
+                #foreach ($subAttr in ${subjectAttributes})
+                <xs:element name="${subAttr.externalRefLabel}" minOccurs="0" #if (${subAttr.selectionType})>
+                    <xs:simpleType>
+                        <xs:restriction base="da">
+                        #foreach ($val in ${subAttr.refersToType.lookupValues})
+                            <xs:enumeration value="${val.valueId}"/>
+                        #end
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                    #else
+                    type="da"/>
+                    #end
+                #end
+                <xs:element name="subjectAssociations" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element ref="stpAssociation" minOccurs="1" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:all>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="stpAssociation">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="target" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="id" type="xs:string" minOccurs="1"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="type">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        #foreach($subjectAssocVal in ${subjectAssociationValues})
+                        <xs:enumeration value="${subjectAssocVal.valueId}"/>
+                        #end
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="portfolioItem">
+        <xs:complexType>
+            <xs:all>
+                <xs:element name="id" type="xs:string" minOccurs="0"/>
+                <xs:element name="label" type="xs:string" minOccurs="0"/>
+                <xs:element name="comments" type="xs:string" minOccurs="0"/>
+                <xs:element ref="node" minOccurs="0"/>
+                <xs:element ref="contentType" minOccurs="0"/>
+                <xs:element ref="contentSubType" minOccurs="0"/>
+                <xs:element name="blobValue" minOccurs="0">
+                    <xs:complexType>
+                        <xs:attribute name="ref" type="xs:integer"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element ref="scope" minOccurs="0"/>
+                <xs:element name="origFileName" type="xs:string" minOccurs="0"/>
+                <xs:element name="fileExtension" type="xs:string" minOccurs="0"/>
+            </xs:all>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="contentType">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:NMTOKEN">
+                            #foreach($contentType in ${contentTypes})
+                            <xs:enumeration value="${contentType.id}"><xs:annotation><xs:documentation>${contentType.label}</xs:documentation></xs:annotation></xs:enumeration>
+                            #end
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="contentSubType">
+        <xs:simpleType>
+            <xs:restriction base="xs:NMTOKEN">
+                <xs:enumeration value="UPLOAD"/>
+                <xs:enumeration value="TEXT"/>
+                <xs:enumeration value="URL"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="scope">
+        <xs:simpleType>
+            <xs:restriction base="xs:NMTOKEN">
+                <xs:enumeration value="RESTRICTED"/>
+                <xs:enumeration value="PRIVATE"/>
+                <xs:enumeration value="PUBLIC"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="node">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:string" minOccurs="1" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="parent">
+        <xs:complexType>
+            <xs:all>
+                <xs:element name="id" type="xs:string" minOccurs="1"/>
+            </xs:all>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- validation for questionnaire xml files -->
+    <xs:element name="questionnaire">
+       <xs:complexType>
+            <xs:all>
+                <xs:element ref="subjectId" minOccurs="1"/>
+                <xs:element ref="questionnaireWorkflowId" minOccurs="1"/>
+                <xs:element ref="questionnaireWorkflow" minOccurs="1" />
+                #foreach($question in ${questions})
+                    <xs:element name="${question.externalRefLabel}" type="xs:string" minOccurs="0"/>
+                #end
+             </xs:all>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="subjectId">
+         <xs:simpleType>
+        <xs:restriction base="xs:NMTOKEN">
+            #foreach($subject in ${subjects})
+                <xs:enumeration value="${subject.id}"/>
+            #end
+        </xs:restriction>
+         </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="questionnaireWorkflowId">
+         <xs:simpleType>
+        <xs:restriction base="xs:NMTOKEN">
+            #foreach($workflow in ${workflows})
+                <xs:enumeration value="${workflow.id}"/>
+            #end
+        </xs:restriction>
+         </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="questionnaireWorkflow">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" minOccurs="1">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:NMTOKEN">
+                            #foreach($workflow in ${workflows})
+                                <xs:enumeration value="${workflow.id}"/>
+                            #end
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+    <questionnaire name="1. Personal Profile" title="Personal Profile">
+        <group name="Personal Profile">
+
+            <question id="1" type="TextBox" name="Development programmes completed" title="Development programmes completed" length="50"/>
+
+            <question id="2" type="Text" name="External Coach" title="External Coach"/>
+
+            <question id="3" type="Text" name="Internal Mentor" title="Internal Mentor"/>
+
+            <question id="4" type="TextBox" name="Current Responsibilities" title="Current Responsibilities" length="50"/>
+
+            <question id="5" type="TextBox" name="Brief Career History" title="Brief Career Historys" length="30"/>
+
+            <question id="6" type="TextBox" name="Education" title="Education" length="70"/>
+
+            <question id="7" type="Select" name="This years performance rating" title="This years performance rating">
+                <answer value="1" text="1"></answer>
+                <answer value="2" text="2"></answer>
+                <answer value="3" text="3"></answer>
+                <answer value="3+" text="3+"></answer>
+                <answer value="4" text="4"></answer>
+                <answer value="4+" text="4+"></answer>
+                <answer value="5" text="5"></answer>
+            </question>
+
+
+            <question id="8" type="Select" name="Last years performance rating" title="Last years performance rating">
+                <answer value="1" text="1"></answer>
+                <answer value="2" text="2"></answer>
+                <answer value="3" text="3"></answer>
+                <answer value="3+" text="3+"></answer>
+                <answer value="4" text="4"></answer>
+                <answer value="4+" text="4+"></answer>
+                <answer value="5" text="5"></answer>
+            </question>
+
+
+            <question id="9" type="Select" name="Risk of Leaving" title="Risk of Leaving">
+                <answer value="High" text="High"></answer>
+                <answer value="Medium" text="Medium"></answer>
+                <answer value="Low" text="Low"></answer>
+            </question>
+        </group>
+    </questionnaire>
+</xml>

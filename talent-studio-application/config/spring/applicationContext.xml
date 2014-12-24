@@ -1,0 +1,1079 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+<!--
+  - Root application Application context definition for talentstudio's business layer.
+  - Contains references to the datasource defined in applicationContext-jdbc.xml
+  - and the hibernate SessionFactory defined in applicationContext-hibernate.xml.
+ -->
+
+<beans>
+
+    <bean id="propertyConfigurerApp" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>WEB-INF/jdbc.properties</value>
+                <value>WEB-INF/mail.properties</value>
+                <value>WEB-INF/autonomy.properties</value>
+            </list>
+        </property>
+
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+         <!--SYSTEM_PROPERTIES_MODE_OVERRIDE -->        
+        <property name="systemPropertiesMode" value="2"/>
+        <property name="ignoreResourceNotFound" value="true"/>
+    </bean>
+
+    <bean id="messageResourceHandler" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+                <value>/WEB-INF/classes/clientmessages</value>
+                <value>/WEB-INF/classes/messages</value>
+            </list>
+        </property>
+    </bean>
+       
+
+    <!--=====================================================================-->
+    <!--===================  ENTITY INTERCEPTOR STUFF  ======================-->
+    <!--=====================================================================-->
+    <bean id="zynapEntityInterceptor" class="com.zynap.talentstudio.common.hibernate.ZynapEntityInterceptor"/>
+
+    <bean id="defaultInterceptorStrategy" class="com.zynap.talentstudio.common.hibernate.interceptor.strategy.DefaultInterceptorStrategy">
+        
+        <property name="auditDao" ref="auditDao"/>
+        <property name="entityTableMappings">
+            <map>
+                <entry key="com.zynap.talentstudio.organisation.OrganisationUnit" value="ORGANIZATION_UNITS"/>
+                <entry key="com.zynap.talentstudio.organisation.positions.Position" value="POSITIONS"/>
+                <entry key="com.zynap.talentstudio.organisation.subjects.Subject" value="SUBJECTS"/>
+                <entry key="com.zynap.domain.admin.User" value="USERS"/>
+                <!--<entry key="com.zynap.talentstudio.organisation.attributes.NodeExtendedAttribute" value="NODE_DAS"/>-->
+                <!--<entry key="com.zynap.talentstudio.organisation.portfolio.PortfolioItem" value="NODE_ITEMS"/>-->
+            </map>
+        </property>
+    </bean>
+
+    <bean id="nodeInterceptorStrategy" class="com.zynap.talentstudio.common.hibernate.interceptor.strategy.NodeInterceptorStrategy" parent="defaultInterceptorStrategy">
+        <property name="externalRefMappingDao" ref="externalRefMappingDao"/>        
+    </bean>
+
+    <bean id="interceptorStrategyFactory" class="com.zynap.talentstudio.common.hibernate.interceptor.InterceptorStrategyFactory">
+        <property name="strategies">
+            <map>
+                <!--<entry key="com.zynap.talentstudio.organisation.OrganisationUnit" value-ref="nodeInterceptorStrategy"/>-->
+                <entry key="com.zynap.talentstudio.organisation.positions.Position" value-ref="nodeInterceptorStrategy"/>
+                <entry key="com.zynap.talentstudio.organisation.subjects.Subject" value-ref="nodeInterceptorStrategy"/>
+                <entry key="com.zynap.domain.admin.User" value-ref="defaultInterceptorStrategy"/>                
+            </map>
+        </property>
+    </bean>
+
+    <!--=====================================================================-->
+    <!--==========================  MAIL STUFF  =============================-->
+    <!--=====================================================================-->
+    
+    <bean id="simpleMailMessage" class="org.springframework.mail.SimpleMailMessage">
+        <property name="from" value="${sender.email}"/>
+    </bean>
+
+    <bean id="questionnaireMailNotification" class="com.zynap.talentstudio.mail.MailNotification">
+        <property name="mailSender" ref="mailSender"/>
+        <property name="simpleMailMessage" ref="simpleMailMessage"/>
+        <property name="velocityEngine" ref="velocityEngine"/>
+        <property name="subject" value="Notification received to answer {0}"/>
+        <property name="messageTemplate" value="templates/questionnaireNotification.vm"/>
+        <property name="serverUrl" value="${server.url}"/>
+    </bean>
+
+    <bean id="infoFormMailNotification" parent="questionnaireMailNotification">
+        <property name="messageTemplate" value="templates/infoFormNotification.vm"/>
+    </bean>
+
+    <bean id="infoFormManagerUpdateMailNotification" parent="questionnaireMailNotification">
+        <property name="messageTemplate" value="templates/infoformManagerUpdatedNotification.vm"/>
+    </bean>
+
+    <bean id="infoFormStaffUpdateMailNotification" parent="questionnaireMailNotification">
+        <property name="messageTemplate" value="templates/infoformStaffUpdatedNotification.vm"/>
+    </bean>
+
+    <bean id="evaluateeMailNotification" parent="questionnaireMailNotification">
+        <property name="messageTemplate" value="templates/answerAppraisalNotification.vm"/>
+    </bean>
+
+    <bean id="managerAppraisalMailNotification" parent="questionnaireMailNotification">
+        <property name="messageTemplate" value="templates/startAppraisalNotification.vm"/>
+    </bean>
+
+    <!-- email notification sent by the staff member to their manager once they have reviewed their goals -->
+    <bean id="managerGoalReviewNotification" parent="questionnaireMailNotification">
+        <property name="subject" value="Goals have been reviewed"/>
+        <property name="messageTemplate" value="templates/managerGoalReview.vm"/>
+    </bean>
+
+    <!-- the email notification sent to the member of staff by their manager, once their manager has reviewed their goals -->
+    <bean id="staffGoalReviewedNotification" parent="questionnaireMailNotification">
+        <property name="subject" value="Your goals have been reviewed"/>
+        <property name="messageTemplate" value="templates/staffGoalReviewed.vm"/>
+    </bean>
+
+    <!-- notification sent to the manager once the staff member has completed the assessment of their goals -->
+    <bean id="managerGoalAssessedNotification" parent="questionnaireMailNotification">
+        <property name="subject" value="Goal assessments have been updated"/>
+        <property name="messageTemplate" value="templates/managerGoalAssessed.vm"/>
+    </bean>
+
+    <!-- notification sent to the staff member once the manager has assessed their goals -->
+    <bean id="staffGoalAssessedNotification" parent="questionnaireMailNotification">
+        <property name="subject" value="Your goal assessments have been updated"/>
+        <property name="messageTemplate" value="templates/staffGoalAssessed.vm"/>
+    </bean>
+
+    <!-- notification sent to an application user when a new item arrives in their inbox -->
+    <bean id="inboxMailNotification" parent="questionnaireMailNotification">
+        <property name="subject" value="A new item has arrived in your inbox"/>
+        <property name="messageTemplate" value="templates/newInboxItem.vm"/>
+    </bean>
+
+
+    <bean id="passwordReminderMailNotification" parent="questionnaireMailNotification">
+        <property name="subject" value="Password Reminder"/>
+        <property name="messageTemplate" value="templates/forgotPassword.vm"/>
+    </bean>
+    <!-- use a velocity template to define the contents of the email message -->
+    <bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+        <property name="velocityProperties">
+            <props>
+                <prop key="resource.loader">class</prop>
+                <prop key="class.resource.loader.class">
+                    org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+                </prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--=====================================================================-->
+    <!--===================  TRANSACTION STUFF  =============================-->
+    <!--=====================================================================-->
+    <!-- Transaction Management -->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--=====================================================================-->
+    <!--===================      MANAGERS     ===============================-->
+    <!--=====================================================================-->
+
+    <bean id="securityManagerTarget" class="com.zynap.talentstudio.security.SecurityManager">
+        <property name="securityManagerDao" ref="securityManDao"/>
+        <!--<property name="jdbcSecurityManager" ref="jdbcSecurityManager"/>-->
+    </bean>
+
+    <bean id="lookupManagerTarget" class="com.zynap.talentstudio.common.lookups.LookupManager">
+        <property name="lookupManagerDao" ref="lookupManDao"/>
+    </bean>
+
+    <bean id="roleManagerTarget" class="com.zynap.talentstudio.security.roles.RoleManager">
+        <property name="roleManagerDao" ref="roleManDao"/>
+        <property name="permitManagerDao" ref="permitManDao"/>
+    </bean>
+
+    <bean id="preferencesManagerTarget" class="com.zynap.talentstudio.preferences.PreferencesManager">
+        <property name="preferencesManagerDao" ref="prefManDao"/>
+        <property name="permitManagerDao" ref="permitManDao"/>
+    </bean>
+
+    <bean id="arenaManagerTarget" class="com.zynap.talentstudio.arenas.ArenaManager">
+        <property name="arenaManagerDao" ref="arenaManDao"/>
+        <property name="roleManager" ref="roleManager"/>
+    </bean>
+
+    <!--=====================================================================-->
+    <!--===================      SERVICES     ===============================-->
+    <!--=====================================================================-->
+
+    <bean id="helpTextServiceTarget" class="com.zynap.talentstudio.help.HelpTextService">
+        <property name="helpTextDao" ref="helpTextDao"/>
+    </bean>
+
+    <bean id="objectiveServiceTarget" class="com.zynap.talentstudio.objectives.ObjectiveService">
+        <property name="objectiveDao" ref="objectiveDao"/>        
+    </bean>
+
+    <bean id="userServiceTarget" class="com.zynap.talentstudio.security.users.UserService">
+        <property name="userDao" ref="hibUserManDao"/>
+        <property name="permitManagerDao" ref="permitManDao"/>
+        <property name="organisationUnitService" ref="organisationUnitService"/>
+    </bean>
+
+    <bean id="displayConfigServiceTarget" class="com.zynap.talentstudio.display.DisplayConfigService">
+        <property name="displayConfigDao" ref="displayConfigDao"/>
+    </bean>
+
+    <bean id="organisationUnitServiceTarget" class="com.zynap.talentstudio.organisation.OrganisationUnitService">
+        <property name="organisationUnitDao" ref="organisationUnitDao"/>
+        <property name="positionService" ref="positionService"/>
+        <property name="jdbcOrganisationDao" ref="orgUnitManDao"/>
+        <property name="permitManagerDao" ref="permitManDao"/>
+        <property name="objectiveDao" ref="objectiveDao"/>
+    </bean>
+
+    <bean id="subjectServiceTarget" class="com.zynap.talentstudio.organisation.subjects.SubjectService">
+        <property name="subjectDao" ref="hibSubjectDao"/>
+        <property name="userDao" ref="hibUserManDao"/>
+        <property name="permitManagerDao" ref="permitManDao"/>
+        <property name="populationEngine" ref="populationEngine"/>
+        <property name="analysisService" ref="analysisServiceTarget"/>
+        <property name="workflowAdapter" ref="workFlowAdapter"/>
+        <property name="questionnaireDao" ref="questionnaireDao"/>
+    </bean>
+
+    <bean id="questionnaireDefinitionTarget" class="com.zynap.talentstudio.questionnaires.QuestionnaireDefinitionService">
+        <property name="workflowAdapter" ref="workFlowAdapter"/>
+        <property name="populationEngine" ref="populationEngine"/>
+        <property name="analysisService" ref="analysisServiceTarget"/>
+        <property name="lookupManagerDao" ref="lookupManDao"/>
+        <property name="questionnaireDao" ref="questionnaireDao"/>
+        <property name="auditDao" ref="auditDao"/>
+    </bean>
+
+    <bean id="questionnaireServiceTarget" class="com.zynap.talentstudio.questionnaires.QuestionnaireService">
+        <property name="questionnaireDao" ref="questionnaireDao"/>
+        <property name="attributeDao" ref="dynamicAttrDao"/>       
+    </bean>
+
+    <bean id="performanceReviewServiceTarget" class="com.zynap.talentstudio.performance.PerformanceReviewService">
+        <property name="performanceReviewDao" ref="performanceReviewDao"/>
+        <property name="workflowAdapter" ref="workFlowAdapter"/>
+        <property name="populationEngine" ref="populationEngine"/>
+        <property name="analysisService" ref="analysisServiceTarget"/>
+        <property name="lookupManagerDao" ref="lookupManDao"/>
+        <property name="questionnaireDao" ref="questionnaireDao"/>
+    </bean>
+
+    <bean id="questionnaireWorkflowServiceTarget" class="com.zynap.talentstudio.questionnaires.QuestionnaireWorkflowService" parent="questionnaireDefinitionTarget">
+         <property name="performanceReviewService" ref="performanceReviewService"/>
+    </bean>
+
+    <bean id="positionServiceTarget" class="com.zynap.talentstudio.organisation.positions.PositionService">
+        <property name="positionDao" ref="hibPositionDao"/>
+        <property name="permitManagerDao" ref="permitManDao"/>
+        <property name="populationEngine" ref="populationEngine"/>
+        <property name="analysisService" ref="analysisServiceTarget"/>
+    </bean>
+
+    <bean id="portfolioServiceTarget" class="com.zynap.talentstudio.organisation.portfolio.PortfolioService">
+        <property name="portfolioDao" ref="hibPortfolioDao"/>
+        <property name="permitManagerDao" ref="permitManDao"/>
+    </bean>
+
+    <bean id="dynamicAttrServiceTarget" class="com.zynap.talentstudio.organisation.attributes.DynamicAttributeService">
+        <property name="dynamicAttributeDao" ref="dynamicAttrDao"/>
+        <property name="helpTextDao" ref="helpTextDao"/>
+    </bean>
+
+    <bean id="analysisServiceTarget" class="com.zynap.talentstudio.analysis.AnalysisService">
+        <property name="populationDao" ref="hibPopulationDao"/>
+    </bean>
+
+    <bean id="reportServiceTarget" class="com.zynap.talentstudio.analysis.reports.ReportService">
+        <property name="reportDao" ref="reportDao"/>
+        <property name="permitManagerDao" ref="permitManDao"/>
+        <property name="arenaManagerDao" ref="arenaManDao"/>
+        <property name="analysisService" ref="analysisServiceTarget"/>
+        <property name="populationEngine" ref="populationEngine"/>
+    </bean>
+
+    <bean id="metricServiceTarget" class="com.zynap.talentstudio.analysis.metrics.MetricService">
+        <property name="metricDao" ref="metricDao"/>
+    </bean>
+
+    <bean id="messageServiceTarget" class="com.zynap.talentstudio.messages.MessageService">
+        <property name="messageDao" ref="messageDao"/>
+    </bean>
+
+    <bean id="configRuleServiceTarget" class="com.zynap.talentstudio.security.rules.ConfigRuleService">
+        <property name="configRuleDao" ref="configRuleDao"/>
+    </bean>
+
+    <bean id="dashboardServiceTarget" class="com.zynap.talentstudio.dashboard.DashboardService">
+        <property name="dashboardDao" ref="dashboardDao"/>
+        <property name="analysisService" ref="analysisServiceTarget"/>
+        <property name="populationEngine" ref="populationEngine"/>
+    </bean>
+
+    <bean id="groupServiceTarget" class="com.zynap.talentstudio.common.groups.GroupService">
+        <property name="groupDao" ref="groupDao"/>
+        <property name="userDao" ref="hibUserManDao"/>
+    </bean>
+
+    <bean id="searchTermService" class="com.zynap.talentstudio.search.SearchTermServiceImpl">
+        <property name="searchTermDao" ref="searchTermDao"/>
+    </bean>
+    
+    <!--=====================================================================-->
+    <!--===================      DATA ACCESS OBJECTS     ====================-->
+    <!--=====================================================================-->
+
+    <bean id="helpTextDao" class="com.zynap.talentstudio.help.HibernateHelpTextDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="searchTermDao" class="com.zynap.talentstudio.search.HibernateSearchTermDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="dashboardDao" class="com.zynap.talentstudio.dashboard.HibernateDashboardDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="objectiveDao" class="com.zynap.talentstudio.objectives.HibernateObjectiveDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+
+    <bean id="hibUserManDao" class="com.zynap.talentstudio.security.users.HibernateUserDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+
+    <bean id="displayConfigDao" class="com.zynap.talentstudio.display.HibernateDisplayConfigDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="securityManDao" class="com.zynap.talentstudio.security.SecurityManagerDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="arenaManDao" class="com.zynap.talentstudio.arenas.HibernateArenaManagerDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="lookupManDao" class="com.zynap.talentstudio.common.lookups.HibernateLookupManagerDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="persistenceIdGenerator" ref="stringIdGenerator"/>
+    </bean>
+
+    <bean id="populationEngine" class="com.zynap.talentstudio.analysis.populations.HibernatePopulationEngine">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="permitManagerDao" ref="permitManDao"/>
+        <property name="dynamicAttributeService" ref="dynamicAttrService"/>
+        <property name="questionnaireWorkflowService" ref="queWorkflowService"/>
+    </bean>
+
+    <bean id="permitManDao" class="com.zynap.talentstudio.security.permits.HibernatePermitManagerDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="roleManDao" class="com.zynap.talentstudio.security.roles.HibernateRoleManagerDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="organisationUnitDao" class="com.zynap.talentstudio.organisation.HibernateOrganisationDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+
+    <bean id="orgUnitManDao" class="com.zynap.talentstudio.organisation.JdbcOrganisationManagerDao">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+
+    <bean id="prefManDao" class="com.zynap.talentstudio.preferences.HibernatePreferencesManagerDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="dynamicAttrDao" class="com.zynap.talentstudio.organisation.attributes.HibernateDynamicAttributeDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="hibPortfolioDao" class="com.zynap.talentstudio.organisation.portfolio.HibernatePortfolioDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="hibSubjectDao" class="com.zynap.talentstudio.organisation.subjects.HibernateSubjectDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+
+    <bean id="hibPositionDao" class="com.zynap.talentstudio.organisation.positions.HibernatePositionDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+
+    <bean id="hibPopulationDao" class="com.zynap.talentstudio.analysis.populations.HibernatePopulationsDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="reportDao" class="com.zynap.talentstudio.analysis.reports.HibernateReportDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="metricDao" class="com.zynap.talentstudio.analysis.metrics.HibernateMetricDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="configRuleDao" class="com.zynap.talentstudio.security.rules.HibernateConfigRuleDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="questionnaireDao" class="com.zynap.talentstudio.questionnaires.HibernateQuestionnaireDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+
+    <bean id="performanceReviewDao" class="com.zynap.talentstudio.performance.HibernatePerformanceReviewDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="externalRefMappingDao" class="com.zynap.talentstudio.common.mapping.HibernateExternalRefMappingDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="auditDao" class="com.zynap.talentstudio.audit.HibernateAuditDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+
+    <bean id="messageDao" class="com.zynap.talentstudio.messages.HibernateMessageDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="groupDao" class="com.zynap.talentstudio.common.groups.HibernateGroupDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <!--=====================================================================-->
+    <!--===================   REPORTING STRUCTURE BROWSER PREFERENCES  ======-->
+    <!--=====================================================================-->
+
+    <bean id="subjectPref" class="com.zynap.talentstudio.preferences.domain.DomainObjectPreference"/>
+
+    <bean id="orgUnitPref" class="com.zynap.talentstudio.preferences.domain.DomainObjectPreference">
+        <property name="attributePrefs">
+            <map>
+                <entry key="label">
+                    <bean name="labelPref1" class="com.zynap.talentstudio.preferences.properties.AttributePreference">
+                        <property name="displayable" value="true"/>
+                        <property name="attributeName" value="label"/>
+                        <property name="displayName" value="label"/>
+                        <property name="formattingInfo">
+                            <bean name="fInfo" class="com.zynap.talentstudio.preferences.format.FormattingInfo">
+                                <property name="formattingAttributes">
+                                    <map>
+                                        <entry key="color">
+                                            <bean name="fgColorAttr" class="com.zynap.talentstudio.preferences.format.FormattingAttribute">
+                                                <property name="name" value="color"/>
+                                                <property name="value" value="white"/>
+                                            </bean>
+                                        </entry>
+                                        <entry key="background-color">
+                                            <bean name="bgColorAttr" class="com.zynap.talentstudio.preferences.format.FormattingAttribute">
+                                                <property name="name" value="background-color"/>
+                                                <property name="value" value="#0066FF"/>
+                                            </bean>
+                                        </entry>
+                                    </map>
+                                </property>
+                            </bean>
+                        </property>
+                    </bean>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="positionPref" class="com.zynap.talentstudio.preferences.domain.DomainObjectPreference">
+        <property name="attributePrefs">
+            <map>
+                <entry key="title">
+                    <bean name="defaultLabelFormatting" class="com.zynap.talentstudio.preferences.properties.NestedAttributePreference">
+                        <property name="displayable" value="true"/>
+                        <property name="attributeName" value="title"/>
+                        <property name="displayName" value="title"/>
+                        <property name="nestedAttributePreference">
+                            <bean name="defaultLabelFormatting" class="com.zynap.talentstudio.preferences.properties.SwitchAttributePreference">
+                                <property name="displayable" value="true"/>
+                                <property name="attributeName" value="title"/>
+                                <property name="displayName" value="title"/>
+                                <property name="conditions">
+                                    <map>
+                                        <entry key="default">
+                                            <bean name="acting" class="com.zynap.talentstudio.preferences.properties.ConditionalAttributePreference">
+                                                <property name="displayable" value="true"/>
+
+                                                <property name="formattingInfo">
+                                                    <bean name="format1" class="com.zynap.talentstudio.preferences.format.FormattingInfo">
+                                                        <property name="formattingAttributes">
+                                                            <map>
+                                                                <entry key="color">
+                                                                    <bean name="attr" class="com.zynap.talentstudio.preferences.format.FormattingAttribute">
+                                                                        <property name="name" value="color"/>
+                                                                        <property name="value" value="black"/>
+                                                                    </bean>
+                                                                </entry>
+                                                                <entry key="background-color">
+                                                                    <bean name="attr" class="com.zynap.talentstudio.preferences.format.FormattingAttribute">
+                                                                        <property name="name" value="background-color"/>
+                                                                        <property name="value" value="white"/>
+                                                                    </bean>
+                                                                </entry>
+                                                            </map>
+                                                        </property>
+                                                    </bean>
+                                                </property>
+                                            </bean>
+                                        </entry>
+                                    </map>
+                                </property>
+                            </bean>
+                        </property>
+                    </bean>
+                </entry>
+                <entry key="primaryAssociation">
+                    <bean name="primaryAssoc" class="com.zynap.talentstudio.preferences.properties.AttributePreference">
+                        <property name="displayable" value="true"/>
+                        <property name="attributeName" value="primaryAssociation"/>
+                        <property name="displayName" value="Primary Association"/>
+                        <property name="formattingInfo">
+                            <bean name="format1" class="com.zynap.talentstudio.preferences.format.FormattingInfo">
+                                <property name="formattingAttributes">
+                                    <map>
+                                        <entry key="line-height">
+                                            <bean name="lineWidthAttr" class="com.zynap.talentstudio.preferences.format.FormattingAttribute">
+                                                <property name="name" value="line-height"/>
+                                                <property name="value" value="2px"/>
+                                            </bean>
+                                        </entry>
+                                        <entry key="border">
+                                            <bean name="lineWidthAttr" class="com.zynap.talentstudio.preferences.format.FormattingAttribute">
+                                                <property name="name" value="border"/>
+                                                <property name="value" value="solid"/>
+                                            </bean>
+                                        </entry>
+                                        <entry key="background-color">
+                                            <bean name="bgColorAttr" class="com.zynap.talentstudio.preferences.format.FormattingAttribute">
+                                                <property name="name" value="background-color"/>
+                                                <property name="value" value="#0066FF"/>
+                                            </bean>
+                                        </entry>
+                                    </map>
+                                </property>
+                            </bean>
+                        </property>
+                    </bean>
+                </entry>
+                <entry key="secondaryAssociations">
+                    <bean name="secAssoc" class="com.zynap.talentstudio.preferences.properties.AttributePreference">
+                        <property name="displayable" value="false"/>
+                        <property name="attributeName" value="secondaryAssociations"/>
+                        <property name="displayName" value="Secondary Associations"/>
+                        <property name="formattingInfo">
+                            <bean name="format1" class="com.zynap.talentstudio.preferences.format.FormattingInfo">
+                                <property name="formattingAttributes">
+                                    <map>
+                                        <entry key="line-height">
+                                            <bean name="lineWidthAttr" class="com.zynap.talentstudio.preferences.format.FormattingAttribute">
+                                                <property name="name" value="line-height"/>
+                                                <property name="value" value="1px"/>
+                                            </bean>
+                                        </entry>
+                                        <entry key="border">
+                                            <bean name="lineWidthAttr" class="com.zynap.talentstudio.preferences.format.FormattingAttribute">
+                                                <property name="name" value="border"/>
+                                                <property name="value" value="solid"/>
+                                            </bean>
+                                        </entry>
+                                        <entry key="background-color">
+                                            <bean name="bgColorAttr" class="com.zynap.talentstudio.preferences.format.FormattingAttribute">
+                                                <property name="name" value="background-color"/>
+                                                <property name="value" value="#006600"/>
+                                            </bean>
+                                        </entry>
+                                    </map>
+                                </property>
+                            </bean>
+                        </property>
+                    </bean>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="subjectAssocPref" class="com.zynap.talentstudio.preferences.domain.DomainObjectPreference">
+        <property name="attributePrefs">
+            <map>
+                <entry key="associationType">
+                    <bean name="primaryAssociationPref" class="com.zynap.talentstudio.preferences.properties.CompositeSwitchAttributePreference">
+                        <property name="displayable" value="true"/>
+                        <property name="attributeName" value="primary"/>
+                        <property name="displayName" value="primary"/>
+                        <property name="switchAttributePreferences">
+                            <map>
+                                <entry key="true">
+                                    <bean name="primaryAssocPref"
+                                          class="com.zynap.talentstudio.preferences.properties.SwitchAttributePreference">
+                                        <property name="displayable" value="true"/>
+                                        <property name="attributeName" value="qualifier.valueId"/>
+                                        <property name="conditions">
+                                            <map>
+                                                <entry key="ACTING">
+                                                    <bean name="acting" class="com.zynap.talentstudio.preferences.properties.ConditionalAttributePreference">
+                                                        <property name="expectedValue" value="ACTING"/>
+                                                        <property name="displayName" value="Acting"/>
+                                                        <property name="displayable" value="true"/>
+                                                        <property name="formattingInfo">
+                                                            <bean name="format1"
+                                                                  class="com.zynap.talentstudio.preferences.format.FormattingInfo">
+                                                                <property name="formattingAttributes">
+                                                                    <map>
+                                                                        <entry key="color">
+                                                                            <bean name="attrcol"
+                                                                                  class="com.zynap.talentstudio.preferences.format.FormattingAttribute">
+                                                                                <property name="name" value="color"/>
+                                                                                <property name="value" value="black"/>
+                                                                            </bean>
+                                                                        </entry>
+                                                                        <entry key="background-color">
+                                                                            <bean name="attrcol"
+                                                                                  class="com.zynap.talentstudio.preferences.format.FormattingAttribute">
+                                                                                <property name="name" value="background-color"/>
+                                                                                <property name="value" value="#FFFFCC"/>
+                                                                            </bean>
+                                                                        </entry>
+                                                                    </map>
+                                                                </property>
+                                                            </bean>
+                                                        </property>
+                                                    </bean>
+                                                </entry>
+                                                <entry key="TEMPORARY">
+                                                    <bean name="temporary"
+                                                          class="com.zynap.talentstudio.preferences.properties.ConditionalAttributePreference">
+                                                        <property name="expectedValue" value="TEMPORARY"/>
+                                                        <property name="displayName" value="Temporary"/>
+                                                        <property name="displayable" value="true"/>
+                                                        <property name="formattingInfo">
+                                                            <bean name="format1"
+                                                                  class="com.zynap.talentstudio.preferences.format.FormattingInfo">
+                                                                <property name="formattingAttributes">
+                                                                    <map>
+                                                                        <entry key="color">
+                                                                            <bean name="attrcol"
+                                                                                  class="com.zynap.talentstudio.preferences.format.FormattingAttribute">
+                                                                                <property name="name" value="color"/>
+                                                                                <property name="value" value="black"/>
+                                                                            </bean>
+                                                                        </entry>
+                                                                        <entry key="background-color">
+                                                                            <bean name="attrcol"
+                                                                                  class="com.zynap.talentstudio.preferences.format.FormattingAttribute">
+                                                                                <property name="name" value="background-color"/>
+                                                                                <property name="value" value="#FFCCCC"/>
+                                                                            </bean>
+                                                                        </entry>
+                                                                    </map>
+                                                                </property>
+                                                            </bean>
+                                                        </property>
+                                                    </bean>
+                                                </entry>
+                                                <entry key="SECONDEDTO">
+                                                    <bean name="seconded"
+                                                          class="com.zynap.talentstudio.preferences.properties.ConditionalAttributePreference">
+                                                        <property name="expectedValue" value="SECONDEDTO"/>
+                                                        <property name="displayName" value="Seconded To"/>
+                                                        <property name="displayable" value="true"/>
+                                                        <property name="formattingInfo">
+                                                            <bean name="format1"
+                                                                  class="com.zynap.talentstudio.preferences.format.FormattingInfo">
+                                                                <property name="formattingAttributes">
+                                                                    <map>
+                                                                        <entry key="color">
+                                                                            <bean name="attrcol"
+                                                                                  class="com.zynap.talentstudio.preferences.format.FormattingAttribute">
+                                                                                <property name="name" value="color"/>
+                                                                                <property name="value" value="black"/>
+                                                                            </bean>
+                                                                        </entry>
+                                                                        <entry key="background-color">
+                                                                            <bean name="attrcol"
+                                                                                  class="com.zynap.talentstudio.preferences.format.FormattingAttribute">
+                                                                                <property name="name" value="background-color"/>
+                                                                                <property name="value" value="#CCFFCC"/>
+                                                                            </bean>
+                                                                        </entry>
+                                                                    </map>
+                                                                </property>
+                                                            </bean>
+                                                        </property>
+                                                    </bean>
+                                                </entry>
+                                                <entry key="PERMANENT">
+                                                    <bean name="permanent"
+                                                          class="com.zynap.talentstudio.preferences.properties.ConditionalAttributePreference">
+                                                        <property name="expectedValue" value="PERMANENT"/>
+                                                        <property name="displayName" value="Permanent"/>
+                                                        <property name="displayable" value="true"/>
+                                                        <property name="formattingInfo">
+                                                            <bean name="format1"
+                                                                  class="com.zynap.talentstudio.preferences.format.FormattingInfo">
+                                                                <property name="formattingAttributes">
+                                                                    <map>
+                                                                        <entry key="color">
+                                                                            <bean name="attrcol"
+                                                                                  class="com.zynap.talentstudio.preferences.format.FormattingAttribute">
+                                                                                <property name="name" value="color"/>
+                                                                                <property name="value" value="black"/>
+                                                                            </bean>
+                                                                        </entry>
+                                                                        <entry key="background-color">
+                                                                            <bean name="attrcol"
+                                                                                  class="com.zynap.talentstudio.preferences.format.FormattingAttribute">
+                                                                                <property name="name" value="background-color"/>
+                                                                                <property name="value" value="#CCFFFF"/>
+                                                                            </bean>
+                                                                        </entry>
+                                                                    </map>
+                                                                </property>
+                                                            </bean>
+                                                        </property>
+                                                    </bean>
+                                                </entry>
+                                                <entry key="default">
+                                                    <bean name="permanent"
+                                                          class="com.zynap.talentstudio.preferences.properties.ConditionalAttributePreference">
+                                                        <property name="displayable" value="true"/>
+                                                        <property name="formattingInfo">
+                                                            <bean name="format1"
+                                                                  class="com.zynap.talentstudio.preferences.format.FormattingInfo">
+                                                                <property name="formattingAttributes">
+                                                                    <map>
+                                                                        <entry key="color">
+                                                                            <bean name="attrcol"
+                                                                                  class="com.zynap.talentstudio.preferences.format.FormattingAttribute">
+                                                                                <property name="name" value="color"/>
+                                                                                <property name="value" value="black"/>
+                                                                            </bean>
+                                                                        </entry>
+                                                                        <entry key="background-color">
+                                                                            <bean name="attrcol"
+                                                                                  class="com.zynap.talentstudio.preferences.format.FormattingAttribute">
+                                                                                <property name="name" value="background-color"/>
+                                                                                <property name="value" value="#CCFFFF"/>
+                                                                            </bean>
+                                                                        </entry>
+                                                                    </map>
+                                                                </property>
+                                                            </bean>
+                                                        </property>
+                                                    </bean>
+                                                </entry>
+                                            </map>
+                                        </property>
+                                    </bean>
+                                </entry>
+                                <entry key="false">
+                                    <bean name="secondaryAssocPref"
+                                          class="com.zynap.talentstudio.preferences.properties.SwitchAttributePreference">
+                                        <property name="displayable" value="true"/>
+                                        <property name="attributeName" value="qualifier.valueId"/>
+                                        <property name="displayName" value="qualifier.label"/>
+                                        <property name="conditions">
+                                            <map>
+                                                <entry key="EMERGENCY">
+                                                    <bean name="emergency"
+                                                          class="com.zynap.talentstudio.preferences.properties.ConditionalAttributePreference">
+                                                        <property name="expectedValue" value="EMERGENCY"/>
+                                                        <property name="displayName" value="Emergency"/>
+                                                        <property name="displayable" value="true"/>
+                                                        <property name="formattingInfo">
+                                                            <bean name="format1"
+                                                                  class="com.zynap.talentstudio.preferences.format.FormattingInfo">
+                                                                <property name="formattingAttributes">
+                                                                    <map>
+                                                                        <entry key="color">
+                                                                            <bean name="attrcol"
+                                                                                  class="com.zynap.talentstudio.preferences.format.FormattingAttribute">
+                                                                                <property name="name" value="color"/>
+                                                                                <property name="value" value="black"/>
+                                                                            </bean>
+                                                                        </entry>
+                                                                        <entry key="background-color">
+                                                                            <bean name="attrcol"
+                                                                                  class="com.zynap.talentstudio.preferences.format.FormattingAttribute">
+                                                                                <property name="name" value="background-color"/>
+                                                                                <property name="value" value="#FFFFCC"/>
+                                                                            </bean>
+                                                                        </entry>
+                                                                    </map>
+                                                                </property>
+                                                            </bean>
+                                                        </property>
+                                                    </bean>
+                                                </entry>
+                                                <entry key="READYNOW">
+                                                    <bean name="readyNow"
+                                                          class="com.zynap.talentstudio.preferences.properties.ConditionalAttributePreference">
+                                                        <property name="expectedValue" value="READYNOW"/>
+                                                        <property name="displayName" value="Ready Now"/>
+                                                        <property name="displayable" value="true"/>
+                                                        <property name="formattingInfo">
+                                                            <bean name="format1"
+                                                                  class="com.zynap.talentstudio.preferences.format.FormattingInfo">
+                                                                <property name="formattingAttributes">
+                                                                    <map>
+                                                                        <entry key="color">
+                                                                            <bean name="attrcol"
+                                                                                  class="com.zynap.talentstudio.preferences.format.FormattingAttribute">
+                                                                                <property name="name" value="color"/>
+                                                                                <property name="value" value="black"/>
+                                                                            </bean>
+                                                                        </entry>
+                                                                        <entry key="background-color">
+                                                                            <bean name="attrcol"
+                                                                                  class="com.zynap.talentstudio.preferences.format.FormattingAttribute">
+                                                                                <property name="name" value="background-color"/>
+                                                                                <property name="value" value="#FFCCCC"/>
+                                                                            </bean>
+                                                                        </entry>
+                                                                    </map>
+                                                                </property>
+                                                            </bean>
+                                                        </property>
+                                                    </bean>
+                                                </entry>
+                                                <entry key="SHORTTERM">
+                                                    <bean name="shortTerm"
+                                                          class="com.zynap.talentstudio.preferences.properties.ConditionalAttributePreference">
+                                                        <property name="expectedValue" value="SHORTTERM"/>
+                                                        <property name="displayName" value="Short Term"/>
+                                                        <property name="displayable" value="true"/>
+                                                        <property name="formattingInfo">
+                                                            <bean name="format1"
+                                                                  class="com.zynap.talentstudio.preferences.format.FormattingInfo">
+                                                                <property name="formattingAttributes">
+                                                                    <map>
+                                                                        <entry key="color">
+                                                                            <bean name="attrcol"
+                                                                                  class="com.zynap.talentstudio.preferences.format.FormattingAttribute">
+                                                                                <property name="name" value="color"/>
+                                                                                <property name="value" value="black"/>
+                                                                            </bean>
+                                                                        </entry>
+                                                                        <entry key="background-color">
+                                                                            <bean name="attrcol"
+                                                                                  class="com.zynap.talentstudio.preferences.format.FormattingAttribute">
+                                                                                <property name="name" value="background-color"/>
+                                                                                <property name="value" value="#CCFFCC"/>
+                                                                            </bean>
+                                                                        </entry>
+                                                                    </map>
+                                                                </property>
+                                                            </bean>
+                                                        </property>
+                                                    </bean>
+                                                </entry>
+                                                <entry key="MEDIUMTERM">
+                                                    <bean name="mediumTerm"
+                                                          class="com.zynap.talentstudio.preferences.properties.ConditionalAttributePreference">
+                                                        <property name="expectedValue" value="MEDIUMTERM"/>
+                                                        <property name="displayName" value="Medium Term"/>
+                                                        <property name="displayable" value="true"/>
+                                                        <property name="formattingInfo">
+                                                            <bean name="format1"
+                                                                  class="com.zynap.talentstudio.preferences.format.FormattingInfo">
+                                                                <property name="formattingAttributes">
+                                                                    <map>
+                                                                        <entry key="color">
+                                                                            <bean name="attrcol"
+                                                                                  class="com.zynap.talentstudio.preferences.format.FormattingAttribute">
+                                                                                <property name="name" value="color"/>
+                                                                                <property name="value" value="black"/>
+                                                                            </bean>
+                                                                        </entry>
+                                                                        <entry key="background-color">
+                                                                            <bean name="attrcol"
+                                                                                  class="com.zynap.talentstudio.preferences.format.FormattingAttribute">
+                                                                                <property name="name" value="background-color"/>
+                                                                                <property name="value" value="#CCFFFF"/>
+                                                                            </bean>
+                                                                        </entry>
+                                                                    </map>
+                                                                </property>
+                                                            </bean>
+                                                        </property>
+                                                    </bean>
+                                                </entry>
+                                                <entry key="default">
+                                                    <bean name="permanent"
+                                                          class="com.zynap.talentstudio.preferences.properties.ConditionalAttributePreference">
+                                                        <property name="displayable" value="true"/>
+                                                        <property name="formattingInfo">
+                                                            <bean name="format1"
+                                                                  class="com.zynap.talentstudio.preferences.format.FormattingInfo">
+                                                                <property name="formattingAttributes">
+                                                                    <map>
+                                                                        <entry key="color">
+                                                                            <bean name="attrcol"
+                                                                                  class="com.zynap.talentstudio.preferences.format.FormattingAttribute">
+                                                                                <property name="name" value="color"/>
+                                                                                <property name="value" value="black"/>
+                                                                            </bean>
+                                                                        </entry>
+                                                                        <entry key="background-color">
+                                                                            <bean name="attrcol"
+                                                                                  class="com.zynap.talentstudio.preferences.format.FormattingAttribute">
+                                                                                <property name="name" value="background-color"/>
+                                                                                <property name="value" value="#CCFFFF"/>
+                                                                            </bean>
+                                                                        </entry>
+                                                                    </map>
+                                                                </property>
+                                                            </bean>
+                                                        </property>
+                                                    </bean>
+                                                </entry>
+                                            </map>
+                                        </property>
+                                    </bean>
+                                </entry>
+                            </map>
+                        </property>
+                    </bean>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="reportingChartPreferences" class="com.zynap.talentstudio.preferences.domain.DomainObjectPreferenceCollection">
+        <property name="domainObjectPrefs">
+            <map>
+                <entry key="com.zynap.talentstudio.organisation.OrganisationUnit">
+                    <ref local="orgUnitPref"/>
+                </entry>
+                <entry key="com.zynap.talentstudio.organisation.positions.Position">
+                    <ref local="positionPref"/>
+                </entry>
+                <entry key="com.zynap.talentstudio.organisation.subjects.Subject">
+                    <ref local="subjectPref"/>
+                </entry>
+                <entry key="com.zynap.talentstudio.organisation.subjects.SubjectAssociation">
+                    <ref local="subjectAssocPref"/>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <!--=====================================================================-->
+    <!--===================   SEARCH RELATED COMPONENTS   =================-->
+    <!--=====================================================================-->
+
+    <!-- mock component for testing portfolio searches - use instead of Autonomy version below -->
+    <bean id="mockAutonomySearcher" class="com.zynap.talentstudio.organisation.portfolio.search.MockPortfolioSearcher">
+        <property name="portfolioDao" ref="hibPortfolioDao"/>
+        <property name="artefactTypes">
+            <map>
+                <entry key="${autonomy.position.database}" value="P"/>
+                <entry key="${autonomy.subject.database}" value="S"/>
+            </map>
+        </property>
+    </bean>
+
+    <!-- xmlMapper is needed for the mock searcher -->
+    <bean id="xmlMapper" class="com.zynap.talentstudio.organisation.portfolio.search.XMLMapper"/>
+    <bean id="oracleMapper" class="com.zynap.talentstudio.organisation.portfolio.search.oracle.OracleMapper"/>
+
+    <bean id="oracleGateway" class="com.zynap.talentstudio.organisation.portfolio.search.oracle.OracleGateway">
+        <property name="searcher" ref="mockAutonomySearcher"/>
+        <!-- todo when we migrate to oracle this mapper muct change to the oracle mapper and we need to parameterise -->
+        <property name="mapper" ref="xmlMapper"/>
+    </bean>
+
+    <bean id="oracleSearcher" class="com.zynap.talentstudio.organisation.portfolio.search.oracle.OracleSearcher">
+        <!--<property name="host" value="${autonomy.host}"/>-->
+        <!--<property name="port" value="${autonomy.aciport}"/>-->
+        <!--<property name="retries" value="${autonomy.retries}"/>-->
+        <!--<property name="timeout" value="${autonomy.connection.timeout}"/>-->
+        <property name="version" value="10.1.8.2"/>
+    </bean>
+
+    <!-- ExternalSearchManager only does read-only data access - therefore does not need transactions -->
+    <bean id="searchManager" class="com.zynap.talentstudio.organisation.portfolio.search.ExternalSearchManager" lazy-init="true">
+        <property name="gateway" ref="oracleGateway"/>
+        <property name="permitManagerDao" ref="permitManDao"/>
+    </bean>
+
+    <!--=====================================================================-->
+    <!--===================   OTHER COMPONENTS  =============================-->
+    <!--=====================================================================-->
+
+    <!-- Component that generates ids -->
+    <bean id="stringIdGenerator" class="com.zynap.talentstudio.util.IdGenerator">
+        <property name="template" ref="jdbcTemplate"/>
+    </bean>
+
+    <!-- Automatically proxy Advisor beans (i.e. The Security Advisor)-->
+    <bean id="autoProxyCreator" class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>
+
+    <bean id="formatterFactory" class="com.zynap.talentstudio.util.FormatterFactory">
+        <constructor-arg index="0" type="java.lang.String" value="EN"/>
+        <constructor-arg index="1" type="java.lang.String" value="dd MMM yyyy"/>
+    </bean>
+
+    <bean id="dynamicAttributeValidationFactory" class="com.zynap.talentstudio.organisation.attributes.DaDefinitionValidationFactory">
+        <property name="specificationMappings">
+            <map>
+                <entry key="NUMBER">
+                    <bean class="com.zynap.talentstudio.organisation.attributes.validators.definition.IntegerRangeValidator"/>
+                </entry>
+                <entry key="TEXT">
+                    <bean class="com.zynap.talentstudio.organisation.attributes.validators.definition.TextRangeValidator"/>
+                </entry>
+                <entry key="TEXTAREA">
+                    <bean class="com.zynap.talentstudio.organisation.attributes.validators.definition.TextRangeValidator"/>
+                </entry>
+                <entry key="STRUCT">
+                    <bean class="com.zynap.talentstudio.organisation.attributes.validators.definition.StructValidator"/>
+                </entry>
+                <entry key="MULTISELECT">
+                    <bean class="com.zynap.talentstudio.organisation.attributes.validators.definition.StructValidator"/>
+                </entry>
+                <entry key="DATE">
+                    <bean class="com.zynap.talentstudio.organisation.attributes.validators.definition.DateRangeValidator"/>
+                </entry>
+                <entry key="TIME">
+                    <bean class="com.zynap.talentstudio.organisation.attributes.validators.definition.TimeRangeValidator"/>
+                </entry>
+                <entry key="DATETIME">
+                    <bean class="com.zynap.talentstudio.organisation.attributes.validators.definition.DateTimeRangeValidator"/>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="workFlowCommander" class="com.zynap.talentstudio.workflow.WorkflowBasicJdbcCommander">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+
+
+    <bean id="workFlowAdapter" class="com.zynap.talentstudio.workflow.WorkflowAdapter">
+        <property name="workflowBasicCommander" ref="workFlowCommander"/>
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <!-- Reporting components for Jasper -->
+    <bean id="dataSourceFactory" class="com.zynap.talentstudio.analysis.reports.jasper.JasperDataSourceFactory">
+        <property name="dynamicAttributeService" ref="dynamicAttrService"/>
+        <property name="populationEngine" ref="populationEngine"/>
+        <property name="lookupManager" ref="lookupManager"/>
+    </bean>
+
+    <bean id="appraisalReportBuilder" class="com.zynap.talentstudio.analysis.reports.AppraisalReportBuilder">
+        <property name="questionnaireService" ref="questionnaireService"/>
+        <property name="reportService" ref="reportService"/>
+    </bean>
+
+
+</beans>

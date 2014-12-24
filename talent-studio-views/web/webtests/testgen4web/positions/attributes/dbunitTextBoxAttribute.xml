@@ -1,0 +1,421 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tg4w version="0.38.2">
+    <actions>
+        <action type="goto" refresh="true" step="0">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/orgbuilder/browseposition.htm?navigator.notSubmit=true]]></value>
+        </action>
+        <action type="verify-title" step="1">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Browse Positions]]></value>
+        </action>
+        <action type="assert-text-exists" step="2">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Man Equal Range TB]]></value>
+        </action>
+        <action type="assert-text-exists" step="3">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Man No Range TB]]></value>
+        </action>
+        <action type="assert-text-exists" step="4">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Not Man Equals Range TB]]></value>
+        </action>
+        <action type="assert-text-exists" step="5">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Not Man No Range TB]]></value>
+        </action>
+        <action type="click" refresh="true" step="6">
+            <xpath><![CDATA[*/FORM[@ID="details_frm"]/INPUT[@ID="btn_details"]]]></xpath>
+            <value><![CDATA[details_frm]]></value>
+        </action>
+        <action type="verify-title" step="7">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Edit Position]]></value>
+        </action>
+        <action type="assert-text-exists" step="8">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[(6 to 6 characters)]]></value>
+        </action>
+        <action type="assert-text-exists" step="9">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[(Min 7 characters)]]></value>
+        </action>
+        <action type="assert-text-exists" step="10">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[(Max 8 characters)]]></value>
+        </action>
+        <action type="assert-text-exists" step="11">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[(8 to 8 characters)]]></value>
+        </action>
+        <action type="assert-text-exists" step="12">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[(Min 9 characters)]]></value>
+        </action>
+        <action type="assert-text-exists" step="13">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[(Max 8 characters)]]></value>
+        </action>
+        <action type="fill" step="14">
+            <xpath><![CDATA[*/FORM[@ID="editposda"]/*/TEXTAREA[@ID="ManEqualRangeTB"]]]></xpath>
+            <value><![CDATA[testers]]></value>
+        </action>
+        <action type="fill" step="15">
+            <xpath><![CDATA[*/FORM[@ID="editposda"]/*/TEXTAREA[@ID="ManNoMaxTB"]]]></xpath>
+            <value><![CDATA[666666]]></value>
+        </action>
+        <action type="fill" step="16">
+            <xpath><![CDATA[*/FORM[@ID="editposda"]/*/TEXTAREA[@ID="ManNoMinTB"]]]></xpath>
+            <value><![CDATA[999999999]]></value>
+        </action>
+        <action type="fill" step="17">
+            <xpath><![CDATA[*/FORM[@ID="editposda"]/*/TEXTAREA[@ID="NotManEqualsRangeTB"]]]></xpath>
+            <value><![CDATA[22]]></value>
+        </action>
+        <action type="fill" step="18">
+            <xpath><![CDATA[*/FORM[@ID="editposda"]/*/TEXTAREA[@ID="NotManNoMaxTB"]]]></xpath>
+            <value><![CDATA[88888888]]></value>
+        </action>
+        <action type="fill" step="19">
+            <xpath><![CDATA[*/FORM[@ID="editposda"]/*/TEXTAREA[@ID="NotManNoMinTB"]]]></xpath>
+            <value><![CDATA[7]]></value>
+        </action>
+        <action type="click" refresh="true" step="20">
+            <xpath><![CDATA[*/FORM[@ID="editposda"]/*/INPUT[@NAME="_edit" and @VALUE="Save"]]]></xpath>
+            <value><![CDATA[_edit]]></value>
+        </action>
+        <action type="verify-title" step="21">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Edit Position]]></value>
+        </action>
+        <action type="assert-text-exists" step="22">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Text length is longer than the maximum of 6 characters.]]></value>
+        </action>
+        <action type="assert-text-exists" step="23">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Text length is less that the minimum of 7 characters.]]></value>
+        </action>
+        <action type="assert-text-exists" step="24">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Text length is longer than the maximum of 8 characters.]]></value>
+        </action>
+        <action type="assert-text-exists" step="25">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[This is a mandatory field. Please enter a value.]]></value>
+        </action>
+        <action type="assert-text-exists" step="26">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Text length is less that the minimum of 8 characters.]]></value>
+        </action>
+        <action type="assert-text-exists" step="27">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Text length is less that the minimum of 9 characters.]]></value>
+        </action>
+        <action type="fill" step="28">
+            <xpath><![CDATA[*/FORM[@ID="editposda"]/*/TEXTAREA[@ID="ManEqualRangeTB"]]]></xpath>
+            <value><![CDATA[tester]]></value>
+        </action>
+        <action type="fill" step="29">
+            <xpath><![CDATA[*/FORM[@ID="editposda"]/*/TEXTAREA[@ID="ManNoMaxTB"]]]></xpath>
+            <value><![CDATA[6666666]]></value>
+        </action>
+        <action type="fill" step="30">
+            <xpath><![CDATA[*/FORM[@ID="editposda"]/*/TEXTAREA[@ID="ManNoMinTB"]]]></xpath>
+            <value><![CDATA[99999999]]></value>
+        </action>
+        <action type="fill" step="31">
+            <xpath><![CDATA[*/FORM[@ID="editposda"]/*/TEXTAREA[@ID="ManNoRangeTB"]]]></xpath>
+            <value><![CDATA[mandatory no range verified]]></value>
+        </action>
+        <action type="fill" step="32">
+            <xpath><![CDATA[*/FORM[@ID="editposda"]/*/TEXTAREA[@ID="NotManEqualsRangeTB"]]]></xpath>
+            <value><![CDATA[eight cha]]></value>
+        </action>
+        <action type="fill" step="33">
+            <xpath><![CDATA[*/FORM[@ID="editposda"]/*/TEXTAREA[@ID="NotManNoMaxTB"]]]></xpath>
+            <value><![CDATA[888888889]]></value>
+        </action>
+        <action type="fill" step="34">
+            <xpath><![CDATA[*/FORM[@ID="editposda"]/*/TEXTAREA[@ID="NotManNoMinTB"]]]></xpath>
+            <value><![CDATA[this can be aboove 8 characters]]></value>
+        </action>
+        <action type="click" refresh="true" step="35">
+            <xpath><![CDATA[*/FORM[@ID="editposda"]/*/INPUT[@NAME="_edit" and @VALUE="Save"]]]></xpath>
+            <value><![CDATA[_edit]]></value>
+        </action>
+        <action type="verify-title" step="36">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Edit Position]]></value>
+        </action>
+        <action type="assert-text-exists" step="37">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Text length is longer than the maximum of 8 characters.]]></value>
+        </action>
+        <action type="fill" step="38">
+            <xpath><![CDATA[*/FORM[@ID="editposda"]/*/TEXTAREA[@ID="NotManEqualsRangeTB"]]]></xpath>
+            <value><![CDATA[eight ch]]></value>
+        </action>
+        <action type="fill" step="39">
+            <xpath><![CDATA[*/FORM[@ID="editposda"]/*/TEXTAREA[@ID="NotManNoMinTB"]]]></xpath>
+            <value><![CDATA[characte]]></value>
+        </action>
+        <action type="click" refresh="true" step="40">
+            <xpath><![CDATA[*/FORM[@ID="editposda"]/*/INPUT[@NAME="_edit" and @VALUE="Save"]]]></xpath>
+            <value><![CDATA[_edit]]></value>
+        </action>
+        <action type="verify-title" step="41">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Browse Positions]]></value>
+        </action>
+        <action type="assert-text-exists" step="42">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[mandatory no range verified]]></value>
+        </action>
+        <action type="assert-text-exists" step="43">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[characte]]></value>
+        </action>
+        <action type="goto" refresh="true" step="44">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/admin/listpositionDA.htm?navigator.notSubmit=true]]></value>
+        </action>
+        <action type="verify-title" step="45">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Position Attributes]]></value>
+        </action>
+        <action type="assert-text-exists" step="46">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Man Equal Range TB]]></value>
+        </action>
+        <action type="assert-text-exists" step="47">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Man No Max TB]]></value>
+        </action>
+        <action type="assert-text-exists" step="48">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Not Man Equals Range TB]]></value>
+        </action>
+        <action type="assert-text-exists" step="49">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Not Man No Min TB]]></value>
+        </action>
+        <action type="click" refresh="true" step="50">
+            <xpath><![CDATA[TABLE[@ID="attribute"]/TBODY[1]/TR[8]/TD[1]/A[@CDATA="Man Equal Range TB"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" step="51">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Attribute]]></value>
+        </action>
+        <action type="click" refresh="true" step="52">
+            <xpath><![CDATA[*/FORM[@ID="_delete"]/INPUT[@ID="delda"]]]></xpath>
+            <value><![CDATA[delda]]></value>
+        </action>
+        <action type="verify-title" step="53">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Delete Attribute]]></value>
+        </action>
+        <action type="assert-text-exists" step="54">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Warning:]]></value>
+        </action>
+        <action type="click" refresh="true" step="55">
+            <xpath><![CDATA[*/FORM[@ID="_confirm"]/INPUT[@NAME="_confirm" and @VALUE="Confirm"]]]></xpath>
+            <value><![CDATA[_confirm]]></value>
+        </action>
+        <action type="verify-title" step="56">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Position Attributes]]></value>
+        </action>
+        <action type="click" refresh="true" step="57">
+            <xpath><![CDATA[TABLE[@ID="attribute"]/TBODY[1]/TR[8]/TD[1]/A[@CDATA="Man No Max TB"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" step="58">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Attribute]]></value>
+        </action>
+        <action type="click" refresh="true" step="59">
+            <xpath><![CDATA[*/FORM[@ID="_delete"]/INPUT[@ID="delda"]]]></xpath>
+            <value><![CDATA[delda]]></value>
+        </action>
+        <action type="verify-title" step="60">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Delete Attribute]]></value>
+        </action>
+        <action type="click" refresh="true" step="61">
+            <xpath><![CDATA[*/FORM[@ID="_confirm"]/INPUT[@NAME="_confirm" and @VALUE="Confirm"]]]></xpath>
+            <value><![CDATA[_confirm]]></value>
+        </action>
+        <action type="verify-title" step="62">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Position Attributes]]></value>
+        </action>
+        <action type="click" refresh="true" step="63">
+            <xpath><![CDATA[TABLE[@ID="attribute"]/TBODY[1]/TR[8]/TD[1]/A[@CDATA="Man No Min TB"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" step="64">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Attribute]]></value>
+        </action>
+        <action type="click" refresh="true" step="65">
+            <xpath><![CDATA[*/FORM[@ID="_delete"]/INPUT[@ID="delda"]]]></xpath>
+            <value><![CDATA[delda]]></value>
+        </action>
+        <action type="verify-title" step="66">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Delete Attribute]]></value>
+        </action>
+        <action type="click" refresh="true" step="67">
+            <xpath><![CDATA[*/FORM[@ID="_confirm"]/INPUT[@NAME="_confirm" and @VALUE="Confirm"]]]></xpath>
+            <value><![CDATA[_confirm]]></value>
+        </action>
+        <action type="verify-title" step="68">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Position Attributes]]></value>
+        </action>
+        <action type="click" refresh="true" step="69">
+            <xpath><![CDATA[TABLE[@ID="attribute"]/TBODY[1]/TR[8]/TD[1]/A[@CDATA="Man No Range TB"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" step="70">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Attribute]]></value>
+        </action>
+        <action type="click" refresh="true" step="71">
+            <xpath><![CDATA[*/FORM[@ID="_delete"]/INPUT[@ID="delda"]]]></xpath>
+            <value><![CDATA[delda]]></value>
+        </action>
+        <action type="verify-title" step="72">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Delete Attribute]]></value>
+        </action>
+        <action type="assert-text-exists" step="73">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Warning:]]></value>
+        </action>
+        <action type="click" refresh="true" step="74">
+            <xpath><![CDATA[*/FORM[@ID="_confirm"]/INPUT[@NAME="_confirm" and @VALUE="Confirm"]]]></xpath>
+            <value><![CDATA[_confirm]]></value>
+        </action>
+        <action type="verify-title" step="75">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Position Attributes]]></value>
+        </action>
+        <action type="click" refresh="true" step="76">
+            <xpath><![CDATA[TABLE[@ID="attribute"]/TBODY[1]/TR[8]/TD[1]/A[@CDATA="Not Man Equals Range TB"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" step="77">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Attribute]]></value>
+        </action>
+        <action type="click" refresh="true" step="78">
+            <xpath><![CDATA[*/FORM[@ID="_delete"]/INPUT[@ID="delda"]]]></xpath>
+            <value><![CDATA[delda]]></value>
+        </action>
+        <action type="verify-title" step="79">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Delete Attribute]]></value>
+        </action>
+        <action type="assert-text-exists" step="80">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Warning:]]></value>
+        </action>
+        <action type="click" refresh="true" step="81">
+            <xpath><![CDATA[*/FORM[@ID="_confirm"]/INPUT[@NAME="_confirm" and @VALUE="Confirm"]]]></xpath>
+            <value><![CDATA[_confirm]]></value>
+        </action>
+        <action type="verify-title" step="82">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Position Attributes]]></value>
+        </action>
+        <action type="click" refresh="true" step="83">
+            <xpath><![CDATA[TABLE[@ID="attribute"]/TBODY[1]/TR[8]/TD[1]/A[@CDATA="Not Man No Max TB"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" step="84">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Attribute]]></value>
+        </action>
+        <action type="click" refresh="true" step="85">
+            <xpath><![CDATA[*/FORM[@ID="_delete"]/INPUT[@ID="delda"]]]></xpath>
+            <value><![CDATA[delda]]></value>
+        </action>
+        <action type="verify-title" step="86">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Delete Attribute]]></value>
+        </action>
+        <action type="assert-text-exists" step="87">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Warning:]]></value>
+        </action>
+        <action type="click" refresh="true" step="88">
+            <xpath><![CDATA[*/FORM[@ID="_confirm"]/INPUT[@NAME="_confirm" and @VALUE="Confirm"]]]></xpath>
+            <value><![CDATA[_confirm]]></value>
+        </action>
+        <action type="verify-title" step="89">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Position Attributes]]></value>
+        </action>
+        <action type="click" refresh="true" step="90">
+            <xpath><![CDATA[TABLE[@ID="attribute"]/TBODY[1]/TR[8]/TD[1]/A[@CDATA="Not Man No Min TB"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" step="91">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Attribute]]></value>
+        </action>
+        <action type="click" refresh="true" step="92">
+            <xpath><![CDATA[*/FORM[@ID="_delete"]/INPUT[@ID="delda"]]]></xpath>
+            <value><![CDATA[delda]]></value>
+        </action>
+        <action type="verify-title" step="93">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Delete Attribute]]></value>
+        </action>
+        <action type="assert-text-exists" step="94">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Warning:]]></value>
+        </action>
+        <action type="click" refresh="true" step="95">
+            <xpath><![CDATA[*/FORM[@ID="_confirm"]/INPUT[@NAME="_confirm" and @VALUE="Confirm"]]]></xpath>
+            <value><![CDATA[_confirm]]></value>
+        </action>
+        <action type="verify-title" step="96">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Position Attributes]]></value>
+        </action>
+        <action type="click" refresh="true" step="97">
+            <xpath><![CDATA[TABLE[@ID="attribute"]/TBODY[1]/TR[8]/TD[1]/A[@CDATA="Not Man No Range TB"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" step="98">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Attribute]]></value>
+        </action>
+        <action type="click" refresh="true" step="99">
+            <xpath><![CDATA[*/FORM[@ID="_delete"]/INPUT[@ID="delda"]]]></xpath>
+            <value><![CDATA[delda]]></value>
+        </action>
+        <action type="verify-title" step="100">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Delete Attribute]]></value>
+        </action>
+        <action type="assert-text-does-not-exist" step="101">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Warning]]></value>
+        </action>
+        <action type="click" refresh="true" step="102">
+            <xpath><![CDATA[*/FORM[@ID="_confirm"]/INPUT[@NAME="_confirm" and @VALUE="Confirm"]]]></xpath>
+            <value><![CDATA[_confirm]]></value>
+        </action>
+        <action type="verify-title" step="103">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Position Attributes]]></value>
+        </action>
+    </actions>
+</tg4w>

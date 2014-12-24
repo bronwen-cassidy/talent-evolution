@@ -1,0 +1,165 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tg4w version="0.38.2">
+    <actions>
+        <action type="goto" refresh="true" step="0">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/orgbuilder/addsubject.htm]]></value>
+        </action>
+        <action type="verify-title" step="1">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Add Person]]></value>
+        </action>
+        <action type="select" step="2">
+            <xpath><![CDATA[*/FORM[@ID="es_next"]/*/SELECT[@NAME="coreDetail.title"]]]></xpath>
+            <value><![CDATA[Mr]]></value>
+        </action>
+        <action type="fill" step="3">
+            <xpath><![CDATA[*/FORM[@ID="es_next"]/*/INPUT[@TYPE="text" and @NAME="coreDetail.firstName"]]]></xpath>
+            <value><![CDATA[ben]]></value>
+        </action>
+        <action type="fill" step="4">
+            <xpath><![CDATA[*/FORM[@ID="es_next"]/*/INPUT[@TYPE="text" and @NAME="coreDetail.secondName"]]]></xpath>
+            <value><![CDATA[ben]]></value>
+        </action>
+        <action type="fill" step="5">
+            <xpath><![CDATA[*/FORM[@ID="es_next"]/*/INPUT[@TYPE="text" and @NAME="coreDetail.prefGivenName"]]]></xpath>
+            <value><![CDATA[ben ben]]></value>
+        </action>
+        <action type="click" refresh="true" step="6">
+            <xpath><![CDATA[*/FORM[@ID="es_next"]/*/INPUT[@NAME="_target1" and @VALUE="Next >>"]]]></xpath>
+            <value><![CDATA[_target1]]></value>
+        </action>
+        <action type="verify-title" step="7">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Add Person]]></value>
+        </action>
+        <action type="click" refresh="true" step="8">
+            <xpath><![CDATA[*/FORM[@ID="_addAssoc"]/*/INPUT[@NAME="_target2" and @VALUE="Next >>"]]]></xpath>
+            <value><![CDATA[_target2]]></value>
+        </action>
+        <action type="verify-title" step="9">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Add Person]]></value>
+        </action>
+        <action type="fill" step="10">
+            <xpath><![CDATA[*/FORM[@ID="_add"]/*/INPUT[@TYPE="text" and @NAME="userWrapper.loginInfo.username"]]]></xpath>
+            <value><![CDATA[ben.ben]]></value>
+        </action>
+        <action type="fill" step="11">
+            <xpath><![CDATA[*/FORM[@ID="_add"]/*/INPUT[@TYPE="password" and @NAME="userWrapper.loginInfo.password"]]]></xpath>
+            <value><![CDATA[password]]></value>
+        </action>
+        <action type="fill" step="12">
+            <xpath><![CDATA[*/FORM[@ID="_add"]/*/INPUT[@TYPE="password" and @NAME="userWrapper.loginInfo.repeatedPassword"]]]></xpath>
+            <value><![CDATA[password]]></value>
+        </action>
+        <action type="click" step="13">
+            <xpath><![CDATA[*/FORM[@ID="_add"]/*/INPUT[@ID="btn_setAll"]]]></xpath>
+            <value><![CDATA[SetAll]]></value>
+        </action>
+        <action type="click" refresh="true" step="14">
+            <xpath><![CDATA[*/FORM[@ID="_add"]/*/INPUT[@NAME="_finish" and @VALUE="Save"]]]></xpath>
+            <value><![CDATA[_finish]]></value>
+        </action>
+        <action type="verify-title" step="15">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Person]]></value>
+        </action>
+        <action type="click" refresh="true" step="16">
+            <xpath><![CDATA[A[@ID="a_ADMINMODULE"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" refresh="true" step="17">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Administration Home]]></value>
+        </action>
+        <action type="goto" refresh="true" step="18">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[admin/listuser.htm]]></value>
+        </action>
+        <action type="verify-title" step="19">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Users]]></value>
+        </action>
+        <action type="click" refresh="true" step="20">
+            <xpath><![CDATA[*/FORM[@ID="user"]/*/INPUT[@TYPE="submit" and @VALUE="Search"]]]></xpath>
+            <value><![CDATA[null]]></value>
+        </action>
+        <action type="verify-title" refresh="true" step="21">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Users]]></value>
+        </action>
+        <action type="click" step="22">
+            <xpath><![CDATA[TABLE[@ID="userList"]/TBODY[1]/TR[3]/TD[1]/A[@CDATA="ben.ben"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" step="23">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - User]]></value>
+        </action>
+        <action type="click" refresh="true" step="24">
+            <xpath><![CDATA[*/FORM[@ID="_deleteuser"]/INPUT[@NAME="_deleteuser" and @VALUE="Delete"]]]></xpath>
+            <value><![CDATA[_deleteuser]]></value>
+        </action>
+        <action type="verify-title" step="25">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Delete User]]></value>
+        </action>
+        <action type="click" refresh="true" step="26">
+            <xpath><![CDATA[*/FORM[@ID="_confirm"]/INPUT[@NAME="_confirm" and @VALUE="Confirm"]]]></xpath>
+            <value><![CDATA[_confirm]]></value>
+        </action>
+        <action type="verify-title" step="27">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Users]]></value>
+        </action>
+        <action type="click" refresh="true" step="28">
+            <xpath><![CDATA[A[@ID="a_ORGANISATIONMODULE"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" refresh="true" step="29">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Organisation Home]]></value>
+        </action>
+        <action type="goto" refresh="true" step="30">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[orgbuilder/listsubject.htm]]></value>
+        </action>
+        <action type="verify-title" step="31">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - People Search]]></value>
+        </action>
+        <action type="click" refresh="true" step="32">
+            <xpath><![CDATA[*/FORM[@ID="subject"]/*/INPUT[@NAME="_target3" and @VALUE="Search"]]]></xpath>
+            <value><![CDATA[_target3]]></value>
+        </action>
+        <action type="verify-title" step="33">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - People Search]]></value>
+        </action>
+        <action type="click" refresh="true" step="34">
+            <xpath><![CDATA[TABLE[@ID="subjecttable"]/TBODY[1]/TR[7]/TD[1]/A[@CDATA="ben"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" step="35">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - People Search]]></value>
+        </action>
+        <action type="click" refresh="true" step="36">
+            <xpath><![CDATA[*/FORM[@ID="_delSubject"]/INPUT[@ID="btn_deletesubject"]]]></xpath>
+            <value><![CDATA[_delSubject]]></value>
+        </action>
+        <action type="verify-title" step="37">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Delete Person]]></value>
+        </action>
+        <action type="click" refresh="true" step="38">
+            <xpath><![CDATA[*/FORM[@ID="_delete"]/INPUT[@NAME="_delete" and @VALUE="Confirm"]]]></xpath>
+            <value><![CDATA[_delete]]></value>
+        </action>
+        <action type="verify-title" step="39">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - People Search]]></value>
+        </action>
+    </actions>
+</tg4w>

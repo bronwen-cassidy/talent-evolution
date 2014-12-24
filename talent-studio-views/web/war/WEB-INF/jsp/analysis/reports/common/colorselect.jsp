@@ -1,0 +1,22 @@
+<option style="background-color:#FFFFFF" value="" <c:if test="${columnDisplayImage.displayImage == '' || columnDisplayImage.displayImage == null}">selected</c:if>><fmt:message key="none"/></option>
+<option style="background-color:#000066" value="000066" <c:if test="${columnDisplayImage.displayImage == '000066'}">selected</c:if>>&nbsp;</option>
+<option style="background-color:#0066CC" value="0066CC" <c:if test="${columnDisplayImage.displayImage == '0066CC'}">selected</c:if>>&nbsp;</option>
+<option style="background-color:#009900" value="009900" <c:if test="${columnDisplayImage.displayImage == '009900'}">selected</c:if>>&nbsp;</option>
+<option style="background-color:#00FF99" value="00FF99" <c:if test="${columnDisplayImage.displayImage == '00FF99'}">selected</c:if>>&nbsp;</option>
+<option style="background-color:#3300FF" value="3300FF" <c:if test="${columnDisplayImage.displayImage == '3300FF'}">selected</c:if>>&nbsp;</option>
+<option style="background-color:#339999" value="339999" <c:if test="${columnDisplayImage.displayImage == '339999'}">selected</c:if>>&nbsp;</option>
+<option style="background-color:#33CCFF" value="33CCFF" <c:if test="${columnDisplayImage.displayImage == '33CCFF'}">selected</c:if>>&nbsp;</option>
+<option style="background-color:#33FF33" value="33FF33" <c:if test="${columnDisplayImage.displayImage == '33FF33'}">selected</c:if>>&nbsp;</option>
+<option style="background-color:#660033" value="660033" <c:if test="${columnDisplayImage.displayImage == '660033'}">selected</c:if>>&nbsp;</option>
+<option style="background-color:#9900FF" value="9900FF" <c:if test="${columnDisplayImage.displayImage == '9900FF'}">selected</c:if>>&nbsp;</option>
+<option style="background-color:#996600" value="996600" <c:if test="${columnDisplayImage.displayImage == '996600'}">selected</c:if>>&nbsp;</option>
+<option style="background-color:#FF0000" value="FF0000" <c:if test="${columnDisplayImage.displayImage == 'FF0000'}">selected</c:if>>&nbsp;</option>
+<option style="background-color:#FF33CC" value="FF33CC" <c:if test="${columnDisplayImage.displayImage == 'FF33CC'}">selected</c:if>>&nbsp;</option>
+<option style="background-color:#FF6666" value="FF6666" <c:if test="${columnDisplayImage.displayImage == 'FF6666'}">selected</c:if>>&nbsp;</option>
+<option style="background-color:#FFCC66" value="FFCC66" <c:if test="${columnDisplayImage.displayImage == 'FFCC66'}">selected</c:if>>&nbsp;</option>
+<option style="background-color:#0000CC" value="0000CC" <c:if test="${columnDisplayImage.displayImage == '0000CC'}">selected</c:if>>&nbsp;</option>
+<option style="background-color:#999933" value="999933" <c:if test="${columnDisplayImage.displayImage == '999933'}">selected</c:if>>&nbsp;</option>
+<option style="background-color:#FF9933" value="FF9933" <c:if test="${columnDisplayImage.displayImage == 'FF9933'}">selected</c:if>>&nbsp;</option>
+<option style="background-color:#CC9900" value="CC9900" <c:if test="${columnDisplayImage.displayImage == 'CC9900'}">selected</c:if>>&nbsp;</option>
+<option style="background-color:#FFCCFF" value="FFCCFF" <c:if test="${columnDisplayImage.displayImage == 'FFCCFF'}">selected</c:if>>&nbsp;</option>
+<option style="background-color:#000000" value="000000" <c:if test="${columnDisplayImage.displayImage == '000000'}">selected</c:if>>&nbsp;</option>

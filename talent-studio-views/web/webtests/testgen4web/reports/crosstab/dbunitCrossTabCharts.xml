@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tg4w version="0.38.2">
+    <actions>
+        <action type="goto" refresh="true" step="0">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/analysis/listcrosstabreports.htm?navigator.notSubmit=true]]></value>
+        </action>
+        <action type="verify-title" step="1">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Cross-tab Reports]]></value>
+        </action>
+        <action type="click" refresh="true" step="2">
+            <xpath><![CDATA[TABLE[@ID="reports"]/TBODY[1]/TR[1]/TD[1]/A[@CDATA="Cross tab Report 1"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" step="3">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Cross-tab Report]]></value>
+        </action>
+        <action type="assert-text-exists" step="4">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Cross tab Report 1]]></value>
+        </action>
+        <action type="assert-text-exists" step="5">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Tabular Report 1]]></value>
+        </action>
+
+        <!-- run report with default settings -->        
+        <action type="click" step="6">
+            <xpath><![CDATA[A[@ID="a_runoptions"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="click" refresh="true" step="7">
+            <xpath><![CDATA[*/FORM[@ID="runreport"]/*/INPUT[@NAME="_target0" and @VALUE="Run"]]]></xpath>
+            <value><![CDATA[_target0]]></value>
+        </action>
+
+        <!-- check results -->
+        <action type="verify-title" step="8">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Cross-tab Report]]></value>
+        </action>
+        <action type="assert-text-exists" step="9">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Organisation Unit]]></value>
+        </action>
+        <action type="assert-text-exists" step="10">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Default Org Unit]]></value>
+        </action>
+        <action type="assert-text-exists" step="11">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Results]]></value>
+        </action>
+        <action type="assert-text-exists" step="12">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[N/A]]></value>
+        </action>
+        <action type="assert-text-exists" step="13">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Total]]></value>
+        </action>
+        <action type="assert-text-exists" step="14">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[1]]></value>
+        </action>
+
+        <!-- bar chart -->
+        <action type="click" refresh="true" step="15">
+            <xpath><![CDATA[TD[@ID="ibd_results"]/TABLE[1]/TBODY[1]/TR[1]/TD[1]/TABLE[1]/TBODY[1]/TR[2]/TD[1]/A[@CDATA="Category"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" step="16">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Cross-tab Report]]></value>
+        </action>
+        <action type="assert-text-exists" step="17">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Charts]]></value>
+        </action>
+        <action type="assert-text-exists" step="18">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[No Results To Chart]]></value>
+        </action>
+        <action type="click" step="19">
+            <xpath><![CDATA[A[@ID="a_results"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+
+        <!-- pie chart -->
+        <action type="click" refresh="true" step="20">
+            <xpath><![CDATA[TD[@ID="ibd_results"]/TABLE[1]/TBODY[1]/TR[1]/TD[2]/A[@CDATA="Default Org Unit"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" step="21">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Cross-tab Report]]></value>
+        </action>
+        <action type="assert-text-exists" step="22">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Distribution of Category for Organisation Unit "Default Org Unit"]]></value>
+        </action>
+    </actions>
+</tg4w>

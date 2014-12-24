@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tg4w version="0.38.2">
+    <actions>
+        <action type="goto" refresh="true" step="0">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/admin/displayconfigsettings.htm?navigator.notSubmit=true]]></value>
+        </action>
+        <action type="verify-title" step="1">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Artefact Display Configuration]]></value>
+        </action>
+        <action type="click" refresh="true" step="2">
+            <xpath><![CDATA[A[@ID="dis3"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" step="3">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Artefact Display Configuration]]></value>
+        </action>
+        <action type="click" refresh="true" step="4">
+            <xpath><![CDATA[A[@ID="disI1"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" step="5">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Artefact Display Configuration]]></value>
+        </action>
+        <action type="click" refresh="true" step="6">
+            <xpath><![CDATA[*/FORM[@ID="editDCI"]/INPUT[@ID="editDCI3"]]]></xpath>
+            <value><![CDATA[null]]></value>
+        </action>
+        <action type="verify-title" step="7">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Artefact Display Configuration]]></value>
+        </action>
+        <action type="fill" step="8">
+            <xpath><![CDATA[*/FORM[@ID="addinfo"]/*/INPUT[@ID="reports0.columns0.label"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="click" refresh="true" step="9">
+            <xpath><![CDATA[*/FORM[@ID="addinfo"]/*/INPUT[@NAME="_target6" and @VALUE="Save"]]]></xpath>
+            <value><![CDATA[_target6]]></value>
+        </action>
+        <action type="verify-title" step="10">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Artefact Display Configuration]]></value>
+        </action>
+        <action type="assert-text-exists" step="11">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Label is a required field.]]></value>
+        </action>
+        <action type="fill" step="12">
+            <xpath><![CDATA[*/FORM[@ID="addinfo"]/*/INPUT[@TYPE="text" and @NAME="reports[0].label"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="click" refresh="true" step="13">
+            <xpath><![CDATA[*/FORM[@ID="addinfo"]/*/INPUT[@NAME="_target6" and @VALUE="Save"]]]></xpath>
+            <value><![CDATA[_target6]]></value>
+        </action>
+        <action type="verify-title" step="14">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Artefact Display Configuration]]></value>
+        </action>
+        <action type="assert-text-exists" step="15">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Label is a required field.]]></value>
+        </action>
+        <action type="fill" step="16">
+            <xpath><![CDATA[*/FORM[@ID="addinfo"]/*/INPUT[@ID="ifconfig"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="click" refresh="true" step="17">
+            <xpath><![CDATA[*/FORM[@ID="addinfo"]/*/INPUT[@NAME="_target6" and @VALUE="Save"]]]></xpath>
+            <value><![CDATA[_target6]]></value>
+        </action>
+        <action type="verify-title" step="18">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Artefact Display Configuration]]></value>
+        </action>
+        <action type="assert-text-exists" step="19">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Label is a required field.]]></value>
+        </action>
+        <action type="click" refresh="true" step="20">
+            <xpath><![CDATA[*/FORM[@ID="addinfo"]/*/INPUT[@NAME="cancelRes" and @VALUE="Cancel"]]]></xpath>
+            <value><![CDATA[cancelRes]]></value>
+        </action>
+        <action type="verify-title" step="21">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Artefact Display Configuration]]></value>
+        </action>
+        <action type="assert-text-exists" step="22">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Title]]></value>
+        </action>
+    </actions>
+</tg4w>

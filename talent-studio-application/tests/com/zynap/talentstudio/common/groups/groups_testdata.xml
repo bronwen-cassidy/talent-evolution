@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+  <GROUPS ID="1" LABEL="Another" TYPE="QUESTIONNAIRE"/>
+  <GROUPS ID="21" LABEL="Group 1" TYPE="HOMEPAGE"/>
+  <HOME_PAGES ARENA_ID="TALENTIDENTIFIERMODULE" PAGE_URL="http://www.pentaho.com/" FILE_UPLOAD="[NULL]" ID="1" GROUP_ID="21"/>
+  <HOME_PAGES ARENA_ID="ORGANISATIONMODULE" PAGE_URL="http://www.bbc.co.uk/weather/5day.shtml?world=0008" FILE_UPLOAD="[NULL]" ID="2" GROUP_ID="21"/>
+  <HOME_PAGES ARENA_ID="MYZYNAPMODULE" PAGE_URL="http://scratch.mit.edu/" FILE_UPLOAD="[NULL]" ID="3" GROUP_ID="21"/>
+  <HOME_PAGES ARENA_ID="SUCCESSIONMODULE" PAGE_URL="http://www.dzone.com/links/" FILE_UPLOAD="[NULL]" ID="4" GROUP_ID="21"/>
+  <HOME_PAGES ARENA_ID="PERFMANMODULE" PAGE_URL="http://www.rnib.org.uk/xpedio/groups/public/documents/publicwebsite/public_everydaybraille.hcsp" FILE_UPLOAD="[NULL]" ID="5" GROUP_ID="21"/>
+  <HOME_PAGES ARENA_ID="ANALYSISMODULE" PAGE_URL="http://inkscape.org/download/?lang=en" FILE_UPLOAD="[NULL]" ID="6" GROUP_ID="21"/>
+  <HOME_PAGES ARENA_ID="ADMINMODULE" PAGE_URL="http://java.sun.com/" FILE_UPLOAD="[NULL]" ID="7" GROUP_ID="21"/>
+</dataset>

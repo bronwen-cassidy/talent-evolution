@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+    <!--
+        Created by the Middlegen Hibernate plugin 2.1
+
+        http://boss.bekk.no/boss/middlegen/
+        http://www.hibernate.org/
+    -->
+
+    <class
+            name="com.zynap.talentstudio.arenas.Arena"
+            table="MODULES"
+            dynamic-update="true"
+            dynamic-insert="true"
+            >
+        <cache usage="nonstrict-read-write"/>
+        
+        <id
+                name="arenaId"
+                type="java.lang.String"
+                column="ID"
+                >
+            <generator class="assigned"/>
+        </id>
+
+        <property
+                name="label"
+                type="java.lang.String"
+                column="LABEL"
+                not-null="true"
+                length="200"
+                />
+
+        <property
+                name="url"
+                type="java.lang.String"
+                column="URL"
+                not-null="true"
+                length="50"
+                />
+
+        <property
+                name="description"
+                type="java.lang.String"
+                column="DESCRIPTION"
+                length="200"
+                />
+
+        <property
+                name="sessionTimeout"
+                type="java.lang.Integer"
+                column="SESSION_TIMEOUT"
+                length="4"
+                />
+
+        <property
+                name="active"
+                type="true_false"
+                column="IS_ACTIVE"
+                not-null="true"
+                length="1"
+                />
+
+        <property
+                name="hideable"
+                type="true_false"
+                column="IS_HIDEABLE"
+                not-null="true"
+                length="1"
+                />
+
+        <property
+                name="sortOrder"
+                type="java.lang.Integer"
+                column="SORT_ORDER"
+                not-null="true"
+                />
+
+        <!-- Associations -->
+        <!-- bi-directional one-to-many association to MenuSection -->
+        <set
+                name="menuSections"
+                lazy="false"
+                inverse="true"
+                cascade="none"
+                order-by="SORT_ORDER"
+                batch-size="50"
+                >
+            <cache usage="nonstrict-read-write"/>
+            <key>
+                <column name="MODULE_ID"/>
+            </key>
+
+            <one-to-many
+                    class="com.zynap.talentstudio.arenas.MenuSection"
+                    />
+        </set>
+
+        <!-- bi-directional one-to-many association to ArenaDisplayConfigItem -->
+        <set
+                name="arenaDisplayConfigItems"
+                lazy="true"
+                inverse="true"
+                cascade="all-delete-orphan"
+                outer-join="true"
+                batch-size="50"
+                >
+            <key>
+                <column name="MODULE_ID"/>
+            </key>
+            <one-to-many
+                    class="com.zynap.talentstudio.arenas.ArenaDisplayConfigItem"
+                    />
+        </set>
+
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Implementation-Title: TalentEvolution Integration Client Application.
+Implementation-Vendor: Zynap Ltd.
+Main-Class: com.zynap.talentstudio.integration.client.ExecuteXml
+

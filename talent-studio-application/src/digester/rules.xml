@@ -1,0 +1,46 @@
+<!DOCTYPE digester-rules PUBLIC "-//Jakarta Apache //DTD digester-rules XML V1.0//EN" "http://jakarta.apache.org/commons/digester/dtds/digester-rules.dtd">
+
+<digester-rules>
+
+    <pattern value="xml">
+
+        <pattern value="questionnaire">
+
+            <object-create-rule classname="com.zynap.talentstudio.questionnaires.support.DigesterQuestionnaireDefinition"/>
+            <set-properties-rule>
+                <alias attr-name="name" prop-name="label"/>
+                <alias attr-name="title" prop-name="title"/>
+            </set-properties-rule>
+
+            <pattern value="group">
+
+                <object-create-rule classname="com.zynap.talentstudio.questionnaires.support.QuestionnaireGroup"/>
+                <set-properties-rule>
+                    <alias attr-name="name" prop-name="label"/>
+                    <alias attr-name="displayable" prop-name="displayable"/>
+                    <alias attr-name="title" prop-name="title"/>
+                </set-properties-rule>
+                <call-method-rule pattern="narrative" methodname="setDescription" paramcount="0"/>
+
+                <set-next-rule methodname="addQuestionnaireGroup"/>
+
+                <include path="digester/questionrules.xml"/>
+
+            </pattern>
+
+            <pattern value="group/multi-question">
+
+                <object-create-rule classname="com.zynap.talentstudio.questionnaires.support.MultiQuestion"/>
+                <set-properties-rule>
+                    <alias attr-name="name" prop-name="name"/>
+                </set-properties-rule>
+                <set-next-rule methodname="addMultiQuestion"/>
+                <include path="digester/questionrules.xml"/>
+
+            </pattern>
+
+        </pattern>
+
+    </pattern>
+
+</digester-rules>

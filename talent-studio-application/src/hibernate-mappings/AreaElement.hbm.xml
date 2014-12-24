@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+    <!--
+        Created by the Middlegen Hibernate plugin 2.1
+
+        http://boss.bekk.no/boss/middlegen/
+        http://www.hibernate.org/
+    -->
+
+    <class
+            name="com.zynap.talentstudio.security.areas.AreaElement"
+            table="AREA_ELEMENTS"
+            dynamic-update="true"
+            dynamic-insert="true"
+            >
+
+        <id
+                name="id"
+                type="long"
+                column="ID"
+                unsaved-value="null"
+                >
+            <generator class="sequence">
+                <param name="sequence">ASSOC_SQ</param>
+            </generator>
+
+        </id>
+
+        <property
+                name="cascading"
+                type="true_false"
+                column="CASCADING"
+                />
+
+        <property
+                name="excluded"
+                type="true_false"
+                column="IS_EXCLUDED"
+                />
+
+        <property
+                name="fromPopulation"
+                type="true_false"
+                column="IS_FROM_POPULATION"
+                />
+        <!-- Associations -->
+
+        <!-- bi-directional many-to-one association to Node -->
+        <many-to-one
+                name="node"
+                class="com.zynap.talentstudio.organisation.Node"
+                not-null="true"
+                >
+            <column name="NODE_ID"/>
+        </many-to-one>
+
+        <!-- bi-directional many-to-one association to Area -->
+        <many-to-one
+                name="area"
+                class="com.zynap.talentstudio.security.areas.Area"
+                not-null="true"
+                >
+            <column name="AREA_ID"/>
+        </many-to-one>
+
+    </class>
+</hibernate-mapping>

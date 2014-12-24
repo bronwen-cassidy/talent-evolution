@@ -1,0 +1,135 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tg4w version="0.38.2">
+    <actions>
+        <action type="goto" refresh="true" step="0">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/orgbuilder/listsubject.htm?navigator.notSubmit=true]]></value>
+        </action>
+        <action type="verify-title" step="1">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - People Search]]></value>
+        </action>
+        <action type="select" step="2">
+            <xpath><![CDATA[*/FORM[@ID="subject"]/*/SELECT[@ID="pop2"]]]></xpath>
+            <value><![CDATA[-2]]></value>
+        </action>
+        <action type="click" refresh="true" step="3">
+            <xpath><![CDATA[*/FORM[@ID="subject"]/*/INPUT[@NAME="_target3" and @VALUE="Search"]]]></xpath>
+            <value><![CDATA[_target3]]></value>
+        </action>
+        <action type="verify-title" step="4">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - People Search]]></value>
+        </action>
+        <action type="assert-text-exists" step="5">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[5 items found, displaying all items.]]></value>
+        </action>
+        <action type="assert-text-exists" step="6">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Deronda]]></value>
+        </action>
+        <action type="assert-text-exists" step="7">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Eyre]]></value>
+        </action>
+        <action type="assert-text-exists" step="8">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Verne]]></value>
+        </action>
+        <action type="assert-text-exists" step="9">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Battaglia]]></value>
+        </action>
+        <action type="assert-text-exists" step="10">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Twist]]></value>
+        </action>
+        <action type="click" refresh="true" step="11">
+            <xpath><![CDATA[TABLE[@ID="positiontable"]/THEAD[1]/TR[1]/TH[1]/A[@CDATA="Title"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" step="12">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - People Search]]></value>
+        </action>
+        <action type="click" step="13">
+            <xpath><![CDATA[A[@ID="a_search"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="select" step="14">
+            <xpath><![CDATA[*/FORM[@ID="subject"]/*/SELECT[@ID="pop2"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="fill" step="15">
+            <xpath><![CDATA[*/FORM[@ID="subject"]/*/INPUT[@TYPE="text" and @NAME="filter.firstName"]]]></xpath>
+            <value><![CDATA[jules]]></value>
+        </action>
+        <action type="click" refresh="true" step="16">
+            <xpath><![CDATA[*/FORM[@ID="subject"]/*/INPUT[@NAME="_target3" and @VALUE="Search"]]]></xpath>
+            <value><![CDATA[_target3]]></value>
+        </action>
+        <action type="verify-title" step="17">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - People Search]]></value>
+        </action>
+        <action type="assert-text-exists" step="18">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Verne]]></value>
+        </action>
+        <action type="assert-text-exists" step="19">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[One item found.]]></value>
+        </action>
+        <action type="click" refresh="true" step="20">
+            <xpath><![CDATA[TABLE[@ID="positiontable"]/TBODY[1]/TR[3]/TD[1]/A[@CDATA="Verne"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" step="21">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - People Search]]></value>
+        </action>
+        <action type="assert-text-exists" step="22">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Summary of Jules Verne]]></value>
+        </action>
+
+        <action type="fill" step="23">
+            <xpath><![CDATA[*/FORM[@ID="subject"]/*/INPUT[@TYPE="text" and @NAME="filter.firstName"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="fill" step="24">
+            <xpath><![CDATA[*/FORM[@ID="subject"]/*/INPUT[@TYPE="text" and @NAME="filter.positionTitle"]]]></xpath>
+            <value><![CDATA[head of IT]]></value>
+        </action>
+        <action type="click" refresh="true" step="25">
+            <xpath><![CDATA[*/FORM[@ID="subject"]/*/INPUT[@NAME="_target3" and @VALUE="Search"]]]></xpath>
+            <value><![CDATA[_target3]]></value>
+        </action>
+        <action type="verify-title" step="26">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - People Search]]></value>
+        </action>
+        <action type="assert-text-exists" step="27">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Battaglia]]></value>
+        </action>
+        <action type="assert-text-exists" step="28">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[One item found.]]></value>
+        </action>
+        <action type="click" refresh="true" step="29">
+            <xpath><![CDATA[TABLE[@ID="positiontable"]/TBODY[1]/TR[3]/TD[1]/A[@CDATA="Battaglia"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" step="30">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - People Search]]></value>
+        </action>
+        <action type="assert-text-exists" step="31">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Summary of Santa Battaglia]]></value>
+        </action>
+
+    </actions>
+</tg4w>

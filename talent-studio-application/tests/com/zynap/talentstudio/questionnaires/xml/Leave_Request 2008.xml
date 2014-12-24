@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+    <questionnaire name="Leave Request" title="Leave Request">
+        <group name="Status" title="Status">
+            <question id="1" type="LastUpdated" name="Annual Leave Form Last Updated"/>
+            <question id="40" type="LastUpdatedBy" name="Last Updated By" title="Last Updated By"/>
+        </group>
+        <group name="Current Leave Entitlement" title="Current Leave Entitlement">
+            <narrative>Your full year leave entitlement is 27 days annual leave, plus national and bank holidays per annum. The annual leave year runs from 1st April to 31st March.</narrative>
+            <narrative>As trainees join the Graduate Scheme part way through the leave year, the entitlement is calculated pro-rata, as below:</narrative>
+            <narrative>HR/GENERAL MANAGEMENT</narrative>
+            <narrative>September 2008 – March 2009 (7 months) - 16 days, April 2009 – March 2010 (12 months) - 27 days, April 2010 – August 2011 (5 months) - 11.5 days</narrative>
+            <narrative>FINANCE</narrative>
+            <narrative>September 2008 – March 2009 (7 months) - 16 days, April 2009 – March 2010 (12 months) - 27 days, April 2010 – Mar 2011 (12 months) - 27 days</narrative>
+        </group>
+        <group name="Additional Entitlement and Carried Over Leave" title="Additional Entitlement">
+            <narrative>Additional Leave may be available for those trainees who have previous NHS service whether it be continuous or reckonable service.</narrative>
+            <multi-question name="Additional Entitlement">
+                <line-item dynamic="N"/>
+                <question id="30" type="Text" name="Year 1" title="Year 1 Additional" managerWrite="Y"/>
+                <question id="31" type="Text" name="Year 2" title="Year 2 Additional" managerWrite="Y"/>
+                <question id="32" type="Text" name="Year 3" title="year 3 Addtional" managerWrite="Y"/>
+                <question id="33" type="TextBox" name="Comments" title="Comments" managerWrite="Y"/>
+            </multi-question>
+            <narrative>Leave may only be carried over in exceptional circumstance which must be approved</narrative>
+            <multi-question name="Leave Carried Over">
+                <line-item dynamic="N"/>
+                <question id="35" type="Text" name="Approved balance from Year 1" title="Year 1 Carry " managerWrite="Y"/>
+                <question id="36" type="Text" name="Approved balance from Year 2" title="Year 2 carry" managerWrite="Y"/>
+                <question id="37" type="Text" name="Approved balance from Year 3" title="Year 3 carry" managerWrite="Y"/>
+                <question id="38" type="TextBox" name="Comments" title="Comments" managerWrite="Y"/>
+            </multi-question>
+        </group>
+        <group name="Leave Request - September 2008 - March 2009" title="Leave Request">
+            <narrative>(Annual, Compassionate, Maternity etc.)</narrative>
+            <multi-question name=" ">
+                <line-item dynamic="Y" managerCanDisable="Y">Request</line-item>
+                <question id="2" type="Select" name="Type" title="Type">
+                    <answer value="Annual Leave" text="Annual Leave"/>
+                    <answer value="Study Leave" text="Study Leave"/>
+                    <answer value="Compassionate Leave" text="Compassionate Leave"/>
+                    <answer value="Maternity Leave" text="Maternity Leave"/>
+                </question>
+                <question id="3" type="Date" name="Date from" title="Date from"/>
+                <question id="4" type="Date" name="Date to" title="Date to"/>
+                <question id="5" type="Text" name="Days requested" title="Days requested"/>
+                <question id="6" type="Text" name="Days remaining" title="Days remaining"/>
+                <question id="7" type="Date" name="Authorised" title="Authorised" managerWrite="Y"/>
+                <question id="8" type="Text" name="Authorised By" title="Authorised" managerWrite="Y"/>
+            </multi-question>
+        </group>
+        <group name="Leave Request - April 2009 - March 2010" title="Leave Request">
+            <narrative>(Annual, Compassionate, Maternity etc.)</narrative>
+            <multi-question name=" ">
+                <line-item dynamic="Y" managerCanDisable="Y">Request</line-item>
+                <question id="9" type="Select" name="Type" title="Type">
+                    <answer value="Annual Leave" text="Annual Leave"/>
+                    <answer value="Study Leave" text="Study Leave"/>
+                    <answer value="Compassionate Leave" text="Compassionate Leave"/>
+                    <answer value="Maternity Leave" text="Maternity Leave"/>
+                </question>
+                <question id="10" type="Date" name="Date from" title="Date from"/>
+                <question id="11" type="Date" name="Date to" title="Date to"/>
+                <question id="12" type="Text" name="Days requested" title="Days requested"/>
+                <question id="13" type="Text" name="Days remaining" title="Days remaining"/>
+                <question id="14" type="Date" name="Authorised" title="Authorised" managerWrite="Y"/>
+                <question id="15" type="Text" name="Authorised By" title="Authorised" managerWrite="Y"/>
+            </multi-question>
+        </group>
+        <group name="Leave Request - April 2010 - Scheme End" title="Leave Request">
+            <narrative>(Annual, Compassionate, Maternity etc.)</narrative>
+            <multi-question name=" ">
+                <line-item dynamic="Y" managerCanDisable="Y">Request</line-item>
+                <question id="20" type="Select" name="Type" title="Type">
+                    <answer value="Annual Leave" text="Annual Leave"/>
+                    <answer value="Study Leave" text="Study Leave"/>
+                    <answer value="Compassionate Leave" text="Compassionate Leave"/>
+                    <answer value="Maternity Leave" text="Maternity Leave"/>
+                </question>
+                <question id="21" type="Date" name="Date from" title="Date from"/>
+                <question id="22" type="Date" name="Date to" title="Date to"/>
+                <question id="23" type="Text" name="Days requested" title="Days requested"/>
+                <question id="24" type="Text" name="Days remaining" title="Days remaining"/>
+                <question id="25" type="Date" name="Authorised" title="Authorised" managerWrite="Y"/>
+                <question id="26" type="Text" name="Authorised By" title="Authorised" managerWrite="Y"/>
+            </multi-question>
+        </group>
+
+    </questionnaire>
+</xml>

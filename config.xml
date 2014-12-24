@@ -1,0 +1,32 @@
+<cruisecontrol>
+    <project name="TSBuild" buildafterfailed="true">
+        <listeners>
+            <currentbuildstatuslistener file="../logs/TSBuild/status.txt"/>
+        </listeners>
+
+        <bootstrappers>
+            <accurevbootstrapper synctime="true" verbose="true" workspace="/home/bcassidy/cruise/TSIntegration">
+            </accurevbootstrapper>
+        </bootstrappers>
+
+        <modificationset quietperiod="2400">
+            <accurev stream="TSIntegrationBuild_bcassidy" verbose="true">
+            </accurev>
+        </modificationset>
+
+        <schedule interval="900">
+            <ant anthome="/data01/apache-ant-1.7.0"
+                 buildfile="build.xml"
+                 target="auto-build"
+                 uselogger="true"
+                 usedebug="true"
+                 saveLogDir="/home/bcassidy/cruise/logs/ant"/>
+        </schedule>
+
+        <log logdir="../logs/TSBuild"/>
+
+        <publishers>
+        </publishers>
+
+    </project>
+</cruisecontrol>

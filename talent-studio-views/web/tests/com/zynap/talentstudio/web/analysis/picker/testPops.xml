@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<trees>
+    <tree type="S">
+        <branch id="person" label="Person" type="S" root="true">
+            <branch id="subjectPrimaryAssociations.position" label="Current Jobs" type="P" includeQualifierAttributes="true"/>
+            <branch id="subjectSecondaryAssociations.position" label="Succession Positions" type="P" includeQualifierAttributes="true"/>
+        </branch>
+    </tree>
+    <tree type="P">
+        <branch id="position" label="Position" type="P" root="true">
+            <branch label="Current Holders" id="subjectPrimaryAssociations.subject" type="S" includeQualifierAttributes="true"/>
+            <branch label="Successors" id="subjectSecondaryAssociations.subject" type="S" includeQualifierAttributes="true"/>
+            <branch label="Reports To" id="sourceAssociations.target" type="P" includeQualifierAttributes="true"/>
+            <branch label="Subordinates" id="targetAssociations.source" type="P" includeQualifierAttributes="true"/>
+        </branch>
+    </tree>
+    <attributes type="P">
+        <attribute id="title" label="Title" type="TEXT"/>
+        <attribute id="comments" label="Comments" type="TEXT"/>
+        <attribute id="organisationUnit.id" label="Organisation Unit" type="ORGANISATION"/>
+    </attributes>
+    <attributes type="S">
+        <attribute id="coreDetail.title" label="Title" type="TEXT"/>
+        <attribute id="coreDetail.firstName" label="First Name" type="TEXT"/>
+        <attribute id="coreDetail.prefGivenName" label="Given Name" type="TEXT"/>
+        <attribute id="coreDetail.secondName" label="Last Name" type="TEXT"/>
+        <attribute id="comments" label="Comments" type="TEXT"/>
+        <attribute id="coreDetail.contactEmail" label="Email" type="TEXT"/>
+        <attribute id="coreDetail.contactTelephone" label="Telephone" type="NUMBER"/>
+        <attribute id="dateOfBirth" label="Date of Birth" type="DATE"/>
+        <attribute id="user.loginInfo.username" label="Username" type="TEXT"/>
+    </attributes>
+
+    <!-- indicates what attributes are available for qualifiers -->
+    <qualifierattributes>
+        <attribute id="qualifier.id" label="Type" type="TEXT"/>
+    </qualifierattributes>
+
+    <!-- indicates restrictions on attributes -->
+    <extendedattributes searchableOnly="true"/>
+    <derivedattributes include="true"/>
+    <dynamiclineitems include="true"/>
+
+</trees>

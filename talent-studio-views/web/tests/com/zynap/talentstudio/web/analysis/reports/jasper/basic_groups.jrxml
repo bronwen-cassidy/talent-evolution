@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="DataSourceReport" pageWidth="450" pageHeight="842" columnWidth="150" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0"
+              isIgnorePagination="true" columnCount="3">
+
+    <style name="pager" isDefault="true" fontName="Arial" fontSize="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"
+           pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+    <style name="infomessage" isDefault="false" fontName="Arial" fontSize="12" isBold="true" isItalic="false" isUnderline="false"
+           isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+    <parameter name="subjectUrl" class="java.lang.String"/>
+    <parameter name="positionUrl" class="java.lang.String"/>
+    <parameter name="report" class="com.zynap.talentstudio.analysis.reports.Report"/>
+
+    <parameter name="Subreport" class="net.sf.jasperreports.engine.JasperReport"/>
+    <parameter name="subReportchildren" class="net.sf.jasperreports.engine.JasperReport"/>
+
+    <field name="title" class="java.lang.String"/>
+
+    <field name="children" class="java.util.Collection"/>
+
+    <field name="id" class="java.lang.String"/>
+
+    <group name="EvenGroup">
+        <groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+        <groupHeader>
+            <band height="15">
+                <printWhenExpression><![CDATA[$V{REPORT_COUNT}.intValue() % 2 == 1 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+                <textField hyperlinkType="Reference">
+                    <reportElement style="pager" x="0" y="20" width="150" height="15"/>
+                    <textElement/>
+                    <textFieldExpression class="java.lang.String">
+                        <![CDATA[com.zynap.talentstudio.analysis.reports.DataFormatter.formatValue((com.zynap.talentstudio.analysis.reports.Column)$P{report}.getColumns().get(0),$F{title})]]></textFieldExpression>
+                    <hyperlinkReferenceExpression><![CDATA[$P{positionUrl} + $F{id}]]></hyperlinkReferenceExpression>
+                </textField>
+
+                <subreport>
+                    <reportElement style="pager" x="150" y="20" width="150" height="15" isRemoveLineWhenBlank="true" key="subReportchildren"/>
+                    <subreportParameter name="positionUrl">
+                        <subreportParameterExpression><![CDATA[$P{positionUrl}]]></subreportParameterExpression>
+                    </subreportParameter>
+                    <subreportParameter name="report">
+                        <subreportParameterExpression><![CDATA[$P{report}]]></subreportParameterExpression>
+                    </subreportParameter>
+                    <subreportParameter name="subjectUrl">
+                        <subreportParameterExpression><![CDATA[$P{subjectUrl}]]></subreportParameterExpression>
+                    </subreportParameter>
+                    <subreportParameter name="subReportchildren">
+                        <subreportParameterExpression><![CDATA[$P{subReportchildren}]]></subreportParameterExpression>
+                    </subreportParameter>
+                    <dataSourceExpression>
+                        <![CDATA[new com.zynap.talentstudio.web.analysis.reports.jasper.JRCollectionDataSource($F{children})]]></dataSourceExpression>
+                    <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{Subreport}]]></subreportExpression>
+                </subreport>
+                
+            </band>
+        </groupHeader>
+    </group>
+
+    <group name="OddGroup">
+        <groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+        <groupHeader>
+            <band height="15">
+                <printWhenExpression><![CDATA[$V{REPORT_COUNT}.intValue() % 2 == 0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+
+                <textField hyperlinkType="Reference">
+                    <reportElement style="pager" x="0" y="20" width="150" height="15"/>
+                    <textElement/>
+                    <textFieldExpression class="java.lang.String">
+                        <![CDATA[com.zynap.talentstudio.analysis.reports.DataFormatter.formatValue((com.zynap.talentstudio.analysis.reports.Column)$P{report}.getColumns().get(0),$F{title})]]></textFieldExpression>
+                    <hyperlinkReferenceExpression><![CDATA[$P{positionUrl} + $F{id}]]></hyperlinkReferenceExpression>
+                </textField>
+
+                <subreport>
+                    <reportElement style="pager" x="150" y="20" width="150" height="15" isRemoveLineWhenBlank="true" key="subReportchildren"/>
+                    <subreportParameter name="positionUrl">
+                        <subreportParameterExpression><![CDATA[$P{positionUrl}]]></subreportParameterExpression>
+                    </subreportParameter>
+                    <subreportParameter name="report">
+                        <subreportParameterExpression><![CDATA[$P{report}]]></subreportParameterExpression>
+                    </subreportParameter>
+                    <subreportParameter name="subjectUrl">
+                        <subreportParameterExpression><![CDATA[$P{subjectUrl}]]></subreportParameterExpression>
+                    </subreportParameter>
+                    <subreportParameter name="subReportchildren">
+                        <subreportParameterExpression><![CDATA[$P{subReportchildren}]]></subreportParameterExpression>
+                    </subreportParameter>
+                    <dataSourceExpression>
+                        <![CDATA[new com.zynap.talentstudio.web.analysis.reports.jasper.JRCollectionDataSource($F{children})]]></dataSourceExpression>
+                    <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{Subreport}]]></subreportExpression>
+                </subreport>
+            </band>
+        </groupHeader>
+    </group>
+
+    <pageHeader>
+        <band height="20">
+            <staticText>
+                <reportElement style="infomessage" x="0" y="0" width="150" height="15"/>
+                <textElement/>
+                <text><![CDATA[Label]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="infomessage" x="150" y="0" width="150" height="15"/>
+                <textElement/>
+                <text><![CDATA[C Label]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="infomessage" x="300" y="0" width="150" height="15"/>
+                <textElement/>
+                <text><![CDATA[CC label]]></text>
+            </staticText>
+        </band>
+    </pageHeader>
+
+    <detail>
+        <band height="60">
+
+        </band>
+    </detail>
+
+</jasperReport>

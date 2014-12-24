@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<autnresponse xmlns:autn="http://schemas.autonomy.com/aci/">
+    <action>QUERY</action>
+    <response>SUCCESS</response>
+    <responsedata>
+        <autn:numhits>${numPortfolioItems}</autn:numhits>
+
+        #foreach ($portfolioItem in ${portfolioItems})
+
+            #if (${portfolioItem.getComments()})
+                #set($summary = ${portfolioItem.getComments()})
+            #else
+                #set($summary = "")
+            #end
+
+            #if (${portfolioItem.isText()})
+                #set($content = ${portfolioItem.textContent})
+            #elseif (${portfolioItem.isURL()})
+                #set($content = ${portfolioItem.url})
+            #else
+                #set($content = $summary)
+            #end
+
+            #set($id = ${portfolioItem.getId()})
+
+            #set($node = ${portfolioItem.getNode()})
+            #set($nodeType = ${node.getNodeType()})
+            #set($nodeLabel = ${node.getLabel()})
+
+            <autn:hit>
+                <autn:reference>${id}</autn:reference>
+                <autn:id>${id}</autn:id>
+                <autn:section>0</autn:section>
+                <autn:weight>99.00</autn:weight>
+                <autn:database>${nodeType}data</autn:database>
+                <autn:title>${nodeLabel}</autn:title>
+                <autn:summary><![CDATA[${nodeLabel} ${summary}]]></autn:summary>
+                <autn:content>
+                    <DOCUMENT>
+                        <DREREFERENCE>${id}</DREREFERENCE>
+                        <DRETITLE>${nodeLabel}</DRETITLE>
+                        <DREDATE>1153144063</DREDATE>
+                        <DREDBNAME>${nodeType}data</DREDBNAME>
+                        <ITEM_ID>${id}</ITEM_ID>
+                        <ARTEFACT_ID>${node.getId()}</ARTEFACT_ID>
+                        <CREATED_BY>${portfolioItem.getCreatedById()}</CREATED_BY>
+                        <CONTENT_TITLE><![CDATA[${portfolioItem.getLabel()}]]></CONTENT_TITLE>
+                        <SCOPE>${portfolioItem.getScope()}</SCOPE>
+                        <TYPE>${nodeType}</TYPE>
+                        <CONTENT_TYPE_ID>${portfolioItem.getContentType().getId()}</CONTENT_TYPE_ID>
+                        <HTTP_URL/>
+                        <SUMMARY><![CDATA[${summary}]]></SUMMARY>
+                        <DRECONTENT><![CDATA[${content}]]></DRECONTENT>
+                    </DOCUMENT>
+                </autn:content>
+            </autn:hit>
+        #end
+
+    </responsedata>
+</autnresponse>

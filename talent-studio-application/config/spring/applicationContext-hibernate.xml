@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+<beans>
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mappingResources">
+            <list>
+                <value>hibernate-mappings/Arena.hbm.xml</value>
+                <value>hibernate-mappings/ArenaDisplayConfigItem.hbm.xml</value>
+                <value>hibernate-mappings/NodeExtendedAttribute.hbm.xml</value>
+                <value>hibernate-mappings/DynamicAttribute.hbm.xml</value>
+                <value>hibernate-mappings/DynamicAttributeReference.hbm.xml</value>
+                <value>hibernate-mappings/MenuSection.hbm.xml</value>
+                <value>hibernate-mappings/MenuItem.hbm.xml</value>
+                <value>hibernate-mappings/LookupType.hbm.xml</value>
+                <value>hibernate-mappings/LookupValue.hbm.xml</value>
+                <value>hibernate-mappings/Permit.hbm.xml</value>
+                <value>hibernate-mappings/Role.hbm.xml</value>
+                <value>hibernate-mappings/User.hbm.xml</value>
+                <value>hibernate-mappings/SecurityDomain.hbm.xml</value>
+                <value>hibernate-mappings/Node.hbm.xml</value>
+                <value>hibernate-mappings/SubjectAssociation.hbm.xml</value>
+                <value>hibernate-mappings/SubjectPrimaryAssociation.hbm.xml</value>
+                <value>hibernate-mappings/SubjectSecondaryAssociation.hbm.xml</value>
+                <value>hibernate-mappings/LoginInfo.hbm.xml</value>
+                <value>hibernate-mappings/AreaElement.hbm.xml</value>
+                <value>hibernate-mappings/PortfolioItem.hbm.xml</value>
+                <value>hibernate-mappings/ContentType.hbm.xml</value>
+                <value>hibernate-mappings/PositionAssociation.hbm.xml</value>
+                <value>hibernate-mappings/PositionsHierarchy.hbm.xml</value>
+                <value>hibernate-mappings/PositionsHierarchyInc.hbm.xml</value>
+                <value>hibernate-mappings/OuHierarchy.hbm.xml</value>
+                <value>hibernate-mappings/OuHierarchyInc.hbm.xml</value>
+                <value>hibernate-mappings/UserDomainPermit.hbm.xml</value>
+                <value>hibernate-mappings/UserDomainPermitNoCache.hbm.xml</value>
+                <value>hibernate-mappings/SessionLog.hbm.xml</value>
+                <value>hibernate-mappings/PasswordHistory.hbm.xml</value>
+                <value>hibernate-mappings/Rule.hbm.xml</value>
+                <value>hibernate-mappings/Config.hbm.xml</value>
+                <value>hibernate-mappings/CoreDetail.hbm.xml</value>
+                <value>hibernate-mappings/Population.hbm.xml</value>
+                <value>hibernate-mappings/PopulationCriteria.hbm.xml</value>
+                <value>hibernate-mappings/Report.hbm.xml</value>
+                <value>hibernate-mappings/ReportColumn.hbm.xml</value>
+                <value>hibernate-mappings/ColumnDisplayImage.hbm.xml</value>
+                <value>hibernate-mappings/TargetDerivedAttribute.hbm.xml</value>
+                <value>hibernate-mappings/SourceDerivedAttribute.hbm.xml</value>
+                <value>hibernate-mappings/NodeAudit.hbm.xml</value>
+                <value>hibernate-mappings/Metric.hbm.xml</value>
+                <value>hibernate-mappings/QueDefinition.hbm.xml</value>
+                <value>hibernate-mappings/QueDefinitionModel.hbm.xml</value>
+                <value>hibernate-mappings/QueWorkflow.hbm.xml</value>
+                <value>hibernate-mappings/QueWorkflowParticipant.hbm.xml</value>                
+                <value>hibernate-mappings/Notification.hbm.xml</value>
+                <value>hibernate-mappings/MessageAttribute.hbm.xml</value>
+                <value>hibernate-mappings/DisplayConfig.hbm.xml</value>
+                <value>hibernate-mappings/DisplayConfigItem.hbm.xml</value>
+                <value>hibernate-mappings/DisplayItemReport.hbm.xml</value>
+                <value>hibernate-mappings/ExternalRefMapping.hbm.xml</value>
+                <value>hibernate-mappings/PerformanceReview.hbm.xml</value>
+                <value>hibernate-mappings/PerformanceEvaluator.hbm.xml</value>
+                <value>hibernate-mappings/PerformanceManager.hbm.xml</value>
+                <value>hibernate-mappings/Preference.hbm.xml</value>
+                <value>hibernate-mappings/ObjectiveDefinition.hbm.xml</value>
+                <value>hibernate-mappings/ObjectiveSet.hbm.xml</value>
+                <value>hibernate-mappings/ObjectiveAssessment.hbm.xml</value>
+                <value>hibernate-mappings/HelpTextItem.hbm.xml</value>
+                <value>hibernate-mappings/SecurityAttribute.hbm.xml</value>
+                <value>hibernate-mappings/Question.hbm.xml</value>
+                <value>hibernate-mappings/LineItem.hbm.xml</value>
+                <value>hibernate-mappings/QuestionGroup.hbm.xml</value>
+                <value>hibernate-mappings/MultiQuestion.hbm.xml</value>                
+                <value>hibernate-mappings/HomePage.hbm.xml</value>
+                <value>hibernate-mappings/Calculation.hbm.xml</value>
+                <value>hibernate-mappings/CalculationExpression.hbm.xml</value>
+                <value>hibernate-mappings/InboxItem.hbm.xml</value>
+                <value>hibernate-mappings/Group.hbm.xml</value>
+                <value>hibernate-mappings/CrosstabCellInfo.hbm.xml</value>
+                <value>hibernate-mappings/SubjectPicture.hbm.xml</value>
+                <value>hibernate-mappings/QueXmlData.hbm.xml</value>
+                <value>hibernate-mappings/PortfolioItemFile.hbm.xml</value>
+                <value>hibernate-mappings/MyTeamView.hbm.xml</value>
+                <value>hibernate-mappings/Audit.hbm.xml</value>
+                <value>hibernate-mappings/PopulationGroupView.hbm.xml</value>
+                <value>hibernate-mappings/SearchTermResult.hbm.xml</value>
+                <value>hibernate-mappings/DataTerm.hbm.xml</value>
+                <value>hibernate-mappings/ChartReportAttribute.hbm.xml</value>
+                <value>hibernate-mappings/Dashboard.hbm.xml</value>
+                <value>hibernate-mappings/DashboardItem.hbm.xml</value>
+                <value>hibernate-mappings/DashboardParticipant.hbm.xml</value>
+                <value>hibernate-mappings/DashboardChartValue.hbm.xml</value>
+                <value>hibernate-mappings/ReportWorkflow.hbm.xml</value>
+                <value>hibernate-mappings/ReportParticipant.hbm.xml</value>
+                <value>hibernate-mappings/ChartColumnAttribute.hbm.xml</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">net.sf.hibernate.dialect.Oracle9Dialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.cache.provider_class">net.sf.hibernate.cache.EhCacheProvider</prop>
+                <prop key="hibernate.cache.use_query_cache">true</prop>
+                <prop key="oracle.jdbc.RetainV9LongBindBehavior">true</prop>
+                <prop key="hibernate.jdbc.use_streams_for_binary">true</prop>                
+                <!--<prop key="hibernate.c3p0.acquire_increment">1</prop>-->
+                <!--<prop key="hibernate.c3p0.idle_test_period">60000</prop>-->
+                <!--<prop key="hibernate.c3p0.timeout">60000</prop>-->
+                <!--<prop key="hibernate.c3p0.max_size">40</prop>-->
+                <!--<prop key="hibernate.c3p0.max_statements">20</prop>-->
+                <!--<prop key="hibernate.c3p0.min_size">5</prop>-->
+                <!--<prop key="hibernate.c3p0.validate">true</prop>-->
+                <!--<prop key="hibernate.connection.charSet">ISO8859_1</prop>-->
+            </props>
+        </property>
+
+        <property name="lobHandler" ref="oracleLobHandler"/>
+        <property name="entityInterceptor" ref="zynapEntityInterceptor"/>
+        
+    </bean>
+
+    <!--<bean id="zynapEntityInterceptor" class="com.zynap.talentstudio.common.hibernate.ZynapEntityInterceptor"/>-->
+
+</beans>

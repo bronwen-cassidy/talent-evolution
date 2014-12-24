@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+    
+<hibernate-mapping>
+<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+
+<class 
+    name="com.zynap.talentstudio.organisation.NodeAudit"
+    table="NODE_AUDITS"
+    dynamic-update="true"
+    dynamic-insert="true"
+>
+
+    <id
+        name="nodeId"
+        type="java.lang.Long"
+        column="NODE_ID"
+    >
+        <meta attribute="use-in-equals">true</meta>
+        <generator class="foreign">
+            <param name="property">node</param>
+         </generator>
+    </id>
+
+    <property
+        name="updated"
+        type="java.sql.Date"
+        column="UPDATED"
+        length="7"
+    />
+    <property
+        name="created"
+        type="java.sql.Date"
+        column="CREATED"
+        length="7"
+    />
+    <property
+        name="updatedById"
+        type="java.lang.Long"
+        column="UPDATED_BY"
+    />
+    <property
+        name="createdById"
+        type="java.lang.Long"
+        column="CREATED_BY"
+    />
+
+    <!-- Associations -->
+    <!-- bi-directional one-to-one association to Node -->
+    <one-to-one
+        name="node"
+        class="com.zynap.talentstudio.organisation.Node"
+        outer-join="auto"
+        constrained="true"
+    />
+
+</class>
+</hibernate-mapping>

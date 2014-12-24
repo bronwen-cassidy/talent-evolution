@@ -1,0 +1,205 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tg4w version="0.38.2">
+    <actions>
+        <action type="goto" refresh="true" step="0">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/orgbuilder/browseposition.htm?navigator.notSubmit=true]]></value>
+        </action>
+        <action type="verify-title" step="1">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Browse Positions]]></value>
+        </action>
+        <action type="click" step="2">
+            <xpath><![CDATA[A[@ID="a_portfolio"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="click" refresh="true" step="3">
+            <xpath><![CDATA[*/FORM[@ID="additem"]/INPUT[@NAME="additem" and @VALUE="Add Item"]]]></xpath>
+            <value><![CDATA[additem]]></value>
+        </action>
+        <action type="verify-title" step="4">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Add Portfolio Item]]></value>
+        </action>
+        <action type="fill" step="5">
+            <xpath><![CDATA[*/FORM[@ID="additem"]/*/INPUT[@NAME="contentTypeId"]]]></xpath>
+            <value><![CDATA[CF]]></value>
+        </action>
+        <action type="click" refresh="true" step="6">
+            <xpath><![CDATA[*/FORM[@ID="additem"]/*/INPUT[@NAME="_target1" and @VALUE="Next >>"]]]></xpath>
+            <value><![CDATA[_target1]]></value>
+        </action>
+        <action type="verify-title" step="7">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Add Portfolio Item]]></value>
+        </action>
+        <action type="fill" step="8">
+            <xpath><![CDATA[*/FORM[@ID="selectSubType"]/*/INPUT[@NAME="contentSubType"]]]></xpath>
+            <value><![CDATA[TEXT]]></value>
+        </action>
+        <action type="click" refresh="true" step="9">
+            <xpath><![CDATA[*/FORM[@ID="selectSubType"]/*/INPUT[@NAME="_target2" and @VALUE="Next >>"]]]></xpath>
+            <value><![CDATA[_target2]]></value>
+        </action>
+        <action type="verify-title" step="10">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Add Portfolio Item]]></value>
+        </action>
+        <action type="fill" step="11">
+            <xpath><![CDATA[*/FORM[@ID="additem"]/*/INPUT[@TYPE="text" and @NAME="label"]]]></xpath>
+            <value><![CDATA[test 1]]></value>
+        </action>
+        <action type="fill" step="12">
+            <xpath><![CDATA[*/FORM[@ID="additem"]/*/TEXTAREA[@NAME="uploadedText"]]]></xpath>
+            <value><![CDATA[some text]]></value>
+        </action>
+        <action type="click" refresh="true" step="13">
+            <xpath><![CDATA[*/FORM[@ID="additem"]/*/INPUT[@NAME="_finish" and @VALUE="Save"]]]></xpath>
+            <value><![CDATA[_finish]]></value>
+        </action>
+        <action type="verify-title" step="14">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Browse Positions]]></value>
+        </action>
+        <action type="click" refresh="true" step="15">
+            <xpath><![CDATA[*/FORM[@ID="additem"]/INPUT[@NAME="additem" and @VALUE="Add Item"]]]></xpath>
+            <value><![CDATA[additem]]></value>
+        </action>
+        <action type="verify-title" step="16">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Add Portfolio Item]]></value>
+        </action>
+        <action type="fill" step="17">
+            <xpath><![CDATA[*/FORM[@ID="additem"]/*/INPUT[@NAME="contentTypeId"]]]></xpath>
+            <value><![CDATA[CF]]></value>
+        </action>
+        <action type="click" refresh="true" step="18">
+            <xpath><![CDATA[*/FORM[@ID="additem"]/*/INPUT[@NAME="_target1" and @VALUE="Next >>"]]]></xpath>
+            <value><![CDATA[_target1]]></value>
+        </action>
+        <action type="verify-title" step="19">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Add Portfolio Item]]></value>
+        </action>
+        <action type="fill" step="20">
+            <xpath><![CDATA[*/FORM[@ID="selectSubType"]/*/INPUT[@NAME="contentSubType"]]]></xpath>
+            <value><![CDATA[TEXT]]></value>
+        </action>
+        <action type="click" refresh="true" step="21">
+            <xpath><![CDATA[*/FORM[@ID="selectSubType"]/*/INPUT[@NAME="_target2" and @VALUE="Next >>"]]]></xpath>
+            <value><![CDATA[_target2]]></value>
+        </action>
+        <action type="verify-title" step="22">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Add Portfolio Item]]></value>
+        </action>
+        <action type="fill" step="23">
+            <xpath><![CDATA[*/FORM[@ID="additem"]/*/INPUT[@TYPE="text" and @NAME="label"]]]></xpath>
+            <value><![CDATA[test 1]]></value>
+        </action>
+        <action type="fill" step="24">
+            <xpath><![CDATA[*/FORM[@ID="additem"]/*/TEXTAREA[@NAME="uploadedText"]]]></xpath>
+            <value><![CDATA[some text again]]></value>
+        </action>
+        <action type="verify-title" step="25">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Add Portfolio Item]]></value>
+        </action>
+        <action type="click" refresh="true" step="26">
+            <xpath><![CDATA[*/FORM[@ID="additem"]/*/INPUT[@NAME="_finish" and @VALUE="Save"]]]></xpath>
+            <value><![CDATA[_finish]]></value>
+        </action>
+        <action type="verify-title" step="27">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Add Portfolio Item]]></value>
+        </action>
+        <action type="assert-text-exists" step="28">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[A portfolio item with this Document Title already exists.]]></value>
+        </action>
+        <action type="fill" step="29">
+            <xpath><![CDATA[*/FORM[@ID="additem"]/*/INPUT[@TYPE="text" and @NAME="label"]]]></xpath>
+            <value><![CDATA[Test 1]]></value>
+        </action>
+        <action type="click" refresh="true" step="30">
+            <xpath><![CDATA[*/FORM[@ID="additem"]/*/INPUT[@NAME="_finish" and @VALUE="Save"]]]></xpath>
+            <value><![CDATA[_finish]]></value>
+        </action>
+        <action type="verify-title" step="31">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Browse Positions]]></value>
+        </action>
+        <action type="assert-text-exists" step="32">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Summary of Default Position]]></value>
+        </action>
+        <action type="assert-text-exists" step="33">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[2 items found, displaying all items.]]></value>
+        </action>
+        <action type="click" refresh="true" step="34">
+            <xpath><![CDATA[TABLE[@ID="portfolioitemtable"]/TBODY[1]/TR[1]/TD[1]/A[@CDATA="Test 1"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" step="35">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Portfolio Item]]></value>
+        </action>
+        <action type="click" refresh="true" step="36">
+            <xpath><![CDATA[*/FORM[@ID="_delete"]/INPUT[@NAME="_delete" and @VALUE="Delete"]]]></xpath>
+            <value><![CDATA[_delete]]></value>
+        </action>
+        <action type="verify-title" step="37">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Delete Portfolio Item]]></value>
+        </action>
+        <action type="click" refresh="true" step="38">
+            <xpath><![CDATA[*/FORM[@ID="confirm"]/INPUT[@NAME="confirm" and @VALUE="Confirm"]]]></xpath>
+            <value><![CDATA[confirm]]></value>
+        </action>
+        <action type="verify-title" step="39">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Browse Positions]]></value>
+        </action>
+        <action type="assert-text-exists" step="40">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Summary of Default Position]]></value>
+        </action>
+        <action type="assert-text-exists" step="41">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[One item found.]]></value>
+        </action>
+        <action type="click" refresh="true" step="42">
+            <xpath><![CDATA[TABLE[@ID="portfolioitemtable"]/TBODY[1]/TR[1]/TD[1]/A[@CDATA="test 1"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" step="43">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Portfolio Item]]></value>
+        </action>
+        <action type="click" refresh="true" step="44">
+            <xpath><![CDATA[*/FORM[@ID="_delete"]/INPUT[@NAME="_delete" and @VALUE="Delete"]]]></xpath>
+            <value><![CDATA[_delete]]></value>
+        </action>
+        <action type="verify-title" step="45">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Delete Portfolio Item]]></value>
+        </action>
+        <action type="click" refresh="true" step="46">
+            <xpath><![CDATA[*/FORM[@ID="confirm"]/INPUT[@NAME="confirm" and @VALUE="Confirm"]]]></xpath>
+            <value><![CDATA[confirm]]></value>
+        </action>
+        <action type="verify-title" step="47">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Browse Positions]]></value>
+        </action>
+        <action type="assert-text-exists" step="48">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Summary of Default Position]]></value>
+        </action>
+        <action type="assert-text-exists" step="49">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Nothing found to display.]]></value>
+        </action>
+    </actions>
+</tg4w>

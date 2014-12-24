@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+
+    <class name="com.zynap.talentstudio.organisation.subjects.MyTeamView"
+           table="MY_TEAM_VIEWS"
+           dynamic-update="true"
+           dynamic-insert="true"
+            >
+
+        <id name="id" type="java.lang.Long" column="ID">
+            <meta attribute="use-in-equals">true</meta>
+            <generator class="sequence">
+                <param name="sequence">CONFIG_SQ</param>
+            </generator>
+        </id>
+
+        <property
+                name="userId"
+                type="java.lang.Long"
+                column="USER_ID"
+                not-null="true"
+                />
+        <property
+                name="dynamicAttributeId"
+                type="java.lang.Long"
+                column="DA_ID"
+                />
+
+    </class>
+</hibernate-mapping>

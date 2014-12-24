@@ -1,0 +1,246 @@
+@charset "utf-8";
+/* CSS Document */
+
+body	{
+	background-color:#fff;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	margin:0;
+	padding:0;
+	font-size:100%;
+	color:#666;
+}
+.txtWhite	{
+	color:#fff;
+	font-size:.75em;
+	font-weight:600;
+}
+/* new insertions 28.09.07 */
+/* amendment to class mnSection p below */
+/* amendment to class mnContent - included margin-bottom attribute of 40px */
+/* added h4 class */
+/* amendment to class listMenu a - deleted height attribute of 20px */
+/* amendment to class listMenu ul - amended padding-left attribute to 15px */
+/* added attribute font-size to class mnSection ul li  */
+/* added attribute color to class table th in order to darken heading as per request */
+/* added clear:both attribute to class layFooter */
+/* added attribute font-size to class table, ul li */
+/* deleted attribute line-height from class mnSection ul */
+/* note some of the classes below do not have , separating them e.g. .mnSection p as opposed to .mnSection, p [stylesheet style copied from TMPW */
+a:link {
+	color:#0000FF; 
+	text-decoration:none;
+}
+a:visited {
+	color:#0000FF; 
+	text-decoration:none;
+}
+a:focus {
+	color:#FF9966; 
+	text-decoration:none;
+}
+a:hover {
+	color:#FF9966; 
+	text-decoration:none;
+}
+a:active {
+	color:#FF0000; 
+	text-decoration:none;
+}
+table {
+	background:#DAD0E1;
+	color:#83629B;
+	text-align:left;
+	font-size:.75em;
+}
+table ul, li	{
+	font-size:medium;
+}
+table a, table, tbody, tfoot, tr, th, td {
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+}
+table caption {
+	border:1px solid #83629B;
+	text-align:left;
+	padding:2px;
+	color:#83629B;
+	font-weight:600;
+}
+table, td, th {
+	margin:0px;
+	padding:2px;
+	border:1px solid #83629B;
+}
+td, th {
+	border:1px solid #83629B;
+}
+table th {
+	color:#574167;
+}
+
+h4	{
+	font-size:.90em;
+	color:#8968A1;
+}
+/* end of new insertions 28.09.07 */
+.txtViolet	{
+	color:#8968A1;
+}
+hr {
+	height:1px; 
+	color:#8968A1;
+}
+#pgContainer	{
+	width:750px; 
+	margin:0; 
+	background-image:url(../images/img_pg_bg.gif);
+	background-repeat:repeat-y;
+}
+.layHeader	{
+	width:750px;
+}
+.laySide	{
+	float:left; 
+	width:241px;  
+}
+.laySideLogo	{
+	width:241px;
+	height:93px;
+	margin-top:40px;
+}	
+/* define the overall look of the left menu */
+.listMenu {
+	width: 241px;
+	background-color:#C8DFE1;
+	margin-left:6px;
+	border-left: 1px solid #fff;
+}
+/* take control of the list */
+.listMenu ul {
+	margin:0 0 0 4px; 
+	padding-left:15px;
+	list-style-image:url(../images/img_li_item.gif);
+} 
+/*.list-menu ul li {
+	margin: 0; 
+	padding:0;
+	list-style-image:url(../images/img_li_item.gif);
+} */
+/* no margins above each list item */
+.listMenu li {
+	margin:0;
+} 
+/* style for the links */
+.listMenu a {
+	display: block;
+	/*height:20px;*/
+	padding:2px 2px 2px 0;
+	border-bottom: 1px solid #48959B;
+	/*background-image:url(../images/img_li_item.gif);
+	background-repeat:no-repeat;*/
+	background-color:#C8DFE1;
+	font-size:.75em;
+	text-decoration:none; 
+} 
+/* rollover */
+.listMenu a:link, .listMenu a:active, .listMenu a:visited  {
+	color:#48959B;
+}
+.listMenu a:hover {
+	border-bottom: 1px solid #48959B;
+	background-color:#48959B;
+	color:#fff;
+} 
+.laySideNav	{
+	padding:5px 0 5px 0;
+	margin-left:6px;
+	background:#C8DFE1;
+	border-bottom:1px solid #48959B; 
+	border-left:1px solid #fff;
+}
+.laySideNav ul	{
+	padding-left:10px;
+	margin:0px;
+	line-height:20px;
+}
+.laySideNav ul li	{
+	display:block;
+	list-style-type:none;
+}
+.laySideNav ul li a	{
+	background-image:url(../images/img_li_item.gif);
+	background-repeat:no-repeat;
+	padding-left:20px;
+	color:#48959B;
+    font-size:.75em;
+	text-decoration:none;
+}
+.laySideNav a:hover,
+.laySideNav li:hover a	{
+	background-image:url(../images/img_li_item.gif);
+	background-repeat:no-repeat;
+	padding-left:20px;
+	color:#48959B;
+    font-size:.75em;
+	text-decoration:underline;
+}
+.mnContent	{
+	margin: 10px 0 40px 290px;
+	width:450px;
+}
+.mnSection	{
+	padding:0 0 5px 0;
+}	
+/* delete margin/padding given no space re formatting paragraphs */
+.mnSection p	{
+	font-size:.75em;
+	line-height:1.45em;
+}
+.mnSection ul li {
+	font-size:.75em;
+}
+.layFooter	{
+	width:750px;
+	height:104px;
+	background-image:url(../images/img_footer.jpg);
+	clear:both
+}
+.layFooterLogo {
+	float:right; 
+	width:147px; 
+}
+.layFooterNav	{
+	float:left;
+	width:268px;
+	height:64px;
+	padding-top:40px;
+	text-align:center;
+}	
+.layFooterNav ul	{
+	padding:0px;
+	margin:0px;
+}
+.layFooterNav ul li	{
+	display:inline;
+	list-style-type:none;
+}
+.layFooterNav ul li a	{
+	color:white;
+	text-decoration:none;
+	font-size:.75em;
+}
+.layFooterNav a:active, .layFooterNav a:visited 	{
+	color:white;
+	text-decoration:none;
+	font-size:.75em;
+} 
+.layFooterNav a:hover 	{
+	color:white;
+	text-decoration:underline;
+	font-size:.75em;
+}
+.layCopyright	{
+	width:745px; 
+	padding:5px 0 0 5px; 
+	text-align:center;
+	font-size:.75em;
+}

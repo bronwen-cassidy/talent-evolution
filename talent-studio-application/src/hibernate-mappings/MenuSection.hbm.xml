@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+    <!--
+        Created by the Middlegen Hibernate plugin 2.1
+
+        http://boss.bekk.no/boss/middlegen/
+        http://www.hibernate.org/
+    -->
+
+    <class
+            name="com.zynap.talentstudio.arenas.MenuSection"
+            table="MENU_SECTIONS"
+            dynamic-update="true"
+            dynamic-insert="true"
+            >
+
+        <composite-id name="primaryKey" class="com.zynap.talentstudio.arenas.MenuSectionPK">
+            <meta attribute="use-in-equals">true</meta>
+            <key-property
+                    name="id"
+                    column="ID"
+                    type="java.lang.String"
+                    length="50"
+                    />
+            <key-property
+                    name="arenaId"
+                    column="MODULE_ID"
+                    type="java.lang.String"
+                    length="50"
+                    />
+        </composite-id>
+
+        <property
+                name="label"
+                type="java.lang.String"
+                column="SECTION_LABEL"
+                not-null="true"
+                length="50"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+
+        <property
+                name="url"
+                type="java.lang.String"
+                column="URL"
+                not-null="true"
+                length="100"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+
+        <property
+                name="sortOrder"
+                type="java.lang.Integer"
+                column="SORT_ORDER"
+                not-null="true"
+                length="22"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+
+        <!-- Associations -->
+        <!-- derived association(s) for compound key -->
+        <!-- bi-directional many-to-one association to Module -->
+        <many-to-one
+                name="arena"
+                class="com.zynap.talentstudio.arenas.Arena"
+                update="false"
+                insert="false"
+                outer-join="true"
+                >
+            <column name="MODULE_ID"/>
+        </many-to-one>
+
+        <!-- end of derived association(s) -->
+
+        <!-- bi-directional one-to-many association to MenuItem -->
+        <set
+                name="menuItems"
+                lazy="false"
+                inverse="true"
+                cascade="none"
+                order-by="SORT_ORDER"
+                batch-size="50"
+                >
+            <key>
+                <column name="SECTION_ID"/>
+                <column name="MODULE_ID"/>
+            </key>
+            <one-to-many
+                    class="com.zynap.talentstudio.arenas.MenuItem"
+                    />
+        </set>
+
+    </class>
+</hibernate-mapping>

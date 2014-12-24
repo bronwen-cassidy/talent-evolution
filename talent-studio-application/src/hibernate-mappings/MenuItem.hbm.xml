@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+    <!--
+        Created by the Middlegen Hibernate plugin 2.1
+
+        http://boss.bekk.no/boss/middlegen/
+        http://www.hibernate.org/
+    -->
+
+    <class
+            name="com.zynap.talentstudio.arenas.MenuItem"
+            table="MENU_ITEMS"
+            dynamic-update="true"
+            dynamic-insert="true"
+            >
+        <cache usage="nonstrict-read-write"/>
+
+        <id
+                name="id"
+                type="java.lang.Long"
+                column="ID"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <generator class="sequence">
+                <param name="sequence">MENUITEM_SQ</param>
+            </generator>
+        </id>
+
+        <property
+                name="label"
+                type="java.lang.String"
+                column="LABEL"
+                not-null="true"
+                length="100"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+
+        <property
+                name="sortOrder"
+                type="java.lang.Integer"
+                column="SORT_ORDER"
+                not-null="true"
+                length="22"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+
+        <property
+                name="url"
+                type="java.lang.String"
+                column="URL"
+                not-null="true"
+                length="100"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+
+        <property
+                name="description"
+                type="java.lang.String"
+                column="DESCRIPTION"
+                length="200"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+
+        <property name="userType" type="java.lang.String" column="USER_TYPE">
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+
+        <!-- Associations -->
+        <!-- bi-directional many-to-one association to MenuSection -->
+        <!-- update and insert need to be true - otherwise it does not insert / update the foreign key fields on this table -->
+        <many-to-one
+                name="menuSection"
+                class="com.zynap.talentstudio.arenas.MenuSection"
+                update="true"
+                insert="true"
+                outer-join="true"                
+                >           
+            <column name="SECTION_ID"/>
+            <column name="MODULE_ID"/>
+        </many-to-one>
+
+        <!-- bi-directional many-to-one association to Permit -->
+        <many-to-one
+                name="permit"
+                class="com.zynap.talentstudio.security.permits.Permit"
+                not-null="true"
+                outer-join="true"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <column name="PERMIT_ID"/>
+        </many-to-one>
+
+        <!-- bi-directional many-to-one association to Report -->
+        <many-to-one
+                name="report"
+                class="com.zynap.talentstudio.analysis.reports.Report"
+                not-null="false"
+                outer-join="true"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <column name="REPORT_ID"/>
+        </many-to-one>
+
+        <!-- bi-directional many-to-one association to Preference -->
+        <many-to-one
+                name="preference"
+                class="com.zynap.talentstudio.preferences.Preference"
+                not-null="false"
+                outer-join="true"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <column name="PREFERENCE_ID"/>
+        </many-to-one>
+
+
+    </class>
+</hibernate-mapping>

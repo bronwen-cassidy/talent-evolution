@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tg4w version="0.38.2">
+    <actions>
+        <action type="goto" refresh="true" step="0">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/login.htm]]></value>
+        </action>
+        <action type="verify-title" step="1">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Login]]></value>
+        </action>
+        <action type="fill" step="2">
+            <xpath><![CDATA[*/FORM[@ID="_login"]/*/INPUT[@TYPE="text" and @NAME="username"]]]></xpath>
+            <value><![CDATA[kilikili]]></value>
+        </action>
+        <action type="fill" step="3">
+            <xpath><![CDATA[*/FORM[@ID="_login"]/*/INPUT[@TYPE="password" and @NAME="password"]]]></xpath>
+            <value><![CDATA[kilikili]]></value>
+        </action>
+        <action type="click" refresh="true" step="4">
+            <xpath><![CDATA[*/FORM[@ID="_login"]/*/INPUT[@ID="loginsubmit"]]]></xpath>
+            <value><![CDATA[null]]></value>
+        </action>
+        <action type="verify-title" step="5">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Policy]]></value>
+        </action>
+        <action type="check" step="6">
+            <xpath><![CDATA[*/FORM[@ID="policyform"]/*/INPUT[@TYPE="checkbox" and @NAME="acceptedPolicy"]]]></xpath>
+            <value><![CDATA[true]]></value>
+        </action>
+        <action type="click" refresh="true" step="7">
+            <xpath><![CDATA[*/FORM[@ID="policyform"]/*/INPUT[@ID="accept"]]]></xpath>
+            <value><![CDATA[Agree]]></value>
+        </action>
+        <action type="verify-title" step="8">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Home]]></value>
+        </action>
+        <action type="click" refresh="true" step="9">
+            <xpath><![CDATA[A[@ID="a_PERFMANMODULE"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="goto" refresh="true" step="10">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/perfman/documentsearch.htm?navigator.notSubmit=true]]></value>
+        </action>
+        <action type="verify-title" step="11">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Document Search]]></value>
+        </action>
+        <action type="fill" step="12">
+            <xpath><![CDATA[*/FORM[@ID="search"]/*/TEXTAREA[@NAME="queryText"]]]></xpath>
+            <value><![CDATA[*]]></value>
+        </action>
+        <action type="click" refresh="true" step="13">
+            <xpath><![CDATA[*/FORM[@ID="search"]/*/INPUT[@NAME="_target1" and @VALUE="Search"]]]></xpath>
+            <value><![CDATA[_target1]]></value>
+        </action>
+        <action type="verify-title" step="14">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Document Search]]></value>
+        </action>
+        <action type="assert-text-exists" step="15">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Oin public CV added by administrator]]></value>
+        </action>
+        <action type="assert-text-exists" step="16">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Oin public CV added by Fili]]></value>
+        </action>
+        <action type="assert-text-exists" step="17">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Fili public CV added by Thorin]]></value>
+        </action>
+        <action type="assert-text-exists" step="18">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Fili public CV added by self]]></value>
+        </action>
+        <action type="assert-text-exists" step="19">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Fili public CV added by administrator]]></value>
+        </action>
+        <action type="assert-text-exists" step="20">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Thorin public CV added by administrator]]></value>
+        </action>
+        <action type="assert-text-exists" step="21">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Thorin public CV added by self]]></value>
+        </action>
+
+        <!-- assert no restricted or private CVs present (restricted not displayed as subordinate has no access to superiors and has no private or restricted docs added by self -->
+        <action type="assert-text-does-not-exist" step="22">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[restricted CV]]></value>
+        </action>
+        <action type="assert-text-does-not-exist" step="23">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[private CV]]></value>
+        </action>
+    </actions>
+</tg4w>

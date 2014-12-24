@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<commands>
+
+    <command action='delete'>
+        <position>
+            <id>19000046</id>
+        </position>
+    </command>
+
+    <command action='delete'>
+        <position>
+            <id>19000224</id>
+        </position>
+    </command>
+
+    <command action='delete'>
+        <organisationUnit>
+            <id>10005</id>
+        </organisationUnit>
+    </command>
+
+</commands>

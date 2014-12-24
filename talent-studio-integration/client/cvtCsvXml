@@ -1,0 +1,38 @@
+#!/bin/sh
+
+PROPS=
+
+argError=
+
+while [ "$1" != "" ]
+do
+	case $1 in
+	-*)
+			echo "Unexpected option '$1'"
+			argError=true
+			shift 1
+			;;
+	*)
+			PROPS=$1
+			shift 1
+			;;
+	esac
+done
+
+if [ -z "$PROPS" ]
+then
+	echo Properties File is required.
+	argError=true
+fi
+
+if [ ! -z "$argError" ]
+then
+	echo "Unexpected option '$1'
+Usage:
+    $0 [options] propertiesFile"
+	exit 2
+fi
+
+set -u
+
+${JAVA_HOME}/bin/java -classpath talent-studio-standalone.jar com.zynap.talentstudio.integration.conversion.CsvXmlConverter ${PROPS}

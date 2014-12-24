@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+<!--
+    JDBC configuration for application
+    todo try to add to the app server oracle.jdbc.RetainV9LongBindBehavior,true to solve the error message: ORA-01461: can bind a LONG value only for insert into a LONG column
+-->
+<beans>
+
+    <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiName" value="${jdbc.jndiname}"/>
+    </bean>
+
+    <!--<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">-->
+        <!--<property name="driverClass" value="oracle.jdbc.OracleDriver"/>-->
+        <!--<property name="jdbcUrl" value="${db.url}"/>-->
+        <!--<property name="user" value="${db.username}"/>-->
+        <!--<property name="password" value="${db.password}"/>-->
+        <!--<property name="minPoolSize" value="5"/>-->
+        <!--<property name="acquireIncrement" value="1"/>-->
+        <!--<property name="maxPoolSize" value="30"/>-->
+        <!--<property name="idleConnectionTestPeriod" value="60000"/>-->
+        <!--<property name="maxIdleTime" value="60000"/>-->
+        <!--<property name="acquireRetryAttempts" value="5"/>-->
+        <!--<property name="maxStatements" value="0"/>-->
+        <!--<property name="testConnectionOnCheckout" value="true"/>-->
+    <!--</bean>-->
+
+    <bean id="zynapSqlExceptionTranslator" class="com.zynap.exception.dao.oracle.ZynapSQLExceptionTranslator">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="exceptionTranslator" ref="zynapSqlExceptionTranslator"/>
+    </bean>
+
+    <!-- todo need a strategy to use only this connection pool or the jndi one or both   -->
+    <!--<bean id="simpleNativeJdbcExtractor" class="org.springframework.jdbc.support.nativejdbc.C3P0NativeJdbcExtractor" lazy-init="true" />-->
+    <bean id="simpleNativeJdbcExtractor" class="org.springframework.jdbc.support.nativejdbc.SimpleNativeJdbcExtractor" lazy-init="true" />
+
+    <bean id="oracleLobHandler" class="org.springframework.jdbc.support.lob.OracleLobHandler">
+        <property name="nativeJdbcExtractor" ref="simpleNativeJdbcExtractor"/>
+    </bean>
+    
+    <!--<bean id="oracleLobHandler" class="org.springframework.jdbc.support.lob.OracleLobHandler">-->
+        <!--<property name="nativeJdbcExtractor" ref="${lobHandler.extractor}"/>-->
+    <!--</bean>-->
+
+
+</beans>

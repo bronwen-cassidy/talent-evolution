@@ -1,0 +1,436 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tg4w version="0.38.2">
+    <actions>
+        <!-- add person -->
+        <action type="goto" refresh="true" step="0">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/orgbuilder/addsubject.htm?navigator.notSubmit=true]]></value>
+        </action>
+        <action type="verify-title" step="1">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Add Person]]></value>
+        </action>
+        <action type="fill" step="2">
+            <xpath><![CDATA[*/FORM[@ID="es_next"]/*/INPUT[@TYPE="text" and @NAME="coreDetail.firstName"]]]></xpath>
+            <value><![CDATA[Angus]]></value>
+        </action>
+        <action type="fill" step="3">
+            <xpath><![CDATA[*/FORM[@ID="es_next"]/*/INPUT[@TYPE="text" and @NAME="coreDetail.secondName"]]]></xpath>
+            <value><![CDATA[Mark]]></value>
+        </action>
+        <action type="fill" step="4">
+            <xpath><![CDATA[*/FORM[@ID="es_next"]/*/INPUT[@TYPE="text" and @NAME="coreDetail.prefGivenName"]]]></xpath>
+            <value><![CDATA[Wookie]]></value>
+        </action>
+        <action type="fill" step="5">
+            <xpath><![CDATA[*/FORM[@ID="es_next"]/*/INPUT[@TYPE="hidden" and @NAME="dateOfBirth"]]]></xpath>
+            <value><![CDATA[1973-11-17]]></value>
+        </action>
+        <action type="fill" step="6">
+            <xpath><![CDATA[*/FORM[@ID="es_next"]/*/INPUT[@TYPE="text" and @NAME="coreDetail.contactTelephone"]]]></xpath>
+            <value><![CDATA[07984 938607]]></value>
+        </action>
+        <action type="fill" step="7">
+            <xpath><![CDATA[*/FORM[@ID="es_next"]/*/INPUT[@TYPE="text" and @NAME="coreDetail.contactEmail"]]]></xpath>
+            <value><![CDATA[amark@zynap.com]]></value>
+        </action>
+        <action type="click" refresh="true" step="8">
+            <xpath><![CDATA[*/FORM[@ID="es_next"]/*/INPUT[@NAME="_target1" and @VALUE="Next >>"]]]></xpath>
+            <value><![CDATA[_target1]]></value>
+        </action>
+        <action type="verify-title" step="9">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Add Person]]></value>
+        </action>
+        <action type="click" refresh="true" step="10">
+            <xpath><![CDATA[*/FORM[@ID="_addAssoc"]/*/INPUT[@NAME="_target2" and @VALUE="Next >>"]]]></xpath>
+            <value><![CDATA[_target2]]></value>
+        </action>
+        <action type="verify-title" step="11">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Add Person]]></value>
+        </action>
+        <action type="fill" step="12">
+            <xpath><![CDATA[*/FORM[@ID="_add"]/*/INPUT[@TYPE="text" and @NAME="userWrapper.loginInfo.username"]]]></xpath>
+            <value><![CDATA[wookie]]></value>
+        </action>
+        <action type="fill" step="13">
+            <xpath><![CDATA[*/FORM[@ID="_add"]/*/INPUT[@TYPE="password" and @NAME="userWrapper.loginInfo.password"]]]></xpath>
+            <value><![CDATA[wookie]]></value>
+        </action>
+        <action type="fill" step="14">
+            <xpath><![CDATA[*/FORM[@ID="_add"]/*/INPUT[@TYPE="password" and @NAME="userWrapper.loginInfo.repeatedPassword"]]]></xpath>
+            <value><![CDATA[wookie]]></value>
+        </action>
+        <action type="click" step="15">
+            <xpath><![CDATA[*/FORM[@ID="_add"]/*/INPUT[@ID="btn_setAll"]]]></xpath>
+            <value><![CDATA[SetAll]]></value>
+        </action>
+        <action type="click" refresh="true" step="16">
+            <xpath><![CDATA[*/FORM[@ID="_add"]/*/INPUT[@NAME="_finish" and @VALUE="Save"]]]></xpath>
+            <value><![CDATA[_finish]]></value>
+        </action>
+
+        <!-- check details added -->
+        <action type="verify-title" step="17">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Person]]></value>
+        </action>
+        <action type="assert-text-exists" step="18">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Summary of Angus Mark]]></value>
+        </action>
+        <action type="assert-text-exists" step="19">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Wookie]]></value>
+        </action>
+        <action type="assert-text-exists" step="20">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[17 Nov 1973]]></value>
+        </action>
+        <action type="click" step="21">
+            <xpath><![CDATA[A[@ID="a_currentjobs"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="click" step="22">
+            <xpath><![CDATA[A[@ID="a_userdetails"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="assert-text-exists" step="23">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[wookie]]></value>
+        </action>
+        <action type="assert-text-exists" step="24">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Administration Arena]]></value>
+        </action>
+        <action type="assert-text-exists" step="25">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Analyser Arena]]></value>
+        </action>
+        <action type="assert-text-exists" step="26">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Home Arena]]></value>
+        </action>
+        <action type="assert-text-exists" step="27">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Organisation Arena]]></value>
+        </action>
+        <action type="assert-text-exists" step="28">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Performance Management Arena]]></value>
+        </action>
+        <action type="assert-text-exists" step="29">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Succession Builder Arena]]></value>
+        </action>
+        <action type="assert-text-exists" step="30">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Identifier Arena]]></value>
+        </action>
+
+        <!-- logout -->
+        <action type="goto" step="31">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/logout.htm]]></value>
+        </action>
+
+        <!-- login as new user -->
+        <action type="verify-title" step="32">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Login]]></value>
+        </action>
+        <action type="fill" step="33">
+            <xpath><![CDATA[*/FORM[@ID="_login"]/*/INPUT[@TYPE="text" and @NAME="username"]]]></xpath>
+            <value><![CDATA[wookie]]></value>
+        </action>
+        <action type="fill" step="34">
+            <xpath><![CDATA[*/FORM[@ID="_login"]/*/INPUT[@TYPE="password" and @NAME="password"]]]></xpath>
+            <value><![CDATA[wookie]]></value>
+        </action>
+        <action type="click" refresh="true" step="35">
+            <xpath><![CDATA[*/FORM[@ID="_login"]/*/INPUT[@ID="loginsubmit"]]]></xpath>
+            <value><![CDATA[null]]></value>
+        </action>
+
+        <!-- change password -->
+        <action type="verify-title" step="36">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Change Password]]></value>
+        </action>
+        <action type="fill" step="37">
+            <xpath><![CDATA[*/FORM[@ID="changepwdform"]/*/INPUT[@TYPE="password" and @NAME="newPassword"]]]></xpath>
+            <value><![CDATA[wookie2]]></value>
+        </action>
+        <action type="fill" step="38">
+            <xpath><![CDATA[*/FORM[@ID="changepwdform"]/*/INPUT[@TYPE="password" and @NAME="newPasswordAgain"]]]></xpath>
+            <value><![CDATA[wookie2]]></value>
+        </action>
+        <action type="click" refresh="true" step="39">
+            <xpath><![CDATA[*/FORM[@ID="changepwdform"]/*/INPUT[@ID="_save"]]]></xpath>
+            <value><![CDATA[_save]]></value>
+        </action>
+
+        <!-- accept policy -->
+        <action type="verify-title" step="40">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Policy]]></value>
+        </action>
+        <action type="check" step="41">
+            <xpath><![CDATA[*/FORM[@ID="policyform"]/*/INPUT[@TYPE="checkbox" and @NAME="acceptedPolicy"]]]></xpath>
+            <value><![CDATA[true]]></value>
+        </action>
+        <action type="click" refresh="true" step="42">
+            <xpath><![CDATA[*/FORM[@ID="policyform"]/*/INPUT[@ID="accept"]]]></xpath>
+            <value><![CDATA[Agree]]></value>
+        </action>
+        <action type="verify-title" refresh="true" step="43">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Home]]></value>
+        </action>
+
+        <!-- go to my account -->
+        <action type="goto" step="44">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/talentarena/viewmyaccount.htm?navigator.notSubmit=true]]></value>
+        </action>
+        <action type="verify-title" step="45">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - My Account]]></value>
+        </action>
+
+        <!-- edit and set title and save -->
+        <action type="click" refresh="true" step="46">
+            <xpath><![CDATA[*/FORM[@ID="_edit"]/INPUT[@NAME="_edit" and @VALUE="Edit"]]]></xpath>
+            <value><![CDATA[_edit]]></value>
+        </action>
+        <action type="verify-title" step="47">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Edit My Account]]></value>
+        </action>
+        <action type="select" step="48">
+            <xpath><![CDATA[*/FORM[@ID="_edit"]/*/SELECT[@NAME="title"]]]></xpath>
+            <value><![CDATA[Mr]]></value>
+        </action>
+        <action type="click" refresh="true" step="49">
+            <xpath><![CDATA[*/FORM[@ID="_edit"]/*/INPUT[@NAME="_edit" and @VALUE="Save"]]]></xpath>
+            <value><![CDATA[_edit]]></value>
+        </action>
+        <action type="verify-title" step="50">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - My Account]]></value>
+        </action>
+
+        <!-- check saved account details -->
+        <action type="assert-text-exists" step="51">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[My Account]]></value>
+        </action>
+        <action type="assert-text-exists" step="52">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[wookie]]></value>
+        </action>
+        <action type="assert-text-exists" step="53">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Mr]]></value>
+        </action>
+        <action type="assert-text-exists" step="54">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Angus]]></value>
+        </action>
+        <action type="assert-text-exists" step="55">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Mark]]></value>
+        </action>
+        <action type="assert-text-exists" step="56">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Wookie]]></value>
+        </action>
+        <action type="assert-text-exists" step="57">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[07984 938607]]></value>
+        </action>
+        <action type="assert-text-exists" step="58">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[amark@zynap.com]]></value>
+        </action>
+        <action type="assert-text-does-not-exist" step="59">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[17 Nov 1973]]></value>
+        </action>
+
+        <!-- logout and login back in as administrator -->
+        <action type="goto" step="60">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/logout.htm]]></value>
+        </action>
+        <action type="verify-title" step="61">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Login]]></value>
+        </action>
+        <action type="fill" step="62">
+            <xpath><![CDATA[*/FORM[@ID="_login"]/*/INPUT[@TYPE="text" and @NAME="username"]]]></xpath>
+            <value><![CDATA[administrator]]></value>
+        </action>
+        <action type="fill" step="63">
+            <xpath><![CDATA[*/FORM[@ID="_login"]/*/INPUT[@TYPE="password" and @NAME="password"]]]></xpath>
+            <value><![CDATA[administrator]]></value>
+        </action>
+        <action type="click" refresh="true" step="64">
+            <xpath><![CDATA[*/FORM[@ID="_login"]/*/INPUT[@ID="loginsubmit"]]]></xpath>
+            <value><![CDATA[null]]></value>
+        </action>
+        <action type="verify-title" step="65">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Policy]]></value>
+        </action>
+        <action type="check" step="66">
+            <xpath><![CDATA[*/FORM[@ID="policyform"]/*/INPUT[@TYPE="checkbox" and @NAME="acceptedPolicy"]]]></xpath>
+            <value><![CDATA[true]]></value>
+        </action>
+        <action type="click" refresh="true" step="67">
+            <xpath><![CDATA[*/FORM[@ID="policyform"]/*/INPUT[@ID="accept"]]]></xpath>
+            <value><![CDATA[Agree]]></value>
+        </action>
+        <action type="verify-title" step="68">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Home]]></value>
+        </action>
+
+        <!-- go to orgbuilder and search for people -->
+        <action type="click" refresh="true" step="69">
+            <xpath><![CDATA[A[@ID="a_ORGANISATIONMODULE"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="goto" refresh="true" step="70">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/orgbuilder/listsubject.htm?navigator.notSubmit=true]]></value>
+        </action>
+        <action type="verify-title" step="71">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - People Search]]></value>
+        </action>
+        <action type="click" refresh="true" step="72">
+            <xpath><![CDATA[*/FORM[@ID="subject"]/*/INPUT[@NAME="_target3" and @VALUE="Search"]]]></xpath>
+            <value><![CDATA[_target3]]></value>
+        </action>
+
+        <!-- check user details - check roles are still assigned -->
+        <action type="verify-title" step="73">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - People Search]]></value>
+        </action>
+        <action type="click" step="74">
+            <xpath><![CDATA[A[@ID="a_browse"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="click" step="75">
+            <xpath><![CDATA[A[@ID="a_userdetails"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="assert-text-exists" step="76">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[wookie]]></value>
+        </action>
+        <action type="assert-text-exists" step="77">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Administration Arena]]></value>
+        </action>
+        <action type="assert-text-exists" step="78">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Analyser Arena]]></value>
+        </action>
+        <action type="assert-text-exists" step="79">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Home Arena]]></value>
+        </action>
+        <action type="assert-text-exists" step="80">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Organisation Arena]]></value>
+        </action>
+        <action type="assert-text-exists" step="81">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Performance Management Arena]]></value>
+        </action>
+        <action type="assert-text-exists" step="82">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Succession Builder Arena]]></value>
+        </action>
+        <action type="assert-text-exists" step="83">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Identifier Arena]]></value>
+        </action>
+
+        <!-- delete subject -->
+        <action type="click" refresh="true" step="84">
+            <xpath><![CDATA[*/FORM[@ID="_delSubject"]/INPUT[@ID="btn_deletesubject"]]]></xpath>
+            <value><![CDATA[_delSubject]]></value>
+        </action>
+        <action type="verify-title" step="85">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Delete Person]]></value>
+        </action>
+        <action type="click" refresh="true" step="86">
+            <xpath><![CDATA[*/FORM[@ID="_delete"]/INPUT[@NAME="_delete" and @VALUE="Confirm"]]]></xpath>
+            <value><![CDATA[_delete]]></value>
+        </action>
+        <action type="verify-title" step="87">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - People Search]]></value>
+        </action>
+
+        <!-- delete user -->
+        <action type="goto" refresh="true" step="88">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/admin/listuser.htm?navigator.notSubmit=true]]></value>
+        </action>
+        <action type="verify-title" step="89">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Users]]></value>
+        </action>
+        <action type="click" refresh="true" step="90">
+            <xpath><![CDATA[*/FORM[@ID="user"]/*/INPUT[@TYPE="submit" and @VALUE="Search"]]]></xpath>
+            <value><![CDATA[null]]></value>
+        </action>
+        <action type="verify-title" step="91">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Users]]></value>
+        </action>
+        <action type="click" refresh="true" step="92">
+            <xpath><![CDATA[TABLE[@ID="userList"]/TBODY[1]/TR[1]/TD[1]/A[@CDATA="wookie"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" step="93">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - User]]></value>
+        </action>
+        <action type="click" refresh="true" step="94">
+            <xpath><![CDATA[*/FORM[@ID="_deleteuser"]/INPUT[@NAME="_deleteuser" and @VALUE="Delete"]]]></xpath>
+            <value><![CDATA[_deleteuser]]></value>
+        </action>
+        <action type="verify-title" step="95">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Delete User]]></value>
+        </action>
+        <action type="click" refresh="true" step="96">
+            <xpath><![CDATA[*/FORM[@ID="_confirm"]/INPUT[@NAME="_confirm" and @VALUE="Confirm"]]]></xpath>
+            <value><![CDATA[_confirm]]></value>
+        </action>
+        <action type="verify-title" step="97">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Users]]></value>
+        </action>
+        <action type="click" refresh="true" step="98">
+            <xpath><![CDATA[*/FORM[@ID="user"]/*/INPUT[@TYPE="submit" and @VALUE="Search"]]]></xpath>
+            <value><![CDATA[null]]></value>
+        </action>
+        <action type="verify-title" step="99">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Users]]></value>
+        </action>
+        <action type="assert-text-does-not-exist" step="100">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[wookie]]></value>
+        </action>
+    </actions>
+</tg4w>

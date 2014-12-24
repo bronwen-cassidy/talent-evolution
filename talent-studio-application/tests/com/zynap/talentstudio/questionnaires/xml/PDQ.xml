@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+
+    <questionnaire name="Position Description Questionnaire" title="Position Description Questionnaire">
+
+        <group name="INSTRUCTIONS FOR COMPLETING YOUR POSITION DESCRIPTION QUESTIONNAIRE (PDQ)">
+            <narrative>
+                Position Description Questionnaires (PDQs) are being distributed to all individuals
+                who are included within the scope of the study. The information you provide on your PDQ will
+                be used to develop new job descriptions and to determine the correct classification for your job.
+                It is very important that you provide accurate, detailed information about your current job duties
+            </narrative>
+            <narrative>
+                We suggest you begin by reading through the entire questionnaire so that you understand the information
+                we are asking for in each section.Next, complete as much of the questionnaire as you can and then put it
+                down for a day.On the next day, complete the rest of the questionnaire.Finally, just before you turn it in,
+                read it again to make sure you haven't forgotten anything.
+                We have included a checklist on page 2 to assist you with tracking your progress
+            </narrative>
+            <narrative>
+                Please spend a majority of your time on the sections indicated by '*', as these are the most important sections in
+                determining job classifications in the new system.
+            </narrative>
+            <narrative>
+                You may complete your PDQ as an individual, or you may join with other employees who perform the same type
+                of work that you do to complete the PDQ as a group.Contact your supervisor for specific details on how to
+                participate through a group process.
+            </narrative>
+            <narrative>
+                The completed questionnaire must be reviewed and signed by your immediate supervisor and your Department Director.
+                The Supervisor/Department Director should review the questionnaire to ensure it is complete and accurate.
+            </narrative>
+            <narrative>
+                We suggest that you keep a copy of the final document for your records.Your completed PDQ must be submitted
+                to your Department Director and immediate supervisor (if someone other than Department Director) by December 9,
+                2008. Department Directors must submit signed original PDQs to the Human Resources by December 19, 2008.
+            </narrative>
+            <narrative>
+                This document is designed to be filled out by the employee by either typing a response, checking a box,
+                or selecting an answer from a drop-down menu.Spaces left for response are indicated by a gray-shaded area.
+                Drop-down menus are indicated by the word, "select" and an arrow next to the word when the box is highlighted.
+                You may move between response areas simply by using the "Tab" key.
+            </narrative>
+        </group>
+
+        <group name="1. EMPLOYEE INFORMATION">
+            <narrative>
+                In this section you will provide information regarding your name, current job title,
+                your immediate supervisor, etc.This will help us make sure we refer to the correct job throughout the study.
+            </narrative>
+            <multi-question name="Personal Info">
+                <line-item/>
+                <question id="2" type="Date" name="Date Form Completed" title="Date Form Completed"/>
+                <question id="1" type="Text" name="Employee Name" title="Employee Name"/>
+                <question id="5" type="Text" name="Work Phone" title="Work Phone"/>
+                <question id="7" type="Text" name="E-mail" title="E-mail"/>
+            </multi-question>
+            <multi-question name="Job Info">
+                <line-item/>
+                <question id="3" type="Position" name="Official Job Title" title="Official Job Title"/>
+                <question id="4" type="Organisation" name="Department" title="Department"/>
+                <question id="6" type="Text" name="Division" title="Division"/>
+                <question id="9" type="Text" name="Time in Current Position(years months)" title="Time in Current Position"/>
+            </multi-question>
+            <multi-question name="Immediate Supervisor">
+                <line-item/>
+                <question id="10" type="Text" name="Name" title="Name"/>
+                <question id="11" type="Position" name="Title" title="Job Title"/>
+                <question id="12" type="Text" name="Work Phone" title="Work Phone"/>
+                <question id="13" type="Text" name="Email" title="Email"/>
+            </multi-question>
+            <multi-question name="Immediate supervisor reports to">
+                <line-item/>
+                <question id="14" type="Text" name="Name" title="Name"/>
+                <question id="15" type="Position" name="Title" title="Job Title"/>
+                <question id="16" type="Text" name="Work Phone" title="Work Phone"/>
+                <question id="17" type="Text" name="Email" title="Email"/>
+            </multi-question>
+        </group>
+
+        <group name="2. POSITION SUMMARY">
+            <narrative>Please write 1 to 3 sentences which describe the purpose of your position</narrative>
+            <narrative>Example: Computer Support Technician</narrative>
+            <narrative>Summary: To operate, maintain and repair computer equipment and to provide technical assistance to users.</narrative>
+            <question id="18" type="TextBox" name="Purpose of your Position" title="Purpose of your Position" length="30"/>
+        </group>
+
+        <group name="3. SUPERVISORY RESPONSIBILITIES - This is very important.">
+            <narrative>
+                For each statement in the chart below, if the statement applies to your position, please check the box under the
+                "Yes" column and then indicate the number of employees for which you are responsible to the right of the statement
+            </narrative>
+            <multi-question name="Duty">
+                <line-item>I do not officially supervise other employees (sign performance reviews).</line-item>
+                <question id="19" type="Checkbox" name="Yes" title="Yes"/>
+                <question id="21" type="Text" name="Full-time Equivalent Employees" title="Full-time Equivalent Employees"/>
+            </multi-question>
+            <multi-question name="Duty">
+                <line-item>I evaluate and sign performance reviews of other regular employees.</line-item>
+                <question id="20" type="Checkbox" name="Yes" title="Yes"/>
+                <question id="38" type="Text" name="Full-time Equivalent Employees" title="Full-time Equivalent Employees"/>
+            </multi-question>
+            <multi-question name="Duty">
+                <line-item>I evaluate and sign performance reviews of part-time, temporary or contract employees</line-item>
+                <question id="22" type="Checkbox" name="Yes" title="Yes"/>
+                <question id="23" type="Text" name="Full-time Equivalent Employees" title="Full-time Equivalent Employees"/>
+            </multi-question>
+            <multi-question name="Duty">
+                <line-item>I instruct other employees in methods or procedures needed to carry out their job (how to carry-out their assigned duties)</line-item>
+                <question id="24" type="Checkbox" name="Yes" title="Yes"/>
+                <question id="25" type="Text" name="Full-time Equivalent Employees" title="Full-time Equivalent Employees"/>
+            </multi-question>
+            <multi-question name="Duty">
+                <line-item>I make work assignments for others</line-item>
+                <question id="26" type="Checkbox" name="Yes" title="Yes"/>
+                <question id="27" type="Text" name="Full-time Equivalent Employees" title="Full-time Equivalent Employees"/>
+            </multi-question>
+            <multi-question name="Duty">
+                <line-item>I make hiring and hiring pay recommendations</line-item>
+                <question id="28" type="Checkbox" name="Yes" title="Yes"/>
+                <question id="29" type="Text" name="Full-time Equivalent Employees" title="Full-time Equivalent Employees"/>
+            </multi-question>
+            <multi-question name="Duty">
+                <line-item>I make hiring and hiring pay decisions</line-item>
+                <question id="30" type="Checkbox" name="Yes" title="Yes"/>
+                <question id="31" type="Text" name="Full-time Equivalent Employees" title="Full-time Equivalent Employees"/>
+            </multi-question>
+            <multi-question name="Duty">
+                <line-item>I recommend termination for poor performance</line-item>
+                <question id="32" type="Checkbox" name="Yes" title="Yes"/>
+                <question id="33" type="Text" name="Full-time Equivalent Employees" title="Full-time Equivalent Employees"/>
+            </multi-question>
+            <multi-question name="Duty">
+                <line-item>I provide advice to peers that they must consider carefully before making a decision</line-item>
+                <question id="34" type="Checkbox" name="Yes" title="Yes"/>
+                <question id="35" type="Text" name="Full-time Equivalent Employees" title="Full-time Equivalent Employees"/>
+            </multi-question>
+            <multi-question name="Duty">
+                <line-item>I provide information to supervisors/management that they use in making a decision.</line-item>
+                <question id="36" type="Checkbox" name="Yes" title="Yes"/>
+                <question id="37" type="Text" name="Full-time Equivalent Employees" title="Full-time Equivalent Employees"/>
+            </multi-question>
+        </group>
+
+        <group name="4.  ORGANIZATION CHART">
+            <narrative>
+                Complete the organization chart below. Please use titles and not names. Fill in the applicable position titles:
+                (1) your coworkers, employees you work with and who also report directly to your supervisor; and,
+                (2) your subordinates, any employees you supervise directly. List only those jobs over which you have full
+                managerial/supervisory authority (i.e. complete and sign performance evaluation.) Do not list employees
+                supervised by your subordinate supervisors
+            </narrative>
+            <question id="40" type="Position" name="Supervisors Job Title" title="Supervisors Job Title"/>
+            <question id="41" type="Position" name="Subordinate Job Title" title="Subordinate Job Title"/>
+            <question id="42" type="Position" name="Subordinate Job Title" title="Subordinate Job Title"/>
+            <question id="43" type="Position" name="Subordinate Job Title" title="SSubordinate Job Title"/>
+        </group>
+
+        <group name="5. ESSENTIAL DUTIES - This is very important.">
+            <narrative>
+                In the table below, please list your essential duties (those duties that make up at least 5% of your time)
+                and the decisions you make in carrying out each duty.Provide enough detail so that someone who may not be
+                familiar with your job will have a clear understanding of what it is that you do. For example,
+                do not simply state "prepares reports", but state "prepares reports such as status reports, staff reports",
+                or other type of report(s) you may prepare.Also, please use action verbs such as prepares, calculates, operates,
+                etc., to start off each statement. Avoid phrases such as "assists with" or "participates in" Do not use acronyms
+            </narrative>
+            <narrative>
+                In the Frequency column, please indicate how often you perform each duty:
+                D = daily, W = weekly, M = monthly, Q = quarterly, A = annually, or O = occasionally.
+            </narrative>
+            <narrative>
+                In the "Percent of Time" column please indicate how much of your time you spend on each task.
+                The total of these percentages should not be more than 100%.
+                Example: Sally conducts property value estimates 20% of the time, it may mean she spends one day out of
+                five on that task, or that she spends around two hours each day.
+                These need only be estimates so do not spend a great deal of time trying to come up with an exact percentage.
+                The percentages of all duties should equal 100% over a one year period of time.
+            </narrative>
+            <narrative>Insert additional rows if necessary.</narrative>
+            <multi-question name=" ">
+                <line-item dynamic="Y"/>
+                <question id="50" type="TextBox" name="Essential Duties" title="Essential Duties"/>
+                <question id="51" type="TextBox" name="Decisions Required" title="Decisions Required"/>
+                <question id="52" type="Select" name="Frequency:D = Daily, W = Weekly, M = Monthly, Q = Quarterly, A = Annually, O = Occasionally" title="Frequency">
+                    <answer value="D" text="D"/>
+                    <answer value="W" text="W"/>
+                    <answer value="M" text="M"/>
+                    <answer value="Q" text="Q"/>
+                    <answer value="A" text="A"/>
+                    <answer value="O" text="O"/>
+                </question>
+                <question id="53" type="Text" name="% of Time Spent (Not to exceed 100%)" title="% of Time Spent (Not to exceed 100%)"/>
+            </multi-question>
+        </group>
+
+        <group name="6. REQUIRED KNOWLEDGE AND SKILLS">
+            <narrative>
+                Please list the knowledge and skills required for entry into your position, and not what you might necessarily
+                know or be able to do after being in your position for a number of years.
+            </narrative>
+            <narrative>
+                Knowledge: refers to the possession of concepts and information gained through experience, training and/or education
+                and can be measured through testing.
+            </narrative>
+            <narrative>
+                Skills: refers to the proficiency which can be demonstrated and are typically manual in nature and/or can be measured through testing
+            </narrative>
+            <narrative>Insert additional rows if necessary.</narrative>
+            <multi-question name=" ">
+                <line-item dynamic="Y"/>
+                <question id="60" type="TextBox" name="Knowledge" title="Knowledge"/>
+                <question id="61" type="TextBox" name="Skills" title="Skills"/>
+            </multi-question>
+        </group>
+
+        <group name="7.  EDUCATION - This is very important">
+            <narrative>
+                What minimum level of education do you believe is needed to satisfactorily perform your job at entry level? This may be different from what the organization currently requires.
+                Check the level that applies to your job:
+            </narrative>
+            <question id="70" type="Checkbox" name="Less than High School Diploma or equivalent (G.E.D.)(ability to read, write, and follow directions)" title="Less than High School Diploma or equivalent (G.E.D.)  (ability to read, write, and follow directions)"/>
+            <question id="71" type="Checkbox" name="High School Diploma or equivalent (G.E.D.)" title="High School Diploma or equivalent (G.E.D.)"/>
+            <question id="72" type="Checkbox" name="Up to one year of specialized or technical training beyond high school" title="Up to one year of specialized or technical training beyond high school"/>
+            <question id="73" type="Checkbox" name="Associate degree (A.S., A.A.) or two-year technical certificate" title="Associate degree (A.S., A.A.) or two-year technical certificate"/>
+            <question id="74" type="Checkbox" name="Bachelor's degree" title="Bachelor's degree"/>
+            <question id="75" type="Checkbox" name="Other" title="Other"/>
+            <question id="76" type="TextBox" name="If Other Selected Please Explain" title="If Other Selected Please Explain"/>
+            <question id="77" type="TextBox" name="What field(s) should training or degree be in?" title="What field(s) should training or degree be in?"/>
+        </group>
+
+        <group name="8.  EXPERIENCE - This is very important.">
+            <narrative>What is the minimum type and years of experience needed for entry into your job?</narrative>
+            <narrative>Insert additional rows if necessary.</narrative>
+            <multi-question name=" ">
+                <line-item dynamic="Y"/>
+                <question id="80" type="Text" name="You Need" title="You Need"/>
+                <question id="81" type="Text" name="Minimum Time Required (Years)" title="Minimum Time Required (Years)"/>
+            </multi-question>
+        </group>
+
+        <group name="9. SPECIAL REQUIREMENTS">
+            <narrative>List any registrations, certifications or licenses that are required for entry into your position</narrative>
+            <narrative>Insert additional rows if necessary.</narrative>
+            <multi-question name=" ">
+                <line-item dynamic="Y"/>
+                <question id="90" type="Text" name="You Need" title="You Need"/>
+            </multi-question>
+        </group>
+
+        <group name="10. MACHINES, TOOLS AND EQUIPMENT.">
+            <narrative>
+                List any specialized machines, tools, equipment or software used in your work and show the frequency and time spent using each.
+                The machines, tools, equipment and software must refer to the Essential Duties you listed in Section 3
+            </narrative>
+            <narrative>Insert additional rows if necessary.</narrative>
+            <multi-question name=" ">
+                <line-item dynamic="Y"/>
+                <question id="100" type="Text" name="Machines, Tools, Equipment" title="Machines, Tools, Equipment"/>
+                <question id="101" type="Text" name="Frequency/Time" title="Frequency/Time"/>
+            </multi-question>
+        </group>
+
+        <group name="11. DECISION-MAKING AND JUDGMENTS.">
+            <narrative>
+                a. Describe two kinds of decisions and judgments you make regularly and independently in the performance of your duties
+            </narrative>
+            <question id="110" type="TextBox" name="1" title="1"/>
+            <question id="111" type="TextBox" name="2" title="2"/>
+            <question id="112" type="TextBox" name="b.  For what work do you make the final decision?  Provide examples." title="b.  For what work do you make the final decision?  Provide examples."/>
+            <question id="113" type="TextBox" name="c.  Does this position have authority to commit the organization, or any of its units, to a course of action? Provide examples" title="c.  Does this position have authority to commit the organization, or any of its units, to a course of action? Provide examples"/>
+        </group>
+
+        <group name="12.  PHYSICAL FACTORS">
+            <narrative>
+                Check the box that best describes the overall amount of physical effort required to perform this job
+            </narrative>
+            <question id="120" type="Checkbox" name="Standard (Normally seated, standing or walking at will)" title="Standard (Normally seated, standing or walking at will)"/>
+            <question id="121" type="Checkbox" name="Restricted, Not Mobile (Confined to immediate work area)" title="Restricted,Not Mobile (Confined to immediate work area)"/>
+            <question id="122" type="Checkbox" name="Exertive (Extensive walking, recurring bending, crouching, stooping, stretching, reaching or similar activities)" title="Exertive (Extensive walking, recurring bending, crouching, stooping, stretching, reaching or similar activities)"/>
+            <question id="123" type="Checkbox" name="Strenuous (Considerable and rapid physical exertion or demands on the body)" title="Strenuous (Considerable and rapid physical exertion or demands on the body)"/>
+
+            <multi-question name="Please indicate the relative frequency required in your position for each activity listed below">
+                <line-item dynamic="Y"/>
+                <question id="124" type="Select" name="Physical Activity" title="Physical Activity">
+                    <answer text="Lift,Carry (Heavy 45 lbs and over)" value="0"/>
+                    <answer text="Lift,Carry (Moderate 15 to 45 lbs)" value="1"/>
+                    <answer text="Lift,Carry (Light 15 lbs or less)" value="2"/>
+                    <answer text="Pull,Push" value="3"/>
+                    <answer text="Reach,Work Overhead" value="4"/>
+                    <answer text="Good manual dexterity" value="5"/>
+                    <answer text="Use of both hands" value="6"/>
+                    <answer text="Walking" value="7"/>
+                    <answer text="Able to stand while performing work" value="8"/>
+                    <answer text="Able to sit while performing work" value="9"/>
+                    <answer text="Crawl/Crouch" value="10"/>
+                    <answer text="Able to run in order to perform work" value="11"/>
+                    <answer text="Able to kneel while performing work" value="12"/>
+                    <answer text="Repeated bending" value="13"/>
+                    <answer text="Able to climb in order to perform work" value="14"/>
+                    <answer text="Operate motorized equipment" value="15"/>
+                    <answer text="Discharge firearms" value="16"/>
+                    <answer text="Good eye/hand coordination" value="17"/>
+                    <answer text="Ability to speak clearly" value="18"/>
+                    <answer text="Ability to hear in order to perform work" value="19"/>
+                    <answer text="Repetitive motions" value="20"/>
+                    <answer text="Near vision, 20 inches or less" value="21"/>
+                    <answer text="Mid-range Vision, more than 20 inches/less than 20 feet" value="22"/>
+                    <answer text="Distance Vision, 20 feet or more" value="23"/>
+                    <answer text="Ability to identify and distinguish colors" value="24"/>
+                    <answer text="Depth perception" value="25"/>
+                </question>
+                <question id="125" type="Select" name="Relative Frequency" title="Relative Frequency">
+                    <answer text="Never" value="0"/>
+                    <answer text="Infrequently (Less Than 10%)" value="10"/>
+                    <answer text="Seldom (10% - 25%)" value="20"/>
+                    <answer text="Moderately (25% - 50%)" value="50"/>
+                    <answer text="Always (Greater Than 50%)" value="75"/>
+                </question>
+            </multi-question>
+        </group>
+
+        <group name="13. ADDITIONAL COMMENTS">
+            <narrative>
+                Are there any additional comments you would like to make to be sure you have described your job adequately? (Use additional sheets if necessary).
+            </narrative>
+            <question id="130" type="Comments" name="Comments" title="Comments"/>
+        </group>
+
+        <group name="EMPLOYEE CERTIFICATION">
+            <narrative>
+                I certify that the above statements and responses are accurate and complete to the best of my knowledge
+            </narrative>
+            <question id="140" type="Text" name="Signed" title="Your Name"/>
+            <question id="141" type="Date" name="Date" title="Date"/>
+            <narrative>
+                THANK YOU FOR COMPLETING THIS QUESTIONNAIRE. AFTER YOU OR YOUR GROUP HAS COMPLETED YOUR PORTION OF THE QUESTIONNAIRE,
+                PLEASE SUBMIT THE QUESTIONNAIRE TO YOUR SUPERVISOR FOR REVIEW, SIGNATURE, AND COMMENT.
+                YOUR SUPERVISOR WILL SUBMIT THE COMPLETED QUESTIONNAIRE TO YOUR DEPARTMENT HEAD
+            </narrative>
+        </group>
+
+        <group name="TO BE COMPLETED BY THE IMMEDIATE SUPERVISOR AND DEPARTMENT HEAD">
+            <narrative>
+                Use this section to note any additional comments, additional duties or disagreements with any section of the questionnaire.
+                Do not change anything written by the individual filling out the questionnaire and do not address any performance issues.
+                If you disagree with any information provided or believe some information is missing, indicate below the question number and your comments
+            </narrative>
+            <narrative>
+                Any supervisory or department head comments must be discussed with the employee.
+            </narrative>
+            <multi-question name="">
+                <line-item dynamic="Y" managerCanDisable="Y"/>
+                <question id="150" type="Text" name="Question No" title="Question No" managerWrite="Y"/>
+                <question id="151" type="TextBox" name="Comments" title="Comments" managerWrite="Y"/>
+            </multi-question>
+        </group>
+
+        <group name="SUPERVISORY AND DEPARTMENT HEAD SIGNATURES">
+            <narrative>
+                Please check the appropriate statement
+            </narrative>
+            <question id="160" type="Checkbox" name="I agree with the incumbents position questionnaire as written" title="I agree with the incumbents position questionnaire as written" managerWrite="Y"/>
+            <question id="161" type="Checkbox" name="The above modifications have been discussed with the incumbent, and the incumbent agrees with these modifications" title="The above modifications have been discussed with the incumbent, and the incumbent agrees with these modifications" managerWrite="Y"/>
+            <question id="162" type="Checkbox" name="The above modifications have been discussed with the incumbent, and the incumbent disagrees with these modifications" title="The above modifications have been discussed with the incumbent, and the incumbent disagrees with these modifications" managerWrite="Y"/>
+
+            <multi-question name="">
+                <line-item/>
+                <question id="163" type="Text" name="Supervisor Signature" title="Supervisor Signature" managerWrite="Y"/>
+                <question id="164" type="Date" name="Date" title="Date" managerWrite="Y"/>
+            </multi-question>
+
+            <multi-question name="">
+                <line-item/>
+                <question id="165" type="Text" name="Department Head Signature" title="Department Head Signature" managerWrite="Y"/>
+                <question id="166" type="Date" name="Date" title="Date" managerWrite="Y"/>
+            </multi-question>
+
+            <narrative>
+                I have noted the modifications made by my supervisor in the comments section above
+            </narrative>
+
+            <multi-question name="">
+                <line-item/>
+                <question id="167" type="Text" name="Employee Signature" title="Employee Signature"/>
+                <question id="168" type="Date" name="Date" title="Date"/>
+            </multi-question>
+        </group>
+
+    </questionnaire>
+</xml>

@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+    <!--
+        Created by the Middlegen Hibernate plugin 2.1
+
+        http://boss.bekk.no/boss/middlegen/
+        http://www.hibernate.org/
+    -->
+
+    <class
+        name="com.zynap.talentstudio.audit.SessionLog"
+        table="SESSION_LOGS"
+        dynamic-update="true"
+        dynamic-insert="true"
+        >
+
+        <id
+            name="id"
+            type="java.lang.Long"
+            column="ID"
+            >
+            <meta attribute="use-in-equals">true</meta>
+            <generator class="sequence">
+                <param name="sequence">SEC_RULE_SQ</param>
+            </generator>
+        </id>
+
+        <property
+            name="sessionId"
+            type="java.lang.String"
+            column="SESSION_ID"
+            not-null="true"
+            length="100"
+            >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+
+        <property
+            name="remoteHost"
+            type="java.lang.String"
+            column="REMOTE_HOST"
+            not-null="true"
+            length="100"
+            >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+        <property
+            name="status"
+            type="java.lang.String"
+            column="STATUS"
+            not-null="true"
+            length="20"
+            >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+        <property
+            name="loggedInDate"
+            type="java.util.Date"
+            column="LOGGED_IN_DTS"
+            not-null="true"
+            length="7"
+            >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+        <property
+            name="loggedOutDate"
+            type="java.util.Date"
+            column="LOGGED_OUT_DTS"
+            length="7"
+            >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+        <property
+            name="loggedOutReason"
+            type="java.lang.String"
+            column="LOGGED_OUT_REASON"
+            length="100"
+            >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+        <!-- Associations -->
+
+        <!-- bi-directional many-to-one association to User -->
+        <many-to-one
+            name="user"
+            class="com.zynap.domain.admin.User"
+            not-null="true"
+            >
+            <meta attribute="use-in-equals">true</meta>
+            <column name="USER_ID"/>
+        </many-to-one>
+
+    </class>
+</hibernate-mapping>

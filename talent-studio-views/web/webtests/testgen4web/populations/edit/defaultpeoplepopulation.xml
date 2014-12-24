@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tg4w version="0.38.2">
+    <actions>
+        <action type="goto" refresh="true" step="0">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/talentarena/home.htm?a=MYZYNAPMODULE&a_tab=MYZYNAPMODULE]]></value>
+        </action>
+        <action type="verify-title" step="1">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Home]]></value>
+        </action>
+        <action type="click" refresh="true" step="2">
+            <xpath><![CDATA[A[@ID="a_ANALYSISMODULE"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" refresh="true" step="3">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Analyser Home]]></value>
+        </action>
+        <action type="goto" refresh="true" step="4">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/analysis/listpopulations.htm]]></value>
+        </action>
+        <action type="verify-title" step="5">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Populations]]></value>
+        </action>
+        <action type="assert-text-exists" step="6">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[All People]]></value>
+        </action>
+        <action type="assert-text-exists" step="7">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[All Positions]]></value>
+        </action>
+        <action type="click" refresh="true" step="8">
+            <xpath><![CDATA[TABLE[@ID="populations"]/TBODY[1]/TR[1]/TD[1]/A[@CDATA="All People"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" step="9">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Population]]></value>
+        </action>
+        <action type="assert-text-does-not-exist" step="10">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Edit]]></value>
+        </action>
+        <action type="click" refresh="true" step="11">
+            <xpath><![CDATA[*/FORM[@ID="_back"]/INPUT[@NAME="_back" and @VALUE="Back"]]]></xpath>
+            <value><![CDATA[_back]]></value>
+        </action>
+        <action type="verify-title" step="12">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Populations]]></value>
+        </action>
+        <action type="click" refresh="true" step="13">
+            <xpath><![CDATA[TABLE[@ID="populations"]/TBODY[1]/TR[1]/TD[1]/A[@CDATA="All People"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" step="14">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Population]]></value>
+        </action>
+        <action type="assert-text-does-not-exist" step="15">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Delete]]></value>
+        </action>
+    </actions>
+</tg4w>

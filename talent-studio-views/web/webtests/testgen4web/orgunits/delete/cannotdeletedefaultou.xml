@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tg4w version="0.38.2">
+    <actions>
+        <action type="goto" refresh="true" step="0">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/talentarena/home.htm?a=MYZYNAPMODULE&a_tab=MYZYNAPMODULE]]></value>
+        </action>
+        <action type="verify-title" step="1">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Home]]></value>
+        </action>
+        <action type="click" refresh="true" step="2">
+            <xpath><![CDATA[A[@ID="a_ORGANISATIONMODULE"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" refresh="true" step="3">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Organisation Home]]></value>
+        </action>
+        <action type="goto" refresh="true" step="4">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/orgbuilder/listorganisations.htm]]></value>
+        </action>
+        <action type="verify-title" step="5">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Organisation Units]]></value>
+        </action>
+        <action type="assert-text-exists" step="6">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Default Org Unit]]></value>
+        </action>
+        <action type="click" refresh="true" step="7">
+            <xpath><![CDATA[A[@ID="item_0"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" step="8">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Organisation Unit]]></value>
+        </action>
+
+        <!-- check that delete button not present -->
+        <action type="assert-text-does-not-exist" step="9">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Delete]]></value>
+        </action>
+
+        <!-- go back to search -->
+        <action type="click" refresh="true" step="10">
+            <xpath><![CDATA[*/FORM[@NAME="_back"]/INPUT[@ID="back"]]]></xpath>
+            <value><![CDATA[_back]]></value>
+        </action>
+        <action type="verify-title" step="11">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Organisation Units]]></value>
+        </action>
+        <action type="assert-text-exists" step="12">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Default Org Unit]]></value>
+        </action>
+    </actions>
+</tg4w>

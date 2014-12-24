@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+    
+<hibernate-mapping>
+<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+
+<class 
+    name="com.zynap.talentstudio.organisation.organisationunit.OuHierarchy"
+    table="OU_HIERARCHY"
+    dynamic-update="true"
+    dynamic-insert="true"
+>
+
+    <composite-id name="compositeId" class="com.zynap.talentstudio.organisation.organisationunit.OuHierarchyPK">
+        <meta attribute="use-in-equals">true</meta>
+        <key-property 
+            name="rootId" 
+            column="ROOT_ID" 
+            type="java.lang.Long"
+            length="22"
+        />
+        <key-property 
+            name="id" 
+            column="ID" 
+            type="java.lang.Long"
+            length="22"
+        />
+    </composite-id>    
+
+    <property
+        name="hlevel"
+        type="java.lang.Integer"
+        column="HLEVEL"
+        length="5"
+    >
+        <meta attribute="use-in-tostring">true</meta>
+        <meta attribute="use-in-equals">true</meta>
+    </property>
+
+    <!-- Associations -->
+    <!-- derived association(s) for compound key -->
+    <!-- bi-directional many-to-one association to OrganizationUnit -->
+    <many-to-one
+        name="root"
+	    class="com.zynap.talentstudio.organisation.OrganisationUnit"
+	    update="false"
+	    insert="false"
+	>
+    	<column name="ROOT_ID" />
+	</many-to-one>
+	
+    <!-- bi-directional many-to-one association to OrganizationUnit -->
+    <many-to-one
+        name="descendent"
+	    class="com.zynap.talentstudio.organisation.OrganisationUnit"
+	    update="false"
+	    insert="false"
+	>
+    	<column name="ID" />
+	</many-to-one>
+	
+    <!-- end of derived association(s) -->
+  
+
+</class>
+</hibernate-mapping>

@@ -1,0 +1,4 @@
+TODOS
+====================================
+SEVERE: The web application [/nhs] is still processing a request that has yet to finish. This is very likely to create a memory leak. You can control the time allowed for requests to finish by using the unloadDelay attribute of the standard Context implementation.
+STOP and cleanup the quartz threads

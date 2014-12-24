@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tg4w version="0.38.2">
+    <actions>
+        <action type="goto" refresh="true" step="0">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/login.htm]]></value>
+        </action>
+        <action type="verify-title" step="1">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Login]]></value>
+        </action>
+        <action type="fill" step="2">
+            <xpath><![CDATA[*/FORM[@ID="_login"]/*/INPUT[@TYPE="text" and @NAME="username"]]]></xpath>
+            <value><![CDATA[test]]></value>
+        </action>
+        <action type="fill" step="3">
+            <xpath><![CDATA[*/FORM[@ID="_login"]/*/INPUT[@TYPE="password" and @NAME="password"]]]></xpath>
+            <value><![CDATA[test]]></value>
+        </action>
+        <action type="click" refresh="true" step="4">
+            <xpath><![CDATA[*/FORM[@ID="_login"]/*/INPUT[@ID="loginsubmit"]]]></xpath>
+            <value><![CDATA[null]]></value>
+        </action>
+        <action type="verify-title" step="5">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Login]]></value>
+        </action>
+        <action type="assert-text-exists" step="6">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Invalid login. Please make sure that you have entered a correct username and password.]]></value>
+        </action>
+        <action type="fill" step="7">
+            <xpath><![CDATA[*/FORM[@ID="_login"]/*/INPUT[@TYPE="text" and @NAME="username"]]]></xpath>
+            <value><![CDATA[administrator]]></value>
+        </action>
+        <action type="fill" step="8">
+            <xpath><![CDATA[*/FORM[@ID="_login"]/*/INPUT[@TYPE="password" and @NAME="password"]]]></xpath>
+            <value><![CDATA[administrator]]></value>
+        </action>
+        <action type="click" refresh="true" step="9">
+            <xpath><![CDATA[*/FORM[@ID="_login"]/*/INPUT[@ID="loginsubmit"]]]></xpath>
+            <value><![CDATA[null]]></value>
+        </action>
+        <action type="verify-title" step="10">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Policy]]></value>
+        </action>
+        <action type="assert-text-exists" step="11">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Please read and agree to the text below before you continue.]]></value>
+        </action>
+        <action type="click" refresh="true" step="12">
+            <xpath><![CDATA[*/FORM[@ID="policyform"]/*/INPUT[@ID="disagree"]]]></xpath>
+            <value><![CDATA[Disagree]]></value>
+        </action>
+        <action type="verify-title" step="13">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Login]]></value>
+        </action>
+        <action type="assert-text-exists" step="14">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Login]]></value>
+        </action>
+        <action type="fill" step="15">
+            <xpath><![CDATA[*/FORM[@ID="_login"]/*/INPUT[@TYPE="text" and @NAME="username"]]]></xpath>
+            <value><![CDATA[administrator]]></value>
+        </action>
+        <action type="fill" step="16">
+            <xpath><![CDATA[*/FORM[@ID="_login"]/*/INPUT[@TYPE="password" and @NAME="password"]]]></xpath>
+            <value><![CDATA[administrator]]></value>
+        </action>
+        <action type="click" refresh="true" step="17">
+            <xpath><![CDATA[*/FORM[@ID="_login"]/*/INPUT[@ID="loginsubmit"]]]></xpath>
+            <value><![CDATA[null]]></value>
+        </action>
+        <action type="verify-title" step="18">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Policy]]></value>
+        </action>
+        <action type="click" refresh="true" step="19">
+            <xpath><![CDATA[*/FORM[@ID="policyform"]/*/INPUT[@ID="accept"]]]></xpath>
+            <value><![CDATA[Agree]]></value>
+        </action>
+        <action type="verify-title" step="20">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Policy]]></value>
+        </action>
+        <action type="assert-text-exists" step="21">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[You must agree to the policy before continuing.]]></value>
+        </action>
+        <action type="check" step="22">
+            <xpath><![CDATA[*/FORM[@ID="policyform"]/*/INPUT[@TYPE="checkbox" and @NAME="acceptedPolicy"]]]></xpath>
+            <value><![CDATA[true]]></value>
+        </action>
+        <action type="click" refresh="true" step="23">
+            <xpath><![CDATA[*/FORM[@ID="policyform"]/*/INPUT[@ID="accept"]]]></xpath>
+            <value><![CDATA[Agree]]></value>
+        </action>
+        <action type="verify-title" step="24">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Home]]></value>
+        </action>
+        <action type="assert-text-exists" step="25">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Mission Statement]]></value>
+        </action>
+    </actions>
+</tg4w>

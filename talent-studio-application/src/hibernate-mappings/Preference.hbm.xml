@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+    <!--
+        Created by the Middlegen Hibernate plugin 2.1
+
+        http://boss.bekk.no/boss/middlegen/
+        http://www.hibernate.org/
+    -->
+
+    <class
+            name="com.zynap.talentstudio.preferences.Preference"
+            table="PREFERENCES"
+            dynamic-update="true"
+            dynamic-insert="true"
+            >
+
+        <id
+                name="id"
+                type="java.lang.Long"
+                column="ID"
+                >
+            <generator class="sequence">
+                <param name="sequence">PREFERENCE_SQ</param>
+            </generator>
+        </id>
+
+        <property
+                name="hashcode"
+                type="java.lang.String"
+                column="HASHCODE"
+                not-null="true"
+                length="500"
+                />
+
+        <property
+                name="viewName"
+                type="java.lang.String"
+                column="VIEW_NAME"
+                not-null="true"
+                unique="true"
+                length="100"
+                />
+
+        <property
+                name="description"
+                type="java.lang.String"
+                column="DESCRIPTION"
+                length="255"
+                />
+
+        <property
+                name="type"
+                type="java.lang.String"
+                column="PREFERENCE_TYPE"
+                length="50"
+                />
+        <property
+                name="userId"
+                type="java.lang.Long"
+                column="USER_ID"
+                length="50"
+                />
+
+        <property
+                name="secure"
+                type="true_false"
+                column="IS_SECURE"
+                length="1"
+                />
+
+        <property
+                name="preferenceCollection"
+                type="org.springframework.orm.hibernate.support.BlobSerializableType"
+                column="PREFERENCE_VALUES"
+                not-null="true"
+                />
+
+        <!-- Associations -->
+
+        <!-- bi-directional one-to-many association to MenuItem -->
+        <set
+                name="menuItems"
+                lazy="true"
+                inverse="true"
+                cascade="all-delete-orphan"
+                outer-join="true"
+                batch-size="50"
+                >
+            <key>
+                <column name="PREFERENCE_ID"/>
+            </key>
+            <one-to-many class="com.zynap.talentstudio.arenas.MenuItem"/>
+        </set>
+
+        <set
+                name="groups"
+                table="PREFERENCE_GROUPS"
+                cascade="none"
+                outer-join="true"
+                lazy="true"
+                batch-size="50">
+            <key>
+                <column name="PREFERENCE_ID"/>
+            </key>
+            <many-to-many class="com.zynap.talentstudio.common.groups.Group" column="GROUP_ID"/>
+        </set>
+        
+    </class>
+</hibernate-mapping>

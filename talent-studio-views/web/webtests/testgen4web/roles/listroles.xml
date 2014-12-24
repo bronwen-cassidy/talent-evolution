@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tg4w version="0.38.2">
+    <actions>
+        <action type="goto" refresh="true" step="0">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/admin/listrole.htm?navigator.notSubmit=true]]></value>
+        </action>
+        <action type="verify-title" step="1">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Roles]]></value>
+        </action>
+        <action type="assert-text-does-not-exist" step="2">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Add]]></value>
+        </action>
+        <action type="click" refresh="true" step="3">
+            <xpath><![CDATA[TABLE[@ID="pg_table"]/THEAD[1]/TR[1]/TH[1]/A[@CDATA="Name"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" step="4">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Roles]]></value>
+        </action>
+        <action type="click" refresh="true" step="5">
+            <xpath><![CDATA[TABLE[@ID="pg_table"]/TBODY[1]/TR[15]/TD[1]/A[@CDATA="Administration Arena"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" step="6">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Role]]></value>
+        </action>
+
+        <action type="assert-text-exists" step="7">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Back]]></value>
+        </action>
+        <action type="assert-text-does-not-exist" step="8">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Edit]]></value>
+        </action>
+        <action type="assert-text-does-not-exist" step="9">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Delete]]></value>
+        </action>
+
+        <action type="assert-text-exists" step="10">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Role]]></value>
+        </action>
+        <action type="assert-text-exists" step="11">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Users]]></value>
+        </action>
+        <action type="assert-text-exists" step="12">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Role Information]]></value>
+        </action>
+        <action type="assert-text-exists" step="13">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Access Permissions]]></value>
+        </action>
+        <action type="assert-text-exists" step="14">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Administration Arena]]></value>
+        </action>
+        <action type="click" refresh="true" step="15">
+            <xpath><![CDATA[A[@ID="a_USERS"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" step="16">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Role]]></value>
+        </action>
+        <action type="assert-text-exists" step="17">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Role - User Information]]></value>
+        </action>
+        <action type="assert-text-exists" step="18">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Users with Role Administration Arena]]></value>
+        </action>
+        <action type="assert-text-exists" step="19">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[administrator]]></value>
+        </action>
+        <action type="click" refresh="true" step="20">
+            <xpath><![CDATA[A[@ID="a_ROLE"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" step="21">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Role]]></value>
+        </action>
+        <action type="click" refresh="true" step="22">
+            <xpath><![CDATA[*/FORM[@NAME="_back"]/INPUT[@ID="back"]]]></xpath>
+            <value><![CDATA[_back]]></value>
+        </action>
+        <action type="verify-title" step="23">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Roles]]></value>
+        </action>
+    </actions>
+</tg4w>

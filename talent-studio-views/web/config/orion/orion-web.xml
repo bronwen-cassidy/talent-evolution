@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+
+<orion-web-app
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://xmlns.oracle.com/oracleas/schema/orion-web-10_0.xsd" deployment-version="null"
+        deployment-time="1178109552015"
+        jsp-cache-directory="./persistence"
+        jsp-cache-tlds="standard"
+        simple-jsp-mapping="false"
+        temporary-directory="./temp"
+        context-root="/"
+        development="true"
+        schema-major-version="10"
+        schema-minor-version="0">
+    <!-- todo add in this attribute to orion-web-app when db is utf-8 encoded default-charset="UTF-8"-->
+    <!-- Uncomment this element to control web application class loader behavior.
+         <web-app-class-loader search-local-classes-first="true"  include-war-manifest-class-path="true" />
+    -->
+
+    <security-role-mapping name="webserviceuser">
+        <group name="webserviceuser"/>
+    </security-role-mapping>
+
+    <web-app>
+    </web-app>
+</orion-web-app>

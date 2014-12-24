@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+    <questionnaire name="CPW Succession Performance / Potential Questionnaire" title="CPW Succession Performance / Potential Questionnaire">
+
+        <group name="Potential to Lead" title="Potential to Lead - Ability and Attitude">
+
+            <question id="1" type="Radio" name="Interpersonal Ability" title="Interpersonal Ability">
+                <answer value="1" text="They are less influential sometimes having problems influencing or communicating with others"/>
+                <answer value="2" text="Their interpersonal ability is gererally suitable, although they need greater guidance when making effective business decisions"/>
+                <answer value="3" text="They have strong interpersonal ability in that they build effective influencing relationships with all levels of employees"/>
+            </question>
+
+            <question id="2" type="Radio" name="Intellectual Ability" title="Intellectual Ability">
+                <answer value="1" text="They demonstrate lower levels of intellectual ability with a need for rigid and structured approach to operating"/>
+                <answer value="2" text="Their intellectual ability is reasonable although they need greater guidance when making effective business judgements"/>
+                <answer value="3" text="They are strong intellectually in that they work effectively with complexity and ambiguity to make sound judgements"/>
+            </question>
+
+            <question id="3" type="Radio" name="Core Values" title="Core Values">
+                <answer value="1" text="They follow our values rather than seeing them as core"/>
+                <answer value="2" text="They share our core values (rather than just buying into them)"/>
+                <answer value="3" text="They breathe life into our core values actively encouraging all to adopt them"/>
+            </question>
+
+            <question id="4" type="Radio" name="Management Requirement" title="Management Requirement">
+                <answer value="1" text="They need to be managed closely in order to perform"/>
+                <answer value="2" text="They look to their boss for management direction and support"/>
+                <answer value="3" text="They don't need to be managed; they have a responsibility rather than a job"/>
+            </question>
+
+            <question id="5" type="Radio" name="Career Direction" title="Career Direction">
+                <answer value="1" text="They are less career driven and are not actively working to progress further"/>
+                <answer value="2" text="They are looking to build a strong career; seeing CPW as an option"/>
+                <answer value="3" text="They have strong interpersonal ability in that they build effective influencing relationships with all levels of employees"/>
+            </question>
+        </group>
+
+
+        <group name="Performance" title="Performance - Achievement">
+
+            <question id="6" type="Radio" name="Performance Levels" title="Performance Levels">
+                <answer value="1" text="Their performance levels are inconsistent or often poor"/>
+                <answer value="2" text="They have a track record of delivering acceptable levels of performance"/>
+                <answer value="3" text="They have a proven track record of delivering high levels of performance"/>
+            </question>
+
+            <question id="7" type="Radio" name="Meeting Expectations" title="Meeting Expectations">
+                <answer value="1" text="They often fail to meet required levels of performance, and often require close management to achieve this."/>
+                <answer value="2" text="They meet required levels of performance and on occasion exceed expectations"/>
+                <answer value="3" text="They regularly exceed performance expectations"/>
+            </question>
+
+            <question id="8" type="Radio" name="Breadth of Experience" title="Breadth of Experience">
+                <answer value="1" text="They are not keen to perform outside their area of expertise"/>
+                <answer value="2" text="Their breadth of experience has been limited to their area of expertise to date"/>
+                <answer value="3" text="They have a breadth of experience beyond their core area of expertise"/>
+            </question>
+
+        </group>
+
+        <group name="Potential / Performance Scores" title="Potential / Performance Scores">
+
+            <question id="9" type="Sum" name="Potential Total" title="Potential Total">
+                <operand source="1"/>
+                <operand source="2"/>
+                <operand source="3"/>
+                <operand source="4"/>
+                <operand source="5"/>
+            </question>
+
+            <question id="10" type="Sum" name="Performance Total" title="Performance Total">
+                <operand source="6"/>
+                <operand source="7"/>
+                <operand source="8"/>
+            </question>
+
+
+            <question id="11" type="EnumMapping" name="Calculated Potential" title="Calculated Potential">
+                <mapping upperbound="6" value="Low" text="Low Potential" source="9"/>
+                <mapping lowerbound="7" upperbound="12" value="Medium" text="Intermediate Potential" source="9"/>
+                <mapping lowerbound="13" value="High" text="High Potential" source="9"/>
+            </question>
+
+            <question id="12" type="EnumMapping" name="Calculated Performance" title="Calculated Performance">
+                <mapping upperbound="4" value="Low" text="Low Performance" source="10"/>
+                <mapping lowerbound="5" upperbound="7" value="Medium" text="Intermediate Performance" source="10"/>
+                <mapping lowerbound="8" value="High" text="High Performance" source="10"/>
+            </question>
+
+            <question id="13" type="EnumMapping" name="Potential Grade" title="Potential Grade">
+                <mapping upperbound="6" value="3" text="3" source="9"/>
+                <mapping lowerbound="7" upperbound="12" value="2" text="2" source="9"/>
+                <mapping lowerbound="13" value="1" text="1" source="9"/>
+            </question>
+
+            <question id="14" type="EnumMapping" name="Performance Grade" title="Performance Grade">
+                <mapping upperbound="6" value="3" text="3" source="9"/>
+                <mapping lowerbound="7" upperbound="12" value="2" text="2" source="9"/>
+                <mapping lowerbound="13" value="1" text="1" source="9"/>
+            </question>
+
+        </group>
+
+    </questionnaire>
+</xml>

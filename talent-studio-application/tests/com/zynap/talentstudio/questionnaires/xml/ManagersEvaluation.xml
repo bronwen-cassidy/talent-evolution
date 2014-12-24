@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+
+    <questionnaire name="Managers Evaluation" title="Managers Appraisal Evaluation Questionnaire">
+
+        <group name="Managers Group 1">
+            <narrative>Managers Group 1 Narrative</narrative>
+            <narrative>Please Note disabled fields are editable only by the manager</narrative>
+            <question id="Q1" type="Text" name="Q1 Text Name (manager editable only)" title="Text Title" mandatory="Y"/>
+            <question id="Q2" type="Date" name="Q2 Date Name" title="Date Title" managerWrite="Y"/>
+            <question id="Q3" type="Integer" name="Q3 Integer Name" title="Integer Title" managerWrite="Y"/>
+            <question id="Q4" type="PositiveInteger" name="Q4 Positive Integer Name" title="Positive Integer Title" managerWrite="Y"/>
+            <question id="Q5" type="TextBox" name="Q5 Textbox Name" title="Textbox Title" managerWrite="Y"/>
+            <question id="Q6" type="Select" name="Q6 Select Name" title="Select Title" target="Select Value1" managerWrite="Y">
+                <answer value="Select Value1" text="Select Text1"/>
+                <answer value="Select Value2" text="Select Text2"/>
+                <answer value="Select Value3" text="Select Text3"/>
+                <answer value="Select Value4" text="Select Text4"/>
+                <answer value="Select Value5" text="Select Text5"/>
+            </question>
+            <question id="Q7" type="MultiSelect" name="Q7 MultiSelect Name" title="MultiSelect Title" target="MultiSelect Value1" managerWrite="Y">
+                <answer value="MultiSelect Value1" text="MultiSelect Text1"/>
+                <answer value="MultiSelect Value2" text="MultiSelect Text2"/>
+                <answer value="MultiSelect Value3" text="MultiSelect Text3"/>
+                <answer value="MultiSelect Value4" text="MultiSelect Text4"/>
+                <answer value="MultiSelect Value5" text="MultiSelect Text5"/>
+                <answer value="MultiSelect Value6" text="MultiSelect Text6"/>
+                <answer value="MultiSelect Value7" text="MultiSelect Text7"/>
+                <answer value="MultiSelect Value8" text="MultiSelect Text8"/>
+                <answer value="MultiSelect Value9" text="MultiSelect Text9"/>
+                <answer value="MultiSelect Value10" text="MultiSelect Text10"/>
+                <answer value="MultiSelect Value11" text="MultiSelect Text11"/>
+                <answer value="MultiSelect Value12" text="MultiSelect Text12"/>
+            </question>
+            <question id="Q8" type="Radio" name="Q8 Radio Name" title="Radio Title" target="Radio Value1" managerWrite="Y">
+                <answer value="Radio Value1" text="Radio Text1"/>
+                <answer value="Radio Value2" text="Radio Text2"/>
+                <answer value="Radio Value3" text="Radio Text3"/>
+                <answer value="Radio Value4" text="Radio Text4"/>
+                <answer value="Radio Value5" text="Radio Text5"/>
+            </question>
+            <question id="Q9" type="Checkbox" name="Q9 Checkbox Name" title="Checkbox Title" target="Checkbox Value1" managerWrite="Y">
+                <answer value="Checkbox Value1" text="Checkbox Text1"/>
+                <answer value="Checkbox Value2" text="Checkbox Text2"/>
+                <answer value="Checkbox Value3" text="Checkbox Text3"/>
+                <answer value="Checkbox Value4" text="Checkbox Text4"/>
+                <answer value="Checkbox Value5" text="Checkbox Text5"/>
+            </question>
+            <question id="Q10" type="Image" name="Q10 Image" title="Image title?" managerWrite="Y"/>
+            <question id="Q11" type="Organisation" name="Q11 Organisation name" title="Organisation title" managerWrite="Y"/>
+            <question id="Q12" type="Subject" name="Q12 Subject Name name" title="Subject Name title" managerWrite="Y"/>
+            <question id="Q13" type="Position" name="Q13 Position Title name" title="Position title" managerWrite="Y"/>
+            <multi-question name="MultiQuestion Name">
+                <line-item>Line Item 1</line-item>
+                <line-item>Line Item 2</line-item>
+                <line-item>Line Item 3</line-item>
+                <question id="Q14" type="Radio" name="Q14 Radio Name" title="Radio Title" managerWrite="Y">
+                    <answer value="Radio Value 1" text="Radio Text 1"/>
+                    <answer value="Radio Value 2" text="Radio Text 2"/>
+                    <answer value="Radio Value 3" text="Radio Text 3"/>
+                </question>
+                <question id="Q15" type="Text" name="Q15 Text Name" title="Text Title" managerWrite="Y"/>
+            </multi-question>
+        </group>
+    </questionnaire>
+</xml>

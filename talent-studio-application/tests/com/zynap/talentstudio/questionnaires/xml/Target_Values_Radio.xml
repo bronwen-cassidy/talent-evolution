@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+	<questionnaire name="Target Values Radio Button Questionnaire" title="Target Values Radio Button Questionnaire">
+
+			<group name="Achievement against Objectives">
+				<question type="Radio" name="Overall achievement" title="Overall achievement" target="Objectives achieved">
+					<answer value="1" text="Objectives not achieved"/>
+					<answer value="2" text="Objectives partially achieved"/>
+					<answer value="3" text="Objectives achieved"/>
+					<answer value="4" text="Objectives over achieved"/>
+				</question>
+			</group>
+		
+			<group name="Behavioral Competencies">
+				<question type="Radio" name="Business and Financial Focus" title="Business and Financial Focus" target="Objectives achieved">
+					<answer value="1" text="Good"/>
+					<answer value="2" text="Above Average"/>
+					<answer value="3" text="Acceptable"/>
+					<answer value="4" text="Poor"/>
+				</question>
+
+				<question type="Radio" name="Client Focus" title="Client Focus" target="Good">
+					<answer value="1" text="Good"/>
+					<answer value="2" text="Above Average"/>
+					<answer value="3" text="Acceptable"/>
+					<answer value="4" text="Poor"/>
+				</question>
+
+				<question type="Radio" name="Communication and Impact" title="Communication and Impact" target="Poor">
+					<answer value="1" text="Good"/>
+					<answer value="2" text="Above Average"/>
+					<answer value="3" text="Acceptable"/>
+					<answer value="4" text="Poor"/>
+				</question>
+
+				<question type="Radio" name="Developing Self Learning" title="Developing Self Learning" target="Above Average">
+					<answer value="1" text="Good"/>
+					<answer value="2" text="Above Average"/>
+					<answer value="3" text="Acceptable"/>
+					<answer value="4" text="Poor"/>
+				</question>
+
+				<question type="Radio" name="Drive and Commitment" title="Drive and Commitment" target="Good">
+					<answer value="1" text="Good"/>
+					<answer value="2" text="Above Average"/>
+					<answer value="3" text="Acceptable"/>
+					<answer value="4" text="Poor"/>
+				</question>
+
+				<question type="Radio" name="Innovation" title="Innovation" target="Good">
+					<answer value="1" text="Good"/>
+					<answer value="2" text="Above Average"/>
+					<answer value="3" text="Acceptable"/>
+					<answer value="4" text="Poor"/>
+				</question>
+
+				<question type="Radio" name="Judgement and Decision Making" title="Judgement and Decision Making" target="Above Average">
+					<answer value="1" text="Good"/>
+					<answer value="2" text="Above Average"/>
+					<answer value="3" text="Acceptable"/>
+					<answer value="4" text="Poor"/>
+				</question>
+
+				<question type="Radio" name="Leadership" title="Leadership" target="Good">
+					<answer value="1" text="Good"/>
+					<answer value="2" text="Above Average"/>
+					<answer value="3" text="Acceptable"/>
+					<answer value="4" text="Poor"/>
+				</question>
+
+				<question type="Radio" name="Managing and Developing People" title="Managing and Developing People" target="Above Average">
+					<answer value="1" text="Good"/>
+					<answer value="2" text="Above Average"/>
+					<answer value="3" text="Acceptable"/>
+					<answer value="4" text="Poor"/>
+				</question>
+
+				<question type="Radio" name="Planning and Organising" title="Planning and Organising" target="Poor">
+					<answer value="1" text="Good"/>
+					<answer value="2" text="Above Average"/>
+					<answer value="3" text="Acceptable"/>
+					<answer value="4" text="Poor"/>
+				</question>
+
+				<question type="Radio" name="Problem Analysis" title="Problem Analysis" target="Good">
+					<answer value="1" text="Good"/>
+					<answer value="2" text="Above Average"/>
+					<answer value="3" text="Acceptable"/>
+					<answer value="4" text="Poor"/>
+				</question>
+
+				<question type="Radio" name="Professional Behaviour" title="Professional Behaviour" target="Above Average">
+					<answer value="1" text="Good"/>
+					<answer value="2" text="Above Average"/>
+					<answer value="3" text="Acceptable"/>
+					<answer value="4" text="Poor"/>
+				</question>
+
+				<question type="Radio" name="Quality and Continuous Improvement" title="Quality and Continuous Improvement" target="Poor">
+					<answer value="1" text="Good"/>
+					<answer value="2" text="Above Average"/>
+					<answer value="3" text="Acceptable"/>
+					<answer value="4" text="Poor"/>
+				</question>
+
+				<question type="Radio" name="Resilience and Stress Management" title="Resilience and Stress Management" target="Good">
+					<answer value="1" text="Good"/>
+					<answer value="2" text="Above Average"/>
+					<answer value="3" text="Acceptable"/>
+					<answer value="4" text="Poor"/>
+				</question>
+
+				<question type="Radio" name="Strategic Perspective and Global Awareness" title="Strategic Perspective and Global Awareness" target="Acceptable">
+					<answer value="1" text="Good"/>
+					<answer value="2" text="Above Average"/>
+					<answer value="3" text="Acceptable"/>
+					<answer value="4" text="Poor"/>
+				</question>
+
+				<question type="Radio" name="Teamwork" title="Teamwork" target="Poor">
+					<answer value="1" text="Good"/>
+					<answer value="2" text="Above Average"/>
+					<answer value="3" text="Acceptable"/>
+					<answer value="4" text="Poor"/>
+				</question>
+
+				<question type="Radio" name="Valuing Diversity" title="Valuing Diversity" target="Above Average">
+					<answer value="1" text="Good"/>
+					<answer value="2" text="Above Average"/>
+					<answer value="3" text="Acceptable"/>
+					<answer value="4" text="Poor"/>
+				</question>
+
+			</group>
+	</questionnaire>
+</xml>

@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+    <!--
+        Created by the Middlegen Hibernate plugin 2.1
+
+        http://boss.bekk.no/boss/middlegen/
+        http://www.hibernate.org/
+    -->
+
+    <class
+            name="com.zynap.talentstudio.organisation.subjects.SubjectPicture"
+            table="SUBJECT_PICTURES"
+            dynamic-update="true"
+            dynamic-insert="true"
+            >
+
+        <cache usage="read-write"/>
+
+        <id
+                name="subjectId"
+                type="java.lang.Long"
+                column="SUBJECT_ID"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <generator class="assigned"/>
+        </id>
+
+        <property
+                name="picture"
+                type="org.springframework.orm.hibernate.support.BlobByteArrayType"
+                column="PICTURE">
+        </property>
+
+    </class>
+</hibernate-mapping>

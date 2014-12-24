@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tg4w version="0.38.2">
+    <actions>
+        <action type="goto" refresh="true" step="0">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/admin/listlookuptypes.htm?navigator.notSubmit=true]]></value>
+        </action>
+        <action type="verify-title" step="1">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Selection Types]]></value>
+        </action>
+        <action type="click" refresh="true" step="2">
+            <xpath><![CDATA[*/FORM[@ID="_add"]/INPUT[@NAME="_add" and @VALUE="Add"]]]></xpath>
+            <value><![CDATA[_add]]></value>
+        </action>
+        <action type="verify-title" step="3">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Add Selection Type]]></value>
+        </action>
+        <action type="fill" step="4">
+            <xpath><![CDATA[*/FORM[@ID="_add"]/*/INPUT[@TYPE="text" and @NAME="label"]]]></xpath>
+            <value><![CDATA[Choice]]></value>
+        </action>
+        <action type="fill" step="5">
+            <xpath><![CDATA[*/FORM[@ID="_add"]/*/TEXTAREA[@NAME="description"]]]></xpath>
+            <value><![CDATA[Choice]]></value>
+        </action>
+        <action type="click" refresh="true" step="6">
+            <xpath><![CDATA[*/FORM[@ID="_add"]/*/INPUT[@NAME="_add" and @VALUE="Save"]]]></xpath>
+            <value><![CDATA[_add]]></value>
+        </action>
+        <action type="verify-title" step="7">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Add Selection Type]]></value>
+        </action>
+        <action type="assert-text-exists" step="8">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[A selection type with the specified label already exists.]]></value>
+        </action>
+        <action type="click" refresh="true" step="9">
+            <xpath><![CDATA[*/FORM[@ID="_add"]/*/INPUT[@NAME="_cancel" and @VALUE="Cancel"]]]></xpath>
+            <value><![CDATA[_cancel]]></value>
+        </action>
+        <action type="verify-title" step="10">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Selection Types]]></value>
+        </action>
+        <action type="click" refresh="true" step="11">
+            <xpath><![CDATA[TABLE[@ID="lookup"]/TBODY[1]/TR[2]/TD[1]/A[@CDATA="Choice"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" step="12">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Selection Type]]></value>
+        </action>
+        <action type="click" refresh="true" step="13">
+            <xpath><![CDATA[*/FORM[@ID="addLookupValue"]/INPUT[@NAME="addLookupValue" and @VALUE="Add Value"]]]></xpath>
+            <value><![CDATA[addLookupValue]]></value>
+        </action>
+        <action type="verify-title" step="14">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Add Selection Value]]></value>
+        </action>
+        <action type="fill" step="15">
+            <xpath><![CDATA[*/FORM[@ID="_add"]/*/INPUT[@TYPE="text" and @NAME="label"]]]></xpath>
+            <value><![CDATA[No]]></value>
+        </action>
+        <action type="fill" step="16">
+            <xpath><![CDATA[*/FORM[@ID="_add"]/*/TEXTAREA[@NAME="description"]]]></xpath>
+            <value><![CDATA[No]]></value>
+        </action>
+        <action type="click" refresh="true" step="17">
+            <xpath><![CDATA[*/FORM[@ID="_add"]/*/INPUT[@NAME="_add" and @VALUE="Save"]]]></xpath>
+            <value><![CDATA[_add]]></value>
+        </action>
+        <action type="verify-title" step="18">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Add Selection Value]]></value>
+        </action>
+        <action type="assert-text-exists" step="19">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[A value with the specified display name already exists for this selection type.]]></value>
+        </action>
+        <action type="click" refresh="true" step="20">
+            <xpath><![CDATA[*/FORM[@ID="_add"]/*/INPUT[@NAME="_cancel" and @VALUE="Cancel"]]]></xpath>
+            <value><![CDATA[_cancel]]></value>
+        </action>
+        <action type="verify-title" step="21">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Selection Type]]></value>
+        </action>
+    </actions>
+</tg4w>

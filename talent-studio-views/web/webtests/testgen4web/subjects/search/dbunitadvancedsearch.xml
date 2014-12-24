@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tg4w version="0.38.2">
+    <actions>
+        <action type="goto" refresh="true" step="0">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/orgbuilder/listsubject.htm?navigator.notSubmit=true]]></value>
+        </action>
+        <action type="verify-title" step="1">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - People Search]]></value>
+        </action>
+        <action type="click" step="2">
+            <xpath><![CDATA[*/FORM[@ID="toggleparams"]/*/INPUT[@ID="btn_toggleparams"]]]></xpath>
+            <value><![CDATA[null]]></value>
+        </action>
+        <action type="assert-text-exists" step="3">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Advanced Search Parameters]]></value>
+        </action>
+        <action type="assert-text-exists" step="4">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Clock In Time]]></value>
+        </action>
+        <action type="select" step="5">
+            <xpath><![CDATA[*/FORM[@ID="subject"]/*/SELECT[@ID="ClockInTime_hours"]]]></xpath>
+            <value><![CDATA[06]]></value>
+        </action>
+        <action type="select" step="6">
+            <xpath><![CDATA[*/FORM[@ID="subject"]/*/SELECT[@ID="ClockInTime_mins"]]]></xpath>
+            <value><![CDATA[00]]></value>
+        </action>
+        <action type="click" refresh="true" step="7">
+            <xpath><![CDATA[*/FORM[@ID="subject"]/*/INPUT[@NAME="_target3" and @VALUE="Search"]]]></xpath>
+            <value><![CDATA[_target3]]></value>
+        </action>
+        <action type="verify-title" step="8">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - People Search]]></value>
+        </action>
+        <action type="assert-text-exists" step="9">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Nothing found to display.]]></value>
+        </action>
+        <action type="select" step="10">
+            <xpath><![CDATA[*/FORM[@ID="subject"]/*/SELECT[@ID="ClockInTime_hours"]]]></xpath>
+            <value><![CDATA[09]]></value>
+        </action>
+        <action type="click" refresh="true" step="11">
+            <xpath><![CDATA[*/FORM[@ID="subject"]/*/INPUT[@NAME="_target3" and @VALUE="Search"]]]></xpath>
+            <value><![CDATA[_target3]]></value>
+        </action>
+        <action type="assert-text-exists" step="12">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[2 items found, displaying all items.]]></value>
+        </action>
+        <action type="assert-text-exists" step="13">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Deronda]]></value>
+        </action>
+        <action type="assert-text-exists" step="14">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Verne]]></value>
+        </action>
+
+        <action type="select" step="15">
+            <xpath><![CDATA[*/FORM[@ID="subject"]/*/SELECT[@ID="ClockInTime_hours"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="select" step="16">
+            <xpath><![CDATA[*/FORM[@ID="subject"]/*/SELECT[@ID="ClockInTime_mins"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="fill" step="17">
+            <xpath><![CDATA[*/FORM[@ID="subject"]/*/INPUT[@TYPE="hidden" and @ID="DateJoined_iso"]]]></xpath>
+            <value><![CDATA[1906-06-30]]></value>
+        </action>
+        <action type="click" refresh="true" step="18">
+            <xpath><![CDATA[*/FORM[@ID="subject"]/*/INPUT[@NAME="_target3" and @VALUE="Search"]]]></xpath>
+            <value><![CDATA[_target3]]></value>
+        </action>
+        <action type="verify-title" step="19">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - People Search]]></value>
+        </action>
+        <action type="assert-text-exists" step="20">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Nothing found to display.]]></value>
+        </action>
+
+        <action type="fill" step="21">
+            <xpath><![CDATA[*/FORM[@ID="subject"]/*/INPUT[@TYPE="hidden" and @ID="DateJoined_iso"]]]></xpath>
+            <value><![CDATA[2006-06-30]]></value>
+        </action>
+        <action type="click" refresh="true" step="22">
+            <xpath><![CDATA[*/FORM[@ID="subject"]/*/INPUT[@NAME="_target3" and @VALUE="Search"]]]></xpath>
+            <value><![CDATA[_target3]]></value>
+        </action>
+        <action type="verify-title" step="23">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - People Search]]></value>
+        </action>
+        <action type="assert-text-exists" step="24">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[One item found.]]></value>
+        </action>
+        <action type="assert-text-exists" step="25">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Battaglia]]></value>
+        </action>
+
+        <action type="fill" step="26">
+            <xpath><![CDATA[*/FORM[@ID="subject"]/*/INPUT[@TYPE="hidden" and @ID="ReviewMeeting_iso"]]]></xpath>
+            <value><![CDATA[2006-06-30]]></value>
+        </action>
+        <action type="select" step="27">
+            <xpath><![CDATA[*/FORM[@ID="subject"]/*/SELECT[@ID="ReviewMeeting_hours"]]]></xpath>
+            <value><![CDATA[14]]></value>
+        </action>
+        <action type="select" step="28">
+            <xpath><![CDATA[*/FORM[@ID="subject"]/*/SELECT[@ID="ReviewMeeting_mins"]]]></xpath>
+            <value><![CDATA[30]]></value>
+        </action>
+        <action type="click" refresh="true" step="29">
+            <xpath><![CDATA[*/FORM[@ID="subject"]/*/INPUT[@NAME="_target3" and @VALUE="Search"]]]></xpath>
+            <value><![CDATA[_target3]]></value>
+        </action>
+        <action type="verify-title" step="30">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - People Search]]></value>
+        </action>
+        <action type="assert-text-exists" step="31">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[One item found.]]></value>
+        </action>
+        <action type="assert-text-exists" step="32">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Battaglia]]></value>
+        </action>
+
+    </actions>
+</tg4w>

@@ -1,0 +1,63 @@
+Current App Instances
+================= 
+
+TS2
+US Demo (5.4.0)
+client dir: demo
+URL       : https://us.talentscope.com/demous/
+admin:  administrator/TScope123  
+        talentsys/Talentscope123
+        
+TS3
+AZ (5.4.0) (az version)
+client dir: az
+URL       : https://us.talentscope.com/az
+admin     : administrator/administrator
+            talentsys/Talentscope123 
+ant deploy-us -Dclient=az -Dserver=uslive -Dproject.name=TS3 -Dclient.path=az                   
+
+
+TS8
+Autism Speaks (5.4.0)
+client dir: autismspeaks
+URL       : https://us.talentscope.com/autismspeaks/
+admin     : administrator/administrator
+            talentsys/Talentscope123
+
+TS10
+Niles Audio (5.4.0)
+client dir: niles
+URL       : https://us.talentscope.com/nilesaudio/
+admin     : administrator/administrator
+            talentsys/Talentscope123
+
+TS11
+grupobimbo (5.4.0)
+client dir: grupobimbo
+URL       : https://us.talentscope.com/grupobimbo/
+admin     : administrator/administrator
+            talentsys/Talentscope123
+            
+ant clean [release][deploy-us] -Dproject.name=TS11 -Dclient=grupobimbo -Dserver=uslive -Dclient.path=grupobimbo            
+
+TS6
+haley (5.2.7) -- available
+client dir: haley
+URL       : https://us.talentscope.com/haley
+admin     : administrator/ha13yta13nt
+            talentsys/Talentscope123
+
+TS7
+Bank of New York (5.3.1)
+client dir: bnym
+URL       : https://us.talentscope.com/bnymellon/
+admin     : administrator/administrator
+            talentsys/Talentscope123
+ant clean [release] [deploy-us] -Dproject.name=TS7 -Dclient=bnym -Dserver=uslive -Dclient.path=bnymellon            
+
+TS9
+WindsorFoods (5.3.1) off the BNYM project stream
+client dir: windsorfoods
+URL       : https://us.talentscope.com/windsorfoods/
+admin     : administrator/administrator
+            talentsys/Talentscope123

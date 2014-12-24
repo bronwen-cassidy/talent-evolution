@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<definitions xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+             xmlns:tns="https://api.talentanalytics.com/2012-01-01"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             targetNamespace="https://api.talentanalytics.com/2012-01-01">
+    <types>
+        <xsd:schema targetNamespace="https://api.talentanalytics.com/2012-01-01"
+                >
+            <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+            <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/"/>
+            <xsd:complexType name="ObjectIDListType">
+                <xsd:complexContent>
+                    <xsd:restriction base="SOAP-ENC:Array">
+                        <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:ObjectIDType"/>
+                    </xsd:restriction>
+                </xsd:complexContent>
+            </xsd:complexType>
+            <xsd:complexType name="RespondentInfoListType">
+                <xsd:complexContent>
+                    <xsd:restriction base="SOAP-ENC:Array">
+                        <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:RespondentInfoType"/>
+                    </xsd:restriction>
+                </xsd:complexContent>
+            </xsd:complexType>
+            <xsd:complexType name="RespondentContentListType">
+                <xsd:complexContent>
+                    <xsd:restriction base="SOAP-ENC:Array">
+                        <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:RespondentContentType"/>
+                    </xsd:restriction>
+                </xsd:complexContent>
+            </xsd:complexType>
+            <xsd:complexType name="LabelListType">
+                <xsd:complexContent>
+                    <xsd:restriction base="SOAP-ENC:Array">
+                        <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="xsd:string[1]"/>
+                    </xsd:restriction>
+                </xsd:complexContent>
+            </xsd:complexType>
+            <xsd:complexType name="FieldListType">
+                <xsd:complexContent>
+                    <xsd:restriction base="SOAP-ENC:Array">
+                        <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="xsd:string"/>
+                    </xsd:restriction>
+                </xsd:complexContent>
+            </xsd:complexType>
+            <xsd:complexType name="RespondentInfoType">
+                <xsd:all>
+                    <xsd:element name="RespondentID" type="tns:ObjectIDType" documentation="Unique Identifier assigned by Talent Analytics"/>
+                    <xsd:element name="ExtID" type="xsd:string" documentation="User-specified Identifier"/>
+                    <xsd:element name="CallbackURL" type="xsd:string" documentation="User-specified URL, will called by Talent Analytics when there are important updates for this Respondent."/>
+                    <xsd:element name="FirstName" type="xsd:string"/>
+                    <xsd:element name="LastName" type="xsd:string"/>
+                    <xsd:element name="EMail" type="xsd:string"/>
+                    <xsd:element name="Gender" type="tns:GenderType" documentation="Gender of Respondent: [M,F,NA]"/>
+                    <xsd:element name="Status" type="xsd:string" documentation="Status of Respondent: [pending,complete,inactive]"/>
+                    <xsd:element name="MATCH_TOTAL" type="xsd:double" documentation="Total Match to default Benchmark "/>
+                    <xsd:element name="MATCH_CORE" type="xsd:double" documentation="Match to default CORE Benchmark "/>
+                    <xsd:element name="MATCH_AMB" type="xsd:double" documentation="Match to default Ambitions Benchmark "/>
+                    <xsd:element name="Labels" type="tns:LabelListType"/>
+                    <xsd:element name="ACT_C" type="xsd:double"/>
+                    <xsd:element name="ACT_O" type="xsd:double"/>
+                    <xsd:element name="ACT_R" type="xsd:double"/>
+                    <xsd:element name="ACT_E" type="xsd:double"/>
+                    <xsd:element name="MOD_C" type="xsd:double"/>
+                    <xsd:element name="MOD_O" type="xsd:double"/>
+                    <xsd:element name="MOD_R" type="xsd:double"/>
+                    <xsd:element name="MOD_E" type="xsd:double"/>
+                    <xsd:element name="SCORE_ECO" type="xsd:double"/>
+                    <xsd:element name="SCORE_ALT" type="xsd:double"/>
+                    <xsd:element name="SCORE_THE" type="xsd:double"/>
+                    <xsd:element name="SCORE_AUT" type="xsd:double"/>
+                    <xsd:element name="SCORE_POL" type="xsd:double"/>
+                    <xsd:element name="SCORE_IND" type="xsd:double"/>
+                    <xsd:element name="SCORE_CRE" type="xsd:double"/>
+                    <xsd:element name="RANK_ECO" type="xsd:double"/>
+                    <xsd:element name="RANK_ALT" type="xsd:double"/>
+                    <xsd:element name="RANK_THE" type="xsd:double"/>
+                    <xsd:element name="RANK_AUT" type="xsd:double"/>
+                    <xsd:element name="RANK_POL" type="xsd:double"/>
+                    <xsd:element name="RANK_IND" type="xsd:double"/>
+                    <xsd:element name="RANK_CRE" type="xsd:double"/>
+                </xsd:all>
+            </xsd:complexType>
+            <xsd:complexType name="RespondentContentType">
+                <xsd:all>
+                    <xsd:element name="RespondentID" type="tns:ObjectIDType" documentation="ID of the respondent of whom this content describes."/>
+                    <xsd:element name="ContentKey" type="tns:ContentKeyType" documentation="A key that classifies the content. Typically this and RespondentID are a unique pair and can be considered a foreign key to the content."/>
+                    <xsd:element name="Format" type="tns:ContentFormatType" documentation="Format of the content found in the Text field (html,textism,raw)"/>
+                    <xsd:element name="Text" type="xsd:string" documentation="The actual content"/>
+                </xsd:all>
+            </xsd:complexType>
+            <xsd:simpleType name="ObjectIDType">
+                <xsd:restriction base="xsd:string">
+                </xsd:restriction>
+            </xsd:simpleType>
+            <xsd:simpleType name="ContentKeyType">
+                <xsd:restriction base="xsd:string">
+                </xsd:restriction>
+            </xsd:simpleType>
+            <xsd:simpleType name="ContentFormatType">
+                <xsd:restriction base="xsd:string">
+                </xsd:restriction>
+            </xsd:simpleType>
+            <xsd:simpleType name="GenderType">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="NA"/>
+                    <xsd:enumeration value="M"/>
+                    <xsd:enumeration value="F"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+        </xsd:schema>
+    </types>
+    <message name="createRespondentRequest">
+        <part name="RespondentInfo" type="tns:RespondentInfoType"/>
+    </message>
+    <message name="createRespondentResponse">
+        <part name="RespondentInfo" type="tns:RespondentInfoType"/>
+    </message>
+    <message name="getRespondentInfoRequest">
+        <part name="RespondentIDList" type="tns:ObjectIDListType"/>
+        <part name="FieldList" type="tns:FieldListType"/>
+    </message>
+    <message name="getRespondentInfoResponse">
+        <part name="RespondentInfoList" type="tns:RespondentInfoListType"/>
+    </message>
+    <message name="updateRespondentInfoRequest">
+        <part name="RespondentID" type="tns:ObjectIDType"/>
+        <part name="RespondentInfo" type="tns:RespondentInfoType"/>
+    </message>
+    <message name="updateRespondentInfoResponse">
+        <part name="Success" type="xsd:boolean"/>
+    </message>
+    <message name="setRespondentLabelsRequest">
+        <part name="RespondentIDList" type="tns:ObjectIDListType"/>
+        <part name="RespondentLabelList" type="tns:LabelListType"/>
+    </message>
+    <message name="setRespondentLabelsResponse">
+        <part name="Success" type="xsd:boolean"/>
+    </message>
+    <message name="removeRespondentLabelsRequest">
+        <part name="RespondentIDList" type="tns:ObjectIDListType"/>
+        <part name="RespondentLabelList" type="tns:LabelListType"/>
+    </message>
+    <message name="removeRespondentLabelsResponse">
+        <part name="Success" type="xsd:boolean"/>
+    </message>
+    <message name="getRespondentLabelsRequest">
+        <part name="RespondentID" type="tns:ObjectIDType"/>
+    </message>
+    <message name="getRespondentLabelsResponse">
+        <part name="RespondentLabelList" type="tns:LabelListType"/>
+    </message>
+    <message name="getContentRequest">
+        <part name="RespondentIDList" type="tns:ObjectIDListType"/>
+        <part name="ContentKey" type="tns:ContentKeyType"/>
+        <part name="Format" type="tns:ContentFormatType"/>
+    </message>
+    <message name="getContentResponse">
+        <part name="RespondentContentList" type="tns:RespondentContentListType"/>
+    </message>
+    <message name="findRespondentsRequest">
+        <part name="RespondentInfo" type="tns:RespondentInfoType"/>
+    </message>
+    <message name="findRespondentsResponse">
+        <part name="RespondentInfoList" type="tns:RespondentInfoListType"/>
+    </message>
+    <portType name="TAAPIPortType">
+        <operation name="createRespondent">
+            <documentation>Creates an RDC request for the specified user, email address is required as part of the given respondent info input. All other supplied info is added at creation time. Returns the respondent info.</documentation>
+            <input message="tns:createRespondentRequest"/>
+            <output message="tns:createRespondentResponse"/>
+        </operation>
+        <operation name="getRespondentInfo">
+            <documentation>Returns the respondent info for the given id. Restricts output only to supplied fields. If no fields are supplied, returns the entire info object.</documentation>
+            <input message="tns:getRespondentInfoRequest"/>
+            <output message="tns:getRespondentInfoResponse"/>
+        </operation>
+        <operation name="updateRespondentInfo">
+            <documentation>Updates a single respondent info for the given id. Only overwrites fields that are present in the passed in respondent info package.</documentation>
+            <input message="tns:updateRespondentInfoRequest"/>
+            <output message="tns:updateRespondentInfoResponse"/>
+        </operation>
+        <operation name="setRespondentLabels">
+            <documentation>Applies the supplied list of labels to each respondent in the given list.</documentation>
+            <input message="tns:setRespondentLabelsRequest"/>
+            <output message="tns:setRespondentLabelsResponse"/>
+        </operation>
+        <operation name="removeRespondentLabels">
+            <documentation>Removes the supplied list of labels from each respondent in the given list.</documentation>
+            <input message="tns:removeRespondentLabelsRequest"/>
+            <output message="tns:removeRespondentLabelsResponse"/>
+        </operation>
+        <operation name="getRespondentLabels">
+            <documentation>Returns a list of labels for for the given id as set by the user.</documentation>
+            <input message="tns:getRespondentLabelsRequest"/>
+            <output message="tns:getRespondentLabelsResponse"/>
+        </operation>
+        <operation name="getContent">
+            <documentation>Returns the content for a list of respondents given a list and content key. Takes an optional format descriptor (html by default)</documentation>
+            <input message="tns:getContentRequest"/>
+            <output message="tns:getContentResponse"/>
+        </operation>
+        <operation name="findRespondents">
+            <documentation>Does a search for respondents based on supplied info.</documentation>
+            <input message="tns:findRespondentsRequest"/>
+            <output message="tns:findRespondentsResponse"/>
+        </operation>
+    </portType>
+    <binding name="TAAPIBinding" type="tns:TAAPIPortType">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="createRespondent">
+            <soap:operation soapAction="https://api.talentanalytics.com/2012-01-01#createRespondent" style="rpc"/>
+            <input>
+                <soap:body use="encoded" namespace="https://api.talentanalytics.com/2012-01-01" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <soap:body use="encoded" namespace="https://api.talentanalytics.com/2012-01-01" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="getRespondentInfo">
+            <soap:operation soapAction="https://api.talentanalytics.com/2012-01-01#getRespondentInfo" style="rpc"/>
+            <input>
+                <soap:body use="encoded" namespace="https://api.talentanalytics.com/2012-01-01" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <soap:body use="encoded" namespace="https://api.talentanalytics.com/2012-01-01" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="updateRespondentInfo">
+            <soap:operation soapAction="https://api.talentanalytics.com/2012-01-01#updateRespondentInfo" style="rpc"/>
+            <input>
+                <soap:body use="encoded" namespace="https://api.talentanalytics.com/2012-01-01" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <soap:body use="encoded" namespace="https://api.talentanalytics.com/2012-01-01" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="setRespondentLabels">
+            <soap:operation soapAction="https://api.talentanalytics.com/2012-01-01#setRespondentLabels" style="rpc"/>
+            <input>
+                <soap:body use="encoded" namespace="https://api.talentanalytics.com/2012-01-01" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <soap:body use="encoded" namespace="https://api.talentanalytics.com/2012-01-01" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="removeRespondentLabels">
+            <soap:operation soapAction="https://api.talentanalytics.com/2012-01-01#removeRespondentLabels" style="rpc"/>
+            <input>
+                <soap:body use="encoded" namespace="https://api.talentanalytics.com/2012-01-01" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <soap:body use="encoded" namespace="https://api.talentanalytics.com/2012-01-01" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="getRespondentLabels">
+            <soap:operation soapAction="https://api.talentanalytics.com/2012-01-01#getRespondentLabels" style="rpc"/>
+            <input>
+                <soap:body use="encoded" namespace="https://api.talentanalytics.com/2012-01-01" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <soap:body use="encoded" namespace="https://api.talentanalytics.com/2012-01-01" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="getContent">
+            <soap:operation soapAction="https://api.talentanalytics.com/2012-01-01#getContent" style="rpc"/>
+            <input>
+                <soap:body use="encoded" namespace="https://api.talentanalytics.com/2012-01-01" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <soap:body use="encoded" namespace="https://api.talentanalytics.com/2012-01-01" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="findRespondents">
+            <soap:operation soapAction="https://api.talentanalytics.com/2012-01-01#findRespondents" style="rpc"/>
+            <input>
+                <soap:body use="encoded" namespace="https://api.talentanalytics.com/2012-01-01" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <soap:body use="encoded" namespace="https://api.talentanalytics.com/2012-01-01" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+    </binding>
+    <service name="TAAPI">
+        <port name="TAAPIPort" binding="tns:TAAPIBinding">
+            <soap:address location="https://api.talentanalytics.com/"/>
+        </port>
+    </service>
+</definitions>

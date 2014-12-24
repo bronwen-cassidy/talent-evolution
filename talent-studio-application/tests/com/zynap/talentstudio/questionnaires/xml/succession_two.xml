@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+	<questionnaire name="Succession Planning II" title="Succession Planning">
+
+		<group name="Succession Planning">
+
+			<narrative>Identify potential successors.</narrative>
+
+			<multi-question name="">
+				<line-item>Immediate Potential Successor</line-item>
+				<question type="Subject" name="First" title="Immediate"></question>
+				<question type="Subject" name="Second" title="Immediate"></question>
+				<question type="Subject" name="Third" title="Immediate"></question>
+				<question type="Subject" name="Forth" title="Immediate"></question>
+			</multi-question>
+
+			<multi-question name="">
+				<line-item>Medium Term Potential Successor</line-item>
+				<question type="Subject" name="First" title="Immediate"></question>
+				<question type="Subject" name="Second" title="Immediate"></question>
+				<question type="Subject" name="Third" title="Immediate"></question>
+				<question type="Subject" name="Forth" title="Immediate"></question>
+			</multi-question>
+
+			<multi-question name="">
+				<line-item>Long Term Potential Successor</line-item>
+				<question type="Subject" name="First" title="Immediate"></question>
+				<question type="Subject" name="Second" title="Immediate"></question>
+				<question type="Subject" name="Third" title="Immediate"></question>
+				<question type="Subject" name="Forth" title="Immediate"></question>
+			</multi-question>
+
+		</group>
+
+	</questionnaire>
+</xml>

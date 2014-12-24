@@ -1,0 +1,225 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+    <!--
+            Created by the Middlegen Hibernate plugin 2.1
+
+            http://boss.bekk.no/boss/middlegen/
+            http://www.hibernate.org/
+        -->
+
+    <class
+            name="com.zynap.talentstudio.organisation.attributes.DynamicAttribute"
+            table="DYNAMIC_ATTRIBUTES"
+            dynamic-update="true"
+            dynamic-insert="true"
+            >
+        <cache usage="nonstrict-read-write"/>
+
+        <id
+                name="id"
+                type="java.lang.Long"
+                column="ID"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <generator class="sequence">
+                <param name="sequence">DA_SQ</param>
+            </generator>
+        </id>
+
+        <property
+                name="label"
+                type="java.lang.String"
+                column="LABEL"
+                not-null="true"
+                length="100"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+        <property
+                name="externalRefLabel"
+                type="java.lang.String"
+                column="MODIFIED_LABEL"
+                not-null="true"
+                length="100"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+        <property
+                name="type"
+                type="java.lang.String"
+                column="TYPE"
+                not-null="true"
+                length="50"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+        <property
+                name="artefactType"
+                type="java.lang.String"
+                column="ARTEFACT_TYPE"
+                not-null="true"
+                length="50"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+        <property
+                name="maxSize"
+                type="java.lang.String"
+                column="MAX_SIZE"
+                />
+        <property
+                name="minSize"
+                type="java.lang.String"
+                column="MIN_SIZE"
+                />
+        <property
+                name="decimalPlaces"
+                type="java.lang.Integer"
+                column="DECIMAL_PLACES"
+                />
+        <property
+                name="mandatory"
+                type="true_false"
+                column="IS_MANDATORY"
+                not-null="true"
+                length="1"
+                />
+        <property
+                name="active"
+                type="true_false"
+                column="IS_ACTIVE"
+                not-null="true"
+                length="1"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+        <property
+                name="hasHelpText"
+                type="true_false"
+                column="HAS_HELPTEXT"
+                not-null="true"
+                length="1"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+        <property
+                name="searchable"
+                type="true_false"
+                column="IS_SEARCHABLE"
+                not-null="true"
+                length="1"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+        <property
+                name="description"
+                type="java.lang.String"
+                column="DESCRIPTION"
+                length="255"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+        <property
+                name="lockId"
+                type="int"
+                column="LOCK_ID"
+                not-null="false"
+                length="22"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+        <property
+                name="questionnaireDefinitionId"
+                type="java.lang.Long"
+                column="QD_ID"
+                not-null="false"
+                length="22">
+        </property>
+        <property
+                name="uniqueNumber"
+                type="java.lang.Double"
+                column="UNIQUE_NUMBER"
+                not-null="false">
+        </property>
+        <property
+                name="calculated"
+                type="true_false"
+                column="IS_CALCULATED"
+                not-null="false">
+        </property>
+        <property
+                name="dynamic"
+                type="true_false"
+                column="IS_DYNAMIC"
+                not-null="true"
+                length="1"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+        <property
+                name="unique"
+                type="true_false"
+                column="IS_UNIQUE"
+                not-null="true"
+                length="1"
+                />
+        <property
+                name="mask"
+                type="java.lang.String"
+                column="VALIDATION_MASK"
+                length="512"
+                />
+
+        <!-- Associations -->
+        <many-to-one name="refersToType" class="com.zynap.talentstudio.common.lookups.LookupType" not-null="false" cascade="none" outer-join="true">
+            <column name="REFERS_TO"/>
+        </many-to-one>
+
+        <many-to-one name="calculation" class="com.zynap.talentstudio.calculations.Calculation" cascade="all" outer-join="true">
+            <column name="CALCULATION_ID"/>
+        </many-to-one>
+
+        <bag name="children"
+             lazy="true"
+             inverse="true"
+             cascade="all-delete-orphan"
+             order-by="ID"
+             outer-join="true"
+             batch-size="50"
+                >
+            <key>
+                <column name="PARENT_DA_ID"/>
+            </key>
+            <one-to-many class="com.zynap.talentstudio.organisation.attributes.DynamicAttributeReference"/>
+        </bag>
+
+        <bag name="references"
+             lazy="true"
+             inverse="true"
+             cascade="all-delete-orphan"
+             order-by="ID"
+             outer-join="true"
+             batch-size="50"
+                >
+            <key>
+                <column name="REFERENCE_DA_ID"/>
+            </key>
+            <one-to-many class="com.zynap.talentstudio.organisation.attributes.DynamicAttributeReference"/>
+        </bag>
+
+    </class>
+</hibernate-mapping>

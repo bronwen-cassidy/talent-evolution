@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+    <questionnaire name="2.2.4" title="2.2.4">
+
+        <group name="Status" title="Status">
+            <question id="1" type="LastUpdated" name="Competency Record Last Updated"/>
+            <question id="2" type="LastUpdatedBy" name="Last Updated By" title="Last Updated By"/>
+        </group>
+
+        <group name="2.2.4" title="2.2.4">
+            <narrative>Knowledge of the due diligence process required in assessing non NHS providers.</narrative>
+        </group>
+
+        <group name="Knowledge / Developing Skills - applying knowledge " title="Knowledge / Developing Skills - applying knowledge ">
+            <narrative>Knowledge</narrative>
+            <narrative>Please refer to the Graduate Scheme Handbook to cross reference this competency to the KSF.</narrative>
+        </group>
+
+        <group name="Dates of Evidence Activity" title="Dates of Evidence Activity">
+            <question id="3" type="Date" name="From" title="Date from"/>
+            <question id="4" type="Date" name="To" title="Date to"/>
+            <question id="5" type="Text" name="Total Number of Days" title="Total Number of Days"/>
+            <question id="6" type="Text" name="For CIPFA Trainees which Statement of Expertise is this linked to?" title="For CIPFA Trainees which Statement of Expertise is this linked to?" length="50"/>
+        </group>
+
+        <group name="Evidence" title="Evidence">
+            <question id="7" type="TextBox" name="Evidence of achievement of competency" title="Evidence of achievement of competency" length="60"/>
+        </group>
+
+        <group name="Rating" title="Rating">
+            <multi-question name=" ">
+                <line-item dynamic="Y" managerCanDisable="Y">Rating</line-item>
+                <question id="8" type="Select" name="Placement Manager Rating" title="Placement Manager Rating" managerWrite="Y">
+                    <answer value="Not Achieved" text="Not Achieved"/>
+                    <answer value="Partially Achieved" text="Partially Achieved"/>
+                    <answer value="Achieved" text="Achieved"/>
+                </question>
+                <question id="9" type="Date" name="Date of Rating" title="Date of Rating" managerWrite="Y"/>
+                <question id="10" type="TextBox" name="Comments" title="Comments" managerWrite="Y"/>
+            </multi-question>
+        </group>
+    </questionnaire>
+</xml>

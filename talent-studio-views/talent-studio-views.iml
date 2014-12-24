@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module relativePaths="false" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="web" name="talent-studio-views">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/web/config/common/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/web/war" relative="/" />
+        </webroots>
+        <sourceRoots>
+          <root url="file://$MODULE_DIR$/web" />
+          <root url="file://$MODULE_DIR$/web/src" />
+          <root url="file://$MODULE_DIR$/web/webtests" />
+        </sourceRoots>
+      </configuration>
+    </facet>
+    <facet type="javaeeApplication" name="javaEEApplication">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="application.xml" url="file://$MODULE_DIR$/web/config/orion/application.xml" />
+        </descriptors>
+      </configuration>
+    </facet>
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="web: application context" name="MVC application context" removed="false">
+          <file>file://$MODULE_DIR$/../talent-studio-integration/config/integrationContext.xml</file>
+          <file>file://$MODULE_DIR$/../talent-studio-application/config/spring/applicationContext-hibernate.xml</file>
+          <file>file://$MODULE_DIR$/../talent-studio-application/config/spring/applicationContext-jdbc.xml</file>
+        </fileset>
+        <fileset id="web: talentstudio servlet context" name="MVC talentstudio servlet context" removed="false">
+          <dependency>web: application context</dependency>
+          <file>file://$MODULE_DIR$/web/config/spring/applicationContext-dwr.xml</file>
+          <file>file://$MODULE_DIR$/web/config/spring/talentstudio-servlet.xml</file>
+          <file>file://$MODULE_DIR$/../talent-studio-application/config/spring/applicationContext-hibernate.xml</file>
+          <file>file://$MODULE_DIR$/../talent-studio-application/config/spring/applicationContext-mail.xml</file>
+          <file>file://$MODULE_DIR$/../talent-studio-application/config/spring/applicationContext-scheduling.xml</file>
+          <file>file://$MODULE_DIR$/../talent-studio-application/config/spring/applicationContext-tx.xml</file>
+          <file>file://$MODULE_DIR$/../talent-studio-application/config/spring/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/../talent-studio-application/config/spring/applicationContext-jdbc.xml</file>
+          <file>file://$MODULE_DIR$/../talent-studio-integration/config/integrationContext.xml</file>
+        </fileset>
+        <fileset id="fileset1" name="My Fileset" removed="false">
+          <file>file://$MODULE_DIR$/../talent-studio-application/tests/config/spring/testApplicationContext-mail.xml</file>
+          <file>file://$MODULE_DIR$/../talent-studio-application/tests/config/spring/testApplicationContext-jdbc.xml</file>
+          <file>file://$MODULE_DIR$/../talent-studio-application/tests/config/spring/testApplicationContext-hibernate.xml</file>
+          <file>file://$MODULE_DIR$/../talent-studio-application/config/spring/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/../talent-studio-application/config/spring/applicationContext-tx.xml</file>
+          <file>file://$MODULE_DIR$/../talent-studio-application/config/spring/applicationContext-scheduling.xml</file>
+        </fileset>
+        <fileset id="fileset2" name="MVC Integration Context" removed="false">
+          <file>file://$MODULE_DIR$/../talent-studio-application/config/spring/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/../talent-studio-integration/config/integrationContext.xml</file>
+        </fileset>
+        <fileset id="fileset" name="Spring Application Context" removed="false" />
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="false">
+    <output url="file://$MODULE_DIR$/../classes" />
+    <output-test url="file://$MODULE_DIR$/../classes" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/web" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/web/resources" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/web/resources/properties" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/web/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/web/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/web/webtests" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/web/webtests" />
+    </content>
+    <orderEntry type="jdk" jdkName="1.7" jdkType="JavaSDK" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../lib/tools/jsp-api.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="talent-studio-application" exported="" />
+    <orderEntry type="module" module-name="talent-studio-integration" exported="" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../talent-studio-application/tests/config/logging" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="jasper" level="project" />
+    <orderEntry type="library" name="runtime" level="project" />
+    <orderEntry type="library" name="spring-2.5.6" level="project" />
+    <orderEntry type="library" name="velocity-1.7" level="project" />
+    <orderEntry type="library" name="xalan-2.7.0" level="project" />
+    <orderEntry type="library" name="web-unit-testing" level="project" />
+    <orderEntry type="library" name="unit-testing" level="project" />
+    <orderEntry type="library" name="integration" level="project" />
+    <orderEntry type="library" name="cewolf-1.0" level="project" />
+    <orderEntry type="library" name="jfreechart-1.0" level="project" />
+    <orderEntry type="library" name="j2ee" level="project" />
+    <orderEntry type="library" name="web-unit-testing" level="project" />
+  </component>
+</module>
+

@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+    <!--
+        Created by the Middlegen Hibernate plugin 2.1
+
+        http://boss.bekk.no/boss/middlegen/
+        http://www.hibernate.org/
+    -->
+
+    <class
+            name="com.zynap.talentstudio.performance.PerformanceEvaluator"
+            table="PERFORMANCE_EVALUATORS"
+            dynamic-update="true"
+            dynamic-insert="true"
+            >
+
+        <id
+                name="id"
+                type="java.lang.Long"
+                column="ID"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <generator class="sequence">
+                <param name="sequence">PERFORMER_SQ</param>
+            </generator>
+        </id>
+
+        <property name="performanceId"
+                  type="java.lang.Long"
+                  column="PERFORMANCE_ID"/>
+
+        <property name="subjectId"
+                  type="java.lang.Long"
+                  column="SUBJECT_ID"/>
+
+        <property name="userId"
+                  type="java.lang.Long"
+                  column="USER_ID"/>
+
+        <!-- uni-directional many-to-one association to LookupValue -->
+        <many-to-one name="role" class="com.zynap.talentstudio.common.lookups.LookupValue">
+            <column name="ROLE"/>
+        </many-to-one>
+
+        <!-- bi-directional many-to-one association to PerformanceReview -->
+        <many-to-one
+                name="performanceReview"
+                class="com.zynap.talentstudio.performance.PerformanceReview"
+                not-null="true"
+                insert="false"
+                update="false"
+                >
+            <column name="PERFORMANCE_ID"/>
+        </many-to-one>
+        <!-- bi-directional many-to-one association to Subject -->
+        <many-to-one
+                name="subject"
+                class="com.zynap.talentstudio.organisation.subjects.Subject"
+                not-null="true"
+                insert="false"
+                update="false"
+                >
+            <column name="SUBJECT_ID"/>
+        </many-to-one>
+        <!-- bi-directional many-to-one association to User -->
+        <many-to-one
+                name="user"
+                class="com.zynap.domain.admin.User"
+                not-null="true"
+                insert="false"
+                update="false"
+                >
+            <column name="USER_ID"/>
+        </many-to-one>
+
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE orion-application PUBLIC "-//Evermind//DTD J2EE Application runtime 1.2//EN" "http://xmlns.oracle.com/ias/dtds/orion-application.dtd">
+
+<orion-application deployment-version="10.1.3.2.0">
+    
+    <web-module id="@_applicationName_@" path="@_applicationName_@.war"/>
+
+    <!--<security-role-mapping name="webserviceuser">-->
+        <!--<group name="administrators"/>-->
+        <!--<group name="webserviceuser"/>-->
+        <!--<user name="webserviceuser"/>-->
+    <!--</security-role-mapping>-->
+
+    <persistence path="persistence"/>
+
+    <principals path="./principals.xml"/>
+    
+    <log>
+        <file path="application.log"/>
+    </log>
+
+</orion-application>

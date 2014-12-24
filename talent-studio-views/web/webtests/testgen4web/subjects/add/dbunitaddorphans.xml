@@ -1,0 +1,193 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tg4w version="0.38.2">
+    <actions>
+        <action type="goto" refresh="true" step="0">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/login.htm]]></value>
+        </action>
+        <action type="verify-title" step="1">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Login]]></value>
+        </action>
+        <action type="fill" step="2">
+            <xpath><![CDATA[*/FORM[@ID="_login"]/*/INPUT[@TYPE="text" and @NAME="username"]]]></xpath>
+            <value><![CDATA[norphuser]]></value>
+        </action>
+        <action type="fill" step="3">
+            <xpath><![CDATA[*/FORM[@ID="_login"]/*/INPUT[@TYPE="password" and @NAME="password"]]]></xpath>
+            <value><![CDATA[norphuser]]></value>
+        </action>
+        <action type="click" refresh="true" step="4">
+            <xpath><![CDATA[*/FORM[@ID="_login"]/*/INPUT[@ID="loginsubmit"]]]></xpath>
+            <value><![CDATA[null]]></value>
+        </action>
+        <action type="verify-title" step="5">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Policy]]></value>
+        </action>
+        <action type="check" step="6">
+            <xpath><![CDATA[*/FORM[@ID="policyform"]/*/INPUT[@TYPE="checkbox" and @NAME="acceptedPolicy"]]]></xpath>
+            <value><![CDATA[true]]></value>
+        </action>
+        <action type="click" refresh="true" step="7">
+            <xpath><![CDATA[*/FORM[@ID="policyform"]/*/INPUT[@ID="accept"]]]></xpath>
+            <value><![CDATA[Agree]]></value>
+        </action>
+        <action type="verify-title" step="8">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Home]]></value>
+        </action>
+        <action type="click" refresh="true" step="9">
+            <xpath><![CDATA[A[@ID="a_ORGANISATIONMODULE"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" refresh="true" step="10">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Organisation Home]]></value>
+        </action>
+        <action type="goto" refresh="true" step="11">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/orgbuilder/addsubject.htm]]></value>
+        </action>
+        <action type="verify-title" step="12">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Add Person]]></value>
+        </action>
+        <action type="fill" step="13">
+            <xpath><![CDATA[*/FORM[@ID="es_next"]/*/INPUT[@TYPE="text" and @NAME="coreDetail.firstName"]]]></xpath>
+            <value><![CDATA[Angus]]></value>
+        </action>
+        <action type="fill" step="14">
+            <xpath><![CDATA[*/FORM[@ID="es_next"]/*/INPUT[@TYPE="text" and @NAME="coreDetail.secondName"]]]></xpath>
+            <value><![CDATA[Mark]]></value>
+        </action>
+        <action type="click" refresh="true" step="15">
+            <xpath><![CDATA[*/FORM[@ID="es_next"]/*/INPUT[@NAME="_target1" and @VALUE="Next >>"]]]></xpath>
+            <value><![CDATA[_target1]]></value>
+        </action>
+        <action type="verify-title" step="16">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Add Person]]></value>
+        </action>
+        <action type="click" refresh="true" step="17">
+            <xpath><![CDATA[*/FORM[@ID="_addAssoc"]/*/INPUT[@NAME="_target2" and @VALUE="Next >>"]]]></xpath>
+            <value><![CDATA[_target2]]></value>
+        </action>
+        <action type="verify-title" step="18">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Add Person]]></value>
+        </action>
+        <action type="assert-text-exists" step="19">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[You must specify at least one association.]]></value>
+        </action>
+        <action type="click" refresh="true" step="20">
+            <xpath><![CDATA[*/FORM[@ID="_addAssoc"]/*/INPUT[@NAME="_cancel" and @VALUE="Cancel"]]]></xpath>
+            <value><![CDATA[_cancel]]></value>
+        </action>
+        <action type="verify-title" step="21">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Menu]]></value>
+        </action>
+        <action type="goto" refresh="true" step="22">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/logout.htm]]></value>
+        </action>
+        <action type="verify-title" step="23">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Login]]></value>
+        </action>
+        <action type="fill" step="24">
+            <xpath><![CDATA[*/FORM[@ID="_login"]/*/INPUT[@TYPE="text" and @NAME="username"]]]></xpath>
+            <value><![CDATA[orphuser]]></value>
+        </action>
+        <action type="fill" step="25">
+            <xpath><![CDATA[*/FORM[@ID="_login"]/*/INPUT[@TYPE="password" and @NAME="password"]]]></xpath>
+            <value><![CDATA[orphuser]]></value>
+        </action>
+        <action type="click" refresh="true" step="26">
+            <xpath><![CDATA[*/FORM[@ID="_login"]/*/INPUT[@ID="loginsubmit"]]]></xpath>
+            <value><![CDATA[null]]></value>
+        </action>
+        <action type="verify-title" step="27">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Policy]]></value>
+        </action>
+        <action type="check" step="28">
+            <xpath><![CDATA[*/FORM[@ID="policyform"]/*/INPUT[@TYPE="checkbox" and @NAME="acceptedPolicy"]]]></xpath>
+            <value><![CDATA[true]]></value>
+        </action>
+        <action type="click" refresh="true" step="29">
+            <xpath><![CDATA[*/FORM[@ID="policyform"]/*/INPUT[@ID="accept"]]]></xpath>
+            <value><![CDATA[Agree]]></value>
+        </action>
+        <action type="verify-title" step="30">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Home]]></value>
+        </action>
+        <action type="click" refresh="true" step="31">
+            <xpath><![CDATA[A[@ID="a_ORGANISATIONMODULE"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" refresh="true" step="32">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Organisation Home]]></value>
+        </action>
+        <action type="goto" refresh="true" step="33">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/orgbuilder/addsubject.htm]]></value>
+        </action>
+        <action type="verify-title" step="34">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Add Person]]></value>
+        </action>
+        <action type="fill" step="35">
+            <xpath><![CDATA[*/FORM[@ID="es_next"]/*/INPUT[@TYPE="text" and @NAME="coreDetail.firstName"]]]></xpath>
+            <value><![CDATA[Angus]]></value>
+        </action>
+        <action type="fill" step="36">
+            <xpath><![CDATA[*/FORM[@ID="es_next"]/*/INPUT[@TYPE="text" and @NAME="coreDetail.secondName"]]]></xpath>
+            <value><![CDATA[Mark]]></value>
+        </action>
+        <action type="click" refresh="true" step="37">
+            <xpath><![CDATA[*/FORM[@ID="es_next"]/*/INPUT[@NAME="_target1" and @VALUE="Next >>"]]]></xpath>
+            <value><![CDATA[_target1]]></value>
+        </action>
+        <action type="verify-title" step="38">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Add Person]]></value>
+        </action>
+        <action type="click" refresh="true" step="39">
+            <xpath><![CDATA[*/FORM[@ID="_addAssoc"]/*/INPUT[@NAME="_target2" and @VALUE="Next >>"]]]></xpath>
+            <value><![CDATA[_target2]]></value>
+        </action>
+        <action type="verify-title" step="40">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Add Person]]></value>
+        </action>
+        <action type="click" refresh="true" step="41">
+            <xpath><![CDATA[*/FORM[@ID="_add"]/*/INPUT[@NAME="_finish" and @VALUE="Save"]]]></xpath>
+            <value><![CDATA[_finish]]></value>
+        </action>
+        <action type="verify-title" step="42">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Person]]></value>
+        </action>
+        <action type="click" refresh="true" step="43">
+            <xpath><![CDATA[*/FORM[@ID="_delete"]/INPUT[@ID="btn_deletesubject"]]]></xpath>
+            <value><![CDATA[_delete]]></value>
+        </action>
+        <action type="verify-title" step="44">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Delete Person]]></value>
+        </action>
+        <action type="click" refresh="true" step="45">
+            <xpath><![CDATA[*/FORM[@ID="_delete"]/INPUT[@NAME="_delete" and @VALUE="Confirm"]]]></xpath>
+            <value><![CDATA[_delete]]></value>
+        </action>
+        <action type="verify-title" step="46">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Menu]]></value>
+        </action>
+    </actions>
+</tg4w>

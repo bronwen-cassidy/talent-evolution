@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+        <!-- note the pageWidth must be the number of columns * the column width -->
+<jasperReport name="Basic_Sub_1" pageWidth="595" pageHeight="842" columnWidth="350" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" >
+
+    <style name="templateDetailStyle" isDefault="true" fontName="Arial" fontSize="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+    <style name="templateHeaderStyle" isDefault="false" fontName="Arial" fontSize="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+    <style name="templateGroupStyle" isDefault="false" fontName="Arial" fontSize="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+
+    <parameter name="subjectUrl" class="java.lang.String"/>
+    <parameter name="positionUrl" class="java.lang.String"/>
+    <parameter name="report" class="com.zynap.talentstudio.analysis.reports.Report"/>
+    <parameter name="_DS_FACTORY_PARAM" class="com.zynap.talentstudio.analysis.reports.jasper.JasperDataSourceFactory"/>
+    <parameter name="user" class="com.zynap.domain.admin.User"/>
+
+
+
+    <detail>
+        <band height="40">
+
+        </band>
+    </detail>
+
+</jasperReport>

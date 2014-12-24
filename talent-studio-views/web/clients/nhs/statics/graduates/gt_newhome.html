@@ -1,0 +1,24 @@
+<html>
+<head>
+    <title>Talent Studio - Home</title>
+
+    <script type="text/javascript">
+	    $(function() {
+	        $.get('https://www.ynshosting.com/nhs/talentarena/viewmyhomepagedetails.htm', function(data) {
+	                $('#practpgId1').html(data);
+	        });
+	    });
+
+	    function showPage() {
+	    	$.get('https://www.ynshosting.com/nhs/statics/graduates/gt2008_2.html', function(data) {
+	                $('#helpPageDvId').html(data);
+	        });
+	        $('#practpgId1').css("display", "none");
+	    }
+	</script>
+</head>
+<body>
+	<div id="helpPageDvId"><a href="#" onclick="showPage();">Help/User Guide</a></div>
+	<div id="practpgId1"></div>
+</body>
+</html>

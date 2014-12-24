@@ -1,0 +1,11 @@
+To ${user.label}
+
+You have recieved a notification to answer questionnaire ${domainObject.label}.
+#if ($url && $url != "")
+Please click to go to the questionnaire to-do list ${url}
+#end
+
+Regards
+Talent Management Evolution, Inc.
+
+[Note: This is an automated reply sent from TalentEvolution, please do not respond]

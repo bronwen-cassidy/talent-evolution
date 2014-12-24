@@ -1,0 +1,69 @@
+<?xml version="1.0" standalone='yes'?>
+
+<principals 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:noNamespaceSchemaLocation="http://xmlns.oracle.com/oracleas/schema/principals-10_0.xsd"
+  schema-major-version="10"
+  schema-minor-version="0"
+>
+  <groups>
+    <group name="webserviceuser">
+      <description>webservice users</description>
+      <permission name="rmi:login" />
+    </group>
+    <group name="users">
+      <description>users</description>
+      <permission name="rmi:login" />
+    </group>
+    <group name="guests">
+      <description>guests</description>
+    </group>
+    <group name="administrators">
+      <description>administrators</description>
+      <permission name="administration" />
+    </group>
+    <group name="jmxusers">
+      <description>jmx users</description>
+      <permission name="rmi:login" />
+    </group>
+  </groups>
+
+  <users>
+    <user username="webserviceuser" password="webserviceuser">
+      <description>webservice user</description>
+      <group-membership group="webserviceuser" />
+    </user>
+    <user username="SCOTT" password="TIGER">
+      <description>no description</description>
+      <group-membership group="users" />
+    </user>
+    <user username="user" password="456" deactivated="true">
+      <description>The default user</description>
+      <group-membership group="users" />
+      <group-membership group="guests" />
+    </user>
+    <user username="anonymous" password="">
+      <description>The default guest/anonyomous user</description>
+      <group-membership group="guests" />
+    </user>
+    <user username="admin" password=""  deactivated="true">
+      <description>The default administrator</description>
+      <group-membership group="users" />
+      <group-membership group="guests" />
+      <group-membership group="administrators" />
+    </user>
+
+    <!-- users used for password hiding -->
+    <user username="pwForScott" password="TIGER" deactivated="true">
+      <description>Password for database user Scott</description>
+    </user>
+    <user username="pwForSSL" password="123456" deactivated="true">
+      <description>Password for database user Scott</description>
+    </user>
+    <user username="pwForSystem" password="manager" deactivated="true">
+      <description>Password for database user Scott</description>
+    </user>
+  </users>
+
+</principals>
+

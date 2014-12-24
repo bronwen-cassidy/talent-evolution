@@ -1,0 +1,707 @@
+body {
+    font-family: arial, helvetical, sans-serif, verdana;
+    font-size: 12px;
+}
+
+h1 {
+    margin: 3px;
+    padding: 3px;
+    font-size: 12px;
+    font-family: arial, helvetical, sans-serif, verdana;
+    color: #0069AA;
+}
+
+h2 {
+    font-size: 12px;
+    font-style: italic;
+    font-family: arial, helvetical, sans-serif, verdana;
+    color: #0069AA;
+}
+
+a, a:active, a:visited {
+    color: #003768;
+}
+
+a:hover {
+    color: #000000;
+}
+
+th {
+    background-color: white;
+    color: #0069AA;
+}
+
+input {
+    font-size: 12px;
+    font-family: arial, helvetical, sans-serif, verdana;
+}
+
+span.userinfo {
+    padding-left: 150px;
+}
+
+td.footer {
+    font-size: 0.9em;
+    color: black;
+    background-color: #989DA3;
+    border: none;
+    padding: 5px 10px 5px 120px;
+}
+
+.copyright a, .copyright a:visited {
+    text-decoration: none;
+    color: #002257;
+}
+
+.copyright a:hover {
+    color: black;
+    text-decoration: underline;
+}
+
+td.infoarea {
+    font-size: 12px;
+    font-weight: bold;
+    background-color: #0069AA;
+    padding-left: 140px;
+    color: #FFFFFF;
+}
+
+a.logout, a.logout:visited {
+    color: white;
+}
+
+a.logout:hover {
+    color: white;
+}
+
+td.userinfodata {
+    font-size: 12px;
+    font-weight:bold;
+    background-color: #0069AA;
+    padding-left: 140px;
+    color: #FFFFFF;
+}
+
+div.arenatabs {
+    background-color: #FFFFFF;
+    background-image: url( ../images/niles_short.jpg);
+    background-repeat: no-repeat;
+    border-width: 0;
+    border-color: #002257;
+    padding-left: 33px;
+    padding-top: 110px;
+    padding-bottom: 0;
+    margin-bottom: 15px;
+    margin-top:5px;
+}
+
+.arena_nav_span {
+	position: absolute;
+	margin-left: -35px;
+
+}
+
+.arenbar td {
+    background-color: #0069AA;
+    border-width: 0px;
+    padding: 3px;
+}
+
+#arenatabs {
+	margin-top:12px;
+}
+
+td.arena_tabbar_left {
+    border-style: solid;
+    border-width: 0px 0px 0px 0px;
+    border-color: black;
+}
+
+img.arena_tabbar_left {
+    width: 175px;
+}
+
+td.arena_tabbar_space {
+    padding: 0px;
+}
+
+img.arena_tabbar_space {
+    width: 0px;
+}
+
+table.arena_tabbar td.arena_active_tab {
+    border-style: solid;
+    border-width: 1px 0px 0px 1px;
+    border-color: #000000;
+    background-color: #0069AA;
+    color: black;
+    padding: 5px 10px 5px 10px;
+}
+
+td.arena_inactive_tab {
+    border-width: 1px 1px 1px 1px;
+    border-color: black;
+    color: black;
+    padding: 5px 10px 5px 10px;
+}
+
+td.arena_inactive_tab.hover {
+	color: white;
+    background-color: #989DA3;
+}
+
+td.arena_active_tab a:visited {
+	color:white;
+}
+
+td.arena_inactive_tab.no_hover {
+    background-color: #0069AA;
+    color: black;
+}
+
+.arena_inactive_tab a, .arena_inactive_tab a:visited {
+    color: black;
+}
+
+td.arena_inactive_tab a:hover {
+    color: white;
+}
+
+td.tab_tabbar_space {
+    padding: 0px;
+}
+
+img.tab_tabbar_space {
+    width: 0px;
+}
+
+table.tab_tabbar td.tab_active_tab {
+    border-width: 0px 1px 0px 0px;
+    border-color: white;
+    background-color: #989DA3;
+    color: #0069AA;
+    padding: 5px 10px 5px 10px;
+}
+
+.tab_active_tab a, .tab_active_tab a:visited {
+    color: #000000;
+}
+
+.tab_active_tab a:hover {
+    color: #000000;
+}
+
+td.tab_inactive_tab {
+    border-width: 0px 1px 0px 0px;
+    border-color: white;
+    color: #0069AA;
+    padding: 5px 10px 5px 10px;
+}
+
+table.tab_tabbar .tab_inactive_tab.hover {
+    background-color: #989DA3;
+}
+
+table.tab_tabbar .tab_inactive_tab.no_hover {
+    background-color: #0069AA;
+}
+
+.tab_inactive_tab a, .tab_inactive_tab a:visited {
+    color: #989DA3;
+}
+
+.tab_inactive_tab a:hover {
+    color: #989DA3;
+}
+
+td.navigation {
+    background-color: #0069AA;
+    white-space: nowrap;
+}
+
+div.navigation {
+    width: 200px;
+    margin: 0px 0px 0px 10px;
+    background-color: #0069AA;
+    padding: 20px 0px 20px 10px;
+}
+
+.nav_manipulation {
+    float: left;
+    display: inline;
+    vertical-align: bottom;
+    margin-left: 0;
+    padding-left: 2pt;
+    padding-top: 2pt;
+    padding-bottom: 2pt;
+    padding-right: 2pt;
+    cursor: pointer;
+    background-color: #FFFFFF;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.navigation_no_hover {
+    background-color: #0069AA;
+    color: black;
+}
+
+.navigation_hover {
+    background-color: #989DA3;
+    color: white;
+}
+
+.navigation_main_item {
+    width: 200px;
+    font-family: arial, helvetical, sans-serif, verdana;
+    font-size: 12px;
+    font-weight: bold;
+    text-decoration: none;
+    border-color: black;
+    border-style: solid;
+    border-width: 0px 0px 1px 0px;
+    padding: 5px 5px 5px 10px;
+}
+
+.navigation_sub_item {
+    width: 200px;
+    white-space: normal;
+    font-family: arial, helvetical, sans-serif, verdana;
+    font-size: 12px;
+    font-weight: normal;
+    text-decoration: none;
+    border-color: black;
+    border-style: solid;
+    border-width: 0px 0px 1px 0px;
+    padding: 5px 5px 5px 25px;
+}
+
+td.content {
+    border: none;
+    padding: 20px 5px 5px 10px;
+}
+
+th.artefact {
+    background-color: #989DA3;
+    margin-bottom: 10px;
+    border-width: 1px;
+    border-color: #002257;
+    color: #0069AA;
+}
+
+th.artefact .infotable {
+    background-color: #eff2f9;
+}
+
+td.artefact {
+    background-color: white;
+    border: none;
+    padding: 10px 0px 0px 0px;
+}
+
+table.infobox {
+    background-color: white;
+}
+
+th.infobox {
+    background-color: #0069AA;
+    margin: 3px;
+    padding: 3px;
+    color: #efefef;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+td.infobox {
+    background-color: #989DA3;
+    padding: 10px;
+}
+
+table.infotable {
+    background-color: #989DA3;
+    border-color: #0069AA;
+    border-width: 1px;
+}
+
+.heading {
+    color: #0069AA;
+    background-color: #989DA3;
+    text-align: justify;
+    margin: 3px;
+    padding: 5px 3px 5px 3px;
+}
+
+.infoheading {
+    border-color: #989DA3;
+    border-width: 1px;
+    padding: 5px;
+    color: black;
+    background-color: #e7e7e7;
+}
+
+.infosubheading {
+    background-color: #0069AA;
+    border-color: #989DA3;
+    border-width: 1px;
+}
+
+.infonarrative {
+    background-color: #eff2f9;
+    color: #000000;
+    border-color: #989DA3;
+    border-width: 1px;
+}
+
+.infolabel {
+    background-color: #eff2f9;
+    border-color: #989DA3;
+    border-width: 1px;
+    color: black;
+}
+
+.infodata {
+    background-color: #eff2f9;
+    border-color: #989DA3;
+    border-width: 1px;
+}
+
+.questionlabel {
+    background-color: #eff2f9;
+    border-color: #989DA3;
+    border-width: 1px;
+    color: black;
+}
+
+.questiondata {
+    background-color: #eff2f9;
+    border-color: #989DA3;
+    border-width: 1px;
+}
+
+.infobutton {
+    background-color: #eff2f9;
+    border-color: #989DA3;
+    border-width: 1px;
+}
+
+table.actionbox {
+    border-style: none;
+}
+
+td.actionbox {
+    background-color: #eff2f9;
+    padding: 2px 2px 2px 2px;
+}
+
+input.actionbutton {
+    border: none;
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 1px;
+    margin: 0px 3px 0px 0px;
+    color: #0069AA;
+    background-color: #FFFFFF;
+}
+
+input.inlinebutton {
+    font-weight: normal;
+    color: black;
+    padding: 1px;
+}
+
+input.partnerbutton {
+    color: black;
+}
+
+table.pager {
+    border-width: 0px;
+    border-color: #989DA3;
+}
+table.pager4 {
+    border-width: 0px;
+    border-color: #989DA3;
+    table-layout: fixed;
+}
+
+th.sorted, th.sortable {
+    border-color: #989DA3;
+    border-width: 1px;
+    color: #0069AA;
+}
+
+td.pager {
+    padding: 5px;
+    border-width: 0px 1px 1px 1px;
+    border-color: #989DA3;
+    background-color: #EFEFEF;
+}
+td.pager4 {
+    padding: 5px;
+    border-width: 0px 1px 1px 1px;
+    border-color: #989DA3;
+    background-color: #EFEFEF;
+    width: 25%;
+}
+
+tr.odd {
+    background-color: #FFFFFF;
+}
+
+tr.even {
+    background-color: #FFFFFF;
+}
+
+table.crosstabtable {
+}
+
+td.crosstabaxisheader {
+    border-collapse: collapse;
+    background-color: #989DA3;
+}
+
+td.crosstabcolumntitle {
+    background-color: #989DA3;
+    border-collapse: collapse;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+td.crosstabrowtitle {
+    border-collapse: collapse;
+    background-color: #989DA3;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+td.crosstabcolumnheader {
+    background-color: #989DA3;
+    font-size: 1em;
+    font-weight: normal;
+}
+
+td.crosstabrowheader {
+    color: #0069AA;
+    background-color: #989DA3;
+    font-size: 1em;
+    font-weight: normal;
+}
+
+td.crosstabdata {
+    height: 100%;
+    vertical-align: top;
+    padding: 10px;
+    text-align: center;
+    border-color: #989DA3;
+    border-style: solid;
+    border-width: 1px;
+    background-color: #FFFFFF;
+}
+
+td.columnheader {
+    background-color: white;
+    color: #0069AA;
+    border-color: #989DA3;
+    border-width: 1px;
+}
+
+.group td {
+    border-bottom: 0px;
+    background-color: #0069AA;
+}
+
+.summarylabel {
+    background-color: #989DA3;
+}
+
+.summarydata {
+    background-color: #989DA3;
+}
+
+/********************************************************************************/
+
+/* General Tab controls */
+
+/* Main area containing tabs */
+
+table.tab_tabbar {
+    width: 100%;
+    border: none;
+    padding: 0px;
+}
+
+.tab_tabbar td {
+    border-style: solid;
+    border-width: 0px 0px 1px 0px;
+    border-color: #989DA3;
+    padding: 0px;
+}
+
+/* Space to the left of tabs */
+
+td.tab_tabbar_left {
+}
+
+img.tab_tabbar_left {
+    width: 0px;
+}
+
+/* Space between tabs */
+
+td.tab_tabbar_space {
+}
+
+img.tab_tabbar_space {
+    width: 3px;
+}
+
+/* Space to the right of tabs */
+
+td.tab_tabbar_right {
+    width: 100%;
+}
+
+/* Body of tab containing text */
+
+td.tab_tab {
+    white-space: nowrap;
+    text-align: center;
+    font-weight: bold;
+    font-family: arial, helvetical, sans-serif, verdana;
+    font-size: 0.9em;
+    padding: 3px 6px 3px 6px;
+    border-style: solid;
+    border-color: #989DA3;
+    color: #0069AA;
+}
+
+table.tab_tabbar td.tab_active_tab {
+    border-width: 1px 1px 0px 1px;
+    background-color: white;
+    border-color: #9A9A9A;
+}
+
+.tab_active_tab a, .tab_active_tab a:active, .tab_active_tab a:visited, .tab_active_tab a:hover {
+    text-decoration: none;
+    color: #0069AA;
+    cursor: text;
+}
+
+td.tab_inactive_tab {
+    border-width: 1px 1px 1px 1px;
+}
+
+table.tab_tabbar .tab_inactive_tab.hover {
+    background-color: white;
+}
+
+table.tab_tabbar .tab_inactive_tab.no_hover {
+    background-color: #EFEFEF;
+}
+
+.tab_inactive_tab a, .tab_inactive_tab a:visited {
+    color: black;
+    text-decoration: none;
+}
+
+.tab_inactive_tab a:hover {
+    color: #0069AA;
+}
+
+/* Surround of the tab page */
+
+table.tab_page_border {
+    width: 100%;
+    border-style: solid;
+    border-width: 0px 1px 1px 1px;
+    border-color: #989DA3;
+}
+
+td.tab_page_border {
+    padding: 0px;
+}
+
+tr.popupTitle {
+    background-color: #0069AA;
+}
+
+/********************************************************************************/
+/* redefine width to be longer than default for Development Suggestions input */
+textarea {
+    font-family: arial, helvetica, sans-serif;
+    display: block;
+    font-size: 1em; /*width: 100%;*/
+    width: 500px;
+    text-align: justify;
+    white-space: normal;
+}
+
+span.wizardHeading  {
+    color: #989DA3;
+}
+
+span.wizardHeadingActive {
+    color: #FFFFFF;
+}
+
+.policyheader {
+    border-color: #0069AA;
+    background-color: #989DA3;
+    color: #0069AA;
+}
+
+.infomessage {
+    border-color: #989DA3;
+    background-color: #D9D9D9;
+    color: #0069AA;
+}
+
+.table_infobox {
+    background-color: #0069AA;
+}
+
+/* front logo to go in main after re-branding */
+.header-left {
+	height:0;
+	width: 0;
+	background-color: #0069AA;
+}
+
+.header-center {
+	height:0;
+	width: 0;
+	background-color: #0069AA;
+}
+
+.header-right {
+	height:0;
+	width: 0;
+	background-color: #0069AA;
+}
+
+/* npc */
+/* the style for the crosstab cell label */
+.crosstabcelllabel {
+    text-align: center;
+    font-weight: bold;
+}
+
+/* the style for the crosstab cell number/percent results */
+.crosstabcelldata {
+    font-weight: bold;
+    font-size: 1.3em;
+}
+
+/* npc - modify graphics for AZ */
+/* enables use of replacement images for traffic-lights but makes them bigger */
+img.colorcell {
+    border: 0px solid #989DA3;
+    width: 15px;
+    height: 15px;
+}
+
+div#noPhotograph {
+    font-size: 12px;
+    word-spacing: 5em;
+    background-color: #989DA3;
+}

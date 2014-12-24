@@ -1,0 +1,178 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+    <!--
+        Created by the Middlegen Hibernate plugin 2.1
+
+        http://boss.bekk.no/boss/middlegen/
+        http://www.hibernate.org/
+    -->
+
+    <class
+            name="com.zynap.talentstudio.display.DisplayConfigItem"
+            table="DISPLAY_CONFIG_ITEMS"
+            dynamic-update="true"
+            dynamic-insert="true"
+            >
+        <cache usage="nonstrict-read-write"/>
+        <id
+                name="id"
+                type="java.lang.Long"
+                column="ID"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <generator class="sequence">
+                <param name="sequence">CONFIG_SQ</param>
+            </generator>
+        </id>
+
+        <property
+                name="label"
+                type="java.lang.String"
+                column="LABEL"
+                not-null="true"
+                length="255"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+
+        <property
+                name="contentType"
+                type="java.lang.String"
+                column="CONTENT_TYPE"
+                not-null="false"
+                length="10"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+
+        <property
+                name="active"
+                type="true_false"
+                column="IS_ACTIVE"
+                not-null="true"
+                length="1"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+
+        <property
+                name="hideable"
+                type="true_false"
+                column="HIDEABLE"
+                not-null="true"
+                length="1"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+
+        <property
+                name="rolesModifiable"
+                type="true_false"
+                column="ROLES_MODIFIABLE"
+                not-null="true"
+                length="1"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+
+        <property
+                name="sortOrder"
+                type="java.lang.Integer"
+                column="SORT_ORDER"
+                not-null="true"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+
+        <!-- Associations -->
+        <set
+                name="arenas"
+                table="MODULE_DISPLAY_CONFIG_ITEMS"
+                cascade="none"
+                lazy="true"
+                outer-join="true"
+                batch-size="50"
+                >
+            <cache usage="nonstrict-read-write"/>
+            <key>
+                <column name="DISPLAY_CONFIG_ITEM_ID"/>
+            </key>
+            <many-to-many class="com.zynap.talentstudio.arenas.Arena" column="MODULE_ID"/>
+        </set>
+
+        <set
+                name="roles"
+                table="DISPLAY_CONFIG_ROLES"
+                cascade="save-update"
+                lazy="false"
+                outer-join="true"
+                batch-size="50"
+                >
+            <cache usage="nonstrict-read-write"/>
+            <key>
+                <column name="DISPLAY_CONFIG_ITEM_ID"/>
+            </key>
+            <many-to-many class="com.zynap.talentstudio.security.roles.AccessRole" column="ROLE_ID"/>
+        </set>
+
+        <set
+                name="groups"
+                table="DISPLAY_CONFIG_GROUPS"
+                cascade="save-update"
+                lazy="false"
+                outer-join="true"
+                batch-size="50"
+                >
+            <cache usage="nonstrict-read-write"/>
+            <key>
+                <column name="DISPLAY_CONFIG_ITEM_ID"/>
+            </key>
+            <many-to-many class="com.zynap.talentstudio.common.groups.Group" column="GROUP_ID"/>
+        </set>
+
+        <bag
+                name="reportItems"
+                inverse="true"
+                lazy="false"
+                cascade="all-delete-orphan"
+                outer-join="true"
+                batch-size="50"
+                >
+            <cache usage="nonstrict-read-write"/>
+            <key>
+                <column name="DISPLAY_CONFIG_ITEM_ID"/>
+            </key>
+            <one-to-many class="com.zynap.talentstudio.display.DisplayItemReport"/>
+        </bag>
+
+        <!-- bi-directional many-to-one association to DisplayConfig -->
+        <many-to-one
+                name="displayConfig"
+                class="com.zynap.talentstudio.display.DisplayConfig"
+                not-null="true"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <column name="DISPLAY_CONFIG_ID"/>
+        </many-to-one>
+
+        <many-to-one
+                name="population"
+                class="com.zynap.talentstudio.analysis.populations.Population"
+                cascade="save-update"                
+                >
+            <column name="POPULATION_ID"/>
+        </many-to-one>
+
+    </class>
+
+</hibernate-mapping>

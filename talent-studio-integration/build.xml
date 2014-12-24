@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+
+<project name="talent-studio" default="import-xml" basedir=".">
+
+    <path id="build.standalone.classpath">
+        <fileset dir="lib">
+            <include name="**/*.jar"/>
+        </fileset>
+    </path>
+
+    <property name="db.username" value="TSQA2"/>
+    <property name="db.password" value="TSQA2"/>
+    <property name="host" value="10.83.110.118"/>
+    <property name="sid" value="ZYNTS01"/>
+    <!--<property name="sid" value="ZYNTS02"/>-->
+    <property name="tsuser" value="webserviceuser"/>
+
+    <target name="run-question-calc">
+        <java classname="com.zynap.talentstudio.integration.client.QuestionnaireCalculationImporter" failonerror="true" fork="true">
+            <classpath refid="build.standalone.classpath"/>
+            <classpath>
+                <pathelement path="classes"/>
+            </classpath>
+            <arg line="-host ${host} -dbuser ${db.username} -sid ${sid} ${qwf.id}"/>
+        </java>
+    </target>
+
+    <target name="import-xml" description="Loads an xml file into the xml adaptor file">
+
+        <java jar="talent-studio-standalone" fork="true">
+            <!--<java classname="com.zynap.talentstudio.integration.client.ExecuteXml">-->
+            <classpath refid="build.standalone.classpath"/>
+            <classpath>
+                <pathelement path="classes"/>
+            </classpath>
+            <!--<classpath refid="build.standalone.classpath"/>-->
+            <arg line="-dbuser"/>
+            <arg line="${db.username}"/>
+            <arg line="-host"/>
+            <arg line="${host}"/>
+            <arg line="-sid"/>
+            <arg line="${sid}"/>
+            <arg line="-dbpasswd"/>
+            <arg line="${db.password}"/>
+            <arg line="-tsuser"/>
+            <arg line="${tsuser}"/>
+            <arg value="${xml.upload.file}"/>
+        </java>
+    </target>
+
+</project>

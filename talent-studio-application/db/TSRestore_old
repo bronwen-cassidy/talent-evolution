@@ -1,0 +1,83 @@
+#!/bin/sh
+
+if [ -z "$1" -o -z "$2" ]
+then
+	echo usage $0 [DB Admin User] [DB User] [Dump file name]
+	exit 2
+fi
+
+set -u
+
+DBADMIN=$1
+DBUSER=$2
+DMPFILE=$3
+
+if [ ! -d ${DMPFILE} ]
+then
+	echo ${DMPFILE} is not an accessible directory.
+	exit 1
+fi
+
+if [ -z "$ORACLE_HOME" ]
+then
+	echo Please ensure ORACLE_HOME environment variable is set.
+	echo E.g. ORACLE_HOME=/home/oracle/product/9.2.0.4.0
+	exit 3
+fi
+
+# Create TS user
+
+sqlplus $DBADMIN/$DBADMIN @promptAndCreateUser.sql <<XXX
+${DBUSER}
+XXX
+
+result=$?
+echo RESULT = $result
+
+if [ "$result" -ne 0 ]
+then
+	echo ****** User creation failed *******
+	exit $result
+fi
+
+# Import the TS schema and data
+
+$ORACLE_HOME/bin/imp $DBUSER/$DBUSER LOG=${DMPFILE}/ts_restore.log FULL=y COMMIT=y ROWS=y INDEXES=y CONSTRAINTS=y GRANTS=y FILE=${DMPFILE}/ts.dmp
+result=$?
+
+# Drop selective Workflow tables
+
+if [ "$result" -eq 0 ]
+then
+	sqlplus OWF_${DBUSER}/OWF_${DBUSER} @wf/drop_wf_tables.sql
+fi
+
+# Import the Workflow schema and data
+
+if [ "$result" -eq 0 ]
+then
+	$ORACLE_HOME/bin/imp OWF_${DBUSER}/OWF_${DBUSER} LOG=${DMPFILE}/wf_restore.log FULL=y COMMIT=y ROWS=y INDEXES=y CONSTRAINTS=y GRANTS=y FILE=${DMPFILE}/wf.dmp
+	result=$?
+fi
+
+# Fix up the workflow schema
+
+if [ "$result" -eq 0 ]
+then
+	sqlplus OWF_${DBUSER}/OWF_${DBUSER} @${DMPFILE}/wf_insert_data.sql
+	sqlplus OWF_${DBUSER}/OWF_${DBUSER} @wf/updateSequences.sql
+	sqlplus OWF_${DBUSER}/OWF_${DBUSER} @wf/wf_integration_standalone.sql <<XXX
+${DBUSER}
+OWF_${DBUSER}
+XXX
+fi
+
+echo RESULT = $result
+
+if [ "$result" -ne 0 ]
+then
+	echo ****** Database restore failed *******
+	exit $result
+fi
+
+echo Restore completed OK.

@@ -1,0 +1,199 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tg4w version="0.38.2">
+    <actions>
+        <action type="goto" refresh="true" step="0">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/perfman/documentsearch.htm?navigator.notSubmit=true]]></value>
+        </action>
+        <action type="verify-title" step="1">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Document Search]]></value>
+        </action>
+
+        <!-- do search without any selected content types or supplying text - will cause validation errors -->
+        <action type="click" step="2">
+            <xpath><![CDATA[*/FORM[@ID="search"]/*/INPUT[@ID="clearalltypes"]]]></xpath>
+            <value><![CDATA[UnCheckAll]]></value>
+        </action>
+        <action type="click" refresh="true" step="3">
+            <xpath><![CDATA[*/FORM[@ID="search"]/*/INPUT[@NAME="_target1" and @VALUE="Search"]]]></xpath>
+            <value><![CDATA[_target1]]></value>
+        </action>
+        <action type="verify-title" step="4">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Document Search]]></value>
+        </action>
+        <action type="assert-text-exists" step="5">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[At least one content type must be selected.]]></value>
+        </action>
+        <action type="assert-text-exists" step="6">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Please enter some text.]]></value>
+        </action>
+        <action type="assert-text-does-not-exist" step="7">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[a_results]]></value>
+        </action>
+        <action type="assert-text-does-not-exist" step="8">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[a_browse]]></value>
+        </action>
+
+        <!-- do search with all content types selected and text set to "*" -->
+        <action type="click" step="9">
+            <xpath><![CDATA[*/FORM[@ID="search"]/*/INPUT[@ID="setalltypes"]]]></xpath>
+            <value><![CDATA[CheckAll]]></value>
+        </action>
+        <action type="fill" step="10">
+            <xpath><![CDATA[*/FORM[@ID="search"]/*/TEXTAREA[@NAME="queryText"]]]></xpath>
+            <value><![CDATA[*]]></value>
+        </action>
+        <action type="click" refresh="true" step="11">
+            <xpath><![CDATA[*/FORM[@ID="search"]/*/INPUT[@NAME="_target1" and @VALUE="Search"]]]></xpath>
+            <value><![CDATA[_target1]]></value>
+        </action>
+        <action type="verify-title" step="12">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Document Search]]></value>
+        </action>
+        <action type="assert-text-exists" step="13">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[a_results]]></value>
+        </action>
+        <action type="assert-text-exists" step="14">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[a_browse]]></value>
+        </action>
+        <action type="assert-text-exists" step="15">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Oin Dwarf]]></value>
+        </action>
+
+        <!-- all docs for Oin must be present  -->
+        <action type="assert-text-exists" step="16">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Oin private CV added by administrator]]></value>
+        </action>
+        <action type="assert-text-exists" step="17">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Oin restricted CV added by administrator]]></value>
+        </action>
+        <action type="assert-text-exists" step="18">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Oin public CV added by administrator]]></value>
+        </action>
+        <action type="assert-text-exists" step="19">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Oin private CV added by Fili]]></value>
+        </action>
+        <action type="assert-text-exists" step="20">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Oin restricted CV added by Fili]]></value>
+        </action>
+        <action type="assert-text-exists" step="21">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Oin public CV added by Fili]]></value>
+        </action>
+
+        <!-- all docs for Fili must be present  -->
+        <action type="assert-text-exists" step="22">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Fili private CV added by self]]></value>
+        </action>
+        <action type="assert-text-exists" step="23">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Fili restricted CV added by self]]></value>
+        </action>
+        <action type="assert-text-exists" step="24">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Fili public CV added by self]]></value>
+        </action>
+        <action type="assert-text-exists" step="25">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Fili private CV added by administrator]]></value>
+        </action>
+        <action type="assert-text-exists" step="26">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Fili restricted CV added by administrator]]></value>
+        </action>
+        <action type="assert-text-exists" step="27">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Fili public CV added by administrator]]></value>
+        </action>
+        <action type="assert-text-exists" step="28">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Fili private CV added by Thorin]]></value>
+        </action>
+        <action type="assert-text-exists" step="29">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Fili restricted CV added by Thorin]]></value>
+        </action>
+        <action type="assert-text-exists" step="30">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Fili public CV added by Thorin]]></value>
+        </action>
+
+        <!-- all docs for Thorin must be present  -->
+        <action type="assert-text-exists" step="31">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Thorin private CV added by self]]></value>
+        </action>
+        <action type="assert-text-exists" step="32">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Thorin restricted CV added by self]]></value>
+        </action>
+        <action type="assert-text-exists" step="33">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Thorin public CV added by self]]></value>
+        </action>
+        <action type="assert-text-exists" step="34">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Thorin private CV added by administrator]]></value>
+        </action>
+        <action type="assert-text-exists" step="35">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Thorin restricted CV added by administrator]]></value>
+        </action>
+        <action type="assert-text-exists" step="36">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Thorin public CV added by administrator]]></value>
+        </action>
+
+        <!-- Kili and Gloin have no docs so must not appear in the search  -->
+        <action type="assert-text-does-not-exist" step="37">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Kili Dwarf]]></value>
+        </action>
+        <action type="assert-text-does-not-exist" step="38">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Gloin Dwarf]]></value>
+        </action>
+
+        <!-- Click on browse - check 1st document is Thorin public CV added by administrator  -->
+        <action type="click" step="39">
+            <xpath><![CDATA[A[@ID="a_browse"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="assert-text-exists" step="40">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[21]]></value>
+        </action>
+        <action type="assert-text-exists" step="41">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Public CV added by administrator]]></value>
+        </action>
+        <action type="assert-text-exists" step="42">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Curriculum Vitae]]></value>
+        </action>
+        <action type="assert-text-exists" step="43">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Text]]></value>
+        </action>
+        <action type="assert-text-exists" step="44">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Public]]></value>
+        </action>
+    </actions>
+</tg4w>

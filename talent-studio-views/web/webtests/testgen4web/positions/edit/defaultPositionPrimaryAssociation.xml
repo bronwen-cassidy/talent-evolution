@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tg4w version="0.38.2">
+    <actions>
+        <action type="goto" refresh="true" step="0">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://localhost:8888/talent-studio/orgbuilder/browseposition.htm?navigator.notSubmit=true]]></value>
+        </action>
+        <action type="verify-title" step="1">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Talent Studio - Browse Positions]]></value>
+        </action>
+        <action type="assert-text-exists" step="2">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Summary of Default Position]]></value>
+        </action>
+
+        <!-- check there are no direct superiors -->
+        <action type="click" step="3">
+            <xpath><![CDATA[A[@ID="a_directreporting"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="assert-text-does-not-exist" step="4">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Reports To]]></value>
+        </action>
+        <action type="assert-text-exists" step="5">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Subordinates]]></value>
+        </action>
+        <action type="assert-text-exists" step="6">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[None defined.]]></value>
+        </action>
+
+        <!-- check there are no provisional superiors -->
+        <action type="click" step="7">
+            <xpath><![CDATA[A[@ID="a_provisionalreporting"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="assert-text-does-not-exist" step="8">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Provisional Supervisor]]></value>
+        </action>
+        <action type="assert-text-exists" step="9">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Provisional Subordinate]]></value>
+        </action>
+        <action type="assert-text-exists" step="10">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[None defined.]]></value>
+        </action>
+    </actions>
+</tg4w>

@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+    <!--
+        Created by the Middlegen Hibernate plugin 2.1
+
+        http://boss.bekk.no/boss/middlegen/
+        http://www.hibernate.org/
+    -->
+
+    <class
+            name="com.zynap.talentstudio.organisation.positions.PositionAssociation"
+            table="POSITION_ASSOCIATIONS"
+            dynamic-update="true"
+            dynamic-insert="true"
+            >
+        <meta attribute="class-description" inherit="false">
+            @hibernate.class
+            table="POSITION_ASSOCIATIONS"
+            dynamic-update="true"
+            dynamic-insert="true"
+        </meta>
+
+        <id
+                name="id"
+                type="long"
+                column="ID"
+                unsaved-value="null"
+                >            
+            <generator class="sequence">
+                <param name="sequence">ASSOC_SQ</param>
+            </generator>
+        </id>
+
+        <property name="sourceId"
+            type="java.lang.Long"
+            column="SOURCE_ID"/>
+
+        <property name="targetId"
+            type="java.lang.Long"
+            column="TARGET_ID"/>
+        <!-- Associations -->
+
+        <!-- uni-directional many-to-one association to LookupValue -->
+
+        <many-to-one name="qualifier"
+                     class="com.zynap.talentstudio.common.lookups.LookupValue"
+                     not-null="true"
+                     unique="false"
+                     outer-join="auto"
+                     update="true"
+                     insert="true">
+            <column name="VALUE_ID"/>
+        </many-to-one>
+
+        <!-- bi-directional many-to-one association to Position -->
+        <many-to-one
+                name="source"
+                class="com.zynap.talentstudio.organisation.positions.Position"
+                not-null="true"
+                insert="false"
+                update="false"
+                >
+            <column name="SOURCE_ID"/>
+        </many-to-one>
+
+        <!-- bi-directional many-to-one association to Position -->
+        <many-to-one
+                name="target"
+                class="com.zynap.talentstudio.organisation.positions.Position"
+                not-null="true"
+                insert="false"
+                update="false"
+                >
+            <column name="TARGET_ID"/>
+        </many-to-one>
+
+    </class>
+</hibernate-mapping>

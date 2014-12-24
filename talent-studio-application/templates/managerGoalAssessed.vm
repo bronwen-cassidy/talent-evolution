@@ -1,0 +1,8 @@
+To ${user.label}
+
+${domainObject.label} has completed commenting and assessing their goals
+
+Sent on behalf of
+${from.label}.
+
+[Note: This is an automated reply sent from TalentEvolution, please do not respond]

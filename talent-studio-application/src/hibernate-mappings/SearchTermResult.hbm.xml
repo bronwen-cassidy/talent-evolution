@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+    <!--
+        Created by the Middlegen Hibernate plugin 2.1
+
+        http://boss.bekk.no/boss/middlegen/
+        http://www.hibernate.org/
+    -->
+
+    <class
+            name="com.zynap.talentstudio.search.SearchTermResult"
+            table="SEARCH_TERMS_XY"
+            dynamic-update="false"
+            dynamic-insert="false"
+            >
+        <id
+                name="id"
+                type="java.lang.Long"
+                column="ID"
+                >
+            <generator class="assigned"/>
+        </id>
+        <property
+                name="userId"
+                type="java.lang.Long"
+                column="USER_ID"
+                />
+        <property
+                name="permitId"
+                type="java.lang.Long"
+                column="PERMIT_ID"
+                />
+        <property
+                name="managerRead"
+                type="true_false"
+                column="MANAGER_READ"
+                />
+        <property
+                name="individualRead"
+                type="true_false"
+                column="INDIVIDUAL_READ"
+                />
+        <property
+                name="nodeId"
+                type="java.lang.Long"
+                column="NODE_ID"
+                />
+        <property
+                name="label"
+                type="java.lang.String"
+                column="LABEL"
+                length="100"
+                />
+        <property
+                name="description"
+                type="java.lang.String"
+                column="DESCRIPTION"
+                length="1024"
+                />
+        <property
+                name="linkUrl"
+                type="java.lang.String"
+                column="LINK_URL"
+                />
+        <property
+                name="name"
+                type="java.lang.String"
+                column="NAME"
+                />
+
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+    <!--
+            Created by the Middlegen Hibernate plugin 2.1
+
+            http://boss.bekk.no/boss/middlegen/
+            http://www.hibernate.org/
+        -->
+
+    <class
+            name="com.zynap.talentstudio.organisation.portfolio.PortfolioItem"
+            table="NODE_ITEMS"
+            dynamic-update="true"
+            dynamic-insert="true"
+            >
+
+        <id
+                name="id"
+                type="java.lang.Long"
+                column="ID"
+                unsaved-value="null"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <generator class="sequence">
+                <param name="sequence">NODE_ITEM_SQ</param>
+            </generator>
+        </id>
+
+        <property
+                name="label"
+                type="java.lang.String"
+                column="LABEL"
+                length="50"
+                />
+
+        <property
+                name="comments"
+                type="java.lang.String"
+                column="COMMENTS"
+                length="4000"
+                />
+        <property
+                name="status"
+                type="java.lang.String"
+                column="STATUS"
+                length="10"
+                not-null="true"
+                />
+        <property
+                name="scope"
+                type="java.lang.String"
+                column="SCOPE"
+                length="10"
+                not-null="true"
+                />
+        <property
+                name="lastModified"
+                type="java.util.Date"
+                column="LAST_MODIFIED"
+                length="7"
+                />
+
+        <property
+                name="lastModifiedById"
+                type="long"
+                column="LAST_MODIFIED_BY"/>
+
+        <property
+                name="createdById"
+                type="long"
+                column="OWNER_ID"/>
+
+        <property
+                name="origFileName"
+                type="java.lang.String"
+                column="ORIG_FILE_NAME"
+                length="500"
+                />
+        <property
+                name="fileSize"
+                type="long"
+                column="FILE_SIZE"
+                length="22"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+
+        <property
+                name="fileExtension"
+                type="java.lang.String"
+                column="FILE_EXTENSION"
+                length="10"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+        <property
+                name="contentSubType"
+                type="java.lang.String"
+                column="CONTENT_SUB_TYPE"
+                not-null="true"
+                length="20"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+
+        <!-- Associations -->
+        <many-to-one
+                name="contentType"
+                class="com.zynap.talentstudio.organisation.portfolio.ContentType"
+                not-null="true"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <column name="CONTENT_TYPE_ID"/>
+        </many-to-one>
+
+        <!-- bi-directional many-to-one association to Node -->
+        <many-to-one
+                name="node"
+                class="com.zynap.talentstudio.organisation.Node"
+                not-null="true"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <column name="NODE_ID"/>
+        </many-to-one>
+
+        <many-to-one
+                name="lastModifiedBy"
+                class="com.zynap.domain.admin.User"
+                insert="false"
+                update="false"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <column name="LAST_MODIFIED_BY"/>
+        </many-to-one>
+
+        <many-to-one
+                name="createdBy"
+                class="com.zynap.domain.admin.User"
+                insert="false"
+                update="false"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <column name="OWNER_ID"/>
+        </many-to-one>
+
+        <!-- bi-directional many-to-one association to SecurityAttribute -->
+        <many-to-one
+                name="securityAttribute"
+                class="com.zynap.talentstudio.security.SecurityAttribute"
+                not-null="true"
+                cascade="all"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <column name="SECURITY_ID"/>
+        </many-to-one>
+
+    </class>
+</hibernate-mapping>

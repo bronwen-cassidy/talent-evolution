@@ -1,0 +1,9 @@
+To ${user.label}
+
+You have recieved a notification in your TalentStudio todo list.
+Please login in to assign roles and start the appraisal ${domainObject.label}
+
+Regards
+TalentScope Ltd.
+
+[Note: This is an automated reply sent from TalentEvolution, please do not respond]

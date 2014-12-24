@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+  <CORE_DETAILS ID="3" FIRST_NAME="Daniel" TITLE="Mr" PREF_GIVEN_NAME="Danny" SECOND_NAME="Deronda"/>
+  <USERS CD_ID="3" ID="3" USER_TYPE="SYSTEM" IS_ACTIVE="T" IS_ROOT="F"/>
+  <LOGINS USER_ID="3" USERNAME="daniel" PASSWORD="E9AF2190C5E63E66" EXPIRES="2016-04-30" LOCKED="F" FORCE_PWD_CHANGE="F"/>
+</dataset>

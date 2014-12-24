@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<trees>
+    
+    <tree type="S">
+        <branch id="person" label="Person" type="S" root="true">
+            <branch id="subjectPrimaryAssociations.position" label="Current Job" type="P" includeQualifierAttributes="true">
+                <branch id="subjectPrimaryAssociations.position.sourceAssociations.target" label="Reports To" type="P" includeQualifierAttributes="true">
+                    <branch id="subjectPrimaryAssociations.position.sourceAssociations.target.subjectPrimaryAssociations.subject" label="Manager" type="S" includeQualifierAttributes="true"/>
+                </branch>
+            </branch>
+        </branch>
+    </tree>
+
+    <attributes type="S" viewType="EXEC">
+        <attribute id="coreDetail.title" label="Title" type="TEXT"/>
+        <attribute id="coreDetail.firstName" label="First Name" type="TEXT"/>
+        <attribute id="coreDetail.name" label="Full Name" type="TEXT"/>
+        <attribute id="coreDetail.secondName" label="Last Name" type="TEXT"/>
+        <attribute id="coreDetail.prefGivenName" label="Given Name" type="TEXT"/>
+        <attribute id="comments" label="Comments" type="TEXT"/>
+        <attribute id="coreDetail.contactEmail" label="Email" type="TEXT"/>
+        <attribute id="coreDetail.contactTelephone" label="Telephone" type="NUMBER"/>
+        <attribute id="dateOfBirth" label="Date of Birth" type="DATE"/>
+        <attribute id="user.loginInfo.username" label="Username" type="TEXT"/>
+    </attributes>
+
+    <attributes type="P" viewType="EXEC">
+        <attribute id="title" label="Title" type="TEXT"/>
+        <attribute id="comments" label="Comments" type="TEXT"/>
+        <attribute id="organisationUnit.label" label="Organisation Unit" type="TEXT"/>
+    </attributes>
+    
+    <!-- indicates restrictions on attributes -->
+    <extendedattributes searchableOnly="false"/>    
+    <derivedattributes include="false"/>
+    <dynamiclineitems include="true"/>
+
+</trees>
