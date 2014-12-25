@@ -62,17 +62,17 @@
     <property name="emma.jar.name" value="${emma.version}.jar"/>
 
     <!-- directory for the tools jars -->
-    <property name="tools.lib" value="lib/tools"/>
+    <property name="tools.lib" value="../lib/tools"/>
 
     <!-- directory for the runtime jars -->
-    <property name="runtime.lib" value="lib/runtime"/>
+    <property name="runtime.lib" value="../lib/runtime"/>
 
     <!-- directory for the runtime jars provided by J2EE container -->
-    <property name="j2ee.lib" value="lib/j2ee"/>
+    <property name="j2ee.lib" value="../lib/j2ee"/>
     <!--<property name="j2ee.lib" value="lib/j2ee"/>-->
 
     <!-- directory for the jars required for tomcat - also contains commons-dbcp used in application tests -->
-    <property name="tomcat.lib" value="lib/tomcat"/>
+    <property name="tomcat.lib" value="../lib/tomcat"/>
 
     <!-- Where build things are put -->
     <property name="build.dir" value="build"/>

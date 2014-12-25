@@ -173,8 +173,8 @@ public class BarChartProducer extends AbstractChartProducer implements ChartPost
 
         BarRenderer renderer = (BarRenderer) plot.getRenderer();
         renderer.setItemMargin(0.0);
-        //renderer.setMaximumBarWidth(0.5);
-        renderer.setMaxBarWidth(0.5);
+        renderer.setMaximumBarWidth(0.5);
+        //renderer.setMaxBarWidth(0.5);
 
         renderer.setBaseItemLabelGenerator(labelGenerator);
         plot.setDrawingSupplier(new CustomDrawingSupplier());
