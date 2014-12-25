@@ -5,16 +5,29 @@
     <modelVersion>4.0.0</modelVersion>
     <!-- todo this will change -->
     <groupId>com.zynap</groupId>
-    <artifactId>talent-evolution</artifactId>
+    <artifactId>talent-studio</artifactId>
     <version>v5.4.4-mt-SNAPSHOT</version>
     
-    <packaging>war</packaging>
+    <packaging>pom</packaging>
     <name>Talent Evolution</name>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>        
     </properties>
+    
+    <modules>
+        <module>talent-studio-application</module>
+        <module>talent-studio-integration</module>
+        <module>talent-studio-views</module>
+    </modules>
+    
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring</artifactId>
+            <version>2.5.6</version>
+        </dependency>    
+    </dependencies>
 
 
 </project>
