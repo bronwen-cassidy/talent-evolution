@@ -187,7 +187,7 @@ CREATE OR REPLACE VIEW SEARCH_TERMS_XY AS
 -- all direct answers from dynamic_attributes
     select nd.id, nd.value as label, da.description, nd.node_id as artefact_id, dp.user_id, dp.permit_id,
           case
-              when n.node_type = 'S' then 'subkect link'
+              when n.node_type = 'S' then 'subject link'
               when n.node_type = 'P' then 'position link'
               when node_type = 'O' then 'org_unit link'
           end as link_url,
@@ -229,7 +229,7 @@ CREATE OR REPLACE VIEW SEARCH_TERMS_XY AS
     -- all select type answers from dynamic_attributes
     select nd.id, lv.short_desc as label, da.description, nd.node_id as artefact_id, dp.user_id, dp.permit_id,
                   case
-                  when n.node_type = 'S' then 'subkect link'
+                  when n.node_type = 'S' then 'subject link'
                   when n.node_type = 'P' then 'position link'
                   when node_type = 'O' then 'org_unit link'
                   end as link_url,

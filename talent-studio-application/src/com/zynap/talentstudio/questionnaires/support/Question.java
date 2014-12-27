@@ -183,10 +183,8 @@ public class Question extends BaseQuestion implements Cloneable {
 
     public void addLookupValue(LookupValue value) {
         value.setDescription(value.getLabel());
-        value.setActive(true);
         value.setSortOrder(SORT_ORDER++);
-        createLookupType();
-        dynamicAttribute.getRefersToType().addLookupValue(value);
+        createLookupType().addLookupValue(value);
     }
 
     public void setMultiQuestion(MultiQuestion multiQuestion) {

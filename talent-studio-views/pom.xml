@@ -62,12 +62,12 @@
         <dependency>
             <groupId>jfree</groupId>
             <artifactId>jcommon</artifactId>
-            <version>1.0.0-rc1</version>
+            <version>1.0.9</version>
         </dependency>
         <dependency>
             <groupId>jfree</groupId>
             <artifactId>jfreechart</artifactId>
-            <version>1.0.0-rc1</version>
+            <version>1.0.5</version>
         </dependency>
         <dependency>
             <groupId>log4j</groupId>

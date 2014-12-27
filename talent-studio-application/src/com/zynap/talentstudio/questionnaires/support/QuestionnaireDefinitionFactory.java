@@ -49,7 +49,8 @@ public class QuestionnaireDefinitionFactory {
         String rulesFile = "digester/rules.xml";
         URL rulesURL = QuestionnaireDefinitionFactory.class.getClassLoader().getResource(rulesFile);
         URL schemaURL = QuestionnaireDefinitionFactory.class.getClassLoader().getResource("digester/questionnaire.xsd");
-
+        if(schemaURL == null) throw new IOException("cannot proceed without the schema");
+        
         DigesterQuestionnaireDefinition digesterQuestionnaireDefinition;
         try {
             SAXParserFactoryImpl f = new SAXParserFactoryImpl();
@@ -92,6 +93,7 @@ public class QuestionnaireDefinitionFactory {
 
         QuestionnaireDefinitionModel questionnaireDefinitionModel = new QuestionnaireDefinitionModel();
         questionnaireDefinitionModel.setQuestionnaireDefinition(questionnaireDefinition);
+        
         createQuestionnaireModel(questionnaireDefinitionModel, digesterQuestionnaireDefinition);
         return questionnaireDefinition;
     }
@@ -165,6 +167,7 @@ public class QuestionnaireDefinitionFactory {
         }
 
         DynamicAttribute attribute = question.getDynamicAttribute();
+        
         if(attribute.getExternalRefLabel() == null) {
             attribute.setExternalRefLabel(StringUtil.clean(attribute.getLabel().trim().toLowerCase()));
             attribute.setLabel(question.getLabel());
