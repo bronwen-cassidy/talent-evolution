@@ -1041,7 +1041,7 @@ public class ZynapSpiderWebPlot extends SpiderWebPlot implements Cloneable, Seri
      *
      * @return The value to be plotted
      */
-    Number getPlotValue(int series, int cat) {
+    protected Number getPlotValue(int series, int cat) {
         Number value = null;
         if (this.dataExtractOrder == TableOrder.BY_ROW) {
             value = this.dataset.getValue(series, cat);
