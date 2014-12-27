@@ -105,7 +105,6 @@ public class QuestionnaireHelper {
             // add group wrapper to collection
             questionGroupWrappers.add(wrapper);
         }
-
         questionnaireWrapper.setQuestionnaireState(questionnaire, questionGroupWrappers, allAttributes, questionnaireDefinition.getId());
     }
 
@@ -120,28 +119,18 @@ public class QuestionnaireHelper {
      */
     public QuestionAttribute findQuestion(List questionnaireDefinitions, AnalysisParameter criteriaAttribute) {
 
-        QuestionAttribute question = null;
-
         final Long questionnaireWorkflowId = criteriaAttribute.getQuestionnaireWorkflowId();
         final Long questionId = AnalysisAttributeHelper.getQuestionId(criteriaAttribute);
-
-        question = findAnswer(questionnaireDefinitions, questionnaireWorkflowId, question, questionId);
-
-        return question;
+        return findAnswer(questionnaireDefinitions, questionnaireWorkflowId, questionId);
     }
 
     public QuestionAttribute findQuestion(List questionnaireDefinitions, String attributeName, Long questionnaireWorkflowId) {
-
-        QuestionAttribute question = null;
         final Long questionId = AnalysisAttributeHelper.getQuestionId(attributeName);
-
-        question = findAnswer(questionnaireDefinitions, questionnaireWorkflowId, question, questionId);
-
-        return question;
+        return findAnswer(questionnaireDefinitions, questionnaireWorkflowId, questionId);
     }
 
-    private QuestionAttribute findAnswer(List questionnaireDefinitions, Long questionnaireWorkflowId, QuestionAttribute question, Long questionId) {
-        
+    private QuestionAttribute findAnswer(List questionnaireDefinitions, Long questionnaireWorkflowId, Long questionId) {
+        QuestionAttribute question = null;
         for (Iterator iterator = questionnaireDefinitions.iterator(); iterator.hasNext();) {
             QuestionnaireDefinition questionnaireDefinition = (QuestionnaireDefinition) iterator.next();
 
@@ -415,7 +404,8 @@ public class QuestionnaireHelper {
      * @param multiQuestion          the multi question item which contains line items and questions
      * @return LineItemWrapper or DynamicLineItemWrapper as appropriate
      */
-    private LineItemWrapper createLineItemWrapper(QuestionnaireWrapper questionnaireWrapper, AttributeValuesCollection dynamicAttributeValues, MultiQuestionItem multiQuestion) {
+    private LineItemWrapper createLineItemWrapper(QuestionnaireWrapper questionnaireWrapper, AttributeValuesCollection dynamicAttributeValues,
+                                                  MultiQuestionItem multiQuestion) {
 
         final List questions = multiQuestion.getQuestions();
         final boolean isDynamic = ((QuestionAttribute) questions.get(0)).isDynamic();
@@ -438,7 +428,8 @@ public class QuestionnaireHelper {
      * @param multiQuestion          the multi question item containing the line items
      * @return LineItemWrapper wrapping the LineItem object
      */
-    private LineItemWrapper createLineItemWrapper(QuestionnaireWrapper questionnaireWrapper, List questions, AttributeValuesCollection dynamicAttributeValues, MultiQuestionItem multiQuestion) {
+    private LineItemWrapper createLineItemWrapper(QuestionnaireWrapper questionnaireWrapper, List questions, 
+                                                  AttributeValuesCollection dynamicAttributeValues, MultiQuestionItem multiQuestion) {
         final LineItemWrapper lineItemWrapper = new LineItemWrapper(multiQuestion);
 
         // build wrappers - if questionnaire supplied iterate questions and find values (if any) for each question
@@ -490,7 +481,7 @@ public class QuestionnaireHelper {
 
             final AttributeValue childAttributeValue = getAttributeValue(childDynamicAttribute, dynamicAttributeValues);
             final DynamicQuestionAttributeWrapperBean dynamicQuestionAttributeWrapperBean = new DynamicQuestionAttributeWrapperBean(question, childAttributeValue, maxNumberOfLineItems);
-            //dynamicQuestionAttributeWrapperBean.setLineItemWrapper(dynamicLineItemWrapper);
+          
             dynamicLineItemWrapper.addLineItemQuestion(dynamicQuestionAttributeWrapperBean);
         }
 
@@ -506,8 +497,8 @@ public class QuestionnaireHelper {
      * @param dynamicAttributeValues the list of answers
      * @return QuestionAttributeWrapperBean
      */
-    private QuestionAttributeWrapperBean createQuestionAttributeWrapper(QuestionnaireWrapper questionnaireWrapper, final QuestionAttribute question, AttributeValuesCollection dynamicAttributeValues) {
-
+    private QuestionAttributeWrapperBean createQuestionAttributeWrapper(QuestionnaireWrapper questionnaireWrapper, final QuestionAttribute question, 
+                                                                        AttributeValuesCollection dynamicAttributeValues) {
 
         final DynamicAttribute dynamicAttribute = question.getDynamicAttribute();
         dynamicAttribute.initLazy();
@@ -521,7 +512,7 @@ public class QuestionnaireHelper {
         }
 
         AttributeValue attributeValue = getAttributeValue(dynamicAttribute, dynamicAttributeValues);
-
+        
         // make sure that label is set for node type questions or user name for the last updated by question if has value
         String label = null;
         if (attributeValue.hasValue() && dynamicAttributeService != null && (dynamicAttribute.isNodeType() || dynamicAttribute.isLastUpdatedByType())) {

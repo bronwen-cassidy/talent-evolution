@@ -1610,6 +1610,8 @@
     ===============================================================================================
     -->
     <target name="copy-webapp" depends="build-war" description="developers target">
+        <!-- delete the expanded webapp :-( -->
+        <delete dir="${tomcat.webapps.dir}/${project.name}"/>
         <copy file="${dist.dir}/${project.name}.war" todir="${tomcat.webapps.dir}" overwrite="true"/>
     </target>
 
