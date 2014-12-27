@@ -12,6 +12,7 @@ public class LookupValue extends ZynapDomainObject {
 
 
     private static final long serialVersionUID = 3817110678636858943L;
+    private String linkId;
 
     /**
      * default constructor.
@@ -119,6 +120,14 @@ public class LookupValue extends ZynapDomainObject {
         this.blank = blank;
     }
 
+    public String getRequires() {
+        return requires;
+    }
+
+    public void setRequires(String requires) {
+        this.requires = requires;
+    }
+
     /**
      * Sort by short description.
      *
@@ -161,34 +170,28 @@ public class LookupValue extends ZynapDomainObject {
         return qualif;
     }
 
-    /**
-     * persistent field
-     */
     private String valueId;
 
-    /**
-     * persistent field
-     */
     private String typeId;
 
-    /**
-     * persistent field
-     */
     private String description;
 
-    /**
-     * persistent field
-     */
     private boolean system = false;
 
-    /**
-     * nullable persistent field
-     */
     private int sortOrder;
     private boolean blank;
+    
+    /* a comma separated list of answer ids that this lookup value is dependant on for visibility, if the parent is not selected this value will not be visible  */
+    private String requires;
 
-    /**
-     * nullable persistent field
-     */
     private LookupType lookupType = new LookupType();
+
+
+    public String getLinkId() {
+        return linkId;
+    }
+
+    public void setLinkId(String linkId) {
+        this.linkId = linkId;
+    }
 }

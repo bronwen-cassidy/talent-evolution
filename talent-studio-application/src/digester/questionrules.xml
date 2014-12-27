@@ -34,9 +34,11 @@
         <pattern value="answer">
             <object-create-rule classname="com.zynap.talentstudio.common.lookups.LookupValue"/>
             <set-properties-rule>
+                <alias attr-name="id" prop-name="linkId"/>
                 <alias attr-name="value" prop-name="valueId"/>
                 <alias attr-name="text" prop-name="label"/>
                 <alias attr-name="blank" prop-name="blank"/>
+                <alias attr-name="requires" prop-name="requires"/>
             </set-properties-rule>
             <set-next-rule methodname="addLookupValue"/>
         </pattern>

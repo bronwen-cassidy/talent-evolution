@@ -71,6 +71,47 @@ public class TestQuestionnaireDefinitionFactory extends TestCase {
             fail("No Exception expected but got " + e.getMessage());
         }
     }
+    
+    public void testParseQuestionAnswerParentIds() throws Exception {
+        String testFile = "com/zynap/talentstudio/questionnaires/xml/LinkedAnswers.xml";
+        byte[] readBytes = parseQueDefinition(testFile);
+        try {
+            QuestionnaireDefinition x = QuestionnaireDefinitionFactory.parse(readBytes);
+            final QuestionnaireDefinitionModel definitionModel = x.getQuestionnaireDefinitionModel();
+            final List<QuestionGroup> questionGroups = definitionModel.getQuestionGroups();
+            // 2 groups
+            assertEquals(2, questionGroups.size());
+            
+            // get the questions
+            for (QuestionGroup questionGroup : questionGroups) {
+                List<QuestionAttribute> questions = questionGroup.getQuestions();
+                for (QuestionAttribute question : questions) {
+                    if ("First Requires".equals(question.getLabel())) {
+                        DynamicAttribute dynamicAttribute = question.getDynamicAttribute();
+                        if(dynamicAttribute.getRefersToType() != null) {
+                            List<LookupValue> lookupValues = dynamicAttribute.getRefersToType().getLookupValues();
+                            for (LookupValue lookupValue : lookupValues) {
+                                assertNotNull(lookupValue.getRequires());
+                            }
+                        }
+                    }
+                }
+            }
+            
+            List<DynamicAttribute> dynamicAttributes = x.getDynamicAttributes();
+            for (DynamicAttribute dynamicAttribute : dynamicAttributes) {
+                if(dynamicAttribute.getRefersToType() != null) {
+                    List<LookupValue> lookupValues = dynamicAttribute.getRefersToType().getLookupValues();
+                    for (LookupValue lookupValue : lookupValues) {
+                        assertNotNull(lookupValue.getLinkId());
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            fail("no exception expected but got " + e.getMessage());
+        }
+    }
 
     public void testParseNoGroup() throws Exception {
         XmlBuilder builder = new XmlBuilder();
@@ -428,12 +469,13 @@ public class TestQuestionnaireDefinitionFactory extends TestCase {
                     assertNotNull(questionReference.getLookupValue().getLabel());
                 }
                 // returns all children recursively
-                List children = questionReference.getChildren();
-                for (int k = 0; k < children.size(); k++) {
-                    DynamicAttributeReference child = (DynamicAttributeReference) children.get(k);
-                    assertNotNull(child.getParent());
-                    // each child should have a reference
-                    assertNotNull("children mappings should all have a reference", child.getReferenceDa());
+                List<DynamicAttributeReference> children = questionReference.getChildren();
+                if (children != null) {
+                    for (DynamicAttributeReference child : children) {
+                        assertNotNull(child.getParent());
+                        // each child should have a reference
+                        assertNotNull("children mappings should all have a reference", child.getReferenceDa());
+                    }
                 }
             }
 

@@ -26,67 +26,16 @@
             </generator>
         </id>
 
-        <property
-            name="valueId"
-            type="java.lang.String"
-            column="VALUE_ID"
-            not-null="true"
-            length="100"
-           />
-
-        <property
-            name="typeId"
-            type="java.lang.String"
-            column="TYPE_ID"
-            not-null="true"
-            length="100"
-            />
-
-        <property
-            name="label"
-            type="java.lang.String"
-            column="SHORT_DESC"
-            not-null="true"
-            length="100"
-            />
-
-        <property
-            name="description"
-            type="java.lang.String"
-            column="DESCRIPTION"
-            not-null="true"
-            length="4000"
-            />
-        
-        <property
-            name="active"
-            type="true_false"
-            column="IS_ACTIVE"
-            not-null="true"
-            length="1"
-            />
-        <property
-            name="blank"
-            type="true_false"
-            column="IS_BLANK"
-            not-null="true"
-            length="1"
-            />
-
-        <property
-            name="system"
-            type="true_false"
-            column="IS_SYSTEM"
-            not-null="true"
-            length="1"
-            />
-
-        <property
-            name="sortOrder"
-            type="int"
-            column="SORT_ORDER"
-            length="22"
-            />
+        <property name="valueId" type="java.lang.String" column="VALUE_ID" not-null="true" length="100"/>
+        <property name="typeId" type="java.lang.String" column="TYPE_ID" not-null="true" length="100"/>
+        <property name="label" type="java.lang.String" column="SHORT_DESC" not-null="true" length="100"/>
+        <property name="requires" type="java.lang.String" column="REQUIRES" length="500"/>
+        <property name="linkId" type="java.lang.String" column="LINK_ID" length="500"/>
+        <property name="description" type="java.lang.String" column="DESCRIPTION" length="4000"/>
+        <property name="active" type="true_false" column="IS_ACTIVE" not-null="true" length="1"/>
+        <property name="blank" type="true_false" column="IS_BLANK" length="1"/>
+        <property name="system" type="true_false" column="IS_SYSTEM" length="1" />
+        <property name="sortOrder" type="int" column="SORT_ORDER" length="22" />
 
         <!-- Associations -->
         <!-- bi-directional many-to-one association to LookupType -->
