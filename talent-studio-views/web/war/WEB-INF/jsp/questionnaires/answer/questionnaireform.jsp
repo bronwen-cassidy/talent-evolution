@@ -201,4 +201,25 @@
     <%-- todo write jquery to show options based on selected parents --%>
     <%-- todo write jquery to handle selecting an option and filtering the dependent ones (showing) also need to highlight one that has a lost a value because a new parent link has been selected --%>
     
+   $(function() {
+        $('.linked').each(function() {
+            // get the requires attribute this gives us a comma separated list of linkIds
+            var requiresIds = $(this).attr('requires');
+            console.log(requiresIds);
+            var requiresArray = requiresIds.split(',');
+            // go and find the selected option from the requires list found in the linkId attribute
+            var hideElem = true;
+            for(var i = 0; i < requiresArray.length; i++) {
+                if($("option[linkId='" + requiresArray[i] +"']").is(":selected")) {
+                    // make this option visible
+                    hideElem = false;
+                    $(this).show();
+                }                
+            }
+            if(hideElem) {
+                $(this).hide();
+            }
+        });    
+   })
+    
 </script>
