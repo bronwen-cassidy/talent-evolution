@@ -100,8 +100,10 @@
 
 <c:when test="${question.type == 'SELECT' || question.type == 'STRUCT'}">
     <spring:bind path="${prefix}.value">
-        <select id="<c:out value="${fieldId}"/>" name="<c:out value="${status.expression}"/>" <c:out value="${titleAttr}" escapeXml="false"/>
-        onchange="javascript:saveUpdateDeleteQuestionnaireList('<c:out value="${fieldId}"/>','<c:out value="${command.questionnaireId}"/>','<c:out value="${question.daId}"/>','<c:out value="${fieldId}_attid"/>','<c:out value="${fieldId}"/>_error');"
+        <select id="<c:out value="${fieldId}"/>" 
+                name="<c:out value="${status.expression}"/>" <c:out value="${titleAttr}" escapeXml="false"/>
+                class="linkable"
+                onchange="javascript:saveUpdateDeleteQuestionnaireList('<c:out value="${fieldId}"/>','<c:out value="${command.questionnaireId}"/>','<c:out value="${question.daId}"/>','<c:out value="${fieldId}_attid"/>','<c:out value="${fieldId}"/>_error');"
         <c:if test="${disbledVar || queDisabled}">disabled="true"</c:if>>
         <c:if test="${!question.hasBlank}">
             <c:choose>
@@ -193,7 +195,7 @@
 
 <c:when test="${question.type == 'MULTISELECT'}">
     <spring:bind path="${prefix}.value">
-        <select
+        <select class="linkable"
                 onblur="javascript:saveUpdateDeleteQuestionnaireMultiSelect('<c:out value="${fieldId}"/>','<c:out value="${command.questionnaireId}"/>','<c:out value="${question.daId}"/>','<c:out value="${fieldId}_attid"/>','<c:out value="${fieldId}"/>_error');"
         <c:out value="${titleAttr}" escapeXml="false"/> id="<c:out value="${fieldId}"/>" name="<c:out value="${status.expression}"/>"
         multiple size="<c:out value="${question.rowCount}"/>"
