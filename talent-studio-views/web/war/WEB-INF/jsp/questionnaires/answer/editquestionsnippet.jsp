@@ -100,10 +100,10 @@
 
 <c:when test="${question.type == 'SELECT' || question.type == 'STRUCT'}">
     <spring:bind path="${prefix}.value">
-        <select id="<c:out value="${fieldId}"/>" 
-                name="<c:out value="${status.expression}"/>" <c:out value="${titleAttr}" escapeXml="false"/>
-                class="linkable"
-                onchange="javascript:saveUpdateDeleteQuestionnaireList('<c:out value="${fieldId}"/>','<c:out value="${command.questionnaireId}"/>','<c:out value="${question.daId}"/>','<c:out value="${fieldId}_attid"/>','<c:out value="${fieldId}"/>_error');"
+        <select id="<c:out value="${fieldId}"/>"
+        name="<c:out value="${status.expression}"/>" <c:out value="${titleAttr}" escapeXml="false"/>
+        class="linkable"
+        onchange="javascript:saveUpdateDeleteQuestionnaireList('<c:out value="${fieldId}"/>','<c:out value="${command.questionnaireId}"/>','<c:out value="${question.daId}"/>','<c:out value="${fieldId}_attid"/>','<c:out value="${fieldId}"/>_error');"
         <c:if test="${disbledVar || queDisabled}">disabled="true"</c:if>>
         <c:if test="${!question.hasBlank}">
             <c:choose>
@@ -117,8 +117,9 @@
         </c:if>
         <c:forEach var="vals" items="${question.attributeDefinition.refersToType.lookupValues}">
             <c:set var="cssClass" value="not_linked"/>
-            <c:if test="${vals.requires != null || vals.requires != ''}"><c:set var="cssClass" value="linked"/></c:if>
-            <option linkid="<c:out value="${vals.linkId}"/>" requires="<c:out value="${vals.requires}"/>" class="<c:out value="${cssClass}"/>" value="<c:out value="${vals.id}"/>" <c:if test="${question.value == vals.id}">selected </c:if><c:if test="${question.value == null && vals.requires != null}">style="display:none";</c:if>>
+            <c:if test="${vals.requires != null && vals.requires != ''}"><c:set var="cssClass" value="linked"/></c:if>
+            <option linkid="<c:out value="${vals.linkId}"/>" requires="<c:out value="${vals.requires}"/>"
+            class="<c:out value="${cssClass}"/>" value="<c:out value="${vals.id}"/>" <c:if test="${question.value == vals.id}">selected </c:if>>
             <c:if test="${!vals.blank}"><c:out value="${vals.label}"/></c:if>
             </option>
         </c:forEach>
@@ -195,7 +196,7 @@
 
 <c:when test="${question.type == 'MULTISELECT'}">
     <spring:bind path="${prefix}.value">
-        <select class="linkable"
+        <select class="multi-linkable"
                 onblur="javascript:saveUpdateDeleteQuestionnaireMultiSelect('<c:out value="${fieldId}"/>','<c:out value="${command.questionnaireId}"/>','<c:out value="${question.daId}"/>','<c:out value="${fieldId}_attid"/>','<c:out value="${fieldId}"/>_error');"
         <c:out value="${titleAttr}" escapeXml="false"/> id="<c:out value="${fieldId}"/>" name="<c:out value="${status.expression}"/>"
         multiple size="<c:out value="${question.rowCount}"/>"
@@ -210,8 +211,10 @@
                 </c:if>
             </c:forEach>
             <c:set var="cssClass" value="not_linked"/>
-            <c:if test="${vals.requires != null || vals.requires != ''}"><c:set var="cssClass" value="linked"/></c:if>
-            <option linkid="<c:out value="${vals.linkId}"/>" requires="<c:out value="${vals.requires}"/>" class="<c:out value="${cssClass}"/>" value="<c:out value="${vals.id}"/>" <c:if test="${found}">selected</c:if>><c:out value="${vals.label}"/></option>
+            <c:if test="${vals.requires != null && vals.requires != ''}"><c:set var="cssClass" value="linked"/></c:if>
+
+            <option linkid="<c:out value="${vals.linkId}"/>" requires="<c:out value="${vals.requires}"/>"
+            class="<c:out value="${cssClass}"/>" value="<c:out value="${vals.id}"/>" <c:if test="${found}">selected</c:if>><c:out value="${vals.label}"/></option>
         </c:forEach>
         </select>
         <%@ include file="../../includes/error_message.jsp" %>
