@@ -321,7 +321,7 @@
         </fileset>
     </path>
 
-    <condition property="db.url" value="jdbc:oracle:thin:@31.222.181.54:1521:orcl">
+    <condition property="db.url" value="jdbc:oracle:thin:@172.24.16.24:1521:orcl">
         <equals arg1="${server}" arg2="tc"/>
     </condition>
     <condition property="db.url" value="jdbc:oracle:thin:@poseidon:1521:XE">
@@ -334,32 +334,29 @@
     <condition property="smpt.host" value="smtp.ynshosting.com">
         <equals arg1="${server}" arg2=""/>
     </condition>
-    <condition property="logFilePath" value="/usr/share/apache-tomcat-7.0.27/logs/">
+    <condition property="logFilePath" value="/usr/local/tomcat7/logs/">
         <equals arg1="${server}" arg2="tc"/>
     </condition>
     <condition property="logFilePath" value="">
         <equals arg1="${server}" arg2=""/>
     </condition>
 
-    <condition property="host.name" value="ynshosting">
+    <condition property="host.name" value="tmelogin">
         <equals arg1="${server}" arg2="tc"/>
     </condition>
     <condition property="host.name" value="bcassidy-HP">
         <equals arg1="${server}" arg2=""/>
     </condition>
-    <condition property="taapi.part.url" value="https://www.ynshosting.com">
+    <condition property="taapi.part.url" value="https://www.tmelogin.com">
         <equals arg1="${server}" arg2="tc"/>
-    </condition>
-    <condition property="taapi.part.url" value="http://50.62.12.106">
-        <equals arg1="${server}" arg2="gd"/>
     </condition>
     <condition property="taapi.part.url" value="http://localhost:8888">
         <equals arg1="${server}" arg2=""/>
     </condition>
-    <condition property="server.url" value="https://www.ynshosting.com">
+    <condition property="server.url" value="https://www.tmelogin.com">
         <equals arg1="${server}" arg2="tc"/>
     </condition>
-    <condition property="server.url" value="localhost:8888">
+    <condition property="server.url" value="localhost:8080">
         <equals arg1="${server}" arg2=""/>
     </condition>
 
@@ -1369,7 +1366,7 @@
             <sysproperty key="test.webservice.username" value="${test.webservice.username}"/>
             <sysproperty key="test.webservice.password" value="${test.webservice.password}"/>
             <sysproperty key="sender.email" value="${sender.email}"/>
-            <sysproperty key="server.url" value="http://localhost:8888"/>
+            <sysproperty key="server.url" value="http://localhost:8080"/>
 
             <sysproperty key="search.gateway" value="${search.engine}Gateway"/>
             <sysproperty key="search.engine" value="${search.engine}"/>

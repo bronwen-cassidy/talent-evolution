@@ -57,6 +57,7 @@ public class QuestionnaireGroup implements Serializable {
         // ignore status question
         if (!(Question.TYPE_STATUS.equals(question.getType()))) {
             question.setQuestionnaireGroup(this);
+            question.setSortOrder(questions.size());
             questions.add(question);
         }
     }

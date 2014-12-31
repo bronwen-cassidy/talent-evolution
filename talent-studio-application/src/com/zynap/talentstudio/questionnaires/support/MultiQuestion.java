@@ -62,6 +62,7 @@ public class MultiQuestion extends BaseQuestion {
 
     public void addQuestion(Question question) {
         question.setMultiQuestion(this);
+        question.setSortOrder(questions.size());
         questions.add(question);
     }
 

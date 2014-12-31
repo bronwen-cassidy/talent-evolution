@@ -118,8 +118,8 @@
         <c:forEach var="vals" items="${question.attributeDefinition.refersToType.lookupValues}">
             <c:set var="cssClass" value="not_linked"/>
             <c:if test="${vals.requires != null && vals.requires != ''}"><c:set var="cssClass" value="linked"/></c:if>
-            <option linkid="<c:out value="${vals.linkId}"/>" requires="<c:out value="${vals.requires}"/>"
-            class="<c:out value="${cssClass}"/>" value="<c:out value="${vals.id}"/>" <c:if test="${question.value == vals.id}">selected </c:if>>
+            <option id="pp_<c:out value="${vals.linkId}"/>" linkid="<c:out value="${vals.linkId}"/>" requires="<c:out value="${vals.requires}"/>"
+            class="<c:out value="${cssClass}"/>" value="<c:out value="${vals.id}"/>" <c:if test="${question.value == vals.id}">selected</c:if>>
             <c:if test="${!vals.blank}"><c:out value="${vals.label}"/></c:if>
             </option>
         </c:forEach>
@@ -213,7 +213,7 @@
             <c:set var="cssClass" value="not_linked"/>
             <c:if test="${vals.requires != null && vals.requires != ''}"><c:set var="cssClass" value="linked"/></c:if>
 
-            <option linkid="<c:out value="${vals.linkId}"/>" requires="<c:out value="${vals.requires}"/>"
+            <option id="pp_<c:out value="${vals.linkId}"/>" linkid="<c:out value="${vals.linkId}"/>" requires="<c:out value="${vals.requires}"/>"
             class="<c:out value="${cssClass}"/>" value="<c:out value="${vals.id}"/>" <c:if test="${found}">selected</c:if>><c:out value="${vals.label}"/></option>
         </c:forEach>
         </select>

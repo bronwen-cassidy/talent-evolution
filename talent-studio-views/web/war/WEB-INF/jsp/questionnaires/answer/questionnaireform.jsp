@@ -199,47 +199,97 @@
 <script type="text/javascript">
 
     $(function() {
-        $('.linked').each(function() {
-            // get the requires attribute this gives us a comma separated list of linkIds
-            var requiresIds = $(this).attr('requires');
-            console.log(requiresIds);
-            var requiresArray = requiresIds.split(',');
-            // go and find the selected option from the requires list found in the linkId attribute
-            var hideElem = true;
-            for(var i = 0; i < requiresArray.length; i++) {
-                if($("option[linkId='" + requiresArray[i] +"']").is(":selected")) {
-                    // make this option visible
-                    hideElem = false;
-                    $(this).show();
+
+        $('.linkable').each(function() {
+            // selectId
+            var currId = $(this).attr("id");
+            var showOptions = [];
+            var hideOptions = [];
+
+            $('#' + currId + ' option.linked').each(function () {
+                // get the requires list
+                var requiresIds = $(this).attr('requires');
+
+                console.log("found some options " + $(this).attr("linkId"));
+                var found = false;
+                var requiresArray = requiresIds.split(',');
+                for (var i = 0; i < requiresArray.length; i++) {
+
+                    if($("option[linkId='" + requiresArray[i] +"']").is(":selected")) {
+                        showOptions.push($(this));
+                        found = true;
+                        //$(this).unwrap();
+                        //$(this).show();
+                    }
                 }
+                if(!found) hideOptions.push($(this));
+                // only hide the other ones in the option list that do not have a require
+                //$(this).wrap('<span/>'); //$(this).hide();
+            });
+
+            for(var y = 0; y < showOptions.length; y++) {
+                showOptions[y].show();
             }
-            if(hideElem) {
-                $(this).hide();
+
+            if(showOptions.length > 0) {
+                for(var x = 0; x < hideOptions.length; x++) {
+                    console.log("trying to hide " + hideOptions[x].attr("id"));
+                    hideOptions[x].hide();
+                }
             }
         });
 
         $('.linkable').change(function() {
             // find all elements that have this linkId as one of their requires           
             var linkId = $("option:selected", this).attr("linkId");
-            $('.linked').each(function() {
-                // get the requires list
-                var requiresIds = $(this).attr('requires');
-                var hideElem = true;
-                var requiresArray = requiresIds.split(',');
-                for(var i = 0; i < requiresArray.length; i++) {
+            var selectId = $(this).attr("id");
 
-                    if(requiresArray[i] == linkId) {
-                        console.log("found requiresArray[i] = " + requiresArray[i] + " linkId = " + linkId);
-                        hideElem = false;
-                        $(this).show();
+            // find all related selection lists
+            // build a show list and a hide list
+            var showOptions = [];
+            var hideOptions = [];
+
+            $('.linkable').each(function() {
+                // not the current one
+                var currId = $(this).attr("id");
+                if(currId != selectId) {
+
+                    $('#' + currId + ' option.linked').each(function () {
+                        // get the requires list
+                        var requiresIds = $(this).attr('requires');
+                        console.log("found some options " + $(this).attr("linkId"));
+                        var found = false;
+                        var requiresArray = requiresIds.split(',');
+                        for (var i = 0; i < requiresArray.length; i++) {
+
+                            if (!linkId || requiresArray[i] == linkId) {
+                                showOptions.push($(this));
+                                found = true;
+                            }
+                        }
+                        if(!found) hideOptions.push($(this));
+                    });
+                    // need to clear the selected option if it is no longer available
+                    for(var y = 0; y < showOptions.length; y++) {
+                        showOptions[y].show();
+                    }
+                    if(showOptions.length > 0) {
+                        for(var x = 0; x < hideOptions.length; x++) {
+                            var hideOptionId = hideOptions[x].attr("linkId");
+                            console.log("trying to hide " + hideOptionId );
+                            // if this option is currently selected deselect it
+                            if(hideOptions[x].is(":selected")) {
+                                // make the slected option the first one
+                                console.log("have elements to hide");
+                                $('#' + currId +' :nth-child(1)').prop('selected', true);
+                            }
+                            hideOptions[x].hide();
+                        }
                     }
                 }
-                if(hideElem) $(this).hide();
             });
 
         });
-
-        // todo multi-link filtering 
     });
 
 </script>
