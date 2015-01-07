@@ -51,10 +51,11 @@
                         <c:set var="queDisabled" value="${question.rowDisabled}" scope="request"/>
                         <c:set var="fieldId" scope="request"><zynap:id><c:out value="${question.label}"/><c:out value="${rowIndex.index}"/><c:out value="${index}"/></zynap:id></c:set>
                         <c:set var="titleAttr" scope="request"><c:if test="${question.hasTitle}">title="<c:out value="${question.title}"/>"</c:if></c:set>                        
-
+                        <c:set var="dynamicIndex" value="" scope="request"/>
                         <c:choose>
                             <c:when test="${isDynamic}">
                                 <c:set var="prefix" value="command.wrappedDynamicAttributes[${index}].questionWrappers[${rowIndex.index}]" scope="request"/>
+                                <c:set var="dynamicIndex" value="${rowIndex.index + 1}" scope="request"/>
                             </c:when>
                             <c:otherwise>
                                 <c:set var="prefix" value="command.wrappedDynamicAttributes[${index}]" scope="request"/>
