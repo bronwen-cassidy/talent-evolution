@@ -99,6 +99,7 @@
 </c:when>
 
 <c:when test="${question.type == 'SELECT' || question.type == 'STRUCT'}">
+    <%-- if there is a dynamicIndex here we need to post_fix the link_id with it and the requires--%>
     <spring:bind path="${prefix}.value">
         <select id="<c:out value="${fieldId}"/>"
         name="<c:out value="${status.expression}"/>" <c:out value="${titleAttr}" escapeXml="false"/>
@@ -118,7 +119,13 @@
         <c:forEach var="vals" items="${question.attributeDefinition.refersToType.lookupValues}">
             <c:set var="cssClass" value="not_linked"/>
             <c:if test="${vals.requires != null && vals.requires != ''}"><c:set var="cssClass" value="linked"/></c:if>
-            <option id="pp_<c:out value="${vals.linkId}"/>" linkid="<c:out value="${vals.linkId}"/>" requires="<c:out value="${vals.requires}"/>"
+            <c:set var="ll_id" value="${vals.linkId}"/>
+            <c:set var="ll_req" value="${vals.requires}"/>
+            <c:if test="${dynamicIndex != -1}">
+                    <c:set var="ll_id" value="${vals.linkId}_${dynamicIndex}"/>
+                    <c:set var="ll_req" value="${vals.requires}_${dynamicIndex}"/>
+            </c:if>
+            <option id="pp_<c:out value="${ll_id}"/>" linkid="<c:out value="${vals.linkId}"/>" requires="<c:out value="${ll_req}"/>"
             class="<c:out value="${cssClass}"/>" value="<c:out value="${vals.id}"/>" <c:if test="${question.value == vals.id}">selected</c:if>>
             <c:if test="${!vals.blank}"><c:out value="${vals.label}"/></c:if>
             </option>
