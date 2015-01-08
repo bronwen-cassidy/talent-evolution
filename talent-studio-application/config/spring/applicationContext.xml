@@ -991,14 +991,6 @@
         <property name="mapper" ref="xmlMapper"/>
     </bean>
 
-    <bean id="oracleSearcher" class="com.zynap.talentstudio.organisation.portfolio.search.oracle.OracleSearcher">
-        <!--<property name="host" value="${autonomy.host}"/>-->
-        <!--<property name="port" value="${autonomy.aciport}"/>-->
-        <!--<property name="retries" value="${autonomy.retries}"/>-->
-        <!--<property name="timeout" value="${autonomy.connection.timeout}"/>-->
-        <property name="version" value="10.1.8.2"/>
-    </bean>
-
     <!-- ExternalSearchManager only does read-only data access - therefore does not need transactions -->
     <bean id="searchManager" class="com.zynap.talentstudio.organisation.portfolio.search.ExternalSearchManager" lazy-init="true">
         <property name="gateway" ref="oracleGateway"/>
