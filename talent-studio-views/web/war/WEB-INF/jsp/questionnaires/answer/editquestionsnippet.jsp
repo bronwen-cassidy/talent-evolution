@@ -219,8 +219,14 @@
             </c:forEach>
             <c:set var="cssClass" value="not_linked"/>
             <c:if test="${vals.requires != null && vals.requires != ''}"><c:set var="cssClass" value="linked"/></c:if>
+            <c:set var="ll_id" value="${vals.linkId}"/>
+            <c:set var="ll_req" value="${vals.requires}"/>
+            <c:if test="${dynamicIndex != -1}">
+                <c:set var="ll_id" value="${vals.linkId}_${dynamicIndex}"/>
+                <c:set var="ll_req" value="${vals.requires}_${dynamicIndex}"/>
+            </c:if>
 
-            <option id="pp_<c:out value="${vals.linkId}"/>" linkid="<c:out value="${vals.linkId}"/>" requires="<c:out value="${vals.requires}"/>"
+            <option id="pp_<c:out value="${vals.linkId}"/>" linkid="<c:out value="${ll_id}"/>" requires="<c:out value="${ll_req}"/>"
             class="<c:out value="${cssClass}"/>" value="<c:out value="${vals.id}"/>" <c:if test="${found}">selected</c:if>><c:out value="${vals.label}"/></option>
         </c:forEach>
         </select>

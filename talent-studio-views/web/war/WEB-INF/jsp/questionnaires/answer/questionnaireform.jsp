@@ -200,104 +200,46 @@
 
     $(function() {
 
-        $('.linkable').each(function() {
-            // selectId
-            var currId = $(this).attr("id");
-            var showOptions = [];
-            //var hideOptions = [];
+        testLinkableOptions();
 
-            $('#' + currId + ' option.linked').each(function () {
-                // get the requires list
-                var requiresIds = $(this).attr('requires');
-
-                console.log("found some options " + $(this).attr("linkId"));
-                //var found = false;
-                var dynamicIndex = '';
-                var newRequiresId = requiresIds;
-                // check to see if the string end with an _ we must remove this
-                if(requiresIds.indexOf('_') >= 0) {
-                    // grab this index and store it
-                    dynamicIndex = requiresIds.substring(requiresIds.indexOf('_'), requiresIds.length);
-                    newRequiresId = requiresIds.substring(0, requiresIds.indexOf('_') );
-                }
-                var requiresArray = newRequiresId.split(',');
-                for (var i = 0; i < requiresArray.length; i++) {
-
-                    if($("option[linkId='" + requiresArray[i] + dynamicIndex +"']").is(":selected")) {
-                        showOptions.push($(this));
-                        //found = true;
-                    }
-                }
-
-                // if(!found) hideOptions.push($(this));
-                // only hide the other ones in the option list that do not have a require
-                //$(this).wrap('<span/>'); //$(this).hide();
-            });
-
-            $('option.linked:not(:selected)').each(function () {
-                $(this).hide();
-            });
-
-            // todo hide all except the selected ones (only the ones with a requiresId) first then show ones that are found with a match only works on first load not on a change
-            for(var y = 0; y < showOptions.length; y++) {
-                showOptions[y].show();
-            }
-
-
-        });
-
-        // todo the hard one when a new option is selected need to go through the other options find any that require these hide them and show the ones that need this new option
         $('.linkable').change(function() {
-            // find all elements that have this linkId as one of their requires           
-            var linkId = $("option:selected", this).attr("linkId");
-            var selectId = $(this).attr("id");
-
-            // find all related selection lists
-            // build a show list and a hide list
-            var showOptions = [];
-            var hideOptions = [];
-
-            $('.linkable').each(function() {
-                // not the current one
-                var currId = $(this).attr("id");
-                if(currId != selectId) {
-
-                    $('#' + currId + ' option.linked').each(function () {
-                        // get the requires list
-                        var requiresIds = $(this).attr('requires');
-                        console.log("found some options " + $(this).attr("linkId"));
-                        var found = false;
-                        var requiresArray = requiresIds.split(',');
-                        for (var i = 0; i < requiresArray.length; i++) {
-
-                            if (!linkId || requiresArray[i] == linkId) {
-                                showOptions.push($(this));
-                                found = true;
-                            }
-                        }
-                        if(!found) hideOptions.push($(this));
-                    });
-                    // need to clear the selected option if it is no longer available
-                    for(var y = 0; y < showOptions.length; y++) {
-                        showOptions[y].show();
-                    }
-                    if(showOptions.length > 0) {
-                        for(var x = 0; x < hideOptions.length; x++) {
-                            var hideOptionId = hideOptions[x].attr("linkId");
-                            console.log("trying to hide " + hideOptionId );
-                            // if this option is currently selected deselect it
-                            if(hideOptions[x].is(":selected")) {
-                                // make the slected option the first one
-                                console.log("have elements to hide");
-                                $('#' + currId +' :nth-child(1)').prop('selected', true);
-                            }
-                            hideOptions[x].hide();
-                        }
-                    }
-                }
-            });
-
+            // show all linked options please to start off with
+            $('.linked').show();
+            // now hide the one not allowed to be seen
+            testLinkableOptions();
         });
     });
+
+    function testLinkableOptions() {
+        // on first load all options are shown none are hidden so now we just need to hide the ones that do not have a selected parent
+        $('select' + ' option.linked').each(function () {
+            var requiresIds = $(this).attr('requires');
+            console.log("found some options " + $(this).attr("linkId"));
+
+            // handle dynamic line items
+            var dynamicIndex = '';
+            var newRequiresId = requiresIds;
+            // check to see if the string end with an _ we must remove this
+            if(requiresIds.indexOf('_') >= 0) {
+                // grab this index and store it
+                dynamicIndex = requiresIds.substring(requiresIds.indexOf('_'), requiresIds.length);
+                newRequiresId = requiresIds.substring(0, requiresIds.indexOf('_') );
+            }
+            var requiresArray = newRequiresId.split(',');
+            var show = true;
+            for (var i = 0; i < requiresArray.length; i++) {
+
+                if(!$("option[linkId='" + requiresArray[i] + dynamicIndex +"']").is(":selected")) {
+                    show = false;
+                    break;
+                }
+            }
+
+            if(!show) {
+                console.log("hiding the option with a requires list of " + newRequiresId);
+                $(this).hide();
+            }
+        });
+    }
 
 </script>
