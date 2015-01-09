@@ -1095,6 +1095,8 @@
         <property name="formView" value="datauploads"/>
         <property name="successView" value="uploadsuccess.htm"/>
         <property name="commandClass" value="com.zynap.talentstudio.web.data.FileUploadBean"/>
+        <property name="mailSender" ref="mailSender"/>
+        <property name="simpleMailMessage" ref="simpleMailMessage"/>
     </bean>
 
     <bean id="dataUploadMultiController" class="com.zynap.talentstudio.web.data.DataUploadMultiController">

@@ -8,6 +8,8 @@ import com.zynap.talentstudio.web.utils.ZynapWebUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindException;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,6 +29,9 @@ import java.util.Date;
  *
  */
 public class DataUploadController extends SimpleFormController {
+
+    private SimpleMailMessage simpleMailMessage;
+    private JavaMailSender mailSender;
 
     @Override
     protected Object formBackingObject(HttpServletRequest request) throws Exception {
@@ -66,9 +71,22 @@ public class DataUploadController extends SimpleFormController {
             File serverFile = new File(dir.getAbsolutePath() + File.separator + name + ending);
             file.transferTo(serverFile);
 
+            // send an email
+            simpleMailMessage.setSubject("New Data File Uploaded");
+            simpleMailMessage.setTo("Darwin Hanson<darwin@brainerd.net>");
+            simpleMailMessage.setText("New data file has been uploaded it can be found at " + serverFile.getPath());
+            mailSender.send(simpleMailMessage);
         }
 
         // well, let's do nothing with the bean for now and return
         return new ModelAndView(new RedirectView(getSuccessView()));
+    }
+
+    public void setSimpleMailMessage(SimpleMailMessage simpleMailMessage) {
+        this.simpleMailMessage = simpleMailMessage;
+    }
+
+    public void setMailSender(JavaMailSender mailSender) {
+        this.mailSender = mailSender;
     }
 }
