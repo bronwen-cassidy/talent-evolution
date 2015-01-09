@@ -56,7 +56,7 @@ BEGIN
             delete from nodes where id=ou_rec.id;
 
             insert into audits (id, modified_by_id, MODIFIED_BY_USERNAME, OBJECT_ID, MODIFIED_DATE, TABLE_NAME, ACTION_PERFORMED, DESCRIPTION)
-            values (audits_sq.nextval, user_id_, username_, ou_rec.id, sysdate, 'ORGANIZATION_UNITS', 'DELETED', 'com.zynap.talentstudio.organisation.OrganisationUnit@[id=' || ou_rec.id || ', label=' || title_ || ']');
+            values (audits_sq.nextval, user_id_, username_, ou_rec.id, sysdate, 'ORGANIZATION_UNITS', 'DELETED', 'OrganisationUnit@[id=' || ou_rec.id || ', label=' || title_ || ']');
 
 
 		END LOOP;

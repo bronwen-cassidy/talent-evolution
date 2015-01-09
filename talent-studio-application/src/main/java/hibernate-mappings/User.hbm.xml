@@ -1,0 +1,181 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+    <!--
+        Created by the Middlegen Hibernate plugin 2.1
+
+        http://boss.bekk.no/boss/middlegen/
+        http://www.hibernate.org/
+    -->
+
+    <class
+            name="com.zynap.domain.admin.User"
+            table="USERS"
+            dynamic-update="true"
+            dynamic-insert="true"
+            >
+
+        <id
+                name="id"
+                type="long"
+                column="ID"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <generator class="sequence">
+                <param name="sequence">USER_SQ</param>
+            </generator>
+        </id>
+
+        <property
+                name="userType"
+                type="java.lang.String"
+                column="USER_TYPE"
+                not-null="true"
+                length="50"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+
+        <property
+                name="active"
+                type="true_false"
+                column="IS_ACTIVE"
+                not-null="true"
+                length="1"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+
+        <property
+                name="root"
+                type="true_false"
+                column="IS_ROOT"
+                not-null="true"
+                length="1"
+                >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+
+        <!-- bi-directional one-to-one association to Login -->
+        <one-to-one
+                name="loginInfo"
+                class="com.zynap.domain.admin.LoginInfo"
+                outer-join="auto"
+                cascade="all"
+                >
+            <meta attribute="use-in-equals">true</meta>
+        </one-to-one>
+
+        <many-to-one
+                name="coreDetail"
+                class="com.zynap.talentstudio.CoreDetail"
+                not-null="true"
+                cascade="save-update"
+                unique="true"
+                outer-join="true"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <column name="CD_ID"/>
+        </many-to-one>
+
+        <many-to-one
+                name="group"
+                class="com.zynap.talentstudio.common.groups.Group"
+                cascade="none"
+                >
+            <meta attribute="use-in-equals">true</meta>
+            <column name="GROUP_ID"/>
+        </many-to-one>
+
+        <set
+                name="userRoles"
+                table="APP_ROLES_USERS"
+                cascade="save-update"
+                lazy="true"
+                outer-join="true"
+                batch-size="50"
+                >
+            <key>
+                <column name="USER_ID"/>
+            </key>
+            <many-to-many class="com.zynap.talentstudio.security.roles.AccessRole" column="ROLE_ID"/>
+        </set>
+
+        <set
+                name="securityDomains"
+                table="SECURITY_DOMAINS_USERS"
+                cascade="save-update"
+                lazy="true"
+                outer-join="true"
+                batch-size="50"
+                >
+            <key>
+                <column name="USER_ID"/>
+            </key>
+            <many-to-many class="com.zynap.talentstudio.security.SecurityDomain" column="SD_ID"/>
+        </set>
+
+        <set
+                name="sessionLogs"
+                lazy="true"
+                inverse="true"
+                cascade="all"
+                outer-join="true"
+                batch-size="50"
+                >
+            <key>
+                <column name="USER_ID"/>
+            </key>
+            <one-to-many
+                    class="com.zynap.talentstudio.audit.SessionLog"
+                    />
+        </set>
+
+        <!-- bi-directional one-to-many association to Subject -->
+        <set
+                name="subjects"
+                lazy="true"
+                inverse="true"
+                cascade="none"
+                access="field"
+                outer-join="true"
+                batch-size="50"
+                >
+            <key>
+                <column name="USER_ID"/>
+            </key>
+            <one-to-many
+                    class="com.zynap.talentstudio.organisation.subjects.Subject"
+                    />
+        </set>
+
+        <!-- TODO do not think we need this please delete and test -->
+        <!--<set
+                name="messagesSent"
+                lazy="true"
+                inverse="true"
+                cascade="delete"
+                outer-join="true"
+                batch-size="50"
+                >
+            <key>
+                <column name="FROM_USER_ID"/>
+            </key>
+            <one-to-many
+                    class="MessageItem"
+                    />
+        </set>
+        -->
+    </class>
+
+    <query name="findAppUsers">
+        <![CDATA[from User user where user.root = 'F' order by upper(user.loginInfo.username)]]>
+    </query>
+
+</hibernate-mapping>

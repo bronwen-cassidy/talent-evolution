@@ -1,5 +1,5 @@
 <%@ include file="../includes/include.jsp" %>
-<%@ page import="com.zynap.talentstudio.analysis.populations.IPopulationEngine"%>
+<%@ page import="IPopulationEngine"%>
 
 <fmt:message key="analysis.population.view" var="msg"/>
 

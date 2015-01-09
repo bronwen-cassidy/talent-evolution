@@ -1,6 +1,6 @@
 <%@ page import="com.zynap.talentstudio.web.common.ParameterConstants"%>
 <%@ page import="com.zynap.talentstudio.web.analysis.reports.RunReportController"%>
-<%@ page import="com.zynap.talentstudio.analysis.reports.ReportConstants"%>
+<%@ page import="ReportConstants"%>
 
 <%-- include to display results of metric reports --%>
 

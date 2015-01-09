@@ -1,4 +1,4 @@
-<%@ page import="com.zynap.talentstudio.common.AccessType" %>
+<%@ page import="AccessType" %>
 <%@ page import="com.zynap.talentstudio.web.analysis.reports.views.RunCrossTabReportWrapper" %>
 <%@ include file="../../../includes/include.jsp" %>
 

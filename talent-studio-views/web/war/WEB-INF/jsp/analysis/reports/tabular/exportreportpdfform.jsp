@@ -1,5 +1,5 @@
 <%@ page import="com.zynap.talentstudio.web.common.ParameterConstants"%>
-<%@ page import="com.zynap.talentstudio.analysis.reports.ReportConstants"%>
+<%@ page import="ReportConstants"%>
 <zynap:form method="get" name="_reportpdfexport" action="runexportpdftabularreport.htm">
 
     <!-- back -->

@@ -11,8 +11,6 @@ import com.zynap.talentstudio.analysis.populations.IPopulationEngine;
 import com.zynap.talentstudio.organisation.attributes.DynamicAttribute;
 import com.zynap.talentstudio.questionnaires.Questionnaire;
 
-import java.util.List;
-
 public class TestAnalysisAttributeHelper extends ZynapTestCase {
 
     public void testSplitQuestionCriteriaId() throws Exception {

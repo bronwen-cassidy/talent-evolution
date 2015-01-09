@@ -1,4 +1,4 @@
-<%@ page import="com.zynap.talentstudio.analysis.populations.IPopulationEngine" %>
+<%@ page import="IPopulationEngine" %>
 <%@ include file="../../../includes/include.jsp" %>
 
 <zynap:window elementId="questionTree">

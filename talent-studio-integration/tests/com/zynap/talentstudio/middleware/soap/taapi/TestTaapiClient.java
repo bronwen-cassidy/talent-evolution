@@ -2,7 +2,6 @@ package com.zynap.talentstudio.middleware.soap.taapi;
 
 import junit.framework.TestCase;
 
-import com.zynap.talentstudio.middleware.soap.taapi.client.RespondentContentType;
 import com.zynap.talentstudio.middleware.soap.taapi.client.RespondentInfoType;
 import com.zynap.talentstudio.organisation.subjects.Subject;
 

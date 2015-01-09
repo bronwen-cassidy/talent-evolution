@@ -1,5 +1,5 @@
 <%@ include file="../../includes/include.jsp" %>
-<%@ page import="com.zynap.talentstudio.objectives.ObjectiveConstants" %>
+<%@ page import="ObjectiveConstants" %>
 <%@ page import="com.zynap.talentstudio.web.workflow.WorklistController" %>
 
 <script type="text/javascript">

@@ -12,7 +12,6 @@ import com.zynap.talentstudio.organisation.Node;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Date;
 
 public class TestHibernatePermitManagerDao extends AbstractHibernateTestCase {
 

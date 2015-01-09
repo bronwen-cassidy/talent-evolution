@@ -48,8 +48,8 @@
                 <entry key="com.zynap.talentstudio.organisation.positions.Position" value="POSITIONS"/>
                 <entry key="com.zynap.talentstudio.organisation.subjects.Subject" value="SUBJECTS"/>
                 <entry key="com.zynap.domain.admin.User" value="USERS"/>
-                <!--<entry key="com.zynap.talentstudio.organisation.attributes.NodeExtendedAttribute" value="NODE_DAS"/>-->
-                <!--<entry key="com.zynap.talentstudio.organisation.portfolio.PortfolioItem" value="NODE_ITEMS"/>-->
+                <!--<entry key="NodeExtendedAttribute" value="NODE_DAS"/>-->
+                <!--<entry key="PortfolioItem" value="NODE_ITEMS"/>-->
             </map>
         </property>
     </bean>
@@ -61,7 +61,7 @@
     <bean id="interceptorStrategyFactory" class="com.zynap.talentstudio.common.hibernate.interceptor.InterceptorStrategyFactory">
         <property name="strategies">
             <map>
-                <!--<entry key="com.zynap.talentstudio.organisation.OrganisationUnit" value-ref="nodeInterceptorStrategy"/>-->
+                <!--<entry key="OrganisationUnit" value-ref="nodeInterceptorStrategy"/>-->
                 <entry key="com.zynap.talentstudio.organisation.positions.Position" value-ref="nodeInterceptorStrategy"/>
                 <entry key="com.zynap.talentstudio.organisation.subjects.Subject" value-ref="nodeInterceptorStrategy"/>
                 <entry key="com.zynap.domain.admin.User" value-ref="defaultInterceptorStrategy"/>                

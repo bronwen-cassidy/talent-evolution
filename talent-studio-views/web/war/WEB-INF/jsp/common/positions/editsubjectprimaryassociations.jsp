@@ -1,4 +1,4 @@
-<%@ page import="com.zynap.domain.IDomainObject"%>
+<%@ page import="IDomainObject"%>
 <!--secondary associations -->
 <tr>
     <td class="infolabel">

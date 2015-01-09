@@ -2,7 +2,6 @@ package com.zynap.talentstudio.integration.dto.config;
 
 import com.zynap.talentstudio.common.IZynapService;
 import com.zynap.talentstudio.integration.dto.processors.IPostProcessor;
-import com.zynap.talentstudio.integration.dto.processors.IPostProcessor;
 
 /**
  * Created by IntelliJ IDEA.

@@ -36,7 +36,7 @@
         <property name="proxyInterfaces" value="com.zynap.talentstudio.integration.adapter.IAdapter"/>
         <property name="transactionAttributes">
             <props>
-                <prop key="*">PROPAGATION_REQUIRED,-com.zynap.exception.TalentStudioException</prop>
+                <prop key="*">PROPAGATION_REQUIRED,-TalentStudioException</prop>
             </props>
         </property>
     </bean>
