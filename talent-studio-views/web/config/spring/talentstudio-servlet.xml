@@ -233,7 +233,7 @@
         <property name="defaultErrorView" value="defaultErrorView"/>
         <property name="exceptionMappings">
             <props>
-                <prop key="com.zynap.exception.DomainObjectNotFoundException">objectNotFoundErrorView</prop>
+                <prop key="DomainObjectNotFoundException">objectNotFoundErrorView</prop>
                 <prop key="org.springframework.orm.ObjectRetrievalFailureException">objectNotFoundErrorView</prop>
                 <prop key="org.springframework.orm.ObjectOptimisticLockingFailureException">staleDataView</prop>
                 <prop key="com.zynap.talentstudio.web.common.exceptions.InvalidSubmitException">invalidSubmitView</prop>
@@ -876,7 +876,7 @@
     <bean id="loginController" class="com.zynap.talentstudio.web.security.LoginController" scope="request">
         <property name="sessionForm" value="false"/>
         <property name="multiTenantSystem" value="true"/>
-        <property name="commandClass" value="com.zynap.domain.admin.LoginInfo"/>
+        <property name="commandClass" value="LoginInfo"/>
         <property name="validator" ref="loginValidator"/>
         <property name="formView" value="login"/>
         <property name="userService" ref="userService"/>
@@ -884,7 +884,7 @@
     </bean>
     <bean id="forgotPasswordController" class="com.zynap.talentstudio.web.security.ForgotPasswordController" scope="request">
         <property name="sessionForm" value="false"/>
-        <property name="commandClass" value="com.zynap.domain.admin.LoginInfo"/>
+        <property name="commandClass" value="LoginInfo"/>
         <property name="validator" ref="forgotPasswordValidator"/>
         <property name="formView" value="forgotPassword"/>
         <property name="successView" value="login.htm"/>
@@ -894,7 +894,7 @@
     <!-- change password controller -->
     <bean id="changePwdController" class="com.zynap.talentstudio.web.security.ChangePwdController" scope="request">
         <property name="sessionForm" value="true"/>
-        <property name="commandClass" value="com.zynap.domain.admin.UserPassword"/>
+        <property name="commandClass" value="UserPassword"/>
         <property name="validator" ref="changePwdValidator"/>
         <property name="formView" value="changepwd"/>
         <property name="cancelView" value="login.htm"/>
@@ -934,7 +934,7 @@
         <property name="formView" value="resetuserpassword"/>
         <property name="successView" value="viewuser.htm"/>
         <property name="cancelView" value="viewuser.htm"/>
-        <property name="commandClass" value="com.zynap.domain.admin.UserPassword"/>
+        <property name="commandClass" value="UserPassword"/>
         <property name="userService" ref="userService"/>
     </bean>
 
@@ -1249,7 +1249,7 @@
         <property name="formView" value="confirmdeletequestionnairedefinition"/>
         <property name="cancelView" value="viewquestionnairedefinition.htm"/>
         <property name="successView" value="listquestionnairedefinition.htm"/>
-        <property name="commandClass" value="com.zynap.talentstudio.questionnaires.QuestionnaireDefinition"/>
+        <property name="commandClass" value="QuestionnaireDefinition"/>
     </bean>
 
     <bean id="listQuestionnaireWorkflowController" class="com.zynap.talentstudio.web.questionnaires.ListQuestionnaireWorkflowsController">
@@ -1310,7 +1310,7 @@
 
     <bean id="deleteQuestionnaireWorkflowController" class="com.zynap.talentstudio.web.questionnaires.DeleteQuestionnaireWorkflowController">
         <property name="sessionForm" value="true"/>
-        <property name="commandClass" value="com.zynap.talentstudio.questionnaires.QuestionnaireWorkflow"/>
+        <property name="commandClass" value="QuestionnaireWorkflow"/>
         <property name="formView" value="confirmdeletequestionnaireworkflow"/>
         <property name="cancelView" value="viewquestionnaireworkflow.htm"/>
         <property name="successView" value="viewquestionnairedefinition.htm"/>
@@ -1320,7 +1320,7 @@
 
     <bean id="closeQuestionnaireWorkflowController" class="com.zynap.talentstudio.web.questionnaires.CloseQuestionnaireWorkflowController">
         <property name="sessionForm" value="true"/>
-        <property name="commandClass" value="com.zynap.talentstudio.questionnaires.QuestionnaireWorkflow"/>
+        <property name="commandClass" value="QuestionnaireWorkflow"/>
         <property name="formView" value="confirmclosequestionnaireworkflow"/>
         <property name="cancelView" value="viewquestionnaireworkflow.htm"/>
         <property name="successView" value="viewquestionnaireworkflow.htm"/>
@@ -1553,14 +1553,14 @@
         <property name="viewPageURL" value="viewsubject.htm"/>
         <!-- Default success view is only used when a newly added position is deleted -->
         <property name="defaultSuccessViewConfig" ref="addMenuViewConfig"/>
-        <property name="commandClass" value="com.zynap.talentstudio.organisation.subjects.Subject"/>
+        <property name="commandClass" value="Subject"/>
         <property name="subjectService" ref="subjectService"/>
     </bean>
 
     <bean id="inactivateSubjectController" class="com.zynap.talentstudio.web.organisation.subjects.InactivateSubjectController" scope="session">
         <property name="sessionForm" value="true"/>
         <property name="formView" value="editsubjectinactivate"/>
-        <property name="commandClass" value="com.zynap.talentstudio.organisation.subjects.Subject"/>
+        <property name="commandClass" value="Subject"/>
         <property name="subjectService" ref="subjectService"/>
     </bean>
 
@@ -1661,7 +1661,7 @@
         <property name="formView" value="deleteorganisation"/>
         <property name="successView" value="listorganisationsRedirect"/>
         <property name="cancelView" value="vieworganisation.htm"/>
-        <property name="commandClass" value="com.zynap.talentstudio.organisation.OrganisationUnit"/>
+        <property name="commandClass" value="OrganisationUnit"/>
         <property name="organisationManager" ref="organisationUnitService"/>
     </bean>
 
@@ -1860,7 +1860,7 @@
         <property name="sessionForm" value="true"/>
         <property name="formView" value="deleteposition"/>
         <property name="viewPageURL" value="viewposition.htm"/>
-        <property name="commandClass" value="com.zynap.talentstudio.organisation.positions.Position"/>
+        <property name="commandClass" value="Position"/>
         <!-- Default success view is only used when a newly added position is deleted -->
         <property name="defaultSuccessViewConfig" ref="addMenuViewConfig"/>
         <property name="positionService" ref="positionService"/>
@@ -1936,7 +1936,7 @@
         <property name="sessionForm" value="true"/>
         <property name="formView" value="confirmdeleteDA"/>
         <property name="cancelView" value="viewDA.htm"/>
-        <property name="commandClass" value="com.zynap.talentstudio.organisation.attributes.DynamicAttribute"/>
+        <property name="commandClass" value="DynamicAttribute"/>
         <property name="dynamicAttributeService" ref="dynamicAttrService"/>
     </bean>
 
@@ -1979,7 +1979,7 @@
         <property name="sessionForm" value="true"/>
         <property name="formView" value="addlookuptype"/>
         <property name="successView" value="listlookupvalues.htm"/>
-        <property name="commandClass" value="com.zynap.talentstudio.common.lookups.LookupType"/>
+        <property name="commandClass" value="LookupType"/>
         <property name="cancelView" value="/admin/listlookuptypes.htm"/>
         <property name="validator" ref="lookupValidator"/>
         <property name="lookupManager" ref="lookupManager"/>
@@ -1993,7 +1993,7 @@
         <property name="sessionForm" value="false"/>
         <property name="formView" value="addlookupvalue"/>
         <property name="successView" value="listlookupvalues.htm"/>
-        <property name="commandClass" value="com.zynap.talentstudio.common.lookups.LookupValue"/>
+        <property name="commandClass" value="LookupValue"/>
         <property name="validator" ref="lookupValueValidator"/>
         <property name="lookupManager" ref="lookupManager"/>
     </bean>
@@ -2213,7 +2213,7 @@
         <property name="formView" value="deletepopulation"/>
         <property name="successView" value="listpopulations.htm"/>
         <property name="cancelView" value="viewpopulation.htm"/>
-        <property name="commandClass" value="com.zynap.talentstudio.analysis.populations.Population"/>
+        <property name="commandClass" value="Population"/>
         <property name="analysisService" ref="analysisService"/>
     </bean>
 
@@ -2859,7 +2859,7 @@
         <property name="formView" value="confirmdeletemetric"/>
         <property name="cancelView" value="viewmetric.htm"/>
         <property name="successView" value="listmetrics.htm"/>
-        <property name="commandClass" value="com.zynap.talentstudio.analysis.metrics.Metric"/>
+        <property name="commandClass" value="Metric"/>
         <property name="metricService" ref="metricService"/>
     </bean>
 
@@ -2902,7 +2902,7 @@
         <property name="formView" value="resetmypassword"/>
         <property name="successView" value="viewmyaccount.htm"/>
         <property name="cancelView" value="viewmyaccount.htm"/>
-        <property name="commandClass" value="com.zynap.domain.admin.UserPassword"/>
+        <property name="commandClass" value="UserPassword"/>
         <property name="userService" ref="userService"/>
     </bean>
 
@@ -3412,26 +3412,26 @@
 
     <bean id="viewPerformanceReviewController" class="com.zynap.talentstudio.web.perfomance.ViewPerformanceReviewController">
         <property name="sessionForm" value="true"/>
-        <property name="commandClass" value="com.zynap.talentstudio.performance.PerformanceReview"/>
+        <property name="commandClass" value="PerformanceReview"/>
         <property name="formView" value="viewperformancereview"/>
         <property name="performanceReviewService" ref="performanceReviewService"/>
     </bean>
 
     <bean id="deletePerformanceReviewController" class="com.zynap.talentstudio.web.perfomance.DeletePerformanceReviewController">
         <property name="sessionForm" value="true"/>
-        <property name="commandClass" value="com.zynap.talentstudio.performance.PerformanceReview"/>
+        <property name="commandClass" value="PerformanceReview"/>
         <property name="formView" value="confirmdeleteperformancereview"/>
         <property name="successView" value="listperformancereviews.htm"/>
         <property name="cancelView" value="viewperformancereview.htm"/>
         <property name="performanceReviewService" ref="performanceReviewService"/>
     </bean>
 
-    <bean id="reportingChartPreferencesFactory" class="com.zynap.talentstudio.preferences.PreferencesFactory">
+    <bean id="reportingChartPreferencesFactory" class="PreferencesFactory">
         <property name="preferencesManager" ref="prefManager"/>
         <property name="defaultPreference" ref="reportingChartPreferences"/>
     </bean>
 
-    <bean id="arenaMenuHandler" class="com.zynap.talentstudio.arenas.ArenaMenuHandler">
+    <bean id="arenaMenuHandler" class="ArenaMenuHandler">
         <property name="arenaManager" ref="arenaManager"/>
     </bean>
 

@@ -44,7 +44,7 @@ BEGIN
             delete from nodes where id=positions_rec.id;
 
             insert into audits (id, modified_by_id, MODIFIED_BY_USERNAME, OBJECT_ID, MODIFIED_DATE, TABLE_NAME, ACTION_PERFORMED, DESCRIPTION)
-            values (audits_sq.nextval, user_id_, username_, positions_rec.id, sysdate, 'POSITIONS', 'DELETED', 'com.zynap.talentstudio.organisation.positions.Position@[id=' || positions_rec.id || ', title=' || title_ || ']');
+            values (audits_sq.nextval, user_id_, username_, positions_rec.id, sysdate, 'POSITIONS', 'DELETED', 'Position@[id=' || positions_rec.id || ', title=' || title_ || ']');
 
 		END LOOP;
 	CLOSE node_cur;

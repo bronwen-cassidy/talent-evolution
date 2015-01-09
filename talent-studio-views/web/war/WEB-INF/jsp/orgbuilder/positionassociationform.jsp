@@ -1,4 +1,4 @@
-<%@ page import="com.zynap.domain.IDomainObject"%>
+<%@ page import="IDomainObject"%>
 <%@ include file="../includes/include.jsp" %>
 
 <fmt:message key="${pagetitle}" var="msg"/>

@@ -9,7 +9,6 @@ package com.zynap.talentstudio.security.users;
 import com.zynap.domain.admin.LoginInfo;
 import com.zynap.domain.admin.PasswordHistory;
 import com.zynap.domain.admin.User;
-import com.zynap.exception.*;
 import com.zynap.talentstudio.AbstractHibernateTestCase;
 import com.zynap.talentstudio.CoreDetail;
 import com.zynap.talentstudio.security.rules.Config;

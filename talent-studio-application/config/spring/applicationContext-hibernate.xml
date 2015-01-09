@@ -119,6 +119,6 @@
         
     </bean>
 
-    <!--<bean id="zynapEntityInterceptor" class="com.zynap.talentstudio.common.hibernate.ZynapEntityInterceptor"/>-->
+    <!--<bean id="zynapEntityInterceptor" class="ZynapEntityInterceptor"/>-->
 
 </beans>

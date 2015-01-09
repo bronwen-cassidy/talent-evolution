@@ -10,7 +10,6 @@ import junit.framework.TestCase;
 
 import com.zynap.talentstudio.preferences.format.FormattingAttribute;
 import com.zynap.talentstudio.preferences.format.FormattingInfo;
-import com.zynap.talentstudio.preferences.properties.*;
 
 public class TestAttributePreference extends TestCase {
 

@@ -1,4 +1,4 @@
-<%@ page import="com.zynap.domain.orgbuilder.ISearchConstants"%>
+<%@ page import="ISearchConstants"%>
 <%@ include file="../includes/include.jsp" %>
 <%@ taglib uri="http://displaytag.sf.net/el" prefix="display" %>
 

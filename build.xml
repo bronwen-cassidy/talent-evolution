@@ -134,7 +134,7 @@
     <!-- Application module (EAR, JAR)-->
     <property name="application.module" value="talent-studio-application"/>
     <property name="app.db.dir" value="${application.module}/db"/>
-    <property name="app.src.dir" value="${application.module}/src"/>
+    <property name="app.src.dir" value="${application.module}/src/main/java"/>
     <property name="templates.dir" value="templates"/>
     <property name="app.templates.dir" value="${application.module}/templates"/>
     <property name="app.config.dir" value="${application.module}/config"/>

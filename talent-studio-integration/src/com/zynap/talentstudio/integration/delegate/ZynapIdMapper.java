@@ -33,7 +33,7 @@ public class ZynapIdMapper {
      *
      * @param externalId      The external id
      * @param internalRefName The reference name, this is the fully qualified name of the node being added, example
-     *                        <pre>com.zynap.talentstudio.organisation.OrganisationUnit</pre>
+     *                        <pre>OrganisationUnit</pre>
      * @return The internal id. If no internal id has been found for the given external id null is returned.
      */
     public Serializable getInternalId(Serializable externalId, String internalRefName, Collection<String> classNames) {

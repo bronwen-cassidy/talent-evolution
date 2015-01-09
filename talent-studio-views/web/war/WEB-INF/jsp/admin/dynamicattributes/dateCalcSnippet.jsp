@@ -1,4 +1,4 @@
-<%@ page import="com.zynap.talentstudio.calculations.DateCalculation" %>
+<%@ page import="DateCalculation" %>
 <tr>
     <td class="infoarea" colspan="2"><span id="calcMessageId">&nbsp;</span></td>
 </tr>

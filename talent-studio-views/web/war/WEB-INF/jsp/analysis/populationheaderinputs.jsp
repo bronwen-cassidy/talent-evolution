@@ -1,5 +1,5 @@
-<%@ page import="com.zynap.talentstudio.analysis.populations.IPopulationEngine,
-                 com.zynap.talentstudio.common.AccessType"%>
+<%@ page import="IPopulationEngine,
+                 AccessType"%>
 
     <fmt:message key="analysis.population.label" var="label"/>
 

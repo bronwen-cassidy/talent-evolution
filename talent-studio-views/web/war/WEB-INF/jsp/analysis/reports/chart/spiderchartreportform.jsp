@@ -1,5 +1,5 @@
-<%@ page import="com.zynap.talentstudio.analysis.populations.IPopulationEngine" %>
-<%@ page import="com.zynap.talentstudio.common.AccessType" %>
+<%@ page import="IPopulationEngine" %>
+<%@ page import="AccessType" %>
 <%@ include file="../../../includes/include.jsp" %>
 
 <fmt:message key="${pagetitle}" var="msg"/>

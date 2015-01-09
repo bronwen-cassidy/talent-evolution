@@ -1,5 +1,5 @@
-<%@ page import="com.zynap.talentstudio.analysis.reports.ChartReport" %>
-<%@ page import="com.zynap.talentstudio.common.AccessType" %>
+<%@ page import="ChartReport" %>
+<%@ page import="AccessType" %>
 <%@ include file="../../../includes/include.jsp" %>
 
 <fmt:message key="${pagetitle}" var="msg"/>

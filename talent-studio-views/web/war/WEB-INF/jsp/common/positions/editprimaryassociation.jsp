@@ -1,4 +1,4 @@
-<%@ page import="com.zynap.domain.IDomainObject"%>
+<%@ page import="IDomainObject"%>
 <!-- primaryAssociation -->
 <tr>
     <td class="infolabel"><fmt:message key="select.position.primary.association"/>&nbsp;:&nbsp;*</td>
