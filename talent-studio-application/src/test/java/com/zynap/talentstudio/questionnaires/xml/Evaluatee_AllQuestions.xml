@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+
+    <questionnaire name="Evaluatee_AllQuestions" title="Evaluatee">
+
+        <group name="Stat">
+            <question id="1" type="Status" name="Status" title="Status of Appraisal Questionnaire">
+                <answer value="1" text="Not Started"/>
+                <answer value="2" text="In Progress"/>
+                <answer value="3" text="Completed"/>
+            </question>
+        </group>
+
+        <group name="Hello World Narrative">
+            <narrative>General xml type narrative</narrative>
+        </group>
+
+        <group name=" ">
+            <narrative>Narrative without a group name groups together with the next narrative directly above with a group name.</narrative>
+        </group>
+
+        <group name="Group Name for Narrative">
+            <narrative>Some text narrative for a test of the Narrative.</narrative>
+        </group>
+
+
+        <group name="Group Name for Text">
+            <question id="2" type="Text" name="Text Name" title="Text Hover Title" mandatory="Y"></question>
+        </group>
+
+        <group name="Group Name for Date">
+            <question id="3" type="Date" name="Date Name" title="Date Title"/>
+        </group>
+
+        <group name="Group Name for Integer">
+            <question id="4" type="Integer" name="Integer Name" title="Integer Title"/>
+        </group>
+
+        <group name="Group Name for Positive Integer">
+            <question id="5" type="PositiveInteger" name="Positive Integer Name" title="Positive Integer Title"/>
+        </group>
+
+        <group name="Group Name for Textbox">
+            <question id="6" type="TextBox" name="Textbox Name" title="Textbox Title"/>
+        </group>
+
+        <group name="Group Name for Select">
+            <question id="7" type="Select" name="Select Name" title="Select Title" target="Select Value1" mandatory="Y">
+                <answer value="Select Value1" text="Select Text1"/>
+                <answer value="Select Value2" text="Select Text2"/>
+                <answer value="Select Value3" text="Select Text3"/>
+                <answer value="Select Value4" text="Select Text4"/>
+                <answer value="Select Value5" text="Select Text5"/>
+            </question>
+        </group>
+
+        <group name="Group Name for Radio">
+            <question id="8" type="Radio" name="Radio Name" title="Radio Title" target="Radio Value1">
+                <answer value="Radio Value1" text="Radio Text1"/>
+                <answer value="Radio Value2" text="Radio Text2"/>
+                <answer value="Radio Value3" text="Radio Text3"/>
+                <answer value="Radio Value4" text="Radio Text4"/>
+                <answer value="Radio Value5" text="Radio Text5"/>
+            </question>
+        </group>
+
+        <group name="Group Name for Multi Question Test 2">
+            <multi-question name=" ">
+                <line-item>Line Item 1</line-item>
+                <line-item>Line Item 2</line-item>
+                <line-item>Line Item 3</line-item>
+                <line-item>Line Item 4</line-item>
+                <line-item>Line Item 5</line-item>
+                <line-item>Line Item 6</line-item>
+                <line-item>Line Item 7</line-item>
+                <question id="9" type="Radio" name="Radio Name" title="Radio Title">
+                    <answer value="Radio Value 1" text="Radio Text 1"/>
+                    <answer value="Radio Value 2" text="Radio Text 2"/>
+                    <answer value="Radio Value 3" text="Radio Text 3"/>
+                </question>
+                <question id="10" type="Text" name="Text Name" title="Text Title"></question>
+            </multi-question>
+        </group>
+
+        <group name="Group Name for Multi Question Test">
+            <multi-question name=" ">
+                <line-item></line-item>
+                <question id="11" type="Radio" name="Radio Name" title="Radio Title">
+                    <answer value="Radio Value 1" text="Radio Text 1"/>
+                    <answer value="Radio Value 2" text="Radio Text 2"/>
+                    <answer value="Radio Value 3" text="Radio Text 3"/>
+                </question>
+                <question id="12" type="Text" name="Text Name" title="Text Title"></question>
+            </multi-question>
+        </group>
+
+        <group name="Group Name for Image">
+            <question id="13" type="Image" name="Image name" title="Image title?"/>
+        </group>
+
+        <group name="Group Name for Organisation">
+            <question id="14" type="Organisation" name="Organisation name" title="Organisation title"/>
+        </group>
+
+        <group name="Group Name for Subject Name">
+            <question id="15" type="Subject" name="Subject Name name" title="Subject Name title"/>
+        </group>
+
+
+    </questionnaire>
+</xml>

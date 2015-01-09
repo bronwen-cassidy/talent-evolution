@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+	<questionnaire name="Target Values Questionnaire for drop downs" title="Target Values Questionnaire for drop downs">
+
+		<group name=" ">
+			<narrative>Target Values Questionnaire for drop downs</narrative>
+		</group>
+
+		<group name="Track Record - performance in last three years">
+			<question type="Select" name="Track Record" title="Track Record" target="Good">
+				<answer value="Poor" text="Poor" />
+				<answer value="Good" text="Good" />
+				<answer value="Exceptional" text="Exceptional" />
+			</question>
+		</group>
+
+		<group name="Evidence">
+			<question type="Select" name="This Year" title="This Year" target="Very Good">
+				<answer value="Unacceptable" text="Unacceptable" />
+				<answer value="Below expectations" text="Below expectations" />
+				<answer value="Good" text="Good" />
+				<answer value="Very Good" text="Very Good" />
+				<answer value="Exceptional" text="Exceptional" />
+			</question>
+			<question type="Select" name="Last Year" title="Last Year" target="Good">
+				<answer value="Unacceptable" text="Unacceptable" />
+				<answer value="Below expectations" text="Below expectations" />
+				<answer value="Good" text="Good" />
+				<answer value="Very Good" text="Very Good" />
+				<answer value="Exceptional" text="Exceptional" />
+			</question>
+			<question type="Select" name="Two Years Ago" title="Two Years Ago" target="Unacceptable">
+				<answer value="Unacceptable" text="Unacceptable" />
+				<answer value="Below expectations" text="Below expectations" />
+				<answer value="Good" text="Good" />
+				<answer value="Very Good" text="Very Good" />
+				<answer value="Exceptional" text="Exceptional" />
+			</question>
+		</group>
+
+		<group name="Interest in Mobility">
+			<question type="Select" name="Interest in Mobility" title="Interest in Mobility" target="Actively seeking international opportunities">
+				<answer value="Actively seeking international opportunities" text="Actively seeking international opportunities" />
+				<answer value="Could consider mobility" text="Could consider mobility" />
+				<answer value="Is not interested" text="Is not interested" />
+			</question>
+		</group>
+
+		<group name="Employee's Ultimate Career Goal">
+			<question type="Select" name="Goal" title="Goal" target="Senior Management Team">
+				<answer value="SET" text="SET" />
+				<answer value="RVP or Equivalent" text="RVP or Equivalent" />
+				<answer value="MCP small market" text="MCP small market" />
+				<answer value="MCP medium market" text="MCP medium market" />
+				<answer value="MCP large market" text="MCP large market" />
+				<answer value="Senior Management Team" text="Senior Management Team" />
+				<answer value="Functional Head" text="Functional Head" />
+				<answer value="Current Role" text="Current Role" />
+			</question>
+			<question type="Select" name="Timescale" title=" ">
+				<answer value="Next 2 years" text="Next 2 years" />
+				<answer value="2 to 5 years" text="2 to 5 years" />
+				<answer value="5 years plus" text="5 years plus" />
+			</question>
+		</group>
+
+		<group name="Manager's Assessment of Employee's Potential">
+			<question type="Select" name="Goal" title="Goal" target="Senior Management Team">
+				<answer value="SET" text="SET" />
+				<answer value="RVP or Equivalent" text="RVP or Equivalent" />
+				<answer value="MCP small market" text="MCP small market" />
+				<answer value="MCP medium market" text="MCP medium market" />
+				<answer value="MCP large market" text="MCP large market" />
+				<answer value="Senior Management Team" text="Senior Management Team" />
+				<answer value="Functional Head" text="Functional Head" />
+				<answer value="Current Role" text="Current Role" />
+			</question>
+			<question type="Select" name="Timescale" title="Timescale" target="Next 2 years">
+				<answer value="Next 2 years" text="Next 2 years" />
+				<answer value="2 to 5 years" text="2 to 5 years" />
+				<answer value="5 years plus" text="5 years plus" />
+			</question>
+			<question type="Select" name="Agreed High Potential" title="Agreed High Potential" target="Yes">
+				<answer value="Yes" text="Yes" />
+				<answer value="No" text="No" />
+			</question>
+		</group>
+
+		
+		<group name="Next career move - position and timescale">
+
+			<question type="Select" name="Function" title="Function" target="General Management">
+				<answer value="Sales and Marketing" text="Sales and Marketing" />
+				<answer value="Medical and Regulatory" text="Medical and Regulatory" />
+				<answer value="IS" text="IS" />
+				<answer value="HR" text="HR" />
+				<answer value="Finance" text="Finance" />
+				<answer value="PS and L" text="PS and L" />
+				<answer value="Operations" text="Operations" />
+				<answer value="R and D" text="R and D" />
+				<answer value="US" text="US" />
+				<answer value="General Management" text="General Management" />
+				<answer value="Other" text="Other" />
+			</question>
+
+			<question type="Select" name="Timescale" title="Timescale" target="Next 2 years">
+				<answer value="Next 2 years" text="Next 2 years" />
+				<answer value="2 to 5 years" text="2 to 5 years" />
+				<answer value="5 years plus" text="5 years plus" />
+			</question>
+
+		</group>
+	</questionnaire>
+</xml>

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+    <questionnaire name="Assessment of Potential" title="Assessment of Potential">
+
+        <group name="Status" title="Status">
+            <question id="1" type="LastUpdated" name="Assessment of Potential Last Updated"/>
+            <question id="2" type="LastUpdatedBy" name="Last Updated By" title="Last Updated By"/>
+        </group>
+
+        <group name="Assessment of Potential" title="">
+            <narrative>The assessment of potential form also serves as a one page input to the talent review and therefore includes a summary of the individual's aspirations and suggested next career steps.</narrative>
+            <narrative>To save your entries click the Save button at the end of this form.</narrative>
+        </group>
+
+        <group name="Performance Rating" title="Performance Rating">
+            <question id="6" type="Select" name="This Year" title="This Year">
+                <answer value="1" text="Unacceptable"/>
+                <answer value="2" text="Below Expectations"/>
+                <answer value="3" text="Met"/>
+                <answer value="4" text="Very Good"/>
+                <answer value="5" text="Exceptional"/>
+            </question>
+            <question id="7" type="Select" name="Last Year" title="Last Year">
+                <answer value="1" text="Unacceptable"/>
+                <answer value="2" text="Below Expectations"/>
+                <answer value="3" text="Met"/>
+                <answer value="4" text="Very Good"/>
+                <answer value="5" text="Exceptional"/>
+            </question>
+            <question id="8" type="Select" name="Two Years Ago" title="Two Years Ago">
+                <answer value="1" text="Unacceptable"/>
+                <answer value="2" text="Below Expectations"/>
+                <answer value="3" text="Met"/>
+                <answer value="4" text="Very Good"/>
+                <answer value="5" text="Exceptional"/>
+            </question>
+        </group>
+        
+        <group name="Performance Rating Summary" title="Performance Rating Summary">
+
+            <question id="9" type="Sum" name="Rating Sum" title="Rating Sum">
+                <operand source="6"/>
+                <operand source="7"/>
+                <operand source="8"/>
+            </question>
+
+
+            <question id="11" type="EnumMapping" name="Calculated Performance Summary" title="Calculated Performance Summary">
+                <mapping upperbound="6" value="Low" text="Low" source="9"/>
+                <mapping lowerbound="7" upperbound="11" value="Medium" text="Medium" source="9"/>
+                <mapping lowerbound="12" value="High" text="High" source="9"/>
+            </question>
+            <question id="12" type="Select" name="Actual Performance Summary" title="Actual Performance summary">
+                <answer value="1" text="Low"/>
+                <answer value="2" text="Medium"/>
+                <answer value="3" text="High"/>
+            </question>
+            <question id="13" type="Select" name="Performance Tracking" title="Performance Tracking">
+                <answer value="1" text="#OxAD;"/>
+                <answer value="2" text="#0xAD"/>
+                <answer value="3" text="High"/>
+            </question>
+            <narrative>LOW: Has not met individual objectives: rated below "Met" more than once</narrative>
+            <narrative>MEDIUM: Has consistently delivered in line with expectations on individual objectives: in aggregate rated at least "Met" for the past 3 years</narrative>
+            <narrative>HIGH: Has exceeded expectations on individual objectives, regularly rated "Very Good" or "Exceptional"</narrative>
+        </group>
+
+        <group name="EnumMapping - Two Levels" title="EnumMapping - Two Levels">
+
+            <question id="511" type="Select" name="Final Performance Rating" title="Final Performance Rating">
+                <answer value="1" text="1"/>
+                <answer value="2" text="2"/>
+                <answer value="3" text="3"/>
+                <answer value="4" text="4"/>
+                <answer value="5" text="5"/>
+            </question>
+
+            <question id="521" type="EnumMapping" name="EnumMapping - Two Levels" title="EnumMapping - Two Levels">
+                <mapping upperbound="4" value=" " text=" " source="36">
+                    <mapping upperbound="2" value="Fall within low and score 1 or 2 within Final Performance Rating" text="Poor Performer" source="51"/>
+                    <mapping lowerbound="3" upperbound="3" value="Fall within low and score 3 within Final Performance Rating" text="Good Solid Performer" source="51"/>
+                </mapping>
+                <mapping lowerbound="5" upperbound="8" value=" " text=" " source="36">
+                    <mapping upperbound="2" value="Fall within medium and score 1 or 2 within Final Performance Rating" text="Under Performer" source="51"/>
+                    <mapping lowerbound="3" upperbound="3" value="Fall within medium and score 3 within Final Performance Rating" text="Good Solid Performer (with Potential)" source="51"/>
+                </mapping>
+                <mapping lowerbound="9" value=" " text=" " source="36">
+                    <mapping upperbound="2" value="Fall within high and score 1 or 2 within Final Performance Rating" text="Under Performer (with High Potential)" source="51"/>
+                    <mapping lowerbound="3" upperbound="3" value="Fall within high and score 3 within Final Performance Rating" text="Good Solid Performer (with High Potential)" source="51"/>
+                </mapping>
+            </question>
+        </group>
+
+        <group name="Leadership Capabilities">
+
+            <multi-question name="">
+
+                <line-item>Target Leadership Capability Level</line-item>
+                <question id="20" type="Select" name="Rating" title="Rating">
+                    <answer value="1" text="Target Level 1"/>
+                    <answer value="100" text="Target Level 2"/>
+                    <answer value="1000" text="Target Level 3"/>
+                    <answer value="1000000" text="Target Level 4"/>
+                    <answer value="10000000" text="Target Level 5"/>
+                </question>
+                <question id="21" type="TextBox" name="Supporting Examples" title="Supporting Examples" length="50" mandatory="N"/>
+            </multi-question>
+            <multi-question name="">
+
+                <line-item>Passion for Customers</line-item>
+                <question id="22" type="Select" name="Rating" title="Rating">
+                    <answer value="1" text="Below Target"/>
+                    <answer value="100" text="At Target"/>
+                    <answer value="1000" text="Above Target"/>
+                </question>
+                <question id="23" type="TextBox" name="Supporting Examples" title="Supporting Examples" length="50" mandatory="N"/>
+            </multi-question>
+            <multi-question name="">
+
+                <line-item>Thinks Strategically</line-item>
+                <question id="24" type="Select" name="Rating" title="Rating">
+                    <answer value="1" text="Below Target"/>
+                    <answer value="100" text="At Target"/>
+                    <answer value="1000" text="Above Target"/>
+                </question>
+                <question id="25" type="TextBox" name="Supporting Examples" title="Supporting Examples" length="50" mandatory="N"/>
+            </multi-question>
+        </group>
+
+        <group name="Languages" title="Languages">
+
+            <multi-question name="">
+                <line-item>First</line-item>
+                <question id="50" type="Text" name="First" title="First" mandatory="N"/>
+                <question id="51" type="Select" name="Rating" title="Rating">
+                    <answer value="1" text="Native"/>
+                    <answer value="100" text="Fluent"/>
+                    <answer value="1000" text="Good"/>
+                    <answer value="10000" text="Basic"/>
+                </question>
+            </multi-question>
+            <multi-question name="">
+                <line-item>First</line-item>
+                <question id="52" type="Text" name="Second" title="Second" mandatory="N"/>
+                <question id="53" type="Select" name="Rating" title="Rating">
+                    <answer value="1" text="Native"/>
+                    <answer value="100" text="Fluent"/>
+                    <answer value="1000" text="Good"/>
+                    <answer value="10000" text="Basic"/>
+                </question>
+            </multi-question>
+            <multi-question name="">
+                <line-item>Second</line-item>
+                <question id="54" type="Text" name="Third" title="Third" mandatory="N"/>
+                <question id="55" type="Select" name="Rating" title="Rating">
+                    <answer value="1" text="Native"/>
+                    <answer value="100" text="Fluent"/>
+                    <answer value="1000" text="Good"/>
+                    <answer value="10000" text="Basic"/>
+                </question>
+            </multi-question>
+        </group>
+
+        <group name="Interest in Mobility" title="Interest in Mobility">
+            <question id="56" type="Select" name="Interest" title="Interest in Mobility">
+                <answer value="1" text="Actively seeking international opportunities"/>
+                <answer value="100" text="Could consider mobility"/>
+                <answer value="1000" text="Is not interested"/>
+            </question>
+
+            <question id="57" type="MultiSelect" name="Region" title="Mobility Region" mandatory="N">
+                <answer value="1" text="Any Region"/>
+                <answer value="2" text="Europe Main"/>
+                <answer value="3" text="Europe Area I"/>
+                <answer value="4" text="Europe Area II"/>
+                <answer value="5" text="Latin America"/>
+                <answer value="6" text="Middle East and Africa"/>
+                <answer value="7" text="Asia Pacific"/>
+                <answer value="8" text="Japan"/>
+                <answer value="9" text="North America"/>
+            </question>
+            <question id="58" type="TextBox" name="Comment" title="Comments">
+            </question>
+
+        </group>
+
+
+    </questionnaire>
+</xml>		

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+    <questionnaire name="NewQuestions" title="newq">
+
+        <group name="Sum" title="Sum">
+
+            <question id="1" type="Select" name="A" title="A">
+                <answer value="1" text="1"/>
+                <answer value="2" text="2"/>
+                <answer value="3" text="3"/>
+            </question>
+
+            <question id="2" type="Select" name="B" title="B">
+                <answer value="1" text="1"/>
+                <answer value="2" text="2"/>
+                <answer value="3" text="3"/>
+            </question>
+
+            <question id="3" type="Select" name="C" title="C">
+                <answer value="1" text="1"/>
+                <answer value="2" text="2"/>
+                <answer value="3" text="3"/>
+            </question>
+
+            <question id="4" type="Select" name="D" title="D">
+                <answer value="1" text="1"/>
+                <answer value="2" text="2"/>
+                <answer value="3" text="3"/>
+            </question>
+
+            <question id="5" type="Sum" name="Total" title="Total">
+                <operand source="1"/>
+                <operand source="2"/>
+                <operand source="3"/>
+                <operand source="4"/>
+            </question>
+
+        </group>
+
+        <group name="EnumMapping - One Level" title="EnumMapping - One Level">
+
+            <question id="6" type="EnumMapping" name="EnumMapping - One Level" title="EnumMapping - One Level">
+                <mapping upperbound="4" value="Low" text="Low" source="5"/>
+                <mapping lowerbound="5" upperbound="8" value="Medium" text="Medium" source="5"/>
+                <mapping lowerbound="9" value="High" text="High" source="5"/>
+            </question>
+
+        </group>
+
+        <group name="EnumMapping - Two Levels" title="EnumMapping - Two Levels">
+
+            <question id="7" type="Select" name="Final Performance Rating" title="Final Performance Rating">
+                <answer value="1" text="1"/>
+                <answer value="2" text="2"/>
+                <answer value="3" text="3"/>
+                <answer value="4" text="4"/>
+                <answer value="5" text="5"/>
+            </question>
+
+            <question id="8" type="EnumMapping" name="EnumMapping - Two Levels" title="EnumMapping - Two Levels">
+                <mapping upperbound="4" value=" " text=" " source="5">
+                    <mapping upperbound="2" value="Fall within low and score 1 or 2 within Final Performance Rating" text="Poor Performer" source="7"/>
+                    <mapping lowerbound="3" upperbound="3" value="Fall within low and score 3 within Final Performance Rating" text="Good Solid Performer" source="7"/>
+                </mapping>
+                <mapping lowerbound="5" upperbound="8" value=" " text=" " source="5">
+                    <mapping upperbound="2" value="Fall within medium and score 1 or 2 within Final Performance Rating" text="Under Performer" source="7"/>
+                    <mapping lowerbound="3" upperbound="3" value="Fall within medium and score 3 within Final Performance Rating" text="Good Solid Performer (with Potential)" source="7"/>
+                </mapping>
+                <mapping lowerbound="9" value=" " text=" " source="5">
+                    <mapping upperbound="2" value="Fall within high and score 1 or 2 within Final Performance Rating" text="Under Performer (with High Potential)" source="7"/>
+                    <mapping lowerbound="3" upperbound="3" value="Fall within high and score 3 within Final Performance Rating" text="Good Solid Performer (with High Potential)" source="7"/>
+                </mapping>
+            </question>
+        </group>
+
+        <group name="Dynamic line-item" title="Dynamic line-item">
+            <multi-question name="Dynamic">
+                <line-item dynamic="Y">Dynamic line-item</line-item>
+                <question id="9" type="Text" name="Country" title="Country"/>
+                <question id="10" type="PositiveInteger" name="Duration" title="Duration" mandatory="Y"/>
+                <question id="11" type="TextBox" name="Additional Comments" title="Additional Comments"/>
+                <question id="12" type="Date" name="Date Name" title="Date Title" mandatory="Y"/>
+                <question id="13" type="Select" name="Select Name" title="Select Title" mandatory="Y">
+                    <answer value="Select Value1" text="Select Text1"/>
+                    <answer value="Select Value2" text="Select Text2"/>
+                    <answer value="Select Value3" text="Select Text3"/>
+                    <answer value="Select Value4" text="Select Text4"/>
+                    <answer value="Select Value5" text="Select Text5"/>
+                </question>
+                <question id="14" type="Radio" name="Radio Name" title="Radio Title">
+                    <answer value="Radio Value 1" text="Radio Text 1"/>
+                    <answer value="Radio Value 2" text="Radio Text 2"/>
+                    <answer value="Radio Value 3" text="Radio Text 3"/>
+                </question>
+            </multi-question>
+        </group>
+
+        <group name="Last Updated" title="Last Updated">
+            <question id="15" type="LastUpdated" name="Last Updated (Date)"/>
+            <question id="16" type="LastUpdatedBy" name="Last Updated (User)"/>
+        </group>
+
+        <group name="Multi Question Test" title="Multi Question Test">
+            <multi-question name="Regular">
+                <line-item>Challenge</line-item>
+                <question id="17" type="Text" name="Target" title="Please enter your Challenge target" mandatory="N"/>
+                <question id="18" type="Select" name="Scalar" title="Scalar">
+                    <answer value="100" text="Hundred"/>
+                    <answer value="1000" text="Thousand"/>
+                </question>
+            </multi-question>
+        </group>
+
+        <group name="Group Name for Integer" title="Group Name for Integer">
+            <question id="19" type="Integer" name="Integer Name" title="Integer Title"/>
+        </group>
+
+        <group name="Group Name for Positive Integer" title="Group Name for Positive Integer">
+            <question id="20" type="PositiveInteger" name="Positive Integer Name" title="Positive Integer Title"/>
+        </group>
+
+        <group name="Group Name for MultiSelect">
+            <question id="21" type="MultiSelect" name="Mobility Region" title="Mobility Region">
+                <answer value="Any Region" text="Any Region"/>
+                <answer value="Europe Main" text="Europe Main"/>
+                <answer value="Europe Area I" text="Europe Area I"/>
+                <answer value="Europe Area II" text="Europe Area II"/>
+                <answer value="LAMEA" text="LAMEA"/>
+                <answer value="Asia Pacific" text="Asia Pacific"/>
+                <answer value="Japan" text="Japan"/>
+                <answer value="United States" text="United States"/>
+                <answer value="ISMO Central Functions" text="ISMO Central Functions"/>
+            </question>
+        </group>
+
+        <group name="Group Name for Image">
+            <question id="22" type="Image" name="Image name" title="Image title"/>
+        </group>
+
+        <group name="Group Name for Organisation">
+            <question id="23" type="Organisation" name="Organisation name" title="Organisation title"/>
+        </group>
+
+        <group name="Group Name for Subject Name">
+            <question id="24" type="Subject" name="Subject name" title="Subject title"/>
+        </group>
+
+        <group name="Group Name for Position Title">
+            <question id="25" type="Position" name="Position name" title="Position title"/>
+        </group>
+
+        <group name="Group Name for Date">
+            <question id="26" type="Date" name="Date Name" title="Date Title"/>
+        </group>
+
+    </questionnaire>
+</xml>
