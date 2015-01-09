@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+<!--
+    JDBC configuration for application
+-->
+<beans>
+
+<!--========================== MAIL DEFINITIONS =========================-->
+
+    <!-- mail sender without the jndi name lookup -->
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="170.170.1.15"/>
+    </bean>
+
+</beans>

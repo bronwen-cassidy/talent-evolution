@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+    <questionnaire name="DateUpdatedQ" title="lastupdatedInfo">        
+
+        <group name="Questions with different types of title value">
+            <question id="1" type="Text" name="No Title Name" mandatory="Y"/>
+            <question id="2" type="Text" name="Blank Title Name" title="" mandatory="Y"/>
+            <question id="3" type="Text" name="Space Title Name" title=" " mandatory="Y"/>
+            <question id="4" type="Text" name="A title Name" title="This is the title" mandatory="Y"/>
+        </group>
+        
+        <group name="Last Updated" title="Last Updated">
+            <question id="40" type="LastUpdated" name="Last Updated (DateTime)" function="lastupdate" format="DateTime"/>
+            <question id="41" type="LastUpdatedBy" name="Last Updated (DateTimeUser)" function="lastupdate" format="datetimeuser"/>            
+        </group>
+
+        <group name="Sum" title="Sum">
+
+            <question id="32" type="Select" name="A" title="A">
+                <answer value="1" text="1"/>
+                <answer value="2" text="2"/>
+                <answer value="3" text="3"/>
+            </question>
+
+            <question id="33" type="Select" name="B" title="B">
+                <answer value="1" text="1"/>
+                <answer value="2" text="2"/>
+                <answer value="3" text="3"/>
+            </question>
+
+            <question id="34" type="Select" name="C" title="C">
+                <answer value="1" text="1"/>
+                <answer value="2" text="2"/>
+                <answer value="3" text="3"/>
+            </question>
+
+            <question id="35" type="Select" name="D" title="D">
+                <answer value="1" text="1"/>
+                <answer value="2" text="2"/>
+                <answer value="3" text="3"/>
+            </question>
+
+            <question id="36" type="Sum" name="Total" title="Total">
+                <operand source="32"/>
+                <operand source="33"/>
+                <operand source="34"/>
+                <operand source="35"/>
+            </question>
+
+        </group>
+
+        <group name="EnumMapping - One Level" title="EnumMapping - One Level">
+
+            <question id="37" type="EnumMapping" name="EnumMapping - One Level" title="EnumMapping - One Level">
+                <mapping upperbound="4" value="Low" text="Low" source="36"/>
+                <mapping lowerbound="5" upperbound="8" value="Medium" text="Medium" source="36"/>
+                <mapping lowerbound="9" value="High" text="High" source="36"/>
+            </question>
+
+        </group>
+
+        <group name="EnumMapping - Two Levels" title="EnumMapping - Two Levels">
+
+            <question id="51" type="Select" name="Final Performance Rating" title="Final Performance Rating">
+                <answer value="1" text="1"/>
+                <answer value="2" text="2"/>
+                <answer value="3" text="3"/>
+                <answer value="4" text="4"/>
+                <answer value="5" text="5"/>
+            </question>
+
+            <question id="52" type="EnumMapping" name="EnumMapping - Two Levels" title="EnumMapping - Two Levels">
+                <mapping upperbound="4" value=" " text=" " source="36">
+                    <mapping upperbound="2" value="Fall within low and score 1 or 2 within Final Performance Rating" text="Poor Performer" source="51"/>
+                    <mapping lowerbound="3" upperbound="3" value="Fall within low and score 3 within Final Performance Rating" text="Good Solid Performer" source="51"/>
+                </mapping>
+                <mapping lowerbound="5" upperbound="8" value=" " text=" " source="36">
+                    <mapping upperbound="2" value="Fall within medium and score 1 or 2 within Final Performance Rating" text="Under Performer" source="51"/>
+                    <mapping lowerbound="3" upperbound="3" value="Fall within medium and score 3 within Final Performance Rating" text="Good Solid Performer (with Potential)" source="51"/>
+                </mapping>
+                <mapping lowerbound="9" value=" " text=" " source="36">
+                    <mapping upperbound="2" value="Fall within high and score 1 or 2 within Final Performance Rating" text="Under Performer (with High Potential)" source="51"/>
+                    <mapping lowerbound="3" upperbound="3" value="Fall within high and score 3 within Final Performance Rating" text="Good Solid Performer (with High Potential)" source="51"/>
+                </mapping>
+            </question>
+        </group>
+
+    </questionnaire>
+</xml>

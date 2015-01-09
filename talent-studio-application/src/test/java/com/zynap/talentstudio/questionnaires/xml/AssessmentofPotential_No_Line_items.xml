@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+    <questionnaire name="Assessment of Potential" title="Assessment of Potential">
+
+        <group name="Assessment of Potential (AOP)" title="">
+            <narrative>The AOP form also serves as a one page input to the talent review and therefore includes a summary of the individual's aspirations and suggested next career steps.</narrative>
+            <narrative>Please select the status as In progress to start and the form will automatically save as you progress through it.</narrative>
+
+        </group>
+
+        <group name="Status" title="Status">
+            <multi-question name="">
+                <line-item>Last Updated Status</line-item>
+                <question id="1" type="LastUpdated" name="AOP Last Updated" title="AOP Last Updated"/>
+                <question id="2" type="LastUpdatedBy" name="Last Updated By" title="Last Updated By"/>
+                <question id="3" type="Radio" name="AOP Completion Status" title="AOP Completion Status" mandatory="Y">
+                    <answer value="1" text="In Progress"/>
+                    <answer value="2" text="Completed"/>
+                </question>
+            </multi-question>
+
+        </group>
+
+        <group name="Performance Rating" title="Performance Rating">
+
+            <question id="6" type="Radio" name=" This Year" title="" length="60" mandatory="N">
+                <answer value="1" text="Unacceptable"/>
+                <answer value="2" text="Partially Met"/>
+                <answer value="3" text="Met"/>
+                <answer value="4" text="Exceeded"/>
+                <answer value="5" text="Distinguished"/>
+            </question>
+
+            <question id="7" type="Radio" name=" Last Year" title="Last Year">
+                <answer value="1" text="Unacceptable"/>
+                <answer value="2" text="Partially Met"/>
+                <answer value="3" text="Met"/>
+                <answer value="4" text="Exceeded"/>
+                <answer value="5" text="Distinguished"/>
+            </question>
+
+            <question id="8" type="Radio" name=" Two Years Ago" title="Two Years Ago" target="1">
+                <answer value="1" text="Unacceptable"/>
+                <answer value="2" text="Partially Met"/>
+                <answer value="3" text="Met"/>
+                <answer value="4" text="Exceeded"/>
+                <answer value="5" text="Distinguished"/>
+            </question>
+
+            <question id="9" type="Sum" name=" Rating Sum" title="Rating Sum" displayable="false">
+                <operand source="6"/>
+                <operand source="7"/>
+                <operand source="8"/>
+            </question>
+
+            <question id="11" type="EnumMapping" name=" Calculated three year sustained performance " title="Calculated three year sustained performance ">
+                <mapping upperbound="6" value="Low" text="Low" source="9"/>
+                <mapping lowerbound="7" upperbound="11" value="Medium" text="Medium" source="9"/>
+                <mapping lowerbound="12" value="High" text="High" source="9"/>
+            </question>
+
+            <question id="12" type="Radio" name=" Actual three year sustained performance" title="Actual three year sustained performance">
+                <answer value="1" text="Low"/>
+                <answer value="2" text="Medium"/>
+                <answer value="3" text="High"/>
+            </question>
+            <question id="13" type="Radio" name=" Performance Tracking" title="Performance Tracking">
+                <answer value="1" text="Improving"/>
+                <answer value="2" text="No Change"/>
+                <answer value="3" text="Declining"/>
+            </question>
+
+        </group>
+
+
+        <group name="Leadership Capabilities">
+
+            <question id="20" type="Radio" name="Target Leadership Capability Level" title="." length="60">
+                <answer value="1" text="Target Level 1"/>
+                <answer value="100" text="Target Level 2"/>
+                <answer value="1000" text="Target Level 3"/>
+                <answer value="1000000" text="Target Level 4"/>
+                <answer value="10000000" text="Target Level 5"/>
+            </question>
+
+            <question id="21" type="Radio" name="Passion for Customers-Rating" title="Rating">
+                <answer value="10" text="Below Target"/>
+                <answer value="100" text="At Target"/>
+                <answer value="1000" text="Above Target"/>
+            </question>
+            <question id="22" type="TextBox" name="Supporting Examples" title="Supporting Examples" length="32" mandatory="N"/>
+
+
+                <question id="23" type="Radio" name="Thinks Strategically" title="">
+                    <answer value="10" text="Below Target"/>
+                    <answer value="100" text="At Target"/>
+                    <answer value="1000" text="Above Target"/>
+                </question>
+                <question id="24" type="TextBox" name="." title="" length="32" mandatory="N"/>
+
+
+                <question id="25" type="Radio" name="Acts Decisively" title="">
+                    <answer value="10" text="Below Target"/>
+                    <answer value="100" text="At Target"/>
+                    <answer value="1000" text="Above Target"/>
+                </question>
+                <question id="26" type="TextBox" name="." title="" length="32" mandatory="N"/>
+
+
+                <question id="27" type="Radio" name="Drives Performance" title="">
+                    <answer value="10" text="Below Target"/>
+                    <answer value="100" text="At Target"/>
+                    <answer value="1000" text="Above Target"/>
+                </question>
+                <question id="28" type="TextBox" name="." title="" length="32" mandatory="N"/>
+
+
+                <question id="29" type="Radio" name="Works Collaboratively" title="">
+                    <answer value="10" text="Below Target"/>
+                    <answer value="100" text="At Target"/>
+                    <answer value="1000" text="Above Target"/>
+                </question>
+                <question id="30" type="TextBox" name="." title="" length="32" mandatory="N"/>
+
+
+                <question id="31" type="Radio" name="Develops People and Organisation" title="">
+                    <answer value="10" text="Below Target"/>
+                    <answer value="100" text="At Target"/>
+                    <answer value="1000" text="Above Target"/>
+                </question>
+                <question id="32" type="TextBox" name="." title="" length="32" mandatory="N"/>
+
+
+                <question id="33" type="Radio" name="Demonstrates All AstraZeneca Values" title="">
+                    <answer value="10" text="Yes"/>
+                    <answer value="0" text="No"/>
+                </question>
+
+        </group>
+        
+        <group name="Summary Information" title="Current Year Summary">
+
+            <question id="34" type="Sum" name="Rating Sum" title="Rating Sum">
+                <operand source="21"/>
+                <operand source="23"/>
+                <operand source="25"/>
+                <operand source="27"/>
+                <operand source="29"/>
+                <operand source="31"/>
+                <operand source="33"/>
+            </question>
+
+            <question id="35" type="EnumMapping" name="Calculated Current Year Summary" title="Calculated Current Year Summary">
+                <mapping upperbound="60" value="Unacceptable" text="Unacceptable" source="34"/>
+                <mapping lowerbound="410" upperbound="411" value="Partially Met" text="Partially Met" source="34"/>
+                <mapping lowerbound="1310" upperbound="1311" value="Partially Met" text="Partially Met" source="34"/>
+                <mapping lowerbound="2210" upperbound="2211" value="Partially Met" text="Partially Met" source="34"/>
+                <mapping lowerbound="3110" upperbound="3111" value="Partially Met" text="Partially Met" source="34"/>
+                <mapping lowerbound="510" upperbound="511" value="Fully Met" text="Fully Met" source="34"/>
+                <mapping lowerbound="1410" upperbound="1411" value="Fully Met" text="Fully Met" source="34"/>
+                <mapping lowerbound="2310" upperbound="2311" value="Fully Met" text="Fully Met" source="34"/>
+                <mapping lowerbound="4110" upperbound="4111" value="Fully Met" text="Fully Met" source="34"/>
+                <mapping lowerbound="610" upperbound="611" value="Exceeded" text="Exceeded" source="34"/>
+                <mapping lowerbound="1510" upperbound="1511" value="Exceeded" text="Exceeded" source="34"/>
+                <mapping lowerbound="2410" upperbound="2411" value="Exceeded" text="Exceeded" source="34"/>
+                <mapping lowerbound="3310" upperbound="3311" value="Distinguished" text="Distinguished" source="34"/>
+                <mapping lowerbound="4210" upperbound="4211" value="Distinguished" text="Distinguished" source="34"/>
+                <mapping lowerbound="5110" upperbound="5111" value="Distinguished" text="Distinguished" source="34"/>
+                <mapping lowerbound="6010" upperbound="6011" value="Distinguished" text="Distinguished" source="34"/>
+            </question>
+            <question id="36" type="Radio" name="Actual Current Year Summary" title="Actual Current Year Summary">
+                <answer value="1" text="Low"/>
+                <answer value="2" text="Medium"/>
+                <answer value="3" text="High"/>
+            </question>
+
+            <question id="38" type="Radio" name="Overall Assessment Last Year" title="Overall Assessment Last Year">
+                <answer value="1" text="Low"/>
+                <answer value="2" text="Medium"/>
+                <answer value="3" text="High"/>
+            </question>
+
+            <question id="39" type="Radio" name="Overall Assessment Two Years Ago" title="Overall Assessment Two Years Ago">
+                <answer value="1" text="Low"/>
+                <answer value="2" text="Medium"/>
+                <answer value="3" text="High"/>
+            </question>
+        </group>
+        <group name="Overall Assessment This Year" title="Overall Assessment This Year">
+
+            <question id="40" type="Sum" name="Rating Sum" title="Rating Sum">
+                <operand source="21"/>
+                <operand source="23"/>
+                <operand source="25"/>
+                <operand source="27"/>
+                <operand source="29"/>
+                <operand source="31"/>
+            </question>
+
+            <question id="41" type="EnumMapping" name="Calculated Overall Assessment This Year" title="Calculated Overall Assessment This Year">
+                <mapping upperbound="6" value="Low" text="Low" source="40"/>
+                <mapping lowerbound="7" upperbound="11" value="Medium" text="Medium" source="40"/>
+                <mapping lowerbound="12" value="High" text="High" source="40"/>
+
+            </question>
+            <question id="42" type="Radio" name="Actual Overall Assessment This Year" title="Actual Overall Assessment This Year">
+                <answer value="1" text="Low"/>
+                <answer value="2" text="Medium"/>
+                <answer value="3" text="High"/>
+            </question>
+            <question id="43" type="Radio" name="Performance Tracking" title="Performance Tracking">
+                <answer value="1" text="Improving"/>
+                <answer value="2" text="No Change"/>
+                <answer value="3" text="Declining"/>
+            </question>
+        </group>
+
+        <group name="High Potential and Talent Pool" title="High Potential and Talent Pool">
+
+                <question id="44" type="Radio" name="Is never satisfied and constantly challenges the status quo" title="">
+                    <answer value="1" text="Yes"/>
+                    <answer value="0" text="No"/>
+                </question>
+
+
+                <question id="45" type="Radio" name="Has high aspiration and the belief in their ability to have broad impact in AstraZeneca" title="">
+                    <answer value="1" text="Yes"/>
+                    <answer value="0" text="No"/>
+                </question>
+
+
+                <question id="46" type="Radio" name="Takes the initiative to make change happen, even when this means to take a personal risk" title="">
+                    <answer value="1" text="Yes"/>
+                    <answer value="0" text="No"/>
+                </question>
+
+
+                <question id="47" type="Radio" name="Consitently identifies and acts on opportunities before others" title="">
+                    <answer value="1" text="Yes"/>
+                    <answer value="0" text="No"/>
+                </question>
+
+
+                <question id="48" type="Radio" name="Brings multiple perspectives to existing issues and helps others to see the problem differently" title="">
+                    <answer value="1" text="Yes"/>
+                    <answer value="0" text="No"/>
+                </question>
+
+
+                <question id="49" type="Radio" name="Quickly establishes the critical issue in a highly complex situation" title="">
+                    <answer value="1" text="Yes"/>
+                    <answer value="0" text="No"/>
+                </question>
+
+
+                <question id="50" type="Radio" name="Continuously demonstrates the ability to grow and change for sustained success" title="">
+                    <answer value="1" text="Yes"/>
+                    <answer value="0" text="No"/>
+                </question>
+
+
+                <question id="51" type="Radio" name="Accurately reads both the broad environmental context and the needs/motivations of others" title="">
+                    <answer value="1" text="Yes"/>
+                    <answer value="0" text="No"/>
+                </question>
+
+
+                <question id="52" type="Radio" name="Adapts own style and approaches to maximise impact on others" title="">
+                    <answer value="1" text="Yes"/>
+                    <answer value="0" text="No"/>
+                </question>
+        </group>
+
+        <group name="Overall Assessment" title="Overall Assessment">
+
+            <question id="54" type="Sum" name="Rating Sum" title="Rating Sum">
+                <operand source="44"/>
+                <operand source="45"/>
+                <operand source="46"/>
+                <operand source="47"/>
+                <operand source="48"/>
+                <operand source="49"/>
+                <operand source="50"/>
+                <operand source="51"/>
+                <operand source="52"/>
+            </question>
+
+            <question id="55" type="EnumMapping" name="Calculated Overall Assessment" title="Calculated Overall Assessment">
+                <mapping upperbound="2" value="Low" text="Low" source="54"/>
+                <mapping lowerbound="3" upperbound="5" value="Medium" text="Medium" source="54"/>
+                <mapping lowerbound="6" value="High" text="High" source="54"/>
+            </question>
+            
+            <question id="56" type="Radio" name="Actual Overall Assessment" title="Actual Overall Assessment">
+                <answer value="1" text="Low"/>
+                <answer value="2" text="Medium"/>
+                <answer value="3" text="High"/>
+            </question>
+
+            <question id="57" type="Sum" name="Rating Sum" title="Rating Sum">
+                <operand source="12"/>
+                <operand source="42"/>
+                <operand source="54"/>
+            </question>
+
+            <question id="58" type="EnumMapping" name="ISMO Talent Pool" title="ISMO Talent Pool">
+                <mapping upperbound="14" value="No" text="No" source="57"/>
+                <mapping lowerbound="15" value="Yes" text="Yes" source="57"/>
+            </question>
+
+            <question id="59" type="Radio" name="Has the potential for a top 200 role" title="Has the potential for a top 200 role">
+                <answer value="1" text="Yes"/>
+                <answer value="0" text="No"/>
+            </question>
+
+            <question id="60" type="Sum" name="Rating Sum" title="Rating Sum">
+                <operand source="12"/>
+                <operand source="42"/>
+                <operand source="59"/>
+                <operand source="54"/>
+            </question>
+
+            <question id="61" type="EnumMapping" name="Global Talent Pool" title="Global Talent Pool">
+                <mapping upperbound="15" value="No" text="No" source="60"/>
+                <mapping lowerbound="16" value="Yes" text="Yes" source="60"/>
+            </question>
+
+        </group>
+
+        <group name="Interest in Mobility" title="Interest in Mobility">
+            <question id="68" type="Radio" name="Interest" title="Interest in Mobility">
+                <answer value="1" text="Actively seeking international opportunities"/>
+                <answer value="100" text="Could consider mobility"/>
+                <answer value="1000" text="Is not interested"/>
+            </question>
+
+            <question id="69" type="Checkbox" name="Mobility Region" mandatory="N">
+                <answer value="1" text="Any Region"/>
+                <answer value="2" text="Europe Main"/>
+                <answer value="3" text="Europe Area I"/>
+                <answer value="4" text="Central and Eastern Europe"/>
+                <answer value="5" text="Latin America"/>
+                <answer value="6" text="Middle East and Africa"/>
+                <answer value="7" text="Asia Pacific"/>
+                <answer value="8" text="Japan"/>
+                <answer value="9" text="North America"/>
+            </question>
+
+            <question id="70" type="TextBox" name="Comment" title="Comments" length="30">
+            </question>
+        </group>
+
+        <group name="Employees Ultimate Career Goal" title="Employees Ultimate Career Goal">
+            <question id="71" type="Text" name="Goal" title="Goal"/>
+            <question id="72" type="Radio" name="Timescale" title="Timescale">
+                <answer value="1" text="Under 6 months"/>
+                <answer value="100" text="6-12 months"/>
+                <answer value="1000" text="12-24 months"/>
+                <answer value="1000" text="Over 24 months"/>
+            </question>
+        </group>
+
+        <group name="Managers Assessment of Employees Ultimate Potential" title="Managers Assessment of Employees Ultimate Potential">
+            <question id="73" type="Text" name="Goal" title="Goal"/>
+            <question id="74" type="Radio" name="Timescale" title="Timescale">
+                <answer value="1" text="Under 6 months"/>
+                <answer value="100" text="6-12 months"/>
+                <answer value="1000" text="12-24 months"/>
+                <answer value="1000" text="Over 24 months"/>
+            </question>
+        </group>
+
+        <group name="Next Career move - position and timescale" title="Next Career move - position and timescale">
+            <question id="90" type="Text" name="Role" title="Role"/>
+            <question id="91" type="Radio" name="Timescale" title="Timescale">
+                <answer value="1" text="Under 6 months"/>
+                <answer value="100" text="6-12 months"/>
+                <answer value="1000" text="12-24 months"/>
+                <answer value="1000" text="Over 24 months"/>
+            </question>
+            <question id="92" type="Checkbox" name="Preferred Destination" title="Preferred Destination" mandatory="N">
+                <answer value="1" text="Any Region"/>
+                <answer value="2" text="Europe Main"/>
+                <answer value="3" text="Europe Area I"/>
+                <answer value="4" text="Central and Eastern Europe"/>
+                <answer value="5" text="Latin America"/>
+                <answer value="6" text="Middle East and Africa"/>
+                <answer value="7" text="Asia Pacific"/>
+                <answer value="8" text="Japan"/>
+                <answer value="9" text="North America"/>
+            </question>
+            <question id="94" type="TextBox" name="Overall Comments, Further Detail, Supporting Information" title="Overall Comments, Further Detail, Supporting Information"/>
+        </group>
+    </questionnaire>
+</xml>		

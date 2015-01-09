@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+<!--
+    JDBC configuration for tests
+-->
+<beans>
+
+    <!-- required as ZynapDbUnitWebGenTestCase loads this file independently of other context files -->
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="systemPropertiesMode" value="2"/>
+    </bean>
+
+    <bean id="dataSource" class="oracle.jdbc.pool.OracleDataSource">
+        <property name="driverType" value="oracle.jdbc.OracleDriver"/>
+        <property name="URL" value="${test.db.url}"/>
+        <property name="user" value="${test.db.username}"/>
+        <property name="password" value="${test.db.password}"/>
+    </bean>
+
+    <bean id="zynapSqlExceptionTranslator" class="com.zynap.exception.dao.oracle.ZynapSQLExceptionTranslator">
+        <property name="dataSource">
+            <ref local="dataSource"/>
+        </property>
+    </bean>
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource">
+            <ref local="dataSource"/>
+        </property>
+        <property name="exceptionTranslator">
+            <ref local="zynapSqlExceptionTranslator"/>
+        </property>
+    </bean>
+
+    <bean id="nativeJdbcExtractor" class="org.springframework.jdbc.support.nativejdbc.CommonsDbcpNativeJdbcExtractor" lazy-init="true"/>
+
+    <bean id="oracleLobHandler" class="org.springframework.jdbc.support.lob.OracleLobHandler" lazy-init="true">
+        <property name="nativeJdbcExtractor">
+            <ref local="nativeJdbcExtractor"/>
+        </property>
+    </bean>
+
+</beans>

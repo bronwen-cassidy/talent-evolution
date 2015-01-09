@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+
+    <questionnaire name="Post Scheme Plans - additional question" title="Post Scheme Plans">
+		<group name="Status" title="Status">	
+			<question id="1" type="LastUpdated" name="Post Scheme Employment Last Updated" />
+			<question id="2" type="LastUpdatedBy" name="Last Updated By" title="Last Updated By" />
+    </group> 
+	<group name="Leavers Data" title="">
+	<narrative>This form is designed to capture the details of your next move following the scheme. This data will be used to produce leaver statistics and information for our stakeholders on both a national and regional basis.	You will not be identified as an individual in such reporting.</narrative>
+<narrative>	You need to complete this form along with your formal resignation letter.</narrative> 
+<narrative>When completing the Leaver Status field “Scheme Complete” is applicable for:</narrative>
+<narrative>GENERAL / HR / INFORMATICS: trainees leaving from 1st May (Year 2)</narrative>
+<narrative>FINANCE: trainees leaving from 1st April (Year 3)</narrative>
+	</group>
+	
+			<group name="Leaver Details" title="Status" >
+		<question id="60" type="Select" name="Leaver Status" title="Leaver Status" target="Select Value1">
+				<answer value="Select Value1" text="Scheme Complete"/>
+				<answer value="Select Value2" text="Early Leaver"/>
+				<answer value="Select Value3" text="Early Leaver with Special Measures"/>
+</question>				
+
+		<question id="61" type="Select" name="Future Plans" title="Future Plans" target="Select Value1">
+				<answer value="Select Value1" text="Employment: NHS Job in the same SHA area"/>
+				<answer value="Select Value2" text="Employment: NHS Job in other SHA area"/>
+				<answer value="Select Value3" text="Employment: Job in other public sector"/>
+				<answer value="Select Value4" text="Employment: Job in private sector"/>
+                <answer value="Select Value5" text="Other training position"/>
+				<answer value="Select Value6" text="Travelling"/>
+                <answer value="Select Value7" text="Time off"/>
+				<answer value="Select Value8" text="Seeking employment"/>
+				<answer value="Select Value9" text="Further study"/>
+                <answer value="Select Value10" text="Other"/>
+                </question>
+				<question id="62" type="TextBox" name="If you selected Other, please specify" title="Other"/>
+					<question id="63" type="Select" name="Reason for Leaving (only for completion by early leavers)" title="Reason for Leaving" target="Select Value1">
+									<answer value="Select Value1" text="Contract Terminated Academic Policy"/>
+				<answer value="Select Value2" text="Location"/>
+				<answer value="Select Value3" text="Travel"/>
+				<answer value="Select Value4" text="Personal Reasons"/>
+                <answer value="Select Value5" text="Placement"/>
+				<answer value="Select Value6" text="Scheme was not what I expected"/>
+                <answer value="Select Value7" text="Accepted another position: Other NHS Job"/>
+				<answer value="Select Value8" text="Accepted another position: Job in private sector"/>
+                <answer value="Select Value9" text="Accepted another position: Other training position"/>
+				<answer value="Select Value10" text="Contract Terminated Disciplinary Policy"/>
+				<answer value="Select Value11" text="Contract Terminated Performance Policy"/>
+				<answer value="Select Value12" text="Mutual Agreement"/>
+				<answer value="Select Value13" text="Other"/>
+                </question>
+				<question id="64" type="TextBox" name="If you selected Other, please specify" title="Other"/>
+				</group>
+	<group name="Future Employment" title="Future Employment" >			
+		<narrative>If entering employment please provide further details of your employment:</narrative>		
+
+			<question id="74" type="Text" name="Organisation Name" title="Organisation" />
+			<question id="75" type="Text" name="Job Title" title="Job Title" />
+			<question id="76" type="Select" name="SHA Area" title="SHA Area" target="Select Value1" >
+			<answer value="Select Value1" text="London"/>
+                <answer value="Select Value2" text=" North West"/>
+				<answer value="Select Value3" text="North East"/>
+                <answer value="Select Value4" text="Yorkshire and Humber"/>
+				<answer value="Select Value5" text="West Midlands"/>
+				<answer value="Select Value6" text="East Midlands"/>
+				<answer value="Select Value7" text="East of England"/>
+				<answer value="Select Value8" text="South West"/>
+				<answer value="Select Value9" text="South East"/>
+				<answer value="Select Value10" text="South Central"/>
+                </question>
+
+			<question id="77" type="Select" name="Salary Level (If staying within NHS)" title="Salary Level" target="Select Value1" >
+			<answer value="Select Value1" text="Band 5"/>
+                <answer value="Select Value2" text="Band 6"/>
+				<answer value="Select Value3" text="Band 7"/>
+                <answer value="Select Value4" text="Band 8a"/>
+				<answer value="Select Value5" text="Band 8b"/>
+				<answer value="Select Value6" text="Band 8c"/>
+                </question>
+			<question id="78" type="Select" name="Are you eligible for 	High Cost Area Supplement?" title="Eligible" target="Select Value1">
+			<answer value="Select Value1" text="Yes"/>
+                <answer value="Select Value2" text="No"/>
+				</question>
+				<question id="79" type="Select" name="Salary Level (If leaving NHS)" title="Salary Level" target="Select Value1" >
+			<answer value="Select Value1" text="Under £25,000"/>
+                <answer value="Select Value2" text="£25,000 - £29,999"/>
+				<answer value="Select Value3" text="£30,000 - £34,999"/>
+                <answer value="Select Value4" text="£35,000 - £39,999"/>
+				<answer value="Select Value5" text="£40,000 - £44,999"/>
+				<answer value="Select Value6" text="£45,000 - £49,999"/>	
+				<answer value="Select Value7" text="£50,000 - £54,999"/>
+				<answer value="Select Value8" text="£55,000 - £59,999"/>
+				<answer value="Select Value9" text="Over £60,000"/>
+                </question>
+			<question id="80" type="Select" name="Type of position" title="Position type" target="Select Value1" >
+			<answer value="Select Value1" text="Full-time"/>
+                <answer value="Select Value2" text="Part-time"/>
+                </question>
+			<question id="81" type="Select" name="Type of contract" title="Contract Type" target="Select Value1" >
+				<answer value="Select Value1" text="Permanent"/>
+				<answer value="Select Value2" text="Interim"/>
+                <answer value="Select Value3" text="Fixed Term (1- 6 months)"/>
+				<answer value="Select Value4" text="Fixed Term (7 - 12 months)"/>
+				<answer value="Select Value5" text="Fixed Term (13 - 18 months)"/>
+				<answer value="Select Value6" text="Fixed Term (19 - 24 months)"/>
+				<answer value="Select Value7" text="Secondment"/>
+                </question>
+							<question id="82" type="Select" name="Type of organisation (if staying within NHS): " title="Organisation type" target="Select Value1" >
+			<answer value="Select Value1" text="Strategic Health Authority"/>
+                <answer value="Select Value2" text="Primary Care Trust / GP Consortia"/>
+				<answer value="Select Value3" text="Ambulance Trust"/>
+                <answer value="Select Value4" text="Mental Health Trust"/>
+				<answer value="Select Value5" text="Care Trust"/>
+				<answer value="Select Value6" text="Foundation Trust"/>
+				<answer value="Select Value7" text="Acute Trust"/>
+				<answer value="Select Value8" text="Social Enterprise"/>
+				<answer value="Select Value9" text="Special Health Authority"/>
+                </question>
+				<question id="83" type="Date" name="Last date of employment with the scheme" title="Leaving Date"/>
+				<question id="84" type="Text" name="Please provide your preferred email address so we are able to keep in touch with you regarding scheme matters such as graduation." title="Email address"/>
+				<narrative>As a member of the graduate scheme alumni, your details will now be added to our alumni website. Once registered, you will have access to news, events, learning opportunities and a search directory and will be included in the distribution of our quarterly newsletter. </narrative>
+				<question id="85" type="Checkbox" name="If you DO NOT wish to be included please check the box:" title="Alumni - not included" target="Select Value1"/>	              
+				</group>
+							<group name="Monitoring" title="Monitoring" >	
+<narrative>	This section is for scheme staff only to complete:</narrative>
+				<question id="86" type="Select" name="Graduation Status" target="Select Value1" managerWrite="Y">
+				<answer value="Select Value1" text="Eligble to Graduate"/>
+                <answer value="Select Value2" text="Not Eligble to Graduate"/>
+				<answer value="Select Value3" text="Yet to be determined"/>
+				</question>
+			<question id="87" type="Select" name="Job Progress" title="Job Progress" target="Select Value1" managerWrite="Y">
+				<answer value="Select Value1" text="Application Stage"/>				
+                <answer value="Select Value2" text="Interview Stage"/>
+				<answer value="Select Value3" text="Speculative Offer"/>
+				<answer value="Select Value4" text="Provisional Offer / Pending"/>
+				<answer value="Select Value5" text="Job Secured"/>
+				<answer value="Select Value6" text="Not seeking NHS job"/>
+				<answer value="Select Value7" text="No Job Prospect"/>
+				</question>
+				<question id="88" type="Select" name="Resignation Letter received" title="Resignation Letter" target="Select Value1" managerWrite="Y">
+				<answer value="Select Value1" text="Yes"/>
+                <answer value="Select Value2" text="No"/>
+				 <answer value="Select Value3" text="N/A"/>
+				</question>
+				<question id="89" type="Text" name="ESR Number" title="ESR Number" managerWrite="Y"/>
+				<question id="90" type="TextBox" name="Comments" title="Comments" managerWrite="Y"/>
+			
+	</group>
+				
+						
+    </questionnaire>
+</xml>

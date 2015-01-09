@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+    <questionnaire name="Objective Setting" title="Objective Setting">
+      <group name="Status" title="Status">
+        <question id="1" type="LastUpdated" name="Objective Setting Last Updated" />
+        <question id="2" type="LastUpdatedBy" name="Last Updated By" title="Last Updated By" />
+        <question id="3" type="Radio" name="Objectives Completion Status" title="Objectives Completion Status">
+            <answer value="1" text="In Progress"/>
+            <answer value="2" text="Completed"/>
+         </question>
+         
+      </group>
+	  <group name="Objective Details" title="Objective Details">
+
+            <multi-question name=" ">
+                <line-item>Obj 1</line-item>
+          
+          <question id="598" type="Radio" name="Objective Type" title="Objective Type">
+            <answer value="1" text="Performance"/>
+            <answer value="2" text="People"/>
+            <answer value="3" text="Products"/>
+            <answer value="4" text="Patients"/>
+         </question>                      
+          <question id="7" type="TextBox" name="Objective" title="Objective" length="15"/>
+          <question id="8" type="TextBox" name="Measures" title="Measures" length="15"/>
+          <question id="9" type="TextBox" name="Critical Actions to reach Objectives" title="Critical Actions to reach Objectives" length="15"/>
+          <question id="10" type="TextBox" name="Comments" title="Comments" length="15"/>
+        </multi-question>
+        
+            <multi-question name=" ">
+                <line-item>Obj 2</line-item>
+          
+          <question id="599" type="Radio" name="Objective Type" title="Objective Type">
+            <answer value="1" text="Performance"/>
+            <answer value="2" text="People"/>
+            <answer value="3" text="Products"/>
+            <answer value="4" text="Patients"/>
+         </question>                      
+          <question id="11" type="TextBox" name="Objective" title="Objective" length="15"/>
+          <question id="12" type="TextBox" name="Measures" title="Measures" length="15"/>
+          <question id="13" type="TextBox" name="Critical Actions to reach Objectives" title="Critical Actions to reach Objectives" length="15"/>
+          <question id="14" type="TextBox" name="Comments" title="Comments" length="15"/>
+        </multi-question>
+        
+            <multi-question name=" ">
+                <line-item>Obj 3</line-item>
+          
+          <question id="600" type="Radio" name="Objective Type" title="Objective Type">
+            <answer value="1" text="Performance"/>
+            <answer value="2" text="People"/>
+            <answer value="3" text="Products"/>
+            <answer value="4" text="Patients"/>
+         </question>                      
+          <question id="15" type="TextBox" name="Objective" title="Objective" length="15"/>
+          <question id="16" type="TextBox" name="Measures" title="Measures" length="15"/>
+          <question id="17" type="TextBox" name="Critical Actions to reach Objectives" title="Critical Actions to reach Objectives" length="15"/>
+          <question id="18" type="TextBox" name="Comments" title="Comments" length="15"/>
+        </multi-question>
+ 
+             <multi-question name=" ">       
+                <line-item>Obj 4</line-item>
+          
+          <question id="601" type="Radio" name="Objective Type" title="Objective Type">
+            <answer value="1" text="Performance"/>
+            <answer value="2" text="People"/>
+            <answer value="3" text="Products"/>
+            <answer value="4" text="Patients"/>
+         </question>                      
+          <question id="19" type="TextBox" name="Objective" title="Objective" length="15"/>
+          <question id="20" type="TextBox" name="Measures" title="Measures" length="15"/>
+          <question id="21" type="TextBox" name="Critical Actions to reach Objectives" title="Critical Actions to reach Objectives" length="15"/>
+          <question id="22" type="TextBox" name="Comments" title="Comments" length="15"/>
+        </multi-question>
+        
+            <multi-question name=" ">
+                <line-item>Obj 5</line-item>
+          
+          <question id="602" type="Radio" name="Objective Type" title="Objective Type">
+            <answer value="1" text="Performance"/>
+            <answer value="2" text="People"/>
+            <answer value="3" text="Products"/>
+            <answer value="4" text="Patients"/>
+         </question>                      
+          <question id="23" type="TextBox" name="Objective" title="Objective" length="15"/>
+          <question id="24" type="TextBox" name="Measures" title="Measures" length="15"/>
+          <question id="25" type="TextBox" name="Critical Actions to reach Objectives" title="Critical Actions to reach Objectives" length="15"/>
+          <question id="26" type="TextBox" name="Comments" title="Comments" length="15"/>
+        </multi-question>
+        
+            <multi-question name=" ">
+                <line-item>Obj 6</line-item>
+          
+          <question id="603" type="Radio" name="Objective Type" title="Objective Type">
+            <answer value="1" text="Performance"/>
+            <answer value="2" text="People"/>
+            <answer value="3" text="Products"/>
+            <answer value="4" text="Patients"/>
+         </question>                      
+          <question id="27" type="TextBox" name="Objective" title="Objective" length="15"/>
+          <question id="28" type="TextBox" name="Measures" title="Measures" length="15"/>
+          <question id="29" type="TextBox" name="Critical Actions to reach Objectives" title="Critical Actions to reach Objectives" length="15"/>
+          <question id="30" type="TextBox" name="Comments" title="Comments" length="15"/>
+        </multi-question>
+
+            <multi-question name=" ">
+                <line-item>Obj 7</line-item>
+          
+          <question id="604" type="Radio" name="Objective Type" title="Objective Type">
+            <answer value="1" text="Performance"/>
+            <answer value="2" text="People"/>
+            <answer value="3" text="Products"/>
+            <answer value="4" text="Patients"/>
+         </question>                      
+          <question id="31" type="TextBox" name="Objective" title="Objective" length="15"/>
+          <question id="32" type="TextBox" name="Measures" title="Measures" length="15"/>
+          <question id="33" type="TextBox" name="Critical Actions to reach Objectives" title="Critical Actions to reach Objectives" length="15"/>
+          <question id="34" type="TextBox" name="Comments" title="Comments" length="15"/>
+        </multi-question>
+        
+            <multi-question name=" ">
+                <line-item>Obj 8</line-item>
+          
+          <question id="605" type="Radio" name="Objective Type" title="Objective Type">
+            <answer value="1" text="Performance"/>
+            <answer value="2" text="People"/>
+            <answer value="3" text="Products"/>
+            <answer value="4" text="Patients"/>
+         </question>                      
+          <question id="35" type="TextBox" name="Objective" title="Objective" length="15"/>
+          <question id="36" type="TextBox" name="Measures" title="Measures" length="15"/>
+          <question id="37" type="TextBox" name="Critical Actions to reach Objectives" title="Critical Actions to reach Objectives" length="15"/>
+          <question id="38" type="TextBox" name="Comments" title="Comments" length="15"/>
+        </multi-question>
+        
+            <multi-question name=" ">
+                <line-item>Obj 9</line-item>
+          
+          <question id="606" type="Radio" name="Objective Type" title="Objective Type">
+            <answer value="1" text="Performance"/>
+            <answer value="2" text="People"/>
+            <answer value="3" text="Products"/>
+            <answer value="4" text="Patients"/>
+         </question>                      
+          <question id="39" type="TextBox" name="Objective" title="Objective" length="15"/>
+          <question id="40" type="TextBox" name="Measures" title="Measures" length="15"/>
+          <question id="41" type="TextBox" name="Critical Actions to reach Objectives" title="Critical Actions to reach Objectives" length="15"/>
+          <question id="42" type="TextBox" name="Comments" title="Comments" length="15"/>
+        </multi-question>
+
+            <multi-question name=" ">
+                <line-item>Obj 10</line-item>
+          
+          <question id="607" type="Radio" name="Objective Type" title="Objective Type">
+            <answer value="1" text="Performance"/>
+            <answer value="2" text="People"/>
+            <answer value="3" text="Products"/>
+            <answer value="4" text="Patients"/>
+         </question>                      
+          <question id="43" type="TextBox" name="Objective" title="Objective" length="15"/>
+          <question id="44" type="TextBox" name="Measures" title="Measures" length="15"/>
+          <question id="45" type="TextBox" name="Critical Actions to reach Objectives" title="Critical Actions to reach Objectives" length="15"/>
+          <question id="46" type="TextBox" name="Comments" title="Comments" length="15"/>
+        </multi-question>
+        
+            <multi-question name=" ">
+                <line-item>Obj 11</line-item>
+          
+          <question id="608" type="Radio" name="Objective Type" title="Objective Type">
+            <answer value="1" text="Performance"/>
+            <answer value="2" text="People"/>
+            <answer value="3" text="Products"/>
+            <answer value="4" text="Patients"/>
+         </question>                      
+          <question id="47" type="TextBox" name="Objective" title="Objective" length="15"/>
+          <question id="48" type="TextBox" name="Measures" title="Measures" length="15"/>
+          <question id="49" type="TextBox" name="Critical Actions to reach Objectives" title="Critical Actions to reach Objectives" length="15"/>
+          <question id="50" type="TextBox" name="Comments" title="Comments" length="15"/>
+        </multi-question>
+        
+            <multi-question name=" ">
+                <line-item>Obj 12</line-item>
+          
+          <question id="609" type="Radio" name="Objective Type" title="Objective Type">
+            <answer value="1" text="Performance"/>
+            <answer value="2" text="People"/>
+            <answer value="3" text="Products"/>
+            <answer value="4" text="Patients"/>
+         </question>                      
+          <question id="51" type="TextBox" name="Objective" title="Objective" length="15"/>
+          <question id="52" type="TextBox" name="Measures" title="Measures" length="15"/>
+          <question id="53" type="TextBox" name="Critical Actions to reach Objectives" title="Critical Actions to reach Objectives" length="15"/>
+          <question id="54" type="TextBox" name="Comments" title="Comments" length="15"/>
+        </multi-question>
+
+            <multi-question name=" ">
+                <line-item>Obj 13</line-item>
+          
+          <question id="610" type="Radio" name="Objective Type" title="Objective Type">
+            <answer value="1" text="Performance"/>
+            <answer value="2" text="People"/>
+            <answer value="3" text="Products"/>
+            <answer value="4" text="Patients"/>
+         </question>                      
+          <question id="55" type="TextBox" name="Objective" title="Objective" length="15"/>
+          <question id="56" type="TextBox" name="Measures" title="Measures" length="15"/>
+          <question id="57" type="TextBox" name="Critical Actions to reach Objectives" title="Critical Actions to reach Objectives" length="15"/>
+          <question id="58" type="TextBox" name="Comments" title="Comments" length="15"/>
+        </multi-question>
+        
+            <multi-question name=" ">
+                <line-item>Obj 14</line-item>
+          
+          <question id="611" type="Radio" name="Objective Type" title="Objective Type">
+            <answer value="1" text="Performance"/>
+            <answer value="2" text="People"/>
+            <answer value="3" text="Products"/>
+            <answer value="4" text="Patients"/>
+         </question>                      
+          <question id="59" type="TextBox" name="Objective" title="Objective" length="15"/>
+          <question id="60" type="TextBox" name="Measures" title="Measures" length="15"/>
+          <question id="61" type="TextBox" name="Critical Actions to reach Objectives" title="Critical Actions to reach Objectives" length="15"/>
+          <question id="62" type="TextBox" name="Comments" title="Comments" length="15"/>
+        </multi-question>
+        
+            <multi-question name=" ">
+                <line-item>Obj 15</line-item>
+          
+          <question id="612" type="Radio" name="Objective Type" title="Objective Type">
+            <answer value="1" text="Performance"/>
+            <answer value="2" text="People"/>
+            <answer value="3" text="Products"/>
+            <answer value="4" text="Patients"/>
+         </question>                      
+          <question id="63" type="TextBox" name="Objective" title="Objective" length="15"/>
+          <question id="64" type="TextBox" name="Measures" title="Measures" length="15"/>
+          <question id="65" type="TextBox" name="Critical Actions to reach Objectives" title="Critical Actions to reach Objectives" length="15"/>
+          <question id="66" type="TextBox" name="Comments" title="Comments" length="15"/>
+        </multi-question>
+        
+         </group>
+
+	  <group name="Total Rating" title="Total Rating">
+	  <question id="1000" type="Radio" name="Total Rating" title="Total Rating" format="vertical">
+				<answer value="1" text="Unacceptable (missed most or all targets)"/>
+				<answer value="2" text="Partially Met (missed some targets)"/>
+				<answer value="3" text="Met (in aggregate met all targets)"/>
+            			<answer value="4" text="Exceeded (met all exceeded some)"/>
+            			<answer value="5" text="Distinguished (exceeded most targets)"/>
+			</question>
+			</group>	
+    </questionnaire>
+</xml>

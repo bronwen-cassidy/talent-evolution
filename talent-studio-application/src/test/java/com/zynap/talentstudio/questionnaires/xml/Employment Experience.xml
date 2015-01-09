@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+    <questionnaire name="2. Employment Experience" title="Employment Experience">
+        <group name="Employement Details 1">
+            <question id="1" type="Radio" name="International" title="International">
+                <answer value="Yes" text="Yes"/>
+                <answer value="No" text="No"/>
+                <answer value="Partial" text="Partial"/>
+            </question>
+
+            <question id="2" type="TextBox" name="International Details" title="International Details">
+            </question>
+
+            <question id="3" type="Radio" name="Business Unit" title="Business Unit">
+                <answer value="Yes" text="Yes"/>
+                <answer value="No" text="No"/>
+                <answer value="Partial" text="Partial"/>
+            </question>
+
+            <question id="4" type="TextBox" name="Business Unit Details" title="Business Unit Details">
+            </question>
+
+            <question id="5" type="Radio" name="Corporate" title="Corporate">
+                <answer value="Yes" text="Yes"/>
+                <answer value="No" text="No"/>
+                <answer value="Partial" text="Partial"/>
+            </question>
+
+            <question id="6" type="TextBox" name="Corporate" title="Corporate">
+            </question>
+
+        </group>
+
+        <group name="Employement Details 2">
+
+            <question id="7" type="Date" name="Date Appointed" title="Please enter date appointed"/>
+
+
+            <question id="8" type="Text" name="Time in Post" title="Time in Post"/>
+
+            <question id="9" type="Text" name="Client Manager" title="Client Manager"/>
+
+
+            <question id="10" type="Radio" name="Cross-border Experience" title=" ">
+                <answer value="Cross-border Experience" text="Yes"/>
+                <answer value="No Cross-border Experience" text="No"/>
+            </question>
+
+            <question id="11" type="TextBox" name="Comments" title="Comments">
+            </question>
+        </group>
+    </questionnaire>
+</xml>

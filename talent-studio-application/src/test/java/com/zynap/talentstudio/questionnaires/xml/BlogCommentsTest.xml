@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+    <questionnaire name="MTS Academic Record" title="MTS Academic Record">
+
+
+        <group name="Provisional Results" title="Provisional Results">
+            <multi-question name=" ">
+                <line-item dynamic="Y">Provisional Exam Results</line-item>
+                <question id="2" type="Select" name="Diploma Name/ Reference" title="Diploma Name/ Reference">
+                    <answer value="1" text="Dip 0 Fundamentals of Health and Public Leadership"/>
+                    <answer value="2" text="Dip 1 Health and Public Policy"/>
+                    <answer value="3" text="Dip 2 Organisational Development and Leadership"/>
+                    <answer value="4" text="Dip 3 Governance and Performance"/>
+                    <answer value="5" text="Dip 4 Future Challenges"/>
+                </question>
+                <question id="3" type="Text" name="Provisional Individual Mark" title="Provisional Individual Mark"/>
+                <question id="4" type="Text" name="Provisional Group Mark" title="Provisional Group Mark"/>
+                <question id="5" type="Text" name="Provisional Overall Mark" title="Provisional Group Mark"/>                
+            </multi-question>
+            <question id="7" type="Comments" name="Comments relating to this result" title="Comments"/>
+        </group>
+        <group name="Exam Board" title="Exam Board">
+            <multi-question name=" ">
+                <line-item dynamic="Y">Exam Board Decisions</line-item>
+                <question id="8" type="Select" name="Diploma Name/ Reference" title="Diploma Name/ Reference">
+                    <answer value="1" text="Dip 0 Fundamentals of Health and Public Leadership"/>
+                    <answer value="2" text="Dip 1 Health and Public Policy"/>
+                    <answer value="3" text="Dip 2 Organisational Development and Leadership"/>
+                    <answer value="4" text="Dip 3 Governance and Performance"/>
+                    <answer value="5" text="Dip 4 Future Challenges"/>
+                </question>
+                <question id="9" type="Date" name="Exam Board" title="Exam Board Date"/>
+                <question id="10" type="Text" name="Exam Board Final Overall Mark" title="Exam Board Final Overall Mark"/>
+                <question id="11" type="Select" name="Exam Board Decision" title="Exam Board Decision">
+                    <answer value="1" text="Proceed to Year 2"/>
+                    <answer value="2" text="Withdrawn"/>
+                </question>                
+            </multi-question>
+            <question id="12" type="Comments" name="Comments relating to this result" title="Comments"/>
+        </group>
+
+        <group name="Additional Comments">
+            <question id="13" type="Comments" name="Additional Comments" title="Additional Comments"/>
+        </group>
+
+
+    </questionnaire>
+</xml>		

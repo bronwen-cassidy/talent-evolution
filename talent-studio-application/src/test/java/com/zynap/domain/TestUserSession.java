@@ -3,6 +3,11 @@ package com.zynap.domain;
 import com.zynap.domain.admin.User;
 import com.zynap.exception.TalentStudioException;
 import com.zynap.talentstudio.ZynapDatabaseTestCase;
+import com.zynap.talentstudio.arenas.Arena;
+import com.zynap.talentstudio.arenas.ArenaMenuHandler;
+import com.zynap.talentstudio.arenas.IArenaManager;
+import com.zynap.talentstudio.arenas.MenuItem;
+import com.zynap.talentstudio.arenas.MenuSection;
 import com.zynap.talentstudio.security.permits.IPermitManagerDao;
 import com.zynap.talentstudio.security.users.IUserService;
 

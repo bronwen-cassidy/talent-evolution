@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+    <questionnaire name="Test Use Of Questionnaires In Metrics" title="Test Use Of Questionnaires In Metrics">
+        <group name="Leadership Capabilities">
+            <question type="Text" name="Supporting examples" title=" "/>
+
+            <question type="Integer" name="Age" title="Age"/>
+            <question type="Integer" name="Years In Job" title="Years In Job"/>
+        </group>
+        <group name="test invalidity">
+            <question type="Unknown" name="testing" title="testing invaliditiy"/>
+        </group>
+    </questionnaire>
+</xml>
