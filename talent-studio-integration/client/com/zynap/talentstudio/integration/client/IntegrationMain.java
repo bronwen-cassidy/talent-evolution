@@ -103,7 +103,6 @@ abstract class IntegrationMain {
 
     protected static void loadApp() {
         //System.setProperty("test.db.url", "jdbc:oracle:thin:@" + dbHost + ":1521:" + dbSid);
-        System.setProperty("autonomy.host", "localhost");
         System.setProperty("autonomy.aciport", "7009");
         System.setProperty("autonomy.indexport", "7008");
         System.setProperty("autonomy.retries", "0");
