@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.zynap</groupId>
         <artifactId>talent-studio</artifactId>
-        <version>${ts.version}</version>
+        <version>v5.4.4-mt-SNAPSHOT</version>
     </parent>
 
     <artifactId>talent-studio-application</artifactId>

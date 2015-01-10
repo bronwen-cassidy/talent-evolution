@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.zynap</groupId>
         <artifactId>talent-studio</artifactId>
-        <version>${ts.version}</version>
+        <version>v5.4.4-mt-SNAPSHOT</version>
     </parent>
 
     <artifactId>talent-studio-integration</artifactId>
@@ -17,12 +17,12 @@
         <dependency>
             <groupId>com.zynap</groupId>
             <artifactId>talent-studio-application</artifactId>
-            <version>${ts.version}</version>
+            <version>v5.4.4-mt-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.ws</groupId>
-            <artifactId>spring-ws</artifactId>
-            <version>2.0.4.RELEASE</version>
+            <artifactId>spring-ws-core</artifactId>
+            <version>2.2.0.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.apache.axis</groupId>
