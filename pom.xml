@@ -6,7 +6,7 @@
     <!-- todo this will change -->
     <groupId>com.zynap</groupId>
     <artifactId>talent-studio</artifactId>
-    <version>${ts.version}</version>
+    <version>v5.4.4-mt-SNAPSHOT</version>
     
     <packaging>pom</packaging>
     <name>Talent Evolution</name>
@@ -225,11 +225,11 @@
             <id>maven-repo</id>
             <url>http://repo1.maven.org/maven2/</url>
         </repository>
-        <repository>
-            <id>spring-release</id>
-            <name>Spring Release Repository</name>
-            <url>s3://maven.springframework.org/release</url>
-        </repository>
+        <!--<repository>-->
+            <!--<id>spring-release</id>-->
+            <!--<name>Spring Release Repository</name>-->
+            <!--<url>s3://maven.springframework.org/release</url>-->
+        <!--</repository>-->
         <repository>
             <id>pentaho-repo</id>
             <url>http://repo.pentaho.org/artifactory/pentaho/</url>

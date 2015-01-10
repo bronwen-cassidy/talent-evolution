@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.zynap</groupId>
         <artifactId>talent-studio</artifactId>
-        <version>${ts.version}</version>
+        <version>v5.4.4-mt-SNAPSHOT</version>
     </parent>
 
     <artifactId>talent-studio-views</artifactId>
@@ -18,12 +18,12 @@
         <dependency>
             <groupId>com.zynap</groupId>
             <artifactId>talent-studio-application</artifactId>
-            <version>${ts.version}</version>
+            <version>v5.4.4-mt-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.zynap</groupId>
             <artifactId>talent-studio-integration</artifactId>
-            <version>${ts.version}</version>
+            <version>v5.4.4-mt-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>

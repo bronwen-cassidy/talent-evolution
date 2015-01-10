@@ -5,7 +5,7 @@
       <configuration />
     </facet>
   </component>
-  <component name="NewModuleRootManager" inherit-compiler-output="false">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_6" inherit-compiler-output="false">
     <exclude-exploded />
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
@@ -13,8 +13,8 @@
       <sourceFolder url="file://$MODULE_DIR$/client" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/clienttests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/config" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/test" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="jdk" jdkName="1.7" jdkType="JavaSDK" />
@@ -55,7 +55,11 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-jdbc:2.0.8" level="project" />
     <orderEntry type="library" name="Maven: commons-digester:commons-digester:1.7" level="project" />
     <orderEntry type="library" name="Maven: org.freemarker:freemarker:2.3.9" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.ws:spring-ws:2.0.4.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.ws:spring-ws-core:2.2.0.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.ws:spring-xml:2.2.0.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-web:4.0.5.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-webmvc:4.0.5.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-expression:4.0.5.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.apache.axis:axis:1.4" level="project" />
     <orderEntry type="library" name="Maven: org.apache.axis:axis-ant:1.4" level="project" />
     <orderEntry type="library" name="Maven: commons-discovery:commons-discovery:0.5" level="project" />
