@@ -39,16 +39,16 @@ import java.util.StringTokenizer;
  * Date: 31-Mar-2006
  * Time: 14:40:19
  * sunserver properties
- * -Dtest.db.url=jdbc:oracle:thin:@ts-uk12:1521:oradb -Dtest.db.username=tsdev -Dtest.db.password=tsdev -Dtest.base.url=http://localhost:7001/talent-studio -Dautonomy.host=zynap89 -Dautonomy.indexport=9001 -Dautonomy.aciport=9002   -Dautonomy.position.database=positiondata -Dautonomy.subject.database=subjectdata -Dautonomy.retries=3 -Dautonomy.connection.timeout=5000 -Dautonomy.searcher=mockAutonomySearcher -Dsender.email=bcassidy@zynap.com -Dtest.webservice.username=webserviceuser -Dtest.webservice.password=webserviceuser -Dsearch.engine=autonomy -Dserver.url= -Dsearch.gateway=autonomyGateway
+ * -Dtest.db.url=jdbc:oracle:thin:@ts-uk12:1521:oradb -Dtest.db.username=tsdev -Dtest.db.password=tsdev -Dtest.base.url=http://localhost:7001/talent-studio -Dautonomy.indexport=9001 -Dautonomy.aciport=9002   -Dautonomy.position.database=positiondata -Dautonomy.subject.database=subjectdata -Dautonomy.retries=3 -Dautonomy.connection.timeout=5000 -Dautonomy.searcher=mockAutonomySearcher -Dsender.email=bcassidy@zynap.com -Dtest.webservice.username=webserviceuser -Dtest.webservice.password=webserviceuser -Dsearch.engine=autonomy -Dserver.url= -Dsearch.gateway=autonomyGateway
  * <p/>
  * UK live server properties
- * -Dtest.db.url=jdbc:oracle:thin:@10.83.110.118:1521:ZYNTS01 -Dtest.db.username=TS5 -Dtest.db.password=TS5 -Dtest.base.url=http://localhost:7001/talent-studio -Dautonomy.host=zynap89 -Dautonomy.indexport=9001 -Dautonomy.aciport=9002   -Dautonomy.position.database=positiondata -Dautonomy.subject.database=subjectdata -Dautonomy.retries=3 -Dautonomy.connection.timeout=5000 -Dautonomy.searcher=mockAutonomySearcher -Dsender.email=bcassidy@zynap.com -Dtest.webservice.username=webserviceuser -Dtest.webservice.password=webserviceuser -Dsearch.engine=autonomy -Dserver.url= -Dsearch.gateway=autonomyGateway
+ * -Dtest.db.url=jdbc:oracle:thin:@10.83.110.118:1521:ZYNTS01 -Dtest.db.username=TS5 -Dtest.db.password=TS5 -Dtest.base.url=http://localhost:7001/talent-studio -Dautonomy.indexport=9001 -Dautonomy.aciport=9002   -Dautonomy.position.database=positiondata -Dautonomy.subject.database=subjectdata -Dautonomy.retries=3 -Dautonomy.connection.timeout=5000 -Dautonomy.searcher=mockAutonomySearcher -Dsender.email=bcassidy@zynap.com -Dtest.webservice.username=webserviceuser -Dtest.webservice.password=webserviceuser -Dsearch.engine=autonomy -Dserver.url= -Dsearch.gateway=autonomyGateway
  * <p/>
  * US live server properties
- * -Dtest.db.url=jdbc:oracle:thin:@64.14.161.100:1521:talent9 -Dtest.db.username=TS7 -Dtest.db.password=TS7 -Dtest.base.url=http://localhost:7001/talent-studio -Dautonomy.host=zynap89 -Dautonomy.indexport=9001 -Dautonomy.aciport=9002   -Dautonomy.position.database=positiondata -Dautonomy.subject.database=subjectdata -Dautonomy.retries=3 -Dautonomy.connection.timeout=5000 -Dautonomy.searcher=mockAutonomySearcher -Dsender.email=bcassidy@zynap.com -Dtest.webservice.username=webserviceuser -Dtest.webservice.password=webserviceuser -Dsearch.engine=autonomy -Dserver.url= -Dsearch.gateway=autonomyGateway
+ * -Dtest.db.url=jdbc:oracle:thin:@64.14.161.100:1521:talent9 -Dtest.db.username=TS7 -Dtest.db.password=TS7 -Dtest.base.url=http://localhost:7001/talent-studio -Dautonomy.indexport=9001 -Dautonomy.aciport=9002   -Dautonomy.position.database=positiondata -Dautonomy.subject.database=subjectdata -Dautonomy.retries=3 -Dautonomy.connection.timeout=5000 -Dautonomy.searcher=mockAutonomySearcher -Dsender.email=bcassidy@zynap.com -Dtest.webservice.username=webserviceuser -Dtest.webservice.password=webserviceuser -Dsearch.engine=autonomy -Dserver.url= -Dsearch.gateway=autonomyGateway
  * <p/>
  * AZ live database properties
- * -Dtest.db.url=jdbc:oracle:thin:@10.83.110.118:1521:ZYNTS02 -Dtest.db.username=TSAZ -Dtest.db.password=TSAZ -Dtest.base.url=http://localhost:7001/talent-studio -Dautonomy.host=zynap89 -Dautonomy.indexport=9001 -Dautonomy.aciport=9002   -Dautonomy.position.database=positiondata -Dautonomy.subject.database=subjectdata -Dautonomy.retries=3 -Dautonomy.connection.timeout=5000 -Dautonomy.searcher=mockAutonomySearcher -Dsender.email=bcassidy@zynap.com -Dtest.webservice.username=webserviceuser -Dtest.webservice.password=webserviceuser -Dsearch.engine=autonomy -Dserver.url= -Dsearch.gateway=autonomyGateway
+ * -Dtest.db.url=jdbc:oracle:thin:@10.83.110.118:1521:ZYNTS02 -Dtest.db.username=TSAZ -Dtest.db.password=TSAZ -Dtest.base.url=http://localhost:7001/talent-studio -Dautonomy.indexport=9001 -Dautonomy.aciport=9002   -Dautonomy.position.database=positiondata -Dautonomy.subject.database=subjectdata -Dautonomy.retries=3 -Dautonomy.connection.timeout=5000 -Dautonomy.searcher=mockAutonomySearcher -Dsender.email=bcassidy@zynap.com -Dtest.webservice.username=webserviceuser -Dtest.webservice.password=webserviceuser -Dsearch.engine=autonomy -Dserver.url= -Dsearch.gateway=autonomyGateway
  */
 public class ReportUpgrader extends AbstractHibernateTestCase {
 
@@ -377,7 +377,6 @@ public class ReportUpgrader extends AbstractHibernateTestCase {
         System.setProperty("test.base.url", "http://localhost:8888/talent-studio");
         System.setProperty("search.gateway", "oracleGateway");
         System.setProperty("server.url", "zynap89");
-        System.setProperty("autonomy.host", "zynap89");
         System.setProperty("autonomy.indexport", "9001");
         System.setProperty("autonomy.aciport", "9002");
         System.setProperty("autonomy.position.database", "positiondata");

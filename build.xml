@@ -122,7 +122,7 @@
 
     <!-- Integration Module -->
     <property name="integration.module" value="talent-studio-integration"/>
-    <property name="integration.src.dir" value="${integration.module}/src"/>
+    <property name="integration.src.dir" value="${integration.module}/src/main/java"/>
     <property name="integration.lib.dir" value="../integration-lib"/>
     <property name="integration.config.dir" value="${integration.module}/config"/>
 
@@ -192,10 +192,10 @@
     <property name="test.classes.dir" value="${build.dir}/test-classes"/>
     <property name="test.classes.config.dir" value="${test.classes.dir}/config"/>
 
-    <property name="test.app.src.dir" value="${application.module}/tests"/>
+    <property name="test.app.src.dir" value="${application.module}/src/main/test"/>
     <property name="test.webview.src.dir" value="${webview.module}/tests"/>
     <property name="test.webtest.src.dir" value="${webview.module}/webtests"/>
-    <property name="test.integration.src.dir" value="${integration.module}/tests"/>
+    <property name="test.integration.src.dir" value="${integration.module}/src/main/test"/>
     <property name="test.testgen4web.src.dir" value="${test.webtest.src.dir}/testgen4web"/>
 
     <property name="test.webtest.gensrc.dir" value="${build.dir}/genwebtests"/>
@@ -220,9 +220,6 @@
 
     <!-- JavaDocs dir -->
     <property name="javadocs.dir" value="docs/api"/>
-
-    <!-- orion(oc4j) properties -->
-    <property name="glassfish.deploy.dir" value="${glassfish.home.dir}/glassfish/domains/domain1/autodeploy"/>
 
     <!-- build utilities properties -->
     <property name="build.tools.dir" value="tools/build"/>
@@ -383,7 +380,6 @@
         <mkdir dir="${test.classes.dir}"/>
         <mkdir dir="${test.classes.config.dir}"/>
 
-        <echo message="autonomy.host property = ${autonomy.host}"/>
         <echo message="host name property = ${host.name}"/>
         <echo message="server set = ${server}"/>
         <echo message="db url = ${db.url}"/>
@@ -412,7 +408,6 @@
         <filter token="_db.username_" value="${db.username}"/>
         <filter token="_db.password_" value="${db.username}"/>
 
-        <filter token="autonomy.host" value="${autonomy.host}"/>
         <filter token="autonomy.position.database" value="${client}PositionData"/>
         <filter token="autonomy.subject.database" value="${client}SubjectData"/>
         <filter token="autonomy.searcher" value="${autonomy.searcher}"/>

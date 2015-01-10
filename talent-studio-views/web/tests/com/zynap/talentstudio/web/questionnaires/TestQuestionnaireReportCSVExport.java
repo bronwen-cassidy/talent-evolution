@@ -41,7 +41,6 @@ import java.util.List;
  * -Dtest.db.username=az
  * -Dtest.db.password=az
  * -Dtest.base.url=http://localhost:7001/talent-studio
- * -Dautonomy.host=zynap89
  * -Dautonomy.indexport=9001
  * -Dautonomy.aciport=9002
  * -Dautonomy.position.database=positiondata
