@@ -97,15 +97,15 @@
                                 </c:if>
                                 <c:set var="titleAttr" scope="request"><c:if test="${question.hasTitle}">title="<c:out value="${question.title}"/>"</c:if></c:set>
                                 <tr<c:if test="${question.hidden}"> style="display:none;"</c:if>>
-                                    <td class="questionlabel" <c:out value="${titleAttr}" escapeXml="false"/>>
-                                        <c:set var="editable" value="false" scope="request"/>
-                                        <c:out value="${question.label}"/>&nbsp;:&nbsp;
-                                        <c:if test="${question.mandatory}">*</c:if>&nbsp;
-                                        <c:if test="${question.hasHelpText}"><c:import url="../questionnaires/helptextinclude.jsp"/></c:if>
-                                    </td>
-                                    <td class="questiondata" <c:out value="${titleAttr}" escapeXml="false"/>>
-                                        <c:import url="../questionnaires/answer/editquestionsnippet.jsp"/>
-                                    </td>
+                                <td class="questionlabel" <c:out value="${titleAttr}" escapeXml="false"/>>
+                                <c:set var="editable" value="false" scope="request"/>
+                                <c:out value="${question.label}"/>&nbsp;:&nbsp;
+                                <c:if test="${question.mandatory}">*</c:if>&nbsp;
+                                <c:if test="${question.hasHelpText}"><c:import url="../questionnaires/helptextinclude.jsp"/></c:if>
+                                </td>
+                                <td class="questiondata" <c:out value="${titleAttr}" escapeXml="false"/>>
+                                <c:import url="../questionnaires/answer/editquestionsnippet.jsp"/>
+                                </td>
                                 </tr>
                                 <c:set var="index" value="${index + 1}" scope="request"/>
                             </c:otherwise>
@@ -202,6 +202,17 @@
 
     $(function() {
 
+        // todo create an array of selects which contains the full set of options then copy and remove the copy
+        var selectMap = new Object();
+
+        $('.linkable').each(function() {
+            // get the opions and push them into the array
+            var selId = $(this).attr('id');
+            var options = $('#' + selId + ' option');
+            selectMap[selId] = options;
+        });
+
+        console.log("the select map i have = " + selectMap);
         testLinkableOptions();
 
         $('.linkable').change(function() {
