@@ -1,4 +1,4 @@
-<%@ page import="IPopulationEngine"%>
+<%@ page import="com.zynap.talentstudio.analysis.populations.IPopulationEngine"%>
 <%@ include file="../../includes/include.jsp" %>
 
 <zynap:infobox title="${title}">

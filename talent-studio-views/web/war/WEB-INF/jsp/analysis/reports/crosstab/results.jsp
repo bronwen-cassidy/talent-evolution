@@ -1,6 +1,6 @@
 <%@ page import="com.zynap.talentstudio.web.common.ParameterConstants"%>
 <%@ page import="com.zynap.talentstudio.web.analysis.reports.RunCrossTabController"%>
-<%@ page import="ReportConstants"%>
+<%@ page import="com.zynap.talentstudio.analysis.reports.ReportConstants"%>
 
  <%-- include to display results of cross tab reports --%>
 

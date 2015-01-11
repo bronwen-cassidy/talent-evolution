@@ -1,4 +1,4 @@
-<%@ page import="ObjectiveConstants" %>
+<%@ page import="com.zynap.talentstudio.objectives.ObjectiveConstants" %>
 <%@ page import="com.zynap.talentstudio.web.common.ParameterConstants" %>
 <%@ taglib uri="http://displaytag.sf.net/el" prefix="display"%>
 

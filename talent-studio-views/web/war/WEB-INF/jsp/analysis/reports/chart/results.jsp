@@ -1,4 +1,4 @@
-<%@ page import="ReportConstants" %>
+<%@ page import="com.zynap.talentstudio.analysis.reports.ReportConstants" %>
 <%@ page import="com.zynap.talentstudio.web.analysis.reports.cewolf.ChartConstants" %>
 <%@ page import="com.zynap.talentstudio.web.analysis.reports.cewolf.producers.PieChartProducer" %>
 <%@ taglib prefix="cewolf" uri="http://cewolf.sourceforge.net/taglib/cewolf.tld" %>

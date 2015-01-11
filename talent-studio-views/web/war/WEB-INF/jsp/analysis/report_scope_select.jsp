@@ -1,4 +1,4 @@
-<%@ page import="AccessType"%>
+<%@ page import="com.zynap.talentstudio.common.AccessType"%>
 <select name="<c:out value="${status.expression}"/>">
     <option value="" <c:if test="${status.value == null}">selected</c:if>><fmt:message key="please.select"/></option>
     <option value="<%=AccessType.PUBLIC_ACCESS%>" <c:if test="${status.value == 'Public'}"> selected</c:if>><fmt:message key="scope.Public"/></option>

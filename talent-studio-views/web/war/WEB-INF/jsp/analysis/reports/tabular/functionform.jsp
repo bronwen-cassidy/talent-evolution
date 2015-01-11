@@ -1,4 +1,4 @@
-<%@ page import="IPopulationEngine,
+<%@ page import="com.zynap.talentstudio.analysis.populations.IPopulationEngine,
                  com.zynap.talentstudio.web.analysis.reports.BaseReportsWizardController"%>
 <%@ include file="../../../includes/include.jsp" %>
 

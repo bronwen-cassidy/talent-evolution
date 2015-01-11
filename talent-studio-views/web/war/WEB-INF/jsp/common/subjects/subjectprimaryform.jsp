@@ -1,4 +1,4 @@
-<%@ page import="IDomainObject"%>
+<%@ page import="com.zynap.domain.IDomainObject"%>
 <c:forEach var="primaryAssociation" items="${command.subjectPrimaryAssociations}" varStatus="count" >
     <div style="white-space: nowrap;">
         <spring:bind path="command.subjectPrimaryAssociations[${count.index}].qualifierId">

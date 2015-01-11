@@ -1,4 +1,4 @@
-<%@ page import="Role"%>
+<%@ page import="com.zynap.talentstudio.security.roles.Role"%>
 <%@ include file="../../../includes/include.jsp" %>
 
 <fmt:message key="${pagetitle}" var="msg"/>

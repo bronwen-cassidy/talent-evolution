@@ -1,4 +1,4 @@
-<%@ page import="PortfolioItem" %>
+<%@ page import="com.zynap.talentstudio.organisation.portfolio.PortfolioItem" %>
 <%@ include file="../../../includes/include.jsp" %>
 
 <fmt:message key="portfolio.add.item.title" var="msg"/>

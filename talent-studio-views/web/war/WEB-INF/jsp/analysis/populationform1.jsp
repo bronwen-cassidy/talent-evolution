@@ -1,5 +1,5 @@
-<%@ page import="IPopulationEngine"%>
-<%@ page import="ISearchConstants" %>
+<%@ page import="com.zynap.talentstudio.analysis.populations.IPopulationEngine"%>
+<%@ page import="com.zynap.domain.orgbuilder.ISearchConstants" %>
 <%@ include file="../includes/include.jsp" %>
 
 <c:set var="hasOuTree" value="${orgUnitTree != null && !empty orgUnitTree}"/>

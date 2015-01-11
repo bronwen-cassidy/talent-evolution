@@ -1,4 +1,3 @@
-<%@ page import="QuestionnaireWorkflow" %>
 <%@ include file="../../includes/include.jsp" %>
 
 <zynap:infobox title="${title}" id="editWF">

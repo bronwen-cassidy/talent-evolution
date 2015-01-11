@@ -1,4 +1,4 @@
-<%@ page import="IDomainObject"%>
+<%@ page import="com.zynap.domain.IDomainObject"%>
 <table class="infotable" cellspacing="0">
     <tr>
         <td class="infolabel">
