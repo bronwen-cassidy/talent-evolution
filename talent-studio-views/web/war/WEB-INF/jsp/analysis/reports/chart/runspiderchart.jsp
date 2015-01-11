@@ -1,4 +1,4 @@
-<%@ page import="Report" %>
+<%@ page import="com.zynap.talentstudio.analysis.reports.Report" %>
 <%@ include file="../../../includes/include.jsp" %>
 <%@ taglib prefix="cewolf" uri="http://cewolf.sourceforge.net/taglib/cewolf.tld" %>
 

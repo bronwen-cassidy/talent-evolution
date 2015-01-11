@@ -96,7 +96,7 @@ public class HibernateQuestionnaireDao extends ZynapPersistenceSupport implement
     }
 
     public List<DefinitionDTO> listDefinitions() {
-        StringBuffer query = new StringBuffer("select new DefinitionDTO(");
+        StringBuffer query = new StringBuffer("select new " + DefinitionDTO.class.getName() + "(");
         query.append("definition.label, definition.id, definition.description, definition.title )")
                 .append(" from QuestionnaireDefinition definition order by definition.label");
         return getHibernateTemplate().find(query.toString());
@@ -521,7 +521,7 @@ public class HibernateQuestionnaireDao extends ZynapPersistenceSupport implement
      * @return questionnaires that are searchable and editable
      */
     public List<QuestionnaireDTO> findSearchableWorkflows() {
-        StringBuilder query = new StringBuilder("select new QuestionnaireDTO(workflow.id, workflow.label, workflow.workflowType, workflow.status, workflow.expiryDate, workflow.closedDate, workflow.individualWrite, workflow.managerWrite)");
+        StringBuilder query = new StringBuilder("select new " + QuestionnaireDTO.class.getName() + "(workflow.id, workflow.label, workflow.workflowType, workflow.status, workflow.expiryDate, workflow.closedDate, workflow.individualWrite, workflow.managerWrite)");
         query.append(" from QuestionnaireWorkflow workflow ");
         query.append(" where workflow.workflowType = '").append(QuestionnaireWorkflow.TYPE_INFO_FORM).append("'");
         query.append(" and workflow.status <> '").append(QuestionnaireWorkflow.STATUS_COMPLETED).append("'");
@@ -645,7 +645,7 @@ public class HibernateQuestionnaireDao extends ZynapPersistenceSupport implement
      */
     private List<QuestionnaireDTO> getInfoForms(Set<QuestionnaireDTO> completedQuestionnaires, Long subjectId, boolean isManager) {
 
-        StringBuilder queryBuilder = new StringBuilder(" select new QuestionnaireDTO(")
+        StringBuilder queryBuilder = new StringBuilder(" select new " + QuestionnaireDTO.class.getName() + "(")
                 .append(" workflow.id, workflow.label, workflow.workflowType, workflow.status, workflow.expiryDate,")
                 .append(" workflow.closedDate, workflow.individualWrite, workflow.managerWrite, workflow.group.label)")
                 .append(" from WorkflowParticipant participant, QuestionnaireWorkflow workflow left join fetch workflow.group")
@@ -680,7 +680,7 @@ public class HibernateQuestionnaireDao extends ZynapPersistenceSupport implement
 
     private StringBuffer getCompletedQuestionnaireQueryRoot() {
 
-        final StringBuffer stringBuffer = new StringBuffer(" select new QuestionnaireDTO(");
+        final StringBuffer stringBuffer = new StringBuffer(" select new " + QuestionnaireDTO.class.getName() + "(");
         stringBuffer.append("questionnaire.completed, questionnaire.id, workflow.id, workflow.label, workflow.workflowType, workflow.status, workflow.expiryDate, ");
         stringBuffer.append("workflow.individualWrite, workflow.managerWrite, questionnaire.completedDate, questionnaire.role, workflow.group.label) ");
         stringBuffer.append("from Questionnaire questionnaire left join fetch questionnaire.role, ");

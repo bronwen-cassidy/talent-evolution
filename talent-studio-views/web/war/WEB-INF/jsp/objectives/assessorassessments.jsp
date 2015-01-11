@@ -1,4 +1,4 @@
-<%@ page import="ObjectiveConstants" %>
+<%@ page import="com.zynap.talentstudio.objectives.ObjectiveConstants" %>
 <%@ include file="../includes/include.jsp" %>
 <%@ taglib uri="http://displaytag.sf.net/el" prefix="display" %>
 

@@ -1,6 +1,6 @@
-<%@ page import="IPopulationEngine" %>
+<%@ page import="com.zynap.talentstudio.analysis.populations.IPopulationEngine" %>
 <%@ page import="static com.zynap.talentstudio.web.common.ParameterConstants.*" %>
-<%@ page import="static ReportConstants.*" %>
+<%@ page import="static com.zynap.talentstudio.analysis.reports.ReportConstants.*" %>
 <table class="summarytable" cellpadding="0" cellspacing="0">
     <tr>
         <td class="summarylabel">

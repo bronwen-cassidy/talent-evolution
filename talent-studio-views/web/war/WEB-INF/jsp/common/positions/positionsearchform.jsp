@@ -1,4 +1,4 @@
-<%@ page import="ISearchConstants"%>
+<%@ page import="com.zynap.domain.orgbuilder.ISearchConstants"%>
 
 <%@include file="../../includes/orgunitpicker.jsp"%>
 <c:set var="hasOuTree" value="${outree != null && !empty outree}"/>

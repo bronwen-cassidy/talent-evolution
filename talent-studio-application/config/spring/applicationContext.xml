@@ -990,7 +990,7 @@
         <!-- todo when we migrate to oracle this mapper muct change to the oracle mapper and we need to parameterise -->
         <property name="mapper" ref="xmlMapper"/>
     </bean>
-A
+    
     <!-- ExternalSearchManager only does read-only data access - therefore does not need transactions -->
     <bean id="searchManager" class="com.zynap.talentstudio.organisation.portfolio.search.ExternalSearchManager" lazy-init="true">
         <property name="gateway" ref="oracleGateway"/>

@@ -1,4 +1,4 @@
-<%@ page import="ReportConstants"%>
+<%@ page import="com.zynap.talentstudio.analysis.reports.ReportConstants"%>
 <%@ include file="../../includes/include.jsp" %>
 
 <zynap:actionbox>
