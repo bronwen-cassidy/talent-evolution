@@ -390,6 +390,11 @@ function addDynamicLineItemRow(tableId, uniqueGeneratorFieldId, queId) {
 
                 if (currentElem.nodeName == 'SELECT') {
                     currentElem.options[0].selected = 'true';
+                    // todo update the linkId and referenceId
+                    var options = currentElem.options;
+                    for(var m = 0; m < options.length; m++) {
+                            
+                    }
                     addDynamicLineItemRowEvent(currentElem, queId, daId, eventNumber, lineItem, tableId, newRow.id);
                 } else if (currentElem.type == 'text') {
                     resetElementTextAndValue(currentElem);
