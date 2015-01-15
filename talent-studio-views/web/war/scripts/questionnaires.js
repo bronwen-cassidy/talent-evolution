@@ -393,7 +393,13 @@ function addDynamicLineItemRow(tableId, uniqueGeneratorFieldId, queId) {
                     // todo update the linkId and referenceId
                     var options = currentElem.options;
                     for(var m = 0; m < options.length; m++) {
-                            
+                        var linkId = options[m].getAttribute("linkId");
+                        var postfix = "_" + dynamicLevel;
+                        console.log("we have found a postfix of: " + postfix);
+                        if(linkId.indexOf("_") >= 0) {
+                            // remove the postfix and add a new one
+                        }
+                        options[m].setAttribute("linkId", "");            
                     }
                     addDynamicLineItemRowEvent(currentElem, queId, daId, eventNumber, lineItem, tableId, newRow.id);
                 } else if (currentElem.type == 'text') {
