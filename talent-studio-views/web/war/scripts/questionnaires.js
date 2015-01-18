@@ -37,12 +37,12 @@ function saveUpdateDeleteQuestionnaireBlogComments(fieldId, queId, daId, attrIdF
     if (attrId == 'null') attrId = '';
     clearError(errorElem);
     questionnaireBean.saveUpdateDeleteQuestionnaireBlogComments(queId, daId, attrId, dynamicPosition, textValue, queDefId,
-    { callback:function(attributeResult) {
+            { callback:function(attributeResult) {
 
-        attrElem.value = attributeResult.attributeId;
-        displayError(attributeResult, errorElem);
-    },async:false
-    });
+                attrElem.value = attributeResult.attributeId;
+                displayError(attributeResult, errorElem);
+            },async:false
+            });
 }
 
 function saveUpdateDeleteQuestionnaireDate(fieldId, queId, daId, attrIdField, errorId) {
@@ -57,11 +57,11 @@ function saveUpdateDeleteQuestionnaireDate(fieldId, queId, daId, attrIdField, er
     var queDefId = getElemById("queDefIdxx").value;
     clearError(errorElem);
     questionnaireBean.saveUpdateDeleteQuestionnaireDate(queId, daId, attrId, dynamicPosition, dateValue, queDefId,
-    { callback:function(attributeResult) {
-        attrElem.value = attributeResult.attributeId;
-        displayError(attributeResult, errorElem);
-    },async:false
-    });
+            { callback:function(attributeResult) {
+                attrElem.value = attributeResult.attributeId;
+                displayError(attributeResult, errorElem);
+            },async:false
+            });
 }
 
 function saveUpdateDeleteQuestionnaireList(fieldId, queId, daId, attrIdField, errorId) {
@@ -76,12 +76,12 @@ function saveUpdateDeleteQuestionnaireList(fieldId, queId, daId, attrIdField, er
     var queDefId = getElemById("queDefIdxx").value;
     clearError(errorElem);
     questionnaireBean.saveUpdateDeleteQuestionnaireList(queId, daId, attrId, dynamicPosition, pickerListValue, queDefId,
-    { callback:function(attributeResult) {
-        attrElem.value = attributeResult.attributeId;
-        displayError(attributeResult, errorElem);
-        displaySumEnums(attributeResult);
-    },async:false
-    });
+            { callback:function(attributeResult) {
+                attrElem.value = attributeResult.attributeId;
+                displayError(attributeResult, errorElem);
+                displaySumEnums(attributeResult);
+            },async:false
+            });
 }
 
 function saveUpdateDeleteQuestionnairePosition(fieldId, queId, daId, attrIdField, errorId) {
@@ -104,12 +104,12 @@ function saveUpdateDeleteQuestionnaireSubject(fieldId, queId, daId, attrIdField,
 
     clearError(errorElem);
     questionnaireBean.saveUpdateDeleteQuestionnaireSubject(queId, daId, attrId, dynamicPosition, pickerListValue, queDefId,
-    { callback:function(attributeResult) {
+            { callback:function(attributeResult) {
 
-        attrElem.value = attributeResult.attributeId;
-        displayError(attributeResult, errorElem);
-    },async:false
-    });
+                attrElem.value = attributeResult.attributeId;
+                displayError(attributeResult, errorElem);
+            },async:false
+            });
 }
 
 function deleteQuestionnaireAttribute(attributeId) {
@@ -132,12 +132,12 @@ function saveDeleteQuestionnaireCheckBox(fieldId, queId, daId, attrIdField, erro
     }
     clearError(errorElem);
     questionnaireBean.saveDeleteQuestionnaireCheckBox(queId, daId, attrId, idValue, action, queDefId, dynamicLevel,
-    { callback:function(attributeResult) {
-        attrElem.value = attributeResult.attributeId;
-        displayError(attributeResult, errorElem);
-        displaySumEnums(attributeResult);
-    },async:false
-    });
+            { callback:function(attributeResult) {
+                attrElem.value = attributeResult.attributeId;
+                displayError(attributeResult, errorElem);
+                displaySumEnums(attributeResult);
+            },async:false
+            });
 }
 
 function saveUpdateDeleteQuestionnaireMultiSelect(fieldId, queId, daId, attrIdField, errorId) {
@@ -160,12 +160,12 @@ function saveUpdateDeleteQuestionnaireMultiSelect(fieldId, queId, daId, attrIdFi
     clearError(errorElem);
 
     questionnaireBean.saveUpdateDeleteQuestionnaireMultiSelect(queId, daId, attrId, dynamicPosition, newArray, queDefId,
-    { callback:function(attributeResult) {
-        attrElem.value = attributeResult.attributeId;
-        displayError(attributeResult, errorElem);
-        displaySumEnums(attributeResult);
-    },async:false
-    });
+            { callback:function(attributeResult) {
+                attrElem.value = attributeResult.attributeId;
+                displayError(attributeResult, errorElem);
+                displaySumEnums(attributeResult);
+            },async:false
+            });
 }
 
 function saveUpdateDeleteQuestionnaire(fieldId, queId, daId, attrIdField, errorId) {
@@ -181,11 +181,11 @@ function saveUpdateQuestionnaireAttributeDisabled(triggerElem, queId, lineItemId
     }
     var queDefId = getElemById("queDefIdxx").value;
     questionnaireBean.saveUpdateQuestionnaireAttributeDisabled(checked, queId, lineItemId, dynamicPosition, queDefId,
-    { callback:function(attributeResult) {
-        displaySumEnums(attributeResult);
+            { callback:function(attributeResult) {
+                displaySumEnums(attributeResult);
 
-    },async:false
-    });
+            },async:false
+            });
 }
 
 var completedComit = true;
@@ -203,13 +203,13 @@ function saveUpdateDeleteQuestionnaireGeneric(fieldId, queId, daId, attrIdField,
         completedComit = false;
         try {
             questionnaireBean.saveUpdateDeleteQuestionnaireGeneric(queId, daId, attrId, dynamicPosition, textValue, queDefId,
-            { callback:function(attributeResult) {
-                attrElem.value = attributeResult.attributeId;
-                displayError(attributeResult, errorElem);
-                displaySumEnums(attributeResult);
+                    { callback:function(attributeResult) {
+                        attrElem.value = attributeResult.attributeId;
+                        displayError(attributeResult, errorElem);
+                        displaySumEnums(attributeResult);
 
-            },async:false
-            });
+                    },async:false
+                    });
         } catch(e) {
 
             alert("Error occured please try again later.");
@@ -343,6 +343,49 @@ function republishWorkflow(queId, userId, republishMessage, republishAtMsg, user
     }});
 }
 
+function removeOptions(selectbox)
+{
+    var i;
+    for(i=selectbox.options.length-1;i>=0;i--)
+    {
+        selectbox.remove(i);
+    }
+}
+
+function testLinkableOptions() {
+    // on first load all options are shown none are hidden so now we just need to hide the ones that do not have a selected parent
+    $('select' + ' option.linked').each(function () {
+        var requiresIds = $(this).attr('requires');
+        console.log("option requires " + requiresIds);
+        if(requiresIds) {
+            // handle dynamic line items
+            var dynamicIndex = '';
+            var newRequiresId = requiresIds;
+            // check to see if the string end with an _ we must remove this
+            if(requiresIds.indexOf('_') >= 0) {
+                console.log("we have an _ therefore dynamic line item here ");
+                // grab this index and store it
+                dynamicIndex = requiresIds.substring(requiresIds.indexOf('_'), requiresIds.length);
+                newRequiresId = requiresIds.substring(0, requiresIds.indexOf('_') );
+            }
+            //console.log("newRequiresIds is now " + newRequiresId);
+            var requiresArray = newRequiresId.split(',');
+            var show = true;
+            for (var i = 0; i < requiresArray.length; i++) {
+
+                if(!$("option[linkId='" + requiresArray[i] + dynamicIndex +"']").is(":selected")) {
+                    show = false;
+                    break;
+                }
+            }
+
+            if(!show) {
+                //console.log("hiding the option with linkId " + $(this).attr('linkId'));
+                $(this).remove();
+            }
+        }
+    });
+}
 
 function addDynamicLineItemRow(tableId, uniqueGeneratorFieldId, queId) {
 
@@ -378,6 +421,9 @@ function addDynamicLineItemRow(tableId, uniqueGeneratorFieldId, queId) {
 
         for (var j = 0; j < cellElems.length; j++) {
             var currentElem = cellElems[j];
+
+            var elemId = currentElem.id;
+
             setAttributeIdToEmpty(currentElem);
 
             if (eventNumber == 0)eventNumber = getDynamicEventState(cellElems);
@@ -389,19 +435,59 @@ function addDynamicLineItemRow(tableId, uniqueGeneratorFieldId, queId) {
                 currentElem.disabled = managerWriteOnly;
 
                 if (currentElem.nodeName == 'SELECT') {
-                    currentElem.options[0].selected = 'true';
+
                     // todo update the linkId and referenceId
                     var options = currentElem.options;
+
+                    //we will now replace the new select with the complete stored on
+
+                    var ops = selectMap[elemId];
+                    if(ops) {
+                        //$('#' + elemId).html(ops);
+                        options = ops.clone(true);
+                        removeOptions(currentElem);
+                    }
+
                     for(var m = 0; m < options.length; m++) {
                         var linkId = options[m].getAttribute("linkId");
-                        var postfix = "_" + dynamicLevel;
-                        console.log("we have found a postfix of: " + postfix);
-                        if(linkId.indexOf("_") >= 0) {
-                            // remove the postfix and add a new one
+                        var requireIds = options[m].getAttribute("requires");
+                        var postfix = "_" + (parseInt(dynamicLevel) + 1);
+                        //var info = options[m].text;
+                        //var val = options[m].value;                        
+                        if(linkId) {
+                            if(linkId.indexOf("_") >= 0) {
+                                // remove the postfix and add a new one
+                                linkId = linkId.substring(0, linkId.indexOf('_'));
+                            }
+                            options[m].setAttribute("linkId", linkId + postfix);
+                            options[m].setAttribute("id", "pp_" + linkId + postfix);
                         }
-                        options[m].setAttribute("linkId", "");            
+                        // now requiresId          
+                        if(requireIds) {
+                            // todo this will always clear the options!! so nothing further to do except we now need to add to the selectMap!! all linkables!!
+                            // todo need to trigger the javascript call
+                            if(requireIds.indexOf("_") >= 0) {
+                                requireIds = requireIds.substring(0, requireIds.indexOf('_'));
+                            }
+                            options[m].setAttribute("requires", requireIds + postfix);
+                        }
+                        //options[m].text = info;
+                        //options[m].value = val;
+                        if(ops) {
+                            currentElem.add(options[m]);
+                        }
                     }
+                    if(ops) {
+                        // see if we have the new select in
+                        if(!selectMap[currentElem.id]) {
+                            selectMap[currentElem.id] = options;
+                        }
+                    }
+                    currentElem.options[0].selected = 'true';
+                    // need to remove the cloned select options and replace them with ops                    
                     addDynamicLineItemRowEvent(currentElem, queId, daId, eventNumber, lineItem, tableId, newRow.id);
+
+
                 } else if (currentElem.type == 'text') {
                     resetElementTextAndValue(currentElem);
                     addDynamicLineItemRowEvent(currentElem, queId, daId, eventNumber, lineItem, tableId, newRow.id);
@@ -416,7 +502,7 @@ function addDynamicLineItemRow(tableId, uniqueGeneratorFieldId, queId) {
                     addDynamicLineItemRowEvent(currentElem, queId, daId, eventNumber, lineItem, tableId, newRow.id);
                 }
 
-            } else if (currentElem.nodeName == 'TEXTAREA') {
+            } if (currentElem.nodeName == 'TEXTAREA') {
 
                 var itemIndex = eval(index) + increaseByOne;
                 setElementNameId(currentElem, itemIndex, dynamicLevel);
@@ -431,20 +517,23 @@ function addDynamicLineItemRow(tableId, uniqueGeneratorFieldId, queId) {
                 }
 
             } else {
-                var currentElemId = currentElem.id;
-                if (currentElemId) {
-                    var itemIndex = eval(index) + increaseByOne;
+                /*  var currentElemId = currentElem.id;
+                 if (currentElemId) {
+                 var itemIndex = eval(index) + increaseByOne;
 
-                    setElementId(currentElem, itemIndex, dynamicLevel);
-                    resetElementTextAndValue(currentElem);
-                    currentElem.innerHTML = '';
-                }
+                 setElementId(currentElem, itemIndex, dynamicLevel);
+                 resetElementTextAndValue(currentElem);
+                 currentElem.innerHTML = '';
+                 }
+                 */
             }
         }
     }
     var lastRow = tblBody.rows[length - 1];
     tblBody.insertBefore(newRow, lastRow);
     hiddenElem.value = parseInt(index) + 1;
+    // todo try enter here add the function call
+    testLinkableOptions();
 }
 
 function showDeleteRowButton(newRow) {
@@ -847,10 +936,10 @@ function deleteLineItemRow(queId, lineItemId, tableId, rowId) {
     table.deleteRow(rowToDelete.rowIndex);
     var queDefId = getElemById("queDefIdxx").value;
     questionnaireBean.deleteDynamicLineItemRow(queId, queDefId, deletedRowPos, lineItemId,
-    { callback:function(attributeResult) {
-        displaySumEnums(attributeResult);
-    },async:false
-    });
+            { callback:function(attributeResult) {
+                displaySumEnums(attributeResult);
+            },async:false
+            });
 }
 
 function verifyErrors(errorMsg) {

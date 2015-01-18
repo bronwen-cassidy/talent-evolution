@@ -23,7 +23,7 @@
                     <%--<c:set var="editable" value="false" scope="request"/>--%>
                     <td class="infosubheading">
                         <c:out value="${cell.label}"/>&nbsp;<c:if test="${cell.mandatory}">*</c:if>&nbsp;
-                        <%--<c:if test="${question.hasHelpText}"><c:import url="../questionnaires/helptextinclude.jsp"/></c:if>--%>
+                            <%--<c:if test="${question.hasHelpText}"><c:import url="../questionnaires/helptextinclude.jsp"/></c:if>--%>
                     </td>
                 </c:forEach>
                 <%--space for any delete buttons or disable checkboxes--%>
@@ -39,7 +39,7 @@
             <c:forEach var="row" items="${grid}" varStatus="rowIndex">
 
                 <c:set var="rowId" value="litm_row_${rowIndex.index}${index}" scope="request"/>
-                
+
                 <tr id="<c:out value="${rowId}"/>">
 
                     <c:forEach var="cell" items="${row}" varStatus="colIndex" >
@@ -50,8 +50,8 @@
                         <c:set var="isDynamic" value="${question.dynamic}"/>
                         <c:set var="queDisabled" value="${question.rowDisabled}" scope="request"/>
                         <c:set var="fieldId" scope="request"><zynap:id><c:out value="${question.label}"/><c:out value="${rowIndex.index}"/><c:out value="${index}"/></zynap:id></c:set>
-                        <c:set var="titleAttr" scope="request"><c:if test="${question.hasTitle}">title="<c:out value="${question.title}"/>"</c:if></c:set>                        
-                        
+                        <c:set var="titleAttr" scope="request"><c:if test="${question.hasTitle}">title="<c:out value="${question.title}"/>"</c:if></c:set>
+
                         <c:choose>
                             <c:when test="${isDynamic}">
                                 <c:set var="prefix" value="command.wrappedDynamicAttributes[${index}].questionWrappers[${rowIndex.index}]" scope="request"/>
@@ -72,8 +72,8 @@
                         </c:if>
 
                         <%-- display question --%>
-                        <td class="infodata" width="<c:out value="${cellWidth}"/>%">
-                            <c:set var="showHorizontal" value="true" scope="request"/>                            
+                        <td class="questiondata" width="<c:out value="${cellWidth}"/>%">
+                            <c:set var="showHorizontal" value="true" scope="request"/>
                             <c:import url="../questionnaires/answer/editquestionsnippet.jsp"/>
                         </td>
 
@@ -82,10 +82,10 @@
                             <td class="infodata">
                                 <table>
                                     <tr>
-                                        <td class="actionButton">                  
+                                        <td class="actionButton">
                                             <c:if test="${command.managerView && question.canDisable}">
                                                 <fmt:message key="click.to.disable.row" var="disableTitleMsg"/>
-                                                <spring:bind path="${prefix}.disabled">                                                    
+                                                <spring:bind path="${prefix}.disabled">
                                                     <input type="checkbox" class="input_checkbox" name="<c:out value="${status.expression}"/>"
                                                            <c:if test="${queDisabled}">checked="true"</c:if>
                                                            onclick="disableRow('<c:out value="${rowId}"/>', this,'<c:out value="${command.questionnaireId}"/>','<c:out value="${question.lineItemId}"/>');" title="<c:out value="${disableTitleMsg}"/>"/>
@@ -97,12 +97,12 @@
                                         <td class="actionButton">
                                             <c:if test="${isDynamic}">
                                                 <input type="button" class="inlinebutton" <c:if test="${rowIndex.index <= 0 || (!command.managerView && queDisabled)}">style="display:none;"</c:if>
-                                                name="del_d<c:out value="${index}"/>"
-                                                value="<fmt:message key="delete"/>"
-                                                onclick="deleteLineItemRow('<c:out value="${command.questionnaireId}"/>',
-                                                                           '<c:out value="${question.lineItemId}"/>',
-                                                                           '<c:out value="${tableId}"/>',
-                                                                           '<c:out value="${rowId}"/>');"/>
+                                                       name="del_d<c:out value="${index}"/>"
+                                                       value="<fmt:message key="delete"/>"
+                                                       onclick="deleteLineItemRow('<c:out value="${command.questionnaireId}"/>',
+                                                               '<c:out value="${question.lineItemId}"/>',
+                                                               '<c:out value="${tableId}"/>',
+                                                               '<c:out value="${rowId}"/>');"/>
 
                                                 <input name="eventJsId" id="<c:out value="${rowId}_eventJsId"/>" type="hidden" value="14"/>
                                                 <input name="lineItemId" id="<c:out value="${rowId}"/>" type="hidden" value="<c:out value="${question.lineItemId}"/>"/> <!-- needed - clonning-->
@@ -131,14 +131,14 @@
 
             <c:if test="${isDynamic}">
                 <tr>
-                    <%-- add two to num cols always --%>
+                        <%-- add two to num cols always --%>
                     <td class="infodata" colspan="<c:out value="${numCols + 2}"/>">
                         <input type="button" class="inlinebutton"
                                name="add_dlibutton"
                                value="<fmt:message key="add"/>"
                                onclick="addDynamicLineItemRow('infotable_id_<c:out value="${index}"/>','numExpFldId','<c:out value="${command.questionnaireId}"/>')"/>
                         <input id="numExpFldId" type="hidden" value="<c:out value="${index + lineItem.numberOfQuestionWrappers}"/>"/>
-                    </td>                    
+                    </td>
                 </tr>
             </c:if>
 
