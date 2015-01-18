@@ -149,11 +149,11 @@ public class BarChartProducer extends AbstractChartProducer implements ChartPost
 
         Color trans = new Color(0xFF, 0xFF, 0xFF, 0);
         
-        localChart.setBackgroundPaint(trans);  // was null
-        plot.setBackgroundPaint(trans);        // was null
-        plot.setBackgroundAlpha(0.0f);
-        plot.setBackgroundImageAlpha(0.0f);
-        localChart.setBackgroundImageAlpha(0.0f);
+       // localChart.setBackgroundPaint(trans);  // was null
+       // plot.setBackgroundPaint(trans);        // was null
+       // plot.setBackgroundAlpha(0.0f);
+       // plot.setBackgroundImageAlpha(0.0f);
+       // localChart.setBackgroundImageAlpha(0.0f);
 
         CategoryAxis domainAxis = plot.getDomainAxis();
         domainAxis.setCategoryLabelPositions(CategoryLabelPositions.UP_45);
