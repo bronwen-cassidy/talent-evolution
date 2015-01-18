@@ -97,15 +97,15 @@
                                 </c:if>
                                 <c:set var="titleAttr" scope="request"><c:if test="${question.hasTitle}">title="<c:out value="${question.title}"/>"</c:if></c:set>
                                 <tr<c:if test="${question.hidden}"> style="display:none;"</c:if>>
-                                    <td class="questionlabel" <c:out value="${titleAttr}" escapeXml="false"/>>
-                                        <c:set var="editable" value="false" scope="request"/>
-                                        <c:out value="${question.label}"/>&nbsp;:&nbsp;
-                                        <c:if test="${question.mandatory}">*</c:if>&nbsp;
-                                        <c:if test="${question.hasHelpText}"><c:import url="../questionnaires/helptextinclude.jsp"/></c:if>
-                                    </td>
-                                    <td class="questiondata" <c:out value="${titleAttr}" escapeXml="false"/>>
-                                        <c:import url="../questionnaires/answer/editquestionsnippet.jsp"/>
-                                    </td>
+                                <td class="questionlabel" <c:out value="${titleAttr}" escapeXml="false"/>>
+                                <c:set var="editable" value="false" scope="request"/>
+                                <c:out value="${question.label}"/>&nbsp;:&nbsp;
+                                <c:if test="${question.mandatory}">*</c:if>&nbsp;
+                                <c:if test="${question.hasHelpText}"><c:import url="../questionnaires/helptextinclude.jsp"/></c:if>
+                                </td>
+                                <td class="questiondata" <c:out value="${titleAttr}" escapeXml="false"/>>
+                                <c:import url="../questionnaires/answer/editquestionsnippet.jsp"/>
+                                </td>
                                 </tr>
                                 <c:set var="index" value="${index + 1}" scope="request"/>
                             </c:otherwise>
@@ -203,7 +203,7 @@
     $(function() {
 
         // todo create an array of selects which contains the full set of options then copy and remove the copy
-        var selectMap = {};
+        window.selectMap = {};
         //$("div.test").closest("tr");
         $('option.linked').closest('select').each(function() {
             // get the opions and push them into the array
@@ -216,7 +216,7 @@
         //console.log("the select map i have = " + selectMap);
         testLinkableOptions();
 
-        $('.linkable').change(function() {
+        $('td').on('change', 'select.linkable', function() {
 
             var pSelId = $(this).attr('id');
             var selectedOptionLinkId = $("option:selected", this).attr("linkId");
@@ -328,40 +328,4 @@
         });
 
     }
-
-    function testLinkableOptions() {
-        // on first load all options are shown none are hidden so now we just need to hide the ones that do not have a selected parent
-        $('select' + ' option.linked').each(function () {
-            var requiresIds = $(this).attr('requires');
-            console.log("option requires " + requiresIds);
-            if(requiresIds) {
-                // handle dynamic line items
-                var dynamicIndex = '';
-                var newRequiresId = requiresIds;
-                // check to see if the string end with an _ we must remove this
-                if(requiresIds.indexOf('_') >= 0) {
-                    console.log("we have an _ therefore dynamic line item here ");
-                    // grab this index and store it
-                    dynamicIndex = requiresIds.substring(requiresIds.indexOf('_'), requiresIds.length);
-                    newRequiresId = requiresIds.substring(0, requiresIds.indexOf('_') );
-                }
-                //console.log("newRequiresIds is now " + newRequiresId);
-                var requiresArray = newRequiresId.split(',');
-                var show = true;
-                for (var i = 0; i < requiresArray.length; i++) {
-
-                    if(!$("option[linkId='" + requiresArray[i] + dynamicIndex +"']").is(":selected")) {
-                        show = false;
-                        break;
-                    }
-                }
-
-                if(!show) {
-                    //console.log("hiding the option with linkId " + $(this).attr('linkId'));
-                    $(this).remove();
-                }
-            }
-        });
-    }
-
 </script>
