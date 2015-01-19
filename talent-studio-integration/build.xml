@@ -8,8 +8,8 @@
         </fileset>
     </path>
 
-    <property name="db.username" value="TSQA2"/>
-    <property name="db.password" value="TSQA2"/>
+    <property name="db.username" value="TME"/>
+    <property name="db.password" value="TME"/>
     <property name="host" value="10.83.110.118"/>
     <property name="sid" value="ZYNTS01"/>
     <!--<property name="sid" value="ZYNTS02"/>-->
