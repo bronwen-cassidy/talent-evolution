@@ -10,6 +10,7 @@ import com.zynap.talentstudio.common.groups.IGroupService;
 import com.zynap.talentstudio.organisation.subjects.ISubjectService;
 import com.zynap.talentstudio.organisation.subjects.Subject;
 import com.zynap.talentstudio.security.UserSessionFactory;
+import com.zynap.talentstudio.security.roles.IRoleManager;
 import com.zynap.talentstudio.security.roles.Role;
 import com.zynap.talentstudio.security.users.DuplicateUsernameException;
 import com.zynap.talentstudio.security.users.IUserService;
@@ -58,6 +59,8 @@ public final class SubjectUserController extends ZynapDefaultFormController {
         User user = (User) userService.findById(ZynapWebUtils.getUserId(request));
 
         List<Role> roleList = new ArrayList<Role>(user.getUserRoles());
+        Role homeRole = roleManager.findRole(Role.HOME_ROLE_ID);
+        roleList.add(homeRole);
 
         final SubjectWrapperBean subjectWrapperBean = new SubjectWrapperBean(subject, roleList);
         subjectWrapperBean.getUserWrapper().setGroups(groupService.find(Group.TYPE_HOMEPAGE));
@@ -109,7 +112,7 @@ public final class SubjectUserController extends ZynapDefaultFormController {
 
         SubjectWrapperBean subjectWrapperBean = (SubjectWrapperBean) command;
         Subject newSubject = subjectWrapperBean.getModifiedSubject(UserSessionFactory.getUserSession().getUser());
-
+        
         // check is new user
         final boolean newUser = subjectWrapperBean.isNewUser();
 
@@ -157,7 +160,12 @@ public final class SubjectUserController extends ZynapDefaultFormController {
         this.groupService = groupService;
     }
 
+    public void setRoleManager(IRoleManager roleManager) {
+        this.roleManager = roleManager;
+    }
+
     private ISubjectService subjectService;
     private IUserService userService;
     private IGroupService groupService;
+    private IRoleManager roleManager;
 }

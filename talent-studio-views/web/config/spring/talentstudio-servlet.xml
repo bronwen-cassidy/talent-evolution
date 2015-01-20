@@ -2986,6 +2986,7 @@
         <property name="subjectService" ref="subjectService"/>
         <property name="userService" ref="userService"/>
         <property name="groupService" ref="groupService"/>
+        <property name="roleManager" ref="roleManager"/>
         <property name="validator" ref="subjectUserValidator"/>
     </bean>
 
