@@ -207,12 +207,14 @@
             <!-- todo confirm this works was 3.8.2-->
             <!--<version>4.12</version>-->
             <version>3.8.2</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>dbunit</groupId>
             <artifactId>dbunit</artifactId>
             <version>2.1</version>
-        </dependency>
+            <scope>test</scope>
+        </dependency> 
     </dependencies>
 
     <repositories>

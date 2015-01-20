@@ -149,7 +149,7 @@
 
     <!-- Web View Module (Source) -->
     <property name="webview.module" value="talent-studio-views/web"/>
-    <property name="webview.src.dir" value="${webview.module}/src"/>
+    <property name="webview.src.dir" value="${webview.module}/src/main/java"/>
 
     <!-- client directory -->
     <property name="webview.client.dir" value="${webview.module}/clients"/>
@@ -193,7 +193,7 @@
     <property name="test.classes.config.dir" value="${test.classes.dir}/config"/>
 
     <property name="test.app.src.dir" value="${application.module}/src/main/test"/>
-    <property name="test.webview.src.dir" value="${webview.module}/tests"/>
+    <property name="test.webview.src.dir" value="${webview.module}/src/main/test"/>
     <property name="test.webtest.src.dir" value="${webview.module}/webtests"/>
     <property name="test.integration.src.dir" value="${integration.module}/src/main/test"/>
     <property name="test.testgen4web.src.dir" value="${test.webtest.src.dir}/testgen4web"/>
@@ -540,7 +540,7 @@
                 Please ensure junit.jar is in ants classpath.
                 You can copy ${tools.lib}/junit.jar to ANT_HOME/lib
             </echo>
-            <fail>JUnit classes not in classpath</fail>
+            <!--fail>JUnit classes not in classpath</fail-->
         </then>
     </if>
 
