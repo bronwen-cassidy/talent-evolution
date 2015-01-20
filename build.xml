@@ -150,6 +150,7 @@
     <!-- Web View Module (Source) -->
     <property name="webview.module" value="talent-studio-views/web"/>
     <property name="webview.src.dir" value="${webview.module}/src/main/java"/>
+    <property name="webview.root.dir" value="${webview.module}/src"/>
 
     <!-- client directory -->
     <property name="webview.client.dir" value="${webview.module}/clients"/>
@@ -161,6 +162,7 @@
     <property name="war.config.dir" value="${webview.module}/config"/>
     <property name="war.config.spring.dir" value="${war.config.dir}/spring"/>
     <property name="war.config.common.dir" value="${war.config.dir}/common"/>
+    <property name="webapp.webinf.dir" value="${webview.root.dir}/webapp/WEB-INF"/>
     <property name="war.config.logging.dir" value="${war.config.dir}/logging"/>
     <property name="war.config.server.dir" value="${war.config.dir}/server"/>
 
@@ -647,6 +649,7 @@
         <copy todir="${build.webview.war.webinf.dir}" filtering="true" overwrite="true">
             <fileset dir="${war.config.server.dir}"/>
             <fileset dir="${war.config.common.dir}"/>
+            <fileset dir="${webapp.webinf.dir}" includes="web.xml"/>
             <filterset refid="app.config.filterset"/>
         </copy>
 
