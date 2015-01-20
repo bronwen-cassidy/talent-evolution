@@ -173,7 +173,7 @@
     <property name="war.config.axis.file" value="server-config.wsdd"/>
 
     <!-- Web Module resources directories -->
-    <property name="war.resources.dir" value="${webview.module}/resources"/>
+    <property name="war.resources.dir" value="${webview.module}/src/main/resources"/>
     <property name="war.resources.properties.dir" value="${war.resources.dir}/properties"/>
     <property name="client.resources.properties.dir" value="${client.path}/properties"/>
 
