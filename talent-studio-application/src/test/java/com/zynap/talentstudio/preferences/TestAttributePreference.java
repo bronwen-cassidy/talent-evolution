@@ -10,6 +10,11 @@ import junit.framework.TestCase;
 
 import com.zynap.talentstudio.preferences.format.FormattingAttribute;
 import com.zynap.talentstudio.preferences.format.FormattingInfo;
+import com.zynap.talentstudio.preferences.properties.AttributePreference;
+import com.zynap.talentstudio.preferences.properties.AttributeView;
+import com.zynap.talentstudio.preferences.properties.CompositeSwitchAttributePreference;
+import com.zynap.talentstudio.preferences.properties.ConditionalAttributePreference;
+import com.zynap.talentstudio.preferences.properties.SwitchAttributePreference;
 
 public class TestAttributePreference extends TestCase {
 
