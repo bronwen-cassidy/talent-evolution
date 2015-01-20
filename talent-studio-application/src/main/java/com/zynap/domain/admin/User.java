@@ -36,7 +36,7 @@ public class User extends ZynapDomainObject implements Auditable {
         setLoginInfo(loginInfo);
     }
 
-    public User(LoginInfo loginInfo, CoreDetail coreDetail, Collection<Role> userRoles) {
+    public User(LoginInfo loginInfo, CoreDetail coreDetail, Set<Role> userRoles) {
         this(loginInfo, coreDetail);
         this.userRoles = userRoles;
     }
@@ -85,7 +85,7 @@ public class User extends ZynapDomainObject implements Auditable {
         return userRoles;
     }
 
-    public void setUserRoles(Collection<Role> userRoles) {
+    public void setUserRoles(Set<Role> userRoles) {
         this.userRoles = userRoles;
     }
 
@@ -222,7 +222,7 @@ public class User extends ZynapDomainObject implements Auditable {
     // the users home page group
     private Group group;
 
-    private Collection<Role> userRoles;
+    private Set<Role> userRoles;
 
     private Collection<SessionLog> sessionLogs;
 
