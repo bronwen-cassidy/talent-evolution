@@ -192,10 +192,10 @@
     <property name="test.classes.dir" value="${build.dir}/test-classes"/>
     <property name="test.classes.config.dir" value="${test.classes.dir}/config"/>
 
-    <property name="test.app.src.dir" value="${application.module}/src/main/test"/>
-    <property name="test.webview.src.dir" value="${webview.module}/src/main/test"/>
+    <property name="test.app.src.dir" value="${application.module}/src/test/java"/>
+    <property name="test.webview.src.dir" value="${webview.module}/src/test/java"/>
     <property name="test.webtest.src.dir" value="${webview.module}/webtests"/>
-    <property name="test.integration.src.dir" value="${integration.module}/src/main/test"/>
+    <property name="test.integration.src.dir" value="${integration.module}/src/test/java"/>
     <property name="test.testgen4web.src.dir" value="${test.webtest.src.dir}/testgen4web"/>
 
     <property name="test.webtest.gensrc.dir" value="${build.dir}/genwebtests"/>
