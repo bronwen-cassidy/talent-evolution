@@ -26,6 +26,7 @@
     <modules>
         <module>talent-studio-application</module>
         <module>talent-studio-integration</module>
+        <module>talent-studio-integration-client</module>
         <module>talent-studio-views</module>
     </modules>
     

@@ -43,7 +43,6 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-dao:2.0.8" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-jdbc:2.0.8" level="project" />
     <orderEntry type="library" name="Maven: commons-digester:commons-digester:1.7" level="project" />
-    <orderEntry type="library" name="Maven: soap:soap:2.3.1" level="project" />
     <orderEntry type="library" name="Maven: org.freemarker:freemarker:2.3.9" level="project" />
     <orderEntry type="library" name="Maven: junit:junit:3.8.2" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring:2.5.6" level="project" />
@@ -86,6 +85,7 @@
     <orderEntry type="library" name="Maven: commons-pool:commons-pool:1.6" level="project" />
     <orderEntry type="library" name="Maven: javax.transaction:jta:1.1" level="project" />
     <orderEntry type="library" name="Maven: javax.mail:mail:1.4.7" level="project" />
+    <orderEntry type="library" name="Maven: soap:soap:2.3.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: dbunit:dbunit:2.1" level="project" />
   </component>
 </module>

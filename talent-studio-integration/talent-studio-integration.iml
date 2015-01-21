@@ -44,6 +44,7 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-jdbc:2.0.8" level="project" />
     <orderEntry type="library" name="Maven: commons-digester:commons-digester:1.7" level="project" />
     <orderEntry type="library" name="Maven: org.freemarker:freemarker:2.3.9" level="project" />
+    <orderEntry type="module" module-name="talent-studio-application" production-on-test="" />
     <orderEntry type="library" name="Maven: org.springframework.ws:spring-ws-core:2.2.0.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.ws:spring-xml:2.2.0.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-web:4.0.5.RELEASE" level="project" />

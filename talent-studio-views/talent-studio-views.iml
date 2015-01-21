@@ -10,7 +10,8 @@
           <root url="file://$MODULE_DIR$/web/clients" />
           <root url="file://$MODULE_DIR$/web/config" />
           <root url="file://$MODULE_DIR$/web/resources" />
-          <root url="file://$MODULE_DIR$/web/src" />
+          <root url="file://$MODULE_DIR$/web/src/main/java" />
+          <root url="file://$MODULE_DIR$/web/src/webapp" />
           <root url="file://$MODULE_DIR$/web/war" />
         </sourceRoots>
       </configuration>
@@ -469,6 +470,7 @@
     <orderEntry type="library" name="Maven: commons-digester:commons-digester:1.7" level="project" />
     <orderEntry type="library" name="Maven: org.freemarker:freemarker:2.3.9" level="project" />
     <orderEntry type="module" module-name="talent-studio-integration" />
+    <orderEntry type="module" module-name="talent-studio-application" production-on-test="" />
     <orderEntry type="library" name="Maven: org.springframework.ws:spring-ws-core:2.2.0.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.ws:spring-xml:2.2.0.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.apache.axis:axis:1.4" level="project" />
