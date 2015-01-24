@@ -889,24 +889,21 @@ function disableRowBeforeSave(rowId, triggerElem) {
     var selectElems = rowElem.getElementsByTagName("SELECT");
     var txtArea = rowElem.getElementsByTagName("TEXTAREA");
 
-
-    if (!triggerElem.checked) {
-        for (var i = 0; i < inputElems.length; i++) {
-            var inputElem = inputElems[i];
-            if (inputElem != triggerElem) {
-                inputElem.disabled = false;
-            }
-        }
-        for (var j = 0; j < selectElems.length; j++) {
-            var selectElem1 = selectElems[j];
-            selectElem1.disabled = false;
-        }
-        for (var k = 0; k < txtArea.length; k++) {
-            var selectElem2 = txtArea[k];
-            selectElem2.disabled = false;
+    var state = triggerElem.checked;
+    for (var i = 0; i < inputElems.length; i++) {
+        var inputElem = inputElems[i];
+        if (inputElem != triggerElem) {
+            inputElem.disabled = state;
         }
     }
-
+    for (var j = 0; j < selectElems.length; j++) {
+        var selectElem1 = selectElems[j];
+        selectElem1.disabled = state;
+    }
+    for (var k = 0; k < txtArea.length; k++) {
+        var selectElem2 = txtArea[k];
+        selectElem2.disabled = state;
+    }
 }
 
 function deleteLineItemRow(queId, lineItemId, tableId, rowId) {

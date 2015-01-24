@@ -3,6 +3,8 @@
  */
 package com.zynap.talentstudio.web.organisation.attributes;
 
+import java.io.Serializable;
+
 /**
  * Class or Interface description.
  *
@@ -10,7 +12,7 @@ package com.zynap.talentstudio.web.organisation.attributes;
  * @version $Revision: $
  *          $Id: $
  */
-public interface FormAttribute {
+public interface FormAttribute extends Serializable {
 
     String getValue();
 
