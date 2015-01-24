@@ -17,10 +17,9 @@ import java.util.Set;
 
 /**
  * Created by IntelliJ IDEA.
- * User: aandersson
- * Date: 02-Feb-2004
+ * User: bcassidy
+ * Date: 02-Feb-2014
  * Time: 17:54:12
- * To change this template use Options | File Templates.
  */
 public class User extends ZynapDomainObject implements Auditable {
 

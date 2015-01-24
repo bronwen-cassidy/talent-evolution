@@ -195,10 +195,17 @@ public class QuestionnaireService extends DefaultService implements IQuestionnai
             List<QuestionAttribute> listItemQuestions = questionnaireDao.findLineItemQuestions(lineItemId);
 
             for (QuestionAttribute qAttr : listItemQuestions) {
-                List<NodeExtendedAttribute> dynamicAttributesList = questionnaireDao.findNodeAttributes(qAttr.getDynamicAttribute().getId(), dynamicPosition, queId);
+                List<NodeExtendedAttribute> dynamicAttributesList;
+                boolean dynamic = qAttr.isDynamic();
+                if (dynamic) {
+                    dynamicAttributesList = questionnaireDao.findNodeAttributes(qAttr.getDynamicAttribute().getId(), dynamicPosition, queId);
+                } else {
+                    dynamicAttributesList = questionnaireDao.findAttributes(qAttr.getDynamicAttribute().getId(), queId);
+                }
+                
                 for (NodeExtendedAttribute nodeExtendedAtt : dynamicAttributesList) {
                     nodeExtendedAtt.setDisabled(disabled);
-                    nodeExtendedAtt.setDynamicPosition(dynamicPosition);
+                    if(dynamic) nodeExtendedAtt.setDynamicPosition(dynamicPosition);
                     nodeExtendedAtt.setAddedBy(user);
                     nodeExtendedAtt.setDateAdded(new Date());
                     questionnaireDao.update(nodeExtendedAtt);

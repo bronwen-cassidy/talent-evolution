@@ -8,6 +8,7 @@ import com.zynap.talentstudio.organisation.attributes.NodeExtendedAttribute;
 import com.zynap.talentstudio.questionnaires.QuestionAttribute;
 import com.zynap.talentstudio.questionnaires.QuestionGroup;
 import com.zynap.talentstudio.web.organisation.attributes.AttributeWrapperBean;
+import com.zynap.talentstudio.web.organisation.attributes.FormAttribute;
 
 import org.springframework.util.StringUtils;
 
@@ -174,6 +175,11 @@ public class QuestionAttributeWrapperBean extends AttributeWrapperBean {
                 if (attributeWrapperBean.isDisabled()) {
                     return true;
                 }
+            }
+        } else if (isPartOfMultiQuestion()) {
+            List<FormAttribute> questionWrappers = lineItemWrapper.getQuestionWrappers();
+            for (FormAttribute questionWrapper : questionWrappers) {
+                if(((QuestionAttributeWrapperBean) questionWrapper).isDisabled()) return true;
             }
         }
         return false;
