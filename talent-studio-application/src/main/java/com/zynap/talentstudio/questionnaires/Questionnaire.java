@@ -22,6 +22,11 @@ public class Questionnaire extends Node {
         super();
     }
 
+    public Questionnaire(Long id, String label) {
+        super(id);
+        setLabel(label);
+    }
+
     /**
      * minimal constructor
      */
