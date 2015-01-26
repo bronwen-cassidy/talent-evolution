@@ -11,21 +11,29 @@ import com.zynap.talentstudio.web.common.UrlBeanPair;
 import com.zynap.talentstudio.web.utils.RequestUtils;
 import com.zynap.talentstudio.web.utils.ZynapWebUtils;
 import com.zynap.talentstudio.web.workflow.WorkflowConstants;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 /**
  * User: bcassidy
  * Date: 26-Jan-2015
  * Time: 10:04:11
  */
-public class SendQuestionnaireNotificationController implements Controller, WorkflowConstants {
+public class SendQuestionnaireNotificationController implements Controller,  WorkflowConstants {
 
-    private void processInboxNotification(HttpServletRequest request) throws Exception {
+    @Override
+    public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse httpServletResponse) throws Exception {
 
         boolean sendToInbox = RequestUtils.getBooleanParameter(request, "sendToInbox", false);
         boolean sendEmail = RequestUtils.getBooleanParameter(request, "sendEmail", false);
@@ -81,32 +89,21 @@ public class SendQuestionnaireNotificationController implements Controller, Work
                 //wrapper.setSendSuccess(true);
             }
         }
-    }
-    @Override
-    public ModelAndView handleRequest(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
-
         return null;
     }
 
-    public void setMessageService(IMessageService messageService) {
-        this.messageService = messageService;
-    }
-
-    public void setMailNotifications(Map<String, UrlBeanPair> mailNotification) {
-        this.mailNotifications = mailNotification;
-    }
-
-    public void setUserService(IUserService userService) {
-        this.userService = userService;
-    }
-
+    @Autowired
     protected Map<String, UrlBeanPair> mailNotifications;
+    @Autowired
     private IMessageService messageService;
-    protected IUserService userService;
-    protected ISubjectService subjectService;
+    @Autowired
+    private IUserService userService;
+    @Autowired
+    private ISubjectService subjectService;
 
     protected final String INBOX_MAIL = "INBOX";
     protected final String NO_INBOX_MAIL_MANAGER = "NO_INBOX_MANAGER";
     protected final String NO_INBOX_MAIL_INDIVIDUAL = "NO_INBOX_STAFF";
 
+    
 }

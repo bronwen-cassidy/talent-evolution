@@ -369,6 +369,4 @@
 
     <bean id="spellCheckService" class="com.zynap.talentstudio.questionnaires.GoogleSpellCheckService"/>
 
-    <bean id="serviceDelegate" class="com.zynap.talentstudio.ServiceDelegate"/>
-
 </beans>
