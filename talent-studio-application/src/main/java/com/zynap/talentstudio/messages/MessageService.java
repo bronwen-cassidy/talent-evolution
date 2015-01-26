@@ -30,16 +30,22 @@ public class MessageService extends DefaultService implements IMessageService {
 
     /**
      * Creates messages for the given questionnaire
-     * @param modifiedQuestionnaire
-     * @param managerView
-     * @param fromUser
-     * @param toUser
+     *
+     * @param modifiedQuestionnaire - the modified questionaire
+     * @param managerView - is this a managers view
+     * @param fromUser - which user is sending this notification
+     * @param toUser - to whom is it going to
      * @throws TalentStudioException
      */
     public void create(Questionnaire modifiedQuestionnaire, boolean managerView, User fromUser, User toUser) throws TalentStudioException {
 
+        create(modifiedQuestionnaire.getLabel(), modifiedQuestionnaire.getId(), managerView, fromUser, toUser);
+    }
+
+    @Override
+    public void create(String messageLabel, Long itemId, boolean managerView, User fromUser, User toUser) throws TalentStudioException {
         MessageItem inboxItem = new MessageItem();
-        if(managerView) {
+        if (managerView) {
             // we are going to the subordinate who is the subject of the questionnaire
             inboxItem.setViewType(MessageItem.INDIVIDUAL_VIEW);
         } else {
@@ -48,22 +54,26 @@ public class MessageService extends DefaultService implements IMessageService {
         }
         inboxItem.setToUserId(toUser.getId());
         inboxItem.setDateReceived(new Date());
-        inboxItem.setLabel(modifiedQuestionnaire.getLabel());
+        inboxItem.setLabel(messageLabel);
         inboxItem.setFromUser(fromUser);
-        inboxItem.setQuestionnaireId(modifiedQuestionnaire.getId());
+        inboxItem.setQuestionnaireId(itemId);
         inboxItem.setStatus(MessageItem.STATUS_UNREAD);
         inboxItem.setType(MessageItem.TYPE_QUESTIONNAIRE);
         messageDao.create(inboxItem);
     }
 
     public void create(Questionnaire modifiedQuestionnaire, boolean managerView, User user, List<User> participants) throws TalentStudioException {
-        for(User participant : participants) {
-            create(modifiedQuestionnaire, managerView, user, participant);
+            create(modifiedQuestionnaire.getLabel(), modifiedQuestionnaire.getId(), managerView, user, participants);
+    }
+
+    public void create(String queLabel, Long itemId, boolean managerView, User user, List<User> participants) throws TalentStudioException {
+        for (User participant : participants) {
+            create(queLabel, itemId, managerView, user, participant);
         }
     }
 
     public void delete(String[] messageItemIds) {
-        messageDao.delete(messageItemIds);    
+        messageDao.delete(messageItemIds);
     }
 
     public Integer countUnreadMessages(Long userId) throws TalentStudioException {

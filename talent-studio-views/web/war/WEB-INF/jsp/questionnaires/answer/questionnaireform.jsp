@@ -168,8 +168,8 @@
                         <tr>
                             <td class="infobutton" width="50%">&nbsp;</td>
                             <td class="infobutton" align="left" width="50%">
-                                <span><input class="inlinebutton" type="submit" name="_target6" value="<fmt:message key="send.request"/>"/></span>
-                                <c:if test="${command.sendSuccess}"><div class="infomessage"><fmt:message key="send.success"/></div></c:if>
+                                <span><input id="sendNotifRequest" class="inlinebutton" type="button" name="sendRequest" value="<fmt:message key="send.request"/>"/></span>
+                                <div id="sendNotifResponse" class="infomessage" style="display:none;"><fmt:message key="send.success"/></div>
                             </td>
                         </tr>
                     </c:if>
@@ -202,7 +202,6 @@
 
     $(function() {
 
-        // todo create an array of selects which contains the full set of options then copy and remove the copy
         window.selectMap = {};
         //$("div.test").closest("tr");
         $('option.linked').closest('select').each(function() {
@@ -276,6 +275,15 @@
             });
             console.log("show all");
             // now hide the one not allowed to be seen
+
+        });
+
+        $('#sendNotifRequest').on('click', function() {
+            // will do a get request passing through the information need
+            var qnId =
+            $.get('sendQuestionnaireNotification.htm?ts='+new Date().getTime(qId: qnId, {}, function(data,status) {
+
+            });
 
         });
     });

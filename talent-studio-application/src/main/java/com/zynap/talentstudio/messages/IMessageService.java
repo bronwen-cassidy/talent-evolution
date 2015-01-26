@@ -28,6 +28,9 @@ public interface IMessageService {
     void delete(Long messageItemId) throws TalentStudioException;
 
     void create(Questionnaire modifiedQuestionnaire, boolean managerView, User user, List<User> participants) throws TalentStudioException;
+    void create(String messageLabel, Long itemId, boolean managerView, User user, List<User> participants) throws TalentStudioException;
+
+    void create(String messageLabel, Long itemId, boolean managerView, User fromUser, User toUser) throws TalentStudioException;
 
     void delete(String[] messageItemIds);
 
