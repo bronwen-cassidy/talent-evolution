@@ -224,67 +224,77 @@
                 clearDependants($("option", this), selectMap);
                 return;
             }
+
             $.each( selectMap, function( key, value ) {
-                var add = [];
-                var manip = false;
-                // key is the potential select to populate
+                if(key != pSelId) {
+                    var add = [];
 
-                $.each(value, function(index, v) {
-                    // if the requires list contains this selects options link_id then we are good to go																								
-                    var req = v.getAttribute("requires");
-                    if(req) {
-                        var dynamicIndex = '';
-                        var newRequiresId = req;
-                        // check to see if the string end with an _ we must remove this
-                        if(req.indexOf('_') >= 0 && req.indexOf(',') >= 0) {
-                            console.log("we have an _ therefore dynamic line item here ");
-                            // grab this index and store it
-                            dynamicIndex = req.substring(req.indexOf('_'), req.length);
-                            newRequiresId = req.substring(0, req.indexOf('_') );
-                        }
-                        var reqArray = newRequiresId.split(',');
-                        for (var q = 0; q < reqArray.length; q++) {
+                    // key is the potential select to populate
 
-                            var targetLinkId = reqArray[q];
-                            if(targetLinkId + dynamicIndex == selectedOptionLinkId) {
-                                // add the option to the select on the page
-                                add.push(v);
-                                manip = true;
+                    $.each(value, function(index, v)  {
+                        // if the requires list contains this selects options link_id then we are good to go
+                        var req = v.getAttribute("requires");
+                        var optionId = v.getAttribute("id");
+                        // do not process the currently selected select
+                        var currentSelected = $('#'+optionId).is(":selected");
+
+                        if(req) {
+                            var dynamicIndex = '';
+                            var newRequiresId = req;
+                            // check to see if the string end with an _ we must remove this
+                            if(req.indexOf('_') >= 0 && req.indexOf(',') >= 0) {
+                                console.log("we have an _ therefore dynamic line item here ");
+                                // grab this index and store it
+                                dynamicIndex = req.substring(req.indexOf('_'), req.length);
+                                newRequiresId = req.substring(0, req.indexOf('_') );
                             }
+                            var reqArray = newRequiresId.split(',');
+                            var manip = 0;
+
+                            for (var q = 0; q < reqArray.length; q++)  {
+
+                                var targetLinkId = reqArray[q];
+                                // check to see if the link is selected
+                                var optionSelected = $('#pp_' + targetLinkId + dynamicIndex).is(':selected');
+                                if(optionSelected) {
+                                    // add the option to the select on the page
+                                    manip++;
+                                } else {
+                                    manip--;
+                                }
+                            }
+                            if(parseInt(manip) == reqArray.length) add.push(v);
+                        } else {
+                            //first one add it anyway
+                            add.push(v);
                         }
-                    } else {
-                        //first one add it anyway
-                        add.push(v);
+                        // if requires contains the selected option the add it to the target select
+                        console.log("Index = " + index);
+                        console.log("requires = " + reqArray);
+                    });
+
+                    if(add.length > 0) {
+                        // remove all options from key if manip = true
+                        $('#' + key).html('');
+                        for(var t = 0; t < add.length; t++) {
+                            $('#' + key).append(add[t]);
+                        }
+                        // set selected option to 0
+                        $('#' + key + ' option[selected="selected"]').removeAttr('selected');
+                        $("#" + key + " option:first").attr('selected','selected');
                     }
-                    // if requires contains the selected option the add it to the target select
-                    console.log("Index = " + index);
-                    console.log("requires = " + reqArray);
                 });
-
-                if(manip) {
-                    // remove all options from key if manip = true
-                    $('#' + key).html('');
-                    for(var t = 0; t < add.length; t++) {
-                        $('#' + key).append(add[t]);
-                    }
-                    // set selected option to 0
-                    $('#' + key + ' option[selected="selected"]').removeAttr('selected');
-                    $("#" + key + " option:first").attr('selected','selected');
-                }
-
-            });
-            console.log("show all");
+                console.log("show all");
             // now hide the one not allowed to be seen
-
+            }
         });
 
         $('#sendNotifRequest').on('click', function() {
             // will do a get request passing through the information need
-            var qnId =
-            $.get('sendQuestionnaireNotification.htm?ts='+new Date().getTime(qId: qnId, {}, function(data,status) {
-
+            var qnId = "-1";
+            $.get('sendQuestionnaireNotification.htm?ts='+new Date().getTime(),{qId: qnId}, function(data,status) {
+                $('#sendNotifResponse').html(data);
             });
-
         });
     });
 
