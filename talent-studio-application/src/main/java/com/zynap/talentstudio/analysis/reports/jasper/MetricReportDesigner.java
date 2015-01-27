@@ -245,7 +245,7 @@ public class MetricReportDesigner extends ReportDesigner {
         // add expression for formatting to correct number of decimal places
         JRDesignExpression formatExpression = new JRDesignExpression();
         formatExpression.setValueClass(String.class);
-        formatExpression.setText("DataFormatter.formatValue($F{" + field.getName() + "},$P{" + ReportConstants.DECIMAL_PLACES_PARAM + "})");
+        formatExpression.setText("com.zynap.talentstudio.analysis.reports.DataFormatter.formatValue($F{" + field.getName() + "},$P{" + ReportConstants.DECIMAL_PLACES_PARAM + "})");
         element.setExpression(formatExpression);
 
         applyStyleElements(element, style, x, y, width, height);

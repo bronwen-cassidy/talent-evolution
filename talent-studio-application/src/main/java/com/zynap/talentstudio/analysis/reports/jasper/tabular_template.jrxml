@@ -10,9 +10,9 @@
 
     <parameter name="subjectUrl" class="java.lang.String"/>
     <parameter name="positionUrl" class="java.lang.String"/>
-    <parameter name="report" class="Report"/>
-    <parameter name="user" class="User"/>
-    <parameter name="_DS_FACTORY_PARAM" class="JasperDataSourceFactory"/>
+    <parameter name="report" class="com.zynap.talentstudio.analysis.reports.Report"/>
+    <parameter name="user" class="com.zynap.domain.admin.User"/>
+    <parameter name="_DS_FACTORY_PARAM" class="com.zynap.talentstudio.analysis.reports.jasper.JasperDataSourceFactory"/>
 
     <pageHeader>
         <band height="20">

@@ -71,19 +71,19 @@ public abstract class ReportDesigner {
             else if (expression.isMetricExpression()) {
                 final String metricFieldName = getMetricFieldName(expression.getMetric().getId());
 
-                formulaResult.append(" DataFormatter.valueToNumber($F{")
+                formulaResult.append(" com.zynap.talentstudio.analysis.reports.DataFormatter.valueToNumber($F{")
                         .append(metricFieldName)
                         .append("}) ");
                 addField(metricFieldName, design.jasperDesign, Number.class.getName());
 
             } else if (expression.isAttributeOperand()) {
-                formulaResult.append(" DataFormatter.valueToNumber($F{")
+                formulaResult.append(" com.zynap.talentstudio.analysis.reports.DataFormatter.valueToNumber($F{")
                         .append(expression.getAttributeExpression())
                         .append("}) ");
                 createField(attribute, design.jasperDesign);
 
             } else if (expression.isRefValueOperand()) {
-                formulaResult.append(" DataFormatter.valueToNumber($F{")
+                formulaResult.append(" com.zynap.talentstudio.analysis.reports.DataFormatter.valueToNumber($F{")
                         .append(expression.getRefValue())
                         .append("}) ");
                 createField(attribute, design.jasperDesign);
@@ -93,7 +93,7 @@ public abstract class ReportDesigner {
         }
 
         String formula = formulaResult.toString();
-        formula = "DataFormatter.formatValue(new Double(" + formula + "),$P{" + ReportConstants.DECIMAL_PLACES_PARAM + "})";
+        formula = "com.zynap.talentstudio.analysis.reports.DataFormatter.formatValue(new Double(" + formula + "),$P{" + ReportConstants.DECIMAL_PLACES_PARAM + "})";
         JRDesignTextField detailsText = new JRDesignTextField();
         JRDesignExpression expression = new JRDesignExpression();
         expression.setValueClass(String.class);
@@ -216,7 +216,7 @@ public abstract class ReportDesigner {
 
     protected final JRDesignExpression buildFormattingExpression(final String attributeName) {
         JRDesignExpression expression = new JRDesignExpression();
-        expression.setText("DataFormatter.formatValue($F{" + attributeName + "})");
+        expression.setText("com.zynap.talentstudio.analysis.reports.DataFormatter.formatValue($F{" + attributeName + "})");
 
         return expression;
     }
@@ -342,7 +342,7 @@ public abstract class ReportDesigner {
         expression.setValueClass(String.class);
 
         expression.setText("\"../images/report/tabular/\" + "
-                + "DataFormatter.getColorCellValue((Column)$P{report}.getColumns().get(" + position.intValue() + "),$F{" + field.getName() + "})" + "+ \".gif\"");
+                + "com.zynap.talentstudio.analysis.reports.DataFormatter.getColorCellValue((com.zynap.talentstudio.analysis.reports.Column)$P{report}.getColumns().get(" + position.intValue() + "),$F{" + field.getName() + "})" + "+ \".gif\"");
 
         return expression;
     }
