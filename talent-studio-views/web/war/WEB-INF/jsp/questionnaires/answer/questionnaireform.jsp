@@ -259,8 +259,6 @@
                                 if(optionSelected) {
                                     // add the option to the select on the page
                                     manip++;
-                                } else {
-                                    manip--;
                                 }
                             }
                             if(parseInt(manip) == reqArray.length) add.push(v);
@@ -283,10 +281,10 @@
                         $('#' + key + ' option[selected="selected"]').removeAttr('selected');
                         $("#" + key + " option:first").attr('selected','selected');
                     }
-                });
+                };
                 console.log("show all");
-            // now hide the one not allowed to be seen
-            }
+                // now hide the one not allowed to be seen
+            });
         });
 
         $('#sendNotifRequest').on('click', function() {
