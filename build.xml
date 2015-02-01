@@ -148,7 +148,7 @@
     <property name="digester.dir" value="digester"/>
 
     <!-- Web View Module (Source) -->
-    <property name="webview.module" value="talent-studio-views/web"/>
+    <property name="webview.module" value="talent-studio-views"/>
     <property name="webview.src.dir" value="${webview.module}/src/main/java"/>
     <property name="webview.root.dir" value="${webview.module}/src"/>
 
@@ -156,13 +156,13 @@
     <property name="webview.client.dir" value="${webview.module}/clients"/>
 
     <!-- Web Module (WAR) -->
-    <property name="war.dir" value="${webview.module}/war"/>
+    <property name="war.dir" value="${webview.module}/src/main/webapp"/>
 
     <!-- Web Module config directories -->
     <property name="war.config.dir" value="${webview.module}/config"/>
     <property name="war.config.spring.dir" value="${war.config.dir}/spring"/>
     <property name="war.config.common.dir" value="${war.config.dir}/common"/>
-    <property name="webapp.webinf.dir" value="${webview.root.dir}/webapp/WEB-INF"/>
+    <property name="webapp.webinf.dir" value="${webview.root.dir}/main/webapp/WEB-INF"/>
     <property name="war.config.logging.dir" value="${war.config.dir}/logging"/>
     <property name="war.config.server.dir" value="${war.config.dir}/server"/>
 
@@ -802,8 +802,8 @@
     <target name="build-war" depends="build-webapp, build-jars, inspect-spring-config" description="Build WAR file">
 
         <war warfile="${dist.dir}/${project.name}.war" webxml="${build.webview.war.webinf.dir}/web.xml">
-            <!-- copy static resources -->
-            <fileset dir="${war.dir}" excludes="WEB-INF/**,skins/**,help/**,images/**,styles/**,statics/**"/>
+            <!-- provides scripts only -->
+            <fileset dir="${war.dir}" excludes="skins/**,help/**,images/**,styles/**,statics/**"/>
             <fileset dir="${build.webview.war.dir}" excludes="WEB-INF/**,WEB-INF/classes/**"/>
             <!-- copy properties files -->
             <classes dir="${build.webview.properties.dir}"/>
@@ -813,7 +813,8 @@
             <!-- copy WEB-INF directory -->
             <webinf dir="${build.webview.war.webinf.dir}" excludes="web.xml"/>
             <!-- copy JSPs tlds and services -->
-            <webinf dir="${war.dir}/WEB-INF"/>
+            <!--<webinf dir="${war.dir}/WEB-INF"/>-->
+            
             <!-- copy lib files -->
             <lib dir="${integration.lib.dir}" includes="*.jar"/>
             <lib dir="${runtime.lib}" includes="*.jar"/>
@@ -827,6 +828,7 @@
             <lib file="${app.jar}"/>
             <lib file="${integration.jar}"/>
             <lib file="${webview.jar}"/>
+            
         </war>
         
     </target>
