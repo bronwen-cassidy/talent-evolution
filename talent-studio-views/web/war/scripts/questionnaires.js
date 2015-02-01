@@ -370,16 +370,16 @@ function testLinkableOptions() {
             }
             //console.log("newRequiresIds is now " + newRequiresId);
             var requiresArray = newRequiresId.split(',');
-            var show = true;
+            var foundCount = 0;
+
             for (var i = 0; i < requiresArray.length; i++) {
 
-                if(!$("option[linkId='" + requiresArray[i] + dynamicIndex +"']").is(":selected")) {
-                    show = false;
-                    break;
+                if($("option[linkId='" + requiresArray[i] + dynamicIndex +"']").is(":selected")) {
+                    foundCount++;
                 }
             }
 
-            if(!show) {
+            if(parseInt(foundCount) != requiresArray.length) {
                 //console.log("hiding the option with linkId " + $(this).attr('linkId'));
                 $(this).remove();
             }
