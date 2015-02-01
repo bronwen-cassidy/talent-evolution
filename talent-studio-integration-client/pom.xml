@@ -10,9 +10,21 @@
         <version>v5.4.4-mt-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.zynap</groupId>
     <artifactId>talent-studio-integration-client</artifactId>
     <version>v5.4.4-mt-SNAPSHOT</version>
+    
+    <dependencies>
+        <dependency>
+            <groupId>com.zynap</groupId>
+            <artifactId>talent-studio-integration</artifactId>
+            <version>v5.4.4-mt-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.zynap</groupId>
+            <artifactId>talent-studio-application</artifactId>
+            <version>v5.4.4-mt-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
     
 </project>
