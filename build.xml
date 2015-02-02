@@ -156,7 +156,8 @@
     <property name="webview.client.dir" value="${webview.module}/clients"/>
 
     <!-- Web Module (WAR) -->
-    <property name="war.dir" value="${webview.module}/src/main/webapp"/>
+    <property name="webapp.dir" value="${webview.module}/src/main/webapp"/>
+    <property name="war.dir" value="${webview.module}/war"/>
 
     <!-- Web Module config directories -->
     <property name="war.config.dir" value="${webview.module}/config"/>
@@ -165,6 +166,7 @@
     <property name="webapp.webinf.dir" value="${webview.root.dir}/main/webapp/WEB-INF"/>
     <property name="war.config.logging.dir" value="${war.config.dir}/logging"/>
     <property name="war.config.server.dir" value="${war.config.dir}/server"/>
+    <property name="scripts.dir" value="${war.dir}/scripts"/>
 
     <!-- Config file used by Spring to map views to actual JSPs -->
     <property name="war.config.spring.file" value="ts-views.properties"/>
@@ -690,7 +692,6 @@
         <!-- copy website icon file to correct location -->
         <copy file="${webview.module}/war/images/zynap.ico" tofile="${webview.module}/war/favicon.ico" overwrite="true"/>
 
-        <!-- copy the default help, images, resources and styles from the war to the build directory -->
         <copy todir="${build.webview.war.dir}" overwrite="true">
             <fileset dir="${war.dir}">
                 <patternset refid="client.ovewrite.files"/>
@@ -803,8 +804,10 @@
 
         <war warfile="${dist.dir}/${project.name}.war" webxml="${build.webview.war.webinf.dir}/web.xml">
             <!-- provides scripts only -->
-            <fileset dir="${war.dir}" excludes="skins/**,help/**,images/**,styles/**,statics/**"/>
+            <fileset dir="${war.dir}" excludes="help/**,images/**,styles/**,statics/**"/>
             <fileset dir="${build.webview.war.dir}" excludes="WEB-INF/**,WEB-INF/classes/**"/>
+            
+            <fileset dir="${webapp.dir}" excludes="WEB-INF/**"/>
             <!-- copy properties files -->
             <classes dir="${build.webview.properties.dir}"/>
             <!-- copy properties files in view -->
@@ -813,8 +816,7 @@
             <!-- copy WEB-INF directory -->
             <webinf dir="${build.webview.war.webinf.dir}" excludes="web.xml"/>
             <!-- copy JSPs tlds and services -->
-            <!--<webinf dir="${war.dir}/WEB-INF"/>-->
-            
+            <webinf dir="${webapp.dir}/WEB-INF" excludes="web.xml"/>
             <!-- copy lib files -->
             <lib dir="${integration.lib.dir}" includes="*.jar"/>
             <lib dir="${runtime.lib}" includes="*.jar"/>
@@ -1504,7 +1506,7 @@
             <classpath location="${build.tools.config.dir}"/>
             <classpath refid="tools.classpath"/>
 
-            <arg value="${basedir}/${war.dir}"/>
+            <arg value="${basedir}/${webapp.dir}"/>
             <arg value="${basedir}/${war.config.spring.dir}/${war.config.spring.file}"/>
         </java>
 
