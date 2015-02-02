@@ -81,7 +81,7 @@
                         <c:choose>
                             <c:when test="${wrappedDynamicAttribute.lineItem}">
                                 <c:set var="lineItem" value="${wrappedDynamicAttribute}" scope="request"/>
-                                <c:import url="lineitemsnippet.jsp"/>
+                                <%@include file="lineitemsnippet.jsp"%>
                                 <c:set var="dynamicIndex" value="-1" scope="request"/>
                             </c:when>
 
@@ -97,15 +97,15 @@
                                 </c:if>
                                 <c:set var="titleAttr" scope="request"><c:if test="${question.hasTitle}">title="<c:out value="${question.title}"/>"</c:if></c:set>
                                 <tr<c:if test="${question.hidden}"> style="display:none;"</c:if>>
-                                <td class="questionlabel" <c:out value="${titleAttr}" escapeXml="false"/>>
-                                <c:set var="editable" value="false" scope="request"/>
-                                <c:out value="${question.label}"/>&nbsp;:&nbsp;
-                                <c:if test="${question.mandatory}">*</c:if>&nbsp;
-                                <c:if test="${question.hasHelpText}"><c:import url="../helptextinclude.jsp"/></c:if>
-                                </td>
-                                <td class="questiondata" <c:out value="${titleAttr}" escapeXml="false"/>>
-                                <c:import url="editquestionsnippet.jsp"/>
-                                </td>
+                                    <td class="questionlabel" <c:out value="${titleAttr}" escapeXml="false"/>>
+                                        <c:set var="editable" value="false" scope="request"/>
+                                        <c:out value="${question.label}"/>&nbsp;:&nbsp;
+                                        <c:if test="${question.mandatory}">*</c:if>&nbsp;
+                                        <c:if test="${question.hasHelpText}"><c:import url="../helptextinclude.jsp"/></c:if>
+                                    </td>
+                                    <td class="questiondata" <c:out value="${titleAttr}" escapeXml="false"/>>
+                                        <%@include file="editquestionsnippet.jsp"%>
+                                    </td>
                                 </tr>
                                 <c:set var="index" value="${index + 1}" scope="request"/>
                             </c:otherwise>
@@ -122,8 +122,8 @@
 
             <input id="actId" type="hidden" name="action" value=""/>
             <input id="tarId" type="hidden" name="" value=""/>
-            <input id="qnId" type="hidden" name="questionnaireFormId" value="${command.id}"/>
-            <input id="qnLbl" type="hidden" name="questionnaireFormLabel" value="${questionnaireLabel}"/>
+            <input id="qnId" type="hidden" name="questionnaireFormId" value="<c:out value="${command.id}"/>"/>
+            <input id="qnLbl" type="hidden" name="questionnaireFormLabel" value="<c:out value="${questionnaireLabel}"/>"/>
             <input id="subjId" type="hidden" name="<%=ParameterConstants.NODE_ID_PARAM%>" value="<c:out value="${command.subjectId}"/>"/>
             <input id="selObjectiveId" type="hidden" name="<%=ObjectiveConstants.OBJECTIVE_ID%>" value="-1"/>
             <input id="selGroupId" type="hidden" name="<%=WorklistController.SELECTED_GROUP_PARAM%>" value=""/>
@@ -165,8 +165,8 @@
                             </td>
                             <td>
                                 <span><input type="checkbox" name="sendToInbox" id="sendIbx" <c:if test="${managerSelection}">disabled="true"</c:if>/></span>
-                                <input type="hidden" name="managerV" id="manViewId" value="${command.managerView}"/>
-                                <input type="hidden" name="myPortV" id="myPortViewId" value="${command.myPortfolio}"/>
+                                <input type="hidden" name="managerV" id="manViewId" value="<c:out value="${command.managerView}"/>"/>
+                                <input type="hidden" name="myPortV" id="myPortViewId" value="<c:out value="${command.myPortfolio}"/>"/>
                             </td>
                         </tr>
                         <tr>
@@ -295,18 +295,25 @@
             var sendIn = $('#sendIbx').is(':checked');
             var sendE = $('#sendEmlId').is(':checked');
             var myP = $('#myPortViewId').val();
-            var manView=$('#manViewId').val();;
+            var manView=$('#manViewId').val();
             var managers = [];
             $("input[name='selectedManagerIds']:checked").each(function () {
                 managers.push(parseInt($(this).val()));
             });
 
-            $.get('sendQuestionnaireNotification.htm?ts='+new Date().getTime(),
-                    {qId: qnId, sendToInbox: sendId, sendEmail:sendE, managerView: manView, isMyPortfolio: myP,
-                    subjectId:sbjId, qLabel:qnLabel, selectedManagers: managers}, function(data,status)  {
-                        // todo filter according to status
-                        $('#sendNotifResponse').html(data);
+            $.ajax({
+                type: 'GET',
+                url: 'sendQuestionnaireNotification.htm?ts='+new Date().getTime(),
+                data: {qId: qnId, sendToInbox: sendIn, sendEmail:sendE, managerView: manView, isMyPortfolio: myP,
+                    subjectId:sbjId, qLabel:qnLabel, selectedManagers: managers},
+                success: function(data) {
+                    $('#sendNotifResponse').html(data);   
+                },
+                error: function(data) {
+                    alert("failed");
+                }
             });
+            
         });
     });
 

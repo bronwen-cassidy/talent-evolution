@@ -1,6 +1,7 @@
 package com.zynap.talentstudio.web.questionnaires;
 
 import com.zynap.domain.admin.User;
+import com.zynap.exception.TalentStudioException;
 import com.zynap.talentstudio.mail.IMailNotification;
 import com.zynap.talentstudio.messages.IMessageService;
 import com.zynap.talentstudio.organisation.subjects.ISubjectService;
@@ -70,18 +71,22 @@ public class SendQuestionnaireNotificationController implements Controller,  Wor
             }
             if (!participants.isEmpty()) {
 
-                if (sendToInbox)
-                    messageService.create(queLabel, qId, managerView, ZynapWebUtils.getUser(request), participants);
-                if (sendEmail) {
-                    UrlBeanPair pair;
-                    if (sendToInbox) pair = mailNotifications.get(INBOX_MAIL);
-                    else {
-                        if (managerView) pair = mailNotifications.get(NO_INBOX_MAIL_MANAGER);
-                        else pair = mailNotifications.get(NO_INBOX_MAIL_INDIVIDUAL);
+                try {
+                    if (sendToInbox)
+                        messageService.create(queLabel, qId, managerView, ZynapWebUtils.getUser(request), participants);
+                    if (sendEmail) {
+                        UrlBeanPair pair;
+                        if (sendToInbox) pair = mailNotifications.get(INBOX_MAIL);
+                        else {
+                            if (managerView) pair = mailNotifications.get(NO_INBOX_MAIL_MANAGER);
+                            else pair = mailNotifications.get(NO_INBOX_MAIL_INDIVIDUAL);
+                        }
+                        IMailNotification mailNotification = pair.getRef();
+                        String url = pair.getUrl();
+                        mailNotification.send(url, ZynapWebUtils.getUser(request), new Questionnaire(qId, queLabel), participants.toArray(new User[participants.size()]));
                     }
-                    IMailNotification mailNotification = pair.getRef();
-                    String url = pair.getUrl();
-                    mailNotification.send(url, ZynapWebUtils.getUser(request), new Questionnaire(qId, queLabel), participants.toArray(new User[participants.size()]));
+                } catch (TalentStudioException e) {
+                    // todo return error message
                 }
                 //wrapper.setSendSuccess(true);
             }
