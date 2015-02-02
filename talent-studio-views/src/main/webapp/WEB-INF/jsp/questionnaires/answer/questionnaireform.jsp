@@ -122,6 +122,8 @@
 
             <input id="actId" type="hidden" name="action" value=""/>
             <input id="tarId" type="hidden" name="" value=""/>
+            <input id="qnId" type="hidden" name="questionnaireFormId" value="${command.id}"/>
+            <input id="qnLbl" type="hidden" name="questionnaireFormLabel" value="${questionnaireLabel}"/>
             <input id="subjId" type="hidden" name="<%=ParameterConstants.NODE_ID_PARAM%>" value="<c:out value="${command.subjectId}"/>"/>
             <input id="selObjectiveId" type="hidden" name="<%=ObjectiveConstants.OBJECTIVE_ID%>" value="-1"/>
             <input id="selGroupId" type="hidden" name="<%=WorklistController.SELECTED_GROUP_PARAM%>" value=""/>
@@ -150,7 +152,7 @@
                         </c:if>
                         <tr>
                             <td class="infolabel" align="right" width="50%"><span><fmt:message key="send.email"/>&nbsp;:&nbsp;</span></td>
-                            <td><span><input id="sendEmailCBId" type="checkbox" name="sendEmail" id="sendEmlId" <c:if test="${managerSelection}">disabled="true"</c:if>/></span></td>
+                            <td><span><input type="checkbox" name="sendEmail" id="sendEmlId" <c:if test="${managerSelection}">disabled="true"</c:if>/></span></td>
                         </tr>
                         <tr>
                             <td class="infolabel" width="50%" align="right">
@@ -163,6 +165,8 @@
                             </td>
                             <td>
                                 <span><input type="checkbox" name="sendToInbox" id="sendIbx" <c:if test="${managerSelection}">disabled="true"</c:if>/></span>
+                                <input type="hidden" name="managerV" id="manViewId" value="${command.managerView}"/>
+                                <input type="hidden" name="myPortV" id="myPortViewId" value="${command.myPortfolio}"/>
                             </td>
                         </tr>
                         <tr>
@@ -170,6 +174,7 @@
                             <td class="infobutton" align="left" width="50%">
                                 <span><input id="sendNotifRequest" class="inlinebutton" type="button" name="sendRequest" value="<fmt:message key="send.request"/>"/></span>
                                 <div id="sendNotifResponse" class="infomessage" style="display:none;"><fmt:message key="send.success"/></div>
+                                <div id="NoSelectionError" class="error" style="display:none;"><fmt:message key="no.selected.person"/></div>
                             </td>
                         </tr>
                     </c:if>
@@ -266,9 +271,6 @@
                             //first one add it anyway
                             add.push(v);
                         }
-                        // if requires contains the selected option the add it to the target select
-                        console.log("Index = " + index);
-                        console.log("requires = " + reqArray);
                     });
 
                     if(add.length > 0) {
@@ -282,16 +284,28 @@
                         $("#" + key + " option:first").attr('selected','selected');
                     }
                 };
-                console.log("show all");
-                // now hide the one not allowed to be seen
             });
         });
 
         $('#sendNotifRequest').on('click', function() {
             // will do a get request passing through the information need
-            var qnId = "-1";
-            $.get('sendQuestionnaireNotification.htm?ts='+new Date().getTime(),{qId: qnId}, function(data,status) {
-                $('#sendNotifResponse').html(data);
+            var qnId =$('#qnId').val();
+            var sbjId = $('#subjId').val();
+            var qnLabel = $('#qnLbl').val();
+            var sendIn = $('#sendIbx').is(':checked');
+            var sendE = $('#sendEmlId').is(':checked');
+            var myP = $('#myPortViewId').val();
+            var manView=$('#manViewId').val();;
+            var managers = [];
+            $("input[name='selectedManagerIds']:checked").each(function () {
+                managers.push(parseInt($(this).val()));
+            });
+
+            $.get('sendQuestionnaireNotification.htm?ts='+new Date().getTime(),
+                    {qId: qnId, sendToInbox: sendId, sendEmail:sendE, managerView: manView, isMyPortfolio: myP,
+                    subjectId:sbjId, qLabel:qnLabel, selectedManagers: managers}, function(data,status)  {
+                        // todo filter according to status
+                        $('#sendNotifResponse').html(data);
             });
         });
     });
