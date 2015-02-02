@@ -7,6 +7,7 @@ import com.zynap.talentstudio.organisation.subjects.ISubjectService;
 import com.zynap.talentstudio.organisation.subjects.Subject;
 import com.zynap.talentstudio.questionnaires.Questionnaire;
 import com.zynap.talentstudio.security.users.IUserService;
+import com.zynap.talentstudio.web.common.ControllerConstants;
 import com.zynap.talentstudio.web.common.UrlBeanPair;
 import com.zynap.talentstudio.web.utils.RequestUtils;
 import com.zynap.talentstudio.web.utils.ZynapWebUtils;
@@ -19,11 +20,7 @@ import org.springframework.web.servlet.mvc.Controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * User: bcassidy
@@ -89,16 +86,30 @@ public class SendQuestionnaireNotificationController implements Controller,  Wor
                 //wrapper.setSendSuccess(true);
             }
         }
-        return null;
+        Map<String, String> model = new HashMap<String, String>();
+        model.put("successMessage", "mail.send.success");
+        return new ModelAndView("successView");
     }
 
-    @Autowired
+    public void setMailNotifications(Map<String, UrlBeanPair> mailNotifications) {
+        this.mailNotifications = mailNotifications;
+    }
+
+    public void setMessageService(IMessageService messageService) {
+        this.messageService = messageService;
+    }
+
+    public void setUserService(IUserService userService) {
+        this.userService = userService;
+    }
+
+    public void setSubjectService(ISubjectService subjectService) {
+        this.subjectService = subjectService;
+    }
+
     protected Map<String, UrlBeanPair> mailNotifications;
-    @Autowired
     private IMessageService messageService;
-    @Autowired
     private IUserService userService;
-    @Autowired
     private ISubjectService subjectService;
 
     protected final String INBOX_MAIL = "INBOX";

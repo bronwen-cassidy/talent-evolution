@@ -80,6 +80,7 @@
                 <value>/.*exportsubjects.htm</value>
                 <value>/admin/uploadsuccess.htm</value>
                 <value>/common/.*.htm</value>
+                <value>/.*sendQuestionnaireNotification.htm</value>
             </list>
         </property>
         <property name="accessDeniedURL" value="/common/accessDeniedView.htm"/>
@@ -670,6 +671,7 @@
                 <prop key="/**/exportmyexecsubjectquestionnairepdf.htm">viewMyExecSummaryQuestionnairePdfController</prop>
                 <prop key="/**/exportexecsubjectquestionnairepdf.htm">viewExecSummaryQuestionnairePdfController</prop>
                 <prop key="/**/editsubjectquestionnaire.htm">answerQuestionnaireController</prop>
+                <prop key="/**/sendQuestionnaireNotification.htm">sendQuestionnaireNotification</prop>
                 <prop key="/**/browseeditsubjectquestionnaire.htm">browseAnswerQuestionnaireController</prop>
                 <prop key="/**/editmystaffinboxquestionnaire.htm">answerInboxQuestionnaireController</prop>
 
@@ -3030,6 +3032,39 @@
         <property name="successView" value="viewsubjectquestionnaire.htm"/>
         <property name="managerView" value="true"/>
         <property name="imageURL" value="/image/daimageview.htm"/>
+        <property name="mailNotifications">
+            <map>
+                <entry key="INBOX">
+                    <bean class="com.zynap.talentstudio.web.common.UrlBeanPair">
+                        <constructor-arg index="0" type="java.lang.String" value="/talentarena/worklistmessages.htm"/>
+                        <constructor-arg index="1" ref="inboxMailNotification"/>
+                    </bean>
+                </entry>
+                <entry key="NO_INBOX_MANAGER">
+                    <bean class="com.zynap.talentstudio.web.common.UrlBeanPair">
+                        <constructor-arg index="0" type="java.lang.String" value="/talentarena/viewmydetails.htm"/>
+                        <constructor-arg index="1" ref="infoFormManagerUpdateMailNotification"/>
+                    </bean>
+                </entry>
+                <entry key="NO_INBOX_STAFF">
+                    <bean class="com.zynap.talentstudio.web.common.UrlBeanPair">
+                        <constructor-arg index="0" type="java.lang.String" value="/talentarena/viewmyteam.htm"/>
+                        <constructor-arg index="1" ref="infoFormStaffUpdateMailNotification"/>
+                    </bean>
+                </entry>
+                <entry key="APPRAISAL">
+                    <bean class="com.zynap.talentstudio.web.common.UrlBeanPair">
+                        <constructor-arg index="0" type="java.lang.String" value="/talentarena/worklistappraisals.htm"/>
+                        <constructor-arg index="1" ref="evaluateeMailNotification"/>
+                    </bean>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="sendQuestionnaireNotification" class="com.zynap.talentstudio.web.questionnaires.SendQuestionnaireNotificationController">
+        <property name="messageService" ref="messageService"/>
+        <property name="userService" ref="userService"/>
+        <property name="subjectService" ref="subjectService"/>
         <property name="mailNotifications">
             <map>
                 <entry key="INBOX">
