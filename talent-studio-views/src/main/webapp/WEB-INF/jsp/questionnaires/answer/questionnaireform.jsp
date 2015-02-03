@@ -307,10 +307,12 @@
                 data: {qId: qnId, sendToInbox: sendIn, sendEmail:sendE, managerView: manView, isMyPortfolio: myP,
                     subjectId:sbjId, qLabel:qnLabel, selectedManagers: managers},
                 success: function(data) {
-                    $('#sendNotifResponse').html(data);   
+                    $('#sendNotifResponse').html(data);
+                    $('#sendNotifResponse').show();
                 },
                 error: function(data) {
-                    alert("failed");
+                    $('#sendNotifResponse').html(data);
+                    $('#sendNotifResponse').show();
                 }
             });
             

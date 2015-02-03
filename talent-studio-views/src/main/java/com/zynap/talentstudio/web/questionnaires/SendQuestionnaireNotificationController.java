@@ -15,6 +15,7 @@ import com.zynap.talentstudio.web.utils.ZynapWebUtils;
 import com.zynap.talentstudio.web.workflow.WorkflowConstants;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSendException;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
@@ -42,7 +43,10 @@ public class SendQuestionnaireNotificationController implements Controller,  Wor
         Long qId = RequestUtils.getLongParameter(request, "qId", null);
         String queLabel = RequestUtils.getStringParameter(request, "qLabel", "");
         List<Long> selectedManagers = Arrays.asList(RequestUtils.getAllLongParameters(request, "selectedManagers"));
-
+        Map<String, String> model = new HashMap<String, String>();
+        model.put("message", "mail.send.success");
+        String view = "successView";
+        
         boolean process = sendEmail || sendToInbox;
         if (process) {
             List<User> participants = new ArrayList<User>();
@@ -69,6 +73,7 @@ public class SendQuestionnaireNotificationController implements Controller,  Wor
                     }
                 }
             }
+            
             if (!participants.isEmpty()) {
 
                 try {
@@ -85,15 +90,16 @@ public class SendQuestionnaireNotificationController implements Controller,  Wor
                         String url = pair.getUrl();
                         mailNotification.send(url, ZynapWebUtils.getUser(request), new Questionnaire(qId, queLabel), participants.toArray(new User[participants.size()]));
                     }
-                } catch (TalentStudioException e) {
+                } catch (MailSendException e) {
                     // todo return error message
+                    model.put("message", "mail.send.error");
+                    view = "errorView";
                 }
-                //wrapper.setSendSuccess(true);
+                
             }
         }
-        Map<String, String> model = new HashMap<String, String>();
-        model.put("successMessage", "mail.send.success");
-        return new ModelAndView("successView");
+        
+        return new ModelAndView(view, model);
     }
 
     public void setMailNotifications(Map<String, UrlBeanPair> mailNotifications) {
