@@ -124,20 +124,18 @@ public class AnswerQuestionnaireController extends DefaultWizardFormController i
      * @throws Exception
      */
     protected Map referenceData(HttpServletRequest request, Object command, Errors errors, int page) throws Exception {
-
-        int targetPage = getTargetPage(request, page);
-        final QuestionnaireWrapper wrapper = (QuestionnaireWrapper) command;
-        if(targetPage == 6) {
-            processInboxNotification(request, wrapper);
-        }
-
+        
         final Map<String, Object> refData = new HashMap<String, Object>();
 
-        if (wrapper.isFatalErrors()) {
-            refData.put(MESSAGE_KEY, "questionnaire.hasfatalerrors");
-        }
+        if (!isCancelRequest(request)) {
+            final QuestionnaireWrapper wrapper = (QuestionnaireWrapper) command;
 
-        dataForPickers(refData);
+            if (wrapper.isFatalErrors()) {
+                refData.put(MESSAGE_KEY, "questionnaire.hasfatalerrors");
+            }
+
+            dataForPickers(refData);
+        }
 
         return refData;
     }
@@ -155,61 +153,9 @@ public class AnswerQuestionnaireController extends DefaultWizardFormController i
     protected ModelAndView processFinish(HttpServletRequest request, HttpServletResponse response, Object command, BindException errors) throws Exception {
         
         final QuestionnaireWrapper wrapper = (QuestionnaireWrapper) command;
-        processInboxNotification(request, wrapper);
         return buildModelAndView(getSuccessView(), wrapper);
     }
 
-    private void processInboxNotification(HttpServletRequest request, QuestionnaireWrapper wrapper) throws TalentStudioException {
-
-        final Questionnaire modifiedQuestionnaire = wrapper.getQuestionnaire();
-        boolean sendToInbox = RequestUtils.getBooleanParameter(request, "sendToInbox", false);
-        boolean sendEmail = RequestUtils.getBooleanParameter(request, "sendEmail", false);
-
-        boolean process = sendEmail || sendToInbox;
-        if (process) {
-            Long subjectId = modifiedQuestionnaire.getSubjectId();
-            List<User> participants = new ArrayList<User>();
-            // we are going to the subordinate who is the subject of the questionnaire
-            if (managerView) {
-                User toUser = userService.findBySubjectId(subjectId);
-                if (toUser != null) participants.add(toUser);
-            } else {
-                // find the manager
-                Subject subject = subjectService.findById(subjectId);
-                participants = subject.getManagers();
-            }
-            if (wrapper.isMyPortfolio()) {
-                // only check for selected managers if there are more than 1
-                if (participants.size() > 1) {
-                    //if there is more then one manager then do the following filter
-                    //filter managers to only one rather then all -i.e the manager selected
-                    Iterator<User> participant = participants.iterator();
-                    while (participant.hasNext()) {
-                        User user = participant.next();
-                        if (!wrapper.containsManagerSelection(user.getId())) {
-                            participant.remove();
-                        }
-                    }
-                }
-            }
-            if (!participants.isEmpty()) {
-
-                if (sendToInbox) messageService.create(modifiedQuestionnaire, managerView, ZynapWebUtils.getUser(request), participants);
-                if (sendEmail) {
-                    UrlBeanPair pair;
-                    if (sendToInbox) pair = mailNotifications.get(INBOX_MAIL);
-                    else {
-                        if (managerView) pair = mailNotifications.get(NO_INBOX_MAIL_MANAGER);
-                        else pair = mailNotifications.get(NO_INBOX_MAIL_INDIVIDUAL);
-                    }
-                    IMailNotification mailNotification = pair.getRef();
-                    String url = pair.getUrl();
-                    mailNotification.send(url, ZynapWebUtils.getUser(request), modifiedQuestionnaire, participants.toArray(new User[participants.size()]));
-                }
-                wrapper.setSendSuccess(true);
-            }
-        }
-    }
 
     /**
      * Redirect to previous page.
