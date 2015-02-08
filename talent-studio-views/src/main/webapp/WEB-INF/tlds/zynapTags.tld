@@ -222,6 +222,19 @@
     </tag>
 
     <tag>
+        <name>fragment</name>
+        <tag-class>com.zynap.talentstudio.web.common.html.FormFragmentTag</tag-class>
+        <body-content>JSP</body-content>
+        <description>Adds the binding form for spring to the request so fragments can be bound</description>
+        <attribute>
+            <name>modelAttribute</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>Spring bind Attribute</description>
+        </attribute>
+    </tag>
+    
+    <tag>
         <name>form</name>
         <tag-class>com.zynap.talentstudio.web.common.html.FormTag</tag-class>
         <body-content>JSP</body-content>

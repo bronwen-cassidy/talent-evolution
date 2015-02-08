@@ -21,6 +21,10 @@ import java.util.List;
  */
 public class QuestionnaireWrapper implements Serializable {
 
+    private static final long serialVersionUID = 8140178606331559713L;
+    private boolean sendFail;
+    private String sendErrorMessage;
+
     public QuestionnaireWrapper() {
     }
 
@@ -288,4 +292,20 @@ public class QuestionnaireWrapper implements Serializable {
     private List<User> userManagers;
     private boolean sendSuccess;
     private User subjectUser;
+
+    public void setSendFail(boolean sendFile) {
+        this.sendFail = sendFile;
+    }
+
+    public boolean isSendFail() {
+        return sendFail;
+    }
+
+    public void setSendErrorMessage(String sendErrorMessage) {
+        this.sendErrorMessage = sendErrorMessage;
+    }
+
+    public String getSendErrorMessage() {
+        return sendErrorMessage;
+    }
 }

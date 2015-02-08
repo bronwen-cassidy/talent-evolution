@@ -186,7 +186,6 @@ public class WorklistController extends AnswerQuestionnaireController {
         if (loadPickerData(targetPage)) {
             dataForPickers(refData);
         }
-
         return refData;
     }
 
