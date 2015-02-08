@@ -79,7 +79,7 @@ public class AnswerQuestionnaireController extends DefaultWizardFormController i
                         questionnaireWrapper.setUserManagers(subject.getManagers());
                     }
                 } catch (NoSubjectForUserException nsue) {
-                    questionnaireWrapper.setUserManagers(new LinkedList());
+                    questionnaireWrapper.setUserManagers(new LinkedList<User>());
                 }
             }
 
@@ -97,15 +97,14 @@ public class AnswerQuestionnaireController extends DefaultWizardFormController i
     }
 
     protected void onBindAndValidateInternal(HttpServletRequest request, Object command, Errors errors, int page) throws Exception {
-
+       
     }
 
     /**
      * Load data for pickers.
      *
      * @param refData the map containing any data needed by the web page
-     * @throws com.zynap.exception.TalentStudioException
-     *          on error
+     * @throws com.zynap.exception.TalentStudioException on error
      */
     protected void dataForPickers(Map<String, Object> refData) throws TalentStudioException {
         refData.put("orgUnitTree", TreeBuilderHelper.buildOrgUnitTree(organisationUnitService.findOrgUnitTree(OrganisationUnit.ROOT_ORG_UNIT_ID)));
@@ -124,25 +123,27 @@ public class AnswerQuestionnaireController extends DefaultWizardFormController i
      * @throws Exception
      */
     protected Map referenceData(HttpServletRequest request, Object command, Errors errors, int page) throws Exception {
-        
-        final Map<String, Object> refData = new HashMap<String, Object>();
 
-        if (!isCancelRequest(request)) {
-            final QuestionnaireWrapper wrapper = (QuestionnaireWrapper) command;
-
-            if (wrapper.isFatalErrors()) {
-                refData.put(MESSAGE_KEY, "questionnaire.hasfatalerrors");
-            }
-
-            dataForPickers(refData);
+        int targetPage = getTargetPage(request, page);
+        final QuestionnaireWrapper wrapper = (QuestionnaireWrapper) command;
+        if(targetPage == 6) {
+            processInboxNotification(request, wrapper);
+            refreshQuestionnaire(wrapper, (Questionnaire) questionnaireService.findById(wrapper.getQuestionnaireId()));
         }
 
+        final Map<String, Object> refData = new HashMap<String, Object>();
+
+        if (wrapper.isFatalErrors()) {
+            refData.put(MESSAGE_KEY, "questionnaire.hasfatalerrors");
+        }
+
+        dataForPickers(refData);
         return refData;
     }
 
     /**
      * Save modified questionnaire.
-     *
+     *  todo do not think this method is ever called, so remove if ya can
      * @param request  the servlet request
      * @param response the servlet response
      * @param command  the command object {@link com.zynap.talentstudio.web.questionnaires.QuestionnaireWrapper}
@@ -153,9 +154,70 @@ public class AnswerQuestionnaireController extends DefaultWizardFormController i
     protected ModelAndView processFinish(HttpServletRequest request, HttpServletResponse response, Object command, BindException errors) throws Exception {
         
         final QuestionnaireWrapper wrapper = (QuestionnaireWrapper) command;
+        if(wrapper.isFatalErrors()) {
+            wrapper.setFatalErrors(false);
+            return showForm(request, response, errors);
+        }
         return buildModelAndView(getSuccessView(), wrapper);
     }
 
+    private void processInboxNotification(HttpServletRequest request, QuestionnaireWrapper wrapper) throws TalentStudioException {
+
+        final Questionnaire modifiedQuestionnaire = wrapper.getQuestionnaire();
+        boolean sendToInbox = RequestUtils.getBooleanParameter(request, "sendToInbox", false);
+        boolean sendEmail = RequestUtils.getBooleanParameter(request, "sendEmail", false);
+
+        boolean process = sendEmail || sendToInbox;
+        if (process) {
+            Long subjectId = modifiedQuestionnaire.getSubjectId();
+            List<User> participants = new ArrayList<User>();
+            // we are going to the subordinate who is the subject of the questionnaire
+            if (managerView) {
+                User toUser = userService.findBySubjectId(subjectId);
+                if (toUser != null) participants.add(toUser);
+            } else {
+                // find the manager
+                Subject subject = subjectService.findById(subjectId);
+                participants = subject.getManagers();
+            }
+            if (wrapper.isMyPortfolio()) {
+                // only check for selected managers if there are more than 1
+                if (participants.size() > 1) {
+                    //if there is more then one manager then do the following filter
+                    //filter managers to only one rather then all -i.e the manager selected
+                    Iterator<User> participant = participants.iterator();
+                    while (participant.hasNext()) {
+                        User user = participant.next();
+                        if (!wrapper.containsManagerSelection(user.getId())) {
+                            participant.remove();
+                        }
+                    }
+                }
+            }
+            if (!participants.isEmpty()) {
+                wrapper.setSendSuccess(true);
+                if (sendToInbox) messageService.create(modifiedQuestionnaire, managerView, ZynapWebUtils.getUser(request), participants);
+                if (sendEmail) {
+                    UrlBeanPair pair;
+                    if (sendToInbox) pair = mailNotifications.get(INBOX_MAIL);
+                    else {
+                        if (managerView) pair = mailNotifications.get(NO_INBOX_MAIL_MANAGER);
+                        else pair = mailNotifications.get(NO_INBOX_MAIL_INDIVIDUAL);
+                    }
+                    IMailNotification mailNotification = pair.getRef();
+                    String url = pair.getUrl();
+                    try {
+                        mailNotification.send(url, ZynapWebUtils.getUser(request), modifiedQuestionnaire, participants.toArray(new User[participants.size()]));
+                    } catch (Exception e) {
+                        wrapper.setSendSuccess(false);
+                        wrapper.setFatalErrors(true);
+                        wrapper.setSendFail(true);
+                        wrapper.setSendErrorMessage("send.fail");
+                    }
+                }
+            }
+        }
+    }
 
     /**
      * Redirect to previous page.
@@ -187,6 +249,7 @@ public class AnswerQuestionnaireController extends DefaultWizardFormController i
         redirectView.addStaticAttribute(WORKFLOW_ID_PARAM_PREFIX, wrapper.getWorkflowId());
         redirectView.addStaticAttribute(ParameterConstants.NODE_ID_PARAM, wrapper.getSubjectId());
         redirectView.addStaticAttribute(MY_PORTFOLIO, wrapper.isMyPortfolio());
+
         return new ModelAndView(redirectView);
     }
 
@@ -228,7 +291,7 @@ public class AnswerQuestionnaireController extends DefaultWizardFormController i
     public void setSubjectService(ISubjectService subjectService) {
         this.subjectService = subjectService;
     }
-    
+
     public final void setQuestionnaireService(IQuestionnaireService questionnaireService) {
         this.questionnaireService = questionnaireService;
     }

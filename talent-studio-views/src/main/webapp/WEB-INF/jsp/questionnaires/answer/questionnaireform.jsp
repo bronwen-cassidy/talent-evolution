@@ -122,9 +122,6 @@
 
             <input id="actId" type="hidden" name="action" value=""/>
             <input id="tarId" type="hidden" name="" value=""/>
-            <input id="qnId" type="hidden" name="questionnaireFormId" value="<c:out value="${command.id}"/>"/>
-            <input id="qnLbl" type="hidden" name="questionnaireFormLabel" value="<c:out value="${questionnaireLabel}"/>"/>
-            <input id="subjId" type="hidden" name="<%=ParameterConstants.NODE_ID_PARAM%>" value="<c:out value="${command.subjectId}"/>"/>
             <input id="selObjectiveId" type="hidden" name="<%=ObjectiveConstants.OBJECTIVE_ID%>" value="-1"/>
             <input id="selGroupId" type="hidden" name="<%=WorklistController.SELECTED_GROUP_PARAM%>" value=""/>
             <input id="queDefIdxx" type="hidden" name="QUE_DEF_ID" value="<c:out value="${command.definitionId}"/>"/>
@@ -152,7 +149,7 @@
                         </c:if>
                         <tr>
                             <td class="infolabel" align="right" width="50%"><span><fmt:message key="send.email"/>&nbsp;:&nbsp;</span></td>
-                            <td><span><input type="checkbox" name="sendEmail" id="sendEmlId" <c:if test="${managerSelection}">disabled="true"</c:if>/></span></td>
+                            <td><span><input id="sendEmailCBId" type="checkbox" name="sendEmail" id="sendEmlId" <c:if test="${managerSelection}">disabled="true"</c:if>/></span></td>
                         </tr>
                         <tr>
                             <td class="infolabel" width="50%" align="right">
@@ -165,16 +162,14 @@
                             </td>
                             <td>
                                 <span><input type="checkbox" name="sendToInbox" id="sendIbx" <c:if test="${managerSelection}">disabled="true"</c:if>/></span>
-                                <input type="hidden" name="managerV" id="manViewId" value="<c:out value="${command.managerView}"/>"/>
-                                <input type="hidden" name="myPortV" id="myPortViewId" value="<c:out value="${command.myPortfolio}"/>"/>
                             </td>
                         </tr>
                         <tr>
                             <td class="infobutton" width="50%">&nbsp;</td>
                             <td class="infobutton" align="left" width="50%">
-                                <span><input id="sendNotifRequest" class="inlinebutton" type="button" name="sendRequest" value="<fmt:message key="send.request"/>"/></span>
-                                <div id="sendNotifResponse" class="infomessage" style="display:none;"><fmt:message key="send.success"/></div>
-                                <div id="NoSelectionError" class="error" style="display:none;"><fmt:message key="no.selected.person"/></div>
+                                <span><input class="inlinebutton" type="submit" name="_target6" value="<fmt:message key="send.request"/>"/></span>
+                                <c:if test="${command.sendSuccess}"><div class="infomessage"><fmt:message key="send.success"/></div></c:if>
+                                <c:if test="${command.sendFail}"><div class="infomessage"><fmt:message key="send.fail"/></div></c:if>
                             </td>
                         </tr>
                     </c:if>
@@ -283,39 +278,8 @@
                         $('#' + key + ' option[selected="selected"]').removeAttr('selected');
                         $("#" + key + " option:first").attr('selected','selected');
                     }
-                };
-            });
-        });
-
-        $('#sendNotifRequest').on('click', function() {
-            // will do a get request passing through the information need
-            var qnId =$('#qnId').val();
-            var sbjId = $('#subjId').val();
-            var qnLabel = $('#qnLbl').val();
-            var sendIn = $('#sendIbx').is(':checked');
-            var sendE = $('#sendEmlId').is(':checked');
-            var myP = $('#myPortViewId').val();
-            var manView=$('#manViewId').val();
-            var managers = [];
-            $("input[name='selectedManagerIds']:checked").each(function () {
-                managers.push(parseInt($(this).val()));
-            });
-
-            $.ajax({
-                type: 'GET',
-                url: 'sendQuestionnaireNotification.htm?ts='+new Date().getTime(),
-                data: {qId: qnId, sendToInbox: sendIn, sendEmail:sendE, managerView: manView, isMyPortfolio: myP,
-                    subjectId:sbjId, qLabel:qnLabel, selectedManagers: managers},
-                success: function(data) {
-                    $('#sendNotifResponse').html(data);
-                    $('#sendNotifResponse').show();
-                },
-                error: function(data) {
-                    $('#sendNotifResponse').html(data);
-                    $('#sendNotifResponse').show();
                 }
             });
-            
         });
     });
 
@@ -365,6 +329,5 @@
                 }
             }
         });
-
     }
 </script>
