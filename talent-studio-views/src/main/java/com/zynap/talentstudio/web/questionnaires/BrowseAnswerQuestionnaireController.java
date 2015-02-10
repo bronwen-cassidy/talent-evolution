@@ -158,7 +158,7 @@ public class BrowseAnswerQuestionnaireController extends DefaultWizardFormContro
             questionnaireWrapper = buildErrorWrapper(dto.getId(), workflowId, wrapper.getSubjectId(), e.getKey());
             wrapper.updateState(questionnaireWrapper, dto);
         }
-
+        // todo refreshQuestionnaire method ..
         wrapper.setSendSuccess(sendSuccess);
     }
 
@@ -224,6 +224,7 @@ public class BrowseAnswerQuestionnaireController extends DefaultWizardFormContro
             }
             if (toUser != null) participants.add(toUser);
             if (!participants.isEmpty()) {
+                wrapper.setSendSuccess(true);
                 final Questionnaire questionnaire = wrapper.getQuestionnaire();
                 if (sendToInbox) messageService.create(questionnaire, true, ZynapWebUtils.getUser(request), participants);
                 if (sendEmail) {
@@ -234,10 +235,15 @@ public class BrowseAnswerQuestionnaireController extends DefaultWizardFormContro
                     }
                     IMailNotification mailNotification = pair.getRef();
                     String url = pair.getUrl();
-                    mailNotification.send(url, ZynapWebUtils.getUser(request), questionnaire, participants.toArray(new User[participants.size()]));
+                    try {
+                        mailNotification.send(url, ZynapWebUtils.getUser(request), questionnaire, participants.toArray(new User[participants.size()]));
+                    } catch (Exception e) {
+                        wrapper.setSendSuccess(false);
+                        wrapper.setFatalErrors(true);
+                        wrapper.setSendFail(true);
+                        wrapper.setSendErrorMessage("send.fail");
+                    }
                 }
-                // at this point there should have been success
-                wrapper.setSendSuccess(true);
             }
         }
     }
