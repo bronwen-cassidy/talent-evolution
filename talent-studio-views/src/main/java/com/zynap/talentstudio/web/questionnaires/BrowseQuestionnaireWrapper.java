@@ -23,6 +23,10 @@ import java.util.List;
  */
 public class BrowseQuestionnaireWrapper implements Serializable {
 
+    private boolean fatalErrors;
+    private boolean sendFail;
+    private String sendErrorMessage;
+
     public BrowseQuestionnaireWrapper(List<QuestionnaireDTO> results, QuestionnaireWrapper questionnaireWrapper, QuestionnaireDTO current, boolean myPortfolio) {
 
         this.results = results;
@@ -264,4 +268,28 @@ public class BrowseQuestionnaireWrapper implements Serializable {
     private List<User> userManagers;
     private Long subjectId;
     private User subjectUser;
+
+    public void setFatalErrors(boolean fatalErrors) {
+        this.fatalErrors = fatalErrors;
+    }
+
+    public boolean isFatalErrors() {
+        return fatalErrors;
+    }
+
+    public void setSendFail(boolean sendFail) {
+        this.sendFail = sendFail;
+    }
+
+    public boolean isSendFail() {
+        return sendFail;
+    }
+
+    public void setSendErrorMessage(String sendErrorMessage) {
+        this.sendErrorMessage = sendErrorMessage;
+    }
+
+    public String getSendErrorMessage() {
+        return sendErrorMessage;
+    }
 }
