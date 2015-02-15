@@ -41,6 +41,10 @@ public class BrowseQuestionnaireWrapper implements Serializable {
     }
 
     public void updateState(QuestionnaireWrapper wrapper, QuestionnaireDTO current) {
+        wrapper.setSendErrorMessage(questionnaireWrapper.getSendErrorMessage());
+        wrapper.setSendFail(questionnaireWrapper.isSendFail());
+        wrapper.setSendSuccess(questionnaireWrapper.isSendSuccess());
+        
         this.questionnaireWrapper = wrapper;
         this.current = current;
         questionnaireWrapper.setSubjectUser(subjectUser);
@@ -278,18 +282,24 @@ public class BrowseQuestionnaireWrapper implements Serializable {
     }
 
     public void setSendFail(boolean sendFail) {
-        this.sendFail = sendFail;
+        questionnaireWrapper.setSendFail(sendFail);
     }
 
     public boolean isSendFail() {
-        return sendFail;
+        return questionnaireWrapper.isSendFail();
     }
 
     public void setSendErrorMessage(String sendErrorMessage) {
-        this.sendErrorMessage = sendErrorMessage;
+        questionnaireWrapper.setSendErrorMessage(sendErrorMessage);
     }
 
     public String getSendErrorMessage() {
-        return sendErrorMessage;
+        return questionnaireWrapper.getSendErrorMessage();
+    }
+
+    public void resetSendState() {
+        setSendSuccess(false);
+        setSendFail(false);
+        setSendErrorMessage(null);
     }
 }

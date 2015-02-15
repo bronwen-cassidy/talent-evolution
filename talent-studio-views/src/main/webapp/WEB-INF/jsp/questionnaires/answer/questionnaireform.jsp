@@ -219,6 +219,7 @@
 
             var pSelId = $(this).attr('id');
             var selectedOptionLinkId = $("option:selected", this).attr("linkId");
+            
             // if the selected option linkId is blank then add all, remove all options that link to this selects options            
             if(!selectedOptionLinkId) {
                 clearDependants($("option", this), selectMap);
@@ -230,14 +231,16 @@
                     var add = [];
 
                     // key is the potential select to populate
-
                     $.each(value, function(index, v)  {
                         // if the requires list contains this selects options link_id then we are good to go
                         var req = v.getAttribute("requires");
-                        var optionId = v.getAttribute("id");
-                        // do not process the currently selected select
-                        var currentSelected = $('#'+optionId).is(":selected");
-
+                        
+                        // if an option has a requires which needs that selectedOPtionLinkId add the select to the add, as we will rewrite the select out
+                        // but there may 2 dependant selects so we will need to test n options in an and scenario
+                        if(parseInt(index) == 0) {
+                            add.push(v);
+                        }
+                        
                         if(req) {
                             var dynamicIndex = '';
                             var newRequiresId = req;
@@ -250,25 +253,29 @@
                             }
                             var reqArray = newRequiresId.split(',');
                             var manip = 0;
-
+                            var process = false;
+                            
                             for (var q = 0; q < reqArray.length; q++)  {
 
-                                var targetLinkId = reqArray[q];
-                                // check to see if the link is selected
-                                var optionSelected = $('#pp_' + targetLinkId + dynamicIndex).is(':selected');
+                                var requiresLinkId = reqArray[q];
+                                var optionSelected = $('#pp_' + requiresLinkId + dynamicIndex).is(':selected');
                                 if(optionSelected) {
                                     // add the option to the select on the page
                                     manip++;
                                 }
+                                if(requiresLinkId == selectedOptionLinkId) {
+                                    process = true;
+                                }
                             }
-                            if(parseInt(manip) == reqArray.length) add.push(v);
-                        } else {
-                            //first one add it anyway
-                            add.push(v);
-                        }
+                            // all options valid
+                            if(process && manip && parseInt(manip) == reqArray.length) {
+                                add.push(v);
+                            }
+                        } 
                     });
 
-                    if(add.length > 0) {
+                    if(add.length > 1) {
+                        
                         // remove all options from key if manip = true
                         $('#' + key).html('');
                         for(var t = 0; t < add.length; t++) {
@@ -284,10 +291,6 @@
     });
 
     function clearDependants(options, optionMap) {
-        // step 1) find a dependant select
-        // step 2) collect the options to add (i.e not linked to any option in the select)
-        // step 3) remove all
-        // step 4) add the ones not linked to the target select    	
 
         $.each(optionMap, function(key, ops) {
             var removeOptions = [];
