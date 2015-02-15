@@ -95,7 +95,9 @@ public class BrowseAnswerMyQuestionnaireController extends BrowseAnswerQuestionn
         boolean sendEmail = RequestUtils.getBooleanParameter(request, "sendEmail", false);
 
         boolean process = sendEmail || sendToInbox;
-
+        // clear any send messages before we start
+        wrapper.resetSendState();
+        
         if (process) {
             Long subjectId = wrapper.getSubjectId();
             List<User> participants = new ArrayList<User>();
@@ -105,7 +107,6 @@ public class BrowseAnswerMyQuestionnaireController extends BrowseAnswerQuestionn
             participants.addAll(subject.getManagers());
 
             if (participants.size() > 1) {
-                wrapper.setSendSuccess(true);
                 //if there is more then one manager then do the following filter
                 //filter managers to only one rather then all -i.e the manager selected
                 Iterator<User> participant = participants.iterator();
@@ -117,6 +118,7 @@ public class BrowseAnswerMyQuestionnaireController extends BrowseAnswerQuestionn
                 }
             }
             if (!participants.isEmpty()) {
+                wrapper.setSendSuccess(true);
                 final Questionnaire questionnaire = wrapper.getQuestionnaire();
                 if (sendToInbox) messageService.create(questionnaire, false, ZynapWebUtils.getUser(request), participants);
 
@@ -131,14 +133,15 @@ public class BrowseAnswerMyQuestionnaireController extends BrowseAnswerQuestionn
                     try {
                         mailNotification.send(url, ZynapWebUtils.getUser(request), questionnaire, participants.toArray(new User[participants.size()]));
                     } catch (Exception e) {
-                        wrapper.setSendSuccess(false);
-                        wrapper.setFatalErrors(true);
+                        wrapper.resetSendState();
                         wrapper.setSendFail(true);
                         wrapper.setSendErrorMessage("send.fail");
                     }
                 }
-
-                wrapper.setSendSuccess(true);
+            } else {
+                wrapper.resetSendState();
+                wrapper.setSendFail(true);
+                wrapper.setSendErrorMessage("no.manager.to.send.to");
             }
         }
     }

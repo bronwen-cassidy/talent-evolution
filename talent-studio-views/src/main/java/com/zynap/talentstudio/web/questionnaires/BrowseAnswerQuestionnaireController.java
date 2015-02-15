@@ -134,10 +134,8 @@ public class BrowseAnswerQuestionnaireController extends DefaultWizardFormContro
         if (current != null && questionnaireId != null) {
             questionnaireService.unlockQuestionnaire(questionnaireId, ZynapWebUtils.getUserId(request));
         }
-        boolean sendSuccess = false;
         if (target == SEND_EMAIL) {
             processInbox(request, command);
-            sendSuccess = wrapper.isSendSuccess();
             // rebuild the current
             workflowId = wrapper.getWorkflowId();
         }
@@ -158,8 +156,6 @@ public class BrowseAnswerQuestionnaireController extends DefaultWizardFormContro
             questionnaireWrapper = buildErrorWrapper(dto.getId(), workflowId, wrapper.getSubjectId(), e.getKey());
             wrapper.updateState(questionnaireWrapper, dto);
         }
-        // todo refreshQuestionnaire method ..
-        wrapper.setSendSuccess(sendSuccess);
     }
 
     /**
@@ -213,6 +209,9 @@ public class BrowseAnswerQuestionnaireController extends DefaultWizardFormContro
         boolean sendEmail = RequestUtils.getBooleanParameter(request, "sendEmail", false);
 
         boolean process = sendEmail || sendToInbox;
+        // set defaultSate
+        wrapper.resetSendState();
+        
         if (process) {
             Long subjectId = wrapper.getSubjectId();
             List<User> participants = new ArrayList<User>();
@@ -238,8 +237,7 @@ public class BrowseAnswerQuestionnaireController extends DefaultWizardFormContro
                     try {
                         mailNotification.send(url, ZynapWebUtils.getUser(request), questionnaire, participants.toArray(new User[participants.size()]));
                     } catch (Exception e) {
-                        wrapper.setSendSuccess(false);
-                        wrapper.setFatalErrors(true);
+                        wrapper.resetSendState();
                         wrapper.setSendFail(true);
                         wrapper.setSendErrorMessage("send.fail");
                     }

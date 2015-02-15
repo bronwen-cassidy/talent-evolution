@@ -17,7 +17,7 @@
     <tr>
         <td class="artefact">
             <c:set var="portfolioActiveTab" value="${tabContent.key}" scope="request"/>
-            <c:import url="myportfolio.jsp"/>
+            <c:import url="../talentarena/myportfolio.jsp"/>
         </td>
     </tr>
 </table>

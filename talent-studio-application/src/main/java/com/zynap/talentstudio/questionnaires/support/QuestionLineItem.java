@@ -6,7 +6,6 @@ package com.zynap.talentstudio.questionnaires.support;
 import com.zynap.common.util.StringUtil;
 import com.zynap.talentstudio.organisation.attributes.DynamicAttribute;
 import com.zynap.talentstudio.questionnaires.QuestionAttribute;
-import org.springframework.util.StringUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -84,15 +83,6 @@ public class QuestionLineItem implements Serializable {
     }
 
     public List<BaseQuestion> getQuestions() {
-        if(isDynamicLineItem())
-        {
-            // need to determine if the references, if any are all refering to this lineitem if they are postfix with a 0
-            for (BaseQuestion question : questions) {
-                if(question instanceof Question && StringUtils.hasText(((Question) question).getTarget())) {
-
-                }
-            }
-        }
         return questions;
     }
 
