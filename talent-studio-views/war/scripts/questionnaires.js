@@ -356,14 +356,14 @@ function testLinkableOptions() {
     // on first load all options are shown none are hidden so now we just need to hide the ones that do not have a selected parent
     $('select' + ' option.linked').each(function () {
         var requiresIds = $(this).attr('requires');
-        console.log("option requires " + requiresIds);
+
         if(requiresIds) {
             // handle dynamic line items
             var dynamicIndex = '';
             var newRequiresId = requiresIds;
             // check to see if the string end with an _ we must remove this
             if(requiresIds.indexOf('_') >= 0) {
-                console.log("we have an _ therefore dynamic line item here ");
+
                 // grab this index and store it
                 dynamicIndex = requiresIds.substring(requiresIds.indexOf('_'), requiresIds.length);
                 newRequiresId = requiresIds.substring(0, requiresIds.indexOf('_') );
@@ -374,7 +374,7 @@ function testLinkableOptions() {
 
             for (var i = 0; i < requiresArray.length; i++) {
 
-                if($("option[linkId='" + requiresArray[i] + dynamicIndex +"']").is(":selected")) {
+                if($("option[linkId='" + requiresArray[i] + dynamicIndex +"']").is(":selected") || $("option[linkId='" + requiresArray[i] +"']").is(":selected")) {
                     foundCount++;
                 }
             }
