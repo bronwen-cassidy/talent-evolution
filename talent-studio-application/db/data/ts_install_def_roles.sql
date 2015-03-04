@@ -62,7 +62,7 @@ select role_sq.nextval from dual;
 
 INSERT INTO roles (id, type, label, description, is_active,  is_system, arena_id, is_arena_linked)
     VALUES (8, 'AR', 'Home Arena', 'Enable access to the Home Arena', 'T', 'T', 'MYZYNAPMODULE', 'T');
-insert into permits_roles select id, '8' from permits where url like '%talentarena%' AND type = 'AP';
+insert into permits_roles select id, '8' from permits where url like '%talentarena%' AND type = 'AP' and url not like '%/editmyaccount%';
 insert into permits_roles select id, '8' from permits where url like '%addmy%' AND type = 'AP';
 insert into permits_roles select id, '8' from permits where url like '%editmy%' AND type = 'AP';
 insert into permits_roles select id, '8' from permits where upper(url) like upper('%MYPORTFOLIOPOS%') AND type = 'AP';
