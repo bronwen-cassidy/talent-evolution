@@ -200,11 +200,11 @@
 
 <script type="text/javascript">
 
-    $(function() {
+    $(function () {
 
         window.selectMap = {};
         //$("div.test").closest("tr");
-        $('option.linked').closest('select').each(function() {
+        $('option.linked').closest('select').each(function () {
             // get the opions and push them into the array
             var selId = $(this).attr('id');
             console.log("adding element with id " + selId);
@@ -215,84 +215,83 @@
         //console.log("the select map i have = " + selectMap);
         testLinkableOptions();
 
-        $('td').on('change', 'select.linkable', function() {
+        $('td').on('change', 'select.linkable', function () {
 
             var pSelId = $(this).attr('id');
             var selectedOptionLinkId = $("option:selected", this).attr("linkid");
 
             // if the selected option linkId is blank then add all, remove all options that link to this selects options            
-            if(!selectedOptionLinkId) {
+            if (!selectedOptionLinkId) {
                 clearDependants($("option", this), selectMap);
                 return;
             }
 
-            $.each( selectMap, function( key, value ) {
-                if(key != pSelId) {
+            $.each(selectMap, function (key, value) {
+                if (key != pSelId) {
                     var add = [];
 
                     // key is the potential select to populate
-                    $.each(value, function(index, v)  {
+                    $.each(value, function (index, v) {
                         // if the requires list contains this selects options link_id then we are good to go
                         var req = v.getAttribute("requires");
                         var targetId = v.getAttribute("id");
 
                         // if an option has a requires which needs that selectedOPtionLinkId add the select to the add, as we will rewrite the select out
                         // but there may 2 dependant selects so we will need to test n options in an and scenario
-                        if(parseInt(index) == 0) {
+                        if (parseInt(index) == 0) {
                             add.push(v);
                         }
 
-                        if(req) {
+                        if (req) {
                             var dynamicIndex = '';
                             var newRequiresId = req;
                             // check to see if the string end with an _ we must remove this
-                            if(req.indexOf('_') >= 0) {
+                            if (req.indexOf('_') >= 0) {
                                 // console.log("we have an _ therefore dynamic line item here ");
                                 // grab this index and store it
                                 dynamicIndex = req.substring(req.indexOf('_'), req.length);
-                                newRequiresId = req.substring(0, req.indexOf('_') );
+                                newRequiresId = req.substring(0, req.indexOf('_'));
                             }
                             var reqArray = newRequiresId.split(',');
                             var manip = 0;
                             var process = false;
 
-                            for (var q = 0; q < reqArray.length; q++)  {
+                            for (var q = 0; q < reqArray.length; q++) {
 
                                 var requiresLinkId = reqArray[q];
                                 var optionSelected = $('#pp_' + requiresLinkId + dynamicIndex).is(':selected');
-                                if(!optionSelected) {
-                                    optionSelected= $('#pp_' + requiresLinkId).is(':selected');
+                                if (!optionSelected) {
+                                    optionSelected = $('#pp_' + requiresLinkId).is(':selected');
                                 }
-                                if(optionSelected) {
+                                if (optionSelected) {
                                     manip++;
                                 }
+                                //var itemAlreadyVisible = $('#' + targetId)[0];
 
-                                if(requiresLinkId == selectedOptionLinkId || requiresLinkId + dynamicIndex == selectedOptionLinkId) {
+                                if (requiresLinkId == selectedOptionLinkId || requiresLinkId + dynamicIndex == selectedOptionLinkId) {
                                     process = true;
                                 }
                             }
                             // all options valid
-                            if(process && manip && parseInt(manip) == reqArray.length) {
+                            if (process && manip && parseInt(manip) == reqArray.length) {
                                 add.push(v);
                             }
                         }
                     });
 
-                    if(add.length > 1) {
+                    if (add.length > 1) {
                         // todo before we clear the select get the selected option and clear it's dependeants
-
-                        var selOptLinkId = $('#' + key + ' option[selected="selected"]').attr('linkid');
-                        if(selOptLinkId) {
-                            alert("found = " + selOptLinkId);
-                        }
+                        var selOptLinkId = $('#' + key + ' option:selected').attr('linkid');
                         $('#' + key).html('');
-                        for(var t = 0; t < add.length; t++) {
+                        for (var t = 0; t < add.length; t++) {
                             $('#' + key).append(add[t]);
                         }
                         // set selected option to 0
-                        $('#' + key + ' option[selected="selected"]').removeAttr('selected');
-                        $("#" + key + " option:first").attr('selected','selected');
-                        clearDependantsInternal(selOptLinkId);
+                        $('#' + key + ' option:selected').removeAttr('selected');
+                        $("#" + key + " option:first").attr('selected', 'selected');
+                        if(selOptLinkId) {
+                            clearDependantsInternal(selOptLinkId);
+                        }
                     }
                 }
             });
@@ -301,29 +300,29 @@
 
     function clearDependants(options, optionMap) {
 
-        $.each(optionMap, function(key, ops) {
+        $.each(optionMap, function (key, ops) {
             var removeOptions = [];
             var removeElements = false;
 
-            $.each(ops, function(k, data)	{
+            $.each(ops, function (k, data) {
                 var dataReq = data.getAttribute("requires");
                 // split dataReq
 
-                if(dataReq) {
+                if (dataReq) {
                     var dynamicIndex = '';
                     var newRequiresId = dataReq;
                     // check to see if the string end with an _ we must remove this
-                    if(dataReq.indexOf('_') >= 0) {
+                    if (dataReq.indexOf('_') >= 0) {
                         console.log("we have an _ therefore dynamic line item here ");
                         // grab this index and store it
                         dynamicIndex = dataReq.substring(dataReq.indexOf('_'), dataReq.length);
-                        newRequiresId = dataReq.substring(0, dataReq.indexOf('_') );
+                        newRequiresId = dataReq.substring(0, dataReq.indexOf('_'));
                     }
                     var reqArray = newRequiresId.split(',');
-                    $.each(options, function(index, op){
-                        var linkId = op.getAttribute("linkId");
-                        for(var c = 0; c < reqArray.length; c++) {
-                            if(reqArray[c]+dynamicIndex == linkId || reqArray[c] == linkId) {
+                    $.each(options, function (index, op) {
+                        var linkId = op.getAttribute("linkid");
+                        for (var c = 0; c < reqArray.length; c++) {
+                            if (reqArray[c] + dynamicIndex == linkId || reqArray[c] == linkId) {
                                 // to remove
                                 removeOptions.push(data);
                                 removeElements = true;
@@ -333,14 +332,13 @@
                 }
             });
 
-            if(removeElements) {
+            if (removeElements) {
                 // replace all, remove what we have
                 //$('#' + key).html(ops);
-                for(var l = 0; l < removeOptions.length; l++) {
+                for (var l = 0; l < removeOptions.length; l++) {                 
                     $('#' + removeOptions[l].getAttribute('id')).remove();
-                    clearDependantsInternal(removeOptions[l].getAttribute('linkId'));
+                    clearDependantsInternal(removeOptions[l].getAttribute('linkid'));
                 }
-
             }
         });
     }
@@ -348,8 +346,10 @@
         // todo do through all the options on the page if any has a requires with this linkId remove it
         $('option.linked').each(function() {
             var requiresLink = $(this).attr('requires');
+
             var removeOptions = [];
             var removeElements = false;
+            var optionElem = $(this);
 
             if(requiresLink) {
                 var dynamicIndex = '';
@@ -364,16 +364,15 @@
                 for(var c = 0; c < reqArray.length; c++) {
                     if(reqArray[c]+dynamicIndex == optionLinkId || reqArray[c] == optionLinkId) {
                         // to remove
-                        removeOptions.push(data);
+                        removeOptions.push(optionElem);
                         removeElements = true;
                     }
                 }
                 if(removeElements) {
-                    for(var l = 0; l < removeOptions.length; l++) {
-                        $('#' + removeOptions[l].getAttribute('id')).remove();
-                        clearDependantsInternal(removeOptions[l].getAttribute('linkId'));
+                    for(var l = 0; l < removeOptions.length; l++) {                        
+                        $('#' + removeOptions[l].attr('id')).remove();
+                        clearDependantsInternal(removeOptions[l].attr('linkid'));
                     }
-
                 }
             }
         });
