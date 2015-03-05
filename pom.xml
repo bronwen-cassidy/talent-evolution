@@ -271,6 +271,9 @@
                 </plugins>
             </build>
         </profile>
+        <profile>
+            <id>tme</id>
+        </profile>
     </profiles>
 
     <repositories>
