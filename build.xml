@@ -157,7 +157,7 @@
 
     <!-- Web Module (WAR) -->
     <property name="webapp.dir" value="${webview.module}/src/main/webapp"/>
-    <property name="war.dir" value="${webview.module}/war"/>
+    <property name="war.dir" value="${webapp.dir}"/>
 
     <!-- Web Module config directories -->
     <property name="war.config.dir" value="${webview.module}/config"/>

@@ -75,7 +75,7 @@ a.logout:hover {
 
 div.arenatabs {
     background-color: #FFFFFF;
-    background-image: url( ../images/logo.gif );
+    background-image: url(../images/logo.gif);
     background-repeat: no-repeat;
     border-width: 0 0 0 0;
     border-color: #006F96;
@@ -604,26 +604,26 @@ span.export {
 }
 
 span.excel {
-    background-image: url( "../images/displaytag/ico_file_excel.png" );
+    background-image: url("../images/displaytag/ico_file_excel.png");
     background-repeat: no-repeat;
 }
 
 span.csv {
-    background-image: url( ../images/displaytag/ico_file_csv.png );
+    background-image: url(../images/displaytag/ico_file_csv.png);
     background-repeat: no-repeat;
 }
 
 span.xml {
-    background-image: url( ../images/displaytag/ico_file_xml.png );
+    background-image: url(../images/displaytag/ico_file_xml.png);
     background-repeat: no-repeat;
 }
 
 span.pdf {
-    background-image: url( ../images/displaytag/ico_file_pdf.png );
+    background-image: url(../images/displaytag/ico_file_pdf.png);
     background-repeat: no-repeat;
 }
 
 span.rtf {
-    background-image: url( ../images/displaytag/ico_file_rtf.png );
+    background-image: url(../images/displaytag/ico_file_rtf.png);
     background-repeat: no-repeat;
 }
