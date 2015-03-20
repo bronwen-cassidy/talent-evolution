@@ -560,7 +560,6 @@
         <delete dir="${javadocs.dir}"/>
         <delete dir="${checkstyle.report.dir}"/>
         <delete dir="${findbugs.report.dir}"/>
-        <delete file="${webview.module}/war/favicon.ico"/>
         <delete file="${dist.tar.file}"/>
         <delete>
             <fileset dir="${basedir}" includes="*.log"/>
