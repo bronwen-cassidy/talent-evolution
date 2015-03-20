@@ -67,7 +67,7 @@
         <property
             name="active"
             type="true_false"
-            column="IS_AVAILABLE"
+            column="IS_ACTIVE"
             not-null="true"
             length="1"
             >
