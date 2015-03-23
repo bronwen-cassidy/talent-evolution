@@ -383,7 +383,6 @@ public class ReportUpgrader extends AbstractHibernateTestCase {
         System.setProperty("autonomy.subject.database", "subjectdata");
         System.setProperty("autonomy.retries", "3");
         System.setProperty("autonomy.connection.timeout", "5000");
-        System.setProperty("autonomy.searcher", "mockAutonomySearcher");
         System.setProperty("sender.email", "bcassidy@zynap.com");
         System.setProperty("test.webservice.username", "webserviceuser");
         System.setProperty("test.webservice.password", "webserviceuser");

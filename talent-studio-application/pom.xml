@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -12,7 +13,7 @@
     <packaging>jar</packaging>
 
     <name>talent-studio-application</name>
-    
+
     <dependencies>
         <dependency>
             <groupId>net.sf.hibernate</groupId>
@@ -50,9 +51,9 @@
             <version>2.3.9</version>
         </dependency>
         <!--<dependency>-->
-            <!--<groupId>commons-collections</groupId>-->
-            <!--<artifactId>commons-collections</artifactId>-->
-            <!--<version>3.2</version>-->
+        <!--<groupId>commons-collections</groupId>-->
+        <!--<artifactId>commons-collections</artifactId>-->
+        <!--<version>3.2</version>-->
         <!--</dependency>-->
         <!-- testing -->
         <dependency>
@@ -78,5 +79,5 @@
             </plugin>
         </plugins>
     </build>
-    
+
 </project>

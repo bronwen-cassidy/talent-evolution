@@ -389,7 +389,7 @@
         <echo message="db url = ${db.url}"/>
         <echo message="autonomy position database set = ${autonomy.position.database}"/>
         <echo message="autonomy subject database set = ${autonomy.subject.database}"/>
-        <echo message="autonomy searcher = ${autonomy.searcher}"/>
+
         <!-- todo when the oracle search has been set up we need to bring the result mapper into conditional properties-->
         <echo message="result mapper = ${result.mapper}"/>
         <echo message="server url = ${server.url}"/>
@@ -414,8 +414,6 @@
 
         <filter token="autonomy.position.database" value="${client}PositionData"/>
         <filter token="autonomy.subject.database" value="${client}SubjectData"/>
-        <filter token="autonomy.searcher" value="${autonomy.searcher}"/>
-        <filter token="autonomy.searcher" value="${autonomy.searcher}"/>
 
         <filter token="taapi.username" value="${taapi.username}"/>
         <filter token="taapi.password" value="${taapi.password}"/>
@@ -836,14 +834,6 @@
     
     <target name="release" depends="build-war" description="prepares the war file for a release guess we could always figure out how to scp in ant">
     	<copy file="${dist.dir}/${project.name}.war" tofile="${release.dir}/${project.name}.war" overwrite="true"/>
-    </target>
-    
-    
-    <target name="deploy-us" depends="release" description="copies the war files to the savvis us remote servers">
-    	<scp file="${release.dir}/${project.name}.war" 
-    		todir="s603004@64.14.184.228:/data01/home/s603004/oc4j/10.1.3/OracleAS_1/j2ee/home/applications" 
-    		password="1JRTLU-k"
-    		knownhosts="Z:/.ssh/known_hosts"/>
     </target>
 
     <target name="unpack-webapp" depends="build-war" description="Unpacks the war file so that the application can be deployed expanded">
