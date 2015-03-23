@@ -163,6 +163,12 @@
                 <version>2.6</version>
                 <configuration>
                     <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
+                    <webResources>
+                        <resource>
+                            <!-- this is relative to the pom.xml directory -->
+                            <directory>config/spring</directory>
+                        </resource>
+                    </webResources>
                 </configuration>
             </plugin>
         </plugins>
