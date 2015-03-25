@@ -161,7 +161,6 @@
 
     <!-- Web Module config directories -->
     <property name="war.config.dir" value="${webview.module}/config"/>
-    <property name="war.config.spring.dir" value="${war.config.dir}/spring"/>
     <property name="war.config.common.dir" value="${war.config.dir}/common"/>
     <property name="webapp.webinf.dir" value="${webview.root.dir}/main/webapp/WEB-INF"/>
     <property name="war.config.logging.dir" value="${war.config.dir}/logging"/>
@@ -398,6 +397,10 @@
 
     </target>
 
+    <fileset id="web.spring.config.fileset" dir="${webapp.webinf.dir}">
+        <include name="*.xml"/>
+        <exclude name="web.xml"/>
+    </fileset>
     <!-- global filterset used for templating application configuration files -->
     <filterset id="app.config.filterset">
 
@@ -423,8 +426,6 @@
         <filter token="multi.tenant" value="${multi.tenant}"/>
 
         <filter token="result.mapper" value="${result.mapper}"/>
-        <filter token="search.engine" value="${search.engine}"/>
-        <!--<filter token="search.gateway" value="${search.engine}Gateway"/>-->
         <filter token="host.name" value="${host.name}"/>
         <filter token="sender.email" value="${sender.email}"/>
         <filter token="server.url" value="${server.url}/${client.path}"/>
@@ -519,17 +520,9 @@
         <include name="properties/**"/>
     </patternset>
 
-    <!-- Teach Ant how to use FindBugs -->
-    <taskdef name="findbugs" classname="edu.umd.cs.findbugs.anttask.FindBugsTask" classpathref="tools.classpath"/>
-
-    <!-- Teach Ant how to use CheckStyle -->
-    <taskdef resource="checkstyletask.properties" classpath="${tools.lib}/checkstyle-all-3.5.jar"/>
 
     <!-- Teach Ant how to use Contrib Tasks such as <if> (http://ant-contrib.sourceforge.net) -->
     <taskdef resource="net/sf/antcontrib/antcontrib.properties" classpathref="tools.classpath"/>
-
-    <!-- Teach Ant how to use the EMMA code coverage tool -->
-    <taskdef resource="emma_ant.properties" classpathref="tools.classpath"/>
 
     <!-- Check if JUnit classes are available - must be in Ant's classpath -->
     <if>
@@ -551,7 +544,7 @@
         =================== CORE TARGETS =========================================================
     -->
 
-    <target name="clean" depends="emma-clean">
+    <target name="clean">
         <delete dir="${build.dir}"/>
         <delete dir="${dist.dir}"/>
         <delete dir="${test.reports.dir}"/>
@@ -640,7 +633,7 @@
 
         <!-- copy and filter web app config files excluding the ts-views file which needs to go into WEB-INF/classes -->
         <copy todir="${build.webview.war.webinf.dir}" filtering="true" overwrite="true">
-            <fileset dir="${war.config.spring.dir}"/>
+            <fileset refid="web.spring.config.fileset"/>
             <filterset refid="app.config.filterset"/>
         </copy>
 
@@ -675,9 +668,7 @@
         </copy>
 
         <!-- copy and filter Spring view config file to classes directory -->
-        <copy todir="${build.webview.war.classes.dir}" file="${war.resources.dir}/${war.config.spring.file}" filtering="true" overwrite="true">
-            <filterset refid="app.config.filterset"/>
-        </copy>
+        <copy todir="${build.webview.war.classes.dir}" file="${war.resources.dir}/${war.config.spring.file}" overwrite="true"/>
 
         <!-- copy the velocity templates used for emailing -->
         <copy todir="${build.webview.war.classes.dir}" overwrite="true">
@@ -685,9 +676,6 @@
                 <include name="${templates.dir}/*.vm"/>
             </fileset>
         </copy>
-
-        <!-- copy website icon file to correct location -->
-        <copy file="${webview.module}/war/images/zynap.ico" tofile="${webview.module}/war/favicon.ico" overwrite="true"/>
 
         <copy todir="${build.webview.war.dir}" overwrite="true">
             <fileset dir="${war.dir}">
@@ -801,19 +789,20 @@
 
         <war warfile="${dist.dir}/${project.name}.war" webxml="${build.webview.war.webinf.dir}/web.xml">
             <!-- provides scripts only -->
-            <fileset dir="${war.dir}" excludes="help/**,images/**,styles/**,statics/**"/>
+            <fileset dir="${webapp.dir}" includes="scripts/**"/>
             <fileset dir="${build.webview.war.dir}" excludes="WEB-INF/**,WEB-INF/classes/**"/>
             
-            <fileset dir="${webapp.dir}" excludes="WEB-INF/**"/>
             <!-- copy properties files -->
             <classes dir="${build.webview.properties.dir}"/>
             <!-- copy properties files in view -->
             <classes dir="${webview.src.dir}" includes="**/*.properties"/>
             <classes dir="${build.app.classes.dir}" includes="ehcache.xml"/>
+
             <!-- copy WEB-INF directory -->
             <webinf dir="${build.webview.war.webinf.dir}" excludes="web.xml"/>
             <!-- copy JSPs tlds and services -->
-            <webinf dir="${webapp.dir}/WEB-INF" excludes="web.xml"/>
+
+            <webinf dir="${webapp.dir}/WEB-INF" includes="jsp/**,tlds/**"/>
             <!-- copy lib files -->
             <lib dir="${integration.lib.dir}" includes="*.jar"/>
             <lib dir="${runtime.lib}" includes="*.jar"/>
@@ -842,8 +831,6 @@
 
     <target name="all" depends="clean, copy-webapp"/>
 
-    <!-- todo readd when out-of-memory errors handled , emma-report -->
-    <target name="all-tests-and-emma" depends="clean, emma-instrument, run-all-tests"/>
 
     <!--
         =================== COPY CONFIGURATIONS =============================================
@@ -1359,8 +1346,6 @@
             <sysproperty key="sender.email" value="${sender.email}"/>
             <sysproperty key="server.url" value="http://localhost:8080"/>
 
-            <sysproperty key="search.gateway" value="${search.engine}Gateway"/>
-            <sysproperty key="search.engine" value="${search.engine}"/>
             <sysproperty key="result.mapper" value="${result.mapper}"/>
 
             <!-- Emma stuff -->
@@ -1417,57 +1402,6 @@
     </target>
 
     <!--
-        =================== EMMA Instrumented test runs ==========================================
-    -->
-
-    <target name="emma-clean" description="clean all EMMA generated things">
-        <delete dir="${emma.coverage.dir}"/>
-        <delete failonerror="false" file="${runtime.lib}/${emma.jar.name}"/>
-    </target>
-
-    <target name="emma-instrument" depends="compile-webview, compile-integration" description="Generate the EMMA instrumented classes">
-        <if>
-            <isfalse value="${javac.debug}"/>
-            <then>
-                <echo>
-                    Ant property javac.debug does not have the value "true".
-                    The Emma coverage tool can only be used when the java classes have
-                    been compiled with debug data enabled.
-                </echo>
-                <fail>Emma requires java debug info.</fail>
-            </then>
-        </if>
-
-        <emma>
-            <instr metadatafile="${emma.coverage.dir}/metadata.emma" mode="overwrite" merge="true">
-                <instrpath path="${build.app.classes.dir}"/>
-                <instrpath path="${build.webview.classes.dir}"/>
-                <instrpath path="${build.integration.classes.dir}"/>
-                <filter excludes="*.*Exception"/>
-            </instr>
-        </emma>
-
-        <copy file="${tools.lib}/${emma.jar.name}" todir="${runtime.lib}"/>
-    </target>
-
-    <target name="emma-report" description="Generate an EMMA report on results of test runs.">
-        <emma>
-            <report sort="+name,+class">
-                <sourcepath>
-                    <pathelement location="${app.src.dir}"/>
-                    <pathelement location="${webview.src.dir}"/>
-                </sourcepath>
-
-                <fileset dir="${emma.coverage.dir}">
-                    <include name="*.emma"/>
-                </fileset>
-
-                <html outfile="${emma.coverage.dir}/coverage.html"/>
-            </report>
-        </emma>
-    </target>
-
-    <!--
         =================== MISC TARGETS =========================================================
     -->
 
@@ -1496,34 +1430,11 @@
             <classpath refid="tools.classpath"/>
 
             <arg value="${basedir}/${webapp.dir}"/>
-            <arg value="${basedir}/${war.config.spring.dir}/${war.config.spring.file}"/>
+            <arg value="${basedir}/${war.resources.dir}/${war.config.spring.file}"/>
         </java>
 
     </target>
 
-    <target name="checkstyle" description="Runs CheckStyle against code base">
-        <delete dir="${checkstyle.report.dir}"/>
-        <mkdir dir="${checkstyle.report.dir}"/>
-
-        <checkstyle config="zynap_checks.xml">
-            <fileset dir="${app.src.dir}" includes="**/*.java"/>
-            <fileset dir="${webview.src.dir}" includes="**/*.java"/>
-            <formatter type="xml" toFile="${checkstyle.report.dir}/style-errors.xml"/>
-        </checkstyle>
-    </target>
-
-    <target name="findbugs" depends="compile-webview" description="Runs FindBugs against code base">
-        <delete dir="${findbugs.report.dir}"/>
-        <mkdir dir="${findbugs.report.dir}"/>
-
-        <findbugs home="${findbugs.home}" output="xml:withMessages" outputFile="${findbugs.report.dir}/app-bugs.xml">
-            <class location="${build.app.classes.dir}"/>
-            <class location="${build.webview.classes.dir}"/>
-            <auxClasspath refid="build.webview.classpath"/>
-            <sourcePath path="${app.src.dir}"/>
-            <sourcePath path="${webview.src.dir}"/>
-        </findbugs>
-    </target>
 
     <!--
         =================== JAVADOC ==============================================================
