@@ -135,6 +135,8 @@
     <property name="application.module" value="talent-studio-application"/>
     <property name="app.db.dir" value="${application.module}/db"/>
     <property name="app.src.dir" value="${application.module}/src/main/java"/>
+    <property name="app.resources.dir" value="${application.module}/src/main/resources"/>
+    <property name="test.app.resources.dir" value="${application.module}/src/test/resources"/>
     <property name="templates.dir" value="templates"/>
     <property name="app.templates.dir" value="${application.module}/templates"/>
     <property name="app.config.dir" value="${application.module}/config"/>
@@ -568,7 +570,7 @@
 
         <!-- copy additional files -->
         <copy todir="${build.app.classes.dir}" overwrite="true" filtering="true">
-            <fileset dir="${app.src.dir}">
+            <fileset dir="${app.resources.dir}">
                 <patternset refid="app.src.files"/>
             </fileset>
             <filterset refid="app.config.filterset"/>
@@ -672,7 +674,7 @@
 
         <!-- copy the velocity templates used for emailing -->
         <copy todir="${build.webview.war.classes.dir}" overwrite="true">
-            <fileset dir="${application.module}">
+            <fileset dir="${app.resources.dir}">
                 <include name="${templates.dir}/*.vm"/>
             </fileset>
         </copy>
@@ -863,14 +865,14 @@
 
         <!-- copy hibernate application config files to classes directory -->
         <copy todir="${classes-dir}">
-            <fileset dir="${app.src.dir}">
+            <fileset dir="${app.resources.dir}">
                 <patternset refid="hibernate.files"/>
             </fileset>
         </copy>
 
         <!-- copy digester config files to classes directory -->
         <copy todir="${classes-dir}">
-            <fileset dir="${app.src.dir}">
+            <fileset dir="${app.resources.dir}">
                 <patternset refid="digester.files"/>
             </fileset>
         </copy>
@@ -925,14 +927,14 @@
 
         <!-- copy hibernate application config files to classes directory -->
         <copy todir="${webclasses-dir}" overwrite="true">
-            <fileset dir="${app.src.dir}">
+            <fileset dir="${app.resources.dir}">
                 <patternset refid="hibernate.files"/>
             </fileset>
         </copy>
 
         <!-- copy digester config files to classes directory -->
         <copy todir="${webclasses-dir}" overwrite="true">
-            <fileset dir="${app.src.dir}">
+            <fileset dir="${app.resources.dir}">
                 <patternset refid="digester.files"/>
             </fileset>
         </copy>
@@ -989,7 +991,7 @@
 
         <copy todir="${build.standalone.classes.dir}" file="${standalone.src.dir}/log4j.properties"/>
 
-        <copy todir="${build.standalone.classes.dir}" file="${app.src.dir}/ehcache.xml"/>
+        <copy todir="${build.standalone.classes.dir}" file="${app.resources.dir}/ehcache.xml"/>
 
         <copy todir="${build.standalone.dir}" file="${integration.module}/build.xml"/>
 
@@ -1149,7 +1151,7 @@
         
         <!-- copy additional hibernate application config files to test classes directory -->
         <copy todir="${test.classes.dir}" overwrite="true">
-            <fileset dir="${test.app.src.dir}">
+            <fileset dir="${test.app.resources.dir}">
                 <patternset refid="hibernate.files"/>
             </fileset>
         </copy>
