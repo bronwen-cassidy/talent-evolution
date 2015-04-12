@@ -911,7 +911,7 @@ span.wizardHeadingActive {
 	font-size: 175%;
     font-style: oblique;
 	font-weight: bold;
-    color: 004fad;
+    color: #004fad;
 }
 
 .policystatement {
@@ -2097,6 +2097,12 @@ iframe.dashboard {
 .text_external {
     font-style:italic;
     font-weight:bold;
+}
+
+a.edit-img {
+    background-image: url(../images/blue_line.jpg);
+    background-repeat: no-repeat;
+    background-position: bottom left;
 }
 /*============================================ reporting chart styles =====================================================*/
 

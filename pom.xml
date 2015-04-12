@@ -219,7 +219,7 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-    
+
     <build>
         <plugins>
             <plugin>
@@ -236,12 +236,12 @@
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
                 <configuration>
-                    <path>/${client}}</path>
+                    <path>/</path>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-    
+
     <profiles>
         <profile>
             <id>dev</id>
@@ -249,6 +249,24 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <build>
+                <filters>
+                    <!--
+                        which property file to load needs to be done still
+                        this will provide client specif filters
+                    -->
+                    <filter>profiles/dev/config.properties</filter>
+                </filters>
+                <resources>
+                    <!--
+                        Placeholders that are found from the files located in the configured resource
+                        directories are replaced with the property values found from the profile
+                        specific configuration file.
+                    -->
+                    <resource>
+                        <filtering>true</filtering>
+                        <directory>src/main/resources</directory>
+                    </resource>
+                </resources>
                 <plugins>
                     <plugin>
                         <artifactId>maven-antrun-plugin</artifactId>
@@ -257,8 +275,8 @@
                             <execution>
                                 <configuration>
                                     <target name="build-war">
-                                        <property name="client" value="${client}"/>
-                                        <echo message="client is defined as ${client}"/>
+                                        <property name="client" value="tme"/>
+                                        <!--<echo message="client is defined as ${client}"/>-->
                                     </target>
                                 </configuration>
                                 <phase>install</phase>
@@ -277,20 +295,12 @@
     </profiles>
 
     <repositories>
-        <!--<repository>-->
-        <!--<id>pentaho-releases</id>-->
-        <!--<name>Pentaho Releases</name>-->
-        <!--<url>http://repository.pentaho.org/artifactory/repo/</url>-->
-        <!--</repository>-->
+
         <repository>
             <id>maven-repo</id>
             <url>http://repo1.maven.org/maven2/</url>
         </repository>
-        <!--<repository>-->
-        <!--<id>spring-release</id>-->
-        <!--<name>Spring Release Repository</name>-->
-        <!--<url>s3://maven.springframework.org/release</url>-->
-        <!--</repository>-->
+
         <repository>
             <id>pentaho-repo</id>
             <url>http://repo.pentaho.org/artifactory/pentaho/</url>
