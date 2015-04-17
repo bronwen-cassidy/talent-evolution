@@ -71,8 +71,10 @@
                         <zynap:param name="myPortfolio" value="false"/>
                     </zynap:artefactLink>
 
-                    <a href="<c:out value="${editQuestionnaireUrl}"/>"><fmt:message key="edit.questionnaire"/></a>&nbsp;|&nbsp;
-                    <a href="<c:out value="${viewQuestionnaireUrl}"/>"><fmt:message key="view.questionnaire"/></a>
+                    <a class="edit-img" href="<c:out value="${editQuestionnaireUrl}"/>"><fmt:message key="edit.questionnaire"/></a>&nbsp;|&nbsp;
+                    <a href="<c:out value="${viewQuestionnaireUrl}"/>"><fmt:message key="view.questionnaire"/></a>&nbsp;|&nbsp;
+                    <a href="<c:out value="${downloanPdfUrl}"/>"><fmt:message key="download.pdf"/></a> <!-- todo this must be an image -->
+                    
                     
                 </display:column>
             </c:if>
