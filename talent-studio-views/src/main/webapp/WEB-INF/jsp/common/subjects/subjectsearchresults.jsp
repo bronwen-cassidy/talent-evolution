@@ -53,7 +53,6 @@
                 <%-- this column displays the edit link for the questionnaires --%>                
                 <display:column title="${actionHeader}" sortable="false" class="pager" headerClass="sorted">
                      <zynap:artefactLink var="editQuestionnaireUrl" url="editsubjectquestionnaire.htm" tabName="activeTab" activeTab="${tabContent.key}" >
-
                         <zynap:param name="_parameter_save_command_.activeSearchTab" value="${activeSearchTab}"/>
                         <zynap:param name="_parameter_save_command_.activeTab" value="${command.activeTab}"/>
                         <zynap:param name="command.node.id" value="${command.nodeId}"/>
@@ -70,8 +69,16 @@
                         <zynap:param name="<%= ParameterConstants.NODE_ID_PARAM%>" value= "${subjecttable.id}" />
                         <zynap:param name="myPortfolio" value="false"/>
                     </zynap:artefactLink>
-
-                    <a class="edit-img" href="<c:out value="${editQuestionnaireUrl}"/>"><fmt:message key="edit.questionnaire"/></a>&nbsp;|&nbsp;
+                    <zynap:artefactLink url="exportexecsubjectquestionnairepdf.htm" var="downloanPdfUrl" tabName="activeTab" activeTab="${tabContent.key}">
+                        <zynap:param name="_parameter_save_command_.activeSearchTab" value="${activeSearchTab}"/>
+                        <zynap:param name="_parameter_save_command_.activeTab" value="${command.activeTab}"/>
+                        <zynap:param name="command.node.id" value="${subjecttable.id}"/>
+                        <zynap:param name="<%=ParameterConstants.DISABLE_COMMAND_DELETION%>" value="<%=ParameterConstants.LEAVE_COMMAND%>"/>
+                        <zynap:param name="<%=ParameterConstants.QUESTIONNAIRE_ID%>" value="${command.filter.questionnaireId}"/>
+                        <zynap:param name="<%=WorkflowConstants.WORKFLOW_ID_PARAM_PREFIX%>" value="${command.filter.questionnaireId}"/>
+                        <zynap:param name="myPortfolio" value="false"/>
+                    </zynap:artefactLink>
+                    <a href="<c:out value="${editQuestionnaireUrl}"/>"><fmt:message key="edit.questionnaire"/></a>&nbsp;|&nbsp;
                     <a href="<c:out value="${viewQuestionnaireUrl}"/>"><fmt:message key="view.questionnaire"/></a>&nbsp;|&nbsp;
                     <a href="<c:out value="${downloanPdfUrl}"/>"><fmt:message key="download.pdf"/></a> <!-- todo this must be an image -->
                     
