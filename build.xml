@@ -10,7 +10,7 @@
         <format property="build.date" pattern="dd-MM-yy_HH-mm"/>
     </tstamp>
 
-    <property name="build.version" value="V5.4.5-mt"/>
+    <property name="build.version" value="V5.4.5"/>
     <property name="build.info" value="dhanson"/>
     <property name="build.number" value="${build.version} ${build.info} ${build.date.time}"/>
 

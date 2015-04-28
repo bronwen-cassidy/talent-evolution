@@ -74,9 +74,9 @@
                         <zynap:param name="_parameter_save_command_.activeTab" value="${command.activeTab}"/>
                         <zynap:param name="command.node.id" value="${subjecttable.id}"/>
                         <zynap:param name="<%=ParameterConstants.DISABLE_COMMAND_DELETION%>" value="<%=ParameterConstants.LEAVE_COMMAND%>"/>
-                        <zynap:param name="<%=ParameterConstants.QUESTIONNAIRE_ID%>" value="${command.filter.questionnaireId}"/>
                         <zynap:param name="<%=WorkflowConstants.WORKFLOW_ID_PARAM_PREFIX%>" value="${command.filter.questionnaireId}"/>
                         <zynap:param name="myPortfolio" value="false"/>
+                        <zynap:param name="target" value="_blank"/>
                     </zynap:artefactLink>
                     <a href="<c:out value="${editQuestionnaireUrl}"/>"><fmt:message key="edit.questionnaire"/></a>&nbsp;|&nbsp;
                     <a href="<c:out value="${viewQuestionnaireUrl}"/>"><fmt:message key="view.questionnaire"/></a>&nbsp;|&nbsp;
@@ -101,4 +101,3 @@
 
     </c:if>
 </zynap:infobox>
-
