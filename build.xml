@@ -163,7 +163,6 @@
 
     <!-- Web Module config directories -->
     <property name="war.config.dir" value="${webview.module}/config"/>
-    <property name="war.config.common.dir" value="${war.config.dir}/common"/>
     <property name="webapp.webinf.dir" value="${webview.root.dir}/main/webapp/WEB-INF"/>
     <property name="war.config.logging.dir" value="${war.config.dir}/logging"/>
     <property name="war.config.server.dir" value="${war.config.dir}/server"/>
@@ -642,7 +641,6 @@
         <!-- copy and filter webapp config files (web.xml) -->
         <copy todir="${build.webview.war.webinf.dir}" filtering="true" overwrite="true">
             <fileset dir="${war.config.server.dir}"/>
-            <fileset dir="${war.config.common.dir}"/>
             <fileset dir="${webapp.webinf.dir}" includes="web.xml"/>
             <filterset refid="app.config.filterset"/>
         </copy>
@@ -659,7 +657,7 @@
         </copy>
 
         <!-- copy and filter web app resource bundle files -->
-        <copy tofile="${build.webview.war.classes.dir}/messages.properties" file="${war.resources.dir}/language/en/messages.properties" filtering="true" overwrite="true">
+        <copy tofile="${build.webview.war.classes.dir}/messages.properties" file="${war.resources.dir}/messages.properties" filtering="true" overwrite="true">
             <filterset refid="app.config.filterset"/>
         </copy>
 
