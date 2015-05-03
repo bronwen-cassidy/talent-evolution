@@ -147,7 +147,7 @@
 
     <sql-query name="findContentTypePermits">
         <![CDATA[select {ap.*} from PERMITS ap, app_roles_users ur, roles r, permits_roles pr
-        WHERE ur.user_id=? AND r.is_active = 'T' AND ap.is_available = 'T' AND ap.type='AP'
+        WHERE ur.user_id=? AND r.is_active = 'T' AND ap.is_active = 'T' AND ap.type='AP'
         AND ur.role_id = r.id AND r.id = pr.role_id and ap.id = pr.permit_id
         AND ap.content_param=? AND ap.action=?]]>
         <return alias="ap" class="com.zynap.talentstudio.security.permits.AccessPermit"/>        
@@ -155,7 +155,7 @@
 
     <sql-query name="findAccessPermitsByUser">
         <![CDATA[select {ap.*} from PERMITS ap, app_roles_users ur, roles r, permits_roles pr
-        WHERE ur.user_id=? AND r.is_active = 'T' AND ap.is_available = 'T' AND ap.type='AP'
+        WHERE ur.user_id=? AND r.is_active = 'T' AND ap.is_active = 'T' AND ap.type='AP'
         AND ur.role_id = r.id AND r.id = pr.role_id and ap.id = pr.permit_id]]>
         <return alias="ap" class="com.zynap.talentstudio.security.permits.AccessPermit"/>
     </sql-query>

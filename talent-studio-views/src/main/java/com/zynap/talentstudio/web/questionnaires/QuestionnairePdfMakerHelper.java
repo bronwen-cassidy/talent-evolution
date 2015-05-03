@@ -58,6 +58,8 @@ import java.net.MalformedURLException;
 public class QuestionnairePdfMakerHelper {
 
 
+    private Subject subject;
+
     /**
      * using the jsp, rendering system, the below code does the same as view questionnaire jsp
      * toe create the pdf document the questionnaire wrapper, is required with needed params see below
@@ -162,11 +164,11 @@ public class QuestionnairePdfMakerHelper {
         /**
          * include image together with executive summary
          */
-        PdfPCell pdfPCell = null;
-        Subject subject = null;
+        PdfPCell pdfPCell;
+        //Subject subject;
         PdfPTable executiveSummary = getTable(2);
 
-        Report executiveReport = null;
+        Report executiveReport;
         if (myExecutiveSummary) {
             subject = subjectService.findByUserId(user.getId());
             executiveReport = displayConfigService.findDisplayConfigReport(Node.SUBJECT_UNIT_TYPE_, DisplayConfig.MY_EXEC_SUMMARY_TYPE);
@@ -586,6 +588,10 @@ public class QuestionnairePdfMakerHelper {
 
         }
         return ""; //should never be here
+    }
+
+    public Subject getSubject() {
+        return subject;
     }
 
     ReloadableResourceBundleMessageSource messageSource;

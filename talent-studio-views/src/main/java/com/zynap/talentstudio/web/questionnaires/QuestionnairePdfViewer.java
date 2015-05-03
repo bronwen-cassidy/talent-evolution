@@ -42,12 +42,13 @@ public class QuestionnairePdfViewer implements Controller {
         QuestionnaireWrapper questionnaireWrapper = questionnaireHelper.getQuestionnaireWrapper(questionnaireId, workflowId, user, subjectId, false);
         questionnaireWrapper.setMyPortfolio(mySummary);
 
-        String pdfLabel = questionnaireWrapper.getQuestionnaireLabel();
+        
         ArtefactViewQuestionnaireHelper displayHelper = getDisplayHelper(user);
-
+        
         byte[] pdf = questionnairePdfMakerHelper.createPdfDocument(user, questionnaireWrapper, messageSource, request, subjectService,
                 displayConfigService, displayHelper, mySummary);
-
+        
+        String pdfLabel = questionnaireWrapper.getQuestionnaireLabel()  + " - " + questionnairePdfMakerHelper.getSubject().getLabel();
         final String fileName = pdfLabel + ".pdf";
 
         if(pdf.length < 1) {

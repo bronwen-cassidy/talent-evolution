@@ -164,7 +164,6 @@
     <!-- Web Module config directories -->
     <property name="war.config.dir" value="${webview.module}/config"/>
     <property name="webapp.webinf.dir" value="${webview.root.dir}/main/webapp/WEB-INF"/>
-    <property name="war.config.logging.dir" value="${war.config.dir}/logging"/>
     <property name="war.config.server.dir" value="${war.config.dir}/server"/>
     <property name="scripts.dir" value="${war.dir}/scripts"/>
 
@@ -567,16 +566,17 @@
             <src path="${app.src.dir}"/>
         </javac>
 
-        <!-- copy additional files -->
         <copy todir="${build.app.classes.dir}" overwrite="true" filtering="true">
             <fileset dir="${app.resources.dir}">
+                <include name="**/*.vm"/>
+                <include name="**/*.jrxml"/>
                 <patternset refid="app.src.files"/>
             </fileset>
             <filterset refid="app.config.filterset"/>
         </copy>
-
+        
     </target>
-
+    
     <target name="compile-webview" depends="compile-app" description="compile the web view classes">
         <javac destdir="${build.webview.classes.dir}" source="${javac.version}" target="${javac.version}" debug="${javac.debug}"
                deprecation="${javac.deprecation}" optimize="${javac.optimize}" failonerror="${javac.failonerror}" includeAntRuntime="no">
@@ -663,7 +663,7 @@
 
         <!-- copy all other language resource files, e.g french -->
         <copy todir="${build.webview.war.classes.dir}" filtering="true" overwrite="true">
-            <fileset dir="${war.resources.dir}/language" includes="*.properties"/>
+            <fileset dir="${war.resources.dir}" includes="messages*.properties"/>
             <filterset refid="app.config.filterset"/>
         </copy>
 
@@ -685,7 +685,7 @@
 
         <!-- copy the jasper dtd -->
         <copy todir="${build.webview.war.classes.dir}">
-            <fileset dir="${war.resources.dir}" excludes="language/**,properties/**"/>
+            <fileset dir="${war.resources.dir}" excludes="messages*.properties,properties/**"/>
         </copy>
 
         <copy todir="${build.webview.properties.dir}" overwrite="true">
@@ -775,7 +775,7 @@
                         </copy>
                         <!-- copy all other language resource files -->
                         <copy todir="${build.webview.war.classes.dir}" filtering="true" overwrite="true">
-                            <fileset dir="${war.resources.dir}/language" includes="*.properties"/>
+                            <fileset dir="${war.resources.dir}" includes="messages*.properties"/>
                             <filterset refid="app.config.filterset"/>
                         </copy>
                     </then>
@@ -789,7 +789,7 @@
 
         <war warfile="${dist.dir}/${project.name}.war" webxml="${build.webview.war.webinf.dir}/web.xml">
             <!-- provides scripts only -->
-            <fileset dir="${webapp.dir}" includes="scripts/**"/>
+            <fileset dir="${webapp.dir}" excludes="WEB-INF/**"/>
             <fileset dir="${build.webview.war.dir}" excludes="WEB-INF/**,WEB-INF/classes/**"/>
             
             <!-- copy properties files -->
@@ -803,6 +803,7 @@
             <!-- copy JSPs tlds and services -->
 
             <webinf dir="${webapp.dir}/WEB-INF" includes="jsp/**,tlds/**"/>
+          
             <!-- copy lib files -->
             <lib dir="${integration.lib.dir}" includes="*.jar"/>
             <lib dir="${runtime.lib}" includes="*.jar"/>
@@ -939,7 +940,7 @@
 
         <!-- copy and filter logging config files to classes directory -->
         <copy todir="${webclasses-dir}" filtering="true" overwrite="true">
-            <fileset dir="${war.config.logging.dir}"/>
+            <fileset dir="${war.resources.dir}" includes="log4j.properties"/>
             <filterset refid="app.config.filterset"/>
         </copy>
 

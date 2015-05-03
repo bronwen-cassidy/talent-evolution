@@ -2105,5 +2105,31 @@ iframe.dashboard {
     font-style:italic;
     font-weight:bold;
 }
+
+.button {
+    text-decoration: none;
+    align-items: flex-start;
+    text-align: center;
+    color: buttontext;
+    padding: 1px 0 1px;
+    border: 2px outset buttonface;
+    border-image-source: initial;
+    border-image-slice: initial;
+    border-image-repeat: initial;
+    background-color: buttonface;
+    box-sizing: border-box;
+    -webkit-appearance: push-button;
+    -webkit-user-select: none;
+    white-space: pre;
+}
+
+td.nowrap {
+    white-space: nowrap;
+}
+
+img.square-20 {
+    width: 20px;
+    height: 20px;
+}
 /*============================================ reporting chart styles =====================================================*/
 
