@@ -63,7 +63,7 @@ CREATE INDEX OBJ_NODE_REF_FK_I ON OBJECTIVES
 
 -- TS-2437
 INSERT INTO menu_items(module_id, section_id, id, label, sort_order, url, description, user_type) VALUES(zynap_app_sp.get_organisation_module_id(), 'SEARCH',-29, 'Questionnaires', 30, '/orgbuilder/listquestionnaire.htm', 'list.questionnaires.menu.description', null);
-insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_AVAILABLE, URL, ID_PARAM, CLASS, METHOD) VALUES (PERMIT_SQ.nextval, 'AP', 'search','QUESTIONNAIRES' ,'Permission to Browse Questionnaires', 'T','/orgbuilder/listquestionnaire.htm', null, null, null) ;
+insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD) VALUES (PERMIT_SQ.nextval, 'AP', 'search','QUESTIONNAIRES' ,'Permission to Browse Questionnaires', 'T','/orgbuilder/listquestionnaire.htm', null, null, null) ;
 
 exec zynap_loader_sp.menu_permits_link
 

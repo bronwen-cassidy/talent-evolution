@@ -669,6 +669,7 @@
                 <prop key="/**/browseviewsubjectquestionnaire.htm">browseQuestionnaireController</prop>
                 <prop key="/**/exportmyexecsubjectquestionnairepdf.htm">viewMyExecSummaryQuestionnairePdfController</prop>
                 <prop key="/**/exportexecsubjectquestionnairepdf.htm">viewExecSummaryQuestionnairePdfController</prop>
+                <prop key="/orgbuilder/exportallsubjectquestionnaires.htm">exportAllSubjectQuestionnairesController</prop>
                 <prop key="/**/editsubjectquestionnaire.htm">answerQuestionnaireController</prop>
                 <prop key="/**/browseeditsubjectquestionnaire.htm">browseAnswerQuestionnaireController</prop>
                 <prop key="/**/editmystaffinboxquestionnaire.htm">answerInboxQuestionnaireController</prop>
@@ -1232,7 +1233,7 @@
         <property name="dynamicAttributeService" ref="dynamicAttrService"/>
     </bean>
 
-    <bean id="questionnairePdfMakerHelper" class="com.zynap.talentstudio.web.questionnaires.QuestionnairePdfMakerHelper">
+    <bean id="questionnairePdfMakerHelper" class="com.zynap.talentstudio.web.questionnaires.QuestionnairePdfMakerHelper" scope="prototype">
         <!-- populate later if objects required-->
     </bean>
 
@@ -1417,6 +1418,16 @@
 
     <bean id="viewExecSummaryQuestionnairePdfController" parent="viewQuestionnairePdfController">
         <property name="mySummary" value="false"/>
+    </bean>
+    <bean id="exportAllSubjectQuestionnairesController" class="com.zynap.talentstudio.web.questionnaires.QuestionnairePdfExporter">
+        <property name="questionnaireHelper" ref="questionnaireHelper"/>
+        <property name="subjectService" ref="subjectService"/>
+        <property name="questionnairePdfMakerHelper" ref="questionnairePdfMakerHelper"/>
+        <property name="messageSource" ref="messageSource"/>
+        <property name="displayConfigService" ref="displayConfigService"/>
+        <property name="dynamicAttributeService" ref="dynamicAttrService"/>
+        <property name="positionService" ref="positionService"/>
+        <property name="populationEngine" ref="populationEngine"/>
     </bean>
 
     <!--########################## DISPLAY CONFIGURATION CONTROLLERS ##########################-->

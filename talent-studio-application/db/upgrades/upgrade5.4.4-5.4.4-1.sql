@@ -6,7 +6,7 @@ prompt **************************** HAVE YOU BACKED UP YOUR DATABASE (Y/N)? ****
 prompt
 accept l_yes char prompt 'db backed up (y/n): '
 
-insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_AVAILABLE, URL, ID_PARAM, CLASS, METHOD) VALUES(-20, 'AP', 'view', 'UPLOADS', 'Access to Data Uploads','T', '/admin/datauploads.htm', null, null, null);
+insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD) VALUES(-20, 'AP', 'view', 'UPLOADS', 'Access to Data Uploads','T', '/admin/datauploads.htm', null, null, null);
 
 INSERT INTO menu_items(module_id, section_id, id, label, sort_order, url, description, user_type, permit_id) VALUES(zynap_app_sp.get_admin_module_id(), 'TEMPLATES',-373, 'mi.upload.data',60,'/admin/datauploads.htm','upload.data.templates.menu.description', null, -20);
 

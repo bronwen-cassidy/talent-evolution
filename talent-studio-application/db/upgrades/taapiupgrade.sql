@@ -7,7 +7,7 @@ prompt
 accept l_yes char prompt 'db backed up (y/n): '
 
 INSERT INTO menu_items(module_id, section_id, id, label, sort_order, url, description, user_type) VALUES(zynap_app_sp.get_admin_module_id(), 'TEMPLATES',-372, 'mi.sync.settings',50,'/admin/listadaptors.htm','sync.setting.templates.menu.description', null);
-insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_AVAILABLE, URL, ID_PARAM, CLASS, METHOD) VALUES (PERMIT_SQ.nextval, 'AP', 'search','TEMPLATES' ,'Permission to View Syncs', 'T','/admin/listadaptors.htm', null, null, null);
+insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD) VALUES (PERMIT_SQ.nextval, 'AP', 'search','TEMPLATES' ,'Permission to View Syncs', 'T','/admin/listadaptors.htm', null, null, null);
 
 update menu_items set permit_id=(select id from permits where url = '/admin/listadaptors.htm');
 

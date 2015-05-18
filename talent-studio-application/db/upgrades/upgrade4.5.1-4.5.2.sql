@@ -5,7 +5,7 @@ DELETE FROM MENU_ITEMS WHERE url = '/talentarena/worklistobjectives.htm';
 INSERT INTO menu_items(module_id, section_id, id, label, sort_order, url, description, user_type) VALUES(zynap_app_sp.get_myzynap_module_id(), 'ACCOUNT',-33, 'My Team',30,'/talentarena/viewmyteam.htm', 'myteam.menu.description', 'SYSTEMSUBJECT');
 
 -- new permits
-insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_AVAILABLE, URL, ID_PARAM, CLASS, METHOD) VALUES(PERMIT_SQ.nextval, 'AP', 'view', 'DETAILS', 'Access to My Details','T', '/talentarena/viewmy*.*', null, null, null);
+insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD) VALUES(PERMIT_SQ.nextval, 'AP', 'view', 'DETAILS', 'Access to My Details','T', '/talentarena/viewmy*.*', null, null, null);
 
 -- set permit on existing mydetails and myaccount menu items
 update menu_items set permit_id = permit_sq.currval where url = '/talentarena/viewmydetails.htm';
@@ -22,14 +22,14 @@ DELETE FROM PERMITS WHERE URL = '/talentarena/viewmyaccount.htm';
 
 -- questionnaire permits changes
 update permits set url = '/talentarena/viewmyquestionnaire.htm', description = 'Permission to View My Questionnaires' where url   ='/talentarena/viewmyquestionnaireitem.htm';
-insert into permits(ID, TYPE, CONTENT_PARAM, ACTION, CONTENT, DESCRIPTION, IS_AVAILABLE, URL, ID_PARAM, CLASS, METHOD) VALUES (PERMIT_SQ.nextval, 'AP', null, 'edit','QUESTIONNAIRES' ,'Permission to Edit My Questionnaires', 'T','/talentarena/editmyquestionnaire.htm', null, null, null);
-insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_AVAILABLE, URL, ID_PARAM, CLASS, METHOD) VALUES (PERMIT_SQ.nextval, 'AP', 'close','QUESTIONNAIRES' ,'Permission to close questionnaires', 'T','/admin/confirmclosequestionnaireworkflow.*.htm', null, null, null);
+insert into permits(ID, TYPE, CONTENT_PARAM, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD) VALUES (PERMIT_SQ.nextval, 'AP', null, 'edit','QUESTIONNAIRES' ,'Permission to Edit My Questionnaires', 'T','/talentarena/editmyquestionnaire.htm', null, null, null);
+insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD) VALUES (PERMIT_SQ.nextval, 'AP', 'close','QUESTIONNAIRES' ,'Permission to close questionnaires', 'T','/admin/confirmclosequestionnaireworkflow.*.htm', null, null, null);
 
 -- new permit to run reporting charts in analysis arena
-insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_AVAILABLE, URL, ID_PARAM, CLASS, METHOD) VALUES (PERMIT_SQ.nextval, 'AP', 'browse','REPORTING STRUCTURE' ,'Permission to Browse Reporting Structure', 'T','/analysis/reportingchart.htm', null, null, null);
+insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD) VALUES (PERMIT_SQ.nextval, 'AP', 'browse','REPORTING STRUCTURE' ,'Permission to Browse Reporting Structure', 'T','/analysis/reportingchart.htm', null, null, null);
 
 -- new permit to view performance reviews
-insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_AVAILABLE, URL, ID_PARAM, CLASS, METHOD) VALUES (PERMIT_SQ.nextval, 'AP', 'view','APPRAISALS' ,'Permission to View Appraisals', 'T','/perfman/viewperformancereview.htm', null, null, null) ;
+insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD) VALUES (PERMIT_SQ.nextval, 'AP', 'view','APPRAISALS' ,'Permission to View Appraisals', 'T','/perfman/viewperformancereview.htm', null, null, null) ;
 
 -- rebuild home role
 delete from permits_roles where role_id = 8;

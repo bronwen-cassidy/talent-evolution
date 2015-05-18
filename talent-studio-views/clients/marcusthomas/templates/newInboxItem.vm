@@ -1,0 +1,11 @@
+To ${user.label}
+
+A new message item has arrived in your inbox.
+#if ($url && $url != "") 
+Please click to go to your inbox ${url} 
+#end
+
+Sent on behalf of
+${from.label}.
+
+[Note: This is an automated reply sent from TalentEvolution, please do not respond]

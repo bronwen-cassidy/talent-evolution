@@ -35,4 +35,9 @@ ALTER TABLE DYNAMIC_ATTRIBUTES MODIFY IS_MANDATORY VARCHAR2(1) DEFAULT 'F';
 ALTER TABLE DYNAMIC_ATTRIBUTES MODIFY IS_ACTIVE VARCHAR2(1) DEFAULT 'T';
 ALTER TABLE DYNAMIC_ATTRIBUTES MODIFY IS_SEARCHABLE VARCHAR2(1) DEFAULT 'T';
 
+insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD)
+VALUES (PERMIT_SQ.nextval, 'AP', 'search','QUESTIONNAIRES' ,'Permission to Export Questionnaires', 'T','/orgbuilder/exportallsubjectquestionnaires.htm', null, null, null) ;
+
+insert into permits_roles select id, '3' from permits where url = '/orgbuilder/exportallsubjectquestionnaires.htm' AND type = 'AP';
+
 commit;

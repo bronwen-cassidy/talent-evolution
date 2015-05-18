@@ -50,10 +50,10 @@ VALUES(zynap_app_sp.get_admin_module_id(), 'QUESTIONNAIRES', -18, 'mi.questionna
 delete from permits_roles where permit_id in (select id from permits where url like '%editmy.*questionnaire.htm');
 delete from permits where url like '%editmy.*questionnaire.htm';
 
-insert into permits (ID,TYPE,ACTION,CONTENT,DESCRIPTION,IS_AVAILABLE,URL)
+insert into permits (ID,TYPE,ACTION,CONTENT,DESCRIPTION,IS_ACTIVE,URL)
 values (PERMIT_SQ.nextval,'AP','edit','QUESTIONNAIRES','Permission to Edit My Questionnaires','T','/talentarena/editmy.*questionnaire.htm');
 
-insert into permits (ID,TYPE,ACTION,CONTENT,DESCRIPTION,IS_AVAILABLE,URL)
+insert into permits (ID,TYPE,ACTION,CONTENT,DESCRIPTION,IS_ACTIVE,URL)
 values (PERMIT_SQ.nextval,'AP','edit','QUESTIONNAIRES','Permission to View/Edit Questionnaire Workflows','T','/admin/listqueworkflows.htm');
 
 exec zynap_loader_sp.menu_permits_link;

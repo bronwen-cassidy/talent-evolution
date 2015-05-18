@@ -86,8 +86,8 @@ EXEC zynap_lookup_sp.install_values( 'DATYPE', 'MULTISELECT', 'Multi Selection L
 
 INSERT INTO menu_items(module_id, section_id, id, label, sort_order, url, description, user_type) VALUES(zynap_app_sp.get_admin_module_id(), 'TEMPLATES',-11, 'mi.tab.settings',40,'/admin/tabsettings.htm','tab.setting.templates.menu.description', null);
 
-insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_AVAILABLE, URL, ID_PARAM, CLASS, METHOD) VALUES (PERMIT_SQ.nextval, 'AP', 'search','TEMPLATES' ,'Permission to View Tab Settings', 'T','/admin/tabsettings.htm', null, null, null);
-insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_AVAILABLE, URL, ID_PARAM, CLASS, METHOD) VALUES (PERMIT_SQ.nextval, 'AP', 'edit','TEMPLATES' ,'Permission to Edit Tab Settings', 'T','/admin/edittabsettings.htm', null, null, null);
+insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD) VALUES (PERMIT_SQ.nextval, 'AP', 'search','TEMPLATES' ,'Permission to View Tab Settings', 'T','/admin/tabsettings.htm', null, null, null);
+insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD) VALUES (PERMIT_SQ.nextval, 'AP', 'edit','TEMPLATES' ,'Permission to Edit Tab Settings', 'T','/admin/edittabsettings.htm', null, null, null);
 
 insert into permits_roles select id, '1' from permits where url like '%tabsettings%' and type = 'AP';
 

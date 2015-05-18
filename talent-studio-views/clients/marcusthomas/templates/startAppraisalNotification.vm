@@ -1,0 +1,9 @@
+To ${user.label}
+
+You have recieved a notification in your TalentEvolution todo list.
+Please login in to assign roles and start the appraisal ${domainObject.label}
+
+Regards
+Talent Management Evolution, Inc.
+
+[Note: This is an automated reply sent from TalentEvolution, please do not respond]
