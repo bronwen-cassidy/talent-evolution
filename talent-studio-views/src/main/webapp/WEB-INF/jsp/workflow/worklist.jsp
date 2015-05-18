@@ -50,7 +50,7 @@
 
   
     <div id="worklist_span" style="display:<c:choose><c:when test="${command.activeTab == 'worklist'}">inline</c:when><c:otherwise>none</c:otherwise></c:choose>">
-        <c:import url="todolist.jsp"/>
+        <%@ include file="todolist.jsp"%>
     </div>
 
 
