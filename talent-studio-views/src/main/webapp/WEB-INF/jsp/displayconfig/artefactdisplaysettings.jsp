@@ -32,15 +32,15 @@
     </c:if>
 
     <div id="displayconfig_span" style="display:<c:choose><c:when test="${command.activeTab == 'displayconfig'}">inline</c:when><c:otherwise>none</c:otherwise></c:choose>">
-        <c:import url="displayconfiglist.jsp"/>
+        <c:import url="../displayconfig/displayconfiglist.jsp"/>
     </div>
 
     <div id="displayitems_span" style="display:<c:choose><c:when test="${command.activeTab == 'displayitems'}">inline</c:when><c:otherwise>none</c:otherwise></c:choose>">
-        <c:import url="displayconfigitemslist.jsp"/>
+        <c:import url="../displayconfig/displayconfigitemslist.jsp"/>
     </div>
 
     <div id="displayitem_span" style="display:<c:choose><c:when test="${command.activeTab == 'displayitem'}">inline</c:when><c:otherwise>none</c:otherwise></c:choose>">
-        <c:import url="displayconfigreportform.jsp"/>
+        <c:import url="../displayconfig/displayconfigreportform.jsp"/>
     </div>
 
 </zynap:tab>
