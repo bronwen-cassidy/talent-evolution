@@ -133,10 +133,10 @@
                 </tr>
                 <tr>
                     <td class="infodata">                        
-                        <c:import url="assignrolesform.jsp"/>
+                        <c:import url="../displayconfig/assignrolesform.jsp"/>
                     </td>
                     <td class="infodata">
-                        <c:import url="assigngroupsform.jsp"/>
+                        <c:import url="../common/assigngroupsform.jsp"/>
                     </td>
                 </tr>
             </c:if>
