@@ -222,11 +222,6 @@ insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_P
 
 --my account
 insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD) VALUES(PERMIT_SQ.nextval, 'AP', 'edit', 'ACCOUNT', 'Permission to Edit My Account','T', '/talentarena/editmyaccount.htm', null, null, null);
-insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD) VALUES(PERMIT_SQ.nextval, 'AP', 'edit', 'ACCOUNT', 'Permission to View My Account','T', '/talentarena/viewmyaccount.htm', null, null, null);
-insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD) VALUES(PERMIT_SQ.nextval, 'AP', 'edit', 'ACCOUNT', 'Permission to View My Details','T', '/talentarena/viewmydetails.htm', null, null, null);
-insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD) VALUES(PERMIT_SQ.nextval, 'AP', 'edit', 'ACCOUNT', 'Permission to View My Team','T', '/talentarena/viewmyteam.htm', null, null, null);
-insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD) VALUES(PERMIT_SQ.nextval, 'AP', 'edit', 'ACCOUNT', 'Permission to View My Portfolio','T', '/talentarena/viewmyportfolio.htm', null, null, null);
-insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD) VALUES(PERMIT_SQ.nextval, 'AP', 'edit', 'ACCOUNT', 'Permission to View My Dashboard','T', '/talentarena/viewmydashboard.htm', null, null, null);
 
 -- chart settings
 insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD) VALUES (PERMIT_SQ.nextval, 'AP', 'browse','CHART SETTINGS' ,'Permission to Browse My Reporting Charts', 'T','/talentarena/listchartsettings.htm', null, null, null);
