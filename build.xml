@@ -124,7 +124,7 @@
     <property name="integration.module" value="talent-studio-integration"/>
     <property name="integration.src.dir" value="${integration.module}/src/main/java"/>
     <property name="integration.lib.dir" value="../integration-lib"/>
-    <property name="integration.config.dir" value="${integration.module}/config"/>
+    <property name="integration.config.dir" value="${integration.module}/src/main/resources"/>
 
     <!-- Standalone Moddule -->
     <property name="standalone.src.dir" value="${integration.module}/client"/>
@@ -140,7 +140,7 @@
     <property name="templates.dir" value="templates"/>
     <property name="app.templates.dir" value="${application.module}/templates"/>
     <property name="app.config.dir" value="${application.module}/config"/>
-    <property name="app.config.spring.dir" value="${app.config.dir}/spring"/>
+    <property name="app.config.spring.dir" value="${app.resources.dir}/spring"/>
     <property name="app.metainf.dir" value="${application.module}/META-INF"/>
 
     <!--  directory where hibernate mapping files are located -->
@@ -162,9 +162,9 @@
     <property name="war.dir" value="${webapp.dir}"/>
 
     <!-- Web Module config directories -->
-    <property name="war.config.dir" value="${webview.module}/config"/>
+    <property name="war.config.dir" value="${webview.module}/src/main/resources"/>
     <property name="webapp.webinf.dir" value="${webview.root.dir}/main/webapp/WEB-INF"/>
-    <property name="war.config.server.dir" value="${war.config.dir}/server"/>
+    <property name="war.config.server.dir" value="${webview.module}/src/webapp/META-INF"/>
     <property name="scripts.dir" value="${war.dir}/scripts"/>
 
     <!-- Config file used by Spring to map views to actual JSPs -->
@@ -324,15 +324,9 @@
     <condition property="db.url" value="jdbc:oracle:thin:@172.24.16.24:1521:orcl">
         <equals arg1="${server}" arg2="tc"/>
     </condition>
-    <condition property="db.url" value="jdbc:oracle:thin:@poseidon:1521:XE">
-        <equals arg1="${server}" arg2=""/>
-    </condition>
 
     <condition property="smpt.host" value="smtp.sendgrid.net">
         <equals arg1="${server}" arg2="tc"/>
-    </condition>
-    <condition property="smpt.host" value="smtp.ynshosting.com">
-        <equals arg1="${server}" arg2=""/>
     </condition>
     <condition property="logFilePath" value="/usr/local/tomcat7/logs/">
         <equals arg1="${server}" arg2="tc"/>

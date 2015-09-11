@@ -42,6 +42,10 @@ fi
 
 # Import the TS schema and data
 
+impdp system/oracle SCHEMAS=nhs remap_schema=nhs:tsdev \
+            directory=EXPORTDIR \
+            dumpfile=nhs.dmp logfile=${DMPFILE}/ts_restore.log
+
 $ORACLE_HOME/bin/imp $DBUSER/$DBUSER LOG=${DMPFILE}/ts_restore.log FULL=y COMMIT=y ROWS=y INDEXES=y CONSTRAINTS=y GRANTS=y FILE=${DMPFILE}/ts.dmp
 result=$?
 

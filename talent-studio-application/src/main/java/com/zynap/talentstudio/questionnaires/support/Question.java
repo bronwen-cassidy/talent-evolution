@@ -324,6 +324,22 @@ public class Question extends BaseQuestion implements Cloneable {
         return dynamicAttribute.getRefersToType();
     }
 
+    public String getWidth() {
+        return width;
+    }
+
+    public void setWidth(String width) {
+        this.width = width;
+    }
+
+    public String getCellClass() {
+        return cellClass;
+    }
+
+    public void setCellClass(String cellClass) {
+        this.cellClass = cellClass;
+    }
+
     private QuestionnaireGroup questionnaireGroup;
     private MultiQuestion multiQuestion;
     private DynamicAttribute dynamicAttribute;
@@ -334,6 +350,8 @@ public class Question extends BaseQuestion implements Cloneable {
     private String questionType;
     private String label;
     private String textId;
+    private String width;
+    private String cellClass;
 
     private List<QuestionReference> mappings = new ArrayList<QuestionReference>();
     private List<QuestionReference> operands = new ArrayList<QuestionReference>();

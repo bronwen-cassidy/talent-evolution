@@ -76,13 +76,9 @@
             <meta attribute="use-in-tostring">true</meta>
         </property>
 
-        <property
-            name="questionType"
-            type="java.lang.String"
-            column="QUESTION_TYPE"
-            >
-            <meta attribute="use-in-tostring">true</meta>
-        </property>
+        <property name="questionType" type="java.lang.String" column="QUESTION_TYPE"/>
+        <property name="width" type="java.lang.String" column="WIDTH"/>
+        <property name="cellClass" type="java.lang.String" column="CELL_CLASS"/>
 
         <property
             name="labelDisplayable"

@@ -300,11 +300,6 @@
         <taglib-location>/WEB-INF/tlds/zynapTags.tld</taglib-location>
     </taglib>
 
-    <taglib>
-        <taglib-uri>/cewolf</taglib-uri>
-        <taglib-location>/WEB-INF/tlds/cewolf-1.1.tld</taglib-location>
-    </taglib>
-
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>WebService</web-resource-name>

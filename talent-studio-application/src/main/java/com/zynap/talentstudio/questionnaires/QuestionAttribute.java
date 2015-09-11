@@ -18,7 +18,7 @@ import java.util.Collection;
 public class QuestionAttribute extends AbstractQuestion {
 
     private static final long serialVersionUID = 7640989070619047941L;
-    
+
     /**
      * Required default constructor
      */
@@ -240,6 +240,22 @@ public class QuestionAttribute extends AbstractQuestion {
         this.hidden = hidden;
     }
 
+    public String getCellClass() {
+        return cellClass;
+    }
+
+    public void setCellClass(String cellClass) {
+        this.cellClass = cellClass;
+    }
+
+    public Integer getWidth() {
+        return width;
+    }
+
+    public void setWidth(Integer width) {
+        this.width = width;
+    }
+
     private DynamicAttribute dynamicAttribute;
     private LineItem lineItem;
     private QuestionGroup questionGroup;
@@ -252,6 +268,8 @@ public class QuestionAttribute extends AbstractQuestion {
     private String questionType;
     private String textId;
     private boolean labelDisplayable;
+    private String cellClass;
+    private Integer width;
 
     /* determines if the question is editable only by managers */
     private boolean managerWrite;
@@ -259,4 +277,5 @@ public class QuestionAttribute extends AbstractQuestion {
     private boolean hidden;
     public static final String TYPE_CHECKBOX = "CHECKBOX";
     public static final String TYPE_RADIO = "RADIO";
+
 }

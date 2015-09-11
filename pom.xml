@@ -22,6 +22,8 @@
         <maven.compiler.target>1.6</maven.compiler.target>
 
         <ant antfile="build.xml"/>
+        <!-- default properties -->
+        <client>nhs</client>
 
     </properties>
 
@@ -253,6 +255,46 @@
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
+            <properties>
+                <db.url>jdbc:oracle:thin:@DELL55.Rockall.dub:1521:STOC</db.url>
+                <db.password>tsdev</db.password>
+                <db.username>tsdev</db.username>
+                <host.name>localhost</host.name>
+                <server.url>http://localhost:8080</server.url>
+            </properties>
+            <build>
+                <filters>
+                    <!--
+                        which property file to load needs to be done still
+                        this will provide client specif filters todo we need to filter the app context files
+                    -->
+                    <filter>profiles/dev/config.properties</filter>
+                </filters>
+                <resources>
+                    <!--
+                        Placeholders that are found from the files located in the configured resource
+                        directories are replaced with the property values found from the profile
+                        specific configuration file.
+                    -->
+                    <resource>
+                        <filtering>true</filtering>
+                        <directory>src/main/resources</directory>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+        <profile>
+            <id>live</id>
+            <properties>
+                <db.url>jdbc:oracle:thin:@172.24.16.24:1521:orcl</db.url>
+                <db.password>${client}</db.password>
+                <db.username>${client}</db.username>
+                <smpt.host>smtp.sendgrid.net</smpt.host>
+                <host.name>tmelogin</host.name>
+                <server.url>https://www.tmelogin.com</server.url>
+                <logFilePath>/usr/local/tomcat7/logs/</logFilePath>
+                <taapi.part.url>https://www.tmelogin.com</taapi.part.url>
+            </properties>
             <build>
                 <filters>
                     <!--
@@ -272,30 +314,7 @@
                         <directory>src/main/resources</directory>
                     </resource>
                 </resources>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-antrun-plugin</artifactId>
-                        <version>1.8</version>
-                        <executions>
-                            <execution>
-                                <configuration>
-                                    <target name="build-war">
-                                        <property name="client" value="tme"/>
-                                        <!--<echo message="client is defined as ${client}"/>-->
-                                    </target>
-                                </configuration>
-                                <phase>install</phase>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
             </build>
-        </profile>
-        <profile>
-            <id>tme</id>
         </profile>
     </profiles>
 

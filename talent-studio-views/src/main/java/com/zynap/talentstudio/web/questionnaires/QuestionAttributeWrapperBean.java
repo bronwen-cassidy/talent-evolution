@@ -67,6 +67,8 @@ public class QuestionAttributeWrapperBean extends AttributeWrapperBean {
         return question.getLabel();
     }
 
+    public int getTextLength() {return StringUtils.hasText(question.getLabel()) ? 1 : 0; }
+
     /**
      * Sets a new Label on the dynamic attribute used when editing the questionnaire definition to modify the question label
      *
@@ -112,6 +114,14 @@ public class QuestionAttributeWrapperBean extends AttributeWrapperBean {
     public int getLength() {
         final Integer length = question.getLength();
         return length != null ? length.intValue() : 0;
+    }
+
+    public Integer getWidth() {
+        return question.getWidth() != null ? question.getWidth() : 0;
+    }
+
+    public String getCellClass() {
+        return question.getCellClass();
     }
 
     public boolean isDisplayable() {

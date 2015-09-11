@@ -18,17 +18,16 @@
                     <c:out value="${multiQuestionLabel}"/>
                 </td>
 
+                <%-- headings--%>
                 <c:forEach var="cell" items="${grid[0]}">
-                    <%--<c:set var="question" value="${cell}" scope="request"/>--%>
-                    <%--<c:set var="editable" value="false" scope="request"/>--%>
-                    <td class="infosubheading">
+                    <td class="<c:if test="${cell.cellClass != null}"><c:out value="${cell.cellClass}"/></c:if> infosubheading" <c:if test="${cell.width > 0}">width="<c:out value="${cell.width}"/>"</c:if>>
                         <c:out value="${cell.label}"/>&nbsp;<c:if test="${cell.mandatory}">*</c:if>&nbsp;
-                            <%--<c:if test="${question.hasHelpText}"><c:import url="../questionnaires/helptextinclude.jsp"/></c:if>--%>
                     </td>
                 </c:forEach>
+
                 <%--space for any delete buttons or disable checkboxes--%>
                 <c:if test="${lineItem.dynamicOrManagerDisable}">
-                    <td class="infosubheading">
+                    <td width="5%" class="infosubheading">
                         <!-- the disable checkbox for managers -->
                         <c:if test="${lineItem.canManagerDisable && command.managerView}"><fmt:message key="click.to.disable.row"/></c:if>
                     </td>
@@ -64,15 +63,17 @@
 
                         <%-- labels before the first column only --%>
                         <c:if test="${numCols == 0}">
-                            <td class="infodata" width="<c:out value="${cellWidth}"/>%">
+                            <td class="infodata" width="5%">
                                 <c:if test="${question.lineItemLabel != null && question.lineItemLabel != ''}"><c:out value="${question.lineItemLabel}"/>&nbsp;:&nbsp;</c:if>
                                 <c:set var="editable" value="false" scope="request"/>
                                 <c:if test="${question.hasHelpText}"><c:import url="../questionnaires/helptextinclude.jsp"/></c:if>
                             </td>
                         </c:if>
 
+                        <c:set var="cellStyleClass" value="questiondata"/>
+                        <c:if test="${cell.cellClass != null}"><c:set var="cellStyleClass" value="<c:out value='${cell.cellClass}'/> questiondata"/></c:if>
                         <%-- display question --%>
-                        <td class="questiondata" width="<c:out value="${cellWidth}"/>%">
+                        <td class="<c:out value="${cellStyleClass}"/>" width="<c:out value="${cellWidth}"/>%">
                             <c:set var="showHorizontal" value="true" scope="request"/>
                             <c:import url="../questionnaires/answer/editquestionsnippet.jsp"/>
                         </td>
