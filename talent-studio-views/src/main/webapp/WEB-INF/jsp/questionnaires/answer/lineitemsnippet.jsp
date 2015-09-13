@@ -12,6 +12,7 @@
             <c:set var="grid" value="${lineItem.grid}"/>
             <c:set var="numQuestions" value="${lineItem.numberOfQuestionWrappers + 1}" scope="request"/>
             <c:set var="cellWidth" value="${100/numQuestions}%"/>
+            <c:if test="${cell.width != null}"><c:set var="cellWidth" value="${cell.width}"/></c:if>
             <%-- display headers first --%>
             <tr>
                 <td class="infosubheading" width="5%">
@@ -20,7 +21,7 @@
 
                 <%-- headings--%>
                 <c:forEach var="cell" items="${grid[0]}">
-                    <td class="<c:if test="${cell.cellClass != null}"><c:out value="${cell.cellClass}"/></c:if> infosubheading" <c:if test="${cell.width != null}">width="<c:out value="${cell.width}"/>"</c:if>>
+                    <td class="<c:if test="${cell.cellClass != null}"><c:out value="${cell.cellClass}"/></c:if> infosubheading" width="<c:out value="${cellWidth}"/>">
                         <c:out value="${cell.label}"/>&nbsp;<c:if test="${cell.mandatory}">*</c:if>&nbsp;
                     </td>
                 </c:forEach>
