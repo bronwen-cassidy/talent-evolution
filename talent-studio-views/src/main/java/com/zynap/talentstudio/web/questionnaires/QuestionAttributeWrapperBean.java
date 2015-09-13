@@ -116,8 +116,8 @@ public class QuestionAttributeWrapperBean extends AttributeWrapperBean {
         return length != null ? length.intValue() : 0;
     }
 
-    public Integer getWidth() {
-        return question.getWidth() != null ? question.getWidth() : 0;
+    public String getWidth() {
+        return StringUtils.hasLength(question.getWidth()) ? question.getWidth() : null;
     }
 
     public String getCellClass() {

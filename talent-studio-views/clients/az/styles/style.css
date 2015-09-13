@@ -718,3 +718,11 @@ a.nav, a.nav:visited {
 a.nav:hover {
 	color: #FCC23D;
 }
+
+.one {
+    background-color: #ccff66;
+}
+
+.two {
+    background-color: #9966cc;    
+}

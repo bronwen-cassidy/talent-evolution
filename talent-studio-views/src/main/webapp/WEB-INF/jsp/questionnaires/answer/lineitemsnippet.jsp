@@ -11,16 +11,16 @@
 
             <c:set var="grid" value="${lineItem.grid}"/>
             <c:set var="numQuestions" value="${lineItem.numberOfQuestionWrappers + 1}" scope="request"/>
-            <c:set var="cellWidth" value="${100/numQuestions}"/>
+            <c:set var="cellWidth" value="${100/numQuestions}%"/>
             <%-- display headers first --%>
             <tr>
-                <td class="infosubheading">
+                <td class="infosubheading" width="5%">
                     <c:out value="${multiQuestionLabel}"/>
                 </td>
 
                 <%-- headings--%>
                 <c:forEach var="cell" items="${grid[0]}">
-                    <td class="<c:if test="${cell.cellClass != null}"><c:out value="${cell.cellClass}"/></c:if> infosubheading" <c:if test="${cell.width > 0}">width="<c:out value="${cell.width}"/>"</c:if>>
+                    <td class="<c:if test="${cell.cellClass != null}"><c:out value="${cell.cellClass}"/></c:if> infosubheading" <c:if test="${cell.width != null}">width="<c:out value="${cell.width}"/>"</c:if>>
                         <c:out value="${cell.label}"/>&nbsp;<c:if test="${cell.mandatory}">*</c:if>&nbsp;
                     </td>
                 </c:forEach>
@@ -71,9 +71,10 @@
                         </c:if>
 
                         <c:set var="cellStyleClass" value="questiondata"/>
-                        <c:if test="${cell.cellClass != null}"><c:set var="cellStyleClass" value="<c:out value='${cell.cellClass}'/> questiondata"/></c:if>
+                        <c:if test="${cell.cellClass != null}"><c:set var="cellStyleClass" value="${cell.cellClass}"/></c:if>
+                        <c:if test="${cell.width != null || cell.width != ''}"><c:set var="cellWidth" value="${cell.width}"/></c:if>
                         <%-- display question --%>
-                        <td class="<c:out value="${cellStyleClass}"/>" width="<c:out value="${cellWidth}"/>%">
+                        <td class="<c:out value="${cellStyleClass}"/>" width="<c:out value="${cellWidth}"/>">
                             <c:set var="showHorizontal" value="true" scope="request"/>
                             <c:import url="../questionnaires/answer/editquestionsnippet.jsp"/>
                         </td>

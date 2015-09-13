@@ -54,6 +54,12 @@ public class QuestionAttribute extends AbstractQuestion {
         this.sortOrder = sortOrder;
     }
 
+    public QuestionAttribute(DynamicAttribute attribute, int length, String target, String textId, String title, String type, boolean managerWrite, boolean hidden, Integer sortOrder, String width, String cellClass) {
+        this(attribute, length, target, textId, title, type, managerWrite, hidden, sortOrder);
+        this.width = width;
+        this.cellClass = cellClass;
+    }
+
     /**
      * Constructor for the narrative question types
      *
@@ -248,11 +254,11 @@ public class QuestionAttribute extends AbstractQuestion {
         this.cellClass = cellClass;
     }
 
-    public Integer getWidth() {
+    public String getWidth() {
         return width;
     }
 
-    public void setWidth(Integer width) {
+    public void setWidth(String width) {
         this.width = width;
     }
 
@@ -269,7 +275,7 @@ public class QuestionAttribute extends AbstractQuestion {
     private String textId;
     private boolean labelDisplayable;
     private String cellClass;
-    private Integer width;
+    private String width;
 
     /* determines if the question is editable only by managers */
     private boolean managerWrite;

@@ -164,7 +164,7 @@
     <!-- Web Module config directories -->
     <property name="war.config.dir" value="${webview.module}/src/main/resources"/>
     <property name="webapp.webinf.dir" value="${webview.root.dir}/main/webapp/WEB-INF"/>
-    <property name="war.config.server.dir" value="${webview.module}/src/webapp/META-INF"/>
+    <property name="war.config.server.dir" value="${webview.module}/src/main/webapp/META-INF"/>
     <property name="scripts.dir" value="${war.dir}/scripts"/>
 
     <!-- Config file used by Spring to map views to actual JSPs -->

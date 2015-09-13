@@ -90,6 +90,9 @@
                                 <c:set var="prefix" value="command.wrappedDynamicAttributes[${index}]" scope="request"/>
                                 <c:set var="queDisabled" value="${question.disabled}" scope="request"/>
                                 <c:set var="fieldId" scope="request"><zynap:id><c:out value="${question.label}"/><c:out value="${index}"/></zynap:id></c:set>
+                                <c:set var="cellClass" value="questiondata" scope="request"/>
+                                <c:if test="${question.cellClass != null}"><c:set var="cellClass" value="${question.cellClass}" scope="request"/></c:if>
+                                <c:set var="fieldId" scope="request"><zynap:id><c:out value="${question.label}"/><c:out value="${index}"/></zynap:id></c:set>
                                 <c:if test="${question.description != null && !question.description == ''}">
                                     <tr>
                                         <td class="infolabel" colspan="2"><c:out value="${question.description}"/></td>
