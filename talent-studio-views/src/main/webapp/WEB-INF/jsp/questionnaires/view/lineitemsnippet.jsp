@@ -12,7 +12,7 @@
 
             <%-- display headers first --%>
             <tr>
-                <td class="infosubheading" style="min-width:5px">
+                <td class="infosubheading" style="max-width:5px;min-width:5px">
                     <c:out value="${multiQuestionLabel}"/>
                 </td>
 
@@ -21,10 +21,10 @@
 
                     <c:set var="cellStyle" value="${cell.cellStyle}"/>
                     <c:if test="${cellStyle == null || cellStyle == ''}">
-                        <c:set var="cellStyle">min-width:<c:out value="${cellWidth}"/>%</c:set>
+                        <c:set var="cellStyle">max-width:<c:out value="${cellWidth}"/>%;min-width:<c:out value="${cellWidth}"/>%</c:set>
                     </c:if>
 
-                    <td style="<c:out value="${cellStyle}"/>"  class="infosubheading">
+                    <td style="<c:out value="${cellStyle}"/>" class="infosubheading">
                         <c:out value="${cell.label}"/>&nbsp;<c:if test="${cell.mandatory}">*</c:if>&nbsp;
                     </td>
                 </c:forEach>
@@ -38,7 +38,7 @@
 
                         <c:set var="cellStyle" value="${cell.cellStyle}"/>
                         <c:if test="${cellStyle == null || cellStyle == ''}">
-                            <c:set var="cellStyle">min-width:<c:out value="${cellWidth}"/>%</c:set>
+                            <c:set var="cellStyle">max-width:<c:out value="${cellWidth}"/>%;min-width:<c:out value="${cellWidth}"/>%</c:set>
                         </c:if>
 
                         <c:set var="question" value="${cell}" scope="request"/>
@@ -46,7 +46,7 @@
                         <c:set var="titleAttr" scope="request"><c:if test="${question.hasTitle}">title="<c:out value="${question.title}"/>"</c:if></c:set>
 
                         <c:if test="${colIndex.index == 0}">
-                            <td class="infodata" style="min-width:5px;">
+                            <td class="infodata" style="max-width:5px;min-width:5px;">
                                 <c:if test="${question.lineItemLabel != null && question.lineItemLabel != ''}"><c:out value="${question.lineItemLabel}"/>&nbsp;:&nbsp;</c:if>
                                 <c:set var="editable" value="false" scope="request"/>
                                 <c:if test="${question.hasHelpText}"><c:import url="../questionnaires/helptextinclude.jsp"/></c:if>

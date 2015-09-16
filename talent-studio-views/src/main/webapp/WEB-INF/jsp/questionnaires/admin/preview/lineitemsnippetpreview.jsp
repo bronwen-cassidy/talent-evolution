@@ -12,7 +12,7 @@
 
             <%-- display headers first --%>
             <tr>
-                <td class="infosubheading" style="min-width:5px">
+                <td class="infosubheading" style="max-width:5px;min-width:5px">
                     <div class=<c:out value="${openStyle}"/>><c:out value="${lineItem.label}"/></div>
                     <div class=<c:out value="${closedStyle}"/>>
                         <!-- the multi question label -->
@@ -27,7 +27,7 @@
 
                     <c:set var="cellStyle" value="${cell.cellStyle}"/>
                     <c:if test="${cellStyle == null || cellStyle == ''}">
-                        <c:set var="cellStyle">min-width:<c:out value="${cellWidth}"/>%</c:set>
+                        <c:set var="cellStyle">max-width:<c:out value="${cellWidth}"/>%;min-width:<c:out value="${cellWidth}"/>%</c:set>
                     </c:if>
 
                     <td style="<c:out value="${cellStyle}"/>" class="infosubheading">
@@ -42,7 +42,7 @@
                 </c:forEach>
                 <%--space for any delete buttons or disable checkboxes--%>
                 <c:if test="${lineItem.dynamicOrManagerDisable}">
-                    <td style="min-width:5px" class="infosubheading">
+                    <td style="max-width:5px;min-width:5px" class="infosubheading">
                         <!-- the disable checkbox for managers -->
                         <c:if test="${lineItem.canManagerDisable && command.managerView}"><fmt:message key="click.to.disable.row"/></c:if>
                     </td>
@@ -70,7 +70,7 @@
 
                         <%-- Navigation only put before first column --%>
                         <c:if test="${numCols == 0}">
-                            <td class="infodata"  style="min-width:10px">
+                            <td class="infodata"  style="max-width:10px;min-width:10px">
                                 <div class=<c:out value="${openStyle}"/>>
                                     <c:if test="${question.lineItemLabel != null && question.lineItemLabel != ''}"><c:out value="${question.lineItemLabel}"/>&nbsp;:&nbsp;</c:if>
                                 </div>
@@ -86,6 +86,10 @@
                             </td>
                         </c:if>
 
+                        <c:set var="cellStyle" value="${cell.cellStyle}"/>
+                        <c:if test="${cellStyle == null || cellStyle == ''}">
+                            <c:set var="cellStyle">max-width:<c:out value="${cellWidth}"/>%;min-width:<c:out value="${cellWidth}"/>%</c:set>
+                        </c:if>
                         <%-- display question --%>
                         <td class="infodata" style="<c:out value="${cell.cellStyle}"/>">
                             <c:set var="showHorizontal" value="true" scope="request"/>
