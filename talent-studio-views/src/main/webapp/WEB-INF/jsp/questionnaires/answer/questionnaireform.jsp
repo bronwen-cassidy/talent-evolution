@@ -45,10 +45,10 @@
 
         <tr>
             <td class="infoheading" colspan="2">
-                <fmt:message key="username.questionnaire"/> :
-             <span id="username">
-                <img src="<c:url value="/images/loading.gif"/>" alt="loading..."/> <fmt:message key="loading.username.questionnaire"/>
-            </span>
+                 <fmt:message key="username.questionnaire"/> :
+                 <span id="username">
+                    <img src="<c:url value="/images/loading.gif"/>" alt="loading..."/> <fmt:message key="loading.username.questionnaire"/>
+                </span>
             </td>
         </tr>
         <c:if test="${command.workflow.description != null}">
@@ -90,8 +90,6 @@
                                 <c:set var="prefix" value="command.wrappedDynamicAttributes[${index}]" scope="request"/>
                                 <c:set var="queDisabled" value="${question.disabled}" scope="request"/>
                                 <c:set var="fieldId" scope="request"><zynap:id><c:out value="${question.label}"/><c:out value="${index}"/></zynap:id></c:set>
-                                <c:set var="cellClass" value="questiondata" scope="request"/>
-                                <c:if test="${question.cellClass != null}"><c:set var="cellClass" value="${question.cellClass}" scope="request"/></c:if>
                                 <c:set var="fieldId" scope="request"><zynap:id><c:out value="${question.label}"/><c:out value="${index}"/></zynap:id></c:set>
                                 <c:if test="${question.description != null && !question.description == ''}">
                                     <tr>
@@ -106,7 +104,7 @@
                                         <c:if test="${question.mandatory}">*</c:if>&nbsp;
                                         <c:if test="${question.hasHelpText}"><c:import url="../helptextinclude.jsp"/></c:if>
                                     </td>
-                                    <td class="questiondata" <c:out value="${titleAttr}" escapeXml="false"/>>
+                                    <td style="<c:out value="${question.cellStyle}"/>" class="questiondata" <c:out value="${titleAttr}" escapeXml="false"/>>
                                         <%@include file="editquestionsnippet.jsp"%>
                                     </td>
                                 </tr>
@@ -138,7 +136,7 @@
                                     <table cellpadding="0" cellspacing="0">
                                         <c:forEach var="manager" items="${command.userManagers}">
                                             <tr>
-                                                <td class="infodata" width="50%"><c:out value="${manager.label}"/>&nbsp;:&nbsp;</td>
+                                                <td class="infodata" style="width:50%"><c:out value="${manager.label}"/>&nbsp;:&nbsp;</td>
                                                 <spring:bind path="command.selectedManagerIds">
                                                     <td class="infodata" ${colsp}>
                                                         <input type="checkbox" class="input_checkbox" value="<c:out value="${manager.id}"/>" name="selectedManagerIds" onclick="enableSelection('sendIbx','sendEmailCBId')"/>
@@ -151,11 +149,11 @@
                             </tr>
                         </c:if>
                         <tr>
-                            <td class="infolabel" align="right" width="50%"><span><fmt:message key="send.email"/>&nbsp;:&nbsp;</span></td>
+                            <td class="infolabel" align="right" style="width:50%"><span><fmt:message key="send.email"/>&nbsp;:&nbsp;</span></td>
                             <td><span><input id="sendEmailCBId" type="checkbox" name="sendEmail" id="sendEmlId" <c:if test="${managerSelection}">disabled="true"</c:if>/></span></td>
                         </tr>
                         <tr>
-                            <td class="infolabel" width="50%" align="right">
+                            <td class="infolabel" style="width:50%" align="right">
                     <span>
                         <c:choose>
                             <c:when test="${command.managerView}"><fmt:message key="send.to.individual"/>&nbsp;:&nbsp;</c:when>
@@ -168,8 +166,8 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="infobutton" width="50%">&nbsp;</td>
-                            <td class="infobutton" align="left" width="50%">
+                            <td class="infobutton" style="width:50%">&nbsp;</td>
+                            <td class="infobutton" align="left" style="width:50%">
                                 <span><input class="inlinebutton" type="submit" name="_target6" value="<fmt:message key="send.request"/>"/></span>
                                 <c:if test="${command.sendSuccess}"><div class="infomessage"><fmt:message key="send.success"/></div></c:if>
                                 <c:if test="${command.sendFail}"><div class="infomessage"><fmt:message key="send.fail"/></div></c:if>

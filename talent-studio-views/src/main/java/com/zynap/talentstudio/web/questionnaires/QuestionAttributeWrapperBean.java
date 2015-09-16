@@ -105,7 +105,7 @@ public class QuestionAttributeWrapperBean extends AttributeWrapperBean {
      * The label of the node that has been selected as an answer to the question.
      * The value is the id the nodeLabel is the displayValue
      *
-     * @param nodeLabel
+     * @param nodeLabel - the label of the node may be the name or title depending on the node
      */
     public void setNodeLabel(String nodeLabel) {
         this.nodeLabel = nodeLabel;
@@ -113,15 +113,11 @@ public class QuestionAttributeWrapperBean extends AttributeWrapperBean {
 
     public int getLength() {
         final Integer length = question.getLength();
-        return length != null ? length.intValue() : 0;
+        return length != null ? length : 0;
     }
 
-    public String getWidth() {
-        return StringUtils.hasLength(question.getWidth()) ? question.getWidth() : null;
-    }
-
-    public String getCellClass() {
-        return question.getCellClass();
+    public String getCellStyle() {
+        return question.getCellStyle();
     }
 
     public boolean isDisplayable() {

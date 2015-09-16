@@ -11,24 +11,30 @@
 
             <c:set var="grid" value="${lineItem.grid}"/>
             <c:set var="numQuestions" value="${lineItem.numberOfQuestionWrappers + 1}" scope="request"/>
-            <c:set var="cellWidth" value="${100/numQuestions}%"/>
-            <c:if test="${cell.width != null}"><c:set var="cellWidth" value="${cell.width}"/></c:if>
+            <c:set var="cellWidth" value="${90/numQuestions}%"/>
+
             <%-- display headers first --%>
             <tr>
-                <td class="infosubheading" width="5%">
+                <td class="infosubheading" style="min-width:5px">
                     <c:out value="${multiQuestionLabel}"/>
                 </td>
 
                 <%-- headings--%>
                 <c:forEach var="cell" items="${grid[0]}">
-                    <td class="<c:if test="${cell.cellClass != null}"><c:out value="${cell.cellClass}"/></c:if> infosubheading" width="<c:out value="${cellWidth}"/>">
+
+                    <c:set var="cellStyle" value="${cell.cellStyle}"/>
+                    <c:if test="${cellStyle == null || cellStyle == ''}">
+                        <c:set var="cellStyle">min-width:<c:out value="${cellWidth}"/>%</c:set>
+                    </c:if>
+
+                    <td style="<c:out value="${cellStyle}"/>" class="infosubheading">
                         <c:out value="${cell.label}"/>&nbsp;<c:if test="${cell.mandatory}">*</c:if>&nbsp;
                     </td>
                 </c:forEach>
 
                 <%--space for any delete buttons or disable checkboxes--%>
                 <c:if test="${lineItem.dynamicOrManagerDisable}">
-                    <td width="5%" class="infosubheading">
+                    <td style="min-width:5px" class="infosubheading">
                         <!-- the disable checkbox for managers -->
                         <c:if test="${lineItem.canManagerDisable && command.managerView}"><fmt:message key="click.to.disable.row"/></c:if>
                     </td>
@@ -64,18 +70,19 @@
 
                         <%-- labels before the first column only --%>
                         <c:if test="${numCols == 0}">
-                            <td class="infodata" width="5%">
+                            <td class="infodata" style="min-width:5px">
                                 <c:if test="${question.lineItemLabel != null && question.lineItemLabel != ''}"><c:out value="${question.lineItemLabel}"/>&nbsp;:&nbsp;</c:if>
                                 <c:set var="editable" value="false" scope="request"/>
                                 <c:if test="${question.hasHelpText}"><c:import url="../questionnaires/helptextinclude.jsp"/></c:if>
                             </td>
                         </c:if>
 
-                        <c:set var="cellStyleClass" value="questiondata"/>
-                        <c:if test="${cell.cellClass != null}"><c:set var="cellStyleClass" value="${cell.cellClass}"/></c:if>
-                        <c:if test="${cell.width != null || cell.width != ''}"><c:set var="cellWidth" value="${cell.width}"/></c:if>
+                        <c:set var="cellStyle" value="${cell.cellStyle}"/>
+                        <c:if test="${cellStyle == null || cellStyle == ''}">
+                            <c:set var="cellStyle">min-width:<c:out value="${cellWidth}"/>%</c:set>
+                        </c:if>
                         <%-- display question --%>
-                        <td class="<c:out value="${cellStyleClass}"/>" width="<c:out value="${cellWidth}"/>">
+                        <td style="<c:out value="${cellStyle}"/>" class="questiondata">
                             <c:set var="showHorizontal" value="true" scope="request"/>
                             <c:import url="../questionnaires/answer/editquestionsnippet.jsp"/>
                         </td>

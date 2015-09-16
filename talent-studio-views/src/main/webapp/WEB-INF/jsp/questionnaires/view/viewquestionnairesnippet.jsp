@@ -68,7 +68,7 @@
                                         <c:if test="${question.mandatory}">*</c:if>&nbsp;
                                         <c:if test="${question.hasHelpText}"><c:import url="../questionnaires/helptextinclude.jsp"/></c:if>
                                     </td>
-                                    <td class="infodata" <c:out value="${titleAttr}" escapeXml="false"/>>
+                                    <td style="<c:out value="${question.cellStyle}"/>" class="infodata" <c:out value="${titleAttr}" escapeXml="false"/>>
                                         <c:import url="../questionnaires/view/viewquestionsnippet.jsp"/>
                                     </td>
                                 </tr>

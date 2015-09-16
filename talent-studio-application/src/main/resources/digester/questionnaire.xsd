@@ -120,7 +120,7 @@
             <xs:attribute name="hidden" type="xs:boolean" use="optional"/>
             <xs:attribute name="length" type="xs:integer" use="optional"/>
             <xs:attribute name="width" type="xs:string" use="optional"/>
-            <xs:attribute name="cellClass" type="xs:string" use="optional"/>
+            <xs:attribute name="cellStyle" type="xs:string" use="optional"/>
             <xs:attribute name="sortOrder" type="xs:integer" use="optional"/>
             <xs:attribute name="source" type="xs:string" use="optional"/>
             <xs:attribute name="tag" type="xs:string" use="optional"/>

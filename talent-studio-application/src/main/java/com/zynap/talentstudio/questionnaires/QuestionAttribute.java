@@ -54,10 +54,9 @@ public class QuestionAttribute extends AbstractQuestion {
         this.sortOrder = sortOrder;
     }
 
-    public QuestionAttribute(DynamicAttribute attribute, int length, String target, String textId, String title, String type, boolean managerWrite, boolean hidden, Integer sortOrder, String width, String cellClass) {
+    public QuestionAttribute(DynamicAttribute attribute, int length, String target, String textId, String title, String type, boolean managerWrite, boolean hidden, Integer sortOrder, String cellStyle) {
         this(attribute, length, target, textId, title, type, managerWrite, hidden, sortOrder);
-        this.width = width;
-        this.cellClass = cellClass;
+        this.cellStyle = cellStyle;
     }
 
     /**
@@ -246,20 +245,12 @@ public class QuestionAttribute extends AbstractQuestion {
         this.hidden = hidden;
     }
 
-    public String getCellClass() {
-        return cellClass;
+    public String getCellStyle() {
+        return cellStyle;
     }
 
-    public void setCellClass(String cellClass) {
-        this.cellClass = cellClass;
-    }
-
-    public String getWidth() {
-        return width;
-    }
-
-    public void setWidth(String width) {
-        this.width = width;
+    public void setCellStyle(String cellStyle) {
+        this.cellStyle = cellStyle;
     }
 
     private DynamicAttribute dynamicAttribute;
@@ -274,8 +265,7 @@ public class QuestionAttribute extends AbstractQuestion {
     private String questionType;
     private String textId;
     private boolean labelDisplayable;
-    private String cellClass;
-    private String width;
+    private String cellStyle;
 
     /* determines if the question is editable only by managers */
     private boolean managerWrite;

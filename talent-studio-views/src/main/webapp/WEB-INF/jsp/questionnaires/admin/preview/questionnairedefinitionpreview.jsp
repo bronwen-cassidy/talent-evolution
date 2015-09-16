@@ -88,7 +88,7 @@
                                             <c:set var="editable" value="true" scope="request"/>
                                             <c:import url="../questionnaires/helptextinclude.jsp"/>
                                         </td>
-                                        <td class="infodata" <c:out value="${titleAttr}" escapeXml="false"/>>
+                                        <td style="<c:out value="${question.cellStyle}"/>" class="infodata" <c:out value="${titleAttr}" escapeXml="false"/>>
                                             <c:import url="../questionnaires/admin/preview/viewquestionpreviewsnippet.jsp"/>
                                         </td>
                                     </tr>

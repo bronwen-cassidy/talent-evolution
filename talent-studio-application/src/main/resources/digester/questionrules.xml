@@ -28,7 +28,7 @@
             <alias attr-name="sortOrder" prop-name="sortOrder"/>
             <alias attr-name="length" prop-name="length"/>
             <alias attr-name="width" prop-name="width"/>
-            <alias attr-name="cellClass" prop-name="cellClass"/>
+            <alias attr-name="cellStyle" prop-name="cellStyle"/>
             <alias attr-name="managerWrite" prop-name="managerWriteValue"/>
         </set-properties-rule>
         <set-next-rule methodname="addQuestion"/>

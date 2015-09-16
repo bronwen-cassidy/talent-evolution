@@ -175,7 +175,7 @@ public class QuestionnaireDefinitionFactory {
             }
         }
         return new QuestionAttribute(attribute, question.getLength(), question.getTarget(), 
-                question.getTextId(), question.getTitle(), question.getType(), question.isManagerWrite(), question.isHidden(), question.getSortOrder(), question.getWidth(), question.getCellClass());
+                question.getTextId(), question.getTitle(), question.getType(), question.isManagerWrite(), question.isHidden(), question.getSortOrder(), question.getCellStyle());
     }
 
     private static QuestionAttribute createNarrative(BaseQuestion baseQuestion) {
