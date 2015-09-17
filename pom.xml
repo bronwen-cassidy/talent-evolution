@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
     <!-- todo this will change -->
@@ -24,6 +25,8 @@
         <ant antfile="build.xml"/>
         <!-- default properties -->
         <client>nhs</client>
+        <war.name>talent-studio</war.name>
+        <maven.resources.overwrite>true</maven.resources.overwrite>
 
     </properties>
 
@@ -260,21 +263,11 @@
                 <db.username>tsdev</db.username>
                 <host.name>localhost</host.name>
                 <server.url>http://localhost:8080</server.url>
+                <war.name>talent-studio</war.name>
+                <multi.tenant>true</multi.tenant>
             </properties>
             <build>
-                <filters>
-                    <!--
-                        which property file to load needs to be done still
-                        this will provide client specif filters todo we need to filter the app context files
-                    -->
-                    <filter>profiles/dev/config.properties</filter>
-                </filters>
                 <resources>
-                    <!--
-                        Placeholders that are found from the files located in the configured resource
-                        directories are replaced with the property values found from the profile
-                        specific configuration file.
-                    -->
                     <resource>
                         <filtering>true</filtering>
                         <directory>src/main/resources</directory>
@@ -293,21 +286,34 @@
                 <server.url>https://www.tmelogin.com</server.url>
                 <logFilePath>/usr/local/tomcat7/logs/</logFilePath>
                 <taapi.part.url>https://www.tmelogin.com</taapi.part.url>
+                <war.name>${client}</war.name>
+                <multi.tenant>true</multi.tenant>
             </properties>
             <build>
-                <filters>
-                    <!--
-                        which property file to load needs to be done still
-                        this will provide client specif filters
-                    -->
-                    <filter>profiles/dev/config.properties</filter>
-                </filters>
                 <resources>
-                    <!--
-                        Placeholders that are found from the files located in the configured resource
-                        directories are replaced with the property values found from the profile
-                        specific configuration file.
-                    -->
+                    <resource>
+                        <filtering>true</filtering>
+                        <directory>src/main/resources</directory>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+        <profile>
+            <id>single-live</id>
+            <properties>
+                <db.url>jdbc:oracle:thin:@172.24.16.24:1521:orcl</db.url>
+                <db.password>${client}</db.password>
+                <db.username>${client}</db.username>
+                <smpt.host>smtp.sendgrid.net</smpt.host>
+                <host.name>tmelogin</host.name>
+                <server.url>https://www.tmelogin.com</server.url>
+                <logFilePath>/usr/local/tomcat7/logs/</logFilePath>
+                <taapi.part.url>https://www.tmelogin.com</taapi.part.url>
+                <war.name>${client}</war.name>
+                <multi.tenant>false</multi.tenant>
+            </properties>
+            <build>
+                <resources>
                     <resource>
                         <filtering>true</filtering>
                         <directory>src/main/resources</directory>

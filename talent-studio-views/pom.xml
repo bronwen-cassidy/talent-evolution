@@ -158,13 +158,14 @@
                 <version>2.6</version>
                 <configuration>
                     <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
-                    <warName>${client}</warName>
+                    <warName>${war.name}</warName>
                     <webResources>
                         <resource>
                             <!-- these will now be copied to the webapp directory  -->
                             <directory>clients/${client}</directory>
                             <excludes>
                                 <exclude>clients/${client}/resources/language/**</exclude>
+                                <exclude>clients/${client}/templates/**</exclude>
                             </excludes>
                         </resource>
                         <resource>
