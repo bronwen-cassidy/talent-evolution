@@ -1,0 +1,4 @@
+How to add the oracle jar to maven
+==============================================
+C:\Users\home\dev\ts\talent-evolution>mvn install:install-file -Dfile=C:/Users/home/dev/ts/lib/tools/ojdbc7.jar -DgroupId=com
+.oracle -DartifactId=ojdbc7 -Dversion=14.0.0 -Dpackaging=jar
