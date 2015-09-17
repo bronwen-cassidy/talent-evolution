@@ -161,12 +161,28 @@
                     <warName>${war.name}</warName>
                     <webResources>
                         <resource>
-                            <!-- these will now be copied to the webapp directory  -->
-                            <directory>clients/${client}</directory>
-                            <excludes>
-                                <exclude>clients/${client}/resources/language/**</exclude>
-                                <exclude>clients/${client}/templates/**</exclude>
-                            </excludes>
+                            <directory>clients/${client}/</directory>
+                            <includes>
+                                <include>help/**</include>
+                            </includes>
+                        </resource>
+                        <resource>
+                            <directory>clients/${client}/</directory>
+                            <includes>
+                                <include>images/**</include>
+                            </includes>
+                        </resource>
+                        <resource>
+                            <directory>clients/${client}/</directory>
+                            <includes>
+                                <include>statics/**</include>
+                            </includes>
+                        </resource>
+                        <resource>
+                            <directory>clients/${client}/</directory>
+                            <includes>
+                                <include>styles/**</include>
+                            </includes>
                         </resource>
                         <resource>
                             <directory>clients/${client}/resources/language/</directory>
