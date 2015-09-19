@@ -1115,7 +1115,7 @@ div.blogContent {
     overflow: auto;
     background-color: white;
     height: 60px;
-    width: 350px;
+    width: 90%;
     border-style: solid;
     border-color: #D5D5D5;
     float: left;
@@ -2123,6 +2123,19 @@ td.nowrap {
 img.square-20 {
     width: 20px;
     height: 20px;
+}
+.question_text {
+    width: 95%;
+}
+.question_date {
+    width:90%;
+}
+.question_textarea {
+    width:95%;
+}
+.question_table {
+    width:100%; 
+    table-layout:fixed;
 }
 /*============================================ reporting chart styles =====================================================*/
 

@@ -13,7 +13,7 @@
     <c:when test="${question.type == 'TEXT'}">
         <spring:bind path="${prefix}.value">
 
-            <input id="<c:out value="${fieldId}"/>" type="text" name="<c:out value="${status.expression}"/>"
+            <input class="question_text" id="<c:out value="${fieldId}"/>" type="text" name="<c:out value="${status.expression}"/>"
                    value="<c:out value="${status.value}"/>" <c:out value="${titleAttr}" escapeXml="false"/>
                    <c:if test="${question.length != 0}">size="<c:out value="${question.length}"/>"</c:if>
                    <c:if test="${disbledVar || queDisabled}">disabled="true"</c:if>
@@ -34,7 +34,7 @@
 
     <c:when test="${question.type == 'INTEGER' || question.type == 'POSITIVEINTEGER'}">
         <spring:bind path="${prefix}.value">
-            <input id="<c:out value="${fieldId}"/>" type="text" class="input_number" name="<c:out value="${status.expression}"/>"
+            <input class="question_text" id="<c:out value="${fieldId}"/>" type="text" class="input_number" name="<c:out value="${status.expression}"/>"
                    value="<c:out value="${status.value}"/>" <c:out value="${titleAttr}" escapeXml="false"/>
                    <c:if test="${question.length != 0}">size="<c:out value="${question.length}"/>"
             </c:if>
@@ -54,7 +54,7 @@
 
     <c:when test="${question.type == 'TEXTAREA' || question.type == 'TEXTBOX'}">
         <spring:bind path="${prefix}.value">
-        <textarea
+        <textarea class="question_textarea"
             <%--onmouseout="javascript:saveUpdateDeleteQuestionnaire('<c:out value="${fieldId}"/>','<c:out value="${command.questionnaireId}"/>','<c:out value="${question.daId}"/>','<c:out value="${fieldId}_attid"/>','<c:out value="${fieldId}"/>_error');"--%>
                 onblur="javascript:saveUpdateDeleteQuestionnaire('<c:out value="${fieldId}"/>','<c:out value="${command.questionnaireId}"/>','<c:out value="${question.daId}"/>','<c:out value="${fieldId}_attid"/>','<c:out value="${fieldId}"/>_error');"
                 <c:if test="${question.length != 0}">style="display:block; width:<c:out value="${question.length}"/>em;"</c:if>
@@ -81,7 +81,7 @@
             <%-- DONT CHANGE THE LAYOUT BELOW. MUST NOT BE A SPACE BEFORE THE BUTTON --%>
             <span style="white-space: nowrap;">
                 <input id="<c:out value="${dispId}"/>"
-                       class="input_date" name="ignoredValue<c:out value="${dispId}"/>"
+                       class="question_date" name="ignoredValue<c:out value="${dispId}"/>"
                        type="text" value="<c:out value='${question.displayValue}'/>" readonly="true"
                         <c:out value="${titleAttr}" escapeXml="false"/>
                         /><input type="button" class="partnerbutton" value="..."  id="<c:out value="${fieldId}"/>_date" name="<c:out value="${fieldId}"/>_date"

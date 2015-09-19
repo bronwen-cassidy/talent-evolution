@@ -7,7 +7,7 @@
 
         <c:set var="tableId" value="infotable_id_${index}" scope="request"/>
 
-        <table class="infotable" id="infotable_id_<c:out value="${index}"/>" >
+        <table class="question_table" id="infotable_id_<c:out value="${index}"/>" >
 
             <c:set var="grid" value="${lineItem.grid}"/>
             <c:set var="numQuestions" value="${lineItem.numberOfQuestionWrappers + 1}" scope="request"/>
@@ -15,7 +15,7 @@
 
             <%-- display headers first --%>
             <tr>
-                <td class="infosubheading" style="max-width:5px; min-width:5px;">
+                <td class="infosubheading" style="max-width:5%; min-width:5%;">
                     <c:out value="${multiQuestionLabel}"/>
                 </td>
 
@@ -24,7 +24,7 @@
 
                     <c:set var="cellStyle" value="${cell.cellStyle}"/>
                     <c:if test="${cellStyle == null || cellStyle == ''}">
-                        <c:set var="cellStyle">max-width:<c:out value="${cellWidth}"/>%;min-width:<c:out value="${cellWidth}"/>%</c:set>
+                        <c:set var="cellStyle">max-width:<c:out value="${cellWidth}"/>;min-width:<c:out value="${cellWidth}"/></c:set>
                     </c:if>
 
                     <td style="<c:out value="${cellStyle}"/>" class="infosubheading">
@@ -34,7 +34,7 @@
 
                 <%--space for any delete buttons or disable checkboxes--%>
                 <c:if test="${lineItem.dynamicOrManagerDisable}">
-                    <td style="max-width:5px; min-width:5px" class="infosubheading">
+                    <td style="max-width:5%; min-width:5%" class="infosubheading">
                         <!-- the disable checkbox for managers -->
                         <c:if test="${lineItem.canManagerDisable && command.managerView}"><fmt:message key="click.to.disable.row"/></c:if>
                     </td>
@@ -70,7 +70,7 @@
 
                         <%-- labels before the first column only --%>
                         <c:if test="${numCols == 0}">
-                            <td class="infodata" style="max-width:5px; min-width:5px">
+                            <td class="infodata" style="max-width:5%; min-width:5%">
                                 <c:if test="${question.lineItemLabel != null && question.lineItemLabel != ''}"><c:out value="${question.lineItemLabel}"/>&nbsp;:&nbsp;</c:if>
                                 <c:set var="editable" value="false" scope="request"/>
                                 <c:if test="${question.hasHelpText}"><c:import url="../questionnaires/helptextinclude.jsp"/></c:if>
@@ -79,7 +79,7 @@
 
                         <c:set var="cellStyle" value="${cell.cellStyle}"/>
                         <c:if test="${cellStyle == null || cellStyle == ''}">
-                            <c:set var="cellStyle">max-width:<c:out value="${cellWidth}"/>%;min-width:<c:out value="${cellWidth}"/>%</c:set>
+                            <c:set var="cellStyle">max-width:<c:out value="${cellWidth}"/>;min-width:<c:out value="${cellWidth}"/></c:set>
                         </c:if>
                         <%-- display question --%>
                         <td style="<c:out value="${cellStyle}"/>" class="questiondata">
