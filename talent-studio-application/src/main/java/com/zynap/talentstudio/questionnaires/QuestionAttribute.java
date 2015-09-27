@@ -18,6 +18,7 @@ import java.util.Collection;
 public class QuestionAttribute extends AbstractQuestion {
 
     private static final long serialVersionUID = 7640989070619047941L;
+    
 
     /**
      * Required default constructor
@@ -54,9 +55,10 @@ public class QuestionAttribute extends AbstractQuestion {
         this.sortOrder = sortOrder;
     }
 
-    public QuestionAttribute(DynamicAttribute attribute, int length, String target, String textId, String title, String type, boolean managerWrite, boolean hidden, Integer sortOrder, String cellStyle) {
+    public QuestionAttribute(DynamicAttribute attribute, int length, String target, String textId, String title, String type, boolean managerWrite, boolean hidden, Integer sortOrder, String cellStyle, String questionStyle) {
         this(attribute, length, target, textId, title, type, managerWrite, hidden, sortOrder);
         this.cellStyle = cellStyle;
+        this.questionStyle = questionStyle;
     }
 
     /**
@@ -253,6 +255,14 @@ public class QuestionAttribute extends AbstractQuestion {
         this.cellStyle = cellStyle;
     }
 
+    public String getQuestionStyle() {
+        return questionStyle;
+    }
+
+    public void setQuestionStyle(String questionStyle) {
+        this.questionStyle = questionStyle;
+    }
+
     private DynamicAttribute dynamicAttribute;
     private LineItem lineItem;
     private QuestionGroup questionGroup;
@@ -266,6 +276,7 @@ public class QuestionAttribute extends AbstractQuestion {
     private String textId;
     private boolean labelDisplayable;
     private String cellStyle;
+    private String questionStyle;
 
     /* determines if the question is editable only by managers */
     private boolean managerWrite;

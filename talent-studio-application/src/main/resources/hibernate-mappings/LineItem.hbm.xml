@@ -48,13 +48,10 @@
             <meta attribute="use-in-tostring">true</meta>
         </property>
 
-        <property
-                name="label"
-                type="java.lang.String"
-                column="LABEL"
-                >
-            <meta attribute="use-in-tostring">true</meta>
-        </property>
+        <property name="label" type="java.lang.String" column="LABEL"/>
+        <property name="rowStyle" type="java.lang.String" column="ROW_STYLE"/>
+        <property name="headerStyle" type="java.lang.String" column="HEADER_STYLE"/>
+        <property name="footerStyle" type="java.lang.String" column="FOOTER_STYLE"/>
 
         <!-- Associations -->
 

@@ -6,8 +6,9 @@
         <object-create-rule classname="com.zynap.talentstudio.questionnaires.support.QuestionLineItem"/>
         <set-properties-rule>
             <alias attr-name="dynamic" prop-name="dynamic"/>
-        </set-properties-rule>
-        <set-properties-rule>
+            <alias attr-name="headerStyle" prop-name="headerStyle"/>
+            <alias attr-name="footerStyle" prop-name="footerStyle"/>
+            <alias attr-name="rowStyle" prop-name="rowStyle"/>
             <alias attr-name="managerCanDisable" prop-name="managerCanDisable"/>
         </set-properties-rule>
         <bean-property-setter-rule propertyname="label"/>
@@ -29,6 +30,7 @@
             <alias attr-name="length" prop-name="length"/>
             <alias attr-name="width" prop-name="width"/>
             <alias attr-name="cellStyle" prop-name="cellStyle"/>
+            <alias attr-name="questionStyle" prop-name="questionStyle"/>
             <alias attr-name="managerWrite" prop-name="managerWriteValue"/>
         </set-properties-rule>
         <set-next-rule methodname="addQuestion"/>

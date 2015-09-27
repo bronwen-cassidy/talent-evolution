@@ -332,6 +332,14 @@ public class Question extends BaseQuestion implements Cloneable {
         this.cellStyle = cellStyle;
     }
 
+    public String getQuestionStyle() {
+        return questionStyle;
+    }
+
+    public void setQuestionStyle(String questionStyle) {
+        this.questionStyle = questionStyle;
+    }
+
     private QuestionnaireGroup questionnaireGroup;
     private MultiQuestion multiQuestion;
     private DynamicAttribute dynamicAttribute;
@@ -343,6 +351,7 @@ public class Question extends BaseQuestion implements Cloneable {
     private String label;
     private String textId;
     private String cellStyle;
+    private String questionStyle;
 
     private List<QuestionReference> mappings = new ArrayList<QuestionReference>();
     private List<QuestionReference> operands = new ArrayList<QuestionReference>();

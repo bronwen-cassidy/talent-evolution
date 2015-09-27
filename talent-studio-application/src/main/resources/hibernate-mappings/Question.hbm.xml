@@ -78,6 +78,7 @@
 
         <property name="questionType" type="java.lang.String" column="QUESTION_TYPE"/>
         <property name="cellStyle" type="java.lang.String" column="CELL_STYLE"/>
+        <property name="questionStyle" type="java.lang.String" column="QUESTION_STYLE"/>
 
         <property
             name="labelDisplayable"

@@ -142,7 +142,7 @@ public class QuestionnaireDefinitionFactory {
 
         for (Object questionItem : questionItems) {
             QuestionLineItem questionLineItem = (QuestionLineItem) questionItem;
-            LineItem lineItem = new LineItem(questionLineItem.getLabel(), questionLineItem.isDynamicLineItem(), questionLineItem.isCanDisable());
+            LineItem lineItem = new LineItem(questionLineItem.getLabel(), questionLineItem.isDynamicLineItem(), questionLineItem.isCanDisable(), questionLineItem.getRowStyle(), questionLineItem.getHeaderStyle(), questionLineItem.getFooterStyle());
             List lineItemQuestions = questionLineItem.getQuestions();
             for (Object lineItemQuestion : lineItemQuestions) {
                 BaseQuestion question = (BaseQuestion) lineItemQuestion;
@@ -175,7 +175,7 @@ public class QuestionnaireDefinitionFactory {
             }
         }
         return new QuestionAttribute(attribute, question.getLength(), question.getTarget(), 
-                question.getTextId(), question.getTitle(), question.getType(), question.isManagerWrite(), question.isHidden(), question.getSortOrder(), question.getCellStyle());
+                question.getTextId(), question.getTitle(), question.getType(), question.isManagerWrite(), question.isHidden(), question.getSortOrder(), question.getCellStyle(), question.getQuestionStyle());
     }
 
     private static QuestionAttribute createNarrative(BaseQuestion baseQuestion) {

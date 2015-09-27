@@ -42,6 +42,13 @@ public class LineItem extends ZynapDomainObject implements ITreeElement {
         this.canDisable = canDisable;
     }
 
+    public LineItem(String label, boolean isDynamic, boolean canDisable, String rowStyle, String headerStyle, String footerStyle) {
+        this(label, isDynamic, canDisable);
+        this.rowStyle = rowStyle;
+        this.headerStyle = headerStyle;
+        this.footerStyle = footerStyle;
+    }
+
     public MultiQuestionItem getMultiQuestion() {
         return multiQuestion;
     }
@@ -72,6 +79,30 @@ public class LineItem extends ZynapDomainObject implements ITreeElement {
 
     public void setCanDisable(boolean canDisable) {
         this.canDisable = canDisable;
+    }
+
+    public String getRowStyle() {
+        return rowStyle;
+    }
+
+    public void setRowStyle(String rowStyle) {
+        this.rowStyle = rowStyle;
+    }
+
+    public String getHeaderStyle() {
+        return headerStyle;
+    }
+
+    public void setHeaderStyle(String headerStyle) {
+        this.headerStyle = headerStyle;
+    }
+
+    public String getFooterStyle() {
+        return footerStyle;
+    }
+
+    public void setFooterStyle(String footerStyle) {
+        this.footerStyle = footerStyle;
     }
 
     /**
@@ -110,6 +141,10 @@ public class LineItem extends ZynapDomainObject implements ITreeElement {
     private List<QuestionAttribute> questions;
     private boolean dynamic;
     private boolean canDisable;
+    private String rowStyle;
+    private String headerStyle;
+    private String footerStyle;
+
 
     private static final long serialVersionUID = -7416518455128391766L;
 }

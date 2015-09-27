@@ -50,7 +50,16 @@ public class QuestionAttributeWrapperBean extends AttributeWrapperBean {
         final QuestionGroup questionGroup = question.getQuestionGroup();
         return questionGroup != null ? questionGroup : question.getLineItem().getMultiQuestion().getGroup();
     }
-
+    
+    public String getRowStyle() {
+        return isPartOfMultiQuestion() ? question.getLineItem().getRowStyle() : "";
+    }
+    public String getHeaderStyle() {
+        return isPartOfMultiQuestion() ? question.getLineItem().getHeaderStyle() : "";
+    }
+    public String getFooterStyle() {
+        return isPartOfMultiQuestion() ? question.getLineItem().getFooterStyle() : "";
+    }
     public String getType() {
         return question.getQuestionType();
     }
@@ -114,6 +123,10 @@ public class QuestionAttributeWrapperBean extends AttributeWrapperBean {
     public int getLength() {
         final Integer length = question.getLength();
         return length != null ? length : 0;
+    }
+
+    public String getQuestionStyle() {
+        return question.getQuestionStyle();
     }
 
     public String getCellStyle() {

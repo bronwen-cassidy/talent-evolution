@@ -121,6 +121,7 @@
             <xs:attribute name="length" type="xs:integer" use="optional"/>
             <xs:attribute name="width" type="xs:string" use="optional"/>
             <xs:attribute name="cellStyle" type="xs:string" use="optional"/>
+            <xs:attribute name="questionStyle" type="xs:string" use="optional"/>
             <xs:attribute name="sortOrder" type="xs:integer" use="optional"/>
             <xs:attribute name="source" type="xs:string" use="optional"/>
             <xs:attribute name="tag" type="xs:string" use="optional"/>
@@ -168,6 +169,9 @@
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
+            <xs:attribute name="headerStyle" type="xs:string" use="required"/>
+            <xs:attribute name="footerStyle" type="xs:string" use="optional"/>
+            <xs:attribute name="rowStyle" type="xs:string" use="optional"/>
         </xs:complexType>
     </xs:element>
 
