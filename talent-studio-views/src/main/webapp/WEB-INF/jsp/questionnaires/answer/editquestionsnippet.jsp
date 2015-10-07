@@ -7,13 +7,14 @@
 </c:if>
 
 <c:set var="disbledVar" value="${question.managerWrite && !managerAccessView}"/>
+<c:set var="cssStyle" value="${question.questionStyle}"/>
 
 <c:choose>
 
     <c:when test="${question.type == 'TEXT'}">
         <spring:bind path="${prefix}.value">
 
-            <input class="question_text" id="<c:out value="${fieldId}"/>" type="text" name="<c:out value="${status.expression}"/>"
+            <input style="<c:out value="${cssStyle}"/>" class="question_text" id="<c:out value="${fieldId}"/>" type="text" name="<c:out value="${status.expression}"/>"
                    value="<c:out value="${status.value}"/>" <c:out value="${titleAttr}" escapeXml="false"/>
                    <c:if test="${question.length != 0}">size="<c:out value="${question.length}"/>"</c:if>
                    <c:if test="${disbledVar || queDisabled}">disabled="true"</c:if>
@@ -34,7 +35,7 @@
 
     <c:when test="${question.type == 'INTEGER' || question.type == 'POSITIVEINTEGER'}">
         <spring:bind path="${prefix}.value">
-            <input class="question_text" id="<c:out value="${fieldId}"/>" type="text" class="input_number" name="<c:out value="${status.expression}"/>"
+            <input style="<c:out value="${cssStyle}"/>" class="question_text" id="<c:out value="${fieldId}"/>" type="text" class="input_number" name="<c:out value="${status.expression}"/>"
                    value="<c:out value="${status.value}"/>" <c:out value="${titleAttr}" escapeXml="false"/>
                    <c:if test="${question.length != 0}">size="<c:out value="${question.length}"/>"
             </c:if>
@@ -54,7 +55,7 @@
 
     <c:when test="${question.type == 'TEXTAREA' || question.type == 'TEXTBOX'}">
         <spring:bind path="${prefix}.value">
-        <textarea class="question_textarea"
+        <textarea style="<c:out value="${cssStyle}"/>" class="question_textarea"
             <%--onmouseout="javascript:saveUpdateDeleteQuestionnaire('<c:out value="${fieldId}"/>','<c:out value="${command.questionnaireId}"/>','<c:out value="${question.daId}"/>','<c:out value="${fieldId}_attid"/>','<c:out value="${fieldId}"/>_error');"--%>
                 onblur="javascript:saveUpdateDeleteQuestionnaire('<c:out value="${fieldId}"/>','<c:out value="${command.questionnaireId}"/>','<c:out value="${question.daId}"/>','<c:out value="${fieldId}_attid"/>','<c:out value="${fieldId}"/>_error');"
                 <c:if test="${question.length != 0}">style="display:block; width:<c:out value="${question.length}"/>em;"</c:if>
@@ -101,7 +102,7 @@
     <c:when test="${question.type == 'SELECT' || question.type == 'STRUCT'}">
         <%-- if there is a dynamicIndex here we need to post_fix the link_id with it and the requires--%>
         <spring:bind path="${prefix}.value">
-            <select id="<c:out value="${fieldId}"/>"
+            <select style="<c:out value="${cssStyle}"/>" id="<c:out value="${fieldId}"/>"
                     name="<c:out value="${status.expression}"/>" <c:out value="${titleAttr}" escapeXml="false"/>
                     class="linkable"
                     onchange="javascript:saveUpdateDeleteQuestionnaireList('<c:out value="${fieldId}"/>','<c:out value="${command.questionnaireId}"/>','<c:out value="${question.daId}"/>','<c:out value="${fieldId}_attid"/>','<c:out value="${fieldId}"/>_error');"
@@ -147,7 +148,7 @@
             <c:set var="rbn" value="0"/>
             <c:forEach var="vals" items="${question.attributeDefinition.refersToType.lookupValues}">
                 <c:set var="rbn" value="${rbn + 1}"/>
-                <span class="<c:out value="${styleClassName}"/>"><input
+                <span class="<c:out value="${styleClassName}"/>"><input style="<c:out value="${cssStyle}"/>"
                     <c:out value="${titleAttr}" escapeXml="false"/>
                         type="radio" class="input_radio"
                         id="<c:out value="${fieldId}"/>_<c:out value="${rbn}"/>"
@@ -183,6 +184,7 @@
                 </c:forEach>
 
                 <span class="<c:out value="${styleClassName}"/>"><input
+                        style="<c:out value="${cssStyle}"/>"
                         type="checkbox"
                         class="input_checkbox"
                         id="<c:out value="${fieldId}"/>_<c:out value="${cbn}"/>"
@@ -204,7 +206,7 @@
 
     <c:when test="${question.type == 'MULTISELECT'}">
         <spring:bind path="${prefix}.value">
-            <select class="multi-linkable"
+            <select style="<c:out value="${cssStyle}"/>" class="multi-linkable"
                     onblur="javascript:saveUpdateDeleteQuestionnaireMultiSelect('<c:out value="${fieldId}"/>','<c:out value="${command.questionnaireId}"/>','<c:out value="${question.daId}"/>','<c:out value="${fieldId}_attid"/>','<c:out value="${fieldId}"/>_error');"
                     <c:out value="${titleAttr}" escapeXml="false"/> id="<c:out value="${fieldId}"/>" name="<c:out value="${status.expression}"/>"
                     multiple size="<c:out value="${question.rowCount}"/>"
@@ -321,7 +323,7 @@
     <c:when test="${question.type == 'COMMENTS'}">
         <spring:bind path="command.wrappedDynamicAttributes[${index}].lastComment">
 
-            <div class="blogContent" id="blogX<c:out value="${index}"/>">
+            <div style="<c:out value="${cssStyle}"/>" class="blogContent" id="blogX<c:out value="${index}"/>">
                 <p id="bcpartnerval<c:out value="${index}"/>"></p>
                 <c:forEach var="commentBean" items="${question.blogComments}">
                     <p>
@@ -348,25 +350,25 @@
     </c:when>
 
     <c:when test="${question.type == 'ENUMMAPPING'}">
-        <span id="SUM_ENUM<c:out value="${question.daId}"/>">
+        <span style="<c:out value="${cssStyle}"/>" id="SUM_ENUM<c:out value="${question.daId}"/>">
         <c:out value="${question.displayValue}"/>
         </span>
     </c:when>
 
     <c:when test="${question.type == 'SUM'}">
-        <span id="SUM_ENUM<c:out value="${question.daId}"/>">
+        <span style="<c:out value="${cssStyle}"/>" id="SUM_ENUM<c:out value="${question.daId}"/>">
         <c:out value="${question.displayValue}"/>
         </span>
     </c:when>
 
     <c:when test="${question.type == 'LASTUPDATED'}">
-        <span id="LASTUP">
+        <span style="<c:out value="${cssStyle}"/>" id="LASTUP">
             <c:out value="${question.displayValue}"/>
         </span>
     </c:when>
 
     <c:when test="${question.type == 'LASTUPDATEDBY'}">
-        <span id="LASTUPBY">
+        <span style="<c:out value="${cssStyle}"/>" id="LASTUPBY">
             <c:out value="${question.displayValue}"/>
         </span>
     </c:when>

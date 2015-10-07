@@ -126,7 +126,7 @@ public class QuestionAttributeWrapperBean extends AttributeWrapperBean {
     }
 
     public String getQuestionStyle() {
-        return question.getQuestionStyle();
+        return question.getQuestionStyle() != null ? question.getQuestionStyle() : "";
     }
 
     public String getCellStyle() {

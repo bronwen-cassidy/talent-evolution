@@ -2,3 +2,19 @@ How to add the oracle jar to maven
 ==============================================
 C:\Users\home\dev\ts\talent-evolution>mvn install:install-file -Dfile=C:/Users/home/dev/ts/lib/tools/ojdbc7.jar -DgroupId=com
 .oracle -DartifactId=ojdbc7 -Dversion=14.0.0 -Dpackaging=jar
+
+
+How to chop up a very large log file (needs at least cygwin), needs to be run at the cygwin cmd
+================================================================================================
+-- splits a log file into 5000 lines length
+
+awk '{outfile=sprintf("file%02d.txt",NR/5000+1);print > outfile}' yourfile
+
+==============================================
+print just the lines matching
+==================================
+ awk '/22:15/ {print > "info-22-15.log"}' rockalltech.log.2015-09-22
+
+=== number of lines in the file
+ awk 'END {print NR}' file.txt
+

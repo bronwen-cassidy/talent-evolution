@@ -783,7 +783,7 @@
 
         <war warfile="${dist.dir}/${project.name}.war" webxml="${build.webview.war.webinf.dir}/web.xml">
             <!-- provides scripts only -->
-            <fileset dir="${webapp.dir}" excludes="WEB-INF/**"/>
+            <fileset dir="${webapp.dir}" excludes="WEB-INF/**,META_INF/context.xml"/>
             <fileset dir="${build.webview.war.dir}" excludes="WEB-INF/**,WEB-INF/classes/**"/>
             
             <!-- copy properties files -->
