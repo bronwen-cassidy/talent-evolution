@@ -12,7 +12,7 @@
 
             <%-- display headers first --%>
             <tr>
-                <td class="infosubheading" style="max-width:5%;min-width:5%">
+                <td class="infosubheading">
                     <div class=<c:out value="${openStyle}"/>><c:out value="${lineItem.label}"/></div>
                     <div class=<c:out value="${closedStyle}"/>>
                         <!-- the multi question label -->
@@ -24,13 +24,7 @@
                 </td>
                 
                 <c:forEach var="cell" items="${grid[0]}" varStatus="lineItemQIndexer">
-
-                    <c:set var="cellStyle" value="${cell.cellStyle}"/>
-                    <c:if test="${cellStyle == null || cellStyle == ''}">
-                        <c:set var="cellStyle">max-width:<c:out value="${cellWidth}"/>;min-width:<c:out value="${cellWidth}"/></c:set>
-                    </c:if>
-
-                    <td style="<c:out value="${cellStyle}"/>" class="infosubheading">
+                    <td class="infosubheading">
                         <div class=<c:out value="${openStyle}"/>><c:out value="${cell.label}"/>&nbsp;<c:if test="${cell.mandatory}">*</c:if>&nbsp;</div>
                         <div class=<c:out value="${closedStyle}"/>>
                             <spring:bind path="command.questionnaireGroups[${indexer.index}].wrappedDynamicAttributes[${questionIndexer.index}].grid[0][${lineItemQIndexer.index}].label">
@@ -42,7 +36,7 @@
                 </c:forEach>
                 <%--space for any delete buttons or disable checkboxes--%>
                 <c:if test="${lineItem.dynamicOrManagerDisable}">
-                    <td style="max-width:5%;min-width:5%" class="infosubheading">
+                    <td class="infosubheading">
                         <!-- the disable checkbox for managers -->
                         <c:if test="${lineItem.canManagerDisable && command.managerView}"><fmt:message key="click.to.disable.row"/></c:if>
                     </td>
@@ -70,7 +64,7 @@
 
                         <%-- Navigation only put before first column --%>
                         <c:if test="${numCols == 0}">
-                            <td class="infodata"  style="max-width:5%;min-width:5%">
+                            <td class="infodata">
                                 <div class=<c:out value="${openStyle}"/>>                                                                                       f
                                     <c:if test="${question.lineItemLabel != null && question.lineItemLabel != ''}"><c:out value="${question.lineItemLabel}"/>&nbsp;:&nbsp;</c:if>
                                 </div>
@@ -85,13 +79,9 @@
                                 <c:import url="../questionnaires/helptextinclude.jsp"/>
                             </td>
                         </c:if>
-
-                        <c:set var="cellStyle" value="${cell.cellStyle}"/>
-                        <c:if test="${cellStyle == null || cellStyle == ''}">
-                            <c:set var="cellStyle">max-width:<c:out value="${cellWidth}"/>%;min-width:<c:out value="${cellWidth}"/>%</c:set>
-                        </c:if>
+                        
                         <%-- display question --%>
-                        <td class="infodata" style="<c:out value="${cell.cellStyle}"/>">
+                        <td class="infodata">
                             <c:set var="showHorizontal" value="true" scope="request"/>
                             <c:import url="../questionnaires/admin/preview/viewquestionpreviewsnippet.jsp"/>
                         </td>

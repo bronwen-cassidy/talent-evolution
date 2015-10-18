@@ -77,12 +77,13 @@ public class HibernateSubjectDao extends ZynapPersistenceSupport implements ISub
         CoreDetail coreDetail = subject.getCoreDetail();
         // delete and workflow participant information before delete the subject
         getHibernateTemplate().delete("from WorkflowParticipant p where p.subjectId = " + subject.getId());
+        getHibernateTemplate().delete("from PerformanceManager m where (m.subjectId = " + subject.getId() + " or m.managerId = " + subject.getId());
+        getHibernateTemplate().delete("from PerformanceEvaluator e where e.subjectId = " + subject.getId());
 
         super.delete(subject);
         // delete the associated objects not marked for cascade delete
         if (user == null) {
             getHibernateTemplate().delete(coreDetail);
-            //getHibernateTemplate().delete("from CoreDetail coredetail where coredetail.id = " + subject.getCoreDetail().getId());
         } else {
             // delete all messages sent from this subjects user and to this subjects user
             getHibernateTemplate().delete("from MessageItem messages where messages.toUserId = " + user.getId() + " or messages.fromUser.id= " + user.getId());

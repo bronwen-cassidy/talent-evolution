@@ -24,13 +24,6 @@
             column="ID"
             unsaved-value="null"
             >
-            <meta attribute="field-description">
-           @hibernate.id
-            generator-class="assigned"
-            type="long"
-            column="ID"
-
-            </meta>
             <meta attribute="use-in-equals">true</meta>
             <meta attribute="use-in-tostring">true</meta>
             <generator class="sequence">

@@ -13,12 +13,12 @@
             <c:set var="numQuestions" value="${lineItem.numberOfQuestionWrappers + 1}" scope="request"/>
             <c:set var="cellWidth" value="${90/numQuestions}%"/>
 
-            <c:set var="rowStyle" value="${lineItem.rowStyle}"/>
-            <c:set var="headerStyle" value="${lineItem.headerStyle}"/>
+            <c:set var="rowStyle" value="${grid[0][0].rowStyle}"/>
+            <c:set var="headerStyle" value="${grid[0][0].headerStyle}"/>
             <c:if test="${headerStyle == null || headerStyle == ''}">
                 <c:set var="headerStyle">max-width:5%;min-width:5%;width:5%;"/></c:set>
             </c:if>
-            <c:set var="footerStyle" value="${lineItem.footerStyle}"/>
+            <c:set var="footerStyle" value="${grid[0][0].footerStyle}"/>
             <c:if test="${footerStyle == null || footerStyle == ''}">
                 <c:set var="footerStyle">max-width:5%;min-width:5%;width:5%;"/></c:set>
             </c:if>
