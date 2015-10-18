@@ -75,6 +75,9 @@ public class HibernateSubjectDao extends ZynapPersistenceSupport implements ISub
         Subject subject = (Subject) domainObject;
         User user = subject.getUser();
         CoreDetail coreDetail = subject.getCoreDetail();
+        // delete and workflow participant information before delete the subject
+        getHibernateTemplate().delete("from WorkflowParticipant p where p.subjectId = " + subject.getId());
+
         super.delete(subject);
         // delete the associated objects not marked for cascade delete
         if (user == null) {

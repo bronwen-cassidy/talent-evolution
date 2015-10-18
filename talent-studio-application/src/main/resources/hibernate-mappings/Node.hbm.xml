@@ -21,14 +21,8 @@
 
         <cache usage="read-write"/>
 
-        <id
-                name="id"
-                type="long"
-                column="ID"
-                unsaved-value="null"
-                >
+        <id name="id" type="long" column="ID" unsaved-value="null">
             <meta attribute="use-in-equals">true</meta>
-
             <generator class="sequence">
                 <param name="sequence">NODE_SQ</param>
             </generator>
@@ -36,51 +30,16 @@
 
         <!--<version name="lockId" column="LOCK_ID" type="java.lang.Integer"/>-->
 
-        <property
-                name="nodeType"
-                type="java.lang.String"
-                column="NODE_TYPE"
-                length="3"
-                >
-            <meta attribute="use-in-tostring">true</meta>
+        <property name="nodeType" type="java.lang.String" column="NODE_TYPE" length="3">
             <meta attribute="use-in-equals">true</meta>
         </property>
 
-        <property
-                name="comments"
-                type="java.lang.String"
-                column="COMMENTS"
-                length="4000"
-                >
-            <meta attribute="use-in-tostring">true</meta>
-            <meta attribute="use-in-equals">true</meta>
-        </property>
+        <property name="comments" type="java.lang.String" column="COMMENTS" length="4000"/>
+        <property name="active" type="true_false" column="IS_ACTIVE" not-null="true" length="1"/>
 
-        <property
-                name="active"
-                type="true_false"
-                column="IS_ACTIVE"
-                not-null="true"
-                length="1"
-                >
-            <meta attribute="use-in-tostring">true</meta>
-            <meta attribute="use-in-equals">true</meta>
-        </property>
-
-        <set
-                name="portfolioItems"
-                lazy="true"
-                inverse="true"
-                cascade="all"
-                outer-join="true"
-                batch-size="50"
-                >
-            <key>
-                <column name="NODE_ID"/>
-            </key>
-            <one-to-many
-                    class="com.zynap.talentstudio.organisation.portfolio.PortfolioItem"
-                    />
+        <set name="portfolioItems" lazy="true" inverse="true" cascade="all" outer-join="true" batch-size="50">
+            <key column="NODE_ID"/>
+            <one-to-many class="com.zynap.talentstudio.organisation.portfolio.PortfolioItem"/>
         </set>
 
         <set
@@ -145,8 +104,7 @@
                          dynamic-insert="true"
                 >
 
-            <key column="NODE_ID">
-            </key>
+            <key column="NODE_ID"/>
 
             <property
                     name="label"
@@ -156,16 +114,8 @@
                     unique="true"
                     length="100"
                     />
-            <property
-                    name="positionPopulationId"
-                    type="java.lang.Long"
-                    column="POSITION_POPULATION_ID"
-                    />
-            <property
-                    name="subjectPopulationId"
-                    type="java.lang.Long"
-                    column="SUBJECT_POPULATION_ID"
-                    />
+            <property name="positionPopulationId" type="java.lang.Long" column="POSITION_POPULATION_ID" />
+            <property name="subjectPopulationId" type="java.lang.Long" column="SUBJECT_POPULATION_ID" />
 
             <!-- Associations -->
             <!-- bi-directional one-to-many association to AreaElement -->
@@ -284,48 +234,16 @@
         <joined-subclass name="com.zynap.talentstudio.organisation.subjects.Subject" table="SUBJECTS">
             <key column="NODE_ID"/>
 
-            <property
-                    name="dateOfBirth"
-                    type="java.util.Date"
-                    column="DATE_OF_BIRTH"
-                    length="7"
-                    >
-                <meta attribute="use-in-tostring">true</meta>
-                <meta attribute="use-in-equals">true</meta>
-            </property>
+            <property name="dateOfBirth" type="java.util.Date" column="DATE_OF_BIRTH" length="7"/>
 
-            <property
-                    name="hasPicture"
-                    type="true_false"
-                    column="HAS_PICTURE"
-                    length="1"
-                    >
-            </property>
+            <property name="hasPicture" type="true_false" column="HAS_PICTURE" length="1"/>
 
-            <property
-                    name="currentJobInfo"
-                    type="java.lang.String"
-                    column="CURRENT_JOB_INFO"
-                    length="1024"
-                    >
-            </property>
+            <property name="currentJobInfo" type="java.lang.String" column="CURRENT_JOB_INFO" length="1024"/>
 
             <!-- bi-directional one-to-many association to SubjectAssociation -->
-            <set
-                    name="subjectAssociations"
-                    lazy="true"
-                    inverse="true"
-                    cascade="all-delete-orphan"
-                    order-by="ID"
-                    outer-join="true"
-                    batch-size="50"
-                    >
-                <key>
-                    <column name="SUBJECT_ID"/>
-                </key>
-                <one-to-many
-                        class="com.zynap.talentstudio.organisation.subjects.SubjectAssociation"
-                        />
+            <set name="subjectAssociations" lazy="true" inverse="true" cascade="all-delete-orphan" order-by="ID" outer-join="true" batch-size="50">
+                <key column="SUBJECT_ID"/>
+                <one-to-many class="com.zynap.talentstudio.organisation.subjects.SubjectAssociation"/>
             </set>
 
             <!-- bi-directional one-to-many association to SubjectPrimaryAssociation -->
@@ -592,49 +510,13 @@
 
             <key column="NODE_ID"/>
 
-            <property
-                    name="questionnaireWorkflowId"
-                    type="java.lang.Long"
-                    column="QWF_ID"
-                    not-null="true"/>
-            <property
-                    name="completed"
-                    type="true_false"
-                    column="IS_COMPLETED"
-                    not-null="true"
-                    length="1"
-                    />
-            <property
-                    name="locked"
-                    type="true_false"
-                    column="LOCKED"
-                    not-null="true"
-                    length="1"
-                    />
-            <property
-                    name="notificationId"
-                    type="java.lang.Long"
-                    column="NOTIFICATION_ID"
-                    not-null="false"
-                    >
-                <meta attribute="use-in-tostring">true</meta>
-                <meta attribute="use-in-equals">true</meta>
-            </property>
-            <property
-                    name="completedDate"
-                    type="java.util.Date"
-                    column="COMPLETED_DATE"
-                    />
-            <property
-                    name="subjectId"
-                    type="java.lang.Long"
-                    column="SUBJECT_ID"
-                    not-null="true"/>
-            <property
-                    name="lockedBy"
-                    type="java.lang.Long"
-                    column="LOCKED_BY"
-                    />
+            <property name="questionnaireWorkflowId" type="java.lang.Long" column="QWF_ID" not-null="true"/>
+            <property name="completed" type="true_false" column="IS_COMPLETED" not-null="true" length="1"/>
+            <property name="locked" type="true_false" column="LOCKED" not-null="true" length="1"/>
+            <property name="notificationId" type="java.lang.Long" column="NOTIFICATION_ID" not-null="false"/>
+            <property name="completedDate" type="java.util.Date" column="COMPLETED_DATE"/>
+            <property name="subjectId" type="java.lang.Long" column="SUBJECT_ID" not-null="true"/>
+            <property name="lockedBy" type="java.lang.Long" column="LOCKED_BY"/>
 
             <many-to-one
                     name="questionnaireWorkflow"
