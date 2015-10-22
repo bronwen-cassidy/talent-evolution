@@ -169,7 +169,7 @@
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
-            <xs:attribute name="headerStyle" type="xs:string" use="required"/>
+            <xs:attribute name="headerStyle" type="xs:string" use="optional"/>
             <xs:attribute name="footerStyle" type="xs:string" use="optional"/>
             <xs:attribute name="rowStyle" type="xs:string" use="optional"/>
         </xs:complexType>
