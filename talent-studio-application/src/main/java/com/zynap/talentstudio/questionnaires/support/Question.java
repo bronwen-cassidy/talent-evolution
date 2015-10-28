@@ -235,6 +235,14 @@ public class Question extends BaseQuestion implements Cloneable {
         this.managerWrite = "Y".equalsIgnoreCase(managerWrite);
     }
 
+    public boolean isCannotDisable() {
+        return cannotDisable;
+    }
+
+    public void setCannotDisableValue(String cannotDisable) {
+        this.cannotDisable = "Y".equalsIgnoreCase(cannotDisable);
+    }
+
     public void setQuestionnaireGroup(QuestionnaireGroup questionnaireGroup) {
         this.questionnaireGroup = questionnaireGroup;
     }
@@ -360,6 +368,7 @@ public class Question extends BaseQuestion implements Cloneable {
     private boolean displayableLabel = true;
     /* determines if this question is only editable by a manager */
     private boolean managerWrite;
+    private boolean cannotDisable;
 
     /* determine if this question is a hidden one or not default is false*/
     private boolean hidden;

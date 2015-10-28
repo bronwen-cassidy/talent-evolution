@@ -18,7 +18,8 @@ import java.util.Collection;
 public class QuestionAttribute extends AbstractQuestion {
 
     private static final long serialVersionUID = 7640989070619047941L;
-    
+    private boolean cannotDisable = true;
+
 
     /**
      * Required default constructor
@@ -55,9 +56,10 @@ public class QuestionAttribute extends AbstractQuestion {
         this.sortOrder = sortOrder;
     }
 
-    public QuestionAttribute(DynamicAttribute attribute, int length, String target, String textId, String title, String type, boolean managerWrite, boolean hidden, Integer sortOrder, String cellStyle, String questionStyle) {
+    public QuestionAttribute(DynamicAttribute attribute, int length, String target, String textId, String title, String type, boolean managerWrite, boolean cannotDisable, boolean hidden, Integer sortOrder, String cellStyle, String questionStyle) {
         this(attribute, length, target, textId, title, type, managerWrite, hidden, sortOrder);
         this.cellStyle = cellStyle;
+        this.cannotDisable = cannotDisable;
         this.questionStyle = questionStyle;
     }
 
@@ -229,6 +231,14 @@ public class QuestionAttribute extends AbstractQuestion {
 
     public void setManagerWrite(boolean managerWrite) {
         this.managerWrite = managerWrite;
+    }
+
+    public boolean isCannotDisable() {
+        return cannotDisable;
+    }
+
+    public void setCannotDisable(boolean cannotDisable) {
+        this.cannotDisable = cannotDisable;
     }
 
     public void setLabelDisplayable(boolean labelDisplayable) {

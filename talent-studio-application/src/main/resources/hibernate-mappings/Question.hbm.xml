@@ -92,13 +92,8 @@
             column="IS_HIDDEN"
             />
 
-        <property
-            name="managerWrite"
-            type="true_false"
-            column="MANAGER_WRITE"
-            >
-            <meta attribute="use-in-tostring">true</meta>
-        </property>
+        <property name="managerWrite" type="true_false" column="MANAGER_WRITE"/>
+        <property name="cannotDisable" type="true_false" column="CANNOT_DISABLE"/>
 
         <!-- Associations -->
 

@@ -178,6 +178,9 @@ public class QuestionAttributeWrapperBean extends AttributeWrapperBean {
     public boolean isCanDisable() {
         return isPartOfMultiQuestion() && question.getLineItem().isCanDisable();
     }
+    public boolean isQuestionCannotDisable() {
+        return question.isCannotDisable();
+    }
 
     public void setDisabled(boolean value) {
         attributeValue.setDisabled(value);

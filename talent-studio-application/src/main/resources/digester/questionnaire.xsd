@@ -127,6 +127,14 @@
             <xs:attribute name="tag" type="xs:string" use="optional"/>
             <xs:attribute name="function" type="xs:string" use="optional"/>
             <xs:attribute name="format" type="xs:string" use="optional"/>
+            <xs:attribute name="cannotDisable" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:NMTOKEN">
+                        <xs:enumeration value="Y"/>
+                        <xs:enumeration value="N"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
             <xs:attribute name="managerWrite" use="optional">
                 <xs:simpleType>
                     <xs:restriction base="xs:NMTOKEN">

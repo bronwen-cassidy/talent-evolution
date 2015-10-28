@@ -9,12 +9,17 @@
 <c:set var="disbledVar" value="${question.managerWrite && !managerAccessView}"/>
 <c:set var="cssStyle" value="${question.questionStyle}"/>
 
+<c:set var="ssClass" value="lockDown"/>
+<c:if test="${question.questionCannotDisable}">
+    <c:set var="ssClass" value="noLock"/>
+</c:if>
+
 <c:choose>
 
     <c:when test="${question.type == 'TEXT'}">
         <spring:bind path="${prefix}.value">
 
-            <input style="<c:out value="${cssStyle}"/>" class="question_text" id="<c:out value="${fieldId}"/>" type="text" name="<c:out value="${status.expression}"/>"
+            <input style="<c:out value="${cssStyle}"/>" class="question_text <c:out value="${ssClass}"/>" id="<c:out value="${fieldId}"/>" type="text" name="<c:out value="${status.expression}"/>"
                    value="<c:out value="${status.value}"/>" <c:out value="${titleAttr}" escapeXml="false"/>
                    <c:if test="${question.length != 0}">size="<c:out value="${question.length}"/>"</c:if>
                    <c:if test="${disbledVar || queDisabled}">disabled="true"</c:if>
@@ -35,7 +40,7 @@
 
     <c:when test="${question.type == 'INTEGER' || question.type == 'POSITIVEINTEGER'}">
         <spring:bind path="${prefix}.value">
-            <input style="<c:out value="${cssStyle}"/>" class="question_text" id="<c:out value="${fieldId}"/>" type="text" class="input_number" name="<c:out value="${status.expression}"/>"
+            <input style="<c:out value="${cssStyle}"/>" class="question_text <c:out value="${ssClass}"/>" id="<c:out value="${fieldId}"/>" type="text" class="input_number" name="<c:out value="${status.expression}"/>"
                    value="<c:out value="${status.value}"/>" <c:out value="${titleAttr}" escapeXml="false"/>
                    <c:if test="${question.length != 0}">size="<c:out value="${question.length}"/>"
             </c:if>
@@ -55,7 +60,7 @@
 
     <c:when test="${question.type == 'TEXTAREA' || question.type == 'TEXTBOX'}">
         <spring:bind path="${prefix}.value">
-        <textarea style="<c:out value="${cssStyle}"/>" class="question_textarea"
+        <textarea style="<c:out value="${cssStyle}"/>" class="question_textarea <c:out value="${ssClass}"/>"
             <%--onmouseout="javascript:saveUpdateDeleteQuestionnaire('<c:out value="${fieldId}"/>','<c:out value="${command.questionnaireId}"/>','<c:out value="${question.daId}"/>','<c:out value="${fieldId}_attid"/>','<c:out value="${fieldId}"/>_error');"--%>
                 onblur="javascript:saveUpdateDeleteQuestionnaire('<c:out value="${fieldId}"/>','<c:out value="${command.questionnaireId}"/>','<c:out value="${question.daId}"/>','<c:out value="${fieldId}_attid"/>','<c:out value="${fieldId}"/>_error');"
                 <c:if test="${question.length != 0}">style="display:block; width:<c:out value="${question.length}"/>em;"</c:if>
@@ -82,7 +87,7 @@
             <%-- DONT CHANGE THE LAYOUT BELOW. MUST NOT BE A SPACE BEFORE THE BUTTON --%>
             <span style="white-space: nowrap;">
                 <input id="<c:out value="${dispId}"/>"
-                       class="question_date" name="ignoredValue<c:out value="${dispId}"/>"
+                       class="question_date <c:out value="${ssClass}"/>" name="ignoredValue<c:out value="${dispId}"/>"
                        type="text" value="<c:out value='${question.displayValue}'/>" readonly="true"
                         <c:out value="${titleAttr}" escapeXml="false"/>
                         /><input type="button" class="partnerbutton" value="..."  id="<c:out value="${fieldId}"/>_date" name="<c:out value="${fieldId}"/>_date"
@@ -104,7 +109,7 @@
         <spring:bind path="${prefix}.value">
             <select style="<c:out value="${cssStyle}"/>" id="<c:out value="${fieldId}"/>"
                     name="<c:out value="${status.expression}"/>" <c:out value="${titleAttr}" escapeXml="false"/>
-                    class="linkable"
+                    class="linkable <c:out value="${ssClass}"/>"
                     onchange="javascript:saveUpdateDeleteQuestionnaireList('<c:out value="${fieldId}"/>','<c:out value="${command.questionnaireId}"/>','<c:out value="${question.daId}"/>','<c:out value="${fieldId}_attid"/>','<c:out value="${fieldId}"/>_error');"
                     <c:if test="${disbledVar || queDisabled}">disabled="true"</c:if>>
                 <c:if test="${!question.hasBlank}">
@@ -150,7 +155,7 @@
                 <c:set var="rbn" value="${rbn + 1}"/>
                 <span class="<c:out value="${styleClassName}"/>"><input style="<c:out value="${cssStyle}"/>"
                     <c:out value="${titleAttr}" escapeXml="false"/>
-                        type="radio" class="input_radio"
+                        type="radio" class="input_radio <c:out value="${ssClass}"/>"
                         id="<c:out value="${fieldId}"/>_<c:out value="${rbn}"/>"
                         name="<c:out value="${status.expression}"/>"
                         value="<c:out value="${vals.id}"/>"
@@ -186,7 +191,7 @@
                 <span class="<c:out value="${styleClassName}"/>"><input
                         style="<c:out value="${cssStyle}"/>"
                         type="checkbox"
-                        class="input_checkbox"
+                        class="input_checkbox <c:out value="${ssClass}"/>"
                         id="<c:out value="${fieldId}"/>_<c:out value="${cbn}"/>"
                         onclick="saveDeleteQuestionnaireCheckBox('<c:out value="${fieldId}"/>_<c:out value="${cbn}"/>','<c:out value="${command.questionnaireId}"/>','<c:out value="${question.daId}"/>','<c:out value="${fieldId}"/>_<c:out value="${cbn}"/>_attid','<c:out value="${fieldId}"/>_error');"
                         name="<c:out value="${status.expression}"/>"
@@ -206,7 +211,7 @@
 
     <c:when test="${question.type == 'MULTISELECT'}">
         <spring:bind path="${prefix}.value">
-            <select style="<c:out value="${cssStyle}"/>" class="multi-linkable"
+            <select style="<c:out value="${cssStyle}"/>" class="multi-linkable <c:out value="${ssClass}"/>"
                     onblur="javascript:saveUpdateDeleteQuestionnaireMultiSelect('<c:out value="${fieldId}"/>','<c:out value="${command.questionnaireId}"/>','<c:out value="${question.daId}"/>','<c:out value="${fieldId}_attid"/>','<c:out value="${fieldId}"/>_error');"
                     <c:out value="${titleAttr}" escapeXml="false"/> id="<c:out value="${fieldId}"/>" name="<c:out value="${status.expression}"/>"
                     multiple size="<c:out value="${question.rowCount}"/>"
@@ -248,7 +253,7 @@
         <spring:bind path="${prefix}.value">
 
 
-            <span style="white-space: nowrap;"><input id="nav_ou_disp<c:out value="${index}"/>" type="text" class="input_text"
+            <span style="white-space: nowrap;"><input id="nav_ou_disp<c:out value="${index}"/>" type="text" class="input_text <c:out value="${ssClass}"/>"
                                                       value="<c:out value="${question.displayValue}"/>"
                                                       name="<c:out value="wrappedDynamicAttributes[${index}].nodeLabel"/>"
                                                       readonly="true"/><input type="button"
@@ -271,14 +276,15 @@
 
     <c:when test="${question.type == 'SUBJECT'}">
         <spring:bind path="${prefix}.value">
-                <span style="white-space: nowrap;"><input id="nav_ou_disp<c:out value="${index}"/>" type="text" class="input_text"
+                <span style="white-space: nowrap;"><input id="nav_ou_disp<c:out value="${index}"/>" type="text"
+                                                          class="input_text <c:out value="${ssClass}"/>"
                                                           value="<c:out value="${question.displayValue}"/>"
                                                           name="<c:out value="wrappedDynamicAttributes[${index}].nodeLabel"/>"
                                                           readonly="true"/><input type="button"
                                                                                   class="partnerbutton"
                                                                                   value="..." id="navOUPopup"
                                                                                   <c:if test="${disbledVar || queDisabled}">disabled="true"</c:if>
-                        <c:out value="${titleAttr}" escapeXml="false"/>
+                                                                                  <c:out value="${titleAttr}" escapeXml="false"/>
                                                                                   onclick="showSubjectServerTree('<zynap:message code="select.subject" javaScriptEscape="true"/>', this, 'subjectTree', 'nav_ou_disp<c:out value="${index}"/>','nav_ou_id<c:out value="${index}"/>', true);
                                                                                           registerCloseFunc('saveUpdateDeleteQuestionnaireSubject(\'nav_ou_id<c:out value="${index}"/>\', \'<c:out value="${command.questionnaireId}"/>\', \'<c:out value="${question.daId}"/>\', \'nav_ou_id<c:out value="${index}_attid"/>\', \'nav_ou_disp<c:out value="${index}_error"/>\')');"
                         />
@@ -298,15 +304,16 @@
         <spring:bind path="${prefix}.value">
             <zynap:message code="select.position" var="ouMsg" javaScriptEscape="true"/>
 
-            <span style="white-space: nowrap;"><input id="nav_ou_disp<c:out value="${index}"/>" type="text" class="input_text"
-
+            <span style="white-space: nowrap;"><input id="nav_ou_disp<c:out value="${index}"/>"
+                                                      ype="text"
+                                                      class="input_text <c:out value="${ssClass}"/>"
                                                       value="<c:out value="${question.displayValue}"/>"
                                                       name="<c:out value="wrappedDynamicAttributes[${index}].nodeLabel"/>"
                                                       readonly="true"/><input type="button"
                                                                               class="partnerbutton"
                                                                               value="..." id="navOUPopup"
                                                                               <c:if test="${disbledVar || queDisabled}">disabled="true"</c:if>
-                    <c:out value="${titleAttr}" escapeXml="false"/>
+                                                                              <c:out value="${titleAttr}" escapeXml="false"/>
                                                                               onclick="showPositionServerTree('<c:out value="${ouMsg}"/>', this, 'positionTree', 'nav_ou_disp<c:out value="${index}"/>', 'nav_ou_id<c:out value="${index}"/>',true);
                                                                                       registerCloseFunc('saveUpdateDeleteQuestionnairePosition(\'nav_ou_id<c:out value="${index}"/>\', \'<c:out value="${command.questionnaireId}"/>\', \'<c:out value="${question.daId}"/>\', \'nav_ou_id<c:out value="${index}_attid"/>\', \'nav_ou_disp<c:out value="${index}_error"/>\')');"/></span>
             <input id="nav_ou_id<c:out value="${index}"/>" type="hidden" name="<c:out value="${status.expression}"/>"
@@ -333,7 +340,7 @@
                     </p>
                 </c:forEach>
             </div>
-            <input type="button" id="btnBlogX<c:out value="${index}"/>" class="partnerbutton" value="..."
+            <input type="button" id="btnBlogX<c:out value="${index}"/>" class="partnerbutton <c:out value="${ssClass}"/>" value="..."
                    <c:if test="${disbledVar || queDisabled}">disabled="true"</c:if>
                    onclick="showBlogPopup('<zynap:message code="add.question.blog.comment" javaScriptEscape="true"/>', 'btnBlogX<c:out value="${index}"/>', 'blogComment<c:out value="${index}"/>', 'bcpartnerval<c:out value="${index}"/>');
                            registerCloseFunc('saveUpdateDeleteQuestionnaireBlogComments(\'tappx<c:out value="${index}"/>\', \'<c:out value="${command.questionnaireId}"/>\', \'<c:out value="${question.daId}"/>\', \'blogX<c:out value="${index}_attid"/>\', \'<c:out value="${command.userId}"/>\', \'blogX<c:out value="${index}_error"/>\')');"/>

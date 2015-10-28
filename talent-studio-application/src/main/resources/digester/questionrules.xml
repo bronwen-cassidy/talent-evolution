@@ -32,6 +32,7 @@
             <alias attr-name="cellStyle" prop-name="cellStyle"/>
             <alias attr-name="questionStyle" prop-name="questionStyle"/>
             <alias attr-name="managerWrite" prop-name="managerWriteValue"/>
+            <alias attr-name="cannotDisable" prop-name="cannotDisableValue"/>
         </set-properties-rule>
         <set-next-rule methodname="addQuestion"/>
 

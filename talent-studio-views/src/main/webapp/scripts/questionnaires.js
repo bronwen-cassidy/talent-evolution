@@ -892,17 +892,21 @@ function disableRowBeforeSave(rowId, triggerElem) {
     var state = triggerElem.checked;
     for (var i = 0; i < inputElems.length; i++) {
         var inputElem = inputElems[i];
-        if (inputElem != triggerElem) {
+        if (inputElem != triggerElem && inputElem.className.indexOf("lockDown") > -1) {
             inputElem.disabled = state;
         }
     }
     for (var j = 0; j < selectElems.length; j++) {
         var selectElem1 = selectElems[j];
-        selectElem1.disabled = state;
+        if(selectElem1.className.indexOf("lockDown") > -1) {
+            selectElem1.disabled = state;
+        }
     }
     for (var k = 0; k < txtArea.length; k++) {
         var selectElem2 = txtArea[k];
-        selectElem2.disabled = state;
+        if(selectElem2.className.indexOf("lockDown") > -1) {
+            selectElem2.disabled = state;
+        }
     }
 }
 
