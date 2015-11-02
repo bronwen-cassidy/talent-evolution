@@ -53,7 +53,7 @@
     <property name="junit.maxmemory" value="512m"/>
 
     <!-- Default Mail properties for the build server -->
-    <property name="sender.email" value="info@talentscope.net"/>
+    <property name="sender.email" value="info@tmevolution.com"/>
     <property name="mail.jndi.name" value="mail/TSMSession"/>
     <property name="client.path" value="${client}"/>
 
@@ -422,7 +422,7 @@
         <filter token="result.mapper" value="${result.mapper}"/>
         <filter token="host.name" value="${host.name}"/>
         <filter token="sender.email" value="${sender.email}"/>
-        <filter token="server.url" value="${server.url}/${client.path}"/>
+        <filter token="server.url" value="${server.url}/${project.name}"/>
         <filter token="mail.jndi.name" value="${mail.jndi.name}"/>
         <filter token="displayErrors" value="${displayErrors}"/>
 
