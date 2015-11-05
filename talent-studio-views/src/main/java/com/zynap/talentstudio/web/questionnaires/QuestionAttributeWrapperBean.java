@@ -50,7 +50,16 @@ public class QuestionAttributeWrapperBean extends AttributeWrapperBean {
         final QuestionGroup questionGroup = question.getQuestionGroup();
         return questionGroup != null ? questionGroup : question.getLineItem().getMultiQuestion().getGroup();
     }
-
+    
+    public String getRowStyle() {
+        return isPartOfMultiQuestion() ? question.getLineItem().getRowStyle() : "";
+    }
+    public String getHeaderStyle() {
+        return isPartOfMultiQuestion() ? question.getLineItem().getHeaderStyle() : "";
+    }
+    public String getFooterStyle() {
+        return isPartOfMultiQuestion() ? question.getLineItem().getFooterStyle() : "";
+    }
     public String getType() {
         return question.getQuestionType();
     }
@@ -66,6 +75,8 @@ public class QuestionAttributeWrapperBean extends AttributeWrapperBean {
     public String getLabel() {
         return question.getLabel();
     }
+
+    public int getTextLength() {return StringUtils.hasText(question.getLabel()) ? 1 : 0; }
 
     /**
      * Sets a new Label on the dynamic attribute used when editing the questionnaire definition to modify the question label
@@ -103,7 +114,7 @@ public class QuestionAttributeWrapperBean extends AttributeWrapperBean {
      * The label of the node that has been selected as an answer to the question.
      * The value is the id the nodeLabel is the displayValue
      *
-     * @param nodeLabel
+     * @param nodeLabel - the label of the node may be the name or title depending on the node
      */
     public void setNodeLabel(String nodeLabel) {
         this.nodeLabel = nodeLabel;
@@ -111,7 +122,15 @@ public class QuestionAttributeWrapperBean extends AttributeWrapperBean {
 
     public int getLength() {
         final Integer length = question.getLength();
-        return length != null ? length.intValue() : 0;
+        return length != null ? length : 0;
+    }
+
+    public String getQuestionStyle() {
+        return question.getQuestionStyle() != null ? question.getQuestionStyle() : "";
+    }
+
+    public String getCellStyle() {
+        return question.getCellStyle();
     }
 
     public boolean isDisplayable() {
@@ -158,6 +177,9 @@ public class QuestionAttributeWrapperBean extends AttributeWrapperBean {
 
     public boolean isCanDisable() {
         return isPartOfMultiQuestion() && question.getLineItem().isCanDisable();
+    }
+    public boolean isQuestionCannotDisable() {
+        return question.isCannotDisable();
     }
 
     public void setDisabled(boolean value) {

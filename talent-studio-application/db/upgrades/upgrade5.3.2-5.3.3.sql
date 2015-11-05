@@ -41,7 +41,7 @@ ALTER TABLE DISPLAY_CONFIG_ITEMS ADD (CONSTRAINT
 
 -- menu items and permits
 INSERT INTO menu_items(module_id, section_id, id, label, sort_order, url, description, user_type) VALUES('ANALYSISMODULE', 'REPORTS', -57, 'mi.chart.reports', 25, '/analysis/listchartreports.htm', 'chart.reports.menu.description', null);
-insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_AVAILABLE, URL, ID_PARAM, CLASS, METHOD) VALUES (PERMIT_SQ.nextval, 'AP', 'search','CHART REPORTS' ,'Permission to Browse Chart Reports', 'T','/analysis/listchartreports.htm', null, null, null);
+insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD) VALUES (PERMIT_SQ.nextval, 'AP', 'search','CHART REPORTS' ,'Permission to Browse Chart Reports', 'T','/analysis/listchartreports.htm', null, null, null);
 exec zynap_loader_sp.menu_permits_link;
 
 insert into permits_roles select id, '6' from permits where url = '/analysis/listchartreports.htm' AND type = 'AP';
@@ -237,11 +237,11 @@ ALTER TABLE DASHBOARD_ROLES ADD (CONSTRAINT
 -- permits and menu_items
 -- menu items and permits
 INSERT INTO menu_items(module_id, section_id, id, label, sort_order, url, description, user_type) VALUES('ADMINMODULE', 'TEMPLATES', -71, 'mi.dashboards', 25, '/admin/listdashboards.htm', 'dashboards.menu.description', null);
-insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_AVAILABLE, URL, ID_PARAM, CLASS, METHOD) VALUES (PERMIT_SQ.nextval, 'AP', 'search','DASHBOARDS' ,'Permission to Browse Dashboards', 'T','/admin/listdashboards.htm', null, null, null);
+insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD) VALUES (PERMIT_SQ.nextval, 'AP', 'search','DASHBOARDS' ,'Permission to Browse Dashboards', 'T','/admin/listdashboards.htm', null, null, null);
 exec zynap_loader_sp.menu_permits_link;
 
 -- wildcard the dashboard permits
-insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_AVAILABLE, URL, ID_PARAM, CLASS, METHOD) VALUES (PERMIT_SQ.nextval, 'AP', 'modify','DASHBOARDS' ,'Permission to Modify Dashboards', 'T','/admin/.*dashboard.htm', null, null, null);
+insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD) VALUES (PERMIT_SQ.nextval, 'AP', 'modify','DASHBOARDS' ,'Permission to Modify Dashboards', 'T','/admin/.*dashboard.htm', null, null, null);
 
 -- only admin
 insert into permits_roles select id, '1' from permits where url = '/admin/listdashboards.htm' AND type = 'AP';

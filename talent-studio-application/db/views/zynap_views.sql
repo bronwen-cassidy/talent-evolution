@@ -161,25 +161,28 @@ CREATE OR REPLACE VIEW population_groups_view AS
 select p.ID,p.TYPE,p.USER_ID,p.LABEL,p.SCOPE,p.DESCRIPTION,p.ACTIVE_CRITERIA, pg.group_id from populations p left outer join population_groups pg on pg.population_id=p.id
 --WITH READ ONLY;
 /
-  
+
 CREATE OR REPLACE VIEW SURVEY_LIST AS
-select sub_spa.subject_id, cd.first_name, cd.second_name, l.username as manager_name, l.user_id as manager_id, qwp.que_wf_id
-	from subject_primary_associations sub_spa,
-	que_wf_participants qwp, positions p,
-	subject_primary_associations boss_spa,
-	subjects bosses,
-	subjects subordinates,
-	core_details cd,
-	logins l
-	where qwp.subject_id = sub_spa.subject_id
-	and sub_spa.position_id = p.node_id
-	and p.parent_id = boss_spa.position_id
-    and sub_spa.value_id=402
-	and sub_spa.subject_id = subordinates.node_id
-	and subordinates.cd_id = cd.id
-	and boss_spa.subject_id = bosses.node_id
-	and bosses.user_id = l.user_id
---WITH READ ONLY;
+  select sub_spa.subject_id, cd.first_name, cd.second_name, l.username as manager_name, l.user_id as manager_id, qwp.que_wf_id
+  from subject_primary_associations sub_spa,
+    que_wf_participants qwp, positions p,
+    subject_primary_associations boss_spa,
+    subjects bosses,
+    subjects subordinates,
+    core_details cd,
+    logins l,
+    lookup_values lv
+  where qwp.subject_id = sub_spa.subject_id
+        and sub_spa.position_id = p.node_id
+        and p.parent_id = boss_spa.position_id
+        and sub_spa.value_id=lv.id
+        and lv.value_id='PERMANENT'
+        and lv.type_id='POSITIONSUBJECTASSOC'
+        and sub_spa.subject_id = subordinates.node_id
+        and subordinates.cd_id = cd.id
+        and boss_spa.subject_id = bosses.node_id
+        and bosses.user_id = l.user_id
+  --WITH READ ONLY;
 /
 -- view to return all answers to any questions
 CREATE OR REPLACE VIEW SEARCH_TERMS_XY AS

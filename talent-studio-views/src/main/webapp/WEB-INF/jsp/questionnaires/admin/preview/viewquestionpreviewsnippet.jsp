@@ -7,7 +7,7 @@
 
 
 <c:if test="${question.type == 'TEXT' || question.type == 'INTEGER' || question.type == 'POSITIVEINTEGER'}">
-    <input type="text" name="ignore" value="" <c:out value="${titleAttr}" escapeXml="false"/> <c:if test="${question.length != 0}">size="<c:out value="${question.length}"/>"</c:if> readonly="true"/>
+    <input class="question_text" type="text" name="ignore" value="" <c:out value="${titleAttr}" escapeXml="false"/> <c:if test="${question.length != 0}">size="<c:out value="${question.length}"/>"</c:if> readonly="true"/>
 </c:if>
 
 <c:if test="${question.type == 'TEXTAREA' || question.type == 'TEXTBOX'}">
@@ -15,7 +15,7 @@
 </c:if>
 
 <c:if test="${question.type == 'DATE'}">
-    <span style="white-space: nowrap;"><input class="input_date" name="ignore" type="text" readonly="true" <c:out value="${titleAttr}" escapeXml="false"/>
+    <span style="white-space: nowrap;"><input class="question_date" name="ignore" type="text" readonly="true" <c:out value="${titleAttr}" escapeXml="false"/>
             /><input type="button" class="partnerbutton" value="..." disabled="true"/></span>
 </c:if>
 

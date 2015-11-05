@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
     <!-- todo this will change -->
@@ -22,6 +23,10 @@
         <maven.compiler.target>1.6</maven.compiler.target>
 
         <ant antfile="build.xml"/>
+        <!-- default properties -->
+        <client>nhs</client>
+        <war.name>talent-studio</war.name>
+        <maven.resources.overwrite>true</maven.resources.overwrite>
 
     </properties>
 
@@ -207,7 +212,6 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <!-- todo confirm this works was 3.8.2-->
             <!--<version>4.12</version>-->
             <version>3.8.2</version>
             <scope>test</scope>
@@ -219,9 +223,14 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-    
+
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.7</version>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -231,55 +240,96 @@
                     <skipTests>true</skipTests>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <path>/</path>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
-    
+
     <profiles>
         <profile>
             <id>dev</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
+            <properties>
+                <db.url>jdbc:oracle:thin:@DELL55.Rockall.dub:1521:STOC</db.url>
+                <db.password>tsdev</db.password>
+                <db.username>tsdev</db.username>
+                <host.name>localhost</host.name>
+                <server.url>http://localhost:8080</server.url>
+                <war.name>talent-studio</war.name>
+                <multi.tenant>true</multi.tenant>
+            </properties>
             <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-antrun-plugin</artifactId>
-                        <version>1.8</version>
-                        <executions>
-                            <execution>
-                                <configuration>
-                                    <target name="build-war">
-                                        <property name="client" value="${client}"/>
-                                        <echo message="client is defined as ${client}"/>
-                                    </target>
-                                </configuration>
-                                <phase>install</phase>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
+                <resources>
+                    <resource>
+                        <filtering>true</filtering>
+                        <directory>src/main/resources</directory>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+        <profile>
+            <id>live</id>
+            <properties>
+                <db.url>jdbc:oracle:thin:@172.24.16.24:1521:orcl</db.url>
+                <db.password>${client}</db.password>
+                <db.username>${client}</db.username>
+                <smpt.host>smtp.sendgrid.net</smpt.host>
+                <host.name>tmelogin</host.name>
+                <server.url>https://www.tmelogin.com</server.url>
+                <logFilePath>/usr/local/tomcat7/logs/</logFilePath>
+                <taapi.part.url>https://www.tmelogin.com</taapi.part.url>
+                <war.name>${client}</war.name>
+                <multi.tenant>true</multi.tenant>
+            </properties>
+            <build>
+                <resources>
+                    <resource>
+                        <filtering>true</filtering>
+                        <directory>src/main/resources</directory>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+        <profile>
+            <id>single-live</id>
+            <properties>
+                <db.url>jdbc:oracle:thin:@172.24.16.24:1521:orcl</db.url>
+                <db.password>${client}</db.password>
+                <db.username>${client}</db.username>
+                <smpt.host>smtp.sendgrid.net</smpt.host>
+                <host.name>tmelogin</host.name>
+                <server.url>https://www.tmelogin.com</server.url>
+                <logFilePath>/usr/local/tomcat7/logs/</logFilePath>
+                <taapi.part.url>https://www.tmelogin.com</taapi.part.url>
+                <war.name>${client}</war.name>
+                <multi.tenant>false</multi.tenant>
+            </properties>
+            <build>
+                <resources>
+                    <resource>
+                        <filtering>true</filtering>
+                        <directory>src/main/resources</directory>
+                    </resource>
+                </resources>
             </build>
         </profile>
     </profiles>
 
     <repositories>
-        <!--<repository>-->
-        <!--<id>pentaho-releases</id>-->
-        <!--<name>Pentaho Releases</name>-->
-        <!--<url>http://repository.pentaho.org/artifactory/repo/</url>-->
-        <!--</repository>-->
+
         <repository>
             <id>maven-repo</id>
             <url>http://repo1.maven.org/maven2/</url>
         </repository>
-        <!--<repository>-->
-        <!--<id>spring-release</id>-->
-        <!--<name>Spring Release Repository</name>-->
-        <!--<url>s3://maven.springframework.org/release</url>-->
-        <!--</repository>-->
+
         <repository>
             <id>pentaho-repo</id>
             <url>http://repo.pentaho.org/artifactory/pentaho/</url>

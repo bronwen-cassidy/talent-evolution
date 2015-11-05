@@ -139,7 +139,7 @@ INSERT INTO display_config_items (id, display_config_id, label, content_type, is
 VALUES(-23, -5, 'My Objectives', 'OBJECTIVES', 'T', 'T', 3);
 
 -- my objectives permits
-insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_AVAILABLE, URL, ID_PARAM, CLASS, METHOD) VALUES(PERMIT_SQ.nextval, 'AP', 'admin', 'OBJECTIVES', 'objectives','T', '/talentarena/*.*myobjective*.*', null, null, null);
+insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD) VALUES(PERMIT_SQ.nextval, 'AP', 'admin', 'OBJECTIVES', 'objectives','T', '/talentarena/*.*myobjective*.*', null, null, null);
 
 -- rebuild home role
 delete from permits_roles where role_id = 8;

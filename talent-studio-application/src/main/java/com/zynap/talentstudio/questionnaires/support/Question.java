@@ -235,6 +235,14 @@ public class Question extends BaseQuestion implements Cloneable {
         this.managerWrite = "Y".equalsIgnoreCase(managerWrite);
     }
 
+    public boolean isCannotDisable() {
+        return cannotDisable;
+    }
+
+    public void setCannotDisableValue(String cannotDisable) {
+        this.cannotDisable = "Y".equalsIgnoreCase(cannotDisable);
+    }
+
     public void setQuestionnaireGroup(QuestionnaireGroup questionnaireGroup) {
         this.questionnaireGroup = questionnaireGroup;
     }
@@ -324,6 +332,22 @@ public class Question extends BaseQuestion implements Cloneable {
         return dynamicAttribute.getRefersToType();
     }
 
+    public String getCellStyle() {
+        return cellStyle;
+    }
+
+    public void setCellStyle(String cellStyle) {
+        this.cellStyle = cellStyle;
+    }
+
+    public String getQuestionStyle() {
+        return questionStyle;
+    }
+
+    public void setQuestionStyle(String questionStyle) {
+        this.questionStyle = questionStyle;
+    }
+
     private QuestionnaireGroup questionnaireGroup;
     private MultiQuestion multiQuestion;
     private DynamicAttribute dynamicAttribute;
@@ -334,6 +358,8 @@ public class Question extends BaseQuestion implements Cloneable {
     private String questionType;
     private String label;
     private String textId;
+    private String cellStyle;
+    private String questionStyle;
 
     private List<QuestionReference> mappings = new ArrayList<QuestionReference>();
     private List<QuestionReference> operands = new ArrayList<QuestionReference>();
@@ -342,6 +368,7 @@ public class Question extends BaseQuestion implements Cloneable {
     private boolean displayableLabel = true;
     /* determines if this question is only editable by a manager */
     private boolean managerWrite;
+    private boolean cannotDisable;
 
     /* determine if this question is a hidden one or not default is false*/
     private boolean hidden;

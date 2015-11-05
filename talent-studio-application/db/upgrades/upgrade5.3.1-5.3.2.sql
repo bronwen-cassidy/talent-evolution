@@ -22,7 +22,7 @@ UPDATE ROLES SET IS_ARENA_LINKED = 'T' WHERE ID IN (1, 3, 5, 6, 7, 8);
 
 -- insert the menu item in admin arena
 INSERT INTO menu_items(module_id, section_id, id, label, sort_order, url, description, user_type) VALUES(zynap_app_sp.get_admin_module_id(), 'ATTRIBUTES',-70, 'mi.organisation.attributes', 20, '/admin/listorganisationDA.htm', 'list.organisation.da.menu.description', null);
-insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_AVAILABLE, URL, ID_PARAM, CLASS, METHOD) VALUES (PERMIT_SQ.nextval, 'AP', 'search','ATTRIBUTES' ,'Permission to Browse Organisation Attributes', 'T','/admin/listorganisationDA.htm', null, null, null);
+insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD) VALUES (PERMIT_SQ.nextval, 'AP', 'search','ATTRIBUTES' ,'Permission to Browse Organisation Attributes', 'T','/admin/listorganisationDA.htm', null, null, null);
 
 exec zynap_loader_sp.menu_permits_link;
 

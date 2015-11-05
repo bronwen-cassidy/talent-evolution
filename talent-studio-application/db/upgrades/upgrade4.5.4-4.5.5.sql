@@ -273,9 +273,9 @@ INSERT INTO menu_items(module_id, section_id, id, label, sort_order, url, descri
 INSERT INTO menu_items(module_id, section_id, id, label, sort_order, url, description, user_type) VALUES(zynap_app_sp.get_admin_module_id(), 'OBJECTIVES',-17, 'Organisation Objectives', 10, '/admin/listorgunitobjectives.htm', 'list.oganisation.objectives.menu.description', null);
 
 -- Permits for corporate objectives
-insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_AVAILABLE, URL, ID_PARAM, CLASS, METHOD) VALUES (PERMIT_SQ.nextval, 'AP', 'modify','OBJECTIVES' ,'Permission to add/edit corporate objectives', 'T','/admin/.*objectives.htm', null, null, null);
-insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_AVAILABLE, URL, ID_PARAM, CLASS, METHOD) VALUES (PERMIT_SQ.nextval, 'AP', 'search','OBJECTIVES' ,'Permission to list corporate objectives', 'T','/admin/listcorporateobjectives.htm', null, null, null);
-insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_AVAILABLE, URL, ID_PARAM, CLASS, METHOD) VALUES (PERMIT_SQ.nextval, 'AP', 'search','OBJECTIVES' ,'Permission to list corporate objectives', 'T','/admin/listorgunitobjectives.htm', null, null, null);
+insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD) VALUES (PERMIT_SQ.nextval, 'AP', 'modify','OBJECTIVES' ,'Permission to add/edit corporate objectives', 'T','/admin/.*objectives.htm', null, null, null);
+insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD) VALUES (PERMIT_SQ.nextval, 'AP', 'search','OBJECTIVES' ,'Permission to list corporate objectives', 'T','/admin/listcorporateobjectives.htm', null, null, null);
+insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD) VALUES (PERMIT_SQ.nextval, 'AP', 'search','OBJECTIVES' ,'Permission to list corporate objectives', 'T','/admin/listorgunitobjectives.htm', null, null, null);
 
 
 DECLARE

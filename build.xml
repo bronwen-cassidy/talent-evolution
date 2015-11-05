@@ -10,7 +10,7 @@
         <format property="build.date" pattern="dd-MM-yy_HH-mm"/>
     </tstamp>
 
-    <property name="build.version" value="V5.4.5-mt"/>
+    <property name="build.version" value="V5.4.7"/>
     <property name="build.info" value="dhanson"/>
     <property name="build.number" value="${build.version} ${build.info} ${build.date.time}"/>
 
@@ -53,7 +53,7 @@
     <property name="junit.maxmemory" value="512m"/>
 
     <!-- Default Mail properties for the build server -->
-    <property name="sender.email" value="info@talentscope.net"/>
+    <property name="sender.email" value="info@tmevolution.com"/>
     <property name="mail.jndi.name" value="mail/TSMSession"/>
     <property name="client.path" value="${client}"/>
 
@@ -124,7 +124,7 @@
     <property name="integration.module" value="talent-studio-integration"/>
     <property name="integration.src.dir" value="${integration.module}/src/main/java"/>
     <property name="integration.lib.dir" value="../integration-lib"/>
-    <property name="integration.config.dir" value="${integration.module}/config"/>
+    <property name="integration.config.dir" value="${integration.module}/src/main/resources"/>
 
     <!-- Standalone Moddule -->
     <property name="standalone.src.dir" value="${integration.module}/client"/>
@@ -135,10 +135,12 @@
     <property name="application.module" value="talent-studio-application"/>
     <property name="app.db.dir" value="${application.module}/db"/>
     <property name="app.src.dir" value="${application.module}/src/main/java"/>
+    <property name="app.resources.dir" value="${application.module}/src/main/resources"/>
+    <property name="test.app.resources.dir" value="${application.module}/src/test/resources"/>
     <property name="templates.dir" value="templates"/>
     <property name="app.templates.dir" value="${application.module}/templates"/>
     <property name="app.config.dir" value="${application.module}/config"/>
-    <property name="app.config.spring.dir" value="${app.config.dir}/spring"/>
+    <property name="app.config.spring.dir" value="${app.resources.dir}/spring"/>
     <property name="app.metainf.dir" value="${application.module}/META-INF"/>
 
     <!--  directory where hibernate mapping files are located -->
@@ -157,15 +159,12 @@
 
     <!-- Web Module (WAR) -->
     <property name="webapp.dir" value="${webview.module}/src/main/webapp"/>
-    <property name="war.dir" value="${webview.module}/war"/>
+    <property name="war.dir" value="${webapp.dir}"/>
 
     <!-- Web Module config directories -->
-    <property name="war.config.dir" value="${webview.module}/config"/>
-    <property name="war.config.spring.dir" value="${war.config.dir}/spring"/>
-    <property name="war.config.common.dir" value="${war.config.dir}/common"/>
+    <property name="war.config.dir" value="${webview.module}/src/main/resources"/>
     <property name="webapp.webinf.dir" value="${webview.root.dir}/main/webapp/WEB-INF"/>
-    <property name="war.config.logging.dir" value="${war.config.dir}/logging"/>
-    <property name="war.config.server.dir" value="${war.config.dir}/server"/>
+    <property name="war.config.server.dir" value="${webview.module}/src/main/webapp/META-INF"/>
     <property name="scripts.dir" value="${war.dir}/scripts"/>
 
     <!-- Config file used by Spring to map views to actual JSPs -->
@@ -325,15 +324,9 @@
     <condition property="db.url" value="jdbc:oracle:thin:@172.24.16.24:1521:orcl">
         <equals arg1="${server}" arg2="tc"/>
     </condition>
-    <condition property="db.url" value="jdbc:oracle:thin:@poseidon:1521:XE">
-        <equals arg1="${server}" arg2=""/>
-    </condition>
 
     <condition property="smpt.host" value="smtp.sendgrid.net">
         <equals arg1="${server}" arg2="tc"/>
-    </condition>
-    <condition property="smpt.host" value="smtp.ynshosting.com">
-        <equals arg1="${server}" arg2=""/>
     </condition>
     <condition property="logFilePath" value="/usr/local/tomcat7/logs/">
         <equals arg1="${server}" arg2="tc"/>
@@ -389,7 +382,7 @@
         <echo message="db url = ${db.url}"/>
         <echo message="autonomy position database set = ${autonomy.position.database}"/>
         <echo message="autonomy subject database set = ${autonomy.subject.database}"/>
-        <echo message="autonomy searcher = ${autonomy.searcher}"/>
+
         <!-- todo when the oracle search has been set up we need to bring the result mapper into conditional properties-->
         <echo message="result mapper = ${result.mapper}"/>
         <echo message="server url = ${server.url}"/>
@@ -398,6 +391,10 @@
 
     </target>
 
+    <fileset id="web.spring.config.fileset" dir="${webapp.webinf.dir}">
+        <include name="*.xml"/>
+        <exclude name="web.xml"/>
+    </fileset>
     <!-- global filterset used for templating application configuration files -->
     <filterset id="app.config.filterset">
 
@@ -414,8 +411,6 @@
 
         <filter token="autonomy.position.database" value="${client}PositionData"/>
         <filter token="autonomy.subject.database" value="${client}SubjectData"/>
-        <filter token="autonomy.searcher" value="${autonomy.searcher}"/>
-        <filter token="autonomy.searcher" value="${autonomy.searcher}"/>
 
         <filter token="taapi.username" value="${taapi.username}"/>
         <filter token="taapi.password" value="${taapi.password}"/>
@@ -425,11 +420,9 @@
         <filter token="multi.tenant" value="${multi.tenant}"/>
 
         <filter token="result.mapper" value="${result.mapper}"/>
-        <filter token="search.engine" value="${search.engine}"/>
-        <!--<filter token="search.gateway" value="${search.engine}Gateway"/>-->
         <filter token="host.name" value="${host.name}"/>
         <filter token="sender.email" value="${sender.email}"/>
-        <filter token="server.url" value="${server.url}/${client.path}"/>
+        <filter token="server.url" value="${server.url}/${project.name}"/>
         <filter token="mail.jndi.name" value="${mail.jndi.name}"/>
         <filter token="displayErrors" value="${displayErrors}"/>
 
@@ -521,17 +514,9 @@
         <include name="properties/**"/>
     </patternset>
 
-    <!-- Teach Ant how to use FindBugs -->
-    <taskdef name="findbugs" classname="edu.umd.cs.findbugs.anttask.FindBugsTask" classpathref="tools.classpath"/>
-
-    <!-- Teach Ant how to use CheckStyle -->
-    <taskdef resource="checkstyletask.properties" classpath="${tools.lib}/checkstyle-all-3.5.jar"/>
 
     <!-- Teach Ant how to use Contrib Tasks such as <if> (http://ant-contrib.sourceforge.net) -->
     <taskdef resource="net/sf/antcontrib/antcontrib.properties" classpathref="tools.classpath"/>
-
-    <!-- Teach Ant how to use the EMMA code coverage tool -->
-    <taskdef resource="emma_ant.properties" classpathref="tools.classpath"/>
 
     <!-- Check if JUnit classes are available - must be in Ant's classpath -->
     <if>
@@ -553,14 +538,13 @@
         =================== CORE TARGETS =========================================================
     -->
 
-    <target name="clean" depends="emma-clean">
+    <target name="clean">
         <delete dir="${build.dir}"/>
         <delete dir="${dist.dir}"/>
         <delete dir="${test.reports.dir}"/>
         <delete dir="${javadocs.dir}"/>
         <delete dir="${checkstyle.report.dir}"/>
         <delete dir="${findbugs.report.dir}"/>
-        <delete file="${webview.module}/war/favicon.ico"/>
         <delete file="${dist.tar.file}"/>
         <delete>
             <fileset dir="${basedir}" includes="*.log"/>
@@ -576,16 +560,17 @@
             <src path="${app.src.dir}"/>
         </javac>
 
-        <!-- copy additional files -->
         <copy todir="${build.app.classes.dir}" overwrite="true" filtering="true">
-            <fileset dir="${app.src.dir}">
+            <fileset dir="${app.resources.dir}">
+                <include name="**/*.vm"/>
+                <include name="**/*.jrxml"/>
                 <patternset refid="app.src.files"/>
             </fileset>
             <filterset refid="app.config.filterset"/>
         </copy>
-
+        
     </target>
-
+    
     <target name="compile-webview" depends="compile-app" description="compile the web view classes">
         <javac destdir="${build.webview.classes.dir}" source="${javac.version}" target="${javac.version}" debug="${javac.debug}"
                deprecation="${javac.deprecation}" optimize="${javac.optimize}" failonerror="${javac.failonerror}" includeAntRuntime="no">
@@ -643,14 +628,13 @@
 
         <!-- copy and filter web app config files excluding the ts-views file which needs to go into WEB-INF/classes -->
         <copy todir="${build.webview.war.webinf.dir}" filtering="true" overwrite="true">
-            <fileset dir="${war.config.spring.dir}" excludes="**/${war.config.spring.file}"/>
+            <fileset refid="web.spring.config.fileset"/>
             <filterset refid="app.config.filterset"/>
         </copy>
 
         <!-- copy and filter webapp config files (web.xml) -->
         <copy todir="${build.webview.war.webinf.dir}" filtering="true" overwrite="true">
             <fileset dir="${war.config.server.dir}"/>
-            <fileset dir="${war.config.common.dir}"/>
             <fileset dir="${webapp.webinf.dir}" includes="web.xml"/>
             <filterset refid="app.config.filterset"/>
         </copy>
@@ -667,30 +651,25 @@
         </copy>
 
         <!-- copy and filter web app resource bundle files -->
-        <copy tofile="${build.webview.war.classes.dir}/messages.properties" file="${war.resources.dir}/language/en/messages.properties" filtering="true" overwrite="true">
+        <copy tofile="${build.webview.war.classes.dir}/messages.properties" file="${war.resources.dir}/messages.properties" filtering="true" overwrite="true">
             <filterset refid="app.config.filterset"/>
         </copy>
 
         <!-- copy all other language resource files, e.g french -->
         <copy todir="${build.webview.war.classes.dir}" filtering="true" overwrite="true">
-            <fileset dir="${war.resources.dir}/language" includes="*.properties"/>
+            <fileset dir="${war.resources.dir}" includes="messages*.properties"/>
             <filterset refid="app.config.filterset"/>
         </copy>
 
         <!-- copy and filter Spring view config file to classes directory -->
-        <copy todir="${build.webview.war.classes.dir}" file="${war.config.spring.dir}/${war.config.spring.file}" filtering="true" overwrite="true">
-            <filterset refid="app.config.filterset"/>
-        </copy>
+        <copy todir="${build.webview.war.classes.dir}" file="${war.resources.dir}/${war.config.spring.file}" overwrite="true"/>
 
         <!-- copy the velocity templates used for emailing -->
         <copy todir="${build.webview.war.classes.dir}" overwrite="true">
-            <fileset dir="${application.module}">
+            <fileset dir="${app.resources.dir}">
                 <include name="${templates.dir}/*.vm"/>
             </fileset>
         </copy>
-
-        <!-- copy website icon file to correct location -->
-        <copy file="${webview.module}/war/images/zynap.ico" tofile="${webview.module}/war/favicon.ico" overwrite="true"/>
 
         <copy todir="${build.webview.war.dir}" overwrite="true">
             <fileset dir="${war.dir}">
@@ -700,7 +679,7 @@
 
         <!-- copy the jasper dtd -->
         <copy todir="${build.webview.war.classes.dir}">
-            <fileset dir="${war.resources.dir}" excludes="language/**,properties/**"/>
+            <fileset dir="${war.resources.dir}" excludes="messages*.properties,properties/**"/>
         </copy>
 
         <copy todir="${build.webview.properties.dir}" overwrite="true">
@@ -790,7 +769,7 @@
                         </copy>
                         <!-- copy all other language resource files -->
                         <copy todir="${build.webview.war.classes.dir}" filtering="true" overwrite="true">
-                            <fileset dir="${war.resources.dir}/language" includes="*.properties"/>
+                            <fileset dir="${war.resources.dir}" includes="messages*.properties"/>
                             <filterset refid="app.config.filterset"/>
                         </copy>
                     </then>
@@ -804,19 +783,21 @@
 
         <war warfile="${dist.dir}/${project.name}.war" webxml="${build.webview.war.webinf.dir}/web.xml">
             <!-- provides scripts only -->
-            <fileset dir="${war.dir}" excludes="help/**,images/**,styles/**,statics/**"/>
+            <fileset dir="${webapp.dir}" excludes="WEB-INF/**,META_INF/context.xml"/>
             <fileset dir="${build.webview.war.dir}" excludes="WEB-INF/**,WEB-INF/classes/**"/>
             
-            <fileset dir="${webapp.dir}" excludes="WEB-INF/**"/>
             <!-- copy properties files -->
             <classes dir="${build.webview.properties.dir}"/>
             <!-- copy properties files in view -->
             <classes dir="${webview.src.dir}" includes="**/*.properties"/>
             <classes dir="${build.app.classes.dir}" includes="ehcache.xml"/>
+
             <!-- copy WEB-INF directory -->
             <webinf dir="${build.webview.war.webinf.dir}" excludes="web.xml"/>
             <!-- copy JSPs tlds and services -->
-            <webinf dir="${webapp.dir}/WEB-INF" excludes="web.xml"/>
+
+            <webinf dir="${webapp.dir}/WEB-INF" includes="jsp/**,tlds/**"/>
+          
             <!-- copy lib files -->
             <lib dir="${integration.lib.dir}" includes="*.jar"/>
             <lib dir="${runtime.lib}" includes="*.jar"/>
@@ -838,14 +819,6 @@
     <target name="release" depends="build-war" description="prepares the war file for a release guess we could always figure out how to scp in ant">
     	<copy file="${dist.dir}/${project.name}.war" tofile="${release.dir}/${project.name}.war" overwrite="true"/>
     </target>
-    
-    
-    <target name="deploy-us" depends="release" description="copies the war files to the savvis us remote servers">
-    	<scp file="${release.dir}/${project.name}.war" 
-    		todir="s603004@64.14.184.228:/data01/home/s603004/oc4j/10.1.3/OracleAS_1/j2ee/home/applications" 
-    		password="1JRTLU-k"
-    		knownhosts="Z:/.ssh/known_hosts"/>
-    </target>
 
     <target name="unpack-webapp" depends="build-war" description="Unpacks the war file so that the application can be deployed expanded">
         <unwar src="${dist.dir}/${project.name}.war" dest="${dist.webapp.dir}"/>
@@ -853,8 +826,6 @@
 
     <target name="all" depends="clean, copy-webapp"/>
 
-    <!-- todo readd when out-of-memory errors handled , emma-report -->
-    <target name="all-tests-and-emma" depends="clean, emma-instrument, run-all-tests"/>
 
     <!--
         =================== COPY CONFIGURATIONS =============================================
@@ -887,14 +858,14 @@
 
         <!-- copy hibernate application config files to classes directory -->
         <copy todir="${classes-dir}">
-            <fileset dir="${app.src.dir}">
+            <fileset dir="${app.resources.dir}">
                 <patternset refid="hibernate.files"/>
             </fileset>
         </copy>
 
         <!-- copy digester config files to classes directory -->
         <copy todir="${classes-dir}">
-            <fileset dir="${app.src.dir}">
+            <fileset dir="${app.resources.dir}">
                 <patternset refid="digester.files"/>
             </fileset>
         </copy>
@@ -949,21 +920,21 @@
 
         <!-- copy hibernate application config files to classes directory -->
         <copy todir="${webclasses-dir}" overwrite="true">
-            <fileset dir="${app.src.dir}">
+            <fileset dir="${app.resources.dir}">
                 <patternset refid="hibernate.files"/>
             </fileset>
         </copy>
 
         <!-- copy digester config files to classes directory -->
         <copy todir="${webclasses-dir}" overwrite="true">
-            <fileset dir="${app.src.dir}">
+            <fileset dir="${app.resources.dir}">
                 <patternset refid="digester.files"/>
             </fileset>
         </copy>
 
         <!-- copy and filter logging config files to classes directory -->
         <copy todir="${webclasses-dir}" filtering="true" overwrite="true">
-            <fileset dir="${war.config.logging.dir}"/>
+            <fileset dir="${war.resources.dir}" includes="log4j.properties"/>
             <filterset refid="app.config.filterset"/>
         </copy>
 
@@ -1013,7 +984,7 @@
 
         <copy todir="${build.standalone.classes.dir}" file="${standalone.src.dir}/log4j.properties"/>
 
-        <copy todir="${build.standalone.classes.dir}" file="${app.src.dir}/ehcache.xml"/>
+        <copy todir="${build.standalone.classes.dir}" file="${app.resources.dir}/ehcache.xml"/>
 
         <copy todir="${build.standalone.dir}" file="${integration.module}/build.xml"/>
 
@@ -1173,7 +1144,7 @@
         
         <!-- copy additional hibernate application config files to test classes directory -->
         <copy todir="${test.classes.dir}" overwrite="true">
-            <fileset dir="${test.app.src.dir}">
+            <fileset dir="${test.app.resources.dir}">
                 <patternset refid="hibernate.files"/>
             </fileset>
         </copy>
@@ -1370,8 +1341,6 @@
             <sysproperty key="sender.email" value="${sender.email}"/>
             <sysproperty key="server.url" value="http://localhost:8080"/>
 
-            <sysproperty key="search.gateway" value="${search.engine}Gateway"/>
-            <sysproperty key="search.engine" value="${search.engine}"/>
             <sysproperty key="result.mapper" value="${result.mapper}"/>
 
             <!-- Emma stuff -->
@@ -1428,57 +1397,6 @@
     </target>
 
     <!--
-        =================== EMMA Instrumented test runs ==========================================
-    -->
-
-    <target name="emma-clean" description="clean all EMMA generated things">
-        <delete dir="${emma.coverage.dir}"/>
-        <delete failonerror="false" file="${runtime.lib}/${emma.jar.name}"/>
-    </target>
-
-    <target name="emma-instrument" depends="compile-webview, compile-integration" description="Generate the EMMA instrumented classes">
-        <if>
-            <isfalse value="${javac.debug}"/>
-            <then>
-                <echo>
-                    Ant property javac.debug does not have the value "true".
-                    The Emma coverage tool can only be used when the java classes have
-                    been compiled with debug data enabled.
-                </echo>
-                <fail>Emma requires java debug info.</fail>
-            </then>
-        </if>
-
-        <emma>
-            <instr metadatafile="${emma.coverage.dir}/metadata.emma" mode="overwrite" merge="true">
-                <instrpath path="${build.app.classes.dir}"/>
-                <instrpath path="${build.webview.classes.dir}"/>
-                <instrpath path="${build.integration.classes.dir}"/>
-                <filter excludes="*.*Exception"/>
-            </instr>
-        </emma>
-
-        <copy file="${tools.lib}/${emma.jar.name}" todir="${runtime.lib}"/>
-    </target>
-
-    <target name="emma-report" description="Generate an EMMA report on results of test runs.">
-        <emma>
-            <report sort="+name,+class">
-                <sourcepath>
-                    <pathelement location="${app.src.dir}"/>
-                    <pathelement location="${webview.src.dir}"/>
-                </sourcepath>
-
-                <fileset dir="${emma.coverage.dir}">
-                    <include name="*.emma"/>
-                </fileset>
-
-                <html outfile="${emma.coverage.dir}/coverage.html"/>
-            </report>
-        </emma>
-    </target>
-
-    <!--
         =================== MISC TARGETS =========================================================
     -->
 
@@ -1507,34 +1425,11 @@
             <classpath refid="tools.classpath"/>
 
             <arg value="${basedir}/${webapp.dir}"/>
-            <arg value="${basedir}/${war.config.spring.dir}/${war.config.spring.file}"/>
+            <arg value="${basedir}/${war.resources.dir}/${war.config.spring.file}"/>
         </java>
 
     </target>
 
-    <target name="checkstyle" description="Runs CheckStyle against code base">
-        <delete dir="${checkstyle.report.dir}"/>
-        <mkdir dir="${checkstyle.report.dir}"/>
-
-        <checkstyle config="zynap_checks.xml">
-            <fileset dir="${app.src.dir}" includes="**/*.java"/>
-            <fileset dir="${webview.src.dir}" includes="**/*.java"/>
-            <formatter type="xml" toFile="${checkstyle.report.dir}/style-errors.xml"/>
-        </checkstyle>
-    </target>
-
-    <target name="findbugs" depends="compile-webview" description="Runs FindBugs against code base">
-        <delete dir="${findbugs.report.dir}"/>
-        <mkdir dir="${findbugs.report.dir}"/>
-
-        <findbugs home="${findbugs.home}" output="xml:withMessages" outputFile="${findbugs.report.dir}/app-bugs.xml">
-            <class location="${build.app.classes.dir}"/>
-            <class location="${build.webview.classes.dir}"/>
-            <auxClasspath refid="build.webview.classpath"/>
-            <sourcePath path="${app.src.dir}"/>
-            <sourcePath path="${webview.src.dir}"/>
-        </findbugs>
-    </target>
 
     <!--
         =================== JAVADOC ==============================================================

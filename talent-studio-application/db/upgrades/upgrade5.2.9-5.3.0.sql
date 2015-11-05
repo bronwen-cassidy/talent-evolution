@@ -9,7 +9,7 @@ accept l_yes char prompt 'db backed up (y/n): '
 
 -- insert the menu item in analyser arena
 INSERT INTO menu_items(module_id, section_id, id, label, sort_order, url, description, user_type) VALUES('ANALYSISMODULE', 'REPORTS', -56, 'mi.appraisal.summary.reports',20,'/analysis/listappraisalreports.htm', 'appraisal.reports.menu.description', null);
-insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_AVAILABLE, URL, ID_PARAM, CLASS, METHOD) VALUES (PERMIT_SQ.nextval, 'AP', 'search','APPRAISAL REPORTS' ,'Permission to Browse Appraisal Report Templates', 'T','/analysis/listappraisalreports.htm', null, null, null);
+insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD) VALUES (PERMIT_SQ.nextval, 'AP', 'search','APPRAISAL REPORTS' ,'Permission to Browse Appraisal Report Templates', 'T','/analysis/listappraisalreports.htm', null, null, null);
 
 exec zynap_loader_sp.menu_permits_link;
 

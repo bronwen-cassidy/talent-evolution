@@ -46,7 +46,7 @@ ALTER TABLE REPORTS ADD CHART_TYPE VARCHAR2 (252);
 INSERT INTO menu_items(module_id, section_id, id, label, sort_order, url, description, user_type)
 VALUES('ANALYSISMODULE', 'REPORTS', -58, 'mi.progress.reports', 32, '/analysis/listprogressreports.htm', 'progress.reports.menu.description', null);
 
-insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_AVAILABLE, URL, ID_PARAM, CLASS, METHOD) VALUES (PERMIT_SQ.nextval, 'AP', 'search','PROGRESS REPORTS' ,'Permission to Browse Progress Reports', 'T','/analysis/listprogressreports.htm', null, null, null);
+insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD) VALUES (PERMIT_SQ.nextval, 'AP', 'search','PROGRESS REPORTS' ,'Permission to Browse Progress Reports', 'T','/analysis/listprogressreports.htm', null, null, null);
 exec zynap_loader_sp.menu_permits_link;
 
 insert into permits_roles select id, '6' from permits where url = '/analysis/listprogressreports.htm' AND type = 'AP';

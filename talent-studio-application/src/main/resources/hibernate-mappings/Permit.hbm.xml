@@ -1,0 +1,163 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+    <!--
+        Created by the Middlegen Hibernate plugin 2.1
+
+        http://boss.bekk.no/boss/middlegen/
+        http://www.hibernate.org/
+    -->
+
+    <class
+        name="com.zynap.talentstudio.security.permits.Permit"
+        table="PERMITS"
+        dynamic-update="true"
+        dynamic-insert="true"
+        >
+        <meta attribute="extends">com.zynap.domain.ZynapDomainObject</meta>
+        <meta attribute="implements">com.zynap.talentstudio.security.permits.IPermit</meta>
+        <meta attribute="implement-equals">true</meta>
+
+        <cache usage="nonstrict-read-write"/>
+
+        <id
+            name="id"
+            type="long"
+            column="ID"
+            >
+            <meta attribute="use-in-equals">true</meta>
+            <generator class="sequence">
+                <param name="sequence">PERMIT_SQ</param>
+            </generator>
+        </id>
+
+        <discriminator column="type"/>
+
+        <property
+            name="action"
+            type="java.lang.String"
+            column="ACTION"
+            not-null="true"
+            length="200"
+            >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+        <property
+            name="content"
+            type="java.lang.String"
+            column="CONTENT"
+            length="100"
+            >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+        <property
+            name="description"
+            type="java.lang.String"
+            column="DESCRIPTION"
+            length="4000"
+            >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+        <property
+            name="active"
+            type="true_false"
+            column="IS_ACTIVE"
+            not-null="true"
+            length="1"
+            >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+        <property
+            name="url"
+            type="java.lang.String"
+            column="URL"
+            length="2048"
+            >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+        <property
+            name="idParam"
+            type="java.lang.String"
+            column="ID_PARAM"
+            length="50"
+            >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+        <property
+            name="contentParam"
+            type="java.lang.String"
+            column="CONTENT_PARAM"
+            length="20"
+            >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+        <property
+            name="clazz"
+            type="java.lang.String"
+            column="CLASS"
+            length="150"
+            >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+        <property
+            name="method"
+            type="java.lang.String"
+            column="METHOD"
+            length="50"
+            >
+            <meta attribute="use-in-tostring">true</meta>
+            <meta attribute="use-in-equals">true</meta>
+        </property>
+
+        <subclass name="com.zynap.talentstudio.security.permits.AccessPermit" discriminator-value="AP" dynamic-insert="true" dynamic-update="true"/>
+        <subclass name="com.zynap.talentstudio.security.permits.DomainObjectPermit" discriminator-value="DP" dynamic-insert="true" dynamic-update="true"/>
+
+    </class>
+
+    <query name="findDomainObjectPermit">
+        <![CDATA[from com.zynap.talentstudio.security.permits.DomainObjectPermit DomainObjectPermit where DomainObjectPermit.content=? and DomainObjectPermit.action=?]]>
+    </query>
+
+    <query name="findActiveDomainObjectPermits">
+        <![CDATA[from com.zynap.talentstudio.security.permits.DomainObjectPermit DomainObjectPermit where DomainObjectPermit.active='T' order by upper(DomainObjectPermit.content), upper(DomainObjectPermit.action)]]>
+    </query>
+
+    <query name="findActiveAccessPermits">
+        <![CDATA[from com.zynap.talentstudio.security.permits.AccessPermit AccessPermit where AccessPermit.active='T' order by upper(AccessPermit.content), upper(AccessPermit.action)]]>
+    </query>
+
+    <query name="findActivePermits">
+        <![CDATA[from com.zynap.talentstudio.security.permits.Permit Permit where Permit.active='T' order by upper(Permit.content), upper(Permit.action)]]>
+    </query>
+
+    <query name="findDomainObjectPermitForUserAndNode">
+        <![CDATA[from UserDomainPermit zudp where zudp.permitId = ? and zudp.userId = ? and zudp.nodeId = ?]]>
+    </query>
+
+    <sql-query name="findContentTypePermits">
+        <![CDATA[select {ap.*} from PERMITS ap, app_roles_users ur, roles r, permits_roles pr
+        WHERE ur.user_id=? AND r.is_active = 'T' AND ap.is_active = 'T' AND ap.type='AP'
+        AND ur.role_id = r.id AND r.id = pr.role_id and ap.id = pr.permit_id
+        AND ap.content_param=? AND ap.action=?]]>
+        <return alias="ap" class="com.zynap.talentstudio.security.permits.AccessPermit"/>        
+    </sql-query>
+
+    <sql-query name="findAccessPermitsByUser">
+        <![CDATA[select {ap.*} from PERMITS ap, app_roles_users ur, roles r, permits_roles pr
+        WHERE ur.user_id=? AND r.is_active = 'T' AND ap.is_active = 'T' AND ap.type='AP'
+        AND ur.role_id = r.id AND r.id = pr.role_id and ap.id = pr.permit_id]]>
+        <return alias="ap" class="com.zynap.talentstudio.security.permits.AccessPermit"/>
+    </sql-query>
+
+</hibernate-mapping>

@@ -109,7 +109,6 @@ abstract class IntegrationMain {
         System.setProperty("autonomy.connection.timeout", "0");
         System.setProperty("autonomy.position.database", "positions");
         System.setProperty("autonomy.subject.database", "subjects");
-        System.setProperty("autonomy.searcher", "mockAutonomySearcher");
         System.setProperty("sender.email", "zynap@zynap.com");
         System.setProperty("server.url", "https://zynaphosting.com");
         System.setProperty("search.gateway", "autonomyGateway");

@@ -336,7 +336,6 @@ public class QuestionnaireHelper {
                 }
             }
         }
-
         final QuestionnaireWrapper wrapper = new QuestionnaireWrapper();
         final QuestionnaireDefinition questionnaireDefinition = questionnaire.getQuestionnaireWorkflow().getQuestionnaireDefinition();
         setQuestionnaireState(wrapper, questionnaireDefinition, questionnaire);

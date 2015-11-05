@@ -11,3 +11,12 @@ config-inspection.log
 talent-studio-views/talent-studio-views.iml
 *.iml
 *.iml
+*.iml
+talent-studio-views/src/main/webapp/images/Thumbs.db
+*.iml
+talent-studio-views/src/main/webapp/images/tree/Thumbs.db
+talent-studio-views/src/main/webapp/images/objectives/Thumbs.db
+*.db
+talent-studio-application/talent-studio-application.iml
+*.iml
+*.iml

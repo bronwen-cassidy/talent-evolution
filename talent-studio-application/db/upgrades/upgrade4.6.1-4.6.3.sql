@@ -114,10 +114,10 @@ ALTER TABLE USERS ADD (CONSTRAINT
 ----------------------------------------------------
 INSERT INTO menu_items(module_id, section_id, id, label, sort_order, url, description, user_type) VALUES(zynap_app_sp.get_admin_module_id(), 'SECURITY DOMAINS',-3, 'mi.browse.home.pages',30,'/admin/listhomepages.htm','list.homepages.menu.description', null);
 
-insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_AVAILABLE, URL, ID_PARAM, CLASS, METHOD)
+insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD)
 VALUES (PERMIT_SQ.nextval, 'AP', 'search','SECURITY DOMAINS' ,'Permission to Browse Home Pages', 'T','/admin/listhomepages.htm', null, null, null) ;
 
-insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_AVAILABLE, URL, ID_PARAM, CLASS, METHOD)
+insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD)
 VALUES (PERMIT_SQ.nextval, 'AP', 'modify','SECURITY DOMAINS' ,'Permission to Modify Home Pages', 'T','/admin/.*homepages.htm', null, null, null) ;
 
 exec zynap_loader_sp.menu_permits_link;

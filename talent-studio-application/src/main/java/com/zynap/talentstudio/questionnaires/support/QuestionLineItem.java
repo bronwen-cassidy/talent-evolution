@@ -43,6 +43,30 @@ public class QuestionLineItem implements Serializable {
         this.dynamic = (YES_ATTR.equals(dynamic) ? StringUtil.TRUE : StringUtil.FALSE);
     }
 
+    public String getRowStyle() {
+        return rowStyle;
+    }
+
+    public void setRowStyle(String rowStyle) {
+        this.rowStyle = rowStyle;
+    }
+
+    public String getHeaderStyle() {
+        return headerStyle;
+    }
+
+    public void setHeaderStyle(String headerStyle) {
+        this.headerStyle = headerStyle;
+    }
+
+    public String getFooterStyle() {
+        return footerStyle;
+    }
+
+    public void setFooterStyle(String footerStyle) {
+        this.footerStyle = footerStyle;
+    }
+
     public Collection<BaseQuestion> getChildren() {
         return getQuestions();
     }
@@ -90,6 +114,9 @@ public class QuestionLineItem implements Serializable {
     private List<BaseQuestion> questions;
     private String dynamic = StringUtil.FALSE;
     private boolean canDisable;
+    private String rowStyle;
+    private String headerStyle;
+    private String footerStyle;
 
     static final List<String> disallowedTypes = new ArrayList<String>();
     static final List<String> disallowedDynamicLineItemTypes = new ArrayList<String>();
