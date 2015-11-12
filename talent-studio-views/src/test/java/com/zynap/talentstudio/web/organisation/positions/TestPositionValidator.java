@@ -12,7 +12,7 @@ import com.zynap.talentstudio.organisation.positions.PositionAssociation;
 import com.zynap.talentstudio.web.common.ControllerConstants;
 import com.zynap.talentstudio.web.common.validation.AssociationValidationHelper;
 import com.zynap.talentstudio.web.organisation.associations.ArtefactAssociationWrapperBean;
-import com.zynap.web.controller.ZynapDefaultFormController;
+import com.zynap.talentstudio.web.controller.ZynapDefaultFormController;
 
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.PropertyValue;

@@ -10,7 +10,7 @@ import com.zynap.talentstudio.security.homepages.HomePage;
 import com.zynap.talentstudio.web.common.ControllerConstants;
 import com.zynap.talentstudio.web.common.ParameterConstants;
 import com.zynap.talentstudio.web.common.exceptions.InvalidSubmitException;
-import com.zynap.web.SessionConstants;
+import com.zynap.talentstudio.web.SessionConstants;
 
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.logging.Log;
@@ -322,7 +322,7 @@ public final class ZynapWebUtils {
      * Get command object from session.
      * <br> Only currently works
      * for {@link com.zynap.talentstudio.web.common.DefaultWizardFormController}
-     * and {@link com.zynap.web.controller.ZynapDefaultFormController} subclasses.
+     * and {@link com.zynap.talentstudio.web.controller.ZynapDefaultFormController} subclasses.
      *
      * @param request The HttpServletRequest
      * @return The session attribute used by the controllers - default name is {@link ControllerConstants#COMMAND_NAME}

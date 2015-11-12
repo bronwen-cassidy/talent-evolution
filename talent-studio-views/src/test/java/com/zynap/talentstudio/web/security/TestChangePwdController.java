@@ -23,9 +23,8 @@ import com.zynap.talentstudio.security.users.IUserService;
 import com.zynap.talentstudio.web.common.ControllerConstants;
 import com.zynap.talentstudio.web.utils.ZynapMockControllerTest;
 import com.zynap.talentstudio.web.utils.ZynapWebUtils;
-import com.zynap.web.validation.ChangePwdValidator;
+import com.zynap.talentstudio.web.validation.ChangePwdValidator;
 
-import org.springframework.aop.scope.ScopedProxyFactoryBean;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;

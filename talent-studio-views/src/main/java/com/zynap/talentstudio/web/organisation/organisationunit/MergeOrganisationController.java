@@ -12,7 +12,7 @@ import com.zynap.talentstudio.web.history.HistoryHelper;
 import com.zynap.talentstudio.web.organisation.MergeOrgUnitWrapperBean;
 import com.zynap.talentstudio.web.utils.ZynapWebUtils;
 import com.zynap.talentstudio.web.utils.mvc.ZynapRedirectView;
-import com.zynap.web.controller.ZynapDefaultFormController;
+import com.zynap.talentstudio.web.controller.ZynapDefaultFormController;
 
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;

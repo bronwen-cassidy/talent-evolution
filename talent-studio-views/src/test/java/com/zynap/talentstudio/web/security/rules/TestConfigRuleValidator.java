@@ -7,7 +7,7 @@ import com.zynap.talentstudio.security.rules.Config;
 import com.zynap.talentstudio.security.rules.Rule;
 import com.zynap.talentstudio.web.AbstractValidatorTestCase;
 import com.zynap.util.spring.BindUtils;
-import com.zynap.web.controller.ZynapDefaultFormController;
+import com.zynap.talentstudio.web.controller.ZynapDefaultFormController;
 
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.validation.DataBinder;

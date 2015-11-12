@@ -11,7 +11,7 @@ import com.zynap.talentstudio.analysis.reports.crosstab.Row;
 import com.zynap.talentstudio.organisation.Node;
 import com.zynap.talentstudio.web.display.support.ArtefactViewModelBuilder;
 import com.zynap.talentstudio.web.utils.ZynapWebUtils;
-import com.zynap.web.utils.HtmlUtils;
+import com.zynap.talentstudio.web.utils.HtmlUtils;
 
 import org.springframework.web.util.ExpressionEvaluationUtils;
 

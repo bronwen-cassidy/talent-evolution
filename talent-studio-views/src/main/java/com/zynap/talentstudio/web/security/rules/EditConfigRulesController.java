@@ -7,7 +7,7 @@ import com.zynap.exception.TalentStudioException;
 import com.zynap.talentstudio.security.rules.IConfigRuleService;
 import com.zynap.talentstudio.security.rules.Rule;
 
-import com.zynap.web.controller.ZynapDefaultFormController;
+import com.zynap.talentstudio.web.controller.ZynapDefaultFormController;
 
 import com.zynap.talentstudio.web.common.ParameterConstants;
 import com.zynap.talentstudio.web.utils.mvc.ZynapRedirectView;

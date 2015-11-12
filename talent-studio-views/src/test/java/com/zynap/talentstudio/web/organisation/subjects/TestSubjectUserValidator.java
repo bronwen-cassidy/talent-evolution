@@ -11,7 +11,7 @@ import com.zynap.domain.admin.User;
 import com.zynap.talentstudio.CoreDetail;
 import com.zynap.talentstudio.organisation.subjects.Subject;
 import com.zynap.talentstudio.web.AbstractValidatorTestCase;
-import com.zynap.web.controller.ZynapDefaultFormController;
+import com.zynap.talentstudio.web.controller.ZynapDefaultFormController;
 
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.validation.DataBinder;

@@ -6,7 +6,7 @@ package com.zynap.talentstudio.web.questionnaires;
 import com.zynap.talentstudio.questionnaires.IQuestionnaireService;
 import com.zynap.talentstudio.questionnaires.IQueWorkflowService;
 import com.zynap.talentstudio.questionnaires.IQueDefinitionService;
-import com.zynap.web.controller.ZynapDefaultFormController;
+import com.zynap.talentstudio.web.controller.ZynapDefaultFormController;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.ServletRequestDataBinder;

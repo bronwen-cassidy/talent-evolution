@@ -4,7 +4,7 @@ import com.zynap.domain.admin.User;
 import com.zynap.exception.TalentStudioException;
 import com.zynap.talentstudio.common.exceptions.TalentStudioDataAccessException;
 import com.zynap.talentstudio.security.users.IUserService;
-import com.zynap.web.SessionConstants;
+import com.zynap.talentstudio.web.SessionConstants;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

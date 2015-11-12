@@ -7,7 +7,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.tags.RequestContextAwareTag;
-import org.springframework.web.util.ExpressionEvaluationUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
@@ -71,7 +70,7 @@ public class ArenaHomePageTag extends RequestContextAwareTag {
     }
 
     public void setArenaId(String arenaId) throws JspException {
-        this.arenaId = ExpressionEvaluationUtils.evaluateString("arenaId", arenaId, pageContext);
+        this.arenaId = arenaId;
     }
 
     private String arenaId;

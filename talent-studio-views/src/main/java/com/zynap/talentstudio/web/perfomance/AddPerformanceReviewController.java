@@ -12,7 +12,7 @@ import com.zynap.talentstudio.questionnaires.IQueDefinitionService;
 import com.zynap.talentstudio.security.users.IUserService;
 import com.zynap.talentstudio.web.utils.ZynapWebUtils;
 import com.zynap.talentstudio.web.utils.mvc.ZynapRedirectView;
-import com.zynap.web.controller.ZynapDefaultFormController;
+import com.zynap.talentstudio.web.controller.ZynapDefaultFormController;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.dao.DataIntegrityViolationException;

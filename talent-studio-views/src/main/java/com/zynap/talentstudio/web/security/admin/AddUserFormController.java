@@ -12,8 +12,8 @@ import com.zynap.talentstudio.security.users.DuplicateUsernameException;
 import com.zynap.talentstudio.web.common.ParameterConstants;
 import com.zynap.talentstudio.web.utils.RequestUtils;
 import com.zynap.talentstudio.web.utils.mvc.ZynapRedirectView;
-import com.zynap.web.controller.admin.BaseUserFormController;
-import com.zynap.web.validation.admin.UserValidator;
+import com.zynap.talentstudio.web.controller.admin.BaseUserFormController;
+import com.zynap.talentstudio.web.validation.admin.UserValidator;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.validation.Errors;

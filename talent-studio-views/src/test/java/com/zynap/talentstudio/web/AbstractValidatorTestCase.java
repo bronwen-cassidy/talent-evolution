@@ -5,7 +5,7 @@ package com.zynap.talentstudio.web;
 
 import com.zynap.talentstudio.ZynapTestCase;
 import com.zynap.util.spring.BindUtils;
-import com.zynap.web.controller.ZynapDefaultFormController;
+import com.zynap.talentstudio.web.controller.ZynapDefaultFormController;
 
 import org.springframework.validation.DataBinder;
 import org.springframework.validation.Errors;

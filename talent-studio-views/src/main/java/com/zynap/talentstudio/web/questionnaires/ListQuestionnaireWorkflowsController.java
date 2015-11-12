@@ -6,7 +6,7 @@ package com.zynap.talentstudio.web.questionnaires;
 
 import com.zynap.talentstudio.questionnaires.IQueWorkflowService;
 import com.zynap.talentstudio.questionnaires.QuestionnaireWorkflowDTO;
-import com.zynap.web.controller.ZynapDefaultFormController;
+import com.zynap.talentstudio.web.controller.ZynapDefaultFormController;
 
 import javax.servlet.http.HttpServletRequest;
 

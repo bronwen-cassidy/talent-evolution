@@ -10,7 +10,7 @@ package com.zynap.talentstudio.web.analysis.reports;
 import com.zynap.talentstudio.analysis.reports.ChartReport;
 import com.zynap.talentstudio.analysis.reports.Column;
 import com.zynap.talentstudio.web.utils.ZynapDbUnitMockControllerTestCase;
-import com.zynap.web.beans.ColourEditor;
+import com.zynap.talentstudio.web.beans.ColourEditor;
 
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;

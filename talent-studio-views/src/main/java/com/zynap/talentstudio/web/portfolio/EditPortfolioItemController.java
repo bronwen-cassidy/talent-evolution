@@ -5,7 +5,6 @@ package com.zynap.talentstudio.web.portfolio;
 
 import com.zynap.common.util.UploadedFile;
 import com.zynap.domain.UserSession;
-import com.zynap.domain.admin.User;
 import com.zynap.talentstudio.organisation.portfolio.IPortfolioService;
 import com.zynap.talentstudio.organisation.portfolio.PortfolioItem;
 import com.zynap.talentstudio.organisation.portfolio.PortfolioItemFile;
@@ -15,7 +14,7 @@ import com.zynap.talentstudio.web.history.HistoryHelper;
 import com.zynap.talentstudio.web.utils.RequestUtils;
 import com.zynap.talentstudio.web.utils.ZynapWebUtils;
 import com.zynap.talentstudio.web.utils.beans.UploadedFilePropertyEditor;
-import com.zynap.web.controller.ZynapDefaultFormController;
+import com.zynap.talentstudio.web.controller.ZynapDefaultFormController;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.validation.Errors;

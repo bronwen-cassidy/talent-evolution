@@ -17,7 +17,7 @@ import com.zynap.talentstudio.organisation.subjects.Subject;
 import com.zynap.talentstudio.web.common.ParameterConstants;
 import com.zynap.talentstudio.web.utils.ZynapWebUtils;
 import com.zynap.util.resource.PropertiesManager;
-import com.zynap.web.utils.HtmlUtils;
+import com.zynap.talentstudio.web.utils.HtmlUtils;
 
 import org.springframework.util.StringUtils;
 

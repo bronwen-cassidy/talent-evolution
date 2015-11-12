@@ -5,7 +5,7 @@ package com.zynap.talentstudio.web.common.validation;
 
 import com.zynap.talentstudio.web.organisation.NodeWrapperBean;
 import com.zynap.talentstudio.web.organisation.associations.ArtefactAssociationWrapperBean;
-import com.zynap.web.utils.ZynapValidationUtils;
+import com.zynap.talentstudio.web.utils.ZynapValidationUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
 import org.springframework.validation.Errors;

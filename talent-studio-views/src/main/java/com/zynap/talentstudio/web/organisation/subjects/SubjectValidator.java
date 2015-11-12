@@ -7,7 +7,7 @@ import com.zynap.talentstudio.analysis.AnalysisAttributeHelper;
 import com.zynap.talentstudio.web.common.validation.NodeValidator;
 import com.zynap.talentstudio.web.organisation.attributes.validators.ErrorMessageHandler;
 import com.zynap.talentstudio.web.organisation.attributes.validators.ImageAttributeValueValidator;
-import com.zynap.web.utils.ZynapValidationUtils;
+import com.zynap.talentstudio.web.utils.ZynapValidationUtils;
 
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;

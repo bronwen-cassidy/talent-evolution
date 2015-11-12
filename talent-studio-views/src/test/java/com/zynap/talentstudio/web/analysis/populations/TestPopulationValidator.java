@@ -14,7 +14,7 @@ import com.zynap.talentstudio.organisation.attributes.IDynamicAttributeService;
 import com.zynap.talentstudio.web.organisation.attributes.AttributeWrapperBean;
 import com.zynap.talentstudio.web.utils.ZynapMockControllerTest;
 import com.zynap.util.spring.BindUtils;
-import com.zynap.web.controller.ZynapDefaultFormController;
+import com.zynap.talentstudio.web.controller.ZynapDefaultFormController;
 
 import org.springframework.validation.DataBinder;
 import org.springframework.validation.Errors;

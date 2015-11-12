@@ -11,7 +11,7 @@ import com.zynap.talentstudio.analysis.reports.crosstab.Cell;
 import com.zynap.talentstudio.analysis.reports.crosstab.Row;
 import com.zynap.talentstudio.analysis.AnalysisParameter;
 import com.zynap.talentstudio.organisation.Node;
-import com.zynap.web.utils.HtmlUtils;
+import com.zynap.talentstudio.web.utils.HtmlUtils;
 
 import java.text.MessageFormat;
 import java.util.Collection;

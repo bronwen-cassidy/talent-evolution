@@ -7,7 +7,7 @@ import com.zynap.talentstudio.arenas.Arena;
 import com.zynap.talentstudio.arenas.IArenaManager;
 import com.zynap.talentstudio.display.DisplayConfig;
 import com.zynap.talentstudio.display.IDisplayConfigService;
-import com.zynap.web.controller.ZynapDefaultFormController;
+import com.zynap.talentstudio.web.controller.ZynapDefaultFormController;
 
 import javax.servlet.http.HttpServletRequest;
 

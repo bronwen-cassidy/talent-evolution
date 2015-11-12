@@ -4,7 +4,7 @@ package com.zynap.talentstudio.web.organisation.positions;
 import com.zynap.talentstudio.web.common.validation.AssociationValidationHelper;
 import com.zynap.talentstudio.web.common.validation.NodeValidator;
 import com.zynap.talentstudio.web.organisation.associations.ArtefactAssociationWrapperBean;
-import com.zynap.web.utils.ZynapValidationUtils;
+import com.zynap.talentstudio.web.utils.ZynapValidationUtils;
 
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;

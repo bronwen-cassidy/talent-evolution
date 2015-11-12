@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE web-app PUBLIC '-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN' 'http://java.sun.com/dtd/web-app_2_3.dtd'>
+<!DOCTYPE web-app PUBLIC '-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN'
+        'http://java.sun.com/dtd/web-app_2_3.dtd'>
 
 <!--
   - Web app deployment descriptor that loads both a root application context
@@ -47,15 +48,15 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            /WEB-INF/applicationContext-jdbc.xml
-            /WEB-INF/applicationContext-hibernate.xml
-            /WEB-INF/applicationContext-tx.xml
-            /WEB-INF/applicationContext.xml
+            classpath:spring/applicationContext-jdbc.xml
+            classpath:spring/applicationContext-hibernate.xml
+            classpath:spring/applicationContext-tx.xml
+            classpath:spring/applicationContext.xml
             /WEB-INF/applicationContext-validation.xml
             /WEB-INF/applicationContext-dwr.xml
             /WEB-INF/applicationContext-mail.xml
-            /WEB-INF/applicationContext-scheduling.xml
-            /WEB-INF/integrationContext.xml
+            classpath:spring/applicationContext-scheduling.xml
+            classpath:spring/integrationContext.xml
         </param-value>
     </context-param>
 
@@ -109,9 +110,12 @@
     </filter-mapping>
 
     <!--=========== LISTENER ===========-->
+    <listener>
+        <listener-class>com.zynap.talentstudio.web.TalentStudioContextLoaderListener</listener-class>
+    </listener>
 
     <listener>
-        <listener-class>com.zynap.web.listener.ZynapSessionListener</listener-class>
+        <listener-class>com.zynap.talentstudio.web.listener.ZynapSessionListener</listener-class>
     </listener>
 
 
@@ -142,25 +146,6 @@
         <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
     </listener>
     -->
-
-    <!--
-      - Loads the root application context of this web app at startup,
-      - by default from "/WEB-INF/applicationContext.xml".
-        - Note that it is preferable to use ContextLoaderListener in a servlet leaf
-        - that follows the Servlet 2.4 initialization order (many Servlet 2.3 containers do).
-        -
-      - Use WebApplicationContextUtils.getWebApplicationContext(servletContext)
-      - to access it anywhere in the web application, outside of the framework.
-      -
-      - The root context is the parent of all servlet-specific contexts.
-      - This means that its beans are automatically available in these child contexts,
-      - both for getBean(name) calls and (external) bean references.
-    -->
-    <servlet>
-        <servlet-name>context</servlet-name>
-        <servlet-class>com.zynap.talentstudio.web.TalentStudioContextLoaderServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
 
     <!--
       - DEFAULT AREA
@@ -318,5 +303,6 @@
     <security-role>
         <role-name>webserviceuser</role-name>
     </security-role>
+
 
 </web-app>

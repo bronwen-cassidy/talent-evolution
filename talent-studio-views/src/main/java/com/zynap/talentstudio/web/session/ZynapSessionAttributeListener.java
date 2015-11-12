@@ -4,7 +4,7 @@
  */
 package com.zynap.talentstudio.web.session;
 
-import com.zynap.web.listener.ZynapSessionListener;
+import com.zynap.talentstudio.web.listener.ZynapSessionListener;
 import com.zynap.talentstudio.web.analysis.reports.views.RunReportWrapperBean;
 
 import org.apache.commons.logging.Log;

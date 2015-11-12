@@ -13,7 +13,7 @@ import com.zynap.talentstudio.web.common.ControllerConstants;
 import com.zynap.talentstudio.web.common.ParameterConstants;
 import com.zynap.talentstudio.web.utils.RequestUtils;
 import com.zynap.talentstudio.web.utils.ZynapWebUtils;
-import com.zynap.web.beans.ColourEditor;
+import com.zynap.talentstudio.web.beans.ColourEditor;
 
 import org.springframework.validation.BindException;
 import org.springframework.validation.Errors;

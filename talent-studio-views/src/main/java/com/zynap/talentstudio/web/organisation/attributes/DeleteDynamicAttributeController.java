@@ -7,7 +7,7 @@ import com.zynap.talentstudio.organisation.attributes.IDynamicAttributeService;
 import com.zynap.talentstudio.organisation.attributes.DynamicAttribute;
 import com.zynap.talentstudio.organisation.Node;
 
-import com.zynap.web.controller.ZynapDefaultFormController;
+import com.zynap.talentstudio.web.controller.ZynapDefaultFormController;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.validation.Errors;

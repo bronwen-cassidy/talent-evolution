@@ -13,7 +13,7 @@ import com.zynap.talentstudio.web.common.ControllerConstants;
 import com.zynap.talentstudio.web.common.ParameterConstants;
 import com.zynap.talentstudio.web.utils.RequestUtils;
 import com.zynap.talentstudio.web.utils.mvc.ZynapRedirectView;
-import com.zynap.web.controller.ZynapDefaultFormController;
+import com.zynap.talentstudio.web.controller.ZynapDefaultFormController;
 
 import org.apache.commons.collections.FactoryUtils;
 import org.apache.commons.collections.list.LazyList;

@@ -4,7 +4,7 @@
  */
 package com.zynap.talentstudio.web.history;
 
-import com.zynap.web.tag.ZynapTagSupport;
+import com.zynap.talentstudio.web.tag.ZynapTagSupport;
 
 import org.springframework.util.StringUtils;
 import org.springframework.web.util.ExpressionEvaluationUtils;

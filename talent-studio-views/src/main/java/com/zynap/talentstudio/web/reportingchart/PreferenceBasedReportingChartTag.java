@@ -22,7 +22,7 @@ import com.zynap.talentstudio.web.reportingchart.settings.ViewSettingsWrapperBea
 import com.zynap.talentstudio.web.utils.ZynapWebUtils;
 import com.zynap.util.format.MessageTemplateFormatter;
 import com.zynap.util.resource.PropertiesManager;
-import com.zynap.web.utils.HtmlUtils;
+import com.zynap.talentstudio.web.utils.HtmlUtils;
 import com.zynap.domain.admin.User;
 
 import org.springframework.web.util.ExpressionEvaluationUtils;

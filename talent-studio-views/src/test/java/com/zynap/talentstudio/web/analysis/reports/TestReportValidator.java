@@ -26,7 +26,7 @@ import com.zynap.talentstudio.web.analysis.reports.functions.FunctionWrapperBean
 import com.zynap.talentstudio.web.analysis.reports.functions.OperandWrapperBean;
 import com.zynap.talentstudio.web.utils.ZynapMockControllerTest;
 import com.zynap.util.spring.BindUtils;
-import com.zynap.web.controller.ZynapDefaultFormController;
+import com.zynap.talentstudio.web.controller.ZynapDefaultFormController;
 
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.validation.BindException;

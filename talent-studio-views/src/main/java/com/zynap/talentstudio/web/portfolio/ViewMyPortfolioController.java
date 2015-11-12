@@ -22,7 +22,7 @@ import com.zynap.talentstudio.web.organisation.NodeWrapperBean;
 import com.zynap.talentstudio.web.organisation.SubjectBrowseNodeWrapper;
 import com.zynap.talentstudio.web.organisation.subjects.SubjectWrapperBean;
 import com.zynap.talentstudio.web.utils.ZynapWebUtils;
-import com.zynap.web.controller.ZynapDefaultFormController;
+import com.zynap.talentstudio.web.controller.ZynapDefaultFormController;
 
 import org.springframework.validation.BindException;
 import org.springframework.validation.Errors;

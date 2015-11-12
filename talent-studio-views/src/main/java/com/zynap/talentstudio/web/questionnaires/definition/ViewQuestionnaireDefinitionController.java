@@ -8,7 +8,7 @@ import com.zynap.talentstudio.web.history.HistoryHelper;
 import com.zynap.talentstudio.web.history.SavedURL;
 import com.zynap.talentstudio.web.questionnaires.QuestionnaireHelper;
 import com.zynap.talentstudio.web.utils.RequestUtils;
-import com.zynap.web.controller.ZynapDefaultFormController;
+import com.zynap.talentstudio.web.controller.ZynapDefaultFormController;
 
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;

@@ -13,7 +13,7 @@ import com.zynap.talentstudio.web.common.ParameterConstants;
 import com.zynap.talentstudio.web.utils.RequestUtils;
 import com.zynap.talentstudio.web.utils.ZynapWebUtils;
 import com.zynap.talentstudio.web.utils.mvc.ZynapRedirectView;
-import com.zynap.web.validation.admin.RoleValidator;
+import com.zynap.talentstudio.web.validation.admin.RoleValidator;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.validation.BindException;

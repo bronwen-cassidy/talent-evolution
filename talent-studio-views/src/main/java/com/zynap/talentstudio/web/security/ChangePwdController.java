@@ -18,7 +18,7 @@ import com.zynap.talentstudio.security.users.IUserService;
 import com.zynap.talentstudio.web.common.ControllerConstants;
 import com.zynap.talentstudio.web.utils.RequestUtils;
 import com.zynap.talentstudio.web.utils.ZynapWebUtils;
-import com.zynap.web.controller.ZynapDefaultFormController;
+import com.zynap.talentstudio.web.controller.ZynapDefaultFormController;
 
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;

@@ -48,7 +48,7 @@ public class RoleMultiController extends ZynapMultiActionController {
 
     /**
      * Get the Role data based on the role id,
-     * or the Users who have the Role based on the value of the <code>com.zynap.web.SessionConstants.TAB</code> request parameter.
+     * or the Users who have the Role based on the value of the <code>com.zynap.talentstudio.web.SessionConstants.TAB</code> request parameter.
      *
      * @param request
      * @param response

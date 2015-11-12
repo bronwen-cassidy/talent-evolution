@@ -2,7 +2,7 @@ package com.zynap.talentstudio.web.utils.tree;
 
 import com.zynap.talentstudio.web.utils.ZynapWebUtils;
 import com.zynap.util.resource.PropertiesManager;
-import com.zynap.web.utils.HtmlUtils;
+import com.zynap.talentstudio.web.utils.HtmlUtils;
 
 import java.text.MessageFormat;
 import java.util.List;

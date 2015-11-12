@@ -6,7 +6,7 @@ import com.zynap.talentstudio.web.common.ParameterConstants;
 import com.zynap.talentstudio.web.utils.RequestUtils;
 import com.zynap.talentstudio.web.utils.ZynapWebUtils;
 import com.zynap.talentstudio.web.workflow.WorkflowConstants;
-import com.zynap.web.controller.ZynapDefaultFormController;
+import com.zynap.talentstudio.web.controller.ZynapDefaultFormController;
 
 import org.springframework.validation.Errors;
 

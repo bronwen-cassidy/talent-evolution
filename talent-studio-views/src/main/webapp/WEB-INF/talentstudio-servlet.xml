@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/mvc
+                           http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-<beans>
+    <context:component-scan base-package="com.zynap.talentstudio.views"/>
 
-    <!--<context:annotation-config />-->
-
-    <!--<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />-->
-    <!--<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />-->
 
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
@@ -740,19 +746,19 @@
     <!-- ****************************************************************** -->
 
     <!-- =========== Access Validators =========== -->
-    <bean id="loginValidator" class="com.zynap.web.validation.LoginValidator"/>
-    <bean id="changePwdValidator" class="com.zynap.web.validation.ChangePwdValidator"/>
-    <bean id="forgotPasswordValidator" class="com.zynap.web.validation.ForgotPasswordlValidator"/>
+    <bean id="loginValidator" class="com.zynap.talentstudio.web.validation.LoginValidator"/>
+    <bean id="changePwdValidator" class="com.zynap.talentstudio.web.validation.ChangePwdValidator"/>
+    <bean id="forgotPasswordValidator" class="com.zynap.talentstudio.web.validation.ForgotPasswordlValidator"/>
     <!-- =========== Admin Validators ============= -->
-    <bean id="userValidator" class="com.zynap.web.validation.admin.UserValidator"/>
-    <bean id="roleValidator" class="com.zynap.web.validation.admin.RoleValidator"/>
+    <bean id="userValidator" class="com.zynap.talentstudio.web.validation.admin.UserValidator"/>
+    <bean id="roleValidator" class="com.zynap.talentstudio.web.validation.admin.RoleValidator"/>
 
     <bean id="daValidator" class="com.zynap.talentstudio.web.organisation.attributes.DynamicAttributeValidator">
         <property name="factory" ref="dynamicAttributeValidationFactory"/>
     </bean>
 
-    <bean id="lookupValidator" class="com.zynap.web.validation.admin.LookUpTypeValidator"/>
-    <bean id="lookupValueValidator" class="com.zynap.web.validation.admin.LookUpValueValidator"/>
+    <bean id="lookupValidator" class="com.zynap.talentstudio.web.validation.admin.LookUpTypeValidator"/>
+    <bean id="lookupValueValidator" class="com.zynap.talentstudio.web.validation.admin.LookUpValueValidator"/>
 
     <bean id="dashboardBuilderValidator" class="com.zynap.talentstudio.web.dashboard.DashboardBuilderValidator"/>
 
@@ -870,7 +876,7 @@
     <bean id="menuController" class="com.zynap.talentstudio.web.arena.MenuController"/>
 
     <!-- logout controller -->
-    <bean id="logoutController" class="com.zynap.web.controller.LogoutController"/>
+    <bean id="logoutController" class="com.zynap.talentstudio.web.controller.LogoutController"/>
 
     <!-- login controller -->
     <bean id="loginController" class="com.zynap.talentstudio.web.security.LoginController" scope="request">
@@ -924,12 +930,12 @@
         <property name="groupService" ref="groupService"/>
     </bean>
 
-    <bean id="editUserController" class="com.zynap.web.controller.admin.EditUserFormController" parent="addUserFormController">
+    <bean id="editUserController" class="com.zynap.talentstudio.web.controller.admin.EditUserFormController" parent="addUserFormController">
         <property name="formView" value="edituser"/>
         <property name="cancelView" value="viewuser.htm"/>
     </bean>
 
-    <bean id="resetUserPwdController" class="com.zynap.web.controller.admin.AdminResetPasswordFormController">
+    <bean id="resetUserPwdController" class="com.zynap.talentstudio.web.controller.admin.AdminResetPasswordFormController">
         <property name="sessionForm" value="true"/>
         <property name="formView" value="resetuserpassword"/>
         <property name="successView" value="viewuser.htm"/>
@@ -938,7 +944,7 @@
         <property name="userService" ref="userService"/>
     </bean>
 
-    <bean id="listUserController" class="com.zynap.web.controller.admin.ListUserController">
+    <bean id="listUserController" class="com.zynap.talentstudio.web.controller.admin.ListUserController">
         <property name="sessionForm" value="false"/>
         <property name="formView" value="listuser"/>
         <property name="commandClass" value="com.zynap.talentstudio.web.security.admin.UserSearchQueryWrapper"/>
@@ -946,7 +952,7 @@
         <property name="groupService" ref="groupService"/>
     </bean>
 
-    <bean id="multiUserController" class="com.zynap.web.controller.admin.UserMultiController">
+    <bean id="multiUserController" class="com.zynap.talentstudio.web.controller.admin.UserMultiController">
         <property name="methodNameResolver">
             <bean id="userMultiMethodNameResolver"
                   class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
@@ -1980,12 +1986,12 @@
         </property>
     </bean>
 
-    <bean id="multiLookupController" class="com.zynap.web.controller.admin.LookupMultiController">
+    <bean id="multiLookupController" class="com.zynap.talentstudio.web.controller.admin.LookupMultiController">
         <property name="methodNameResolver" ref="lookupMultiMethodNameResolver"/>
         <property name="lookupManager" ref="lookupManager"/>
     </bean>
 
-    <bean id="addLookupTypeController" class="com.zynap.web.controller.admin.AddLookupTypeController">
+    <bean id="addLookupTypeController" class="com.zynap.talentstudio.web.controller.admin.AddLookupTypeController">
         <property name="sessionForm" value="true"/>
         <property name="formView" value="addlookuptype"/>
         <property name="successView" value="listlookupvalues.htm"/>
@@ -1995,11 +2001,11 @@
         <property name="lookupManager" ref="lookupManager"/>
     </bean>
 
-    <bean id="editLookupTypeController" class="com.zynap.web.controller.admin.EditLookupTypeController" parent="addLookupTypeController">
+    <bean id="editLookupTypeController" class="com.zynap.talentstudio.web.controller.admin.EditLookupTypeController" parent="addLookupTypeController">
         <property name="formView" value="editlookuptype"/>
     </bean>
 
-    <bean id="addLookupValueController" class="com.zynap.web.controller.admin.AddLookupValueController">
+    <bean id="addLookupValueController" class="com.zynap.talentstudio.web.controller.admin.AddLookupValueController">
         <property name="sessionForm" value="false"/>
         <property name="formView" value="addlookupvalue"/>
         <property name="successView" value="listlookupvalues.htm"/>
@@ -2008,7 +2014,7 @@
         <property name="lookupManager" ref="lookupManager"/>
     </bean>
 
-    <bean id="editLookupValueController" class="com.zynap.web.controller.admin.EditLookupValueController" parent="addLookupValueController">
+    <bean id="editLookupValueController" class="com.zynap.talentstudio.web.controller.admin.EditLookupValueController" parent="addLookupValueController">
         <property name="bindOnNewForm" value="true"/>
         <property name="formView" value="editlookupvalue"/>
         <property name="successView" value="viewlookupvalue.htm"/>
@@ -2907,7 +2913,7 @@
         <property name="dynamicAttributeService" ref="dynamicAttrService"/>
     </bean>
 
-    <bean id="resetMyPasswordController" class="com.zynap.web.controller.admin.ResetPasswordFormController">
+    <bean id="resetMyPasswordController" class="com.zynap.talentstudio.web.controller.admin.ResetPasswordFormController">
         <property name="sessionForm" value="true"/>
         <property name="formView" value="resetmypassword"/>
         <property name="successView" value="viewmyaccount.htm"/>

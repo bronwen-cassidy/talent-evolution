@@ -25,6 +25,11 @@ public class MockBeanFactory implements BeanFactory {
         return beans.get(name);
     }
 
+    @Override
+    public <T> T getBean(Class<T> aClass) throws BeansException {
+        return null;
+    }
+
     public void addBean(String name, Object value) {
         beans.put(name, value);
     }

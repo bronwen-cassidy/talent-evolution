@@ -23,7 +23,7 @@ import com.zynap.talentstudio.web.organisation.attributes.DynamicAttributesHelpe
 import com.zynap.talentstudio.web.organisation.attributes.FormAttribute;
 import com.zynap.talentstudio.web.utils.RequestUtils;
 import com.zynap.talentstudio.web.utils.ZynapWebUtils;
-import com.zynap.web.controller.ZynapDefaultFormController;
+import com.zynap.talentstudio.web.controller.ZynapDefaultFormController;
 
 import org.springframework.validation.Errors;
 import org.springframework.web.servlet.ModelAndView;

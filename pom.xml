@@ -16,8 +16,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <ts.version>v5.4.4-mt-SNAPSHOT</ts.version>
         <hibernate.version>2.1.8</hibernate.version>
-        <spring.sec.version>2.5.6.SEC03</spring.sec.version>
-        <spring.version>2.5.6</spring.version>
+        <spring.sec.version>3.2.9.RELEASE</spring.sec.version>
+        <spring.version>3.2.9.RELEASE</spring.version>
 
         <maven.compiler.source>1.6</maven.compiler.source>
         <maven.compiler.target>1.6</maven.compiler.target>
@@ -25,7 +25,9 @@
         <ant antfile="build.xml"/>
         <!-- default properties -->
         <client>nhs</client>
-        <war.name>talent-studio</war.name>
+        <application.name>talent-studio</application.name>
+        <mail.jndi.name>TSMSession</mail.jndi.name>
+        <sender.email>info@tmevolution.com</sender.email>
         <maven.resources.overwrite>true</maven.resources.overwrite>
 
     </properties>
@@ -38,11 +40,6 @@
     </modules>
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
@@ -202,6 +199,7 @@
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>
             <version>1.4.7</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>soap</groupId>
@@ -263,8 +261,33 @@
                 <db.username>tsdev</db.username>
                 <host.name>localhost</host.name>
                 <server.url>http://localhost:8080</server.url>
-                <war.name>talent-studio</war.name>
+                <application.name>talent-studio</application.name>
                 <multi.tenant>true</multi.tenant>
+                <log.file.path>${application.name}</log.file.path>
+            </properties>
+            <build>
+                <resources>
+                    <resource>
+                        <filtering>true</filtering>
+                        <directory>src/main/resources</directory>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+        <profile>
+            <id>home</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <db.url>jdbc:oracle:thin:@localhost:1521:STOC</db.url>
+                <db.password>tsdev</db.password>
+                <db.username>tsdev</db.username>
+                <host.name>localhost</host.name>
+                <server.url>http://localhost:8080</server.url>
+                <application.name>talent-studio</application.name>
+                <multi.tenant>true</multi.tenant>
+                <log.file.path>${application.name}</log.file.path>
             </properties>
             <build>
                 <resources>
@@ -286,8 +309,9 @@
                 <server.url>https://www.tmelogin.com</server.url>
                 <logFilePath>/usr/local/tomcat7/logs/</logFilePath>
                 <taapi.part.url>https://www.tmelogin.com</taapi.part.url>
-                <war.name>${client}</war.name>
+                <application.name>${client}</application.name>
                 <multi.tenant>true</multi.tenant>
+                <log.file.path>/usr/local/tomcat7/logs/${application.name}</log.file.path>
             </properties>
             <build>
                 <resources>
@@ -299,7 +323,7 @@
             </build>
         </profile>
         <profile>
-            <id>single-live</id>
+            <id>TME</id>
             <properties>
                 <db.url>jdbc:oracle:thin:@172.24.16.24:1521:orcl</db.url>
                 <db.password>${client}</db.password>
@@ -309,8 +333,9 @@
                 <server.url>https://www.tmelogin.com</server.url>
                 <logFilePath>/usr/local/tomcat7/logs/</logFilePath>
                 <taapi.part.url>https://www.tmelogin.com</taapi.part.url>
-                <war.name>${client}</war.name>
+                <application.name>TME</application.name>
                 <multi.tenant>false</multi.tenant>
+                <log.file.path>/usr/local/tomcat7/logs/${application.name}</log.file.path>
             </properties>
             <build>
                 <resources>

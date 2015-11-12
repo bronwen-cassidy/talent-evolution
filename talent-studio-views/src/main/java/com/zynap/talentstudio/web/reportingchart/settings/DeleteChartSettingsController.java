@@ -4,7 +4,7 @@ import com.zynap.talentstudio.preferences.IPreferencesManager;
 import com.zynap.talentstudio.preferences.Preference;
 import com.zynap.talentstudio.web.utils.ZynapWebUtils;
 import com.zynap.talentstudio.web.utils.mvc.ZynapRedirectView;
-import com.zynap.web.controller.ZynapDefaultFormController;
+import com.zynap.talentstudio.web.controller.ZynapDefaultFormController;
 
 import org.springframework.validation.Errors;
 import org.springframework.web.servlet.ModelAndView;

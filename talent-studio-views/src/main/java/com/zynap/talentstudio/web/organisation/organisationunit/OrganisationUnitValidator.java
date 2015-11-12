@@ -3,7 +3,7 @@ package com.zynap.talentstudio.web.organisation.organisationunit;
 
 import com.zynap.talentstudio.web.organisation.OrganisationUnitWrapperBean;
 import com.zynap.talentstudio.web.common.validation.NodeValidator;
-import com.zynap.web.utils.ZynapValidationUtils;
+import com.zynap.talentstudio.web.utils.ZynapValidationUtils;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;

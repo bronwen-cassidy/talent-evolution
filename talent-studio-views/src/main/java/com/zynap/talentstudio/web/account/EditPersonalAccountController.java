@@ -11,7 +11,7 @@ import com.zynap.talentstudio.common.lookups.ILookupManager;
 import com.zynap.talentstudio.organisation.attributes.IDynamicAttributeService;
 import com.zynap.talentstudio.security.users.IUserService;
 
-import com.zynap.web.controller.ZynapDefaultFormController;
+import com.zynap.talentstudio.web.controller.ZynapDefaultFormController;
 
 import com.zynap.talentstudio.web.common.ControllerConstants;
 import com.zynap.talentstudio.web.security.admin.UserWrapperBean;
@@ -19,7 +19,6 @@ import com.zynap.talentstudio.web.utils.ZynapWebUtils;
 import com.zynap.talentstudio.web.utils.mvc.ZynapRedirectView;
 
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.validation.BindException;
 import org.springframework.validation.Errors;
 import org.springframework.web.servlet.ModelAndView;
 

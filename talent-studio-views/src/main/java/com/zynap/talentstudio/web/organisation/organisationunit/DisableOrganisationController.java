@@ -8,7 +8,7 @@ import com.zynap.talentstudio.organisation.OrganisationUnit;
 import com.zynap.talentstudio.web.common.ParameterConstants;
 import com.zynap.talentstudio.web.utils.RequestUtils;
 import com.zynap.talentstudio.web.utils.mvc.ZynapRedirectView;
-import com.zynap.web.controller.ZynapDefaultFormController;
+import com.zynap.talentstudio.web.controller.ZynapDefaultFormController;
 
 import org.springframework.validation.Errors;
 import org.springframework.web.servlet.ModelAndView;

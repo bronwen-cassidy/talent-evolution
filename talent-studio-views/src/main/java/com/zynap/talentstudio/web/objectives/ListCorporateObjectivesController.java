@@ -6,7 +6,7 @@ package com.zynap.talentstudio.web.objectives;
 
 import com.zynap.talentstudio.objectives.IObjectiveService;
 import com.zynap.talentstudio.objectives.ObjectiveConstants;
-import com.zynap.web.controller.ZynapDefaultFormController;
+import com.zynap.talentstudio.web.controller.ZynapDefaultFormController;
 
 import javax.servlet.http.HttpServletRequest;
 

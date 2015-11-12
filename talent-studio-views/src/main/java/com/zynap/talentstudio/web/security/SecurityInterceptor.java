@@ -5,22 +5,19 @@ import com.zynap.exception.DomainObjectNotFoundException;
 import com.zynap.talentstudio.security.ISecurityManager;
 import com.zynap.talentstudio.security.permits.IPermit;
 import com.zynap.talentstudio.security.roles.IRoleManager;
+import com.zynap.talentstudio.web.SessionConstants;
 import com.zynap.talentstudio.web.history.HistoryHelper;
 import com.zynap.talentstudio.web.utils.ZynapWebUtils;
-import com.zynap.web.SessionConstants;
-
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -122,8 +119,8 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
         if (StringUtils.hasText(idParam)) {
             Long[] nodeIds = getNodeIds(request, idParam);
             boolean result = false;
-            for (int i = 0; i < nodeIds.length; i++) {
-                result = securityManager.checkAccess(permit, user, nodeIds[i]);
+            for (Long nodeId : nodeIds) {
+                result = securityManager.checkAccess(permit, user, nodeId);
                 // exit the loop if user does not have access to every single one of the nodes
                 if (!result) break;
             }
@@ -161,12 +158,17 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
                 String commandName = idParam.substring(0, index);
                 Object command = getCommand(request, commandName);
                 if (command != null) {
+                    String nodeSubString = idParam.substring(index + 1);
                     try {
-                        String nodeSubString = idParam.substring(index + 1);
-                        nodeId = getValueAsLong(BeanUtils.getNestedProperty(command, nodeSubString.substring(nodeSubString.indexOf(".") + 1)));
+
+                        nodeId = getValueAsLong(BeanUtils.getNestedProperty(command, nodeSubString));
                     } catch (Exception e) {
-                        // e.printStackTrace();
-                        // todo exception thrown from here is java.lang.NoSuchMethodException: Unknown property 'node'
+                        String idProperty = nodeSubString.substring(nodeSubString.indexOf(".") + 1);
+                        try {
+                            nodeId = getValueAsLong(BeanUtils.getProperty(command, idProperty));
+                        } catch (Exception e1) {
+                            logger.debug("unable to find property: " + idProperty + " of command " + command.getClass().getName(), e1);
+                        }
                     }
                 }
             }
@@ -291,7 +293,5 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
     private ISecurityManager securityManager;
     private static final String DOC_TYPE_PARAM = "doc_type";
     private static final String PUBLIC_SCOPE = "PUBLIC";
-
-    private static final Pattern tester = Pattern.compile(".*/.*/viewmy*.*.htm");
 }
 

@@ -6,7 +6,7 @@ package com.zynap.talentstudio.web.security;
 
 import com.zynap.exception.TalentStudioException;
 import com.zynap.talentstudio.security.users.IUserService;
-import com.zynap.web.SessionConstants;
+import com.zynap.talentstudio.web.SessionConstants;
 import com.zynap.domain.admin.User;
 
 import org.apache.commons.logging.Log;

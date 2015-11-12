@@ -4,16 +4,12 @@
  */
 package com.zynap.talentstudio.web.history;
 
-import com.zynap.web.tag.ZynapTagSupport;
+import com.zynap.talentstudio.web.tag.ZynapTagSupport;
 import com.zynap.talentstudio.web.utils.ZynapWebUtils;
 import com.zynap.talentstudio.security.roles.Role;
 import com.zynap.domain.UserSession;
 
-import org.springframework.util.StringUtils;
-import org.springframework.web.util.ExpressionEvaluationUtils;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.jsp.JspException;
 
 import java.util.Collection;
 

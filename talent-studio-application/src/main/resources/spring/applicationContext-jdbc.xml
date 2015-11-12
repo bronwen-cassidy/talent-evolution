@@ -39,12 +39,10 @@
     <!--<bean id="simpleNativeJdbcExtractor" class="org.springframework.jdbc.support.nativejdbc.C3P0NativeJdbcExtractor" lazy-init="true" />-->
     <bean id="simpleNativeJdbcExtractor" class="org.springframework.jdbc.support.nativejdbc.SimpleNativeJdbcExtractor" lazy-init="true" />
 
-    <bean id="oracleLobHandler" class="org.springframework.jdbc.support.lob.OracleLobHandler">
-        <property name="nativeJdbcExtractor" ref="simpleNativeJdbcExtractor"/>
-    </bean>
+    <bean id="oracleLobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler"/>
     
     <!--<bean id="oracleLobHandler" class="org.springframework.jdbc.support.lob.OracleLobHandler">-->
-        <!--<property name="nativeJdbcExtractor" ref="${lobHandler.extractor}"/>-->
+        <!--<property name="nativeJdbcExtractor" ref="simpleNativeJdbcExtractor"/>-->
     <!--</bean>-->
 
 

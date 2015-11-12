@@ -581,7 +581,7 @@
 
     <tag>
         <name>infobox</name>
-        <tag-class>com.zynap.web.tag.InfoBoxTag</tag-class>
+        <tag-class>com.zynap.talentstudio.web.tag.InfoBoxTag</tag-class>
         <body-content>JSP</body-content>
         <attribute>
             <name>title</name>
@@ -602,7 +602,7 @@
 
     <tag>
         <name>actionbox</name>
-        <tag-class>com.zynap.web.tag.ActionBoxTag</tag-class>
+        <tag-class>com.zynap.talentstudio.web.tag.ActionBoxTag</tag-class>
         <body-content>JSP</body-content>
         <attribute>
             <name>id</name>
@@ -613,7 +613,7 @@
 
     <tag>
         <name>actionEntry</name>
-        <tag-class>com.zynap.web.tag.ActionEntryTag</tag-class>
+        <tag-class>com.zynap.talentstudio.web.tag.ActionEntryTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
@@ -667,7 +667,7 @@
 
     <tag>
         <name>tab</name>
-        <tag-class>com.zynap.web.tag.TabTag</tag-class>
+        <tag-class>com.zynap.talentstudio.web.tag.TabTag</tag-class>
         <body-content>JSP</body-content>
         <attribute>
             <name>styleSheetClass</name>
@@ -703,7 +703,7 @@
 
     <tag>
         <name>tabName</name>
-        <tag-class>com.zynap.web.tag.TabNameTag</tag-class>
+        <tag-class>com.zynap.talentstudio.web.tag.TabNameTag</tag-class>
         <body-content>empty</body-content>
         <attribute>
             <name>name</name>
@@ -729,7 +729,7 @@
 
     <tag>
         <name>permission</name>
-        <tag-class>com.zynap.web.tag.PermissionTag</tag-class>
+        <tag-class>com.zynap.talentstudio.web.tag.PermissionTag</tag-class>
         <body-content>empty</body-content>
         <attribute>
             <name>label</name>
@@ -755,7 +755,7 @@
 
     <tag>
         <name>tree</name>
-        <tag-class>com.zynap.web.tag.TreeTag</tag-class>
+        <tag-class>com.zynap.talentstudio.web.tag.TreeTag</tag-class>
         <body-content>empty</body-content>
         <attribute>
             <name>composite</name>
@@ -781,7 +781,7 @@
 
     <tag>
         <name>serverTree</name>
-        <tag-class>com.zynap.web.tag.TreeServerTag</tag-class>
+        <tag-class>com.zynap.talentstudio.web.tag.TreeServerTag</tag-class>
         <body-content>empty</body-content>
         <attribute>
             <name>trees</name>
@@ -827,7 +827,7 @@
 
     <tag>
         <name>desc</name>
-        <tag-class>com.zynap.web.tag.DescriptionTag</tag-class>
+        <tag-class>com.zynap.talentstudio.web.tag.DescriptionTag</tag-class>
         <body-content>JSP</body-content>
         <attribute>
             <name>htmlEscape</name>
@@ -838,7 +838,7 @@
 
     <tag>
         <name>popup</name>
-        <tag-class>com.zynap.web.tag.PopupTag</tag-class>
+        <tag-class>com.zynap.talentstudio.web.tag.PopupTag</tag-class>
         <body-content>JSP</body-content>
         <attribute>
             <name>id</name>
@@ -865,7 +865,7 @@
 
     <tag>
         <name>window</name>
-        <tag-class>com.zynap.web.tag.ResizableWindowTag</tag-class>
+        <tag-class>com.zynap.talentstudio.web.tag.ResizableWindowTag</tag-class>
         <body-content>JSP</body-content>
         <attribute>
             <name>elementId</name>

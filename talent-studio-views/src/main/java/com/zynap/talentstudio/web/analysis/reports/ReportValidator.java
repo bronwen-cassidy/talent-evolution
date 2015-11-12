@@ -14,7 +14,7 @@ import com.zynap.talentstudio.organisation.attributes.IDynamicAttributeService;
 import com.zynap.talentstudio.web.analysis.reports.functions.OperandWrapperBean;
 import com.zynap.talentstudio.web.analysis.reports.support.CrossTabReportRunner;
 import com.zynap.talentstudio.web.analysis.reports.views.RunCrossTabReportWrapper;
-import com.zynap.web.utils.ZynapValidationUtils;
+import com.zynap.talentstudio.web.utils.ZynapValidationUtils;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;

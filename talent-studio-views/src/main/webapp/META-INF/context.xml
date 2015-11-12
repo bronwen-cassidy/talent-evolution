@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<Context path="/@_applicationName_@" docBase="@_applicationName_@" reloadable="true">
-    <Resource name="jdbc/@_applicationName_@"
+<Context path="/${application.name}" docBase="${application.name}" reloadable="true">
+    <Resource name="jdbc/${application.name}"
               auth="Container"
               type="javax.sql.DataSource"
-              username="@_db.username_@"
-              password="@_db.username_@"
+              username="${db.username}"
+              password="${db.password}"
               driverClassName="oracle.jdbc.OracleDriver"
-              url="@_db.url_@"
+              url="${db.url}"
               factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
               testOnBorrow="true"
               testOnReturn="true"

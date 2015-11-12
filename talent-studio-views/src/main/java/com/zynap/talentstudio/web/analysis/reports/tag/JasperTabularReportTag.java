@@ -12,7 +12,7 @@ import net.sf.jasperreports.engine.export.JRHtmlExporterParameter;
 import com.zynap.talentstudio.analysis.reports.Report;
 import com.zynap.talentstudio.web.analysis.reports.jasper.CrossTabHtmlExporter;
 import com.zynap.talentstudio.web.analysis.reports.jasper.JasperHtmlExporter;
-import com.zynap.web.tag.ZynapTagSupport;
+import com.zynap.talentstudio.web.tag.ZynapTagSupport;
 
 import org.springframework.web.util.ExpressionEvaluationUtils;
 

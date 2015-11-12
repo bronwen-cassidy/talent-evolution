@@ -5,7 +5,7 @@ import com.zynap.talentstudio.analysis.reports.IReportService;
 import com.zynap.talentstudio.analysis.reports.ReportDto;
 import com.zynap.talentstudio.web.utils.ZynapWebUtils;
 import com.zynap.talentstudio.web.utils.controller.ControllerUtils;
-import com.zynap.web.controller.ZynapDefaultFormController;
+import com.zynap.talentstudio.web.controller.ZynapDefaultFormController;
 
 import org.springframework.validation.Errors;
 import org.springframework.web.servlet.ModelAndView;

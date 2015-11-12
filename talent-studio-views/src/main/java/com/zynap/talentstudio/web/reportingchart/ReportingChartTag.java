@@ -10,8 +10,8 @@ import com.zynap.talentstudio.organisation.OrganisationUnit;
 import com.zynap.talentstudio.organisation.positions.Position;
 import com.zynap.talentstudio.organisation.subjects.Subject;
 
-import com.zynap.web.tag.ZynapTagSupport;
-import com.zynap.web.utils.HtmlUtils;
+import com.zynap.talentstudio.web.tag.ZynapTagSupport;
+import com.zynap.talentstudio.web.utils.HtmlUtils;
 
 import com.zynap.talentstudio.web.common.ParameterConstants;
 import com.zynap.talentstudio.web.utils.ZynapWebUtils;

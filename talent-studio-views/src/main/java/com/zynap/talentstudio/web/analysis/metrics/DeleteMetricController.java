@@ -4,7 +4,7 @@ import com.zynap.talentstudio.analysis.metrics.IMetricService;
 import com.zynap.talentstudio.analysis.metrics.Metric;
 import com.zynap.talentstudio.web.common.ParameterConstants;
 import com.zynap.talentstudio.web.utils.mvc.ZynapRedirectView;
-import com.zynap.web.controller.ZynapDefaultFormController;
+import com.zynap.talentstudio.web.controller.ZynapDefaultFormController;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.validation.Errors;

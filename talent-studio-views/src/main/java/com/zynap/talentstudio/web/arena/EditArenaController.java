@@ -4,7 +4,6 @@
 package com.zynap.talentstudio.web.arena;
 
 import com.zynap.domain.UserSession;
-import com.zynap.domain.UserPrincipal;
 import com.zynap.talentstudio.arenas.Arena;
 import com.zynap.talentstudio.arenas.IArenaManager;
 import com.zynap.talentstudio.display.DisplayConfig;
@@ -13,10 +12,7 @@ import com.zynap.talentstudio.web.common.ParameterConstants;
 import com.zynap.talentstudio.web.utils.RequestUtils;
 import com.zynap.talentstudio.web.utils.ZynapWebUtils;
 import com.zynap.talentstudio.web.utils.mvc.ZynapRedirectView;
-import com.zynap.talentstudio.security.roles.IRoleManager;
-import com.zynap.talentstudio.security.roles.Role;
-import com.zynap.web.controller.ZynapDefaultFormController;
-import com.zynap.exception.TalentStudioException;
+import com.zynap.talentstudio.web.controller.ZynapDefaultFormController;
 
 import org.springframework.validation.Errors;
 import org.springframework.web.servlet.ModelAndView;

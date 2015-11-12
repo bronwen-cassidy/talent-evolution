@@ -6,7 +6,7 @@ alternative page buffer is to switch it off only needed under a few conditions s
 need to verify if none or 24kb is better
 --%>
 
-<%@ page import="com.zynap.web.SessionConstants" %>
+<%@ page import="com.zynap.talentstudio.web.SessionConstants" %>
 <%@ page import="com.zynap.talentstudio.web.common.ParameterConstants"%>
 <%@ page import="com.zynap.talentstudio.web.common.ControllerConstants"%>
 

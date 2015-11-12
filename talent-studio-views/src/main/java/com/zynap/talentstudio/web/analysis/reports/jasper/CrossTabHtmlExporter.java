@@ -20,7 +20,7 @@ import com.zynap.talentstudio.analysis.reports.crosstab.Heading;
 import com.zynap.talentstudio.analysis.reports.crosstab.Row;
 import com.zynap.talentstudio.web.utils.ZynapWebUtils;
 import com.zynap.util.resource.PropertiesManager;
-import com.zynap.web.utils.HtmlUtils;
+import com.zynap.talentstudio.web.utils.HtmlUtils;
 
 import org.apache.commons.lang.StringUtils;
 

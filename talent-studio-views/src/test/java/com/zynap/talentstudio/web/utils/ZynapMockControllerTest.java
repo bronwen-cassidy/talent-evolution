@@ -12,7 +12,7 @@ import com.zynap.talentstudio.security.UserSessionFactory;
 import com.zynap.talentstudio.security.permits.IPermit;
 import com.zynap.talentstudio.web.common.ControllerConstants;
 import com.zynap.talentstudio.web.utils.mvc.ZynapRedirectView;
-import com.zynap.web.SessionConstants;
+import com.zynap.talentstudio.web.SessionConstants;
 
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;

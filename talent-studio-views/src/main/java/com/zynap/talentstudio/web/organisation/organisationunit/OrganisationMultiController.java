@@ -17,7 +17,7 @@ import com.zynap.talentstudio.web.utils.ZynapWebUtils;
 import com.zynap.talentstudio.web.utils.controller.ZynapMultiActionController;
 import com.zynap.talentstudio.web.utils.tree.Branch;
 import com.zynap.talentstudio.web.utils.tree.TreeBuilderHelper;
-import com.zynap.web.tag.TreeTag;
+import com.zynap.talentstudio.web.tag.TreeTag;
 
 import org.apache.commons.collections.Transformer;
 

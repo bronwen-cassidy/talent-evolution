@@ -1,15 +1,11 @@
 package com.zynap.talentstudio.web.security.domain;
 
-import com.zynap.common.util.UploadedFile;
 import com.zynap.talentstudio.security.SecurityDomain;
-import com.zynap.web.utils.ZynapValidationUtils;
-import org.springframework.util.StringUtils;
+import com.zynap.talentstudio.web.utils.ZynapValidationUtils;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Collection;
 import java.util.Iterator;
 

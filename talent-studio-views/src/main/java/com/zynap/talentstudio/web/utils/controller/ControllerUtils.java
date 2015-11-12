@@ -4,10 +4,10 @@
 package com.zynap.talentstudio.web.utils.controller;
 
 import com.zynap.talentstudio.web.common.ParameterConstants;
-import com.zynap.web.beans.ZynapCustomBooleanEditor;
-import com.zynap.web.beans.ZynapCustomDoubleEditor;
-import com.zynap.web.beans.ZynapCustomIntegerEditor;
-import com.zynap.web.beans.ZynapCustomLongEditor;
+import com.zynap.talentstudio.web.beans.ZynapCustomBooleanEditor;
+import com.zynap.talentstudio.web.beans.ZynapCustomDoubleEditor;
+import com.zynap.talentstudio.web.beans.ZynapCustomIntegerEditor;
+import com.zynap.talentstudio.web.beans.ZynapCustomLongEditor;
 
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.ServletRequestDataBinder;

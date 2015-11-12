@@ -29,7 +29,7 @@ import com.zynap.talentstudio.analysis.reports.jasper.MetricReportDesigner;
 import com.zynap.talentstudio.analysis.reports.jasper.ReportDesigner;
 import com.zynap.talentstudio.web.utils.ZynapWebUtils;
 import com.zynap.util.resource.PropertiesManager;
-import com.zynap.web.utils.HtmlUtils;
+import com.zynap.talentstudio.web.utils.HtmlUtils;
 
 import org.apache.commons.lang.StringUtils;
 

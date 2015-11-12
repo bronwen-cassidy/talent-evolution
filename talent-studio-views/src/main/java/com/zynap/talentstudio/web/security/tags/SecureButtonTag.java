@@ -7,7 +7,7 @@ package com.zynap.talentstudio.web.security.tags;
 import com.zynap.domain.UserSession;
 import com.zynap.domain.admin.User;
 import com.zynap.talentstudio.web.utils.ZynapWebUtils;
-import com.zynap.web.tag.ZynapTagSupport;
+import com.zynap.talentstudio.web.tag.ZynapTagSupport;
 
 import org.springframework.web.util.ExpressionEvaluationUtils;
 

@@ -2,7 +2,7 @@ package com.zynap.talentstudio.web.history;
 
 import com.zynap.util.resource.PropertiesManager;
 
-import com.zynap.web.tag.ZynapTagSupport;
+import com.zynap.talentstudio.web.tag.ZynapTagSupport;
 
 import com.zynap.talentstudio.web.utils.ZynapWebUtils;
 

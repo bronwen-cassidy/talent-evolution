@@ -61,11 +61,6 @@
             <version>1.6</version>
         </dependency>
         <dependency>
-            <groupId>crimson</groupId>
-            <artifactId>crimson</artifactId>
-            <version>1.1.3</version>
-        </dependency>
-        <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.12</version>
@@ -124,8 +119,8 @@
         <!-- container jar dependencies  -->
         <dependency>
             <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
         </dependency>
         <dependency>
             <groupId>javax.el</groupId>
@@ -147,6 +142,7 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>2.5.6.SEC03</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     
@@ -158,8 +154,15 @@
                 <version>2.6</version>
                 <configuration>
                     <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
-                    <warName>${war.name}</warName>
+                    <warName>${application.name}</warName>
                     <webResources>
+                        <resource>
+                            <directory>src/main/resources/com/zynap/talentstudio/web</directory>
+                            <includes>
+                                <include>**/*.*</include>
+                            </includes>
+                            <targetPath>WEB-INF/classes/com/zynap/talentstudio/web/</targetPath>
+                        </resource>
                         <resource>
                             <directory>clients/${client}/</directory>
                             <includes>
@@ -193,6 +196,14 @@
                             <targetPath>WEB-INF/classes</targetPath>
                         </resource>
                         <resource>
+                            <directory>src/main/webapp</directory>
+                            <includes>
+                                <include>**/*.properties</include>
+                            </includes>
+                            <!-- override the destination directory for this resource -->
+                            <filtering>true</filtering>
+                        </resource>
+                        <resource>
                             <directory>src/main/webapp/META-INF</directory>
                             <includes>
                                 <include>context.xml</include>
@@ -203,6 +214,23 @@
                         </resource>
                     </webResources>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <port>8093</port>
+                    <path>/${application.name}</path>
+                    <enableNaming>true</enableNaming>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.oracle</groupId>
+                        <artifactId>ojdbc7</artifactId>
+                        <version>14.0.0</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>

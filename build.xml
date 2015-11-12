@@ -189,8 +189,6 @@
     <property name="multi.tenant" value="true"/>
     <!--<property name="host.name" value="ynshosting"/>-->
 
-    <property name="lobHandler.extractor" value="simpleNativeJdbcExtractor"/>
-
     <!-- JUnit Tests -->
     <property name="test.classes.dir" value="${build.dir}/test-classes"/>
     <property name="test.classes.config.dir" value="${test.classes.dir}/config"/>
@@ -403,7 +401,6 @@
 
         <filter token="_applicationName_" value="${project.name}"/>
         <filter token="_logFilePath_" value="${logFilePath}${project.name}"/>
-        <filter token="lobHandler.extractor" value="${lobHandler.extractor}"/>
 
         <filter token="_db.url_" value="${db.url}"/>
         <filter token="_db.username_" value="${db.username}"/>

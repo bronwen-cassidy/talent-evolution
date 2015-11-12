@@ -2,7 +2,7 @@ package com.zynap.talentstudio.web.common.html;
 
 import com.zynap.util.resource.PropertiesManager;
 
-import com.zynap.web.tag.ZynapTagSupport;
+import com.zynap.talentstudio.web.tag.ZynapTagSupport;
 
 import org.springframework.util.StringUtils;
 

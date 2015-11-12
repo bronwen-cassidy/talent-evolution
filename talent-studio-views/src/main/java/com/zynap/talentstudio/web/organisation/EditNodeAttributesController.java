@@ -16,7 +16,7 @@ import com.zynap.talentstudio.web.utils.RequestUtils;
 import com.zynap.talentstudio.web.utils.beans.UploadedFilePropertyEditor;
 import com.zynap.talentstudio.web.utils.mvc.ZynapRedirectView;
 import com.zynap.talentstudio.analysis.AnalysisAttributeHelper;
-import com.zynap.web.controller.ZynapDefaultFormController;
+import com.zynap.talentstudio.web.controller.ZynapDefaultFormController;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.validation.Errors;

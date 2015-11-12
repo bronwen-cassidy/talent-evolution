@@ -21,7 +21,7 @@ import com.zynap.talentstudio.web.organisation.attributes.validators.TextAttribu
 import com.zynap.talentstudio.web.organisation.attributes.validators.TimeAttributeValueValidator;
 import com.zynap.talentstudio.web.organisation.subjects.SubjectWrapperBean;
 import com.zynap.util.spring.BindUtils;
-import com.zynap.web.controller.ZynapDefaultFormController;
+import com.zynap.talentstudio.web.controller.ZynapDefaultFormController;
 
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.validation.DataBinder;

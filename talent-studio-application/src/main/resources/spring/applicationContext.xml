@@ -12,9 +12,9 @@
     <bean id="propertyConfigurerApp" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
-                <value>WEB-INF/jdbc.properties</value>
-                <value>WEB-INF/mail.properties</value>
-                <value>WEB-INF/autonomy.properties</value>
+                <value>classpath:spring/jdbc.properties</value>
+                <value>/WEB-INF/mail.properties</value>
+                <value>classpath:spring/autonomy.properties</value>
             </list>
         </property>
 

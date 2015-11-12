@@ -4,7 +4,7 @@ package com.zynap.talentstudio.web.security.admin;
  * User: amark
  * Date: 14-Mar-2005
  * Time: 13:44:30
- * Test for {@link com.zynap.web.controller.admin.UserMultiController}
+ * Test for {@link com.zynap.talentstudio.web.controller.admin.UserMultiController}
  */
 
 import com.zynap.domain.UserPrincipal;
@@ -17,7 +17,7 @@ import com.zynap.talentstudio.web.common.ParameterConstants;
 import com.zynap.talentstudio.web.utils.MissingRequestParameterException;
 import com.zynap.talentstudio.web.utils.ZynapMockControllerTest;
 import com.zynap.talentstudio.web.utils.ZynapWebUtils;
-import com.zynap.web.controller.admin.UserMultiController;
+import com.zynap.talentstudio.web.controller.admin.UserMultiController;
 
 import org.springframework.validation.BindException;
 import org.springframework.validation.Validator;

@@ -23,7 +23,7 @@ import com.zynap.talentstudio.web.organisation.associations.ArtefactAssociationW
 import com.zynap.talentstudio.web.organisation.attributes.AttributeWrapperBean;
 import com.zynap.talentstudio.web.organisation.attributes.FormAttribute;
 import com.zynap.util.spring.BindUtils;
-import com.zynap.web.controller.ZynapDefaultFormController;
+import com.zynap.talentstudio.web.controller.ZynapDefaultFormController;
 
 import org.apache.commons.lang.StringUtils;
 

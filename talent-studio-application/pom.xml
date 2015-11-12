@@ -64,7 +64,7 @@
                 <includes>
                     <include>**/**</include>
                 </includes>
-                <filtering>false</filtering>
+                <filtering>true</filtering>
             </resource>
             <resource>
                 <directory>../talent-studio-views/clients/${client}/</directory>

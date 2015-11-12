@@ -15,7 +15,7 @@ import com.zynap.talentstudio.organisation.attributes.validators.definition.Text
 import com.zynap.talentstudio.organisation.attributes.validators.definition.TimeRangeValidator;
 import com.zynap.talentstudio.web.AbstractValidatorTestCase;
 import com.zynap.util.spring.BindUtils;
-import com.zynap.web.controller.ZynapDefaultFormController;
+import com.zynap.talentstudio.web.controller.ZynapDefaultFormController;
 
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.validation.DataBinder;
