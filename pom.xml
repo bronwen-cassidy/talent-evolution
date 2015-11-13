@@ -7,22 +7,22 @@
     <!-- todo this will change -->
     <groupId>com.zynap</groupId>
     <artifactId>talent-studio</artifactId>
-    <version>v5.4.4-mt-SNAPSHOT</version>
+    <version>v5.4.8-SNAPSHOT</version>
 
     <packaging>pom</packaging>
     <name>Talent Evolution</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <ts.version>v5.4.4-mt-SNAPSHOT</ts.version>
+        <build.version>v5.4.8</build.version>
+        <build.year>2015</build.year>
         <hibernate.version>2.1.8</hibernate.version>
         <spring.sec.version>3.2.9.RELEASE</spring.sec.version>
         <spring.version>3.2.9.RELEASE</spring.version>
 
-        <maven.compiler.source>1.6</maven.compiler.source>
-        <maven.compiler.target>1.6</maven.compiler.target>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
 
-        <ant antfile="build.xml"/>
         <!-- default properties -->
         <client>nhs</client>
         <application.name>talent-studio</application.name>

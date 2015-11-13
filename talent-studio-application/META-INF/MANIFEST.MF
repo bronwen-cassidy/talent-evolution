@@ -1,4 +1,4 @@
 Manifest-Version: 1.0
 Implementation-Title: TalentEvolution Application.
-Implementation-Vendor: Zynap Ltd.
-
+Implementation-Vendor: TM Evolution Ltd.
+Implementation-Version: ${build.version}
