@@ -5,7 +5,6 @@
 <script type="text/javascript">
 
     loadUserName('<c:out value="${command.subjectId}"/>', '<zynap:message code="no.user.details" javaScriptEscape="true"/>');
-    removeTimer();
     function clearTextField(paragraphElemId, textFieldElemId) {
         var txtFld = getElemById(textFieldElemId);
         txtFld.value = '';

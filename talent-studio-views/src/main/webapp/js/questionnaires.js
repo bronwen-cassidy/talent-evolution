@@ -225,6 +225,8 @@ function displayError(attributeResult, errorElem) {
         errorElem.style.display = 'inline';
         errorCount++;
     }
+    // reset the javascript polling info
+    pollTimeOut(thisTimeoutAmount, timeOutWarningMessage, logoutUrl);
 }
 
 function displaySumEnums(attributeResult) {

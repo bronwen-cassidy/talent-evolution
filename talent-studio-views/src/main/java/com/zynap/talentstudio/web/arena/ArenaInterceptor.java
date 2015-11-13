@@ -52,6 +52,8 @@ public class ArenaInterceptor extends HandlerInterceptorAdapter {
             if (arena != null) {
                 // if found set current arena id
                 userSession.setCurrentArenaId(arena.getArenaId());
+                userSession.setMaxTimeout(arena.getSessionTimeout());
+
                 request.setAttribute(ParameterConstants.ARENAS_MENU_PARAM, userSession.getArenas());
                 request.setAttribute(ParameterConstants.CURRENT_ARENA_ID_PARAM, userSession.getCurrentArenaId());
                 request.setAttribute(ParameterConstants.USER_PRINCIPAL_PARAM, userSession.getUserPrincipal());

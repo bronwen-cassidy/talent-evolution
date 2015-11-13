@@ -33,8 +33,8 @@ This may work with jWebUnit....
 
     <%@ include file="../includes/stylesheets.jsp" %>
 
-    <script src="<c:url value="/scripts/jquery-1.7.2.min.js"/>" type="text/javascript"></script>
-    <script src="<c:url value="/scripts/jquery-ui-1.8.21.custom.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/js/jquery-1.7.2.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/js/jquery-ui-1.8.21.custom.min.js"/>" type="text/javascript"></script>
 
     <script src="<c:url value="/dwr/engine.js"/>" type="text/javascript"></script>
 
@@ -45,8 +45,20 @@ This may work with jWebUnit....
     <script src="<c:url value="/dwr/interface/subjectBean.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/dwr/interface/messageItemBean.js"/>" type="text/javascript"></script>
 
-    <script src="<c:url value="/scripts/talent.studio.min.js"/>" type="text/javascript" charset="ISO-8859-2"></script>
-    <script src="<c:url value="/scripts/questionnaires.js"/>" type="text/javascript" charset="ISO-8859-2"></script>
+    <%--<script src="<c:url value="/js/talent.studio.min.js"/>" type="text/javascript" charset="ISO-8859-2"></script>--%>
+    <script src="<c:url value="/js/functions.js"/>" type="text/javascript" charset="ISO-8859-2"></script>
+    <script src="<c:url value="/js/popups.js"/>" type="text/javascript" charset="ISO-8859-2"></script>
+    <script src="<c:url value="/js/populationfunctions.js"/>" type="text/javascript" charset="ISO-8859-2"></script>
+    <script src="<c:url value="/js/portfoliofunctions.js"/>" type="text/javascript" charset="ISO-8859-2"></script>
+    <script src="<c:url value="/js/attributes.js"/>" type="text/javascript" charset="ISO-8859-2"></script>
+    <script src="<c:url value="/js/helpText.js"/>" type="text/javascript" charset="ISO-8859-2"></script>
+    <script src="<c:url value="/js/messages.js"/>" type="text/javascript" charset="ISO-8859-2"></script>
+    <script src="<c:url value="/js/objectives.js"/>" type="text/javascript" charset="ISO-8859-2"></script>
+    <script src="<c:url value="/js/orgunits.js"/>" type="text/javascript" charset="ISO-8859-2"></script>
+    <script src="<c:url value="/js/questionnaires.js"/>" type="text/javascript" charset="ISO-8859-2"></script>
+    <script src="<c:url value="/js/searchfunctions.js"/>" type="text/javascript" charset="ISO-8859-2"></script>
+    <script src="<c:url value="/js/tabfunctions.js"/>" type="text/javascript" charset="ISO-8859-2"></script>
+    <script src="<c:url value="/js/worklistfunctions.js"/>" type="text/javascript" charset="ISO-8859-2"></script>
 </head>
 
 <zynap:message var="timeoutMsg" code="timeout.warning" javaScriptEscape="true"/>

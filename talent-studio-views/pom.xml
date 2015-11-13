@@ -14,6 +14,10 @@
 
     <name>talent-studio-views</name>
 
+    <properties>
+        <webapp.src.dir>src/main/webapp</webapp.src.dir>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.zynap</groupId>
@@ -213,6 +217,49 @@
                             <targetPath>META-INF</targetPath>
                         </resource>
                     </webResources>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>net.alchim31.maven</groupId>
+                <artifactId>yuicompressor-maven-plugin</artifactId>
+                <version>1.5.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compress</goal>
+                        </goals>
+                        <phase>package</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <excludes>
+                        <!-- todo update the excludes -->
+                        <exclude>**/*.min.js</exclude>
+                        <exclude>**/questionnaires.js</exclude>
+                    </excludes>
+                    <nosuffix>true</nosuffix>
+                    <force>true</force>
+                    <aggregations>
+                        <aggregation>
+                            <output>${project.build.directory}/${project.build.finalName}/js/talentstudio.min.js</output>
+                            <inputDir>${project.build.directory}/${project.build.finalName}/js</inputDir>
+                            <includes>
+                                <include>functions.js</include>
+                                <include>popups.js</include>
+                                <include>populationfunctions.js</include>
+                                <include>portfoliofunctions.js</include>
+                                <include>searchfunctions.js</include>
+                                <include>tabfunctions.js</include>
+                                <include>worklistfunctions.js</include>
+                                <include>attributes.js</include>
+                                <include>helpText.js</include>
+                                <include>messages.js</include>
+                                <include>objectives.js</include>
+                                <include>orgunits.js</include>
+                            </includes>
+                        </aggregation>
+                    </aggregations>
+
                 </configuration>
             </plugin>
             <plugin>

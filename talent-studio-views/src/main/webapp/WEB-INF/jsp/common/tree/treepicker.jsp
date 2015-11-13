@@ -9,7 +9,7 @@
     <title><fmt:message key="popup"/></title>
 
     <%@ include file="../../includes/stylesheets.jsp" %>
-    <script src="<c:url value="/scripts/talent.studio.min.js"/>" type="text/javascript"></script>    
+    <script src="<c:url value="/js/talent.studio.min.js"/>" type="text/javascript"></script>
 </head>
 
 <body class="serverPopup">

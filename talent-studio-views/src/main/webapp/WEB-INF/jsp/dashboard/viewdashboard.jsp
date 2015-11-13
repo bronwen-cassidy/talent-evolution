@@ -11,7 +11,7 @@
     %>
 
     <%@ include file="../includes/stylesheets.jsp" %>
-    <script src="<c:url value="/scripts/functions.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/js/functions.js"/>" type="text/javascript"></script>
 
 </head>
 

@@ -173,7 +173,7 @@
         <!-- sets overlib.js location relative to webapp -->
         <init-param>
             <param-name>overliburl</param-name>
-            <param-value>/scripts/overlib.js</param-value>
+            <param-value>/js/overlib.js</param-value>
         </init-param>
         <!-- turn on or off debugging logging -->
         <init-param>

@@ -29,6 +29,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -82,12 +83,16 @@ public class QuestionnaireDwrBean {
             e.printStackTrace();
             logger.error(e.toString());
         } finally {
-            clearUserUsession();
+            clearUserUsession(request);
         }
         return result;
     }
 
-    private void clearUserUsession() {
+    private void clearUserUsession(HttpServletRequest request) {
+        // get the current arena to obtain the timeout info
+        UserSession userSession = UserSessionFactory.getUserSession();
+        int sessionTimeout = userSession.getMaxTimeout();
+        request.getSession(false).setMaxInactiveInterval(sessionTimeout * 60);
         UserSessionFactory.setUserSession(null);
     }
 
@@ -135,7 +140,7 @@ public class QuestionnaireDwrBean {
             e.printStackTrace();
             logger.error(e.toString());
         } finally {
-            clearUserUsession();
+            clearUserUsession(request);
         }
 
         return result;
@@ -144,7 +149,7 @@ public class QuestionnaireDwrBean {
     public void deleteQuestionnaireAttribute(Long attributeId, HttpServletRequest request) throws TalentStudioException {
         assignUserSession(request);
         questionnaireService.deleteQuestionnaireAttribute(attributeId);
-        clearUserUsession();
+        clearUserUsession(request);
     }
 
     public AttributePersistenceResult saveUpdateQuestionnaireAttributeDisabled(boolean disabled, Long queId, Long lineItemId, Integer dynamicPosition, Long queDefId, HttpServletRequest request) {
@@ -158,7 +163,7 @@ public class QuestionnaireDwrBean {
             e.printStackTrace();
             logger.error(e.toString());
         } finally {
-            clearUserUsession();
+            clearUserUsession(request);
         }
         return  result;
     }
@@ -183,7 +188,7 @@ public class QuestionnaireDwrBean {
             logger.error(e);
 
         } finally {
-            clearUserUsession();
+            clearUserUsession(request);
         }
         return result;
     }
@@ -236,7 +241,7 @@ public class QuestionnaireDwrBean {
             e.printStackTrace();
             logger.error(e.toString());
         } finally {
-            clearUserUsession();
+            clearUserUsession(request);
         }
         return result;
     }
@@ -251,7 +256,7 @@ public class QuestionnaireDwrBean {
             logger.error(e);
             e.printStackTrace();
         } finally {
-            clearUserUsession();
+            clearUserUsession(request);
         }
         return result;
     }

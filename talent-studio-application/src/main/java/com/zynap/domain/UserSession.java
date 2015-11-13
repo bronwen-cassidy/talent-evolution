@@ -23,7 +23,7 @@ import java.util.*;
  */
 public class UserSession implements Serializable {
 
-    
+
     public UserSession(UserPrincipal principal, IArenaMenuHandler menuHandler) {
         this(principal);
         this.menuHandler = menuHandler;
@@ -221,14 +221,13 @@ public class UserSession implements Serializable {
         return userPrincipal.getUserOrganisationRootId();
     }
 
-    private UserPrincipal userPrincipal;
-    private Locale locale;
-    private String currentArenaId;
-    private String currentMenuSectionId;
-    private boolean agreedToPolicies = false;
-    private ZynapNavigator navigator;
-    private IArenaMenuHandler menuHandler;
-    private Collection<Arena> secureArenas = new ArrayList<Arena>();
+    public void setMaxTimeout(int maxTimeout) {
+        this.maxTimeout = maxTimeout;
+    }
+
+    public int getMaxTimeout() {
+        return maxTimeout;
+    }
 
     private class HomePageReportMenuSectionPredicate implements Predicate {
 
@@ -286,4 +285,14 @@ public class UserSession implements Serializable {
 
     private boolean permitsLoaded;
     private boolean multiTenant;
+    private int maxTimeout;
+    private UserPrincipal userPrincipal;
+    private Locale locale;
+    private String currentArenaId;
+    private String currentMenuSectionId;
+    private boolean agreedToPolicies = false;
+    private ZynapNavigator navigator;
+    private IArenaMenuHandler menuHandler;
+    private Collection<Arena> secureArenas = new ArrayList<Arena>();
+
 }

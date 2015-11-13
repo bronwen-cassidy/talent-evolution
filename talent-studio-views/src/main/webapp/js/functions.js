@@ -8,6 +8,8 @@ var CountActive = true;
 var CountStepper = -1;
 var DisplayFormat = "%%M%% Minutes, %%S%% Seconds.";
 var navTdId = "td_hideable";
+var thisTimeoutAmount;
+
 
 function disableButton(theButton)
 {
@@ -581,12 +583,14 @@ function removeTimer() {
 }
 
 function pollTimeOut(timeoutAmount, message, url) {
+    thisTimeoutAmount = timeoutAmount;
+    timeOutWarningMessage = message;
+    logoutUrl = url;
+
     if (!ignoreTimer) {
         window.clearTimeout(timer);
         window.clearTimeout(countDownTimer);
         currentTimeOutAmount = timeoutAmount - (5 * 60 * 1000);
-        timeOutWarningMessage = message;
-        logoutUrl = url;
         timer = window.setTimeout('warningToTimeout()', currentTimeOutAmount);
     }
 }
