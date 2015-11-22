@@ -6,10 +6,11 @@
     <parent>
         <groupId>com.zynap</groupId>
         <artifactId>talent-studio</artifactId>
-        <version>v5.4.4-mt-SNAPSHOT</version>
+        <version>${build.version}-SNAPSHOT</version>
     </parent>
 
     <artifactId>talent-studio-application</artifactId>
+    <version>${build.version}-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>talent-studio-application</name>

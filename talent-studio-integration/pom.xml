@@ -6,10 +6,11 @@
     <parent>
         <groupId>com.zynap</groupId>
         <artifactId>talent-studio</artifactId>
-        <version>v5.4.4-mt-SNAPSHOT</version>
+        <version>${build.version}-SNAPSHOT</version>
     </parent>
 
     <artifactId>talent-studio-integration</artifactId>
+    <version>${build.version}-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>talent-studio-integration</name>
@@ -18,14 +19,14 @@
         <dependency>
             <groupId>com.zynap</groupId>
             <artifactId>talent-studio-application</artifactId>
-            <version>v5.4.4-mt-SNAPSHOT</version>
+            <version>${build.version}-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.zynap</groupId>
             <artifactId>talent-studio-application</artifactId>
-            <version>v5.4.4-mt-SNAPSHOT</version>
+            <version>${build.version}-SNAPSHOT</version>
             <type>test-jar</type>
-            <scope>test-compile</scope>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>

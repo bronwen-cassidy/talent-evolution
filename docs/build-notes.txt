@@ -1,0 +1,6 @@
+1) cewolf-1.0.pom provided in the docs directory must replace the pom that comes from cewolf this is to remove the 2 dependencies that are not compile time ones, 
+and should not be included with the project. These dependencies are:
+    1.a) crimson
+    1.b) gnujaxp
+    
+    
