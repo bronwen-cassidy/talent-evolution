@@ -17,14 +17,3 @@ print just the lines matching
 
 === number of lines in the file
  awk 'END {print NR}' file.txt
-
-================================================
-set a new version in your poms
-=================================================
-mvn versions:set -DnewVersion=2.50.1-SNAPSHOT
-
--- commit that version
-mvn versions:commit
-
--- revert that version
-mvn versions:revert

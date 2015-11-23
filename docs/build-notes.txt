@@ -2,5 +2,18 @@
 and should not be included with the project. These dependencies are:
     1.a) crimson
     1.b) gnujaxp
+
+================================================
+set a new version in your poms
+=================================================
+mvn versions:set -DnewVersion=2.50.1-SNAPSHOT
+
+-- commit that version
+mvn versions:commit
+
+-- revert that version
+mvn versions:revert
+
+
     
     
