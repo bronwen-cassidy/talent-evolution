@@ -7,23 +7,23 @@
     <parent>
         <groupId>com.zynap</groupId>
         <artifactId>talent-studio</artifactId>
-        <version>${build.version}-SNAPSHOT</version>
+        <version>5.4.8-SNAPSHOT</version>
     </parent>
 
     <artifactId>talent-studio-integration-client</artifactId>
-    <version>${build.version}-SNAPSHOT</version>
+    <version>5.4.8-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
             <groupId>com.zynap</groupId>
             <artifactId>talent-studio-integration</artifactId>
-            <version>v5.4.8-SNAPSHOT</version>
+            <version>5.4.8-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.zynap</groupId>
             <artifactId>talent-studio-application</artifactId>
-            <version>v5.4.8-SNAPSHOT</version>
+            <version>5.4.8-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

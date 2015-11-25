@@ -15,5 +15,21 @@ mvn versions:commit
 mvn versions:revert
 
 
+=============================================
+setup tomcat to access your war file in your project
+=============================================
+add into server.xml under %CATALINE_HOME%/conf:
+-------------------------------------------------
+    <Host name="localhost"  appBase="C:/Users/home/dev/ts/talent-evolution/target/dist"
+            unpackWARs="true" autoDeploy="true">
+
+        <Valve className="org.apache.catalina.valves.AccessLogValve" directory="C:/Users/home/dev/ts/talent-evolution/target"
+               prefix="localhost_access_log" suffix=".txt"
+               pattern="%h %l %u %t &quot;%r&quot; %s %b" />
+
+    </Host>
+
+within the <Engine></Engine> tags of server.xml
+
     
     

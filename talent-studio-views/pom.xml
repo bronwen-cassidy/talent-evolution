@@ -6,11 +6,11 @@
     <parent>
         <groupId>com.zynap</groupId>
         <artifactId>talent-studio</artifactId>
-        <version>${build.version}-SNAPSHOT</version>
+        <version>5.4.8-SNAPSHOT</version>
     </parent>
 
     <artifactId>talent-studio-views</artifactId>
-    <version>${build.version}-SNAPSHOT</version>
+    <version>5.4.8-SNAPSHOT</version>
     <packaging>war</packaging>
 
     <name>talent-studio-views</name>
@@ -23,18 +23,18 @@
         <dependency>
             <groupId>com.zynap</groupId>
             <artifactId>talent-studio-application</artifactId>
-            <version>${build.version}-SNAPSHOT</version>
+            <version>5.4.8-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.zynap</groupId>
             <artifactId>talent-studio-integration</artifactId>
-            <version>${build.version}-SNAPSHOT</version>
+            <version>5.4.8-SNAPSHOT</version>
         </dependency>
         <dependency>
             <!-- todo remove this dependency and use mockito instead -->
             <groupId>com.zynap</groupId>
             <artifactId>talent-studio-application</artifactId>
-            <version>${build.version}-SNAPSHOT</version>
+            <version>5.4.8-SNAPSHOT</version>
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
@@ -132,8 +132,9 @@
         <!-- container jar dependencies  -->
         <dependency>
             <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.0.1</version>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>javax.el</groupId>
@@ -158,7 +159,7 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-    
+
     <build>
         <plugins>
             <plugin>
@@ -168,6 +169,8 @@
                 <configuration>
                     <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
                     <warName>${application.name}</warName>
+                    <!--<webappDirectory>target/${application.name}</webappDirectory>-->
+                    <outputDirectory>target/dist</outputDirectory>
                     <webResources>
                         <resource>
                             <directory>src/main/resources/com/zynap/talentstudio/web</directory>
@@ -227,6 +230,7 @@
                     </webResources>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>net.alchim31.maven</groupId>
                 <artifactId>yuicompressor-maven-plugin</artifactId>
@@ -236,12 +240,11 @@
                         <goals>
                             <goal>compress</goal>
                         </goals>
-                        <phase>package</phase>
+                        <phase>compile</phase>
                     </execution>
                 </executions>
                 <configuration>
                     <excludes>
-                        <!-- todo update the excludes -->
                         <exclude>**/*.min.js</exclude>
                         <exclude>**/AJS.js</exclude>
                         <exclude>**/jquery.color.js</exclude>
@@ -252,8 +255,8 @@
                     <force>true</force>
                     <aggregations>
                         <aggregation>
-                            <output>${project.build.directory}/${project.build.finalName}/js/talentstudio.min.js</output>
-                            <inputDir>${project.build.directory}/${project.build.finalName}/js</inputDir>
+                            <output>src/main/webapp/js/talentstudio.min.js</output>
+                            <inputDir>src/main/webapp/js</inputDir>
                             <includes>
                                 <include>functions.js</include>
                                 <include>popups.js</include>
@@ -270,23 +273,48 @@
                             </includes>
                         </aggregation>
                     </aggregations>
-
                 </configuration>
             </plugin>
             <plugin>
+                <!-- todo this plugin is not working!!-->
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
                 <configuration>
                     <port>8093</port>
-                    <path>/${application.name}</path>
-                    <enableNaming>true</enableNaming>
+                    <path>/talent-studio</path>
+                    <warSourceDirectory>
+                        ${project.build.directory}/${project.build.finalName}
+                    </warSourceDirectory>
+                    <!--<warDirectory>${project.build.directory}/talent-studio.war</warDirectory>-->
+                    <!--<finalName>talent-studio.war</finalName>-->
+                    <systemProperties>
+                        <org.apache.catalina.startup.ContextConfig.jarsToSkip>*
+                        </org.apache.catalina.startup.ContextConfig.jarsToSkip>
+                        <!-- work around .. see: https://issues.apache.org/jira/browse/MTOMCAT-281 -->
+                        <catalina.config>${project.baseUri}/target/tomcat/logs</catalina.config>
+                        <JAVA_OPTS>-Xms2048m -Xmx2048m -XX:+CMSClassUnloadingEnabled -XX:PermSize=2048m
+                            -XX:MaxPermSize=3072m
+                        </JAVA_OPTS>
+                    </systemProperties>
                 </configuration>
                 <dependencies>
                     <dependency>
                         <groupId>com.oracle</groupId>
                         <artifactId>ojdbc7</artifactId>
                         <version>14.0.0</version>
+                        <scope>runtime</scope>
+                    </dependency>
+                    <dependency>
+                        <groupId>javax.mail</groupId>
+                        <artifactId>mail</artifactId>
+                        <version>1.4.7</version>
+                        <scope>runtime</scope>
+                    </dependency>
+                    <dependency>
+                        <groupId>javax.activation</groupId>
+                        <artifactId>activation</artifactId>
+                        <version>1.1.1</version>
                     </dependency>
                 </dependencies>
             </plugin>

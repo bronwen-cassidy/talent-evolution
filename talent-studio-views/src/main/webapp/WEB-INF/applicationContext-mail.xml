@@ -6,6 +6,19 @@
 -->
 <beans>
 
+    <bean id="propertyConfigurerMail" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>/WEB-INF/mail.properties</value>
+            </list>
+        </property>
+
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <!--SYSTEM_PROPERTIES_MODE_OVERRIDE -->
+        <property name="systemPropertiesMode" value="2"/>
+        <property name="ignoreResourceNotFound" value="true"/>
+    </bean>
+
 <!--========================== MAIL DEFINITIONS =========================-->
 
     <!-- jndi name for the mail server -->

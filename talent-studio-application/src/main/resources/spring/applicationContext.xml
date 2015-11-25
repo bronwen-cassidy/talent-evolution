@@ -13,7 +13,6 @@
         <property name="locations">
             <list>
                 <value>classpath:spring/jdbc.properties</value>
-                <value>/WEB-INF/mail.properties</value>
                 <value>classpath:spring/autonomy.properties</value>
             </list>
         </property>
