@@ -1,24 +1,12 @@
 <%@ page errorPage="systemerror.jsp" %>
 <%@ page buffer="32kb" %>
-<%--
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-This may work with jWebUnit....
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-		"http://www.w3.org/TR/html4/loose.dtd">
-
---%>
 
 <%@ include file="../includes/include.jsp" %>
 
 <html>
 <head>
-    <!--<meta http-equiv="Content-type" content="text/html;charset=ISO-8859-1"/>-->
-    <meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
+    <meta http-equiv="Content-type" content="text/html;charset=ISO-8859-1"/>
+    <%--<meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>--%>
 
     <fmt:message key="${title}" var="title" scope="request"/>
     <title><fmt:message key="application.title"/> - <c:out value="${title}"/></title>
@@ -80,10 +68,11 @@ This may work with jWebUnit....
                     <c:if test="${nav != null}">
                         <td valign="top" class="navigation noprint">
                             <div id="td_hideable" class="navigation"
-                                                  <c:choose>
-                                                  <c:when test="${navigationVisible == null || navigationVisible}">style="display:block;" </c:when>
-                                <c:otherwise>style="display:none;"</c:otherwise>
-                            </c:choose>>
+                                <c:choose>
+                                    <c:when test="${navigationVisible == null || navigationVisible}">style="display:block;" </c:when>
+                                    <c:otherwise>style="display:none;"</c:otherwise>
+                                </c:choose>
+                            >
                                 <c:import url="${nav}"/>
                             </div>
                         </td>
