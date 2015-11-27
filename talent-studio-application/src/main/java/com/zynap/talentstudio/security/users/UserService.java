@@ -19,6 +19,9 @@ import com.zynap.talentstudio.organisation.IOrganisationUnitService;
 import com.zynap.talentstudio.organisation.OrganisationUnit;
 import com.zynap.talentstudio.security.permits.IPermitManagerDao;
 
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.io.Serializable;
@@ -33,6 +36,9 @@ import java.util.List;
  * @version $Revision: $
  *          $Id: $
  */
+@Configuration
+@Service("userService")
+@Transactional
 public class UserService implements IUserService {
 
     public void delete(IDomainObject domainObject) throws TalentStudioException {
