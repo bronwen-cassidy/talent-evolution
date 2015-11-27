@@ -25,30 +25,6 @@
                 $('#numAssSpanId').append(num);
             }});
         });
-
-        $('#td_hideable').resizable({
-            // only use the eastern handle
-            handles: 'e',
-            // restrict the width range
-            minWidth: 100,
-            maxWidth: 450,
-            // resize handler updates the content panel width
-            resize: function(event, ui){
-                var currentWidth = ui.size.width;
-                var containerWidth = $(window).width;
-                // this accounts for padding in the panels +
-                // borders, you could calculate this using jQuery
-                var padding = 12;
-
-                // this accounts for some lag in the ui.size value, if you take this away
-                // you'll get some unstable behaviour
-                $(this).width(currentWidth);
-
-                // set the content panel width
-                $(".content").width(containerWidth - currentWidth - padding);
-            }
-        });
-
     });
     
 </script>
