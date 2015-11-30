@@ -31,5 +31,10 @@ add into server.xml under %CATALINE_HOME%/conf:
 
 within the <Engine></Engine> tags of server.xml
 
+=============================================
+library poms
+=============================================
+Please replace the local spring-hibernate2-2.0.8.pom with the one in your .m2 repository
+
     
     
