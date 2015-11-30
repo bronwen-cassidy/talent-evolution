@@ -1,0 +1,18 @@
+identify oracle sessions
+=======================================
+select object_name, s.sid, s.serial#, p.spid
+from v$locked_object l, dba_objects o, v$session s, v$process p
+where l.object_id = o.object_id and l.session_id = s.sid and s.paddr = p.addr;
+
+kill oracle sessions
+==========================================
+alter system kill session 'sid,serial#';--sid` and `serial#` get from 'identify oracle sessions'
+
+
+format sqlplus output
+=======================================
+SET LINESIZE 100
+COLUMN spid FORMAT A10
+COLUMN username FORMAT A10
+COLUMN program FORMAT A45
+
