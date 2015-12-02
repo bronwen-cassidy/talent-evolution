@@ -4,8 +4,8 @@
     <td>
         <div class="arenatabs">
             <c:if test="${nav != null}">
-                <span id="showHideId" class="nav_manipulation">
-                    <a class="nav" href="#" onclick="showHideNav();"><fmt:message key="show.hide.nav"/></a>
+                <span id="showHideId" class="nav_manipulation" onclick="showHideNav()">
+                    <a class="nav" href="javascript:void(0)"><fmt:message key="show.hide.nav"/></a>
                 </span>
             </c:if>
             

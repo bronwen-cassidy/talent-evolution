@@ -33,8 +33,10 @@
     <script src="<c:url value="/dwr/interface/subjectBean.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/dwr/interface/messageItemBean.js"/>" type="text/javascript"></script>
 
-    <script src="<c:url value="/js/talentstudio.min.js"/>" type="text/javascript" charset="ISO-8859-2"></script>
-    <script src="<c:url value="/js/questionnaires.js"/>" type="text/javascript" charset="ISO-8859-2"></script>
+
+    <script src="<c:url value="/js/functions.js"/>" type="text/javascript" charset="ISO-8859-1"></script>
+    <script src="<c:url value="/js/questionnaires.js"/>" type="text/javascript" charset="ISO-8859-1"></script>
+    <script src="<c:url value="/js/talentstudio.min.js"/>" type="text/javascript" charset="ISO-8859-1"></script>
 </head>
 
 <zynap:message var="timeoutMsg" code="timeout.warning" javaScriptEscape="true"/>

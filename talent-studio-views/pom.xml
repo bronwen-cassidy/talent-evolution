@@ -252,6 +252,7 @@
                         <exclude>**/jquery.color.js</exclude>
                         <exclude>**/jquery.tablesorter.pager.js</exclude>
                         <exclude>**/questionnaires.js</exclude>
+                        <exclude>**/functions.js</exclude>
                     </excludes>
                     <nosuffix>true</nosuffix>
                     <force>true</force>
@@ -260,7 +261,6 @@
                             <output>src/main/webapp/js/talentstudio.min.js</output>
                             <inputDir>src/main/webapp/js</inputDir>
                             <includes>
-                                <include>functions.js</include>
                                 <include>popups.js</include>
                                 <include>populationfunctions.js</include>
                                 <include>portfoliofunctions.js</include>
