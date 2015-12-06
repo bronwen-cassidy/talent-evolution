@@ -206,9 +206,15 @@
                             </includes>
                         </resource>
                         <resource>
+                            <directory>clients/${client}/</directory>
+                            <includes>
+                                <include>templates/**</include>
+                            </includes>
+                        </resource>
+                        <resource>
                             <directory>clients/${client}/resources/language/</directory>
                             <includes>
-                                <include>**/*.properties</include>
+                                <include>en/**</include>
                             </includes>
                             <filtering>true</filtering>
                             <!-- override the destination directory for this resource -->
@@ -253,6 +259,7 @@
                         <exclude>**/jquery.tablesorter.pager.js</exclude>
                         <exclude>**/questionnaires.js</exclude>
                         <exclude>**/functions.js</exclude>
+                        <exclude>**/popups.js</exclude>
                     </excludes>
                     <nosuffix>true</nosuffix>
                     <force>true</force>
@@ -261,7 +268,6 @@
                             <output>src/main/webapp/js/talentstudio.min.js</output>
                             <inputDir>src/main/webapp/js</inputDir>
                             <includes>
-                                <include>popups.js</include>
                                 <include>populationfunctions.js</include>
                                 <include>portfoliofunctions.js</include>
                                 <include>searchfunctions.js</include>

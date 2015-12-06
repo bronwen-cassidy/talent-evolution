@@ -18,7 +18,9 @@
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
         <build.user>dhanson</build.user>
         <build.version>v5.4.8</build.version>
-        <build.info>${build.version} ${build.user} ${build.date.time}</build.info>
+        <!--build number is incremented for each deployment-->
+        <build.num>1.0</build.num>
+        <build.info>${build.version}-${build.num} ${build.user} ${build.date.time}</build.info>
         <build.year>2015</build.year>
         <hibernate.version>2.1.8</hibernate.version>
         <spring.sec.version>3.2.9.RELEASE</spring.sec.version>

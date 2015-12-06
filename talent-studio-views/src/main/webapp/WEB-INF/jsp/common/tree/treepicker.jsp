@@ -9,6 +9,10 @@
     <title><fmt:message key="popup"/></title>
 
     <%@ include file="../../includes/stylesheets.jsp" %>
+    <script src="<c:url value="/js/jquery-1.7.2.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/js/jquery-ui-1.8.21.custom.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/js/functions.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/js/popups.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/js/talentstudio.min.js"/>" type="text/javascript"></script>
 </head>
 

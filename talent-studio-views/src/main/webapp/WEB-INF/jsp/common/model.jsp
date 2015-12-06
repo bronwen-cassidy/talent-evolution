@@ -35,6 +35,7 @@
 
 
     <script src="<c:url value="/js/functions.js"/>" type="text/javascript" charset="ISO-8859-1"></script>
+    <script src="<c:url value="/js/popups.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/js/questionnaires.js"/>" type="text/javascript" charset="ISO-8859-1"></script>
     <script src="<c:url value="/js/talentstudio.min.js"/>" type="text/javascript" charset="ISO-8859-1"></script>
 </head>
