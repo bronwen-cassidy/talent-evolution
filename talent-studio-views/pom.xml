@@ -210,6 +210,7 @@
                             <includes>
                                 <include>templates/**</include>
                             </includes>
+                            <targetPath>WEB-INF/classes</targetPath>
                         </resource>
                         <resource>
                             <directory>clients/${client}/resources/language/</directory>

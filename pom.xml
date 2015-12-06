@@ -330,8 +330,8 @@
             <id>TME</id>
             <properties>
                 <db.url>jdbc:oracle:thin:@172.24.16.24:1521:orcl</db.url>
-                <db.password>${client}</db.password>
-                <db.username>${client}</db.username>
+                <db.password>TME</db.password>
+                <db.username>TME</db.username>
                 <smpt.host>smtp.sendgrid.net</smpt.host>
                 <host.name>tmelogin</host.name>
                 <server.url>https://www.tmelogin.com</server.url>
