@@ -267,7 +267,7 @@
                 <db.password>tsdev</db.password>
                 <db.username>tsdev</db.username>
                 <host.name>localhost</host.name>
-                <server.url>http://localhost:8080</server.url>
+                <server.url>http://localhost:8080/talent-studio</server.url>
                 <application.name>talent-studio</application.name>
                 <multi.tenant>true</multi.tenant>
                 <log.file.path>${application.name}</log.file.path>
@@ -288,7 +288,7 @@
                 <db.password>tsdev</db.password>
                 <db.username>tsdev</db.username>
                 <host.name>localhost</host.name>
-                <server.url>http://localhost:8080</server.url>
+                <server.url>http://localhost:8080/talent-studio</server.url>
                 <application.name>talent-studio</application.name>
                 <multi.tenant>true</multi.tenant>
                 <log.file.path>${application.name}</log.file.path>
@@ -310,7 +310,7 @@
                 <db.username>${client}</db.username>
                 <smpt.host>smtp.sendgrid.net</smpt.host>
                 <host.name>tmelogin</host.name>
-                <server.url>https://www.tmelogin.com</server.url>
+                <server.url>https://www.tmelogin.com/${client}</server.url>
                 <logFilePath>/usr/local/tomcat7/logs/</logFilePath>
                 <taapi.part.url>https://www.tmelogin.com</taapi.part.url>
                 <application.name>${client}</application.name>
@@ -334,7 +334,7 @@
                 <db.username>TME</db.username>
                 <smpt.host>smtp.sendgrid.net</smpt.host>
                 <host.name>tmelogin</host.name>
-                <server.url>https://www.tmelogin.com</server.url>
+                <server.url>https://www.tmelogin.com/TME</server.url>
                 <logFilePath>/usr/local/tomcat7/logs/</logFilePath>
                 <taapi.part.url>https://www.tmelogin.com</taapi.part.url>
                 <application.name>TME</application.name>

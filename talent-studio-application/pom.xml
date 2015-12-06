@@ -67,13 +67,6 @@
                 </includes>
                 <filtering>true</filtering>
             </resource>
-            <resource>
-                <directory>../talent-studio-views/clients/${client}/</directory>
-                <includes>
-                    <include>templates/*.vm</include>
-                </includes>
-                <filtering>false</filtering>
-            </resource>
         </resources>
         <plugins>
             <plugin>

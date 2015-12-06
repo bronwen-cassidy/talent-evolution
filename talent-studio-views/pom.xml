@@ -171,15 +171,15 @@
                 <configuration>
                     <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
                     <warName>${application.name}</warName>
-                    <!--<webappDirectory>target/${application.name}</webappDirectory>-->
                     <outputDirectory>target/dist</outputDirectory>
                     <webResources>
                         <resource>
-                            <directory>src/main/resources/com/zynap/talentstudio/web</directory>
+                            <directory>src/main/properties</directory>
                             <includes>
-                                <include>**/*.*</include>
+                                <include>**/**</include>
                             </includes>
-                            <targetPath>WEB-INF/classes/com/zynap/talentstudio/web/</targetPath>
+                            <filtering>false</filtering>
+                            <targetPath>WEB-INF/classes</targetPath>
                         </resource>
                         <resource>
                             <directory>clients/${client}/</directory>
@@ -208,17 +208,16 @@
                         <resource>
                             <directory>clients/${client}/</directory>
                             <includes>
-                                <include>templates/**</include>
+                                <include>templates/*.vm</include>
                             </includes>
                             <targetPath>WEB-INF/classes</targetPath>
                         </resource>
                         <resource>
-                            <directory>clients/${client}/resources/language/</directory>
+                            <directory>clients/${client}/resources/language/en</directory>
                             <includes>
-                                <include>en/**</include>
+                                <include>clientmessages.properties</include>
                             </includes>
                             <filtering>true</filtering>
-                            <!-- override the destination directory for this resource -->
                             <targetPath>WEB-INF/classes</targetPath>
                         </resource>
                         <resource>
