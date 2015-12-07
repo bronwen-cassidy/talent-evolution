@@ -267,7 +267,7 @@
                 <db.password>tsdev</db.password>
                 <db.username>tsdev</db.username>
                 <host.name>localhost</host.name>
-                <server.url>http://localhost:8080/talent-studio</server.url>
+                <server.url>http://localhost:8083/talent-studio</server.url>
                 <application.name>talent-studio</application.name>
                 <multi.tenant>true</multi.tenant>
                 <log.file.path>${application.name}</log.file.path>

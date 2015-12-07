@@ -596,7 +596,7 @@ textarea {
     font-size: 1em; /*width: 100%;*/
     width: 500px;
     text-align: justify;
-    white-space: normal;
+    white-space: pre-line;
 }
 
 .infomessage {

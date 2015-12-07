@@ -213,6 +213,13 @@
                             <targetPath>WEB-INF/classes</targetPath>
                         </resource>
                         <resource>
+                            <directory>clients/${client}/resources/properties</directory>
+                            <includes>
+                                <include>*.xml</include>
+                            </includes>
+                            <targetPath>WEB-INF/classes</targetPath>
+                        </resource>
+                        <resource>
                             <directory>clients/${client}/resources/language/en</directory>
                             <includes>
                                 <include>clientmessages.properties</include>
