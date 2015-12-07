@@ -21,7 +21,7 @@
 <%@ page import="org.jfree.data.time.MovingAverage" %>
 <%@ page import="org.jfree.data.time.TimeSeries" %>
 <%@ page import="de.laures.cewolf.ChartPostProcessor" %>
-<%@ taglib prefix="cewolf" uri="/cewolf" %>
+<%@ taglib prefix="cewolf" uri="http://cewolf.sourceforge.net/taglib/cewolf.tld" %>
 
 
 
