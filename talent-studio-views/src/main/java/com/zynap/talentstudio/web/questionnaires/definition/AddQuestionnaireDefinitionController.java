@@ -80,7 +80,7 @@ public class AddQuestionnaireDefinitionController extends BaseQuestionnaireContr
             return showForm(request, response, errors);
         } catch (DataAccessException e) {
             logger.error(e.getMessage(), e);
-            errors.rejectValue("definitionBytes", "error.duplicate.questionnaire.name", "Questionnaire definitions must all have unique names");
+            errors.rejectValue("definitionBytes", "error.data.integrity.issue", new Object[]{e.getMessage()}, "Questionnaire definitions must all have unique names");
             return showForm(request, response, errors);
         }
         return new ModelAndView(new ZynapRedirectView(getSuccessView()), ParameterConstants.QUESTIONNAIRE_DEF_ID, questionnaireDefinition.getId());

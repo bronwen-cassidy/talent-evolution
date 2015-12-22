@@ -34,6 +34,14 @@
         <application.name>talent-studio</application.name>
         <mail.jndi.name>TSMSession</mail.jndi.name>
         <sender.email>info@tmevolution.com</sender.email>
+
+        <autonomy.position.database>${client}positiondata</autonomy.position.database>
+        <autonomy.subject.database>${client}subjectdata</autonomy.subject.database>
+        <taapi.username>bronwen.cassidy@talentscope.com</taapi.username>
+        <taapi.password>4321TS1234</taapi.password>
+        <taapi.client>${client}</taapi.client>
+        <taapi.url>https://www.tmelogin.com/${client}/orgbuilder/editsubjectcallback.htm</taapi.url>
+        <multi.tenant>true</multi.tenant>
         <maven.resources.overwrite>true</maven.resources.overwrite>
 
     </properties>
@@ -226,6 +234,7 @@
             <version>2.1</version>
             <scope>test</scope>
         </dependency>
+        <!-- todo mockito -->
     </dependencies>
 
     <build>
@@ -269,7 +278,6 @@
                 <host.name>localhost</host.name>
                 <server.url>http://localhost:8083/talent-studio</server.url>
                 <application.name>talent-studio</application.name>
-                <multi.tenant>true</multi.tenant>
                 <log.file.path>${application.name}</log.file.path>
             </properties>
             <build>
@@ -290,7 +298,6 @@
                 <host.name>localhost</host.name>
                 <server.url>http://localhost:8080/talent-studio</server.url>
                 <application.name>talent-studio</application.name>
-                <multi.tenant>true</multi.tenant>
                 <log.file.path>${application.name}</log.file.path>
             </properties>
             <build>
@@ -314,7 +321,6 @@
                 <logFilePath>/usr/local/tomcat7/logs/</logFilePath>
                 <taapi.part.url>https://www.tmelogin.com</taapi.part.url>
                 <application.name>${client}</application.name>
-                <multi.tenant>true</multi.tenant>
                 <log.file.path>/usr/local/tomcat7/logs/${application.name}</log.file.path>
             </properties>
             <build>
