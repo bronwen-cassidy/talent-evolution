@@ -22,7 +22,7 @@ public interface UnitTestConstants {
 
     final LookupValue ACTING_SUBJECT_PRIMARY_QUALIFIER = new LookupValue(new Long(399));
     String ROOT_USERNAME = "talentsys";
-    String ROOT_PASSWORD = "Talentscope123";
+    String ROOT_PASSWORD = "TMEvolution123";
     Long ROOT_USER_ID = IDomainObject.ROOT_USER_ID;
     User ROOT_USER = new User(ROOT_USER_ID, ROOT_USERNAME, "zynap", "sys");
     Long ADMINISTRATOR_USER_ID = new Long(1);

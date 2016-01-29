@@ -33,7 +33,7 @@ public class TestEditDomainController extends AbstractDomainControllerTest {
 
         final Area newArea = new Area();
         newArea.setLabel("newAreaLabel");
-        newSecurityDomain.setNode(newArea);
+        newSecurityDomain.setArea(newArea);
 
         securityManager.createDomain(newSecurityDomain);
         setUserSession(new UserSession(new UserPrincipal(ROOT_USER, new ArrayList())), mockRequest);

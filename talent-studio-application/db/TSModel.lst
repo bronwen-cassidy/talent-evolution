@@ -386,9 +386,6 @@ Table created.
 
 Table created.
 
-
-Table created.
-
 Creating Index 'ZPHT_ZLT1_FK_I'
 
 Index created.
@@ -1003,9 +1000,6 @@ Creating Primary Key on 'QUE_XML_DATA'
 Table altered.
 
 Creating Primary Key on 'NODE_ITEM_BLOBS'
-
-Table altered.
-
 
 Table altered.
 
@@ -2061,10 +2055,6 @@ Creating Sequence 'AUDITS_SQ'
 Sequence created.
 
 Creating Sequence 'DASHBOARDS_SQ'
-
-Sequence created.
-
-Creating Sequence 'SEARCH_TERMS_SQ'
 
 Sequence created.
 

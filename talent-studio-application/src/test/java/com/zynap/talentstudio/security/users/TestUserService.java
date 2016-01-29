@@ -56,7 +56,7 @@ public class TestUserService extends ZynapDatabaseTestCase {
             userService.findBySubjectId((long) -1);
             fail("Find should fail for nonexistent subject");
         } catch (DomainObjectNotFoundException expected) {
-            logger.error(expected);
+            assertNotNull(expected);
         } catch (Exception e) {
             logger.error(e);
         }
@@ -66,8 +66,6 @@ public class TestUserService extends ZynapDatabaseTestCase {
 
         try {
             userService.findBySubjectId((long) -32);
-        } catch (DomainObjectNotFoundException expected) {
-            fail("Find should find subject");
         } catch (Exception e) {
             fail("Find should find subject");
         }
@@ -183,7 +181,7 @@ public class TestUserService extends ZynapDatabaseTestCase {
     }
 
     public void testDeleteUser() throws Exception {
-        IDomainObject user = userService.findById(new Long(-44));
+        IDomainObject user = userService.findById(-44L);
         try {
             userService.delete(user);
         } catch (TalentStudioException e) {
@@ -239,7 +237,7 @@ public class TestUserService extends ZynapDatabaseTestCase {
         String changedPassword = "test.1234";
 
 
-        User user = (User) userService.findById(new Long(-133));
+        User user = (User) userService.findById(-133L);
         final LoginInfo original = user.getLoginInfo();
         LoginInfo loginInfo = new LoginInfo();
         loginInfo.setUsername(original.getUsername());
@@ -300,7 +298,7 @@ public class TestUserService extends ZynapDatabaseTestCase {
             final Collection passwordsHistory = expected.getLoginInfo().getPasswordsHistory();
             assertEquals("Expected 3 password history objects", 3, passwordsHistory.size());
 
-            Collection<String> encryptedPasswords = new ArrayList<String>();
+            Collection<String> encryptedPasswords = new ArrayList<>();
             encryptedPasswords.add(userDao.encrypt(oldPassword));
             encryptedPasswords.add(userDao.encrypt(newPassword));
             encryptedPasswords.add(userDao.encrypt(changedPassword));
@@ -322,13 +320,7 @@ public class TestUserService extends ZynapDatabaseTestCase {
 
     public void testLogInUserOK() throws Exception {
 
-        final String username = ROOT_USERNAME;
-        final String password = ROOT_PASSWORD;
-        final LoginInfo loginInfo = new LoginInfo();
-        loginInfo.setUsername(username);
-        loginInfo.setPassword(password);
-
-        UserPrincipal userPrincipal = userService.logInUser(loginInfo, getMockSessionId(), "localhost");
+        UserPrincipal userPrincipal = loginRootUser();
         assertNotNull(userPrincipal);
     }
 
@@ -376,32 +368,19 @@ public class TestUserService extends ZynapDatabaseTestCase {
 
     public void testLogInUserSessionLogUpdated() throws Exception {
 
-        final String username = ROOT_USERNAME;
-        final String password = ROOT_PASSWORD;
-        final LoginInfo loginInfo = new LoginInfo();
-        loginInfo.setUsername(username);
-        loginInfo.setPassword(password);
-
-        UserPrincipal userPrincipal = userService.logInUser(loginInfo, getMockSessionId(), "localhost");
+        UserPrincipal userPrincipal = loginRootUser();
         User user = (User) userService.findById((long) 0);
         Collection sessionLogs = user.getSessionLogs();
         assertFalse(sessionLogs.isEmpty());
         assertNotNull(userPrincipal);
     }
 
-    public void testGetSession() throws Exception {
-
-        final String username = ROOT_USERNAME;
-        final String password = ROOT_PASSWORD;
+    private UserPrincipal loginRootUser() throws TalentStudioException {
         final LoginInfo loginInfo = new LoginInfo();
-        loginInfo.setUsername(username);
-        loginInfo.setPassword(password);
+        loginInfo.setUsername(ROOT_USERNAME);
+        loginInfo.setPassword(ROOT_PASSWORD);
 
-        UserPrincipal userPrincipal = userService.logInUser(loginInfo, getMockSessionId(), "localhost");
-        User user = (User) userService.findById((long) 0);
-        Collection sessionLogs = user.getSessionLogs();
-        assertFalse(sessionLogs.isEmpty());
-        assertNotNull(userPrincipal);
+        return userService.logInUser(loginInfo, getMockSessionId(), "localhost");
     }
 
     public void testLogInUserIncorrectPassword() throws Exception {
@@ -518,16 +497,16 @@ public class TestUserService extends ZynapDatabaseTestCase {
             userService.findById((long) -99);
             fail("Incorrectly managed to find user with invalid id");
         } catch (DomainObjectNotFoundException expected) {
-
+            assertNotNull(expected);
         }
     }
 
     public void testFindSystemUsers() throws Exception {
         final List<UserDTO> users = userService.findSystemUsers();
         assertNotNull(users);
-        assertFalse(users.contains(new UserDTO(new Long(0))));
-        assertFalse(users.contains(new UserDTO(new Long(1))));
-        assertFalse(users.contains(new UserDTO(new Long(2))));
+        assertFalse(users.contains(new UserDTO(0L)));
+        assertFalse(users.contains(new UserDTO(1L)));
+        assertFalse(users.contains(new UserDTO(2L)));
     }
 
     private User buildUser() {
