@@ -91,7 +91,7 @@
 
         <!-- bi-directional many-to-one association to Node -->
         <many-to-one
-            name="node"
+            name="area"
             class="com.zynap.talentstudio.organisation.Node"
             not-null="true"
             cascade="save-update">

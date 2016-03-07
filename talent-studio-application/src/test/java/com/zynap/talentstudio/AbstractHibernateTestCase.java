@@ -51,9 +51,10 @@ public abstract class AbstractHibernateTestCase extends ZynapTestCase {
         String jdbcConfig = "classpath:config/spring/testApplicationContext-jdbc.xml";
         String hibernateConfig = "classpath:config/spring/testApplicationContext-hibernate.xml";
         String mailConfig = "classpath:config/spring/testApplicationContext-mail.xml";
-        String applicationConfig = "classpath:config/spring/applicationContext.xml";
-        String txConfig = "classpath:config/spring/applicationContext-tx.xml";
-        String schConfig = "classpath:config/spring/applicationContext-scheduling.xml";
+
+        String applicationConfig = "classpath:spring/applicationContext.xml";
+        String txConfig = "classpath:spring/applicationContext-tx.xml";
+        String schConfig = "classpath:spring/applicationContext-scheduling.xml";
 
         List<String> configLocations = new ArrayList<String>();
         configLocations.add(jdbcConfig);

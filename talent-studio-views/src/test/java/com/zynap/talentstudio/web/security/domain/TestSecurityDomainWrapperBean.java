@@ -99,9 +99,9 @@ public class TestSecurityDomainWrapperBean extends TestCase {
         SecurityDomain securityDomain = new SecurityDomain(domainId, false, label, comments, false, null, null, null);
         securityDomainWrapperBean = new SecurityDomainWrapperBean(securityDomain);
 
-        List<Node> areas = new ArrayList<Node>();
-        final Node area = new Area();
-        Long areaId = new Long(-999);
+        List<Area> areas = new ArrayList<>();
+        final Area area = new Area();
+        Long areaId = -999L;
         area.setId(areaId);
         areas.add(area);
 
@@ -111,7 +111,7 @@ public class TestSecurityDomainWrapperBean extends TestCase {
         final SecurityDomain modifiedSecurityDomain = securityDomainWrapperBean.getModifiedSecurityDomain();
         securityDomainWrapperBean.resetIds();
         assertNull(modifiedSecurityDomain.getId());
-        assertNotNull(modifiedSecurityDomain.getNode().getId());
+        assertNotNull(modifiedSecurityDomain.getArea().getId());
     }
 
     public void testAssignedRoles() throws Exception {

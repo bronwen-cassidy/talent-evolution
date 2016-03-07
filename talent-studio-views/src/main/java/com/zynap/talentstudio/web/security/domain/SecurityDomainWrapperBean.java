@@ -9,11 +9,7 @@ import com.zynap.talentstudio.web.security.UserHelper;
 import com.zynap.talentstudio.web.utils.SelectionNodeHelper;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 /**
  * User: amark
@@ -24,12 +20,12 @@ public class SecurityDomainWrapperBean implements Serializable {
 
     public SecurityDomainWrapperBean(SecurityDomain securityDomain) {
         this.securityDomain = securityDomain;
-        this.areaId = securityDomain.getNode() != null ? securityDomain.getNode().getId() : null;
+        this.areaId = securityDomain.getArea() != null ? securityDomain.getArea().getId() : null;
     }
 
     public SecurityDomain getModifiedSecurityDomain() {
 
-        securityDomain.setNode(getAssignedArea());
+        securityDomain.setArea(getAssignedArea());
         securityDomain.setRoles(getAssignedRoles());
         securityDomain.setUsers(UserHelper.retainRootUsers(securityDomain.getUsers(), getAssignedUsers()));
         return securityDomain;
@@ -40,10 +36,9 @@ public class SecurityDomainWrapperBean implements Serializable {
         Area assignedArea = null;
 
         if (areaId != null) {
-            for (Iterator iterator = areas.iterator(); iterator.hasNext();) {
-                Area area = (Area) iterator.next();
+            for (Node area : areas) {
                 if (areaId.equals(area.getId())) {
-                    assignedArea = area;
+                    assignedArea = (Area) area;
                     break;
                 }
             }
@@ -82,11 +77,11 @@ public class SecurityDomainWrapperBean implements Serializable {
     }
 
     public Node getNode() {
-        return securityDomain.getNode();
+        return securityDomain.getArea();
     }
 
     public void setNode(Node newNode) {
-        securityDomain.setNode(newNode);
+        securityDomain.setArea(newNode);
     }
 
     public String getLabel() {
@@ -129,7 +124,7 @@ public class SecurityDomainWrapperBean implements Serializable {
     }
 
     public void setRoleIds(Long[] roleIds) {
-        selectedRoles = new HashSet<Role>();
+        selectedRoles = new HashSet<>();
         SelectionNodeHelper.enableDomainObjectSelections(roles, roleIds, selectedRoles);
     }
 
@@ -137,34 +132,26 @@ public class SecurityDomainWrapperBean implements Serializable {
         return new Long[0];
     }
 
-    public boolean isAssigned(Role role) {
-        return securityDomain.getRoles().contains(role);
-    }
-
     /**
      * Returns list of app users only - removes root users from list for display purposes.
      *
      * @return Collection of User objects
      */
-    public Collection getUsers() {
+    public Collection<User> getUsers() {
         return users;
     }
 
-    public void setUsers(Collection users) {
+    public void setUsers(Collection<User> users) {
         this.users = SelectionNodeHelper.createDomainObjectSelections(users, UserHelper.removeRootUsers(securityDomain.getUsers()));
     }
 
     public void setUserIds(Long[] userIds) {
-        selectedUsers = new HashSet<User>();
+        selectedUsers = new HashSet<>();
         SelectionNodeHelper.enableDomainObjectSelections(users, userIds, selectedUsers);
     }
 
     public Long[] getUserIds() {
         return new Long[0];
-    }
-
-    public boolean isAssigned(User user) {
-        return securityDomain.getUsers().contains(user);
     }
 
     public Long getAreaId() {
@@ -175,11 +162,11 @@ public class SecurityDomainWrapperBean implements Serializable {
         this.areaId = areaId;
     }
 
-    public Collection getAreas() {
+    public Collection<? extends Node> getAreas() {
         return areas;
     }
 
-    public void setAreas(Collection areas) {
+    public void setAreas(Collection<Area> areas) {
         this.areas = areas;
     }
 
@@ -189,11 +176,11 @@ public class SecurityDomainWrapperBean implements Serializable {
 
     private HashSet<Role> selectedRoles;
 
-    private Collection users;
+    private Collection<User> users;
 
-    private HashSet<User> selectedUsers;
+    private Set<User> selectedUsers;
 
-    private Collection areas = new ArrayList();
+    private Collection<? extends Node> areas = new ArrayList<>();
 
     private Long areaId;
 }

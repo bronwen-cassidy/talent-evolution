@@ -80,7 +80,7 @@ public class TestSecurityManager extends AbstractHibernateTestCase {
 
         final Area newArea = new Area();
         newArea.setLabel("area1");
-        newSecurityDomain.setNode(newArea);
+        newSecurityDomain.setArea(newArea);
 
         securityManager.createDomain(newSecurityDomain);
 
@@ -94,7 +94,7 @@ public class TestSecurityManager extends AbstractHibernateTestCase {
         assertNotNull(domain.getRoles());
 
         // check that the node protected by the domain is the expected one
-        assertEquals(domain.getNode(), newArea);
+        assertEquals(domain.getArea(), newArea);
     }
 
     /**
@@ -113,7 +113,7 @@ public class TestSecurityManager extends AbstractHibernateTestCase {
 
         final Area newArea = new Area();
         newArea.setLabel("area2");
-        newSecurityDomain.setNode(newArea);
+        newSecurityDomain.setArea(newArea);
 
         securityManager.createDomain(newSecurityDomain);
 
@@ -167,7 +167,7 @@ public class TestSecurityManager extends AbstractHibernateTestCase {
 
         final Area newArea = new Area();
         newArea.setLabel("area3");
-        newSecurityDomain.setNode(newArea);
+        newSecurityDomain.setArea(newArea);
         newSecurityDomain.addUser(newUser);
 
         securityManager.createDomain(newSecurityDomain);
@@ -201,7 +201,7 @@ public class TestSecurityManager extends AbstractHibernateTestCase {
 
         final Area newArea = new Area();
         newArea.setLabel("area4");
-        newSecurityDomain.setNode(newArea);
+        newSecurityDomain.setArea(newArea);
 
         securityManager.createDomain(newSecurityDomain);
 
@@ -232,18 +232,18 @@ public class TestSecurityManager extends AbstractHibernateTestCase {
 
         final Area newArea = new Area();
         newArea.setLabel("area6");
-        newSecurityDomain.setNode(newArea);
+        newSecurityDomain.setArea(newArea);
 
         securityManager.createDomain(newSecurityDomain);
 
         final Area replacementArea = new Area();
         replacementArea.setLabel("area7");
-        newSecurityDomain.setNode(replacementArea);
+        newSecurityDomain.setArea(replacementArea);
 
         securityManager.updateDomain(newSecurityDomain);
 
         // check that the area protected by the domain is the expected one
-        assertEquals(newSecurityDomain.getNode(), replacementArea);
+        assertEquals(newSecurityDomain.getArea(), replacementArea);
 
         // check that the old area still exists
         Area foundArea = securityManager.findArea(newArea.getId());
@@ -265,7 +265,7 @@ public class TestSecurityManager extends AbstractHibernateTestCase {
 
         final Area newArea = new Area();
         newArea.setLabel("area8");
-        newSecurityDomain.setNode(newArea);
+        newSecurityDomain.setArea(newArea);
 
         securityManager.createDomain(newSecurityDomain);
         final Long domainId = newSecurityDomain.getId();
@@ -308,20 +308,13 @@ public class TestSecurityManager extends AbstractHibernateTestCase {
 
         final Area newArea = new Area();
         newArea.setLabel("area9");
-        newSecurityDomain.setNode(newArea);
+        newSecurityDomain.setArea(newArea);
         newSecurityDomain.addUser(newUser);
 
         securityManager.createDomain(newSecurityDomain);
 
         newSecurityDomain.getUsers().clear();
-        userService.delete(newUser);
-
-        try {
-            userService.findById(newUser.getId());
-            fail("Incorrectly found deleted user");
-        } catch (TalentStudioException expected) {
-
-        }
+        securityManager.updateDomain(newSecurityDomain);
 
         // check that security domain still exists and has no users
         assertTrue(securityManager.findDomain(newSecurityDomain.getId()).getUsers().isEmpty());

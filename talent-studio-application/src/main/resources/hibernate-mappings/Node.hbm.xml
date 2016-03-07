@@ -523,11 +523,10 @@
                     class="com.zynap.talentstudio.questionnaires.QuestionnaireWorkflow"
                     not-null="true"
                     update="false"
-                    insert="false"
-                    >
-                <meta attribute="use-in-equals">true</meta>
+                    insert="false">
                 <column name="QWF_ID"/>
             </many-to-one>
+
             <many-to-one
                     name="subject"
                     class="com.zynap.talentstudio.organisation.subjects.Subject"
@@ -537,12 +536,12 @@
                     >
                 <column name="SUBJECT_ID"/>
             </many-to-one>
+
             <many-to-one
                     name="user"
                     class="com.zynap.domain.admin.User"
                     not-null="true"
                     >
-                <meta attribute="use-in-equals">true</meta>
                 <column name="USER_ID"/>
             </many-to-one>
             <!-- uni-directional many-to-one association to LookupValue -->

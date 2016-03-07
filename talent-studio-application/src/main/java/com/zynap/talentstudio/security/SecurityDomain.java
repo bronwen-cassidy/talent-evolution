@@ -26,13 +26,13 @@ public class SecurityDomain extends ZynapDomainObject implements Serializable {
     /**
      * full constructor.
      */
-    public SecurityDomain(Long id, boolean isExclusive, String label, String comments, boolean isActive, Node node, Set<User> users, Set<Role> roles) {
+    public SecurityDomain(Long id, boolean isExclusive, String label, String comments, boolean isActive, Node area, Set<User> users, Set<Role> roles) {
         setId(id);
         this.exclusive = isExclusive;
         this.label = label;
         this.comments = comments;
         setActive(isActive);
-        this.node = node;
+        this.area = area;
         this.users = users;
         this.roles = roles;
     }
@@ -46,12 +46,12 @@ public class SecurityDomain extends ZynapDomainObject implements Serializable {
     /**
      * minimal constructor.
      */
-    public SecurityDomain(Long id, boolean isExclusive, String label, boolean isActive, Node node, Set<User> securityDomainsUsers, Set<Role> rolesSecurityDomains) {
+    public SecurityDomain(Long id, boolean isExclusive, String label, boolean isActive, Node area, Set<User> securityDomainsUsers, Set<Role> rolesSecurityDomains) {
         this.id = id;
         this.exclusive = isExclusive;
         this.label = label;
         setActive(isActive);
-        this.node = node;
+        this.area = area;
         this.users = securityDomainsUsers;
         this.roles = rolesSecurityDomains;
     }
@@ -72,12 +72,12 @@ public class SecurityDomain extends ZynapDomainObject implements Serializable {
         this.comments = comments;
     }
 
-    public Node getNode() {
-        return this.node;
+    public Node getArea() {
+        return this.area;
     }
 
-    public void setNode(Node node) {
-        this.node = node;
+    public void setArea(Node area) {
+        this.area = area;
     }
 
     public Set<User> getUsers() {
@@ -139,7 +139,7 @@ public class SecurityDomain extends ZynapDomainObject implements Serializable {
     /**
      * persistent field.
      */
-    private Node node;
+    private Node area;
 
     /**
      * persistent field.

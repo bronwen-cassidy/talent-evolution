@@ -6,10 +6,19 @@
 -->
 <beans>
 
-    <!-- required as ZynapDbUnitWebGenTestCase loads this file independently of other context files -->
-    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="systemPropertiesMode" value="2"/>
+    <bean id="propertyConfigurerJdbc" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:test-jdbc.properties</value>
+            </list>
+        </property>
+        <property name="ignoreUnresolvablePlaceholders" value="false"/>
     </bean>
+
+    <!-- required as ZynapDbUnitWebGenTestCase loads this file independently of other context files -->
+    <!--<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">-->
+        <!--<property name="systemPropertiesMode" value="2"/>-->
+    <!--</bean>-->
 
     <bean id="dataSource" class="oracle.jdbc.pool.OracleDataSource">
         <property name="driverType" value="oracle.jdbc.OracleDriver"/>

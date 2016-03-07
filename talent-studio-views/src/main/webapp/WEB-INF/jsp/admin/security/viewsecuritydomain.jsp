@@ -64,14 +64,26 @@
 			    <fmt:message key="securitydomain.users"/>&nbsp;:&nbsp;
 		    </td>
 		    <td class="infodata">
-			    <c:forEach items="${model.users}" var="user">
-
-                    <zynap:historyLink var="viewUserUrl" url="viewuser.htm">
-                        <zynap:param name="node_id" value="${user.id}"/>
-                    </zynap:historyLink>
-
-                    <a href="<c:out value="${viewUserUrl}"/>"><c:out value="${user.loginInfo.username}"/></a><br/>
-			    </c:forEach>
+                <table class="infotable" cellpadding="0" cellspacing="0">
+                    <thead>
+                        <tr><th><fmt:message key="user"/></th><th><fmt:message key="hr"/></th></tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach items="${model.users}" var="user">
+                            <tr>
+                                <td class="infodata">
+                                    <zynap:historyLink var="viewUserUrl" url="viewuser.htm">
+                                        <zynap:param name="node_id" value="${user.id}"/>
+                                    </zynap:historyLink>
+                                    <a href="<c:out value="${viewUserUrl}"/>"><c:out value="${user.loginInfo.username}"/></a>
+                                </td>
+                                <td class="infodata">
+                                    <img src="../images/${user.hr}.gif"/>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
 		    </td>
 	    </tr>
 
@@ -80,7 +92,7 @@
 			    <fmt:message key="securitydomain.area"/>&nbsp;:&nbsp;
 		    </td>
 		    <td class="infodata">
-                <c:set var="area" value="${domain.node}" scope="request"/>
+                <c:set var="area" value="${domain.area}" scope="request"/>
 
                 <zynap:historyLink var="viewAreaUrl" url="viewarea.htm">
                     <zynap:param name="areaId" value="${area.id}"/>

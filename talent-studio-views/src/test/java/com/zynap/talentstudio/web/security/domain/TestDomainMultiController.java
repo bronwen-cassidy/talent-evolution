@@ -72,7 +72,7 @@ public class TestDomainMultiController extends AbstractDomainControllerTest {
 
         final Area newArea = new Area();
         newArea.setLabel("newAreaLabel");
-        newSecurityDomain.setNode(newArea);
+        newSecurityDomain.setArea(newArea);
 
         // add root and all other users to security domain
         final User rootUser = (User) userService.findById(ROOT_USER_ID);
@@ -83,7 +83,6 @@ public class TestDomainMultiController extends AbstractDomainControllerTest {
             User user = (User) iterator.next();
             newSecurityDomain.addUser(user);
         }
-
 
         securityManager.createDomain(newSecurityDomain);
         final Long domainId = newSecurityDomain.getId();
@@ -121,7 +120,7 @@ public class TestDomainMultiController extends AbstractDomainControllerTest {
 
         final Area newArea = new Area();
         newArea.setLabel("newAreaLabel");
-        newSecurityDomain.setNode(newArea);
+        newSecurityDomain.setArea(newArea);
 
         securityManager.createDomain(newSecurityDomain);
         final Long domainId = newSecurityDomain.getId();
