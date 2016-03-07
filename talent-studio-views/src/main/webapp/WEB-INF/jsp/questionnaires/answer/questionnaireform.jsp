@@ -101,7 +101,7 @@
                                         <c:set var="editable" value="false" scope="request"/>
                                         <c:out value="${question.label}"/>&nbsp;:&nbsp;
                                         <c:if test="${question.mandatory}">*</c:if>&nbsp;
-                                        <c:if test="${question.hasHelpText}"><c:import url="../helptextinclude.jsp"/></c:if>
+                                        <c:if test="${question.hasHelpText}"><c:import url="../questionnaires/helptextinclude.jsp"/></c:if>
                                     </td>
                                     <td style="<c:out value="${question.cellStyle}"/>" class="questiondata" <c:out value="${titleAttr}" escapeXml="false"/>>
                                         <%@include file="editquestionsnippet.jsp"%>
