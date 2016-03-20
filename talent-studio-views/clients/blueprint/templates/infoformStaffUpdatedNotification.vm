@@ -1,0 +1,13 @@
+
+To ${user.label}
+
+Questionnaire ${domainObject.label} has been updated. Please login to view changes
+
+#if ($url && $url != "")
+Click to view your team ${url}
+#end
+
+Sent on behalf of
+${from.label}.
+
+[Note: This is an automated reply sent from TalentEvolution, please do not respond]

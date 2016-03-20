@@ -1,22 +1,18 @@
 #!/bin/sh
 
-if [ -z "$1" -o -z "$2" ]
+if [ -z "$1" -o -z "$3" ]
 then
-	echo usage $0 [DB Admin User] [DB User] [Dump file name]
+	echo usage $0 [DB Admin User] [DB Admin password] [DB User] [Dump file name, no ending]
 	exit 2
 fi
 
 set -u
 
 DBADMIN=$1
-DBUSER=$2
-DMPFILE=$3
+DBPASS=$2
+DBUSER=$3
+DMPFILE=$4
 
-if [ ! -d ${DMPFILE} ]
-then
-	echo ${DMPFILE} is not an accessible directory.
-	exit 1
-fi
 
 if [ -z "$ORACLE_HOME" ]
 then
@@ -27,7 +23,7 @@ fi
 
 # Create TS user
 
-sqlplus $DBADMIN/$DBADMIN @promptAndCreateUser.sql <<XXX
+sqlplus $DBADMIN/$DBPASS @promptAndCreateUser.sql <<XXX
 ${DBUSER}
 XXX
 
@@ -42,11 +38,11 @@ fi
 
 # Import the TS schema and data
 
-impdp system/oracle SCHEMAS=nhs remap_schema=nhs:tsdev \
-            directory=EXPORTDIR \
-            dumpfile=nhs.dmp logfile=${DMPFILE}/ts_restore.log
+impdp system/$DBPASS SCHEMAS=TME remap_schema=TME:blueprint \
+            directory=DATA_PUMP_DIR \
+            dumpfile=$DMPFILE.dmp logfile=$DMPFILE_restore.log
 
-$ORACLE_HOME/bin/imp $DBUSER/$DBUSER LOG=${DMPFILE}/ts_restore.log FULL=y COMMIT=y ROWS=y INDEXES=y CONSTRAINTS=y GRANTS=y FILE=${DMPFILE}/ts.dmp
+#$ORACLE_HOME/bin/imp $DBUSER/$DBUSER LOG=${DMPFILE}/ts_restore.log FULL=y COMMIT=y ROWS=y INDEXES=y CONSTRAINTS=y GRANTS=y FILE=${DMPFILE}/ts.dmp
 result=$?
 
 echo RESULT = $result
