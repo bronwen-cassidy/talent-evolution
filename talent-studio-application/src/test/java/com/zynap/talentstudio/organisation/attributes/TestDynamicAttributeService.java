@@ -8,8 +8,8 @@ import com.zynap.domain.admin.User;
 import com.zynap.exception.DomainObjectNotFoundException;
 import com.zynap.talentstudio.AbstractHibernateTestCase;
 import com.zynap.talentstudio.calculations.Calculation;
-import com.zynap.talentstudio.calculations.Expression;
 import com.zynap.talentstudio.calculations.DateCalculation;
+import com.zynap.talentstudio.calculations.Expression;
 import com.zynap.talentstudio.help.HelpTextItem;
 import com.zynap.talentstudio.help.IHelpTextService;
 import com.zynap.talentstudio.organisation.Node;
@@ -17,6 +17,9 @@ import com.zynap.talentstudio.organisation.positions.IPositionService;
 import com.zynap.talentstudio.organisation.positions.Position;
 import com.zynap.talentstudio.security.users.IUserService;
 import com.zynap.util.ArrayUtils;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -32,49 +35,44 @@ import java.util.List;
 
 public class TestDynamicAttributeService extends AbstractHibernateTestCase {
 
-    protected void setUp() throws Exception {
-        super.setUp();
-
-        attributeService = (IDynamicAttributeService) applicationContext.getBean("dynamicAttrService");
-        positionService = (IPositionService) getBean("positionService");
-    }
-
+    @Test
     public void testGetAllAttributes() throws Exception {
 
         final String nodeType = Node.POSITION_UNIT_TYPE_;
 
-        Collection<DynamicAttribute> allAttributes = attributeService.getAllAttributes(nodeType);
+        Collection<DynamicAttribute> allAttributes = dynamicAttrService.getAllAttributes(nodeType);
         assertFalse(allAttributes.isEmpty());
-        for (Iterator iterator = allAttributes.iterator(); iterator.hasNext();) {
-            DynamicAttribute dynamicAttribute = (DynamicAttribute) iterator.next();
+        for (DynamicAttribute dynamicAttribute : allAttributes) {
             assertEquals(nodeType, dynamicAttribute.getArtefactType());
         }
 
-        Collection<DynamicAttribute> activeAttributes = attributeService.getAllActiveAttributes(nodeType, true);
+        Collection<DynamicAttribute> activeAttributes = dynamicAttrService.getAllActiveAttributes(nodeType, true);
         assertTrue(allAttributes.containsAll(activeAttributes));
     }
 
+    @Test
     public void testGetSearchableAttributes() throws Exception {
         final String nodeType = Node.POSITION_UNIT_TYPE_;
 
-        Collection searchableAttributes = attributeService.getSearchableAttributes(nodeType);
+        Collection searchableAttributes = dynamicAttrService.getSearchableAttributes(nodeType);
         assertFalse(searchableAttributes.isEmpty());
-        for (Iterator iterator = searchableAttributes.iterator(); iterator.hasNext();) {
-            DynamicAttribute dynamicAttribute = (DynamicAttribute) iterator.next();
+        for (Object searchableAttribute : searchableAttributes) {
+            DynamicAttribute dynamicAttribute = (DynamicAttribute) searchableAttribute;
             assertTrue(dynamicAttribute.isActive());
             assertTrue(dynamicAttribute.isSearchable());
             assertEquals(nodeType, dynamicAttribute.getArtefactType());
         }
     }
 
+    @Test
     public void testGetTypedAttributes() throws Exception {
         final String nodeType = Node.SUBJECT_UNIT_TYPE_;
         final String attributeType = DynamicAttribute.DA_TYPE_STRUCT;
 
-        final Collection typedAttributes = attributeService.getTypedAttributes(nodeType, attributeType);
+        final Collection typedAttributes = dynamicAttrService.getTypedAttributes(nodeType, attributeType);
         assertFalse(typedAttributes.isEmpty());
-        for (Iterator iterator = typedAttributes.iterator(); iterator.hasNext();) {
-            DynamicAttribute dynamicAttribute = (DynamicAttribute) iterator.next();
+        for (Object typedAttribute : typedAttributes) {
+            DynamicAttribute dynamicAttribute = (DynamicAttribute) typedAttribute;
             assertTrue(dynamicAttribute.isActive());
             assertEquals(nodeType, dynamicAttribute.getArtefactType());
             assertEquals(attributeType, dynamicAttribute.getType());
@@ -82,49 +80,53 @@ public class TestDynamicAttributeService extends AbstractHibernateTestCase {
         }
     }
 
+    @Test
     public void testGetAllActiveAttributes() throws Exception {
         final String nodeType = Node.POSITION_UNIT_TYPE_;
 
-        Collection allActiveAttributes = attributeService.getAllActiveAttributes(nodeType, true);
+        Collection allActiveAttributes = dynamicAttrService.getAllActiveAttributes(nodeType, true);
         assertFalse(allActiveAttributes.isEmpty());
-        for (Iterator iterator = allActiveAttributes.iterator(); iterator.hasNext();) {
-            DynamicAttribute dynamicAttribute = (DynamicAttribute) iterator.next();
+        for (Object allActiveAttribute : allActiveAttributes) {
+            DynamicAttribute dynamicAttribute = (DynamicAttribute) allActiveAttribute;
             assertTrue(dynamicAttribute.isActive());
             assertEquals(nodeType, dynamicAttribute.getArtefactType());
         }
     }
 
+    @Test
     public void testListActiveAttributes() throws Exception {
         final String[] nodeTypes = new String[]{Node.POSITION_UNIT_TYPE_, DynamicAttribute.NODE_TYPE_FUNCTION};
         final String[] attributeTypes = new String[]{DynamicAttribute.DA_TYPE_DATE};
 
-        Collection collection = attributeService.listActiveAttributes(nodeTypes, false, attributeTypes);
+        Collection collection = dynamicAttrService.listActiveAttributes(nodeTypes, false, attributeTypes);
         assertFalse(collection.isEmpty());
-        for (Iterator iterator = collection.iterator(); iterator.hasNext();) {
-            DynamicAttributeDTO dynamicAttributeDTO = (DynamicAttributeDTO) iterator.next();
+        for (Object aCollection : collection) {
+            DynamicAttributeDTO dynamicAttributeDTO = (DynamicAttributeDTO) aCollection;
             assertNotNull(dynamicAttributeDTO.getId());
             assertNotNull(dynamicAttributeDTO.getLabel());
         }
     }
 
+    @Test
     public void testCreate() throws Exception {
 
-        DynamicAttribute dynamicAttribute = new DynamicAttribute(null, "funally3", DynamicAttribute.DA_TYPE_TEXTFIELD, Node.POSITION_UNIT_TYPE_, true, true, false);
-        attributeService.create(dynamicAttribute);
+        DynamicAttribute dynamicAttribute = new DynamicAttribute(null, "funally1", DynamicAttribute.DA_TYPE_TEXTFIELD, Node.POSITION_UNIT_TYPE_, true, true, false);
+        dynamicAttrService.create(dynamicAttribute);
 
         // check that external ref label has been set
         assertNotNull(dynamicAttribute.getExternalRefLabel());
 
-        DynamicAttribute real = attributeService.findById(dynamicAttribute.getId());
+        DynamicAttribute real = dynamicAttrService.findById(dynamicAttribute.getId());
         assertEquals(dynamicAttribute, real);
     }
 
+    @Test
     public void testCreateCalculated() throws Exception {
 
-        DynamicAttribute dynamicAttribute = new DynamicAttribute(null, "funally3", DynamicAttribute.DA_TYPE_TEXTFIELD, Node.POSITION_UNIT_TYPE_, true, true, false);
+        DynamicAttribute dynamicAttribute = new DynamicAttribute(null, "funally2", DynamicAttribute.DA_TYPE_TEXTFIELD, Node.POSITION_UNIT_TYPE_, true, true, false);
         dynamicAttribute.setCalculated(true);
 
-        Collection attributes = attributeService.getAllActiveAttributes(DynamicAttribute.NODE_TYPE_FUNCTION, true);
+        Collection attributes = dynamicAttrService.getAllActiveAttributes(DynamicAttribute.NODE_TYPE_FUNCTION, true);
         DynamicAttribute now = (DynamicAttribute) attributes.iterator().next();
 
         Calculation calculation = new DateCalculation(DynamicAttribute.DA_TYPE_DATE);
@@ -142,12 +144,12 @@ public class TestDynamicAttributeService extends AbstractHibernateTestCase {
 
         dynamicAttribute.setCalculation(calculation);
         List<Expression> expected = calculation.getExpressions();
-        attributeService.create(dynamicAttribute);
+        dynamicAttrService.create(dynamicAttribute);
 
         // check that external ref label has been set
         assertNotNull(dynamicAttribute.getExternalRefLabel());
 
-        DynamicAttribute real = attributeService.findById(dynamicAttribute.getId());
+        DynamicAttribute real = dynamicAttrService.findById(dynamicAttribute.getId());
         Calculation realCalc = real.getCalculation();
         List<Expression> actual = realCalc.getExpressions();
 
@@ -156,9 +158,10 @@ public class TestDynamicAttributeService extends AbstractHibernateTestCase {
         assertEquals(dynamicAttribute, real);
     }
 
+    @Test
     public void testUpdate() throws Exception {
 
-        Collection attributes = attributeService.getAllAttributes(Node.SUBJECT_UNIT_TYPE_);
+        Collection attributes = dynamicAttrService.getAllAttributes(Node.SUBJECT_UNIT_TYPE_);
 
         // get the first and swap it from active to inactive
         DynamicAttribute attribute = (DynamicAttribute) attributes.iterator().next();
@@ -166,101 +169,112 @@ public class TestDynamicAttributeService extends AbstractHibernateTestCase {
         attribute.setActive(!active);
         final String originalExternalRefLabel = attribute.getExternalRefLabel();
 
-        attributeService.update(attribute);
+        dynamicAttrService.update(attribute);
 
         // check that external ref label has not been modified
-        DynamicAttribute actual = attributeService.findById(attribute.getId());
+        DynamicAttribute actual = dynamicAttrService.findById(attribute.getId());
         assertEquals(attribute, actual);
         assertEquals(originalExternalRefLabel, actual.getExternalRefLabel());
     }
 
+    @Test
     public void testDelete() throws Exception {
 
         // add a new da
         DynamicAttribute dynamicAttribute = new DynamicAttribute(null, "funally3", DynamicAttribute.DA_TYPE_TEXTFIELD, Node.POSITION_UNIT_TYPE_, true, true, false);
-        attributeService.create(dynamicAttribute);
+        dynamicAttrService.create(dynamicAttribute);
 
         // delete it
         final Long id = dynamicAttribute.getId();
-        attributeService.delete(id);
+        dynamicAttrService.delete(id);
 
         // check it has been deleted
         try {
-            attributeService.findById(id);
+            dynamicAttrService.findById(id);
         } catch (DomainObjectNotFoundException expected) {
         }
     }
 
+    @Test
+    @Transactional
     public void testUsedByNode() throws Exception {
 
-        final Position defaultPosition = positionService.findByID(DEFAULT_POSITION_ID);
+        final Position defaultPosition = positionService.findById(DEFAULT_POSITION_ID);
+        defaultPosition.getExtendedAttributes().size();
         final String value = "fred";
 
         // add a value for a dynamic attribute to the default position
-        DynamicAttribute dynamicAttribute = attributeService.getAllActiveAttributes(Node.POSITION_UNIT_TYPE_, true).iterator().next();
+        DynamicAttribute dynamicAttribute = dynamicAttrService.getAllActiveAttributes(Node.POSITION_UNIT_TYPE_, true).iterator().next();
         final AttributeValue attributeValue = AttributeValue.create(value, defaultPosition, dynamicAttribute);
         defaultPosition.addAttributeValue(attributeValue);
         positionService.update(defaultPosition);
 
         // check it is now marked as used
-        final boolean used = attributeService.usedByNode(dynamicAttribute.getId());
+        final boolean used = dynamicAttrService.usedByNode(dynamicAttribute.getId());
         assertTrue(used);
     }
 
+    @Test
     public void testGetNodeLabel() throws Exception {
-        final String nodeLabel = attributeService.getNodeLabel(DEFAULT_ORG_UNIT_ID.toString());
+        final String nodeLabel = dynamicAttrService.getNodeLabel(DEFAULT_ORG_UNIT_ID.toString());
         assertEquals(DEFAULT_ORG_UNIT_LABEL, nodeLabel);
     }
 
+    @Test
     public void testGetNodeLabelNullId() throws Exception {
-        final String nodeLabel = attributeService.getDomainObjectLabel(null);
+        final String nodeLabel = dynamicAttrService.getDomainObjectLabel(null);
         assertNotNull(nodeLabel);
         assertEquals(0, nodeLabel.length());
     }
 
+    @Test
     public void testGetDomainObjectLabelNode() throws Exception {
         DynamicAttribute nodeType = new DynamicAttribute("node", DynamicAttribute.DA_TYPE_OU);
         assertTrue(nodeType.isNodeType());
         AttributeValue mock = AttributeValue.create(DEFAULT_ORG_UNIT_ID.toString(), nodeType);
-        String domainObjectLabel = attributeService.getDomainObjectLabel(mock);
+        String domainObjectLabel = dynamicAttrService.getDomainObjectLabel(mock);
         assertEquals(DEFAULT_ORG_UNIT_LABEL, domainObjectLabel);
     }
 
+    @Test
     public void testGetDomainObjectLabelAdmin() throws Exception {
         DynamicAttribute userType = new DynamicAttribute("user", DynamicAttribute.DA_TYPE_LAST_UPDATED_BY);
         assertTrue(userType.isLastUpdatedByType());
         AttributeValue mock = AttributeValue.create(ROOT_USER_ID.toString(), userType);
-        String domainObjectLabel = attributeService.getDomainObjectLabel(mock);
-        User adminUser = (User) ((IUserService) getBean("userService")).findById(ROOT_USER_ID);
+        String domainObjectLabel = dynamicAttrService.getDomainObjectLabel(mock);
+        User adminUser =  ((IUserService) getBean("userService")).findById(ROOT_USER_ID);
         assertEquals(adminUser.getLabel(), domainObjectLabel);
     }
 
+    @Test
     public void testGetDomainObjectLabelNone() throws Exception {
         DynamicAttribute textType = new DynamicAttribute("date", DynamicAttribute.DA_TYPE_TEXTFIELD);
         assertFalse(textType.isLastUpdatedByType());
         AttributeValue mock = AttributeValue.create("-99", textType);
-        String domainObjectLabel = attributeService.getDomainObjectLabel(mock);
+        String domainObjectLabel = dynamicAttrService.getDomainObjectLabel(mock);
         assertNotNull(domainObjectLabel);
         assertEquals("", domainObjectLabel);
     }
 
+    @Test
     public void testGetDomainObjectInvalidId() throws Exception {
-        final IDomainObject domainObject = attributeService.getDomainObject(AttributeValue.create("-999", new DynamicAttribute("label", DynamicAttribute.DA_TYPE_POSITION)));
+        final IDomainObject domainObject = dynamicAttrService.getDomainObject(AttributeValue.create("-999", new DynamicAttribute("label", DynamicAttribute.DA_TYPE_POSITION)));
         assertNull(domainObject);
     }
 
+    @Test
     public void testFindAll() throws Exception {
 
         // make one subject attribute inactive
-        Collection<DynamicAttribute> positionAttributes = attributeService.getAllAttributes(Node.POSITION_UNIT_TYPE_);
-        Collection<DynamicAttribute> subjectAttributes = attributeService.getAllAttributes(Node.SUBJECT_UNIT_TYPE_);
+        Collection<DynamicAttribute> positionAttributes = dynamicAttrService.getAllAttributes(Node.POSITION_UNIT_TYPE_);
+        Collection<DynamicAttribute> subjectAttributes = dynamicAttrService.getAllAttributes(Node.SUBJECT_UNIT_TYPE_);
 
         DynamicAttribute selectedAttribute = subjectAttributes.iterator().next();
         selectedAttribute.setActive(false);
-        attributeService.update(selectedAttribute);
+        dynamicAttrService.update(selectedAttribute);
 
         // get all and check that it is present in the list
-        final List all = attributeService.findAll();
+        final List all = dynamicAttrService.findAll();
         assertFalse(all.isEmpty());
         assertTrue(all.contains(selectedAttribute));
 
@@ -269,20 +283,22 @@ public class TestDynamicAttributeService extends AbstractHibernateTestCase {
         assertTrue(all.containsAll(positionAttributes));
     }
 
+    @Test
     public void testFindAllDefault() throws Exception {
         long start = System.currentTimeMillis();
-        attributeService.findAll();
+        dynamicAttrService.findAll();
         long end = System.currentTimeMillis();
         System.out.println("time taken = " + (end - start) + " millisecs");
     }
 
+    @Test
     public void testGetActiveAttributes() throws Exception {
 
         final boolean searchableOnly = true;
         final String nodeType = Node.POSITION_UNIT_TYPE_;
         final String[] attributeTypes = {DynamicAttribute.DA_TYPE_STRUCT, DynamicAttribute.DA_TYPE_MULTISELECT};
 
-        final Collection activeAttributes = attributeService.getActiveAttributes(nodeType, searchableOnly, attributeTypes);
+        final Collection activeAttributes = dynamicAttrService.getActiveAttributes(nodeType, searchableOnly, attributeTypes);
         assertFalse(activeAttributes.isEmpty());
 
         for (Iterator iterator = activeAttributes.iterator(); iterator.hasNext();) {
@@ -294,15 +310,17 @@ public class TestDynamicAttributeService extends AbstractHibernateTestCase {
         }
     }
 
+    @Test
     public void testFindHelpTextItem() throws Exception {
-        final HelpTextItem helpTextItem = attributeService.findHelpTextItem(new Long(-100));
+        final HelpTextItem helpTextItem = dynamicAttrService.findHelpTextItem(new Long(-100));
         assertNull(helpTextItem);
     }
 
+    @Test
     public void testAddHelpTextItem() throws Exception {
 
         final DynamicAttribute dynamicAttribute = new DynamicAttribute(null, "attr1", DynamicAttribute.DA_TYPE_TEXTFIELD, Node.POSITION_UNIT_TYPE_, true, true, false);
-        attributeService.create(dynamicAttribute);
+        dynamicAttrService.create(dynamicAttribute);
         final Long daId = dynamicAttribute.getId();
 
         final String helpText = "Some content";
@@ -313,7 +331,7 @@ public class TestDynamicAttributeService extends AbstractHibernateTestCase {
         IHelpTextService helpTextService = (IHelpTextService) getBean("helpTextService");
         helpTextService.update(helpTextItem);
         
-        HelpTextItem found = attributeService.findHelpTextItem(daId);
+        HelpTextItem found = dynamicAttrService.findHelpTextItem(daId);
         assertEquals(helpTextItem, found);
         assertEquals(helpText, found.getContentAsString());
 
@@ -321,27 +339,32 @@ public class TestDynamicAttributeService extends AbstractHibernateTestCase {
         helpTextItem.setBlobValue(newHelpText.getBytes());
         helpTextService.update(helpTextItem);
 
-        found = attributeService.findHelpTextItem(daId);
+        found = dynamicAttrService.findHelpTextItem(daId);
         assertEquals(newHelpText, found.getContentAsString());
 
         // delete the help text item
         helpTextService.delete(helpTextItem);
 
-        found = attributeService.findHelpTextItem(daId);
+        found = dynamicAttrService.findHelpTextItem(daId);
         assertNull(found);
     }
 
+    @Test
     public void testListAllAttributes() throws Exception {
-        List subjectAttributes = attributeService.listAllAttributes(Node.SUBJECT_UNIT_TYPE_);
+        List subjectAttributes = dynamicAttrService.listAllAttributes(Node.SUBJECT_UNIT_TYPE_);
         assertFalse(subjectAttributes.isEmpty());
     }
 
+    @Test
     public void testGetSearchableAttributeDtos() throws Exception {
-        final Collection<DynamicAttributeDTO> attributeDTOCollection = attributeService.getSearchableAttributeDtos("S");
+        final Collection<DynamicAttributeDTO> attributeDTOCollection = dynamicAttrService.getSearchableAttributeDtos("S");
         assertNotNull(attributeDTOCollection);
     }
 
-    private IDynamicAttributeService attributeService;
+    @Autowired
+    private IDynamicAttributeService dynamicAttrService;
+    @Autowired
     private IPositionService positionService;
+
     private static final String DEFAULT_ORG_UNIT_LABEL = "Default Org Unit";
 }

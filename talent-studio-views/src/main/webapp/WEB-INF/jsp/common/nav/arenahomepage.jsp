@@ -1,11 +1,18 @@
 <%@ include file="../../includes/include.jsp" %>
-
 <c:choose>
     <c:when test="${homePage != null}">
         <c:choose>
             <c:when test="${homePage.hasData}">
-                <c:url var="urla" value="${arenaContext}/homepage.htm"/>
-                <c:out value="${homePage.content}" escapeXml="false"/>
+                <c:choose>
+                    <c:when test="${homePage.velocityTemplate}">
+                        <c:url var="urla" value="${arenaContext}/homepage.htm"/>
+                        <c:out value="${velocityContent}" escapeXml="false"/>
+                    </c:when>
+                    <c:otherwise>
+                        <c:url var="urla" value="${arenaContext}/homepage.htm"/>
+                        <c:out value="${homePage.content}" escapeXml="false"/>
+                    </c:otherwise>
+                </c:choose>
             </c:when>
             <c:when test="${homePage.internalUrl}">
                 <c:url var="urla" value="${homePage.url}"/>

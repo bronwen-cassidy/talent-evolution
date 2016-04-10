@@ -54,7 +54,7 @@ public class PositionPickerController extends PickerController {
     }
 
     protected void updateBranch(Branch branch, TreeWrapperBean treeWrapperBean, HttpServletRequest request) throws TalentStudioException {
-        OrganisationUnit ou = organisationUnitService.findByID(new Long(branch.getId()));
+        OrganisationUnit ou = organisationUnitService.findById(new Long(branch.getId()));
         TreeBuilderHelper.appendPositionLeaves(branch, ou.getPositions(), displayAssociation);
     }
 

@@ -19,6 +19,10 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.mock.web.MockPageContext;
 import org.springframework.mock.web.MockServletContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.validation.BindException;
 import org.springframework.validation.Errors;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -39,14 +43,22 @@ import java.util.Map;
  * Date: 08-Feb-2005
  * Time: 10:40:54
  */
+@ContextConfiguration(locations = {"classpath:/spring/applicationContext.xml"
+        , "classpath:/spring/applicationContext-tx.xml"
+        , "classpath:/config/spring/testApplicationContext-jdbc.xml"
+        , "classpath:/config/spring/testApplicationContext-mail.xml"
+        , "classpath:/config/spring/testAppContext.xml"
+        , "classpath:/config/spring/testApplicationContext-hibernate.xml"
+        , "file:src/main/webapp/WEB-INF/applicationContext-validation.xml"
+        , "file:src/main/webapp/WEB-INF/talentstudio-servlet.xml"})
+@TestExecutionListeners({DependencyInjectionTestExecutionListener.class, TransactionalTestExecutionListener.class})
 public abstract class ZynapMockControllerTest extends AbstractHibernateTestCase {
 
     protected List<String> getConfigLocations() {
 
         final List<String> configLocations = super.getConfigLocations();
-
-        String validationConfig = "classpath:config/spring/applicationContext-validation.xml";
-        String webappConfig = "classpath:config/spring/talentstudio-servlet.xml";
+        String validationConfig = "file:src/main/webapp/WEB-INF/applicationContext-validation.xml";
+        String webappConfig = "file:src/main/webapp/WEB-INF/talentstudio-servlet.xml";
         configLocations.add(validationConfig);
         configLocations.add(webappConfig);
         configLocations.add("classpath:config/spring/testAppContext.xml");

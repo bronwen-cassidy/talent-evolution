@@ -35,7 +35,7 @@ public class SubjectDocumentSearchController extends DocumentSearchController {
         documentSearchWrapper.setContentTypes(portfolioService.getContentTypes(Node.SUBJECT_UNIT_TYPE_, SecurityConstants.VIEW_ACTION));
 
         Long nodeId = RequestUtils.getRequiredLongParameter(request, ParameterConstants.NODE_ID_PARAM);
-        Node node = positionService.findByID(nodeId);
+        Node node = positionService.findById(nodeId);
         documentSearchWrapper.setNode(node);
 
         // set flag to true - otherwise restricted portfolio item security checks will not work correctly

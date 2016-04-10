@@ -25,7 +25,7 @@ public interface IArenaManagerDao {
      * @return Arena the instance created by the query executed
      * @throws TalentStudioException
      */
-    Arena findByID(Serializable id) throws TalentStudioException;
+    Arena findById(Serializable id) throws TalentStudioException;
 
     /**
      * Finds all arenas.

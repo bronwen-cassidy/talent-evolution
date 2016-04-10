@@ -41,8 +41,8 @@ public abstract class DefaultService implements IZynapService {
      * @param id id of object to be found
      * @return the specified domainObject.
      */
-    public IDomainObject findById(Serializable id) throws TalentStudioException {
-        return getFinderDao().findByID(id);
+    public <T> T findById(Long id) throws TalentStudioException {
+        return getFinderDao().findById(id);
     }
 
     public void create(IDomainObject domainObject) throws TalentStudioException {

@@ -35,7 +35,7 @@ public class HibernateObjectiveDao extends ZynapPersistenceSupport implements IO
     }
 
     public Objective findObjective(Long id) throws TalentStudioException {
-        return ((Objective) findByID(Objective.class, id));
+        return ((Objective) findById(Objective.class, id));
     }
 
     public void updateObjective(Objective objective) throws TalentStudioException {

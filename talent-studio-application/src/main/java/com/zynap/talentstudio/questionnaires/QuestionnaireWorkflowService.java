@@ -6,7 +6,6 @@
 package com.zynap.talentstudio.questionnaires;
 
 import com.zynap.domain.IDomainObject;
-import com.zynap.domain.admin.User;
 import com.zynap.exception.TalentStudioException;
 import com.zynap.talentstudio.common.IFinder;
 import com.zynap.talentstudio.common.IModifiable;
@@ -17,7 +16,6 @@ import com.zynap.talentstudio.questionnaires.support.RepublishResults;
 
 import org.apache.commons.collections.CollectionUtils;
 
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -177,14 +175,14 @@ public class QuestionnaireWorkflowService extends AbstractQuestionnaireService i
         return fullNames;
     }
 
-    public IDomainObject findById(Serializable questionnaireWorkflowId) throws TalentStudioException {
-        final QuestionnaireWorkflow questionnaireWorkflow = (QuestionnaireWorkflow) questionnaireDao.findByID(questionnaireWorkflowId);
+    public <T> T findById(Long questionnaireWorkflowId) throws TalentStudioException {
+        final QuestionnaireWorkflow questionnaireWorkflow = questionnaireDao.findById(questionnaireWorkflowId);
         questionnaireWorkflow.getQuestionnaireDefinition().getDynamicAttributes();
-        return questionnaireWorkflow;
+        return (T) questionnaireWorkflow;
     }
 
     public QuestionnaireWorkflow findWorkflowById(Long queWorkflowId) throws TalentStudioException {
-        return (QuestionnaireWorkflow) questionnaireDao.findByID(QuestionnaireWorkflow.class, queWorkflowId);
+        return (QuestionnaireWorkflow) questionnaireDao.findById(QuestionnaireWorkflow.class, queWorkflowId);
     }
 
     public Collection<QuestionnaireWorkflowDTO> findAllQuestionnaireWorkflowDTOs() {

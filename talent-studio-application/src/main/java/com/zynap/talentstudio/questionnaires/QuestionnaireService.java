@@ -80,7 +80,7 @@ public class QuestionnaireService extends DefaultService implements IQuestionnai
         final Questionnaire questionnaire = new Questionnaire();
         questionnaire.setId(queId);
 
-        final DynamicAttribute attribute = (DynamicAttribute) attributeDao.findByID(daId);
+        final DynamicAttribute attribute = (DynamicAttribute) attributeDao.findById(daId);
         // get the question and the line item id only if dynamic
         Long lineItemId = null;
         if(attribute.isDynamic()) {
@@ -148,7 +148,7 @@ public class QuestionnaireService extends DefaultService implements IQuestionnai
 
         final Questionnaire questionnaire = new Questionnaire();
         questionnaire.setId(queId);
-        final DynamicAttribute attribute = (DynamicAttribute) attributeDao.findByID(daId);
+        final DynamicAttribute attribute = (DynamicAttribute) attributeDao.findById(daId);
         Integer attrDynamicPosition = attribute.isDynamic() ? dynamicPosition : null;
 
         for (int i = 0; i < attributeIdValues.length; i++) {
@@ -172,7 +172,7 @@ public class QuestionnaireService extends DefaultService implements IQuestionnai
 
         final Questionnaire questionnaire = new Questionnaire();
         questionnaire.setId(queId);
-        final DynamicAttribute attribute = (DynamicAttribute) attributeDao.findByID(daId);
+        final DynamicAttribute attribute = (DynamicAttribute) attributeDao.findById(daId);
         Integer attrDynamicPosition = attribute.isDynamic() ? dynamicPosition : null;
 
         // questionnaire.addOrUpdateAttributeValue();
@@ -275,8 +275,8 @@ public class QuestionnaireService extends DefaultService implements IQuestionnai
         return questionnaireDao.findQuestionnaireByWorkflow(questionnaireWorkflowId, userId, subjectId, roleId);
     }
 
-    public IDomainObject findById(Serializable id) throws TalentStudioException {
-        return (IDomainObject) questionnaireDao.findByID(Questionnaire.class, id);
+    public <T> T findById(Long id) throws TalentStudioException {
+        return questionnaireDao.findById(Questionnaire.class, id);
     }
 
     public List<Questionnaire> findAll() throws TalentStudioException {

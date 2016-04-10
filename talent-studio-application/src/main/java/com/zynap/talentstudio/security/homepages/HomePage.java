@@ -95,9 +95,22 @@ public class HomePage extends ZynapDomainObject {
         return (isInternalUrl() && url != null);
     }
 
+    public void setFileExtension(String fileExtension) {
+        this.fileExtension = fileExtension;
+    }
+
+    public String getFileExtension() {
+        return fileExtension;
+    }
+
+    public boolean isVelocityTemplate() {
+        return fileExtension != null && fileExtension.endsWith("vm");
+    }
+
     private String arenaId;
     private byte[] data;
     private String url;
     private Group group;
     private boolean internalUrl;
+    private String fileExtension;
 }

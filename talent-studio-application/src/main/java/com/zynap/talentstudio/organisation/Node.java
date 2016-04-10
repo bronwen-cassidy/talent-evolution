@@ -250,8 +250,8 @@ public class Node extends ZynapDomainObject {
 
         if (attributeValue != null) {
             final List nodeExtendedAttributes = attributeValue.getNodeExtendedAttributes();
-            for (Iterator iterator = nodeExtendedAttributes.iterator(); iterator.hasNext();) {
-                NodeExtendedAttribute nodeExtendedAttribute = (NodeExtendedAttribute) iterator.next();
+            for (Object nodeExtendedAttribute1 : nodeExtendedAttributes) {
+                NodeExtendedAttribute nodeExtendedAttribute = (NodeExtendedAttribute) nodeExtendedAttribute1;
                 addNodeExtendedAttribute(nodeExtendedAttribute);
             }
         }

@@ -49,7 +49,7 @@ public class BaseOrgUnitObjectiveController extends DefaultWizardFormController 
         // get the targeted organisation unit
         Long orgUnitId = RequestUtils.getRequiredLongParameter(request, OU_ID_PARAM);
         ObjectiveSetFormBean formBean = new ObjectiveSetFormBean();
-        OrganisationUnit organisationUnit = organisationUnitService.findByID(orgUnitId);
+        OrganisationUnit organisationUnit = organisationUnitService.findById(orgUnitId);
 
         ObjectiveSet publishedCorporateSet = assignCorporateObjectiveSet(formBean, organisationUnit);
         ObjectiveSet currentOrganisationObjectiveSet = assignOrganisationSet(formBean, organisationUnit, publishedCorporateSet);

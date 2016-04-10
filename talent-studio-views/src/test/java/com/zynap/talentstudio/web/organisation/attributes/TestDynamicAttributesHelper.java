@@ -50,7 +50,7 @@ public class TestDynamicAttributesHelper extends AbstractHibernateTestCase {
 
     public void testAssignMultiSelectAndDynamicAttributeValuesToNode() throws Exception {
 
-        final Position position = positionService.findByID(DEFAULT_POSITION_ID);
+        final Position position = positionService.findById(DEFAULT_POSITION_ID);
 
         final List dynamicAttributes = new ArrayList();
         final DynamicAttribute multiSelectDA = new DynamicAttribute(new Long(-2), "multiSelectDA", DynamicAttribute.DA_TYPE_MULTISELECT);
@@ -110,7 +110,7 @@ public class TestDynamicAttributesHelper extends AbstractHibernateTestCase {
 
     public void testAssignAttributeValuesToNode() throws Exception {
 
-        final Position position = positionService.findByID(DEFAULT_POSITION_ID);
+        final Position position = positionService.findById(DEFAULT_POSITION_ID);
 
         final List dynamicAttributes = new ArrayList();
         final DynamicAttribute textDA = new DynamicAttribute(new Long(-1), "textDA", DynamicAttribute.DA_TYPE_TEXTFIELD);
@@ -248,7 +248,7 @@ public class TestDynamicAttributesHelper extends AbstractHibernateTestCase {
         final DynamicAttribute imgDA = new DynamicAttribute(new Long(-4), "imgDA", DynamicAttribute.DA_TYPE_IMAGE);
         dynamicAttributes.add(imgDA);
 
-        final Position position = positionService.findByID(DEFAULT_POSITION_ID);
+        final Position position = positionService.findById(DEFAULT_POSITION_ID);
         final NodeWrapperBean nodeWrapperBean = new PositionWrapperBean(position);
         final List attributeWrapperBeans = DynamicAttributesHelper.getAttributeWrapperBeans(dynamicAttributes, position, dynamicAttributeService);
         assertEquals(dynamicAttributes.size(), attributeWrapperBeans.size());
@@ -289,7 +289,7 @@ public class TestDynamicAttributesHelper extends AbstractHibernateTestCase {
 
     public void testIsClearAttributeValueRequest() throws Exception {
 
-        final Position position = positionService.findByID(DEFAULT_POSITION_ID);
+        final Position position = positionService.findById(DEFAULT_POSITION_ID);
         final NodeWrapperBean nodeWrapperBean = new PositionWrapperBean(position);
 
         final MockHttpServletRequest request = new MockHttpServletRequest();

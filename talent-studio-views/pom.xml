@@ -31,7 +31,6 @@
             <version>5.4.8-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <!-- todo remove this dependency and use mockito instead -->
             <groupId>com.zynap</groupId>
             <artifactId>talent-studio-application</artifactId>
             <version>5.4.8-SNAPSHOT</version>
@@ -74,11 +73,6 @@
             <version>1.6</version>
         </dependency>
         <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.12</version>
-        </dependency>
-        <dependency>
             <groupId>org.jfree</groupId>
             <artifactId>jcommon</artifactId>
             <version>1.0.17</version>
@@ -102,6 +96,12 @@
             <groupId>displaytag</groupId>
             <artifactId>displaytag-export-poi</artifactId>
             <version>1.2</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>jcl104-over-slf4j</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.apache.poi</groupId>
@@ -153,12 +153,6 @@
             <groupId>net.alchim31.maven</groupId>
             <artifactId>yuicompressor-maven-plugin</artifactId>
             <version>1.5.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <version>${spring.version}</version>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 

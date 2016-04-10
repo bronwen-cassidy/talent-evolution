@@ -111,7 +111,7 @@ public class TestDBUnitOrganisationUnitService extends ZynapDatabaseTestCase {
 
     public void testDeleteOrgUnitCascade() throws Exception {
         try {
-            organisationUnitService.deleteOrgUnitCascade(organisationUnitService.findByID(IT_ORGUNIT_ID));
+            organisationUnitService.deleteOrgUnitCascade(organisationUnitService.findById(IT_ORGUNIT_ID));
             //commitAndStartNewTx();
         } catch (Exception e) {            
             fail();

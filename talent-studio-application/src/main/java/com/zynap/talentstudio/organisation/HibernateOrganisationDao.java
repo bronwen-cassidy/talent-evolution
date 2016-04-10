@@ -33,9 +33,9 @@ public class HibernateOrganisationDao extends ZynapPersistenceSupport implements
         return OrganisationUnit.class;
     }
 
-    public OrganisationUnit findByID(Long organisationUnitId) throws TalentStudioException {
+    public OrganisationUnit findById(Long organisationUnitId) throws TalentStudioException {
         Long id = organisationUnitId != null ? organisationUnitId : OrganisationUnit.ROOT_ORG_UNIT_ID;
-        return (OrganisationUnit) super.findByID(id);
+        return (OrganisationUnit) super.findById(id);
     }
 
     public List<OrganisationUnit> findOrgUnitTree(Long organisationUnitId) {

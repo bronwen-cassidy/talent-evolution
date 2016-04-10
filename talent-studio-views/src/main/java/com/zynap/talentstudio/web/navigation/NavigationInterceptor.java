@@ -105,7 +105,7 @@ public class NavigationInterceptor extends HandlerInterceptorAdapter {
                     if (ZynapWebUtils.isMultiTenant(request)) {
                         ou = getOrganisationManager().findOrgUnitByUser(userSession.getId().toString());
                     } else {
-                        ou = getOrganisationManager().findByID(navigator.getOrganisationUnitId());
+                        ou = getOrganisationManager().findById(navigator.getOrganisationUnitId());
                     }
                     navigator.setOrganisationUnitId(ou.getId());
                     navigator.setOrganisationUnitLabel(ou.getLabel());

@@ -36,8 +36,8 @@ public abstract class HibernateFinderAdaptor extends HibernateDaoSupport impleme
      * @return IDomainObject
      * @throws com.zynap.exception.TalentStudioException if the object was not found.
      */
-    public final IDomainObject findByID(Serializable id) throws TalentStudioException {
-        return (IDomainObject) findByID(getDomainObjectClass(), id);
+    public final <T> T findById(Serializable id) throws TalentStudioException {
+        return findById(getDomainObjectClass(), id);
     }
 
     /**
@@ -48,9 +48,9 @@ public abstract class HibernateFinderAdaptor extends HibernateDaoSupport impleme
      * @return Object
      * @throws DomainObjectNotFoundException
      */
-    public final Object findByID(final Class domainObjectClass, Serializable id) throws TalentStudioException {
+    public final <T> T findById(final Class domainObjectClass, Serializable id) throws TalentStudioException {
         try {
-            return getHibernateTemplate().load(domainObjectClass, id);
+            return (T) getHibernateTemplate().load(domainObjectClass, id);
         } catch (HibernateObjectRetrievalFailureException e) {
             throw new DomainObjectNotFoundException(domainObjectClass, id, e);
         } catch(DataAccessException e) {

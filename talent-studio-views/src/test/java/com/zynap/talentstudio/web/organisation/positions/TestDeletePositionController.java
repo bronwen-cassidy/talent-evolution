@@ -46,7 +46,7 @@ public class TestDeletePositionController extends ZynapDbUnitMockControllerTestC
     }
 
     public void testDeleteNode() throws Exception {
-        Position position = positionService.findByID(POSITION_ID);
+        Position position = positionService.findById(POSITION_ID);
         assertNotNull(position);
         try {
             deletePositionController.deleteNode(position);

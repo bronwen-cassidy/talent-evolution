@@ -87,7 +87,7 @@ public class TestAssociationViewTag extends ZynapDBunitMockTagLibTest {
     public void testIncumbentsView() throws Exception {
 
         final Report report = (Report) reportService.findById(CURRENT_HOLDER_REPORT_ID);
-        final Position position = positionService.findByID(DEFAULT_POSITION_ID);
+        final Position position = positionService.findById(DEFAULT_POSITION_ID);
         final PositionWrapperBean positionWrapperBean = new PositionWrapperBean(position);
 
         final List<ArtefactAssociationWrapperBean> subjectPrimaryAssociations = positionWrapperBean.getSubjectPrimaryAssociations();
@@ -189,7 +189,7 @@ public class TestAssociationViewTag extends ZynapDBunitMockTagLibTest {
     public void testReportsToView() throws Exception {
 
         final Report report = (Report) reportService.findById(REPORTS_TO_REPORT_ID);
-        final Position position = positionService.findByID(DEFAULT_POSITION_ID);
+        final Position position = positionService.findById(DEFAULT_POSITION_ID);
         final PositionWrapperBean positionWrapperBean = new PositionWrapperBean(position);
 
         final List<ArtefactAssociationWrapperBean> primaryTargetAssociations = positionWrapperBean.getPrimaryTargetAssociations();
@@ -216,7 +216,7 @@ public class TestAssociationViewTag extends ZynapDBunitMockTagLibTest {
     public void testSubordinatesView() throws Exception {
 
         final Report report = (Report) reportService.findById(REPORTS_TO_REPORT_ID);
-        final Position position = positionService.findByID(DEFAULT_POSITION_ID);
+        final Position position = positionService.findById(DEFAULT_POSITION_ID);
         final PositionWrapperBean positionWrapperBean = new PositionWrapperBean(position);
 
         final List<ArtefactAssociationWrapperBean> primaryTargetAssociations = positionWrapperBean.getPrimaryTargetAssociations();

@@ -26,15 +26,7 @@ public interface IMetricService extends IZynapService {
      * @param object
      * @throws com.zynap.exception.TalentStudioException
      */
-    public void create(IDomainObject object) throws TalentStudioException;
-
-    /**
-     * Finds a given metric.
-     *
-     * @param id
-     * @return the specified report.
-     */
-    public IDomainObject findById(Serializable id) throws TalentStudioException;
+    void create(IDomainObject object) throws TalentStudioException;
 
     /**
      * Updates the given metric.

@@ -14,7 +14,6 @@ import com.zynap.talentstudio.common.groups.Group;
 import com.zynap.talentstudio.organisation.subjects.Subject;
 import com.zynap.talentstudio.security.roles.Role;
 
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
@@ -37,9 +36,9 @@ public class DashboardService extends DefaultService implements IDashboardServic
         return dashboardDao;
     }
 
-    public void delete(Serializable dashboardId) throws TalentStudioException {
+    public void delete(Long dashboardId) throws TalentStudioException {
         dashboardDao.deleteParticipants(dashboardId);
-        Dashboard dashboard = (Dashboard) findById(dashboardId);
+        Dashboard dashboard = findById(dashboardId);
         if (dashboard != null) {
             delete(dashboard);
         }

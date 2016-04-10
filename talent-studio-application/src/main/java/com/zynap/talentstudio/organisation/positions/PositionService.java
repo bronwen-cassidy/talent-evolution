@@ -49,10 +49,6 @@ public class PositionService extends DefaultService implements IPositionService 
         return positionDao;
     }
 
-    public Position findByID(Long id) throws TalentStudioException {
-        return (Position) positionDao.findByID(id);
-    }
-
     public List<Position> findAvailableParentsForPosition(Long orgUnitId, Long positionId, Long userId) {
         return positionDao.findAvailableParentsForPosition(orgUnitId, positionId, userId, getViewPositionPermitId());
     }

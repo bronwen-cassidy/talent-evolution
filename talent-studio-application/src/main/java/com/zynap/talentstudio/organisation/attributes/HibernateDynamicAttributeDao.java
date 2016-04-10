@@ -7,11 +7,10 @@ import com.zynap.domain.IDomainObject;
 import com.zynap.exception.TalentStudioException;
 import com.zynap.talentstudio.common.HibernateCrudAdaptor;
 import com.zynap.util.ArrayUtils;
-
+import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 /**
  * Class or Interface description.
@@ -20,6 +19,7 @@ import java.util.List;
  * @version $Revision: $
  *          $Id: $
  */
+@Repository( "dynamicAttributeDao" )
 public class HibernateDynamicAttributeDao extends HibernateCrudAdaptor implements IDynamicAttributeDao {
 
     public Class getDomainObjectClass() {
@@ -107,6 +107,21 @@ public class HibernateDynamicAttributeDao extends HibernateCrudAdaptor implement
         return getHibernateTemplate().find("from DynamicAttribute attribute where attribute.id in (" + StringUtils.arrayToCommaDelimitedString(attributeIds) + ") order by upper(attribute.label)");
     }
 
+    @Override
+    public Map<String, String> findAllSubjectAnswers(Long subjectId) {
+        String query = "select answer from NodeExtendedAttribute answer, Questionnaire q " +
+                "where  q.subject.id=? and (answer.node.id=q.id or answer.node.id=?)";
+
+        List<NodeExtendedAttribute> queryResult = getHibernateTemplate().find(query, new Object[]{subjectId, subjectId});
+
+        Map<String, String> result = new HashMap<>();
+        for (NodeExtendedAttribute attr : queryResult) {
+            AttributeValue attributeValue = AttributeValue.create(attr);
+            result.put(attr.getDynamicAttribute().getExternalRefLabel(),attributeValue.getDisplayValue());
+        }
+        return result;
+    }
+
     public Collection<DynamicAttribute> getSearchableAttributes(String nodeType) {
         String queryString = "select attribute from DynamicAttribute attribute " +
                 "where attribute.active='T' " +
@@ -142,7 +157,7 @@ public class HibernateDynamicAttributeDao extends HibernateCrudAdaptor implement
     }
 
     public List<DynamicAttribute> findQuestionnaireAttributes(Long questionnaireDefinitionId) {
-        return getHibernateTemplate().find("from DynamicAttribute attribute where attribute.questionnaireDefinitionId=?", questionnaireDefinitionId);       
+        return getHibernateTemplate().find("from DynamicAttribute attribute where attribute.questionnaireDefinitionId=?", questionnaireDefinitionId);
     }
 
     public boolean usedByNode(Long id) {

@@ -326,7 +326,7 @@ public class TestSecurityManager extends AbstractHibernateTestCase {
         area.setComments("comments");
         area.setActive(true);
 
-        OrganisationUnit ou = organisationManagerDao.findByID(DEFAULT_ORG_UNIT_ID);
+        OrganisationUnit ou = organisationManagerDao.findById(DEFAULT_ORG_UNIT_ID);
         area.getAreaElements().add(new AreaElement(null, ou, area, false));
 
         securityManager.createArea(area);
@@ -362,7 +362,7 @@ public class TestSecurityManager extends AbstractHibernateTestCase {
         area.setComments("comments");
         area.setActive(true);
 
-        OrganisationUnit ou = organisationManagerDao.findByID(DEFAULT_ORG_UNIT_ID);
+        OrganisationUnit ou = organisationManagerDao.findById(DEFAULT_ORG_UNIT_ID);
         area.getAreaElements().add(new AreaElement(null, ou, area, false));
 
         securityManager.createArea(area);
@@ -378,7 +378,7 @@ public class TestSecurityManager extends AbstractHibernateTestCase {
         area.setComments("comments");
         area.setActive(true);
 
-        OrganisationUnit ou = organisationManagerDao.findByID(DEFAULT_ORG_UNIT_ID);
+        OrganisationUnit ou = organisationManagerDao.findById(DEFAULT_ORG_UNIT_ID);
         area.getAreaElements().add(new AreaElement(null, ou, area, false));
 
         securityManager.createArea(area);
@@ -398,7 +398,7 @@ public class TestSecurityManager extends AbstractHibernateTestCase {
         area.setComments("comments");
         area.setActive(true);
 
-        OrganisationUnit ou = organisationManagerDao.findByID(DEFAULT_ORG_UNIT_ID);
+        OrganisationUnit ou = organisationManagerDao.findById(DEFAULT_ORG_UNIT_ID);
         area.getAreaElements().add(new AreaElement(null, ou, area, false));
 
         securityManager.createArea(area);
@@ -465,7 +465,7 @@ public class TestSecurityManager extends AbstractHibernateTestCase {
             area.setComments("comments");
             area.setActive(true);
 
-            OrganisationUnit ou = organisationManagerDao.findByID(DEFAULT_ORG_UNIT_ID);
+            OrganisationUnit ou = organisationManagerDao.findById(DEFAULT_ORG_UNIT_ID);
             area.getAreaElements().add(new AreaElement(null, ou, area, false));
 
             securityManager.createArea(area);

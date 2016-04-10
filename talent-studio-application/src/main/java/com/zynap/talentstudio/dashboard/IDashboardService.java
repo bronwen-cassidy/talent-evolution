@@ -4,13 +4,12 @@
  */
 package com.zynap.talentstudio.dashboard;
 
-import com.zynap.domain.IDomainObject;
 import com.zynap.exception.TalentStudioException;
+import com.zynap.talentstudio.common.IZynapService;
 import com.zynap.talentstudio.common.groups.Group;
 import com.zynap.talentstudio.organisation.subjects.Subject;
 import com.zynap.talentstudio.security.roles.Role;
 
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
@@ -21,13 +20,11 @@ import java.util.List;
  * @version 0.1
  * @since 17-May-2010 17:36:05
  */
-public interface IDashboardService {
+public interface IDashboardService extends IZynapService {
 
     List<Dashboard> findAll() throws TalentStudioException;
 
-    IDomainObject findById(Serializable id) throws TalentStudioException;
-
-    void delete(Serializable dashboardId) throws TalentStudioException;
+    void delete(Long dashboardId) throws TalentStudioException;
 
     void createOrUpdate(Dashboard result) throws TalentStudioException;
 

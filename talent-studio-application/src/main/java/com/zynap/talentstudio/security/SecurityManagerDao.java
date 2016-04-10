@@ -80,7 +80,7 @@ public class SecurityManagerDao extends HibernateCrudAdaptor implements ISecurit
      * @return A {@link SecurityDomain} object.
      */
     public SecurityDomain findDomain(Long domainId) throws TalentStudioException {
-        return (SecurityDomain) super.findByID(SecurityDomain.class, domainId);
+        return (SecurityDomain) super.findById(SecurityDomain.class, domainId);
     }
 
     /**
@@ -139,7 +139,7 @@ public class SecurityManagerDao extends HibernateCrudAdaptor implements ISecurit
      * @throws TalentStudioException
      */
     public Area findArea(Long areaId) throws TalentStudioException {
-        return (Area) findByID(Area.class, areaId);
+        return (Area) findById(Area.class, areaId);
     }
 
     /**

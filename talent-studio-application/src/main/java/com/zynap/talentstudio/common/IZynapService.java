@@ -15,20 +15,20 @@ import java.util.List;
  */
 public interface IZynapService {
 
-    public IDomainObject findById(Serializable id) throws TalentStudioException;
+    <T> T findById(Long id) throws TalentStudioException;
 
-    public List findAll() throws TalentStudioException;
+    List findAll() throws TalentStudioException;
 
-    public void create(IDomainObject domainObject) throws TalentStudioException;
+    void create(IDomainObject domainObject) throws TalentStudioException;
 
-    public void update(IDomainObject domainObject) throws TalentStudioException;
+    void update(IDomainObject domainObject) throws TalentStudioException;
 
-    public void delete(IDomainObject domainObject) throws TalentStudioException;
+    void delete(IDomainObject domainObject) throws TalentStudioException;
 
-    public void disable(IDomainObject domainObject) throws TalentStudioException;
+    void disable(IDomainObject domainObject) throws TalentStudioException;
 
     void updateStateInfo(IDomainObject domainObject);
 
-    final Long ROOT_USER_ID = (long) 0;
+    Long ROOT_USER_ID = (long) 0;
 
 }

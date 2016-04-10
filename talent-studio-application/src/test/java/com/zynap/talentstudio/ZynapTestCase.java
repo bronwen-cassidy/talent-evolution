@@ -1,25 +1,30 @@
 package com.zynap.talentstudio;
 
-import junit.framework.TestCase;
-
+import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.zynap.domain.UserPrincipal;
 import com.zynap.domain.admin.User;
 import com.zynap.talentstudio.arenas.IArenaMenuHandler;
 import com.zynap.talentstudio.arenas.MockArenaMenuHandlerImpl;
-import com.zynap.talentstudio.organisation.OrganisationUnit;
-import com.zynap.talentstudio.organisation.positions.Position;
-import com.zynap.talentstudio.organisation.positions.PositionService;
+import com.zynap.talentstudio.audit.SessionLog;
 import com.zynap.talentstudio.organisation.subjects.Subject;
 import com.zynap.talentstudio.security.permits.IPermit;
-import com.zynap.talentstudio.audit.SessionLog;
-
+import junit.framework.TestCase;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.validation.DataBinder;
 import org.springframework.validation.Errors;
 
 import java.util.ArrayList;
+
+import static junit.framework.TestCase.assertNotNull;
+import static junit.framework.TestCase.assertTrue;
 
 /**
  * User: amark
@@ -47,15 +52,6 @@ public abstract class ZynapTestCase extends TestCase implements UnitTestConstant
     protected final void assertTextPresent(final String string, String text) {
         assertNotNull(string);
         assertTrue(string.indexOf(text) >= 0);
-    }
-
-    protected final void assertTextNotPresent(String string, final String label) {
-        assertNotNull(string);
-        assertTrue(string.indexOf(label) < 0);
-    }
-
-    protected final void assertEquals(double d1, double d2) {
-        assertEquals(d1, d2, 0);        
     }
 
     public Errors getErrors(DataBinder binder) {

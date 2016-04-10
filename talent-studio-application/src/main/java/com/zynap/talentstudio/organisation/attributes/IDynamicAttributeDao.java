@@ -8,6 +8,7 @@ import com.zynap.talentstudio.common.IModifiable;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Class or Interface description.
@@ -43,4 +44,6 @@ public interface IDynamicAttributeDao extends IFinder, IModifiable {
     boolean checkUniqueness(Long daId, String value, Long nodeId);
 
     Collection<DynamicAttribute> getAllAttributes(Long[] attributeIds);
+
+    Map<String, String> findAllSubjectAnswers(Long subjectId);
 }

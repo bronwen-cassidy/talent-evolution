@@ -102,7 +102,8 @@ public class ObjectivesMultiController extends ZynapMultiActionController {
 
     private void deleteObjectiveSet(HttpServletRequest request) throws TalentStudioException {
         Long id = RequestUtils.getRequiredLongParameter(request, "id");
-        objectiveService.delete(objectiveService.findById(id));
+        Objective objective = objectiveService.findById(id);
+        objectiveService.delete(objective);
     }
 
     public void setObjectiveService(IObjectiveService objectiveService) {

@@ -33,7 +33,7 @@ public class HibernateArenaManagerDao extends HibernateDaoSupport implements IAr
         return Arena.class;
     }
 
-    public Arena findByID(Serializable id) throws TalentStudioException {
+    public Arena findById(Serializable id) throws TalentStudioException {
         try {
             return (Arena) getHibernateTemplate().load(Arena.class, id);
         } catch (HibernateObjectRetrievalFailureException e) {

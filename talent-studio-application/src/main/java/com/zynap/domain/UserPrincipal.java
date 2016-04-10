@@ -49,7 +49,7 @@ public final class UserPrincipal implements Serializable {
         this.homePages = new HashMap<String, HomePage>();
         this.group = user.getGroup();
         if(group != null) {
-            assignHomePages(new HashSet<HomePage>(group.getHomePages()));
+            assignHomePages(new HashSet<>(group.getHomePages()));
         }
         this.userRoles=new HashSet<Role>();
         this.userRoles.addAll(user.getUserRoles());
@@ -75,9 +75,10 @@ public final class UserPrincipal implements Serializable {
     }
 
     private void assignHomePages(Set<HomePage> pages) {
-        for (Iterator iterator = pages.iterator(); iterator.hasNext();) {
-            HomePage hp = (HomePage) iterator.next();
-            homePages.put(hp.getArenaId(), new HomePage(hp.getArenaId(), hp.getData(), hp.getUrl(), hp.getLabel(), hp.isInternalUrl()));
+        for (HomePage hp : pages) {
+            HomePage homePage = new HomePage(hp.getArenaId(), hp.getData(), hp.getUrl(), hp.getLabel(), hp.isInternalUrl());
+            homePage.setFileExtension(hp.getFileExtension());
+            homePages.put(hp.getArenaId(), homePage);
         }
     }
 

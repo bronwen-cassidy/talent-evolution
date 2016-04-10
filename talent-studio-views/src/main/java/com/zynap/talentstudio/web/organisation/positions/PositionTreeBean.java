@@ -26,7 +26,7 @@ public class PositionTreeBean extends OrganisationUnitTreeBean {
     public List getPositions(long organisationUnitId) {
         Long orgUnitIdAsLong = new Long(organisationUnitId);
         try {
-            OrganisationUnit searchOrgUnit = organisationManager.findByID(orgUnitIdAsLong);
+            OrganisationUnit searchOrgUnit = organisationManager.findById(orgUnitIdAsLong);
             List orgUnitList = new ArrayList();
             orgUnitList.add(searchOrgUnit);
             return TreeBuilderHelper.buildPositionsTree(orgUnitList);

@@ -52,7 +52,7 @@ public class ArenaManager implements IArenaManager {
     }
 
     public Arena getArena(String arenaId) throws TalentStudioException {
-        return arenaManagerDao.findByID(arenaId);
+        return arenaManagerDao.findById(arenaId);
     }
 
     public Collection getReportMenuSections() throws TalentStudioException {

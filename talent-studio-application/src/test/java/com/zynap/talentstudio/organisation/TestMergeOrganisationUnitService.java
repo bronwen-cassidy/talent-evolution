@@ -43,10 +43,10 @@ public class TestMergeOrganisationUnitService extends ZynapDatabaseTestCase {
        //both casses should not not be null
 
        //using ids, as they have complex data set, using integrity and etc
-       final OrganisationUnit salesOrgUnit=organisationUnitService.findByID((long) 4);
+       final OrganisationUnit salesOrgUnit=organisationUnitService.findById((long) 4);
        assertNotNull(salesOrgUnit);
 
-       final OrganisationUnit finaceOrgUnit =organisationUnitService.findByID((long) 10);
+       final OrganisationUnit finaceOrgUnit =organisationUnitService.findById((long) 10);
        assertNotNull(salesOrgUnit);
 
        //do the merge
@@ -55,7 +55,7 @@ public class TestMergeOrganisationUnitService extends ZynapDatabaseTestCase {
        //commitAndStartNewTx();
 
        try {
-           organisationUnitService.findByID((long) 10);
+           organisationUnitService.findById((long) 10);
            fail("DomainObjectNotFoundException should have been thrown");
        } catch (TalentStudioException e) {
            //e.printStackTrace();

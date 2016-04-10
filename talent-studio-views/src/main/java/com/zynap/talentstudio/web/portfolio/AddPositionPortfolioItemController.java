@@ -19,7 +19,7 @@ public class AddPositionPortfolioItemController extends BaseAddPortfolioItemCont
     }
 
     protected Node getNode(Long nodeId) throws TalentStudioException {
-        return positionService.findByID(nodeId);        
+        return positionService.findById(nodeId);
     }
 
     public void setPositionService(IPositionService positionService) {

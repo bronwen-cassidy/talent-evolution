@@ -1,30 +1,28 @@
 package com.zynap.talentstudio.organisation;
 
-/**
- * User: amark
- * Date: 29-Aug-2006
- * Time: 10:20:24
- */
-
-import com.zynap.talentstudio.ZynapTestCase;
 import com.zynap.talentstudio.organisation.attributes.AttributeValue;
 import com.zynap.talentstudio.organisation.attributes.AttributeValuesCollection;
 import com.zynap.talentstudio.organisation.attributes.DynamicAttribute;
 import com.zynap.talentstudio.organisation.attributes.NodeExtendedAttribute;
 import com.zynap.talentstudio.organisation.positions.Position;
-
+import org.junit.Before;
+import org.junit.Test;
 import org.springframework.util.StringUtils;
 
 import java.util.*;
 
-public class TestNode extends ZynapTestCase {
+import static junit.framework.Assert.assertNotNull;
+import static junit.framework.TestCase.assertEquals;
+import static org.junit.Assert.assertNull;
 
-    protected void setUp() throws Exception {
-        super.setUp();
+public class TestNode {
 
+    @Before
+    public void setUp() throws Exception {
         node = new Position();
     }
 
+    @Test
     public void testAddNodeExtendedAttribute() throws Exception {
 
         // check extended attributes and attribute values are all not null but are empty
@@ -44,13 +42,14 @@ public class TestNode extends ZynapTestCase {
         assertNodeExtendedAttribute(value, nodeExtendedAttribute, 1);
     }
 
+    @Test
     public void testAddNodeExtendedAttributes() throws Exception {
 
         final String value = "expectedValue";
         final NodeExtendedAttribute nodeExtendedAttribute = new NodeExtendedAttribute(value, node, DynamicAttribute.DA_TYPE_STRUCT_O);
 
         // add 1
-        Collection<NodeExtendedAttribute> newExtendedAttributes = new HashSet<NodeExtendedAttribute>();
+        Collection<NodeExtendedAttribute> newExtendedAttributes = new HashSet<>();
         newExtendedAttributes.add(nodeExtendedAttribute);
         node.addNodeExtendedAttributes(newExtendedAttributes);
         assertNodeExtendedAttribute(value, nodeExtendedAttribute, 1);
@@ -66,6 +65,7 @@ public class TestNode extends ZynapTestCase {
         assertNodeExtendedAttribute(value2, nodeExtendedAttribute2, 2);
     }
 
+    @Test
     public void testAddAttributeValue() throws Exception {
 
         final String value = "expectedValue";
@@ -73,7 +73,7 @@ public class TestNode extends ZynapTestCase {
         final AttributeValue attributeValue = AttributeValue.create(value, node, dynamicAttribute);
         node.addAttributeValue(attributeValue);
 
-        List<NodeExtendedAttribute> extendedAttributes = new ArrayList<NodeExtendedAttribute>(node.getExtendedAttributes());
+        List<NodeExtendedAttribute> extendedAttributes = new ArrayList<>(node.getExtendedAttributes());
         AttributeValuesCollection dynamicAttributeValues = node.getDynamicAttributeValues();
 
         assertEquals(1, extendedAttributes.size());
@@ -86,13 +86,12 @@ public class TestNode extends ZynapTestCase {
         final AttributeValue numberAttributeValue = AttributeValue.create(numberValue, node, numberDynamicAttribute);
         node.addAttributeValue(numberAttributeValue);
 
-        extendedAttributes = new ArrayList<NodeExtendedAttribute>(node.getExtendedAttributes());
+        extendedAttributes = new ArrayList<>(node.getExtendedAttributes());
         dynamicAttributeValues = node.getDynamicAttributeValues();
         assertEquals(2, extendedAttributes.size());
         assertEquals(2, dynamicAttributeValues.size());
 
-        for (Iterator iterator = extendedAttributes.iterator(); iterator.hasNext();) {
-            NodeExtendedAttribute nodeExtendedAttribute = (NodeExtendedAttribute) iterator.next();
+        for (NodeExtendedAttribute nodeExtendedAttribute : extendedAttributes) {
             if (nodeExtendedAttribute.getDynamicAttribute().isNumericType()) {
                 assertEquals(numberValue, nodeExtendedAttribute.getValue());
             } else {
@@ -104,6 +103,7 @@ public class TestNode extends ZynapTestCase {
         assertEquals(numberValue, dynamicAttributeValues.get(numberDynamicAttribute).getValue());
     }
 
+    @Test
     public void testRemoveAttributeValue() throws Exception {
 
         // add 2 attribute values to node and check set ok
@@ -148,6 +148,7 @@ public class TestNode extends ZynapTestCase {
         assertEquals(value, dynamicAttributeValues.get(dynamicAttribute).getValue());
     }
 
+    @Test
     public void testDynamicLineItemAttributeValue() throws Exception {
 
         final DynamicAttribute dynamicLineItemDynamicAttribute = new DynamicAttribute("dynamicLineItem", DynamicAttribute.DA_TYPE_NUMBER);
@@ -172,6 +173,7 @@ public class TestNode extends ZynapTestCase {
         assertEquals(nodeExtendedAttributes.size(), attributeValue.getNodeExtendedAttributes().size());
     }
 
+    @Test
     public void testRemoveNodeExtendedAttribute() throws Exception {
 
         final String value = "expectedValue";
@@ -192,6 +194,7 @@ public class TestNode extends ZynapTestCase {
         assertNodeExtendedAttribute(value2, nodeExtendedAttribute2, 1);
     }
 
+    @Test
     public void testAddAttributeValues() throws Exception {
 
         // add 1
@@ -217,10 +220,11 @@ public class TestNode extends ZynapTestCase {
         assertEquals(value, nodeExtendedAttribute.getValue());
     }
 
+    @Test
     public void testRemoveAttributeValues() throws Exception {
 
         // add 2
-        Collection<AttributeValue> attributeValues = new ArrayList<AttributeValue>();
+        Collection<AttributeValue> attributeValues = new ArrayList<>();
         final String value = "expectedValue";
         final DynamicAttribute dynamicAttribute = DynamicAttribute.DA_TYPE_TEXTAREA_O;
         final AttributeValue attributeValue = AttributeValue.create(value, node, dynamicAttribute);
@@ -269,6 +273,7 @@ public class TestNode extends ZynapTestCase {
         assertEquals(value2, nodeExtendedAttribute.getValue());
     }
 
+    @Test
     public void testAddOrUpdateAttributeValue() throws Exception {
         final String value = "expectedValue";
         final DynamicAttribute dynamicAttribute = DynamicAttribute.DA_TYPE_TEXTAREA_O;
@@ -311,6 +316,7 @@ public class TestNode extends ZynapTestCase {
         assertNull(dynamicAttributeValues.get(dynamicAttribute));
     }
 
+    @Test
     public void testAddOrUpdateMultiAnswerAttributeValue() throws Exception {
 
         final String value = "expectedValue";
@@ -370,6 +376,14 @@ public class TestNode extends ZynapTestCase {
         assertEquals(0, extendedAttributes.size());        
     }
 
+    @Test
+    public void testGetNodeType() throws Exception {
+
+        final Long id = new Long(-99);
+        Node pnode = new Position(id);
+        assertEquals(Node.POSITION_UNIT_TYPE_, pnode.getNodeType());
+    }
+
     private void assertNodeExtendedAttribute(final String value, final NodeExtendedAttribute nodeExtendedAttribute, int expectedNodeExtendedAttributes) {
 
         // check extended attributes
@@ -388,13 +402,6 @@ public class TestNode extends ZynapTestCase {
         assertEquals(value, attributeValue.getValue());
         assertEquals(nodeExtendedAttribute.getDynamicAttribute(), attributeValue.getDynamicAttribute());
         assertEquals(nodeExtendedAttribute.getNode(), attributeValue.getNode());
-    }
-
-    public void testGetNodeType() throws Exception {
-
-        final Long id = new Long(-99);
-        Node pnode = new Position(id);
-        assertEquals(Node.POSITION_UNIT_TYPE_, pnode.getNodeType());
     }
 
     private Node node;

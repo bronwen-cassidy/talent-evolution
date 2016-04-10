@@ -121,7 +121,7 @@ public class HibernatePositionDao extends ZynapPersistenceSupport implements IPo
 
     public Position findReportStructureFor(Long positionId, Long principalId, Long viewPositionPermitId, Long viewOrgUnitPermitId, Long viewSubjectPermitId) throws TalentStudioException {
 
-        Position position = (Position) findByID(positionId);
+        Position position = (Position) findById(positionId);
         SecurityHelper.checkPositionAccess(position, principalId, viewPositionPermitId, viewOrgUnitPermitId, viewSubjectPermitId, getHibernateTemplate());
         // check grandparent
         final Position parent = position.getParent();

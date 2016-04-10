@@ -29,7 +29,7 @@ public final class HibernateHelpTextDao extends HibernateCrudAdaptor implements 
     public void delete(Long id) throws TalentStudioException {
 
         try {
-            final HelpTextItem helpTextItem = (HelpTextItem) findByID(id);
+            final HelpTextItem helpTextItem = (HelpTextItem) findById(id);
             getHibernateTemplate().delete(helpTextItem);
             DynamicAttribute dynamicAttribute = (DynamicAttribute) getHibernateTemplate().get(DynamicAttribute.class, id);
             dynamicAttribute.setHasHelpText(false);

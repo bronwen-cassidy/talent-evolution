@@ -84,8 +84,8 @@ public class DBUnitTestDefaultObjectivesController extends ZynapDbUnitMockContro
         ObjectiveWrapperBean objectiveWrapper = objectives.get(0);
         assertFalse(objectiveWrapper.isInvalid());
         // move agatha to a new OU
-        Position position = positionService.findByID(HEAD_OF_IT_ID);
-        OrganisationUnit marketing = organisationService.findByID(MARKETING_OU_ID);
+        Position position = positionService.findById(HEAD_OF_IT_ID);
+        OrganisationUnit marketing = organisationService.findById(MARKETING_OU_ID);
         position.setOrganisationUnit(marketing);
         positionService.update(position);
         // assertions on status of objectives
@@ -116,8 +116,8 @@ public class DBUnitTestDefaultObjectivesController extends ZynapDbUnitMockContro
         ObjectiveWrapperBean objectiveWrapper = objectives.get(0);
         assertFalse(objectiveWrapper.isInvalid());
         // move agatha to a new OU
-        Position position = positionService.findByID(HEAD_OF_IT_ID);
-        OrganisationUnit marketing = organisationService.findByID(MARKETING_OU_ID);
+        Position position = positionService.findById(HEAD_OF_IT_ID);
+        OrganisationUnit marketing = organisationService.findById(MARKETING_OU_ID);
         position.setOrganisationUnit(marketing);
         positionService.update(position);
         // assertions on status of objectives

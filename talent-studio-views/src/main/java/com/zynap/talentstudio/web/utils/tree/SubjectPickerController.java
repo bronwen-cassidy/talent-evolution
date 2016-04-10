@@ -95,7 +95,7 @@ public class SubjectPickerController extends PickerController {
             Area area = securityManager.findArea(ISecurityManager.ORPHANS_AREA_ID);
             TreeBuilderHelper.appendSubjectLeavesFromAreaElements(branch, area.getAssignedSubjects());
         } else {
-            OrganisationUnit ou = organisationUnitService.findByID(new Long(branch.getId()));
+            OrganisationUnit ou = organisationUnitService.findById(new Long(branch.getId()));
             TreeBuilderHelper.appendSubjectFromPositionLeaves(branch, ou.getPositions());
         }
     }

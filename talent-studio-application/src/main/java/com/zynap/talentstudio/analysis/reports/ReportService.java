@@ -70,7 +70,7 @@ public class ReportService extends DefaultService implements IReportService {
     }
 
     public Report findById(Long reportId, Class reportObjectClass) throws TalentStudioException {
-        return (Report) reportDao.findByID(reportObjectClass, reportId);
+        return (Report) reportDao.findById(reportObjectClass, reportId);
     }
 
     public Collection<MenuSection> getMenuSections() {
@@ -167,7 +167,7 @@ public class ReportService extends DefaultService implements IReportService {
      * @return the specified report.
      */
     public IDomainObject findById(Serializable id) throws TalentStudioException {
-        return reportDao.findByID(id);
+        return reportDao.findById(id);
     }
 
     /**

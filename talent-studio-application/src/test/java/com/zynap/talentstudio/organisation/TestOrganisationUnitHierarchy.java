@@ -100,7 +100,7 @@ public class TestOrganisationUnitHierarchy extends ZynapDatabaseTestCase {
     public void testFindAll() throws Exception {
         //noinspection unchecked
         final List<OrganisationUnit> all = organisationUnitService.findAllSecure();
-        assertTrue(all.contains(organisationUnitService.findByID(DEFAULT_ORG_UNIT_ID)));
+        assertTrue(all.contains(organisationUnitService.findById(DEFAULT_ORG_UNIT_ID)));
 
         // check org units are all active
         assertActive(all);

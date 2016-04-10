@@ -47,7 +47,7 @@ public class SubjectUserPickerController extends PickerController {
         } else if (branch.getId().equals(USERS_BRANCH_ID)) {
             TreeBuilderHelper.appendUserLeaves(branch, userService.findSystemUsers());
         } else {
-            OrganisationUnit ou = organisationUnitService.findByID(new Long(branch.getId()));
+            OrganisationUnit ou = organisationUnitService.findById(new Long(branch.getId()));
             TreeBuilderHelper.appendSubjectUserFromPositionLeaves(branch, ou.getPositions());
         }
     }

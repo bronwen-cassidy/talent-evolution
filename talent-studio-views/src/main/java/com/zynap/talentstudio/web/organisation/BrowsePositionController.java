@@ -69,7 +69,7 @@ public class BrowsePositionController extends BrowseNodeController {
                 // when browsing we always show the first result as their is no list of results page
                 if (!results.isEmpty()) {
                     final PositionDto firstPositionDto = results.get(0);
-                    Position firstPosition = positionService.findByID(firstPositionDto.getId());
+                    Position firstPosition = positionService.findById(firstPositionDto.getId());
                     updateNodeInfo(firstPosition, browseNodeWrapper, userSession);
                 }
             } else {
@@ -103,7 +103,7 @@ public class BrowsePositionController extends BrowseNodeController {
                     final int itemIndex = browseNodeWrapper.getCurrentItemIndex();
                     if (itemIndex > -1 && itemIndex < results.size()) {
                         Position firstPositionDto = results.get(itemIndex);
-                        Position firstPosition = positionService.findByID(firstPositionDto.getId());
+                        Position firstPosition = positionService.findById(firstPositionDto.getId());
                         updateNodeInfo(firstPosition, browseNodeWrapper, userSession);
                     }
                 }
@@ -134,7 +134,7 @@ public class BrowsePositionController extends BrowseNodeController {
     }
 
     protected Node findNodeById(Long id) throws TalentStudioException {
-        return getPositionService().findByID(id);
+        return getPositionService().findById(id);
     }
 
     protected NodeWrapperBean createNodeWrapper(Node node, BrowseNodeWrapper wrapper) {

@@ -42,10 +42,10 @@
     </bean>
 
     <bean id="taapiClient" class="com.zynap.talentstudio.middleware.soap.taapi.TaapiClient">
-        <property name="username" value="${taapi.username}"/>
-        <property name="password" value="${taapi.password}"/>
-        <property name="client" value="${taapi.client}"/>
-        <property name="callbackUrl" value="${taapi.url}"/>
+        <property name="username" value="username"/>
+        <property name="password" value="password"/>
+        <property name="client" value="tstest"/>
+        <property name="callbackUrl" value="dummy"/>
     </bean>
 
 </beans>

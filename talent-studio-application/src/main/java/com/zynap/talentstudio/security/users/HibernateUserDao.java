@@ -196,7 +196,7 @@ public class HibernateUserDao extends ZynapPersistenceSupport implements IUserDa
         String queryString = "select sa.position.organisationUnit from SubjectAssociation sa, User user where \n" +
                 " sa.subject.user.id = user.id and user.loginInfo.username=? ";
         Collection result = getHibernateTemplate().find(queryString, new Object[]{username});
-        if (result.isEmpty()) return (OrganisationUnit) findByID(OrganisationUnit.class, OrganisationUnit.ROOT_ORG_UNIT_ID);
+        if (result.isEmpty()) return (OrganisationUnit) findById(OrganisationUnit.class, OrganisationUnit.ROOT_ORG_UNIT_ID);
         return (OrganisationUnit) result.iterator().next();
     }
 
@@ -208,7 +208,7 @@ public class HibernateUserDao extends ZynapPersistenceSupport implements IUserDa
             if(!users.isEmpty()) {
                 return users.get(0);
             }
-            //final Subject subject = (Subject) findByID(Subject.class, subjectId);
+            //final Subject subject = (Subject) findById(Subject.class, subjectId);
             //if (subject.getUser() != null)
             //    return subject.getUser();
             else

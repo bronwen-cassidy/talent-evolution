@@ -7,5 +7,6 @@ prompt
 accept l_yes char prompt 'db backed up (y/n): '
 
 alter table USERS add IS_HR CHAR(1) DEFAULT 'F';
+alter table HOME_PAGES add FILE_EXTENSION VARCHAR2 (10);
 
 commit;

@@ -36,17 +36,6 @@ public interface IPositionService extends IZynapService {
     boolean checkNodeViewAccess(Node node, Long userId);
 
     /**
-     * Finds the position given the id.
-     * <p/>
-     * The method returns a completed valid object with both dynamic attributePreferences and associations.
-     *
-     * @param id
-     * @return Position
-     * @throws TalentStudioException
-     */
-    Position findByID(Long id) throws TalentStudioException;
-
-    /**
      * Search for positions - no restrictions on whether they are active or not.
      *
      * @param principalId The id of the user searching for subjects

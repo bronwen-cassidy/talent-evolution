@@ -36,7 +36,7 @@ public class TestPopulationUtils extends ZynapMockControllerTest {
         IPopulationEngine engine = (IPopulationEngine) applicationContext.getBean("populationEngine");
         IPositionService positionService = (IPositionService) applicationContext.getBean("positionService");
         IReportService reportService = (IReportService) applicationContext.getBean("reportService");
-        Position position = positionService.findByID(new Long(1));
+        Position position = positionService.findById(new Long(1));
         Collection subjectPrimaryAssociations = position.getSubjectPrimaryAssociations();
 
         List<ArtefactAssociationWrapperBean> associations = new ArrayList<ArtefactAssociationWrapperBean>(wrapAssociations(subjectPrimaryAssociations));

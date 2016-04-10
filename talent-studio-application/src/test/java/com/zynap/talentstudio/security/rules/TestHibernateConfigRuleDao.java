@@ -24,23 +24,23 @@ public class TestHibernateConfigRuleDao extends AbstractHibernateTestCase {
     }
 
     public void testUpdatePasswordConfig() throws Exception {
-        Config expected = (Config) hibernateConfigRuleDao.findByID(Config.PASSWORD_CONFIG_ID);
+        Config expected = (Config) hibernateConfigRuleDao.findById(Config.PASSWORD_CONFIG_ID);
         Rule rule = expected.getRule(Rule.PASSWORD_NUMBER_OF_UNIQUE);
         rule.setValue("5");
         hibernateConfigRuleDao.update(expected);
 
-        Config actual = (Config) hibernateConfigRuleDao.findByID(expected.getId());
+        Config actual = (Config) hibernateConfigRuleDao.findById(expected.getId());
         Rule actualRule = actual.getRule(Rule.PASSWORD_NUMBER_OF_UNIQUE);
         assertEquals(rule, actualRule);
     }
 
     public void testUpdateUsernameConfig() throws Exception {
-        Config expected = (Config) hibernateConfigRuleDao.findByID(Config.USERNAME_CONFIG_ID);
+        Config expected = (Config) hibernateConfigRuleDao.findById(Config.USERNAME_CONFIG_ID);
         Rule rule = expected.getRule(Rule.USERNAME_MAX_LENGTH);
         rule.setValue("20");
         hibernateConfigRuleDao.update(expected);
 
-        Config actual = (Config) hibernateConfigRuleDao.findByID(expected.getId());
+        Config actual = (Config) hibernateConfigRuleDao.findById(expected.getId());
         Rule actualRule = actual.getRule(Rule.USERNAME_MAX_LENGTH);
         assertEquals(rule, actualRule);
     }

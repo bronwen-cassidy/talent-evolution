@@ -3,6 +3,7 @@
  */
 package com.zynap.talentstudio;
 
+import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import net.sf.hibernate.HibernateException;
 import net.sf.hibernate.Session;
 import net.sf.hibernate.SessionFactory;
@@ -13,11 +14,18 @@ import com.zynap.exception.TalentStudioException;
 import com.zynap.talentstudio.security.UserSessionFactory;
 import com.zynap.talentstudio.security.users.IUserService;
 
+import org.junit.runner.RunWith;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.orm.hibernate.SessionFactoryUtils;
 import org.springframework.orm.hibernate.SessionHolder;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
@@ -36,14 +44,17 @@ import java.util.List;
  * @version $Revision: $
  *          $Id: $
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:/spring/applicationContext.xml"
+        , "classpath:/spring/applicationContext-tx.xml"
+        , "classpath:/config/spring/testApplicationContext-jdbc.xml"
+        , "classpath:/config/spring/testApplicationContext-mail.xml"
+        , "classpath:/config/spring/testApplicationContext-hibernate.xml"})
+@TestExecutionListeners({DependencyInjectionTestExecutionListener.class, TransactionalTestExecutionListener.class})
+@TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
 public abstract class AbstractHibernateTestCase extends ZynapTestCase {
-
     public AbstractHibernateTestCase() {
-
-        if (applicationContext == null) {
-            List<String> otherConfig = getConfigLocations();
-            applicationContext = new ClassPathXmlApplicationContext(otherConfig.toArray(new String[otherConfig.size()]), true);            
-        }
+        
     }
 
     protected List<String> getConfigLocations() {

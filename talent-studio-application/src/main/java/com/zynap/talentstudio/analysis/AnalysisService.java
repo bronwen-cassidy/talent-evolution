@@ -44,7 +44,7 @@ public class AnalysisService implements IAnalysisService {
     }
 
     public IDomainObject findById(Serializable id) throws TalentStudioException {
-        return populationDao.findByID(id);
+        return populationDao.findById(id);
     }
 
     public boolean populationInPublicReport(Long populationId) {

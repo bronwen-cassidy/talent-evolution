@@ -36,7 +36,7 @@ public class DisableOrganisationController extends ZynapDefaultFormController {
      * @throws Exception
      */
     public Object formBackingObject(HttpServletRequest request) throws Exception {
-        return getOrganisationManager().findByID(RequestUtils.getRequiredLongParameter(request, ParameterConstants.ORG_UNIT_ID_PARAM));
+        return getOrganisationManager().findById(RequestUtils.getRequiredLongParameter(request, ParameterConstants.ORG_UNIT_ID_PARAM));
     }
 
     public ModelAndView onSubmitInternal(HttpServletRequest request, HttpServletResponse response, Object command, Errors errors) throws Exception {

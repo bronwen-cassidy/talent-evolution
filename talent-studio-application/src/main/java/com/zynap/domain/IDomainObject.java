@@ -12,7 +12,7 @@ package com.zynap.domain;
  * @version $Revision: $
  *          $Id: $
  */
-public interface IDomainObject extends IBasicDomainObject {
+public interface IDomainObject<T> extends IBasicDomainObject {
 
     Long getId();
 

@@ -29,20 +29,20 @@ public class TestOrganisationUnitService extends AbstractHibernateTestCase {
         created.setParent(new OrganisationUnit(DEFAULT_ORG_UNIT_ID));
         organisationUnitService.create(created);
 
-        final OrganisationUnit actual = organisationUnitService.findByID(created.getId());
+        final OrganisationUnit actual = organisationUnitService.findById(created.getId());
         assertEquals(created.getId(), actual.getId());
         assertEquals(created.getLabel(), actual.getLabel());
         assertEquals(created.getParent().getId(), actual.getParent().getId());
     }
 
     public void testFindByID() throws Exception {
-        final OrganisationUnit defaultOrgUnit = organisationUnitService.findByID(DEFAULT_ORG_UNIT_ID);
+        final OrganisationUnit defaultOrgUnit = organisationUnitService.findById(DEFAULT_ORG_UNIT_ID);
         assertNotNull(defaultOrgUnit);
     }
 
     public void testFindByInvalidID() throws Exception {
         try {
-            organisationUnitService.findByID(new Long(-99));
+            organisationUnitService.findById(new Long(-99));
             fail("Exception expected as org unit does not exist");
         } catch (TalentStudioException expected) {
         }
@@ -64,7 +64,7 @@ public class TestOrganisationUnitService extends AbstractHibernateTestCase {
 
         organisationUnitService.update(defaultOrgUnit);
 
-        final OrganisationUnit newOrgUnit = organisationUnitService.findByID(defaultOrgUnit.getId());
+        final OrganisationUnit newOrgUnit = organisationUnitService.findById(defaultOrgUnit.getId());
         assertFalse(newOrgUnit.isActive());
         assertEquals(newLabel, newOrgUnit.getLabel());
         assertTrue(newOrgUnit.isDefault());
@@ -81,11 +81,11 @@ public class TestOrganisationUnitService extends AbstractHibernateTestCase {
         organisationUnitService.create(marketingOrgUnit);
         organisationUnitService.updateMerge(salesOrgUnit, marketingOrgUnit);
 
-        organisationUnitService.findByID(salesOrgUnit.getId());
+        organisationUnitService.findById(salesOrgUnit.getId());
 
         // check marketing org unit has been deleted
         try {            
-            organisationUnitService.findByID(marketingOrgUnit.getId());
+            organisationUnitService.findById(marketingOrgUnit.getId());
             fail("Incorrectly found deleted org unit");
         } catch (DomainObjectNotFoundException expected) {
 
@@ -119,7 +119,7 @@ public class TestOrganisationUnitService extends AbstractHibernateTestCase {
     }
 
     private OrganisationUnit getDefaultOrgUnit() throws TalentStudioException {
-        return organisationUnitService.findByID(DEFAULT_ORG_UNIT_ID);
+        return organisationUnitService.findById(DEFAULT_ORG_UNIT_ID);
     }    
 
     private IOrganisationUnitService organisationUnitService;

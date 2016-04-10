@@ -15,9 +15,9 @@ import com.zynap.talentstudio.help.IHelpTextDao;
 import com.zynap.talentstudio.organisation.Node;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 /**
  * Class or Interface description.
@@ -26,6 +26,7 @@ import java.util.List;
  * @version $Revision: $
  *          $Id: $
  */
+@Transactional
 public class DynamicAttributeService extends DefaultService implements IDynamicAttributeService {
 
     public Collection getActiveAttributes(String nodeType, boolean searchableOnly, String[] attributeTypes) {
@@ -63,6 +64,15 @@ public class DynamicAttributeService extends DefaultService implements IDynamicA
         return dynamicAttributeDao.getAllAttributes(attributeIds);
     }
 
+    @Override
+    public Map<String, String> getAllSubjectAttributes(Long subjectId) {
+        Map<String, String> result = new HashMap<>();
+        if (subjectId != null) {
+            result = dynamicAttributeDao.findAllSubjectAnswers(subjectId);
+        }
+        return result;
+    }
+
     public Collection<DynamicAttribute> getSearchableAttributes(String nodeType) {
         return dynamicAttributeDao.getSearchableAttributes(nodeType);
     }
@@ -75,8 +85,8 @@ public class DynamicAttributeService extends DefaultService implements IDynamicA
         return dynamicAttributeDao.getTypedAttributes(nodeType, attributeType);
     }
 
-    public DynamicAttribute findById(Long id) throws TalentStudioException {
-        return (DynamicAttribute) dynamicAttributeDao.findByID(id);
+    public <T> T findById(Long id) throws TalentStudioException {
+        return dynamicAttributeDao.findById(id);
     }
 
     public Collection<DynamicAttribute> getAllActiveAttributes(String nodeType, boolean includeCalculatedAttributes) {
@@ -122,7 +132,7 @@ public class DynamicAttributeService extends DefaultService implements IDynamicA
     }
 
     public void delete(Long attributeId) throws TalentStudioException {
-        final DynamicAttribute dynamicAttribute = (DynamicAttribute) dynamicAttributeDao.findByID(attributeId);
+        final DynamicAttribute dynamicAttribute = (DynamicAttribute) dynamicAttributeDao.findById(attributeId);
         dynamicAttributeDao.delete(dynamicAttribute);
     }
 
@@ -160,7 +170,7 @@ public class DynamicAttributeService extends DefaultService implements IDynamicA
 
     public HelpTextItem findHelpTextItem(Long id) throws TalentStudioException {
         try {
-            return (HelpTextItem) helpTextDao.findByID(id);
+            return (HelpTextItem) helpTextDao.findById(id);
         } catch (DomainObjectNotFoundException e) {
             return null;
         }
@@ -217,7 +227,7 @@ public class DynamicAttributeService extends DefaultService implements IDynamicA
         IDomainObject domainObject = null;
         if (StringUtils.isNotBlank(id) && entityClass != null) {
             try {
-                domainObject = (IDomainObject) getFinderDao().findByID(entityClass, new Long(id));
+                domainObject = (IDomainObject) getFinderDao().findById(entityClass, new Long(id));
             } catch (TalentStudioException e) {
             }
         }

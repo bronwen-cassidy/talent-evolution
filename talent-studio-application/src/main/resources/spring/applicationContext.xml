@@ -13,6 +13,10 @@
   - and the hibernate SessionFactory defined in applicationContext-hibernate.xml.
  -->
 
+    <!-- movement to annotations -->
+    <!--<context:component-scan base-package="com.zynap.talentstudio" />-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
     <bean id="propertyConfigurerApp" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>

@@ -61,8 +61,8 @@ public class HomePagesValidator implements Validator {
             }
             if (hasUpload) {
                 final String extension = uploadHomePage.getFileExtension();
-                if (!("htm".equalsIgnoreCase(extension) || "html".equalsIgnoreCase(extension))) {
-                    errors.rejectValue("homePages[" + index + "].uploadHomePage", "error.required.html.page", "The uploaded file must be an html page");
+                if (!("htm".equalsIgnoreCase(extension) || "html".equalsIgnoreCase(extension) || "vm".equalsIgnoreCase(extension))) {
+                    errors.rejectValue("homePages[" + index + "].uploadHomePage", "error.required.html.page", "The uploaded file must be an html or vm page");
                 }
             }
             index++;

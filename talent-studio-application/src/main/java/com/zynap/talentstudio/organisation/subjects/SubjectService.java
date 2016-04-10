@@ -191,7 +191,7 @@ public class SubjectService extends DefaultService implements ISubjectService {
     }
 
     public void disable(IDomainObject domainObject) throws TalentStudioException {
-        Subject subject = (Subject) subjectDao.findByID(domainObject.getId());
+        Subject subject = (Subject) subjectDao.findById(domainObject.getId());
         subject.setActive(false);
         subjectDao.update(subject);
     }
@@ -253,7 +253,7 @@ public class SubjectService extends DefaultService implements ISubjectService {
 
 
     public Node findNodeById(Long id) throws TalentStudioException {
-        return (Node) subjectDao.findByID(Node.class, id);
+        return (Node) subjectDao.findById(Node.class, id);
     }
 
     public void setUserDao(IUserDao userDao) {

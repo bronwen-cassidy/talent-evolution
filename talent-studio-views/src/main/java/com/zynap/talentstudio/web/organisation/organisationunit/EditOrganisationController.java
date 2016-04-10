@@ -36,7 +36,7 @@ public class EditOrganisationController extends BaseOrganisationController {
 
     protected Object formBackingObject(HttpServletRequest request) throws Exception {
         Long orgUnitId = RequestUtils.getRequiredLongParameter(request, ParameterConstants.ORG_UNIT_ID_PARAM);
-        final OrganisationUnit organisationUnit = organisationUnitService.findByID(orgUnitId);
+        final OrganisationUnit organisationUnit = organisationUnitService.findById(orgUnitId);
         final OrganisationUnitWrapperBean wrapperBean = new OrganisationUnitWrapperBean(organisationUnit);
         wrapperBean.setWrappedDynamicAttributes(DynamicAttributesHelper.getEditableAttributeWrapperBeans(organisationUnit, dynamicAttributeService));
         return wrapperBean;

@@ -1,5 +1,6 @@
 package com.zynap.talentstudio;
 
+import org.dbunit.DatabaseUnitException;
 import org.dbunit.database.DatabaseConfig;
 import org.dbunit.database.DatabaseConnection;
 import org.dbunit.database.IDatabaseConnection;
@@ -91,18 +92,22 @@ public class DBUnitUtils {
 
     private static IDatabaseConnection getDatabaseConnection(Connection connection, String schema) {
 
-        IDatabaseConnection databaseConnection;
+        IDatabaseConnection databaseConnection = null;
         DatabaseConfig config;
-        if (schema != null) {
-            databaseConnection = new DatabaseConnection(connection, schema);
-            config = databaseConnection.getConfig();
-            config.setFeature(DatabaseConfig.FEATURE_QUALIFIED_TABLE_NAMES, Boolean.TRUE);
-        } else {
-            databaseConnection = new DatabaseConnection(connection);
-            config = databaseConnection.getConfig();
+        try {
+            if (schema != null) {
+                databaseConnection = new DatabaseConnection(connection, schema);
+                config = databaseConnection.getConfig();
+                config.setFeature(DatabaseConfig.FEATURE_QUALIFIED_TABLE_NAMES, Boolean.TRUE);
+            } else {
+                databaseConnection = new DatabaseConnection(connection);
+                config = databaseConnection.getConfig();
+            }
+            config.setProperty(DatabaseConfig.PROPERTY_DATATYPE_FACTORY, new OracleDataTypeFactory());
+            config.setProperty(DatabaseConfig.PROPERTY_PRIMARY_KEY_FILTER, new ZynapColumnFilter());
+        } catch (DatabaseUnitException e) {
+            e.printStackTrace();
         }
-        config.setProperty(DatabaseConfig.PROPERTY_DATATYPE_FACTORY, new OracleDataTypeFactory());
-        config.setProperty(DatabaseConfig.PROPERTY_PRIMARY_KEY_FILTER, new ZynapColumnFilter());
         return databaseConnection;
     }
 

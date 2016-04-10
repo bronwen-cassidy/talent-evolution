@@ -20,7 +20,7 @@ import java.util.List;
  * @version 0.1
  * @since 21-Nov-2007 08:51:19
  */
-public interface IGroupService {
+public interface IGroupService extends IZynapService {
 
     List<Group> find(String groupType) throws TalentStudioException;
 
@@ -29,6 +29,4 @@ public interface IGroupService {
     void createOrUpdate(Group group) throws TalentStudioException;
 
     void delete(Long groupId) throws TalentStudioException;
-
-    Group findById(Long groupId) throws TalentStudioException;
 }

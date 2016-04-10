@@ -49,10 +49,6 @@ public class GroupService extends DefaultService implements IGroupService {
         groupDao.delete(group);
     }
 
-    public Group findById(Long groupId) throws TalentStudioException {
-        return (Group) groupDao.findByID(groupId);
-    }
-
     protected IFinder getFinderDao() {
         return groupDao;
     }

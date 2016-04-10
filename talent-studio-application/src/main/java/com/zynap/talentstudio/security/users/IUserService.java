@@ -35,7 +35,7 @@ public interface IUserService {
 
     void update(LoginInfo loginInfo) throws TalentStudioException;
 
-    IDomainObject findById(Serializable id) throws TalentStudioException;
+    <T> T findById(Serializable id) throws TalentStudioException;
 
     Collection search(Long principalId, SearchAdaptor searchAdaptor);
 

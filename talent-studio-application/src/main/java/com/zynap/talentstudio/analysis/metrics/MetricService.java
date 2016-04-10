@@ -6,6 +6,7 @@ package com.zynap.talentstudio.analysis.metrics;
 import com.zynap.domain.IDomainObject;
 import com.zynap.exception.TalentStudioException;
 import com.zynap.talentstudio.common.AccessType;
+import com.zynap.talentstudio.common.DefaultService;
 import com.zynap.talentstudio.common.IFinder;
 import com.zynap.talentstudio.common.IModifiable;
 import com.zynap.talentstudio.analysis.populations.IPopulationEngine;
@@ -21,7 +22,7 @@ import java.util.List;
  * @version $Revision: $
  *          $Id: $
  */
-public class MetricService implements IMetricService {
+public class MetricService extends DefaultService implements IMetricService {
 
     /**
      * Creates a metric.
@@ -31,21 +32,12 @@ public class MetricService implements IMetricService {
      */
     public void create(IDomainObject object) throws TalentStudioException {
         Metric metric = (Metric) object;
-        if(!IPopulationEngine.COUNT.equals(metric.getOperator())) {
+        if (!IPopulationEngine.COUNT.equals(metric.getOperator())) {
             metric.setValue(null);
         }
         metricDao.create(object);
     }
 
-    /**
-     * Finds a given metric.
-     *
-     * @param id
-     * @return the specified report.
-     */
-    public IDomainObject findById(Serializable id) throws TalentStudioException {
-        return metricDao.findByID(id);
-    }
 
     /**
      * Updates the given metric.
@@ -125,10 +117,6 @@ public class MetricService implements IMetricService {
     }
 
     protected IModifiable getModifierDao() {
-        return metricDao;
-    }
-
-    public IMetricDao getMetricDao() {
         return metricDao;
     }
 

@@ -18,7 +18,7 @@ import java.util.List;
 public class DisplayConfigService implements IDisplayConfigService {
 
     public DisplayConfig findById(Long id) throws TalentStudioException {
-        return (DisplayConfig) displayConfigDao.findByID(id);
+        return (DisplayConfig) displayConfigDao.findById(id);
     }
 
     public DisplayConfigItem findConfigItemById(Long id) throws TalentStudioException {

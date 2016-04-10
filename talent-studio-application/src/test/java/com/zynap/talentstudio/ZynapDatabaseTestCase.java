@@ -1,6 +1,12 @@
 package com.zynap.talentstudio;
 
+import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import org.dbunit.operation.DatabaseOperation;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
 import javax.sql.DataSource;
 
@@ -11,6 +17,8 @@ import java.net.URL;
  * Date: 20-Oct-2005
  * Time: 16:28:09
  */
+@TestExecutionListeners({DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class, TransactionalTestExecutionListener.class})
+@TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
 public abstract class ZynapDatabaseTestCase extends AbstractHibernateTestCase {
 
     public ZynapDatabaseTestCase() {

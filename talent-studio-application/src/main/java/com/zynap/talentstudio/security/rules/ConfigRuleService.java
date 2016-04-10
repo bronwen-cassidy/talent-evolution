@@ -26,7 +26,7 @@ public class ConfigRuleService implements IConfigRuleService {
     }
 
     public Config findById(Long configId) throws TalentStudioException {
-        return (Config) configRuleDao.findByID(configId);
+        return (Config) configRuleDao.findById(configId);
     }
 
     public void update(Config config) throws TalentStudioException {

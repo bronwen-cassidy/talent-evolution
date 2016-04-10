@@ -10,5 +10,5 @@ import com.zynap.talentstudio.common.IZynapService;
  */
 public interface IHelpTextService extends IZynapService {
 
-    HelpTextItem findByID(Long id) throws TalentStudioException;
+    HelpTextItem findById(Long id) throws TalentStudioException;
 }

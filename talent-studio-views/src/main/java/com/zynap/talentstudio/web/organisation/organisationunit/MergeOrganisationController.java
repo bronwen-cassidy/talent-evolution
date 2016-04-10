@@ -56,8 +56,8 @@ public class MergeOrganisationController extends ZynapDefaultFormController {
         }
 
         String[] idValues = (String[]) params.values().toArray(new String[params.size()]);
-        final OrganisationUnit baseOrganisationUnit = organisationUnitService.findByID(new Long(idValues[0]));
-        final OrganisationUnit secondOrganisationUnit = organisationUnitService.findByID(new Long(idValues[1]));
+        final OrganisationUnit baseOrganisationUnit = organisationUnitService.findById(new Long(idValues[0]));
+        final OrganisationUnit secondOrganisationUnit = organisationUnitService.findById(new Long(idValues[1]));
         baseOrganisationUnit.getObjectiveSets().size();
         secondOrganisationUnit.getObjectiveSets().size();                
         return new MergeOrgUnitWrapperBean(baseOrganisationUnit, secondOrganisationUnit);

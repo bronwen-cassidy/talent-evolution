@@ -31,7 +31,7 @@ public class EditPositionAttributesController extends EditNodeAttributesControll
         setSuccessView(HistoryHelper.getBackURL(request));
         //get the id from the request and get the position
         Long positionId = RequestUtils.getRequiredLongParameter(request, ParameterConstants.NODE_ID_PARAM);
-        Position position = getPositionService().findByID(positionId);
+        Position position = getPositionService().findById(positionId);
         PositionWrapperBean wrapper = new PositionWrapperBean(position);
         applyAttributes(request, wrapper, position);
         return wrapper;

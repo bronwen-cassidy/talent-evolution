@@ -16,6 +16,7 @@ import java.io.Serializable;
  * User: amark
  * Date: 16-Mar-2005
  * Time: 16:09:27
+ * Todo: save the filename as well
  */
 public class HomePageWrapperBean implements Serializable {
 
@@ -24,7 +25,8 @@ public class HomePageWrapperBean implements Serializable {
         this.homePage = homePage;
         this.arena = arena;
         if (homePage.getData() != null && homePage.getData().length > 0) {
-            this.data = new UploadedFile("*.html", new Long(homePage.getData().length), homePage.getData(), "html");
+            this.fileExtension = homePage.getFileExtension() != null ? homePage.getFileExtension() : "html";
+            this.data = new UploadedFile("*." + homePage.getFileExtension(), (long) homePage.getData().length, homePage.getData(), homePage.getFileExtension());
         } else {
             this.data = new UploadedFile();
         }
@@ -34,12 +36,14 @@ public class HomePageWrapperBean implements Serializable {
     public HomePage getModifiedHomePage() {
         this.homePage.setData(data.isFileEmpty() ? null : data.getBlobValue());
         this.homePage.setUrl(StringUtils.hasText(url) ? url : null);
+        this.homePage.setFileExtension(fileExtension);
         return homePage;
     }
 
     public void setUploadHomePage(UploadedFile file) {
         if (file != null && !file.isFileEmpty()) {
             this.data = file;
+            this.fileExtension = file.getFileExtension();
         }
     }
 
@@ -77,4 +81,5 @@ public class HomePageWrapperBean implements Serializable {
     private Arena arena;
     private String url;
 
+    private String fileExtension;
 }

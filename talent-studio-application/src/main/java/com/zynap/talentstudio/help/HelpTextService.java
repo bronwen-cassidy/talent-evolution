@@ -26,9 +26,9 @@ public final class HelpTextService extends DefaultService implements IHelpTextSe
         this.helpTextDao = helpTextDao;
     }
 
-    public HelpTextItem findByID(Long id) throws TalentStudioException {
+    public HelpTextItem findById(Long id) throws TalentStudioException {
         try {
-            return (HelpTextItem) helpTextDao.findByID(id);
+            return (HelpTextItem) helpTextDao.findById(id);
         } catch (DomainObjectNotFoundException e) {
             return null;
         }

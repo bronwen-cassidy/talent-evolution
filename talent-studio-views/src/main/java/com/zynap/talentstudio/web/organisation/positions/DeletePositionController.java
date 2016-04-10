@@ -41,7 +41,7 @@ public class DeletePositionController extends DeleteNodeController {
      * @throws com.zynap.exception.TalentStudioException
      */
     protected Node getNode(Long nodeId) throws TalentStudioException {
-        return positionService.findByID(nodeId);
+        return positionService.findById(nodeId);
     }
 
     /**

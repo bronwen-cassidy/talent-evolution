@@ -11,7 +11,7 @@ import java.util.Set;
  * User: jsueiras
  * Date: 25-Nov-2005
  * Time: 17:03:33
- *
+ * <p/>
  * Collection that holds AttributeValues.
  */
 public final class AttributeValuesCollection {
@@ -48,6 +48,10 @@ public final class AttributeValuesCollection {
 
     public int size() {
         return values.size();
+    }
+
+    public Map<DynamicAttribute, AttributeValue> getMappedValues() {
+        return values;
     }
 
     private final Map<DynamicAttribute, AttributeValue> values;

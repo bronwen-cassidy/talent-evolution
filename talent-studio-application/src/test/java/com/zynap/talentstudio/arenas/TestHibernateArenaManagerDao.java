@@ -64,24 +64,24 @@ public class TestHibernateArenaManagerDao extends AbstractHibernateTestCase {
     }
 
     public void testGetArena() throws Exception {
-        Arena arena = hibernateArenaManagerDao.findByID(IArenaManager.ADMIN_MODULE);
+        Arena arena = hibernateArenaManagerDao.findById(IArenaManager.ADMIN_MODULE);
         assertEquals(IArenaManager.ADMIN_MODULE, arena.getArenaId());
     }
 
     public void testGetArena_label() throws Exception {
-        Arena arena = hibernateArenaManagerDao.findByID(IArenaManager.ADMIN_MODULE);
+        Arena arena = hibernateArenaManagerDao.findById(IArenaManager.ADMIN_MODULE);
         assertEquals("Administration", arena.getLabel());
     }
 
     public void testGetArena_Sections() throws Exception {
-        Arena arena = hibernateArenaManagerDao.findByID(IArenaManager.ADMIN_MODULE);
+        Arena arena = hibernateArenaManagerDao.findById(IArenaManager.ADMIN_MODULE);
         Collection<MenuSection> menuSections = arena.getMenuSections();
 
         checkMenuSectionOrder(menuSections);
     }
 
     public void testGetArena_SectionMenuItems() throws Exception {
-        Arena arena = hibernateArenaManagerDao.findByID(IArenaManager.ADMIN_MODULE);
+        Arena arena = hibernateArenaManagerDao.findById(IArenaManager.ADMIN_MODULE);
         Collection menuSections = arena.getMenuSections();
         MenuSection menusection = (MenuSection) menuSections.iterator().next();
         Collection menuItems = menusection.getMenuItems();
@@ -110,7 +110,7 @@ public class TestHibernateArenaManagerDao extends AbstractHibernateTestCase {
 
         final int newSessionTimeout = 112;
 
-        final Arena arena = hibernateArenaManagerDao.findByID(IArenaManager.ADMIN_MODULE);
+        final Arena arena = hibernateArenaManagerDao.findById(IArenaManager.ADMIN_MODULE);
         arena.setSessionTimeout(newSessionTimeout);
 
         hibernateArenaManagerDao.update(arena);
@@ -128,7 +128,7 @@ public class TestHibernateArenaManagerDao extends AbstractHibernateTestCase {
 
     public void testFindByInvalidID() throws Exception {
         try {
-            hibernateArenaManagerDao.findByID("no such arena");
+            hibernateArenaManagerDao.findById("no such arena");
             fail("Should have thrown an Exception");
         } catch (DomainObjectNotFoundException ex) {
         }
@@ -159,7 +159,7 @@ public class TestHibernateArenaManagerDao extends AbstractHibernateTestCase {
     }
 
     public void testFindByID() throws Exception {
-        final Arena arena = hibernateArenaManagerDao.findByID(IArenaManager.ADMIN_MODULE);
+        final Arena arena = hibernateArenaManagerDao.findById(IArenaManager.ADMIN_MODULE);
         assertNotNull(arena);
         assertEquals(IArenaManager.ADMIN_MODULE, arena.getArenaId());
     }

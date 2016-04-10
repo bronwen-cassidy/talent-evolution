@@ -23,7 +23,7 @@ public class HelpTextBean {
         
         HelpTextItem helpTextItem = null;
         try {
-            helpTextItem = helpTextService.findByID(new Long(helpTextId));        
+            helpTextItem = helpTextService.findById(new Long(helpTextId));
         } catch (TalentStudioException e) {
             e.printStackTrace();
         }

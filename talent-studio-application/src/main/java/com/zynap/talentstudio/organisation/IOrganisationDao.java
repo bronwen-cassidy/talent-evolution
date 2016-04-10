@@ -18,7 +18,7 @@ import java.util.List;
  */
 public interface IOrganisationDao extends IModifiable, IFinder {
 
-    OrganisationUnit findByID(Long organisationUnitId) throws TalentStudioException;
+    OrganisationUnit findById(Long organisationUnitId) throws TalentStudioException;
 
     List<OrganisationUnit> findOrgUnitTree(Long organisationUnitId) throws TalentStudioException;
 

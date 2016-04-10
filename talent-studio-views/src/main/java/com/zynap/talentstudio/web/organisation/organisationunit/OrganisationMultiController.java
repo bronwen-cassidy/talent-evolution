@@ -92,7 +92,7 @@ public class OrganisationMultiController extends ZynapMultiActionController {
     public ModelAndView viewOrganisationHandler(HttpServletRequest request, HttpServletResponse response) throws ServletRequestBindingException, TalentStudioException {
 
         final Long orgUnitId = RequestUtils.getRequiredLongParameter(request, ParameterConstants.ORG_UNIT_ID_PARAM);
-        final OrganisationUnit orgUnit = getOrganisationManager().findByID(orgUnitId);
+        final OrganisationUnit orgUnit = getOrganisationManager().findById(orgUnitId);
         OrganisationUnitWrapperBean wrapper = new OrganisationUnitWrapperBean(orgUnit);
         wrapper.setWrappedDynamicAttributes(DynamicAttributesHelper.getDisplayableAttributeWrapperBeans(orgUnit, dynamicAttributeService));
         final Map<String, Object> model = new HashMap<String, Object>();

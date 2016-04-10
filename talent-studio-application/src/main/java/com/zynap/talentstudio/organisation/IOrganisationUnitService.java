@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface IOrganisationUnitService extends IZynapService {
 
-    OrganisationUnit findByID(Long orgUnitId) throws TalentStudioException;
+    OrganisationUnit findById(Long orgUnitId) throws TalentStudioException;
 
     /**
      * Find descendents of specified org unit.

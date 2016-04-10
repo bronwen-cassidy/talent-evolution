@@ -52,16 +52,6 @@ public interface ISubjectService extends IZynapService {
     Subject findByUserId(Long userId) throws TalentStudioException;
 
     /**
-     * Find subject by id.
-     * <br> Works for both active and inactive subjects.
-     *
-     * @param id The subject id
-     * @return Subject
-     * @throws TalentStudioException
-     */
-    Subject findById(Long id) throws TalentStudioException;
-
-    /**
      * Find the team of the subject for the given user.
      *
      * @param userId

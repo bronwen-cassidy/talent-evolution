@@ -10,6 +10,7 @@ import com.zynap.talentstudio.help.HelpTextItem;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Class or Interface description.
@@ -76,15 +77,6 @@ public interface IDynamicAttributeService extends IZynapService {
      * @return Collection of DynamicAttribute objects
      */
     Collection getTypedAttributes(String nodeType, String attributeType);
-
-    /**
-     * Find dynamic attribute by id (inactive or active.)
-     *
-     * @param id
-     * @return DynamicAttribute
-     * @throws TalentStudioException
-     */
-    DynamicAttribute findById(Long id) throws TalentStudioException;
 
     /**
      * Find active attributes for the given node type.
@@ -170,6 +162,8 @@ public interface IDynamicAttributeService extends IZynapService {
     boolean checkUniqueness(Long daId, String value, Long nodeId);
 
     Collection<DynamicAttribute> getAllAttributes(Long[] attributeIds);
+
+    Map<String, String> getAllSubjectAttributes(Long subjectId);
 
     DynamicAttribute PP_SUB_DERIVED_ATT_DEFINITION = new DynamicAttribute(" Subordinate", "targetDerivedAttributes");
     DynamicAttribute PP_SUP_DERIVED_ATT_DEFINITION = new DynamicAttribute(" Superior", "sourceDerivedAttributes");

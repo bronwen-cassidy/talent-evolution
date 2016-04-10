@@ -24,7 +24,7 @@ public class TestTabularReportRunner extends ZynapDbUnitMockControllerTestCase {
 
     public void testRun() throws Exception {
 
-        final Report report = (Report) reportService.findById(POSITION_TABULAR_REPORT_ID);
+        final Report report = reportService.findById(POSITION_TABULAR_REPORT_ID);
         reportService.compileReportDesign(report);        
         final Long userId = ADMINISTRATOR_USER_ID;
 
@@ -57,6 +57,6 @@ public class TestTabularReportRunner extends ZynapDbUnitMockControllerTestCase {
     private IReportService reportService;
     private TabularReportRunner tabularReportRunner;
 
-    private static final Serializable POSITION_TABULAR_REPORT_ID = new Long(-101);
-    private static final Serializable TABULAR_REPORT_WITH_QUESTIONNAIRES_ID = new Long(81);
+    private static final Long POSITION_TABULAR_REPORT_ID = -101L;
+    private static final Long TABULAR_REPORT_WITH_QUESTIONNAIRES_ID = 81L;
 }

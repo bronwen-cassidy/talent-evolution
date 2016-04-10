@@ -74,7 +74,7 @@ public class TestHibernatePortfolioDao extends AbstractHibernateTestCase {
         hibernatePortfolioDao.create(itemOne);
 
         final Long portfolioId = itemOne.getId();
-        final PortfolioItem result = (PortfolioItem) hibernatePortfolioDao.findByID(portfolioId);
+        final PortfolioItem result = (PortfolioItem) hibernatePortfolioDao.findById(portfolioId);
         assertEquals(itemOne, result);
         assertTrue(result.isText());
         assertNull(result.getFileExtension());
@@ -92,7 +92,7 @@ public class TestHibernatePortfolioDao extends AbstractHibernateTestCase {
         hibernatePortfolioDao.create(itemOne);
 
         final Long portfolioId = itemOne.getId();
-        final PortfolioItem result = (PortfolioItem) hibernatePortfolioDao.findByID(portfolioId);
+        final PortfolioItem result = (PortfolioItem) hibernatePortfolioDao.findById(portfolioId);
         assertEquals(itemOne, result);
         assertTrue(result.isUpload());
         assertEquals(".xml", itemOne.getFileExtension());
@@ -111,7 +111,7 @@ public class TestHibernatePortfolioDao extends AbstractHibernateTestCase {
         hibernatePortfolioDao.create(itemOne);
 
         final Long portfolioId = itemOne.getId();
-        final PortfolioItem result = (PortfolioItem) hibernatePortfolioDao.findByID(portfolioId);
+        final PortfolioItem result = (PortfolioItem) hibernatePortfolioDao.findById(portfolioId);
         assertEquals(itemOne, result);
         assertTrue(result.isURL());
         assertNull(itemOne.getFileExtension());
@@ -129,7 +129,7 @@ public class TestHibernatePortfolioDao extends AbstractHibernateTestCase {
         target.addPortfolioItem(portfolioItem);
         hibernateSubjectDao.create(target);
 
-        final Subject expected = (Subject) hibernateSubjectDao.findByID(target.getId());
+        final Subject expected = (Subject) hibernateSubjectDao.findById(target.getId());
         final PortfolioItem found = expected.getPortfolioItems().iterator().next();
         assertEquals(portfolioItem, found);
     }

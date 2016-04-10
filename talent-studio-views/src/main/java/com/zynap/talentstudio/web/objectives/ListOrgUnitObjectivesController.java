@@ -61,11 +61,11 @@ public class ListOrgUnitObjectivesController extends DefaultWizardFormController
                 organisationUnit = primaryOrganisationUnits.isEmpty() ? null : primaryOrganisationUnits.iterator().next();
             }
         } else {
-            organisationUnit = organisationUnitService.findByID(organisationUnitId);
+            organisationUnit = organisationUnitService.findById(organisationUnitId);
         }
 
         if(organisationUnit == null) {
-            organisationUnit = organisationUnitService.findByID(OrganisationUnit.ROOT_ORG_UNIT_ID);
+            organisationUnit = organisationUnitService.findById(OrganisationUnit.ROOT_ORG_UNIT_ID);
         }
 
         // todo set the parent oragnisation units objectives
@@ -86,7 +86,7 @@ public class ListOrgUnitObjectivesController extends DefaultWizardFormController
         if (orgUnitId != null && orgUnitId.equals(formBean.getOrganisationUnitId())) return;
         if (orgUnitId == null) return;
         // otherwise the organisation unit has been changed and we need to update the wrapper
-        OrganisationUnit organisationUnit = organisationUnitService.findByID(orgUnitId);
+        OrganisationUnit organisationUnit = organisationUnitService.findById(orgUnitId);
 
         // todo get the parent organisation units objectives
         Collection<ObjectiveSet> sets = organisationUnit.getObjectiveSets();

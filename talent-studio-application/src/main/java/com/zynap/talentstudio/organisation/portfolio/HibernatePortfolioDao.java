@@ -97,7 +97,7 @@ public class HibernatePortfolioDao extends HibernateCrudAdaptor implements IPort
     }
 
     public IDomainObject findAndCheckArtefactAccess(Long portfolioItemId, Long viewSubjectPermitId, Long viewPositionPermitId) throws TalentStudioException {
-        final PortfolioItem portfolioItem = (PortfolioItem) super.findByID(portfolioItemId);
+        final PortfolioItem portfolioItem = (PortfolioItem) super.findById(portfolioItemId);
 
         Long principalId = UserSessionFactory.getUserSession().getId();
         final Node node = portfolioItem.getNode();

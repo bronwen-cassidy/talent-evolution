@@ -62,7 +62,7 @@ public class TestHibernateSubjectDao extends AbstractHibernateTestCase {
         assertFalse(subject.isCanLogIn());
 
         // check that subject associations is not null
-        Subject actual = (Subject) subjectDao.findByID(subject.getId());
+        Subject actual = (Subject) subjectDao.findById(subject.getId());
         assertNotNull(actual.getSubjectAssociations());
     }
 
@@ -97,7 +97,7 @@ public class TestHibernateSubjectDao extends AbstractHibernateTestCase {
         subject.addSubjectAssociation(one);
         Subject expected = (Subject) subjectDao.create(subject);
 
-        Subject actual = (Subject) subjectDao.findByID(expected.getId());
+        Subject actual = (Subject) subjectDao.findById(expected.getId());
         assertEquals(expected, actual);
         assertEquals(1, actual.getSubjectAssociations().size());
     }
@@ -112,7 +112,7 @@ public class TestHibernateSubjectDao extends AbstractHibernateTestCase {
         Subject subject = new Subject(new CoreDetail("Mr", "Benny22", "Castor4"));
         subjectDao.create(subject);
 
-        Subject foundSubject = (Subject) subjectDao.findByID(subject.getId());
+        Subject foundSubject = (Subject) subjectDao.findById(subject.getId());
         assertEquals(0, foundSubject.getDynamicAttributeValues().size());
 
         Collection allAttributes = dynamicAttributeDao.getAllAttributes(Node.SUBJECT_UNIT_TYPE_);
@@ -120,7 +120,7 @@ public class TestHibernateSubjectDao extends AbstractHibernateTestCase {
         subject.addAttributeValue(AttributeValue.create("test value", dynamicAttribute));
         subjectDao.update(foundSubject);
 
-        Subject foundSubject2 = (Subject) subjectDao.findByID(subject.getId());
+        Subject foundSubject2 = (Subject) subjectDao.findById(subject.getId());
         assertEquals(1, foundSubject2.getDynamicAttributeValues().size());
     }
 
@@ -135,7 +135,7 @@ public class TestHibernateSubjectDao extends AbstractHibernateTestCase {
 
         subjectDao.create(subject);
 
-        Subject foundSubject = (Subject) subjectDao.findByID(subject.getId());
+        Subject foundSubject = (Subject) subjectDao.findById(subject.getId());
         assertEquals(1, foundSubject.getDynamicAttributeValues().size());
     }
 

@@ -25,8 +25,8 @@ import java.util.Set;
  */
 public class OrganisationUnitService extends DefaultService implements IOrganisationUnitService {
 
-    public OrganisationUnit findByID(Long orgUnitId) throws TalentStudioException {
-        return organisationUnitDao.findByID(orgUnitId);
+    public OrganisationUnit findById(Long orgUnitId) throws TalentStudioException {
+        return organisationUnitDao.findById(orgUnitId);
     }
 
     public OrganisationUnit findOrgUnitByPositionId(String positionId) throws TalentStudioException {
@@ -105,7 +105,7 @@ public class OrganisationUnitService extends DefaultService implements IOrganisa
         }
         if(ou == null) {
             try {
-                ou = organisationUnitDao.findByID(OrganisationUnit.ROOT_ORG_UNIT_ID);
+                ou = organisationUnitDao.findById(OrganisationUnit.ROOT_ORG_UNIT_ID);
             } catch (TalentStudioException e) {
                 e.printStackTrace();
             }

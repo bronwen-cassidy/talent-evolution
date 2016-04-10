@@ -53,7 +53,7 @@ public class AddOrganisationController extends BaseOrganisationController {
                 unit.setCompanyRoot(true);
             } else {
                 // load the parent properly
-                OrganisationUnit parent = organisationUnitService.findByID(unit.getParent().getId());
+                OrganisationUnit parent = organisationUnitService.findById(unit.getParent().getId());
                 Long rootId = parent.getRootId();
                 if(parent.isCompanyRoot()) rootId = parent.getId();
                 unit.setRootId(rootId);

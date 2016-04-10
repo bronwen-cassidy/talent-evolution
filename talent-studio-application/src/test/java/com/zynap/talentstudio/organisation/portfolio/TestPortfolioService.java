@@ -59,7 +59,7 @@ public class TestPortfolioService extends AbstractHibernateTestCase {
     public void testDelete() throws Exception {
 
         IPositionService positionService = (IPositionService) getBean("positionService");
-        Position position = positionService.findByID(DEFAULT_POSITION_ID);
+        Position position = positionService.findById(DEFAULT_POSITION_ID);
 
         final PortfolioItem portfolioItem = new PortfolioItem("label", "comments", "status", "scope", new Date(), "subtype");
         PortfolioItemFile file = new PortfolioItemFile();

@@ -37,7 +37,7 @@ public class OrganisationUnitTreeBean {
     public List getOrganisationUnitsExcludingBranch(long branchId) {
         Long orgUnitIdAsLong = new Long(branchId);
         try {
-            OrganisationUnit searchOrgUnit = organisationManager.findByID(orgUnitIdAsLong);
+            OrganisationUnit searchOrgUnit = organisationManager.findById(orgUnitIdAsLong);
             List orgUnits = organisationManager.findOrgUnitTree(OrganisationUnit.ROOT_ORG_UNIT_ID);
             List orgUnitsExcludingBranch = removeDescendents(orgUnits, searchOrgUnit);
             return TreeBuilderHelper.buildOrgUnitTree(orgUnitsExcludingBranch);

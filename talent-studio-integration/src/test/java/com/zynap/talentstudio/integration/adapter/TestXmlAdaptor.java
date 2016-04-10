@@ -97,7 +97,7 @@ public class TestXmlAdaptor extends BaseIntegrationTest {
 
         // check has correct parent
         assertNotNull(selectedOrganisationUnit);
-        final OrganisationUnit parent = organisationUnitService.findByID(selectedOrganisationUnit.getParent().getId());
+        final OrganisationUnit parent = organisationUnitService.findById(selectedOrganisationUnit.getParent().getId());
         assertEquals(DEFAULT_ORG_UNIT_ID, parent.getParent().getId());
     }
 

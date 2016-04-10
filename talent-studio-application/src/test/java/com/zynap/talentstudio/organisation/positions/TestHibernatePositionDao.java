@@ -162,7 +162,7 @@ public class TestHibernatePositionDao extends AbstractHibernateTestCase {
 
     public void testDefaultPositionAssociations() throws Exception {
 
-        Position defaultPosition = (Position) hibernatePositionDao.findByID(DEFAULT_POSITION_ID);
+        Position defaultPosition = (Position) hibernatePositionDao.findById(DEFAULT_POSITION_ID);
         assertTrue(defaultPosition.isDefault());
         assertNull(defaultPosition.getParent());
         final PositionAssociation primaryAssociation = ArtefactAssociationHelper.getPrimaryAssociation(defaultPosition.getSourceAssociations());
@@ -176,7 +176,7 @@ public class TestHibernatePositionDao extends AbstractHibernateTestCase {
 
     public void testAddSourceAssociation() throws Exception {
 
-        Position newPosition = (Position) hibernatePositionDao.findByID(setUpAssociations().getId());
+        Position newPosition = (Position) hibernatePositionDao.findById(setUpAssociations().getId());
         int numberOfAssocs = newPosition.getSourceAssociations().size();
 
         // add new source association
@@ -187,7 +187,7 @@ public class TestHibernatePositionDao extends AbstractHibernateTestCase {
         newPosition.addSourceAssociation(newAssociation);
         hibernatePositionDao.update(newPosition);
 
-        Position foundPosition = (Position) hibernatePositionDao.findByID(newPosition.getId());
+        Position foundPosition = (Position) hibernatePositionDao.findById(newPosition.getId());
         assertEquals(numberOfAssocs + 1, foundPosition.getSourceAssociations().size());
     }
 
@@ -206,7 +206,7 @@ public class TestHibernatePositionDao extends AbstractHibernateTestCase {
     private Position setUpAssociations() throws Exception {
 
         final LookupValue qualifier = getDirectPrimaryPositionLookupValue();
-        Position defaultPosition = (Position) hibernatePositionDao.findByID(DEFAULT_POSITION_ID);
+        Position defaultPosition = (Position) hibernatePositionDao.findById(DEFAULT_POSITION_ID);
 
         Position target = new Position(IPopulationEngine.TARGET_ATTR, DEFAULT_ORG_UNIT);
         PositionAssociation association2 = new PositionAssociation(qualifier, defaultPosition);

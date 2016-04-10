@@ -58,8 +58,8 @@ public class UserService implements IUserService {
         userDao.update(loginInfo);
     }
 
-    public IDomainObject findById(Serializable id) throws TalentStudioException {
-        return userDao.findByID(id);
+    public <T> T findById(Serializable id) throws TalentStudioException {
+        return userDao.findById(id);
     }
 
     public Collection search(Long principalId, SearchAdaptor searchAdaptor) {
@@ -82,7 +82,7 @@ public class UserService implements IUserService {
         // add session log
         SessionLog sessionLog = createSessionLog(sessionId, remoteAddr, user);
 
-        user = userDao.findByID(user.getId());
+        user = userDao.findById(user.getId());
         final Group group = user.getGroup();
         final OrganisationUnit unit = organisationUnitService.findOrgUnitByUser("" + user.getId());
         if (group != null) group.getHomePages().size();
@@ -153,7 +153,7 @@ public class UserService implements IUserService {
         if (StringUtils.hasText(username)) {
             user = findByUserName(username);
         } else {
-            user = (User) userDao.findByID(pwdObject.getUserId());
+            user = (User) userDao.findById(pwdObject.getUserId());
         }
 
         // add entry to password history
@@ -186,7 +186,7 @@ public class UserService implements IUserService {
     }
 
     public User getUserById(Long id) throws TalentStudioException {
-        return (User) userDao.findByID(id);
+        return (User) userDao.findById(id);
     }
 
     public User findBySubjectId(Long id) throws DomainObjectNotFoundException {
