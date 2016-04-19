@@ -11,12 +11,13 @@ package com.zynap.common.util;
  * @version 0.1
  */
 
-import junit.framework.*;
+import org.junit.Test;
 
-import com.zynap.common.util.FileUtils;
+import static junit.framework.TestCase.assertEquals;
 
-public class TestFileUtils extends TestCase {
+public class FileUtilsTest {
 
+    @Test
     public void testGetExtension() throws Exception {
         String filename = "c:program files/test/test again.pdf";
         final String extension = FileUtils.getExtension(filename);

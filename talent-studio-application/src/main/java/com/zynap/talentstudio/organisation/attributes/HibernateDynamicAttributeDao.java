@@ -99,7 +99,7 @@ public class HibernateDynamicAttributeDao extends HibernateCrudAdaptor implement
         return getHibernateTemplate().find(query.toString(), nodeType);
     }
 
-    public Collection getAllAttributes(String nodeType) {
+    public Collection<DynamicAttribute> getAllAttributes(String nodeType) {
         return getHibernateTemplate().find("from DynamicAttribute attribute where attribute.artefactType=? order by upper(attribute.label)", nodeType);
     }
 
@@ -108,18 +108,11 @@ public class HibernateDynamicAttributeDao extends HibernateCrudAdaptor implement
     }
 
     @Override
-    public Map<String, String> findAllSubjectAnswers(Long subjectId) {
+    public List<NodeExtendedAttribute> findAllSubjectAnswers(Long subjectId) {
         String query = "select answer from NodeExtendedAttribute answer, Questionnaire q " +
                 "where  q.subject.id=? and (answer.node.id=q.id or answer.node.id=?)";
 
-        List<NodeExtendedAttribute> queryResult = getHibernateTemplate().find(query, new Object[]{subjectId, subjectId});
-
-        Map<String, String> result = new HashMap<>();
-        for (NodeExtendedAttribute attr : queryResult) {
-            AttributeValue attributeValue = AttributeValue.create(attr);
-            result.put(attr.getDynamicAttribute().getExternalRefLabel(),attributeValue.getDisplayValue());
-        }
-        return result;
+        return getHibernateTemplate().find(query, new Object[]{subjectId, subjectId});
     }
 
     public Collection<DynamicAttribute> getSearchableAttributes(String nodeType) {

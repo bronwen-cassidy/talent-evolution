@@ -68,7 +68,12 @@ public class DynamicAttributeService extends DefaultService implements IDynamicA
     public Map<String, String> getAllSubjectAttributes(Long subjectId) {
         Map<String, String> result = new HashMap<>();
         if (subjectId != null) {
-            result = dynamicAttributeDao.findAllSubjectAnswers(subjectId);
+            List<NodeExtendedAttribute> answers = dynamicAttributeDao.findAllSubjectAnswers(subjectId);
+            for (NodeExtendedAttribute attr : answers) {
+                AttributeValue attributeValue = AttributeValue.create(attr);
+                String externalRefLabel = org.springframework.util.StringUtils.replace(attr.getDynamicAttribute().getExternalRefLabel(), ".", "_");
+                result.put(externalRefLabel, attributeValue.getDisplayValue());
+            }
         }
         return result;
     }
@@ -132,7 +137,7 @@ public class DynamicAttributeService extends DefaultService implements IDynamicA
     }
 
     public void delete(Long attributeId) throws TalentStudioException {
-        final DynamicAttribute dynamicAttribute = (DynamicAttribute) dynamicAttributeDao.findById(attributeId);
+        final DynamicAttribute dynamicAttribute = dynamicAttributeDao.findById(attributeId);
         dynamicAttributeDao.delete(dynamicAttribute);
     }
 
@@ -195,7 +200,7 @@ public class DynamicAttributeService extends DefaultService implements IDynamicA
     /**
      * Get the label.
      *
-     * @param domainObject
+     * @param domainObject the domain object to extract the label from
      * @return domain object label or empty string if domain object is null.
      */
     private String getLabel(final IDomainObject domainObject) {
@@ -206,8 +211,8 @@ public class DynamicAttributeService extends DefaultService implements IDynamicA
     /**
      * Find domain object based on id and dynamic attribute type.
      *
-     * @param id
-     * @param dynamicAttribute
+     * @param id - id of the entity
+     * @param dynamicAttribute the attribute ownded by the node
      * @return IDomainObject with matching id or null (never throws Exceptions)
      */
     private IDomainObject findDomainObject(final String id, final DynamicAttribute dynamicAttribute) {
@@ -218,8 +223,8 @@ public class DynamicAttributeService extends DefaultService implements IDynamicA
     /**
      * Find domain object.
      *
-     * @param id
-     * @param entityClass
+     * @param id the id of the entity
+     * @param entityClass - the entity class type
      * @return IDomainObject with matching id or null (never throws Exceptions)
      */
     private IDomainObject findDomainObject(final String id, final Class entityClass) {
@@ -227,8 +232,9 @@ public class DynamicAttributeService extends DefaultService implements IDynamicA
         IDomainObject domainObject = null;
         if (StringUtils.isNotBlank(id) && entityClass != null) {
             try {
-                domainObject = (IDomainObject) getFinderDao().findById(entityClass, new Long(id));
+                domainObject = getFinderDao().findById(entityClass, new Long(id));
             } catch (TalentStudioException e) {
+                logger.debug("exception type: " + e.getClass().getName() + " -> info: " + e.getMessage(), e);
             }
         }
 

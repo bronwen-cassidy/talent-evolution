@@ -1,15 +1,19 @@
 package com.zynap.common.util;
 
+import org.junit.Test;
+
+import static junit.framework.TestCase.assertFalse;
+import static junit.framework.TestCase.assertTrue;
+
 /**
  * User: amark
  * Date: 10-Aug-2006
  * Time: 10:44:15
  */
 
-import com.zynap.talentstudio.ZynapTestCase;
+public class UploadedFileTest {
 
-public class TestUploadedFile extends ZynapTestCase {
-
+    @Test
     public void testIsInvalid() throws Exception {
 
         UploadedFile uploadedFile = new UploadedFile();
@@ -19,15 +23,16 @@ public class TestUploadedFile extends ZynapTestCase {
 
         // set file size and name
         uploadedFile.setFileName("filename");
-        uploadedFile.setFileSize(new Long(10));
+        uploadedFile.setFileSize(10L);
 
         assertTrue(uploadedFile.isValid());
         assertFalse(uploadedFile.isInvalid());
 
-        uploadedFile.setFileSize(new Long(0));
+        uploadedFile.setFileSize(0L);
         assertTrue(uploadedFile.isInvalid());
     }
 
+    @Test
     public void testIsFileEmpty() throws Exception {
 
         UploadedFile uploadedFile = new UploadedFile();
@@ -35,16 +40,17 @@ public class TestUploadedFile extends ZynapTestCase {
         // default must be true
         assertTrue(uploadedFile.isFileEmpty());
 
-        uploadedFile.setFileSize(new Long(0));
+        uploadedFile.setFileSize(0L);
         assertTrue(uploadedFile.isFileEmpty());
 
         uploadedFile.setFileSize(null);
         assertTrue(uploadedFile.isFileEmpty());
 
-        uploadedFile.setFileSize(new Long(1));
+        uploadedFile.setFileSize(1L);
         assertFalse(uploadedFile.isFileEmpty());
     }
 
+    @Test
     public void testIsFileNameSet() throws Exception {
 
         UploadedFile uploadedFile = new UploadedFile();
@@ -59,6 +65,7 @@ public class TestUploadedFile extends ZynapTestCase {
         assertTrue(uploadedFile.isFileNameSet());
     }
 
+    @Test
     public void testIsValid() throws Exception {
 
         UploadedFile uploadedFile = new UploadedFile();
@@ -67,7 +74,7 @@ public class TestUploadedFile extends ZynapTestCase {
         assertFalse(uploadedFile.isValid());
 
         uploadedFile.setFileName("");
-        uploadedFile.setFileSize(new Long(0));
+        uploadedFile.setFileSize(0L);
         assertFalse(uploadedFile.isValid());
 
         uploadedFile.setFileName(null);
@@ -75,7 +82,7 @@ public class TestUploadedFile extends ZynapTestCase {
         assertFalse(uploadedFile.isValid());
 
         uploadedFile.setFileName("test");
-        uploadedFile.setFileSize(new Long(10));
+        uploadedFile.setFileSize(10L);
         assertTrue(uploadedFile.isValid());        
     }
 }

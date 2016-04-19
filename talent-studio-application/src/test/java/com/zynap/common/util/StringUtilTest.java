@@ -4,38 +4,43 @@ package com.zynap.common.util;
  * Copyright (c) 2002 Zynap Limited. All rights reserved.
  */
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
-public class TestStringUtil extends TestCase {
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertFalse;
+import static junit.framework.TestCase.assertTrue;
 
+public class StringUtilTest {
+
+    @Test
     public void testContainsAny() throws Exception {
-        boolean expected = true;
         String testValue = "Have\nToday";
         boolean actual = StringUtil.containsAny(testValue, new String[] {"\n", "\r\n", "\""});
-        assertEquals(expected, actual);
+        assertEquals(true, actual);
     }
 
+    @Test
     public void testContainsAnyQuotes() throws Exception {
-        boolean expected = true;
         String testValue = "Have\"Today";
         boolean actual = StringUtil.containsAny(testValue, new String[] {"\""});
-        assertEquals(expected, actual);
+        assertEquals(true, actual);
     }
 
+    @Test
     public void testContainsAnyNull() throws Exception {
-        boolean expected = false;
         String testValue = "Have\"Today";
         boolean actual = StringUtil.containsAny(testValue, new String[] {null});
-        assertEquals(expected, actual);
+        assertEquals(false, actual);
     }
 
+    @Test
     public void testContainsAnyNothing() throws Exception {
-        boolean expected = false;
         String testValue = "Have\"Today";
         boolean actual = StringUtil.containsAny(testValue, new String[] {""});
-        assertEquals(expected, actual);
-    }       
+        assertEquals(false, actual);
+    }
 
+    @Test
     public void testConvertToBoolean() throws Exception {
         assertTrue(StringUtil.convertToBoolean("t"));
         assertFalse(StringUtil.convertToBoolean("f"));

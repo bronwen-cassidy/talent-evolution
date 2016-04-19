@@ -25,7 +25,7 @@ public interface IDynamicAttributeDao extends IFinder, IModifiable {
 
     List<DynamicAttributeDTO> listAllAttributes(String nodeType);
 
-    Collection getAllAttributes(String nodeType);
+    Collection<DynamicAttribute> getAllAttributes(String nodeType);
 
     Collection<DynamicAttribute> getSearchableAttributes(String nodeType);
 
@@ -45,5 +45,5 @@ public interface IDynamicAttributeDao extends IFinder, IModifiable {
 
     Collection<DynamicAttribute> getAllAttributes(Long[] attributeIds);
 
-    Map<String, String> findAllSubjectAnswers(Long subjectId);
+    List<NodeExtendedAttribute> findAllSubjectAnswers(Long subjectId);
 }

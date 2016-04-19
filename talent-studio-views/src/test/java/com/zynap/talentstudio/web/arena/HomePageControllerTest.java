@@ -1,59 +1,92 @@
 package com.zynap.talentstudio.web.arena;
 
-import com.github.springtestdbunit.DbUnitTestExecutionListener;
-import com.zynap.domain.UserSession;
-import com.zynap.domain.admin.User;
-import com.zynap.talentstudio.ZynapDatabaseTestCase;
-import com.zynap.talentstudio.arenas.IArenaManager;
-import com.zynap.talentstudio.organisation.subjects.ISubjectService;
+import com.zynap.talentstudio.organisation.attributes.IDynamicAttributeService;
 import com.zynap.talentstudio.security.homepages.HomePage;
-import com.zynap.talentstudio.security.users.IUserService;
-import com.zynap.talentstudio.web.HomePageViewController;
 import com.zynap.talentstudio.web.utils.ZynapDbUnitMockControllerTestCase;
-import com.zynap.talentstudio.web.utils.ZynapWebUtils;
-import org.apache.velocity.app.VelocityEngine;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
-import org.springframework.test.context.transaction.TransactionConfiguration;
-import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
-import static org.junit.Assert.assertTrue;
+import static junit.framework.TestCase.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
- * Created by bronwen.cassidy on 30/03/2016.
- *
+ * Created by bronwen.cassidy on 30/03/2016. man
  */
-public class HomePageControllerTest extends ZynapDbUnitMockControllerTestCase {
+@RunWith(MockitoJUnitRunner.class)
+public class HomePageControllerTest {
 
 
-    @Autowired
-    private HomePageViewController homePageController;
+    @InjectMocks
+    private HomePageController homePageController;
 
-    @Override
-    protected String getDataSetFileName() {
-        return "HomePageControllerTest.testHomePage.xml";
-    }
+    @Mock
+    private IDynamicAttributeService dynamicAttrService;
 
     @Test
     public void testHomePage() {
 
+        Map<String, String> results = new HashMap<>();
+        results.put("whatareyourjobresponsibilities0_22076822474514868", "my job responsibilities are");
+        when(dynamicAttrService.getAllSubjectAttributes(-6L)).thenReturn(results);
 
-        assertTrue(homePageController != null);
+        String content = "<h1> Hello velocity templates </h1>\n" +
+                "<p> Testing upload using velocity templates </p>\n" +
+                "<p> my value of what are you job responsibilities = $whatareyourjobresponsibilities0_22076822474514868 </p>";
+        String actual = homePageController.evaluateVelocityContent(content, -6L);
 
+        String expected = "<h1> Hello velocity templates </h1>\n" +
+                "<p> Testing upload using velocity templates </p>\n" +
+                "<p> my value of what are you job responsibilities = my job responsibilities are </p>";
+
+        assertEquals(expected, actual);
 
     }
 
-    private byte[] getVTBytes() {
-        String x = "<h1>Hello World</h1>" +
-        "<a href=\"http://www.google.com?username=$test1&password=$test2\">" +
-                "$attribtes.get('test1').label</a>";
-        return x.getBytes();
+    @Test
+    public void testHomePageWithLink() {
+
+        Map<String, String> results = new HashMap<>();
+        results.put("whatareyourjobresponsibilities0_22076822474514868", "meeeeee");
+        results.put("gotcha", "testme");
+        results.put("pollydied", "yesyesyes");
+
+        when(dynamicAttrService.getAllSubjectAttributes(-6L)).thenReturn(results);
+
+        String content = "<a href=\"www.testme.com?username=$whatareyourjobresponsibilities0_22076822474514868&password=$gotcha\">Click Me</a>";
+        String actual = homePageController.evaluateVelocityContent(content, -6L);
+
+        String expected = "<a href=\"www.testme.com?username=meeeeee&password=testme\">Click Me</a>";
+
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void testHomePageUrl() {
+
+        Map<String, String> results = new HashMap<>();
+        results.put("username", "brendaa");
+        results.put("password", "helooooo");
+        results.put("pollydied", "yesyesyes");
+
+        when(dynamicAttrService.getAllSubjectAttributes(-6L)).thenReturn(results);
+
+        String content = "http://www.google.com?username=$username&password=$password";
+        Map<String, Object> model = new HashMap<>();
+        HomePage homePage = new HomePage("Home", "DemoCompany");
+        homePage.setUrl(content);
+        homePageController.buildModel("dontcare", homePage, model, -6L);
+        String expected = "http://www.google.com?username=brendaa&password=helooooo";
+        String actual = ((HomePage) model.get("homePage")).getUrl();
+
+        assertEquals(expected, actual);
+
     }
 }

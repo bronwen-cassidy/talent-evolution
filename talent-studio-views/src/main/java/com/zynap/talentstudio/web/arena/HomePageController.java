@@ -63,34 +63,42 @@ public class HomePageController implements Controller {
 
         HomePage homePage = ZynapWebUtils.getHomePage(request);
         Map<String, Object> model = new HashMap<>();
+        Long subjectId = userSession.getSubjectId();
 
-        if (homePage != null) {
-
-            model.put("homePage", homePage);
-            if (homePage.isVelocityTemplate()) {
-                model.put("velocityContent", evaluateVelocityContent(userSession, homePage));
-            }
-            model.put("arenaContext", arenaHomePage);
-
-        }
+        buildModel(arenaHomePage, homePage, model, subjectId);
 
         // redirect to view - consists of arena id + _home eg: adminmodule_home
         return new ModelAndView(currentArenaId.toLowerCase() + "_home", model);
     }
 
-    protected String evaluateVelocityContent(UserSession userSession, HomePage homePage) {
-        String content = homePage.getContent();
-        if (homePage.isVelocityTemplate() && StringUtils.hasLength(content)) {
+    protected void buildModel(String arenaHomePage, HomePage homePage, Map<String, Object> model, Long subjectId) {
+        if (homePage != null) {
 
-            Map<String, String> attributes = dynamicAttrService.getAllSubjectAttributes(userSession.getSubjectId());
+            if (homePage.isVelocityTemplate()) {
+                model.put("velocityContent", evaluateVelocityContent(homePage.getContent(), subjectId));
+
+            } else if (StringUtils.hasText(homePage.getUrl()) && homePage.getUrl().contains("$")) {
+
+                homePage.setUrl(evaluateVelocityContent(homePage.getUrl(), subjectId));
+            }
+            model.put("homePage", homePage);
+            model.put("arenaContext", arenaHomePage);
+        }
+    }
+
+    protected String evaluateVelocityContent(String content, Long subjectId) {
+        String data = content;
+        if (StringUtils.hasLength(content)) {
+
+            Map<String, String> attributes = dynamicAttrService.getAllSubjectAttributes(subjectId);
             VelocityContext context = new VelocityContext(attributes);
             StringWriter writer = new StringWriter();
 
-            Velocity.evaluate(context, writer, "homePage", homePage.getContent());
+            Velocity.evaluate(context, writer, "homePage", content);
 
-            content = writer.toString();
+            data = writer.toString();
         }
-        return content;
+        return data;
     }
 
     @Autowired
