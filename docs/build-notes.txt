@@ -3,6 +3,15 @@ and should not be included with the project. These dependencies are:
     1.a) crimson
     1.b) gnujaxp
 
+2) spring-hibernate2-2.0.8.pom Please replace spring-hibernate2-2.0.8.pom in the
+        .m2 repository with the one in the docs directory
+
+===============================================
+maven import of oracle jar
+===============================================
+C:\Users\home\dev\ts\talent-evolution>mvn install:install-file -Dfile=C:/Users/home/dev/ts/lib/tools/ojdbc7.jar -DgroupId=com.oracle -DartifactId=ojdbc7 -Dversion=14.0.0 -Dpackaging=jar
+
+
 ================================================
 set a new version in your poms
 =================================================
@@ -30,11 +39,5 @@ add into server.xml under %CATALINE_HOME%/conf:
     </Host>
 
 within the <Engine></Engine> tags of server.xml
-
-=============================================
-library poms
-=============================================
-Please replace the local spring-hibernate2-2.0.8.pom with the one in your .m2 repository
-
     
     
