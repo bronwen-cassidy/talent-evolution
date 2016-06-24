@@ -85,9 +85,12 @@ public class WorklistController extends AnswerQuestionnaireController {
             Long userId = ZynapWebUtils.getUserId(request);
             String workflowType = request.getParameter(WORKFLOW_TYPE_PARAM);
             String notificationStatus = RequestUtils.getStringParameter(request, NOTIFICATION_STATUS_PARAM, NOTIFICATION_STATUS_OPEN);
-            List workList = workflowAdapter.getNotifications(userId, performanceReview);
+            List<Notification> notifications = workflowAdapter.getNotifications(userId, performanceReview);
 
-            return new WorklistWrapper(workList, workflowType, notificationStatus, performanceReview);
+            WorklistWrapper worklistWrapper = new WorklistWrapper(notifications, workflowType, notificationStatus, performanceReview);
+            worklistWrapper.setCurrentUserId(userId);
+
+            return worklistWrapper;
         }
         return wrapper;
     }
@@ -173,7 +176,7 @@ public class WorklistController extends AnswerQuestionnaireController {
             case RESPOND_NOTIFICATION:
                 refData.put(MESSAGE_KEY, "questionnaire.completed");
                 wrapper.setActiveTab(WORKLIST_TAB);
-                break;            
+                break;
         }
 
         referenceDataAdditionalTargets(wrapper, targetPage, refData);
@@ -222,19 +225,34 @@ public class WorklistController extends AnswerQuestionnaireController {
                         clearInfo(wrapper, false);
                         wrapper.setActiveTab(WORKLIST_TAB);
                     }
-                    
+
                     break;
                 case OPEN_QUESTIONNAIRE:
                     wrapper.setSaved(false);
                     handleOpenQuestionaire(wrapper, request);
                     break;
                 case SAVE_QUESTIONNAIRE:
+                    // todo we need to add in here any send to hr send to manager as we will need to create a notification
                     Long questionnaireId = wrapper.getQuestionnaireId();
-                    if(questionnaireId == null) break;
+                    // todo add the approved checkbox to the questionnaire if the action is approve.
+                    boolean approved = RequestUtils.getBooleanParameter(request, "approved", false);
+                    if (questionnaireId == null) break;
+                    Questionnaire questionnaire = questionnaireService.findById(questionnaireId);
 
-                    Questionnaire questionnaire = (Questionnaire) questionnaireService.findById(questionnaireId);
-                    questionnaireWorkflowService.setNotificationActionable(wrapper.getNotificationId(), true, COMPLETE_WORKFLOW);
-                    wrapper.setAction(COMPLETE_WORKFLOW);
+                    if (wrapper.getHrUserId() != null) {
+                        // todo send to hr, amke a notification
+                        questionnaireWorkflowService.setNotificationActionable(wrapper.getNotificationId(), wrapper.getHrUserId(), true, APPROVE_WORKFLOW);
+                        wrapper.setAction(Notification.APPROVER);
+                    } else if (wrapper.getSelectedManagerIds() != null && wrapper.getSelectedManagerIds().length > 0) {
+                        questionnaireWorkflowService.setNotificationActionable(wrapper.getNotificationId(), wrapper.getSelectedManagerIds()[0], true, APPROVE_WORKFLOW);
+                        wrapper.setAction(Notification.APPROVER);
+                    } else {
+                        // todo this needs to happen only after the approved action has been triggered will be triggered by a checkbox on hr/manager views
+                        if (approved) {
+                            questionnaireWorkflowService.setNotificationActionable(wrapper.getNotificationId(), true, COMPLETE_WORKFLOW);
+                            wrapper.setAction(COMPLETE_WORKFLOW);
+                        }
+                    }
                     refreshQuestionnaire(wrapper, questionnaire);
                     wrapper.setSaved(true);
                     wrapper.setActiveTab(QUESTIONNAIRE_TAB);
@@ -287,8 +305,7 @@ public class WorklistController extends AnswerQuestionnaireController {
      * @param wrapper    the WorklistWrapper
      * @param errors     the object containing binding errors
      * @param targetPage the page to be displayed
-     * @throws com.zynap.exception.TalentStudioException
-     *          any errors
+     * @throws com.zynap.exception.TalentStudioException any errors
      */
     protected void bindAndValidateAdditionalTargets(HttpServletRequest request, WorklistWrapper wrapper, Errors errors, int targetPage) throws Exception {
     }
@@ -330,17 +347,22 @@ public class WorklistController extends AnswerQuestionnaireController {
         if (workflowId != null) {
 
             final Long userId = ZynapWebUtils.getUserId(request);
-            User user = (User) userService.findById(userId);
+            User user = userService.findById(userId);
+            Subject currentUsersSubject = subjectService.findByUserId(userId);
+            if(currentUsersSubject != null) {
+                wrapper.setUserManagers(currentUsersSubject.getManagers());
+            }
             setSubject(user, wrapper);
             wrapper.setUserId(userId);
             // get questionnaire - if null, means there are no answers yet
             final Long role = wrapper.getRole();
 
             Questionnaire questionnaire = questionnaireService.findQuestionnaireByWorkflow(workflowId, userId, wrapper.getSubjectId(), role);
+            final QuestionnaireWorkflow questionnaireWorkflow = questionnaireWorkflowService.findById(workflowId);
 
             final boolean create = (questionnaire == null);
             if (create) {
-                final QuestionnaireWorkflow questionnaireWorkflow = (QuestionnaireWorkflow) questionnaireWorkflowService.findById(workflowId);
+
                 questionnaire = new Questionnaire(null, questionnaireWorkflow, user);
                 questionnaire.setNotificationId(wrapper.getNotificationId());
                 questionnaire.setSubjectId(wrapper.getSubjectId());
@@ -350,10 +372,10 @@ public class WorklistController extends AnswerQuestionnaireController {
                 }
                 questionnaireService.createOrUpdateQuestionnaire(questionnaire);
 
-                if(performanceReview) {
+                if (performanceReview) {
                     // mark the appraisal as having moved to the next phase
                     final Notification notification = wrapper.getNotification();
-                    if(notification != null) {
+                    if (notification != null) {
                         final Long subjectId = wrapper.getSubjectId();
                         final String userName = ZynapWebUtils.getUser(request).getUserName();
                         workflowAdapter.processNotification(notification, wrapper.getAction(), userName, userId, subjectId, role);
@@ -364,6 +386,9 @@ public class WorklistController extends AnswerQuestionnaireController {
             // set questionnaire on wrapper and set active tab
             refreshQuestionnaire(wrapper, questionnaire);
             wrapper.setActiveTab(QUESTIONNAIRE_TAB);
+            if (wrapper.isManagerEvaluation()) {
+                wrapper.setHrUser(questionnaireWorkflow.getHrUser());
+            }
 
             // set additional subject data
             setSubjectData(wrapper);
@@ -397,7 +422,7 @@ public class WorklistController extends AnswerQuestionnaireController {
     public static final int RESPOND_NOTIFICATION = 1;
     public static final int OPEN_QUESTIONNAIRE = 2;
     public static final int SAVE_QUESTIONNAIRE = 3;
-    public static final int CLOSE_FORM_TAB = 4;    
+    public static final int CLOSE_FORM_TAB = 4;
 
     /**
      * Constants for tabs.
@@ -410,5 +435,6 @@ public class WorklistController extends AnswerQuestionnaireController {
      */
     public static final String SELECTED_GROUP_PARAM = "selectedGroup";
     private static final String COMPLETE_WORKFLOW = "COMPLETE";
+    private static final String APPROVE_WORKFLOW = "APPROVE";
 
 }

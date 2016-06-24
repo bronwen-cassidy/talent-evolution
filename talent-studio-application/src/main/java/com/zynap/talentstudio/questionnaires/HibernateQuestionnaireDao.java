@@ -379,7 +379,7 @@ public class HibernateQuestionnaireDao extends ZynapPersistenceSupport implement
 
     public Integer countNumAppraisals(final Long userId) throws TalentStudioException {
 
-        final StringBuffer query = new StringBuffer("select count(*) from Notification n where n.recipientId = :userId");
+        final StringBuffer query = new StringBuffer("select count(*) from Notification n where (n.recipientId = :userId or n.nextUserId = :userId)");
         query.append( " and n.status <> 'COMPLETED'");
         query.append(" and " + " exists (select pr.id from PerformanceReview pr,").append(
                 "QuestionnaireWorkflow qw where ").append(

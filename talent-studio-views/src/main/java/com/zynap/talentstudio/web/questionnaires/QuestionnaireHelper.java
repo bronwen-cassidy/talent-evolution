@@ -317,14 +317,15 @@ public class QuestionnaireHelper {
         if (questionnaireId == null && workflowId == null) throw new InvalidSubmitException(null, null, null, true, this.getClass().getName());
 
         Questionnaire questionnaire;
+
         if (questionnaireId != null) {
             if (forUpdate) {
                 questionnaire = questionnaireService.loadQuestionnaire(questionnaireId, user.getId());
             } else {
-                questionnaire = (Questionnaire) questionnaireService.findById(questionnaireId);
+                questionnaire = questionnaireService.findById(questionnaireId);
             }
         } else {
-            final QuestionnaireWorkflow questionnaireWorkflow = (QuestionnaireWorkflow) questionnaireWorkflowService.findById(workflowId);
+            final QuestionnaireWorkflow questionnaireWorkflow = questionnaireWorkflowService.findById(workflowId);
             if (forUpdate) {
                 // this method looks for a questionnaire given the workflow, if it does not exist it creates it and locks it down
                 questionnaire = questionnaireService.findOrCreateQuestionnaire(workflowId, user.getId(), subjectId);

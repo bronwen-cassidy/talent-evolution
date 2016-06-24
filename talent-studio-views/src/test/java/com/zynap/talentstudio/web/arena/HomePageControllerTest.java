@@ -2,7 +2,6 @@ package com.zynap.talentstudio.web.arena;
 
 import com.zynap.talentstudio.organisation.attributes.IDynamicAttributeService;
 import com.zynap.talentstudio.security.homepages.HomePage;
-import com.zynap.talentstudio.web.utils.ZynapDbUnitMockControllerTestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -13,7 +12,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static junit.framework.TestCase.assertEquals;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**

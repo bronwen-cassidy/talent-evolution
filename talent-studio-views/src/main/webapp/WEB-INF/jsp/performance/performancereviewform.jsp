@@ -3,13 +3,14 @@
 
 <zynap:infobox title="${title}">
 
+    <zynap:window elementId="userTree" src="../picker/userpicker.htm"/>
     <spring:bind path="command">
         <%@include file="../includes/error_messages.jsp" %>
     </spring:bind>
-    <fmt:message key="date.format" var="datePattern"/>
-    <zynap:form name="_add" method="post">
-        <table cellspacing="0" class="infotable">
 
+    <fmt:message key="date.format" var="datePattern"/>
+    <form:form name="_add" method="post">
+        <table cellspacing="0" class="infotable">
             <tr>
                 <td class="infolabel"><fmt:message key="generic.label"/>&nbsp;:&nbsp;*</td>
                 <spring:bind path="command.label">
@@ -78,7 +79,25 @@
                     </spring:bind>
                 </td>
             </tr>
-
+            <tr>
+                <td class="infolabel"><fmt:message key="questionnaire.hr"/>&nbsp;:&nbsp;</td>
+                <td class="infodata">
+                    <spring:bind path="command.hrUserLabel">
+                        <span style="white-space: nowrap;">
+                            <input id="nav_ou_disp_hr" type="text" class="input_text"
+                                  value="<c:out value="${status.value}"/>"
+                                  name="<c:out value="${status.expression}"/>"
+                                  readonly="true"/><input type="button"
+                                                          class="partnerbutton"
+                                                          value="..." id="navOUPopup"
+                                onclick="popupShowServerTree('<zynap:message code="select.hr.user" javaScriptEscape="true"/>', this, 'userTree', 'nav_ou_disp_hr', 'nav_ou_id_hr',null, true)"/>
+                        </span>
+                    </spring:bind>
+                    <spring:bind path="command.hrUserId">
+                        <input id="nav_ou_id_hr" type="hidden" name="<c:out value="${status.expression}"/>" value="<c:out value="${status.value}"/>" />
+                    </spring:bind>
+                </td>
+            </tr>
             <tr>
                 <td class="infolabel"><fmt:message key="questionnaire.population"/>&nbsp;:&nbsp;*</td>
                 <td class="infodata">
@@ -102,7 +121,7 @@
             </tr>
 
         </table>
-    </zynap:form>
+    </form:form>
 </zynap:infobox>
 
 <zynap:form name="_cancel" method="post">

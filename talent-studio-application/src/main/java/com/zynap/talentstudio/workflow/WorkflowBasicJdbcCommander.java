@@ -37,9 +37,9 @@ public class WorkflowBasicJdbcCommander extends JdbcDaoSupport implements IWorkf
         new StartWorkflowProc(getJdbcTemplate()).execute(workflowId, expiryDate, userId);
     }
 
-    public void setNotificationActionable(Long notificationId, String actionable, String nextAction) throws TalentStudioException {
+    public void setNotificationActionable(Long notificationId, Long nextUserId, String actionable, String nextAction) throws TalentStudioException {
         try {
-            new WorkflowSetNotificationActionable(getJdbcTemplate()).execute(notificationId, actionable, nextAction);
+            new WorkflowSetNotificationActionable(getJdbcTemplate()).execute(notificationId, nextUserId, actionable, nextAction);
         } catch (DataAccessException e) {
             throw new WorkflowException(e.getMessage(), e);
         }
@@ -179,6 +179,7 @@ public class WorkflowBasicJdbcCommander extends JdbcDaoSupport implements IWorkf
             setSql("wf_integration.set_actionable");
             setJdbcTemplate(template);
             declareParameter(new SqlParameter("nid_", Types.INTEGER));
+            declareParameter(new SqlParameter("next_user_id_", Types.INTEGER));
             declareParameter(new SqlParameter("actionable_", Types.VARCHAR));
             declareParameter(new SqlParameter("next_action_", Types.VARCHAR));
         }

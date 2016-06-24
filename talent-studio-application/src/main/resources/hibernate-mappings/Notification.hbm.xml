@@ -16,108 +16,89 @@
             table="NOTIFICATIONS"
             dynamic-update="false"
             dynamic-insert="false"
-            >
+    >
 
         <id
                 name="id"
                 type="long"
                 column="ID"
-                >
+        >
             <generator class="assigned"/>
         </id>
 
         <!-- the user id of the manager -->
-        <property
-                name="managerId"
-                column="MANAGER_ID"
-                type="java.lang.Long"
-                />
-
+        <property name="managerId" column="MANAGER_ID" type="java.lang.Long"/>
+        <property name="nextUserId" column="NEXT_USER_ID" type="java.lang.Long"/>
         <!--type represents questionnaire or appraisal -->
-        <property
-                name="type"
-                column="TYPE"
-                type="java.lang.String"
-                length="80"
-                />
+        <property name="type" column="TYPE" type="java.lang.String" length="80"/>
 
         <!-- subType represents manager appraisal or evaluators appraisal -->
-        <property
-                name="subType"
-                column="SUB_TYPE"
-                type="java.lang.String"
-                length="80"
-                />
+        <property name="subType" column="SUB_TYPE" type="java.lang.String" length="80"/>
         <!-- status represents whether the questionnaire is open, completed ot closed -->
-        <property
-                name="status"
-                column="STATUS"
-                type="java.lang.String"
-                length="8"
-                />
+        <property name="status" column="STATUS" type="java.lang.String" length="8"/>
         <!-- the name of the workflow -->
         <property
                 name="workflowName"
                 column="WORKFLOW_NAME"
                 type="java.lang.String"
                 length="8"
-                />
+        />
         <!-- the subject who is being appraised -->
         <property
                 name="subjectId"
                 column="SUBJECT_ID"
                 type="java.lang.Long"
-                />
+        />
 
         <property
                 name="managerInstanceId"
                 column="MANAGER_INSTANCE_ID"
                 type="java.lang.Long"
-                />
+        />
 
         <property
                 name="evaluatorInstanceId"
                 column="EVALUATORS_INSTANCE_ID"
                 type="java.lang.Long"
-                />
+        />
 
         <property
                 name="performanceReviewId"
                 column="PERFORMANCE_REVIEW_ID"
                 type="java.lang.Long"
-                />
+        />
 
         <property
                 name="subjectName"
                 column="SUBJECT_NAME"
                 type="java.lang.String"
-                />
+        />
 
         <!-- the name of the workflow, a temporary value until we remove workflow -->
         <property
                 name="workflowId"
                 column="WORKFLOW_ID"
                 type="java.lang.Long"
-                />
+        />
 
         <!-- the name of the managers notification so children can be removed -->
         <property
                 name="rootId"
                 column="ROOT_ID"
                 type="java.lang.Long"
-                />
+        />
         <!-- populated once roles have been determined -->
         <property
                 name="roleId"
                 column="ROLE_ID"
                 type="java.lang.String"
-                />
+        />
 
         <property
                 name="recipientId"
                 column="RECIPIENT_ID"
                 type="java.lang.Long"
-                />
+        />
 
         <!--the date the process began-->
         <property
@@ -125,56 +106,56 @@
                 column="BEGIN_DATE"
                 type="java.sql.Date"
                 length="7"
-                />
+        />
         <!-- the day the process is due to complete -->
         <property
                 name="dueDate"
                 column="DUE_DATE"
                 type="java.sql.Date"
                 length="7"
-                />
+        />
         <!-- the day the process actually completed -->
         <property
                 name="endDate"
                 column="END_DATE"
                 type="java.sql.Date"
                 length="7"
-                />
+        />
         <!-- the action that is next to occur in the process -->
         <property
                 name="action"
                 column="ACTION"
                 type="java.lang.String"
                 length="512"
-                />
+        />
 
         <property
                 name="roleName"
                 column="ROLE_NAME"
                 type="java.lang.String"
                 length="512"
-                />
+        />
 
         <!-- are we ready to start this process? -->
         <property
                 name="actionable"
                 column="ACTIONABLE"
                 type="true_false"
-                />
+        />
 
         <!-- this indicates whether the process is managed by someone other than the managers -->
         <property
                 name="userManaged"
                 column="USER_MANAGED"
                 type="true_false"
-                />
+        />
 
         <!-- the person who launched the process -->
         <property
                 name="launcherId"
                 column="LAUNCHER_ID"
                 type="java.lang.Long"
-                />
+        />
 
         <many-to-one
                 name="recipient"
@@ -183,7 +164,7 @@
                 outer-join="true"
                 insert="false"
                 update="false"
-                >
+        >
             <meta attribute="use-in-equals">true</meta>
             <column name="RECIPIENT_ID"/>
 
@@ -196,7 +177,7 @@
                 outer-join="true"
                 insert="false"
                 update="false"
-                >
+        >
             <meta attribute="use-in-equals">true</meta>
             <column name="ROLE_ID"/>
         </many-to-one>
@@ -208,7 +189,7 @@
                 outer-join="true"
                 insert="false"
                 update="false"
-                >
+        >
             <meta attribute="use-in-equals">true</meta>
             <column name="SUBJECT_ID"/>
         </many-to-one>

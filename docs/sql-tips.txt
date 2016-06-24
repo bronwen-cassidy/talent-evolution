@@ -16,3 +16,10 @@ COLUMN spid FORMAT A10
 COLUMN username FORMAT A10
 COLUMN program FORMAT A45
 
+
+find a column in oracle
+========================================
+SELECT OWNER, TABLE_NAME, COLUMN_NAME FROM
+      ALL_TAB_COLUMNS WHERE OWNER='HSBC_DEV_BRONWEN'
+      AND COLUMN_NAME='REIT_INDICATOR';
+

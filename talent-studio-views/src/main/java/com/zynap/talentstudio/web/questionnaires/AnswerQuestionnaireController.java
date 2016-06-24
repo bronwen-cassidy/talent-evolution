@@ -96,10 +96,6 @@ public class AnswerQuestionnaireController extends DefaultWizardFormController i
         }
     }
 
-    protected void onBindAndValidateInternal(HttpServletRequest request, Object command, Errors errors, int page) throws Exception {
-       
-    }
-
     /**
      * Load data for pickers.
      *
@@ -126,7 +122,7 @@ public class AnswerQuestionnaireController extends DefaultWizardFormController i
 
         int targetPage = getTargetPage(request, page);
         final QuestionnaireWrapper wrapper = (QuestionnaireWrapper) command;
-        if(targetPage == 6) {
+        if (targetPage == 6) {
             processInboxNotification(request, wrapper);
             refreshQuestionnaire(wrapper, (Questionnaire) questionnaireService.findById(wrapper.getQuestionnaireId()));
         }
@@ -143,7 +139,7 @@ public class AnswerQuestionnaireController extends DefaultWizardFormController i
 
     /**
      * Save modified questionnaire.
-     *  todo do not think this method is ever called, so remove if ya can
+     * todo do not think this method is ever called, so remove if ya can
      * @param request  the servlet request
      * @param response the servlet response
      * @param command  the command object {@link com.zynap.talentstudio.web.questionnaires.QuestionnaireWrapper}
@@ -152,9 +148,9 @@ public class AnswerQuestionnaireController extends DefaultWizardFormController i
      * @throws Exception
      */
     protected ModelAndView processFinish(HttpServletRequest request, HttpServletResponse response, Object command, BindException errors) throws Exception {
-        
+
         final QuestionnaireWrapper wrapper = (QuestionnaireWrapper) command;
-        if(wrapper.isFatalErrors()) {
+        if (wrapper.isFatalErrors()) {
             wrapper.setFatalErrors(false);
             return showForm(request, response, errors);
         }

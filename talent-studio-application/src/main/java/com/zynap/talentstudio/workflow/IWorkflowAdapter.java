@@ -51,7 +51,7 @@ public interface IWorkflowAdapter {
      * @return List of {@link Notification} objects.
      * @throws TalentStudioException
      */
-    List getNotifications(Long userId, boolean performanceReview) throws TalentStudioException;
+    List<Notification> getNotifications(Long userId, boolean performanceReview) throws TalentStudioException;
 
     /**
      * Set status of notification to actionable or not.
@@ -77,6 +77,8 @@ public interface IWorkflowAdapter {
     void reopenNotification(Long notificationId);
 
     void completeNotification(Long notificationId);
+
+    void setNotificationActionable(Long notificationId, Long nextUserId, boolean actionable, String nextAction) throws TalentStudioException;
 
 
     /**

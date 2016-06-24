@@ -118,13 +118,14 @@
         <zynap:form action="" method="post" name="questionnaireForm">
 
             <c:set var="tablesIndex" value="1" scope="request"/>
-            <c:set var="managerSelection" value="${command.myPortfolio == true && command.userManagersCount > 1}" scope="request"/>
+            <c:set var="managerSelection" value="${command.userManagersCount > 1}" scope="request"/>
 
             <input id="actId" type="hidden" name="action" value=""/>
             <input id="tarId" type="hidden" name="" value=""/>
             <input id="selObjectiveId" type="hidden" name="<%=ObjectiveConstants.OBJECTIVE_ID%>" value="-1"/>
             <input id="selGroupId" type="hidden" name="<%=WorklistController.SELECTED_GROUP_PARAM%>" value=""/>
             <input id="queDefIdxx" type="hidden" name="QUE_DEF_ID" value="<c:out value="${command.definitionId}"/>"/>
+
             <c:choose>
                 <c:when test="${infoForm}">
                     <c:if test="${command.showInboxInfo}">
@@ -147,18 +148,20 @@
                                 </td>
                             </tr>
                         </c:if>
+
                         <tr>
                             <td class="infolabel" align="right" style="width:50%"><span><fmt:message key="send.email"/>&nbsp;:&nbsp;</span></td>
                             <td><span><input id="sendEmailCBId" type="checkbox" name="sendEmail" id="sendEmlId" <c:if test="${managerSelection}">disabled="true"</c:if>/></span></td>
                         </tr>
+
                         <tr>
                             <td class="infolabel" style="width:50%" align="right">
-                    <span>
-                        <c:choose>
-                            <c:when test="${command.managerView}"><fmt:message key="send.to.individual"/>&nbsp;:&nbsp;</c:when>
-                            <c:otherwise><fmt:message key="send.to.manager"/>&nbsp;:&nbsp;</c:otherwise>
-                        </c:choose>
-                    </span>
+                                <span>
+                                    <c:choose>
+                                        <c:when test="${command.managerView}"><fmt:message key="send.to.individual"/>&nbsp;:&nbsp;</c:when>
+                                        <c:otherwise><fmt:message key="send.to.manager"/>&nbsp;:&nbsp;</c:otherwise>
+                                    </c:choose>
+                                </span>
                             </td>
                             <td>
                                 <span><input type="checkbox" name="sendToInbox" id="sendIbx" <c:if test="${managerSelection}">disabled="true"</c:if>/></span>
@@ -180,6 +183,36 @@
                     </tr>
                 </c:when>
                 <c:otherwise>
+                    <%-- performance review--%>
+                    <c:if test="${managerAccessView}">
+                        <tr>
+                            <td class="infolabel" align="right"><span><fmt:message key="please.select.managers"/>&nbsp;:&nbsp;</span></td>
+                            <td class="infodata">
+                                <table cellpadding="0" cellspacing="0">
+                                    <c:forEach var="manager" items="${command.userManagers}">
+                                        <tr>
+                                            <td class="infodata" style="width:50%"><c:out value="${manager.label}"/>&nbsp;:&nbsp;</td>
+                                            <spring:bind path="command.selectedManagerIds">
+                                                <td class="infodata" ${colsp}>
+                                                    <input type="checkbox" class="input_checkbox" value="<c:out value="${manager.id}"/>" name="selectedManagerIds"/>
+                                                </td>
+                                            </spring:bind>
+                                        </tr>
+                                    </c:forEach>
+                                </table>
+                            </td>
+                        </tr>
+                        <c:if test="${command.hrUser != null}">
+                            <tr>
+                                <td class="infolabel" align="right"><span><fmt:message key="send.to.hr"/>&nbsp;:&nbsp; <c:out value="${command.hrUser.label}"/></span></td>
+                                <td class="infodata">
+                                    <spring:bind path="command.hrUserId">
+                                        <input type="checkbox" class="input_checkbox" value="<c:out value='${command.hrUser.id}'/>" name="hrUserId"/>
+                                    </spring:bind>
+                                </td>
+                            </tr>
+                        </c:if>
+                    </c:if>
                     <tr>
                         <td class="infobutton" colspan="2" align="center">
                             <input type="submit" class="inlinebutton" name="_target3" value="<fmt:message key="done"/>"/>

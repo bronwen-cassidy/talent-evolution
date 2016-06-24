@@ -163,9 +163,10 @@ select p.ID,p.TYPE,p.USER_ID,p.LABEL,p.SCOPE,p.DESCRIPTION,p.ACTIVE_CRITERIA, pg
 /
 
 CREATE OR REPLACE VIEW SURVEY_LIST AS
-  select sub_spa.subject_id, cd.first_name, cd.second_name, l.username as manager_name, l.user_id as manager_id, qwp.que_wf_id
+  select sub_spa.subject_id, lv.id, cd.first_name, cd.second_name, lv.value_id, l.username as manager_name,
+    l.user_id as manager_id, qwp.que_wf_id
   from subject_primary_associations sub_spa,
-    que_wf_participants qwp, positions p,
+    que_wf_participants qwp, position_associations p,
     subject_primary_associations boss_spa,
     subjects bosses,
     subjects subordinates,
@@ -173,9 +174,9 @@ CREATE OR REPLACE VIEW SURVEY_LIST AS
     logins l,
     lookup_values lv
   where qwp.subject_id = sub_spa.subject_id
-        and sub_spa.position_id = p.node_id
-        and p.parent_id = boss_spa.position_id
-        and sub_spa.value_id=lv.id
+        and sub_spa.position_id = p.source_id
+        and p.target_id = boss_spa.position_id
+        and boss_spa.value_id=lv.id
         and lv.value_id='PERMANENT'
         and lv.type_id='POSITIONSUBJECTASSOC'
         and sub_spa.subject_id = subordinates.node_id

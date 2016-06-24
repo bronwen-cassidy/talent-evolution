@@ -17,7 +17,7 @@ public interface IWorkflowBasicCommander {
 
     void startQuestionnaireProcess(Long workflowId, Date expiryDate, Long userId);
 
-    void setNotificationActionable(Long notificationId, String actionable, String nextAction) throws TalentStudioException;
+    void setNotificationActionable(Long notificationId, Long nextUserId, String actionable, String nextAction) throws TalentStudioException;
 
     void respondNotification(Long notificationId, String action, String responder, Long userId) throws TalentStudioException;
 

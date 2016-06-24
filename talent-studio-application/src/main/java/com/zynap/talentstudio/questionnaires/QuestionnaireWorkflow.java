@@ -1,6 +1,7 @@
 package com.zynap.talentstudio.questionnaires;
 
 import com.zynap.domain.ZynapDomainObject;
+import com.zynap.domain.admin.User;
 import com.zynap.talentstudio.analysis.populations.Population;
 import com.zynap.talentstudio.common.groups.Group;
 import com.zynap.talentstudio.performance.PerformanceReview;
@@ -233,6 +234,22 @@ public class QuestionnaireWorkflow extends ZynapDomainObject {
         this.userId = userId;
     }
 
+    public Long getHrUserId() {
+        return hrUserId;
+    }
+
+    public void setHrUserId(Long hrUserId) {
+        this.hrUserId = hrUserId;
+    }
+
+    public User getHrUser() {
+        return hrUser;
+    }
+
+    public void setHrUser(User hrUser) {
+        this.hrUser = hrUser;
+    }
+
     public Date getLastRepublishedDate() {
         return lastRepublishedDate;
     }
@@ -287,6 +304,11 @@ public class QuestionnaireWorkflow extends ZynapDomainObject {
     private QuestionnaireDefinition questionnaireDefinition;
 
     private Long userId;
+
+    /* the HR user that a workflow will need submitting to if present */
+    private Long hrUserId;
+
+    private User hrUser;
 
     /**
      * The questionnnaires belonging to the workflow.

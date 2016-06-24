@@ -27,6 +27,8 @@
 
 <c:set var="managerWorkflow" value="${command.managerWorkflow}"/>
 <c:set var="evaluatorWorkflow" value="${command.evaluatorWorkflow}"/>
+<c:set var="hrUser" value="${evaluatorWorkflow.hrUser}"/>
+
 <fmt:message key="date.format" var="datePattern"/>
 
 <zynap:infobox title="${title}" id="viewPR">
@@ -50,6 +52,10 @@
         <tr>
             <td class="infolabel"><fmt:message key="questionnaire.generaldefinition"/>&nbsp;:&nbsp;</td>
             <td class="infodata"><c:out value="${evaluatorWorkflow.questionnaireDefinition.label}"/></td>
+        </tr>
+        <tr>
+            <td class="infolabel"><fmt:message key="questionnaire.hr"/>&nbsp;:&nbsp;</td>
+            <td class="infodata"><c:out value="${hrUser.label}"/></td>
         </tr>
         <tr>
             <td class="infolabel"><fmt:message key="questionnaire.population"/>&nbsp;:&nbsp;</td>

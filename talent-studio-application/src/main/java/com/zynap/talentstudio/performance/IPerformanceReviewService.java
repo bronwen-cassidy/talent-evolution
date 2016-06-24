@@ -25,7 +25,7 @@ import java.util.Collection;
  */
 public interface IPerformanceReviewService extends IZynapService, IQuestionnaireCommon {
 
-    void createReview(PerformanceReview performanceReview, User user, Long managerQuestionnaireDefinitionId, Long evaluatorQuestionnaireDefinitionId, Long populationId, Date expiryDate) throws TalentStudioException;
+    void createReview(PerformanceReview performanceReview, User user, Long managerQuestionnaireDefinitionId, Long evaluatorQuestionnaireDefinitionId, Long populationId, Date expiryDate, Long hrUserId) throws TalentStudioException;
 
     void startReview(PerformanceReview performanceReview, User user, boolean userManagedReview) throws TalentStudioException;
 

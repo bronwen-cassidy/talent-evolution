@@ -88,7 +88,7 @@ public class WorkflowAdapter extends HibernateDaoSupport implements IWorkflowAda
         workflowBasicCommander.completeAppraisalProcess(appraisalId);
     }
 
-    public List getNotifications(Long userId, boolean performanceReview) throws TalentStudioException {
+    public List<Notification> getNotifications(Long userId, boolean performanceReview) throws TalentStudioException {
         Object[] params = new Object[1];
         String[] paramNames = new String[1];
         params[0] = userId;
@@ -105,7 +105,12 @@ public class WorkflowAdapter extends HibernateDaoSupport implements IWorkflowAda
     }
 
     public void setNotificationActionable(Long notificationId, boolean actionable, String nextAction) throws TalentStudioException {
-        workflowBasicCommander.setNotificationActionable(notificationId, StringUtil.convertToString(actionable), nextAction);
+        workflowBasicCommander.setNotificationActionable(notificationId, null, StringUtil.convertToString(actionable), nextAction);
+    }
+
+    @Override
+    public void setNotificationActionable(Long notificationId, Long nextUserId, boolean actionable, String nextAction) throws TalentStudioException{
+        workflowBasicCommander.setNotificationActionable(notificationId, nextUserId, StringUtil.convertToString(actionable), nextAction);
     }
 
     public void setWorkflowBasicCommander(IWorkflowBasicCommander workflowBasicCommander) {

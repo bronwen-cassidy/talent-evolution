@@ -25,7 +25,6 @@
 
         <property name="userType" type="java.lang.String" column="USER_TYPE" not-null="true" length="50"/>
         <property name="active" type="true_false" column="IS_ACTIVE" not-null="true" length="1"/>
-        <property name="hr" type="true_false" column="IS_HR" not-null="true" length="1"/>
         <property name="root" type="true_false" column="IS_ROOT" not-null="true" length="1"/>
 
         <!-- bi-directional one-to-one association to Login -->

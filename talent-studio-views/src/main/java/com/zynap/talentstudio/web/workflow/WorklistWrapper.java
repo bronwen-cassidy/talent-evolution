@@ -1,6 +1,7 @@
 package com.zynap.talentstudio.web.workflow;
 
 import com.zynap.domain.IDomainObject;
+import com.zynap.domain.admin.User;
 import com.zynap.talentstudio.performance.PerformanceEvaluator;
 import com.zynap.talentstudio.performance.PerformanceManager;
 import com.zynap.talentstudio.performance.PerformanceReview;
@@ -34,7 +35,7 @@ import java.util.List;
  */
 public class WorklistWrapper extends QuestionnaireWrapper {
 
-    public WorklistWrapper(List notificationList, String workflowType, String notificationStatus, boolean performanceReview) {
+    public WorklistWrapper(List<Notification> notificationList, String workflowType, String notificationStatus, boolean performanceReview) {
         this.notificationList = notificationList;
         this.workflowType = workflowType;
         this.notificationStatus = notificationStatus;
@@ -395,7 +396,15 @@ public class WorklistWrapper extends QuestionnaireWrapper {
         performanceRoles.remove(index);
     }
 
-    private List notificationList;
+    public void setCurrentUserId(Long currentUserId) {
+        this.currentUserId = currentUserId;
+    }
+
+    public Long getCurrentUserId() {
+        return currentUserId;
+    }
+
+    private List<Notification> notificationList;
     private Long notificationId;
     private String action;
     private String activeTab = WorklistController.WORKLIST_TAB;
@@ -426,4 +435,5 @@ public class WorklistWrapper extends QuestionnaireWrapper {
     private List<LookupValue> roles;
     private PerformanceReview appraisalReview;
     private Subject subject;
+    private Long currentUserId;
 }

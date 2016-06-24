@@ -117,7 +117,7 @@ public class AppraisalWorklistController extends WorklistController {
 
         String action = wrapper.getAction();
         if (!WorkflowConstants.START_ASSESMENTS.equals(action)) return;
-        PerformanceReview current = (PerformanceReview) performanceReviewService.findById(wrapper.getPerformanceId());
+        PerformanceReview current = performanceReviewService.findById(wrapper.getPerformanceId());
         if (!current.isNotifiable()) return;
         Collection<User> participants = getParticipants(wrapper, current);
         UrlBeanPair pair = mailNotifications.get(APPRAISAL_MAIL);

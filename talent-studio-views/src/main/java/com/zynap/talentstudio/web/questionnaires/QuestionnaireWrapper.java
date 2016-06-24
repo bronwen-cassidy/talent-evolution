@@ -20,10 +20,14 @@ import java.util.List;
 * @version 0.1
  */
 public class QuestionnaireWrapper implements Serializable {
-
     private static final long serialVersionUID = 8140178606331559713L;
-    private boolean sendFail;
-    private String sendErrorMessage;
+    public Long getHrUserId() {
+        return hrUserId;
+    }
+
+    public void setHrUserId(Long hrUserId) {
+        this.hrUserId = hrUserId;
+    }
 
     public QuestionnaireWrapper() {
     }
@@ -142,6 +146,17 @@ public class QuestionnaireWrapper implements Serializable {
         this.myPortfolio = myPortfolio;
     }
 
+    public void setHrUser(User hrUser) {
+        this.hrUser = hrUser;
+    }
+
+    public User getHrUser() {
+        return hrUser;
+    }
+
+    public boolean isHasHrUser() {
+        return this.hrUser != null;
+    }
 
     public boolean isMyPortfolio() {
         return myPortfolio;
@@ -167,11 +182,12 @@ public class QuestionnaireWrapper implements Serializable {
      * Only to be shown under edit conditions.
      *
      * @return true if manager view and the subject of the questionnaire is a user and can login (no point otherwise)
-     *  or is an individual view and the manager can write
+     *  or is an individual view and the manager can write, or it's the managers view and the manager has manager's
      */
     public boolean isShowInboxInfo() {
         if(managerView && getWorkflow().isIndividualWrite() && subjectUser != null) return true;
         else if(!managerView && getWorkflow().isManagerWrite()) return true;
+        else if (managerView && getUserManagersCount() > 0) return true;
         return false;
     }
 
@@ -271,6 +287,22 @@ public class QuestionnaireWrapper implements Serializable {
         return false;
     }
 
+    public void setSendFail(boolean sendFile) {
+        this.sendFail = sendFile;
+    }
+
+    public boolean isSendFail() {
+        return sendFail;
+    }
+
+    public void setSendErrorMessage(String sendErrorMessage) {
+        this.sendErrorMessage = sendErrorMessage;
+    }
+
+    public String getSendErrorMessage() {
+        return sendErrorMessage;
+    }
+
     private List<QuestionGroupWrapper> questionnaireGroups;
     protected Questionnaire questionnaire;
     private Long definitionId;
@@ -288,24 +320,13 @@ public class QuestionnaireWrapper implements Serializable {
     private boolean positionPickerList=false;
     private boolean subjectPickerList=false;
     private boolean organisationPickerList=false;
+    private boolean sendFail;
+    private String sendErrorMessage;
 
-    private List<User> userManagers;
+    private List<User> userManagers = new ArrayList<>();
     private boolean sendSuccess;
     private User subjectUser;
 
-    public void setSendFail(boolean sendFile) {
-        this.sendFail = sendFile;
-    }
-
-    public boolean isSendFail() {
-        return sendFail;
-    }
-
-    public void setSendErrorMessage(String sendErrorMessage) {
-        this.sendErrorMessage = sendErrorMessage;
-    }
-
-    public String getSendErrorMessage() {
-        return sendErrorMessage;
-    }
+    private User hrUser;
+    private Long hrUserId;
 }

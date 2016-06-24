@@ -160,14 +160,6 @@ public class User extends ZynapDomainObject implements Auditable {
         this.root = root;
     }
 
-    public boolean isHr() {
-        return hr;
-    }
-
-    public void setHr(boolean hr) {
-        this.hr = hr;
-    }
-
     public Subject getSubject() {
         final Collection currentSubjects = getSubjects();
         return (currentSubjects.isEmpty() ? null : (Subject) currentSubjects.iterator().next());
@@ -221,7 +213,6 @@ public class User extends ZynapDomainObject implements Auditable {
     private UserType userType = UserType.USER;
 
     private boolean root = false;
-    private boolean hr = false;
 
     private LoginInfo loginInfo;
 

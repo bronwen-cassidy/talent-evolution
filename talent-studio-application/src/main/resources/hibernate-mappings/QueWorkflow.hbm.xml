@@ -30,89 +30,20 @@
             </generator>
         </id>
 
-        <property
-                name="workflowType"
-                type="java.lang.String"
-                column="WORKFLOW_TYPE"
-                length="240"
-                />
-        <property
-                name="label"
-                type="java.lang.String"
-                column="LABEL"
-                length="100"
-                />
-        <property
-                name="startDate"
-                type="java.util.Date"
-                column="START_DATE"
-                length="7"
-                />
-        <property
-                name="expiryDate"
-                type="java.util.Date"
-                column="EXPIRED_DATE"
-                length="7"
-                />
-
-        <property
-                name="closedDate"
-                type="java.util.Date"
-                column="CLOSED_DATE"
-                length="7"
-                />
-
-        <property
-                name="status"
-                type="java.lang.String"
-                column="STATUS"
-                length="20"
-                />
-
-        <property
-                name="description"
-                type="java.lang.String"
-                column="DESCRIPTION"
-                length="20"
-                />
-
-        <property
-                name="managerRead"
-                type="true_false"
-                column="MANAGER_READ"
-                length="20"
-                />
-
-        <property
-                name="managerWrite"
-                type="true_false"
-                column="MANAGER_WRITE"
-                length="20"
-                />
-        <property
-                name="individualRead"
-                type="true_false"
-                column="INDIVIDUAL_READ"
-                length="20"
-                />
-
-        <property
-                name="individualWrite"
-                type="true_false"
-                column="INDIVIDUAL_WRITE"
-                length="20"
-                />
-        <property
-                name="lastRepublishedDate"
-                type="java.util.Date"
-                column="LAST_REPUPLISHED_DATE"
-                length="7"
-                />
-        <property
-                name="userId"
-                type="java.lang.Long"
-                column="USER_ID"
-                />
+        <property name="workflowType" type="java.lang.String" column="WORKFLOW_TYPE" length="240"/>
+        <property name="label" type="java.lang.String" column="LABEL" length="100"/>
+        <property name="startDate" type="java.util.Date" column="START_DATE" length="7"/>
+        <property name="expiryDate" type="java.util.Date" column="EXPIRED_DATE" length="7"/>
+        <property name="closedDate" type="java.util.Date" column="CLOSED_DATE" length="7"/>
+        <property name="status" type="java.lang.String" column="STATUS" length="20"/>
+        <property name="description" type="java.lang.String" column="DESCRIPTION" length="20"/>
+        <property name="managerRead" type="true_false" column="MANAGER_READ" length="20"/>
+        <property name="managerWrite" type="true_false" column="MANAGER_WRITE" length="20"/>
+        <property name="individualRead" type="true_false" column="INDIVIDUAL_READ" length="20"/>
+        <property name="individualWrite" type="true_false" column="INDIVIDUAL_WRITE" length="20"/>
+        <property name="lastRepublishedDate" type="java.util.Date" column="LAST_REPUPLISHED_DATE" length="7"/>
+        <property name="userId" type="java.lang.Long" column="USER_ID"/>
+        <property name="hrUserId" type="java.lang.Long" column="HR_USER_ID"/>
 
         <!-- Associations -->
 
@@ -123,8 +54,17 @@
                 not-null="true"
                 outer-join="true"
                 >
-            <meta attribute="use-in-equals">true</meta>
             <column name="QD_ID"/>
+        </many-to-one>
+
+        <many-to-one
+                name="hrUser"
+                class="com.zynap.domain.admin.User"
+                not-null="true"
+                insert="false"
+                update="false"
+        >
+            <column name="HR_USER_ID"/>
         </many-to-one>
 
         <!-- bi-directional many-to-one association to PerformanceReview -->
@@ -133,7 +73,6 @@
                 class="com.zynap.talentstudio.performance.PerformanceReview"
                 not-null="true"
                 >
-            <meta attribute="use-in-equals">true</meta>
             <column name="PERFORMANCE_ID"/>
         </many-to-one>
 

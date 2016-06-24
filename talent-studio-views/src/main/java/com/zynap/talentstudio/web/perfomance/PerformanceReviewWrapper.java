@@ -25,7 +25,6 @@ public final class PerformanceReviewWrapper implements Serializable {
         return label;
     }
 
-
     public boolean isNotifiable() {
         return notifiable;
     }
@@ -77,6 +76,22 @@ public final class PerformanceReviewWrapper implements Serializable {
         this.generalQuestionnaireDefinitionId = generalQuestionnaireDefinitionId;
     }
 
+    public Long getHrUserId() {
+        return hrUserId;
+    }
+
+    public void setHrUserId(Long hrUserId) {
+        this.hrUserId = hrUserId;
+    }
+
+    public String getHrUserLabel() {
+        return hrUserLabel;
+    }
+
+    public void setHrUserLabel(String hrUserLabel) {
+        this.hrUserLabel = hrUserLabel;
+    }
+
     public Date getExpiryDate() {
         return expiryDate;
     }
@@ -96,6 +111,8 @@ public final class PerformanceReviewWrapper implements Serializable {
     private Long populationId;
     private Long managerQuestionnaireDefinitionId;
     private Long generalQuestionnaireDefinitionId;
+    private Long hrUserId;
+    private String hrUserLabel;
     private Date expiryDate;
 
     private final Collection populations;

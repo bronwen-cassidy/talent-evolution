@@ -188,12 +188,14 @@ end start_questionnaire;
 -------------------------------------------------------------------------------------------------------
 procedure set_actionable (
               notification_id in number,
+              next_user_id_ in number,
               actionable_ in varchar2,
               next_action_ in varchar2 ) is
 
 begin
      update notifications set actionable = actionable_ where id = notification_id;
      update notifications set action = next_action_ where id = notification_id;
+     update notifications set next_user_id = next_user_id_ where id = notification_id;
 
 end set_actionable;
 

@@ -26,6 +26,7 @@
         <display:table name="${command.notificationList}" id="notification" sort="list" defaultsort="2"  pagesize="15" requestURI="${viewPageUrl}" class="pager" excludedParams="*">
 
             <c:set var="hasNoActions" value="${notification.action == 'CLOSE'}"/>
+            <c:set var="isApproverUser" value="${command.currentUserId == notification.nextUserId}"/>
 
                 <c:choose>
                     <c:when test="${command.performanceReview && notification.target == '5'}">
@@ -116,6 +117,14 @@
                                         <c:when test="${notification.action == 'ANSWER'}">
                                             <%-- answer the review questionnaire --%>
                                             <a href="javascript:respondNotification('notifUrl<c:out value="${notification.id}"/>');"><fmt:message key="worklist.appraisal.answer.invitation"/> </a>
+                                        </c:when>
+                                        <c:when test="${notification.action == 'APPROVE' && isApproverUser}">
+                                            <%-- answer the review questionnaire --%>
+                                            <a href="javascript:respondNotification('notifUrl<c:out value="${notification.id}"/>');"><fmt:message key="worklist.appraisal.answer.invitation"/> </a>
+                                        </c:when>
+                                        <c:when test="${notification.action == 'APPROVE' && !isApproverUser}">
+                                            <%-- Just a message awaiting approval --%>
+                                            <fmt:message key="worklist.appraisal.awaiting.approval"/>
                                         </c:when>
                                         <c:otherwise>
                                             <%-- edit the review, questionnaire --%>

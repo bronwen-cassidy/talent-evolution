@@ -49,6 +49,7 @@ procedure Start_Subject_Review (
 ----------------------------------------------------------------------------------------------------
 procedure set_actionable (
               notification_id in number,
+              next_user_id_ in number,
               actionable_ in varchar2,
               next_action_ in varchar2
 );

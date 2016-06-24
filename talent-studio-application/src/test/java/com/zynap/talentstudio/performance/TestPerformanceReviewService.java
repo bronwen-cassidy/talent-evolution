@@ -13,16 +13,15 @@ import com.zynap.talentstudio.ZynapDatabaseTestCase;
 import com.zynap.talentstudio.common.lookups.LookupValue;
 import com.zynap.talentstudio.organisation.subjects.ISubjectService;
 import com.zynap.talentstudio.organisation.subjects.Subject;
-import com.zynap.talentstudio.questionnaires.QuestionnaireWorkflow;
 import com.zynap.talentstudio.questionnaires.IQueWorkflowService;
+import com.zynap.talentstudio.questionnaires.QuestionnaireWorkflow;
 import com.zynap.talentstudio.security.users.IUserService;
 import com.zynap.talentstudio.workflow.IWorkflowAdapter;
 
+import java.util.Collection;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.Collection;
 
 public class TestPerformanceReviewService extends ZynapDatabaseTestCase {
 
@@ -53,11 +52,10 @@ public class TestPerformanceReviewService extends ZynapDatabaseTestCase {
         final Date expiryDate = new Date();
         final PerformanceReview perfReview = createPerformanceReview(expiryDate, false);
 
-        final Set queWorkflows = perfReview.getQueWorkflows();
+        final Set<QuestionnaireWorkflow> queWorkflows = perfReview.getQueWorkflows();
         assertEquals(2, queWorkflows.size());
 
-        for (Iterator iterator = queWorkflows.iterator(); iterator.hasNext();) {
-            final QuestionnaireWorkflow workflow = (QuestionnaireWorkflow) iterator.next();
+        for (QuestionnaireWorkflow workflow : queWorkflows) {
             assertNotNull(workflow.getId());
             assertEquals(expiryDate, workflow.getExpiryDate());
             assertEquals(POPULATION_ID, workflow.getPopulation().getId());
@@ -88,7 +86,7 @@ public class TestPerformanceReviewService extends ZynapDatabaseTestCase {
         final PerformanceReview perfReview = createPerformanceReview(expiryDate, true);
         final User user = getAdminUser(userService);
         performanceReviewService.startReview(perfReview, user, true);
-        PerformanceReview real = (PerformanceReview) performanceReviewService.findById(perfReview.getId());
+        PerformanceReview real = performanceReviewService.findById(perfReview.getId());
         assertTrue(real != null);
         assertEquals(true, real.isUserManaged());
         performanceReviewService.deleteReview(perfReview.getId());
@@ -98,7 +96,7 @@ public class TestPerformanceReviewService extends ZynapDatabaseTestCase {
         PerformanceReview perfReview = createPerformanceReview(null, false);
 
         // number of assigned roles (there are none at the moment
-        final List roles = performanceReviewService.getAssignedPerformanceEvaluators(perfReview.getId(), SUBJECT_ID);
+        final List<PerformanceEvaluator> roles = performanceReviewService.getAssignedPerformanceEvaluators(perfReview.getId(), SUBJECT_ID);
         assertEquals(0, roles.size());
 
         ISubjectService subjectService = (ISubjectService) getBean("subjectService");
@@ -106,8 +104,7 @@ public class TestPerformanceReviewService extends ZynapDatabaseTestCase {
 
         // id must be null as have not been saved yet
         // check performance review and role and subject are set
-        for (Iterator iterator = roles.iterator(); iterator.hasNext();) {
-            PerformanceEvaluator performanceEvaluator = (PerformanceEvaluator) iterator.next();
+        for (PerformanceEvaluator performanceEvaluator : roles) {
             assertNull(performanceEvaluator.getId());
 
             assertEquals(perfReview, performanceEvaluator.getPerformanceReview());
@@ -116,14 +113,13 @@ public class TestPerformanceReviewService extends ZynapDatabaseTestCase {
     }
 
     public void testGetAssignedPerformanceEvaluators() throws Exception {
-        final List roles = performanceReviewService.getRoles();
+        final List<LookupValue> roles = performanceReviewService.getRoles();
         assertFalse(roles.isEmpty());
-        for (Iterator iterator = roles.iterator(); iterator.hasNext();) {
-            final LookupValue role = (LookupValue) iterator.next();
+        for (final LookupValue role : roles) {
             assertTrue(role.isActive());
         }
 
-        final LookupValue selfEvaluatorRole = (LookupValue) roles.get(0);
+        final LookupValue selfEvaluatorRole = roles.get(0);
         assertEquals(PerformanceEvaluator.SELF_EVALUATOR, selfEvaluatorRole.getValueId());
     }
 
@@ -157,16 +153,17 @@ public class TestPerformanceReviewService extends ZynapDatabaseTestCase {
     public void testFindByID() throws Exception {
         PerformanceReview perfReview = createPerformanceReview(null, false);
 
-        final PerformanceReview found = (PerformanceReview) performanceReviewService.findById(perfReview.getId());
+        final PerformanceReview found = performanceReviewService.findById(perfReview.getId());
         assertEquals(perfReview, found);
     }
 
     public void testFindWithInvalidId() throws Exception {
 
         try {
-            performanceReviewService.findById(new Long(-1));
+            performanceReviewService.findById(-1L);
             fail("Should have thrown exception when finding with invalid id");
         } catch (DomainObjectNotFoundException expected) {
+            // expected
         }
     }
 
@@ -180,14 +177,15 @@ public class TestPerformanceReviewService extends ZynapDatabaseTestCase {
             performanceReviewService.findById(id);
             fail("Should have thrown exception when finding with invalid id");
         } catch (DomainObjectNotFoundException expected) {
+            // expected
         }
     }
 
     public void testCloseReview() throws Exception {
-        PerformanceReview performanceReview = (PerformanceReview) performanceReviewService.findById(new Long(-12));
+        PerformanceReview performanceReview = performanceReviewService.findById(GENERAL_DEFINITION_ID);
         performanceReviewService.closeReview(performanceReview);
         commitAndStartNewTx();
-        performanceReview = (PerformanceReview) performanceReviewService.findById(new Long(-12));
+        performanceReview = performanceReviewService.findById(GENERAL_DEFINITION_ID);
         assertEquals(QuestionnaireWorkflow.STATUS_COMPLETED, performanceReview.getStatus());
     }
 
@@ -201,7 +199,7 @@ public class TestPerformanceReviewService extends ZynapDatabaseTestCase {
     }
 
     public void testGetManagers() throws Exception {
-        PerformanceReview performanceReview = (PerformanceReview) performanceReviewService.findById(new Long(-12));
+        PerformanceReview performanceReview = performanceReviewService.findById(GENERAL_DEFINITION_ID);
         Collection<User> results = performanceReviewService.getManagers(performanceReview);
         assertEquals(1, results.size());
     }
@@ -212,7 +210,7 @@ public class TestPerformanceReviewService extends ZynapDatabaseTestCase {
 
         PerformanceReview perfReview = new PerformanceReview(null, "test 1");
         perfReview.setUserManaged(userManaged);
-        performanceReviewService.createReview(perfReview, user, MANAGER_DEFINITION_ID, GENERAL_DEFINITION_ID, POPULATION_ID, expiryDate);
+        performanceReviewService.createReview(perfReview, user, MANAGER_DEFINITION_ID, GENERAL_DEFINITION_ID, POPULATION_ID, expiryDate, 0L);
         assertNotNull(perfReview.getId());
         assertEquals(QuestionnaireWorkflow.STATUS_NEW, perfReview.getStatus());
         return perfReview;
@@ -224,17 +222,17 @@ public class TestPerformanceReviewService extends ZynapDatabaseTestCase {
     /**
      * Id of subject in data file.
      */
-    private static final Long SUBJECT_ID = new Long(-10);
+    private static final Long SUBJECT_ID = -10L;
 
     /**
      * ID OF ALL PEOPLE POPULATION.
      */
-    private static final Long POPULATION_ID = new Long(-2);
+    private static final Long POPULATION_ID = -2L;
 
     /**
      * Ids of definitions in data file.
      */
-    private static final Long MANAGER_DEFINITION_ID = new Long(-11);
-    private static final Long GENERAL_DEFINITION_ID = new Long(-12);
+    private static final Long MANAGER_DEFINITION_ID = -11L;
+    private static final Long GENERAL_DEFINITION_ID = -12L;
     private IWorkflowAdapter workFlowAdapter;
 }

@@ -210,6 +210,14 @@ public class Notification extends ZynapDomainObject {
         return rootId;
     }
 
+    public Long getNextUserId() {
+        return nextUserId;
+    }
+
+    public void setNextUserId(Long nextUserId) {
+        this.nextUserId = nextUserId;
+    }
+
     public void setRootId(Long rootId) {
         this.rootId = rootId;
     }
@@ -276,6 +284,7 @@ public class Notification extends ZynapDomainObject {
         return MANAGER_ASSESSMENT_SUBTYPE.equals(subType) || EVALUATOR_ASSESSMENT_SUBTYPE.equals(subType);
     }
 
+
     private Long managerId;
     private Long managerInstanceId;
     private Long evaluatorInstanceId;
@@ -307,6 +316,7 @@ public class Notification extends ZynapDomainObject {
     private Long launcherId;
     private Long recipientId;
     private Long rootId;
+    private Long nextUserId;
     private User recipient;
     private LookupValue role;
     private Subject subject;
@@ -318,7 +328,10 @@ public class Notification extends ZynapDomainObject {
 
     public static final String ANSWER = "ANSWER";
     public static final String CLOSE_ACTION = "CLOSE";
+    public static final String APPROVER = "NEXT_MANAGER";
 
+
+    // todo need to action after answer to approve this will be with the approver (hr or managers manager)
     public static final String[] appraisalActions = new String[] {"ASSIGN_ROLES", "START", ANSWER, "COMPLETE", CLOSE_ACTION};
     public static final String[] questionnaireActions = new String[] {ANSWER, "COMPLETE", CLOSE_ACTION};
 

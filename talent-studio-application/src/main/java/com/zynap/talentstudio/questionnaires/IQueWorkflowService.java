@@ -45,4 +45,6 @@ public interface IQueWorkflowService extends IZynapService, IQuestionnaireCommon
     void setNotificationActionable(Long notificationId, boolean actionable, String nextAction) throws TalentStudioException;
 
     void reload(Long workflowId) throws TalentStudioException;
+
+    void setNotificationActionable(Long notificationId, Long nextUserId, boolean actioable, String approveWorkflow) throws TalentStudioException;
 }

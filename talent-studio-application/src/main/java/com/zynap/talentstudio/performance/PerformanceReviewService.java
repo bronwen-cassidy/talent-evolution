@@ -29,7 +29,7 @@ import java.util.List;
  */
 public class PerformanceReviewService extends AbstractQuestionnaireService implements IPerformanceReviewService {
 
-    public void createReview(PerformanceReview performanceReview, User user, Long managerQuestionnaireDefinitionId, Long evaluatorQuestionnaireDefinitionId, Long populationId, Date expiryDate) throws TalentStudioException {
+    public void createReview(PerformanceReview performanceReview, User user, Long managerQuestionnaireDefinitionId, Long evaluatorQuestionnaireDefinitionId, Long populationId, Date expiryDate, Long hrUserId) throws TalentStudioException {
 
         QuestionnaireDefinition managerDefinition = questionnaireDao.findDefinition(managerQuestionnaireDefinitionId);
         QuestionnaireDefinition evaluatorDefinition = questionnaireDao.findDefinition(evaluatorQuestionnaireDefinitionId);
@@ -42,10 +42,12 @@ public class PerformanceReviewService extends AbstractQuestionnaireService imple
         QuestionnaireWorkflow managerWorkflow = new QuestionnaireWorkflow(managerLabel, QuestionnaireWorkflow.TYPE_MANAGER_APPRAISAL, managerDefinition, user.getId());
         managerWorkflow.setExpiryDate(expiryDate);
         managerWorkflow.setPopulation(newPopulation);
+        managerWorkflow.setHrUserId(hrUserId);
 
         QuestionnaireWorkflow evaluatorWorkflow = new QuestionnaireWorkflow(evaluationLabel, QuestionnaireWorkflow.TYPE_EVALUATOR_APPRAISAL, evaluatorDefinition, user.getId());
         evaluatorWorkflow.setExpiryDate(expiryDate);
         evaluatorWorkflow.setPopulation(newPopulation);
+        evaluatorWorkflow.setHrUserId(hrUserId);
 
         performanceReview.addQuestionnaireWorkflow(managerWorkflow);
         performanceReview.addQuestionnaireWorkflow(evaluatorWorkflow);

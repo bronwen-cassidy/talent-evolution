@@ -57,7 +57,12 @@ public class AddPerformanceReviewController extends ZynapDefaultFormController {
 
             // NOTE: these methods are called separately so that the stored procedures that are used when starting the performance review
             // can see the results of the creation - if they were in the same method the transactional behaviour would interfere !!
-            performanceReviewService.createReview(performanceReview, user, wrapper.getManagerQuestionnaireDefinitionId(), wrapper.getGeneralQuestionnaireDefinitionId(), wrapper.getPopulationId(), wrapper.getExpiryDate());
+            Long generalQuestionnaireDefinitionId = wrapper.getGeneralQuestionnaireDefinitionId();
+            Long managerQuestionnaireDefinitionId = wrapper.getManagerQuestionnaireDefinitionId();
+            Long populationId = wrapper.getPopulationId();
+            Date expiryDate = wrapper.getExpiryDate();
+            performanceReviewService.createReview(performanceReview, user, managerQuestionnaireDefinitionId, generalQuestionnaireDefinitionId,
+                    populationId, expiryDate, wrapper.getHrUserId());
 
             // if the entire process is to be managed by the logged in user we need a separate service to handle this use case
             boolean userManagedReview = wrapper.isUserManagedReview();
