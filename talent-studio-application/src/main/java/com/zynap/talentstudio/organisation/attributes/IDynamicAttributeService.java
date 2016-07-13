@@ -31,9 +31,9 @@ public interface IDynamicAttributeService extends IZynapService {
      * @param attributeTypes can be null
      * @return Collection of DynamicAttribute objects
      */
-    Collection getActiveAttributes(String nodeType, boolean searchableOnly, String[] attributeTypes);
+    Collection<DynamicAttribute> getActiveAttributes(String nodeType, boolean searchableOnly, String[] attributeTypes);
 
-    Collection getActiveAttributes(String nodeType, boolean searchableOnly, String[] attributeTypes, boolean includeCalcFields);
+    Collection<DynamicAttribute> getActiveAttributes(String nodeType, boolean searchableOnly, String[] attributeTypes, boolean includeCalcFields);
 
     /**
      * Get active attributes for the given node types.

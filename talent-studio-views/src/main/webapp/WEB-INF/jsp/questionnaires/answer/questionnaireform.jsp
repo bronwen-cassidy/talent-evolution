@@ -185,29 +185,35 @@
                 <c:otherwise>
                     <%-- performance review--%>
                     <c:if test="${managerAccessView}">
-                        <tr>
-                            <td class="infolabel" align="right"><span><fmt:message key="please.select.managers"/>&nbsp;:&nbsp;</span></td>
-                            <td class="infodata">
-                                <table cellpadding="0" cellspacing="0">
-                                    <c:forEach var="manager" items="${command.userManagers}">
-                                        <tr>
-                                            <td class="infodata" style="width:50%"><c:out value="${manager.label}"/>&nbsp;:&nbsp;</td>
-                                            <spring:bind path="command.selectedManagerIds">
-                                                <td class="infodata" ${colsp}>
-                                                    <input type="checkbox" class="input_checkbox" value="<c:out value="${manager.id}"/>" name="selectedManagerIds"/>
-                                                </td>
-                                            </spring:bind>
-                                        </tr>
-                                    </c:forEach>
-                                </table>
-                            </td>
-                        </tr>
+                        <c:if test="${managerSelection}">
+                            <tr>
+                                <td class="infolabel" align="right"><span><fmt:message key="please.select.managers"/>&nbsp;:&nbsp;</span></td>
+                                <td class="infodata">
+                                    <table cellpadding="0" cellspacing="0">
+                                        <c:forEach var="manager" items="${command.userManagers}">
+                                            <tr>
+                                                <td class="infodata" style="width:50%"><c:out value="${manager.label}"/>&nbsp;:&nbsp;</td>
+                                                <spring:bind path="command.selectedManagerIds">
+                                                    <td class="infodata" ${colsp}>
+                                                        <input type="checkbox" class="input_checkbox" value="<c:out value="${manager.id}"/>"
+                                                               name="selectedManagerIds"
+                                                               <c:if test="${command.notification.managersManagerId == manager.id}">checked</c:if>
+                                                               <c:if test="${command.notification.managersManagerId != null}">disabled</c:if>
+                                                        />
+                                                    </td>
+                                                </spring:bind>
+                                            </tr>
+                                        </c:forEach>
+                                    </table>
+                                </td>
+                            </tr>
+                        </c:if>
                         <c:if test="${command.hrUser != null}">
                             <tr>
                                 <td class="infolabel" align="right"><span><fmt:message key="send.to.hr"/>&nbsp;:&nbsp; <c:out value="${command.hrUser.label}"/></span></td>
                                 <td class="infodata">
                                     <spring:bind path="command.hrUserId">
-                                        <input type="checkbox" class="input_checkbox" value="<c:out value='${command.hrUser.id}'/>" name="hrUserId"/>
+                                        <input type="checkbox" class="input_checkbox" value="<c:out value='${command.hrUser.id}'/>" name="hrUserId" <c:if test="${command.notification.hrId != null}">checked disabled</c:if>/>
                                     </spring:bind>
                                 </td>
                             </tr>

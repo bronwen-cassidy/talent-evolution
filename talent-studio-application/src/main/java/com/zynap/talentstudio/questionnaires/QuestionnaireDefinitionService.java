@@ -36,7 +36,7 @@ public class QuestionnaireDefinitionService extends AbstractQuestionnaireService
         return questionnaireDao.listDefinitions();
     }
 
-    public List<QuestionnaireDefinition> findAll() throws TalentStudioException {
+    public <T> List findAll() throws TalentStudioException {
         try {
             return (List<QuestionnaireDefinition>) questionnaireDao.findAllDefinitions();
         } catch (Exception e) {

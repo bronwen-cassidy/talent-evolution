@@ -17,7 +17,7 @@ public interface IZynapService {
 
     <T> T findById(Long id) throws TalentStudioException;
 
-    List findAll() throws TalentStudioException;
+    <T> List<T> findAll() throws TalentStudioException;
 
     void create(IDomainObject domainObject) throws TalentStudioException;
 

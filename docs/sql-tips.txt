@@ -23,3 +23,13 @@ SELECT OWNER, TABLE_NAME, COLUMN_NAME FROM
       ALL_TAB_COLUMNS WHERE OWNER='HSBC_DEV_BRONWEN'
       AND COLUMN_NAME='REIT_INDICATOR';
 
+create tablespace
+=================================
+create tablespace TS_LARGE datafile 'C:\app\bronwen.cassidy\oradata\STOC\ts_large.dbf'
+size                                 2000M
+autoextend on maxsize                2000M
+extent management local uniform size  128M;
+
+
+import a dump
+==============================================

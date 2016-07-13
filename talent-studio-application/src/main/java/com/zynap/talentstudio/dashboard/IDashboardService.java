@@ -22,8 +22,6 @@ import java.util.List;
  */
 public interface IDashboardService extends IZynapService {
 
-    List<Dashboard> findAll() throws TalentStudioException;
-
     void delete(Long dashboardId) throws TalentStudioException;
 
     void createOrUpdate(Dashboard result) throws TalentStudioException;

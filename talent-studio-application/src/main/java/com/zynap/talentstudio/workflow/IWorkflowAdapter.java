@@ -32,15 +32,25 @@ public interface IWorkflowAdapter {
 
     /**
      * Respond to notification.
-     *
      * @param notification
      * @param action
-     * @param userName
      * @param userId @throws TalentStudioException
      * @param subjectId
      * @param roleId
      */
-    void processNotification(Notification notification, String action, String userName, Long userId, Long subjectId, Long roleId) throws TalentStudioException;
+    void processNotification(Notification notification, String action, Long userId, Long subjectId, Long roleId) throws TalentStudioException;
+
+    /**
+     * Case where an HR user has been selected or the manager has requested verification from his manager.
+     *
+     * @param notification - the root notification
+     * @param nextAction - APPROVAL or VERIFY
+     * @param managerId - the id of the manager requesting approval or verification
+     * @param subjectId - the person being reviewed
+     * @param recipientId - the manager's manager or the hr the notification is being created for
+     * @throws TalentStudioException
+     */
+    void processApprovalNotification(Notification notification, String nextAction, Long managerId, Long subjectId, Long recipientId) throws TalentStudioException;
 
     void completeAppraisalProcess(Long appraisalId);
 
@@ -78,8 +88,9 @@ public interface IWorkflowAdapter {
 
     void completeNotification(Long notificationId);
 
-    void setNotificationActionable(Long notificationId, Long nextUserId, boolean actionable, String nextAction) throws TalentStudioException;
+    void approveNotification(Long subjectId, Long hrId, Long performanceId);
 
+    void verifyNotification(Long subjectId, Long managersManagerId, Long performanceId);
 
     /**
      * Constants for workflow parameters.

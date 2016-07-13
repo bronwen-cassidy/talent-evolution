@@ -59,6 +59,16 @@ public class WorkflowAdapter extends HibernateDaoSupport implements IWorkflowAda
         workflowBasicCommander.completeNotification(notificationId);
     }
 
+    @Override
+    public void approveNotification(Long subjectId, Long hrId, Long performanceId) {
+        workflowBasicCommander.approveNotification(subjectId, hrId, performanceId);
+    }
+
+    @Override
+    public void verifyNotification(Long subjectId, Long managersManagerId, Long performanceId) {
+        workflowBasicCommander.verifyNotification(subjectId, managersManagerId, performanceId);
+    }
+
     public void start(QuestionnaireWorkflow questionnaireWorkflow, Long userId) {
         final Date expiryDate = questionnaireWorkflow.getExpiryDate();
         final Long workflowId = questionnaireWorkflow.getId();
@@ -73,15 +83,27 @@ public class WorkflowAdapter extends HibernateDaoSupport implements IWorkflowAda
         workflowBasicCommander.removeNotifications(subjectId);
     }
 
-    public void processNotification(Notification notification, String action, String userName, Long userId, Long subjectId, Long roleId) throws TalentStudioException {
+    public void processNotification(Notification notification, String action, Long userId, Long subjectId, Long roleId) throws TalentStudioException {
         // nothing to do if the notification is null
         if(notification == null) return;
 
         String nextAction = Notification.getNextAction(action, notification.getSubType());
-        workflowBasicCommander.respondNotification(notification.getId(), nextAction, userName, userId);
+
+        workflowBasicCommander.respondNotification(notification.getId(), nextAction);
+
         if (notification.isPerformanceReviewType() && Notification.ANSWER.equals(nextAction)) {
             workflowBasicCommander.startSubjectReview(notification.getId(), nextAction, subjectId, roleId);
         }
+    }
+
+    public void processApprovalNotification(Notification notification, String nextAction, Long managerId, Long subjectId, Long recipientId) throws TalentStudioException {
+        // nothing to do if the notification is null
+        if(notification == null) return;
+
+        // update the next action to approval or verification
+        workflowBasicCommander.respondNotification(notification.getId(), nextAction);
+        // root notification_id
+        workflowBasicCommander.createActionNotification(notification.getId(), nextAction, subjectId, managerId, recipientId);
     }
 
     public void completeAppraisalProcess(Long appraisalId) {
@@ -105,12 +127,7 @@ public class WorkflowAdapter extends HibernateDaoSupport implements IWorkflowAda
     }
 
     public void setNotificationActionable(Long notificationId, boolean actionable, String nextAction) throws TalentStudioException {
-        workflowBasicCommander.setNotificationActionable(notificationId, null, StringUtil.convertToString(actionable), nextAction);
-    }
-
-    @Override
-    public void setNotificationActionable(Long notificationId, Long nextUserId, boolean actionable, String nextAction) throws TalentStudioException{
-        workflowBasicCommander.setNotificationActionable(notificationId, nextUserId, StringUtil.convertToString(actionable), nextAction);
+        workflowBasicCommander.setNotificationActionable(notificationId, StringUtil.convertToString(actionable), nextAction);
     }
 
     public void setWorkflowBasicCommander(IWorkflowBasicCommander workflowBasicCommander) {

@@ -25,16 +25,15 @@ import com.zynap.talentstudio.web.utils.ZynapWebUtils;
 import com.zynap.talentstudio.workflow.IWorkflowAdapter;
 import com.zynap.talentstudio.workflow.Notification;
 import com.zynap.talentstudio.workflow.WorkflowException;
-
 import org.springframework.validation.Errors;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class WorklistController extends AnswerQuestionnaireController {
 
@@ -166,7 +165,7 @@ public class WorklistController extends AnswerQuestionnaireController {
      */
     protected final Map referenceData(HttpServletRequest request, Object command, Errors errors, int page) throws Exception {
         WorklistWrapper wrapper = (WorklistWrapper) command;
-        Map<String, Object> refData = new HashMap<String, Object>();
+        Map<String, Object> refData = new HashMap<>();
         int targetPage = getTargetPage(request, page);
 
         switch (targetPage) {
@@ -207,52 +206,57 @@ public class WorklistController extends AnswerQuestionnaireController {
 
         int targetPage = getTargetPage(request, page);
         final UserPrincipal userPrincipal = UserSessionFactory.getUserSession().getUserPrincipal();
-        final String userName = userPrincipal.getUsername();
         final Long userId = userPrincipal.getUserId();
+        final Long subjectId = wrapper.getSubjectId();
+        Notification notification;
 
         try {
             switch (targetPage) {
                 case RESPOND_NOTIFICATION:
+
                     // starts the process
                     if (isRepondNotificationRequest(request)) {
                         setWorkflowParameters(wrapper, request);
-                        final Long subjectId = wrapper.getSubjectId();
                         final Long roleId = wrapper.getRole();
-                        final Notification notification = wrapper.getNotification();
-                        workflowAdapter.processNotification(notification, wrapper.getAction(), userName, userId, subjectId, roleId);
+                        Notification wrapperNotification = wrapper.getNotification();
+                        workflowAdapter.processNotification(wrapperNotification, wrapper.getAction(), userId, subjectId, roleId);
                         if (wrapper.isPerformanceReview()) respondAppraisalNotification(wrapper, request);
-                        wrapper.setAction(Notification.getNextAction(wrapper.getAction(), notification.getSubType()));
+                        wrapper.setAction(Notification.getNextAction(wrapper.getAction(), wrapperNotification.getSubType()));
                         clearInfo(wrapper, false);
                         wrapper.setActiveTab(WORKLIST_TAB);
                     }
-
                     break;
                 case OPEN_QUESTIONNAIRE:
                     wrapper.setSaved(false);
                     handleOpenQuestionaire(wrapper, request);
                     break;
                 case SAVE_QUESTIONNAIRE:
-                    // todo we need to add in here any send to hr send to manager as we will need to create a notification
                     Long questionnaireId = wrapper.getQuestionnaireId();
-                    // todo add the approved checkbox to the questionnaire if the action is approve.
-                    boolean approved = RequestUtils.getBooleanParameter(request, "approved", false);
-                    if (questionnaireId == null) break;
-                    Questionnaire questionnaire = questionnaireService.findById(questionnaireId);
+                    if(questionnaireId == null) break;
 
-                    if (wrapper.getHrUserId() != null) {
-                        // todo send to hr, amke a notification
-                        questionnaireWorkflowService.setNotificationActionable(wrapper.getNotificationId(), wrapper.getHrUserId(), true, APPROVE_WORKFLOW);
-                        wrapper.setAction(Notification.APPROVER);
-                    } else if (wrapper.getSelectedManagerIds() != null && wrapper.getSelectedManagerIds().length > 0) {
-                        questionnaireWorkflowService.setNotificationActionable(wrapper.getNotificationId(), wrapper.getSelectedManagerIds()[0], true, APPROVE_WORKFLOW);
-                        wrapper.setAction(Notification.APPROVER);
-                    } else {
-                        // todo this needs to happen only after the approved action has been triggered will be triggered by a checkbox on hr/manager views
-                        if (approved) {
-                            questionnaireWorkflowService.setNotificationActionable(wrapper.getNotificationId(), true, COMPLETE_WORKFLOW);
-                            wrapper.setAction(COMPLETE_WORKFLOW);
-                        }
+                    Questionnaire questionnaire = questionnaireService.findById(questionnaireId);
+                    if (wrapper.getSelectedManagerId() != null) {
+
+                        // update the current notification to indicate it is awaiting verification
+                        questionnaireWorkflowService.setNotificationActionable(wrapper.getNotificationId(), true, Notification.AWAITING_APPROVAL);
+                        workflowAdapter.processApprovalNotification(wrapper.getNotification(), Notification.VERIFY, userId, subjectId, wrapper.getSelectedManagerId());
+                        // create a new notification
+                        wrapper.setAction(Notification.AWAITING_APPROVAL);
                     }
+                    // manager's veiw send to hr has been selected
+                    if (wrapper.getHrUserId() != null) {
+                        // todo send to hr, make the hr notification update other notifications to indicate state
+                        // updates the current notification to indicate awaiting approval
+                        questionnaireWorkflowService.setNotificationActionable(wrapper.getNotificationId(), false, Notification.AWAITING_APPROVAL);
+                        workflowAdapter.processApprovalNotification(wrapper.getNotification(), Notification.APPROVE, userId, subjectId, wrapper.getHrUserId());
+                        wrapper.setAction(Notification.AWAITING_APPROVAL);
+                    }
+
+                    // todo complete can only happen if
+                    if((wrapper.getHrUser() == null && wrapper.getSelectedManagerId() == null) || wrapper.getNotification().isApproved()) {
+                        questionnaireWorkflowService.setNotificationActionable(wrapper.getNotificationId(), true, COMPLETE_WORKFLOW);
+                    }
+
                     refreshQuestionnaire(wrapper, questionnaire);
                     wrapper.setSaved(true);
                     wrapper.setActiveTab(QUESTIONNAIRE_TAB);
@@ -260,6 +264,32 @@ public class WorklistController extends AnswerQuestionnaireController {
                 case CLOSE_FORM_TAB:
                     clearInfo(wrapper, true);
                     wrapper.setActiveTab(WORKLIST_TAB);
+                    break;
+                case VIEW_QUESTIONNAIRE:
+                    handleOpenQuestionaire(wrapper, request);
+                    wrapper.setActiveTab(QUESTIONNAIRE_TAB);
+                    break;
+                case APPROVE_QUESTIONNAIRE:
+                    // this notification needs to be removed for this person, all instances with the same subject_id and hr_id
+                    // and performance_id need to be marked as approved
+                    notification = wrapper.getNotification();
+                    workflowAdapter.approveNotification(notification.getSubjectId(), notification.getHrId(), notification.getPerformanceReviewId());
+
+                    clearInfo(wrapper, true);
+                    wrapper.setNotificationList(workflowAdapter.getNotifications(userId, performanceReview));
+                    wrapper.setActiveTab(WORKLIST_TAB);
+                    wrapper.setAction(Notification.APPROVED);
+                    break;
+                case VERIFY_QUESTIONNAIRE:
+
+                    // this notification needs to be removed for this person, all instances with the same subject_id and
+                    // managers_manager_id and performance_id need to be marked as verified
+                    notification = wrapper.getNotification();
+                    workflowAdapter.verifyNotification(notification.getSubjectId(), notification.getManagersManagerId(), notification.getPerformanceReviewId());
+                    clearInfo(wrapper, true);
+                    wrapper.setNotificationList(workflowAdapter.getNotifications(userId, performanceReview));
+                    wrapper.setActiveTab(WORKLIST_TAB);
+                    wrapper.setAction(Notification.VERIFIED);
                     break;
             }
 
@@ -278,8 +308,7 @@ public class WorklistController extends AnswerQuestionnaireController {
     }
 
     private boolean isRepondNotificationRequest(HttpServletRequest request) {
-        final Long notificationId = RequestUtils.getLongParameter(request, NOTIFICATION_ID_PARAM);
-        return notificationId != null;
+        return RequestUtils.getLongParameter(request, NOTIFICATION_ID_PARAM) != null;
     }
 
     protected void respondAppraisalNotification(WorklistWrapper wrapper, HttpServletRequest request) throws Exception {
@@ -377,8 +406,7 @@ public class WorklistController extends AnswerQuestionnaireController {
                     final Notification notification = wrapper.getNotification();
                     if (notification != null) {
                         final Long subjectId = wrapper.getSubjectId();
-                        final String userName = ZynapWebUtils.getUser(request).getUserName();
-                        workflowAdapter.processNotification(notification, wrapper.getAction(), userName, userId, subjectId, role);
+                        workflowAdapter.processNotification(notification, wrapper.getAction(), userId, subjectId, role);
                     }
                 }
             }
@@ -389,7 +417,11 @@ public class WorklistController extends AnswerQuestionnaireController {
             if (wrapper.isManagerEvaluation()) {
                 wrapper.setHrUser(questionnaireWorkflow.getHrUser());
             }
-
+            Notification notification = wrapper.getNotification();
+            if (performanceReview && notification != null) {
+                wrapper.setManagersManagerView(Objects.equals(userId, notification.getManagersManagerId()));
+                wrapper.setHrView(Objects.equals(userId, notification.getHrId()));
+            }
             // set additional subject data
             setSubjectData(wrapper);
         }
@@ -423,6 +455,9 @@ public class WorklistController extends AnswerQuestionnaireController {
     public static final int OPEN_QUESTIONNAIRE = 2;
     public static final int SAVE_QUESTIONNAIRE = 3;
     public static final int CLOSE_FORM_TAB = 4;
+    public static final int VIEW_QUESTIONNAIRE = 6;
+    public static final int APPROVE_QUESTIONNAIRE = 7;
+    public static final int VERIFY_QUESTIONNAIRE = 8;
 
     /**
      * Constants for tabs.
@@ -435,6 +470,5 @@ public class WorklistController extends AnswerQuestionnaireController {
      */
     public static final String SELECTED_GROUP_PARAM = "selectedGroup";
     private static final String COMPLETE_WORKFLOW = "COMPLETE";
-    private static final String APPROVE_WORKFLOW = "APPROVE";
 
 }

@@ -1118,6 +1118,9 @@ Creating Foreign Key on 'QUE_WORKFLOWS'
 
 Table altered.
 
+
+Table altered.
+
 Creating Foreign Key on 'CHART_COLUMN_ATTRIBUTES'
 
 Table altered.
@@ -1354,6 +1357,10 @@ Creating Foreign Key on 'POSITIONS_HIERARCHY_INC'
 Table altered.
 
 Creating Foreign Key on 'EXTERNAL_REF_MAPPINGS'
+
+Table altered.
+
+Creating Foreign Key on 'QUE_WORKFLOWS'
 
 Table altered.
 

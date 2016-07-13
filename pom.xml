@@ -305,7 +305,7 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <db.url>jdbc:oracle:thin:@DELL55.Rockall.dub:1521:STOC</db.url>
+                <db.url>jdbc:oracle:thin:@localhost:1521:STOC</db.url>
                 <db.password>tsdev</db.password>
                 <db.username>tsdev</db.username>
                 <host.name>localhost</host.name>

@@ -21,43 +21,42 @@
         <fmt:message key="worklist.actions" var="headeractions" />
         <fmt:message key="worklist.duedate" var="headerduedate" />
         <fmt:message key="close.warning" var="closewarning" />
+        <fmt:message key="approve.warning" var="approvewarning" />
+        <fmt:message key="verify.warning" var="verifywarning" />
         <zynap:message code="complete.warning" var="completewarning" javaScriptEscape="true"/>
 
         <display:table name="${command.notificationList}" id="notification" sort="list" defaultsort="2"  pagesize="15" requestURI="${viewPageUrl}" class="pager" excludedParams="*">
 
             <c:set var="hasNoActions" value="${notification.action == 'CLOSE'}"/>
-            <c:set var="isApproverUser" value="${command.currentUserId == notification.nextUserId}"/>
 
-                <c:choose>
-                    <c:when test="${command.performanceReview && notification.target == '5'}">
-                        <%-- if target is 5 this is a review that needs roles assigning --%>
-                        <c:choose>
-                            <c:when test="${notification.actionable}">
-                                <fmt:message key="worklist.appraisal.start" var="label"/>
-                            </c:when>
-                            <c:otherwise>
-                                <fmt:message key="worklist.appraisal.assign.roles" var="label"/>
-                            </c:otherwise>
-                        </c:choose>
-                    </c:when>
-
-                    <%-- if not performance review then there is only one message --%>
-                    <c:otherwise>
-                        <c:choose>
-                            <c:when test="${notification.actionable}">
-                                <%-- handles the case when notification indicates the process has completed --%>
-                                <c:choose>
-                                    <c:when test="${hasNoActions}"><fmt:message key="close" var="label"/></c:when>
-                                    <c:otherwise><fmt:message key="worklist.complete" var="label"/></c:otherwise>
-                                </c:choose>
-                            </c:when>
-                            <%-- not yet actionable we therefore answer it --%>
-                            <c:otherwise>
-                                <fmt:message key="worklist.appraisal.answer.invitation" var="label"/>
-                            </c:otherwise>
-                         </c:choose>
-                    </c:otherwise>
-                </c:choose>
+            <c:choose>
+                <c:when test="${command.performanceReview && notification.target == '5'}">
+                    <%-- if target is 5 this is a review that needs roles assigning --%>
+                    <c:choose>
+                        <c:when test="${notification.actionable}">
+                            <fmt:message key="worklist.appraisal.start" var="label"/>
+                        </c:when>
+                        <c:otherwise>
+                            <fmt:message key="worklist.appraisal.assign.roles" var="label"/>
+                        </c:otherwise>
+                    </c:choose>
+                </c:when>
+                <c:otherwise>
+                    <c:choose>
+                        <c:when test="${notification.actionable}">
+                            <%-- handles the case when notification indicates the process has completed --%>
+                            <c:choose>
+                                <c:when test="${hasNoActions}"><fmt:message key="close" var="label"/></c:when>
+                                <c:otherwise><fmt:message key="worklist.complete" var="label"/></c:otherwise>
+                            </c:choose>
+                        </c:when>
+                        <%-- not yet actionable we therefore answer it --%>
+                        <c:otherwise>
+                            <fmt:message key="worklist.appraisal.answer.invitation" var="label"/>
+                        </c:otherwise>
+                     </c:choose>
+                </c:otherwise>
+            </c:choose>
 
             <%-- display the questionnaires name --%>
             <display:column title="${headername}" property="workflowName" sortable="true" headerClass="sortable" class="pager" comparator="org.displaytag.model.RowSorter"/>
@@ -79,8 +78,16 @@
                     <input type="hidden" name="<%=WorkflowConstants.SUBJECT_ID_PARAM_PREFIX%><c:out value="${notification.id}"/>" value="<c:out value="${notification.subjectId}"/>"/>
                     <input type="hidden" name="<%=WorkflowConstants.ROLE_PARAM_PREFIX%><c:out value="${notification.id}"/>" value="<c:out value="${notification.roleId}"/>"/>
                     <input type="hidden" name="<%=WorkflowConstants.APPRAISAL_ID%><c:out value="${notification.id}"/>" value="<c:out value="${notification.performanceReviewId}"/>"/>
-                 </form>
-
+                </form>
+                <form method="post" action="" name="viewQuestionnaireUrl<c:out value="${notification.id}"/>" >
+                    <input type="hidden" name="<%=ParameterConstants.DISABLE_COMMAND_DELETION%>" value="<%=ParameterConstants.UPDATE_COMMAND%>"/>
+                    <input type="hidden" name="_target6" value="6"/>
+                    <input type="hidden" name="<%=WorkflowConstants.NOTIFICATION_ID_PARAM%>" value="<c:out value="${notification.id}"/>"/>
+                    <input type="hidden" name="<%=WorkflowConstants.WORKFLOW_ID_PARAM_PREFIX%><c:out value="${notification.id}"/>" value="<c:out value="${notification.workflowId}"/>"/>
+                    <input type="hidden" name="<%=WorkflowConstants.SUBJECT_ID_PARAM_PREFIX%><c:out value="${notification.id}"/>" value="<c:out value="${notification.subjectId}"/>"/>
+                    <input type="hidden" name="<%=WorkflowConstants.ROLE_PARAM_PREFIX%><c:out value="${notification.id}"/>" value="<c:out value="${notification.roleId}"/>"/>
+                    <input type="hidden" name="<%=WorkflowConstants.APPRAISAL_ID%><c:out value="${notification.id}"/>" value="<c:out value="${notification.performanceReviewId}"/>"/>
+                </form>
                 <form method="post" action="" name="notificationForm<c:out value="${notification.id}"/>" >
                     <input type="hidden" name="<%=ParameterConstants.DISABLE_COMMAND_DELETION%>" value="<%=ParameterConstants.UPDATE_COMMAND%>"/>
                     <input type="hidden" name="<%=WorkflowConstants.NOTIFICATION_ID_PARAM%>" value="<c:out value="${notification.id}"/>"/>
@@ -88,8 +95,25 @@
                     <input type="hidden" name="<%=WorkflowConstants.SUBJECT_ID_PARAM_PREFIX%><c:out value="${notification.id}"/>" value="<c:out value="${notification.subjectId}"/>"/>
                     <input type="hidden" name="<%=WorkflowConstants.APPRAISAL_ID%><c:out value="${notification.id}"/>" value="<c:out value="${notification.performanceReviewId}"/>"/>
                     <input type="hidden" name="_target1" value="<%=WorklistController.RESPOND_NOTIFICATION%>"/>                    
-                </form>                
-
+                </form>
+                <form method="post" action="" name="approveApraisal<c:out value="${notification.id}"/>" >
+                    <input type="hidden" name="<%=ParameterConstants.DISABLE_COMMAND_DELETION%>" value="<%=ParameterConstants.UPDATE_COMMAND%>"/>
+                    <input type="hidden" name="_target7" value="7"/>
+                    <input type="hidden" name="<%=WorkflowConstants.NOTIFICATION_ID_PARAM%>" value="<c:out value="${notification.id}"/>"/>
+                    <input type="hidden" name="<%=WorkflowConstants.WORKFLOW_ID_PARAM_PREFIX%><c:out value="${notification.id}"/>" value="<c:out value="${notification.workflowId}"/>"/>
+                    <input type="hidden" name="<%=WorkflowConstants.SUBJECT_ID_PARAM_PREFIX%><c:out value="${notification.id}"/>" value="<c:out value="${notification.subjectId}"/>"/>
+                    <input type="hidden" name="<%=WorkflowConstants.ROLE_PARAM_PREFIX%><c:out value="${notification.id}"/>" value="<c:out value="${notification.roleId}"/>"/>
+                    <input type="hidden" name="<%=WorkflowConstants.APPRAISAL_ID%><c:out value="${notification.id}"/>" value="<c:out value="${notification.performanceReviewId}"/>"/>
+                </form>
+                <form method="post" action="" name="verifyApraisal<c:out value="${notification.id}"/>" >
+                    <input type="hidden" name="<%=ParameterConstants.DISABLE_COMMAND_DELETION%>" value="<%=ParameterConstants.UPDATE_COMMAND%>"/>
+                    <input type="hidden" name="_target8" value="8"/>
+                    <input type="hidden" name="<%=WorkflowConstants.NOTIFICATION_ID_PARAM%>" value="<c:out value="${notification.id}"/>"/>
+                    <input type="hidden" name="<%=WorkflowConstants.WORKFLOW_ID_PARAM_PREFIX%><c:out value="${notification.id}"/>" value="<c:out value="${notification.workflowId}"/>"/>
+                    <input type="hidden" name="<%=WorkflowConstants.SUBJECT_ID_PARAM_PREFIX%><c:out value="${notification.id}"/>" value="<c:out value="${notification.subjectId}"/>"/>
+                    <input type="hidden" name="<%=WorkflowConstants.ROLE_PARAM_PREFIX%><c:out value="${notification.id}"/>" value="<c:out value="${notification.roleId}"/>"/>
+                    <input type="hidden" name="<%=WorkflowConstants.APPRAISAL_ID%><c:out value="${notification.id}"/>" value="<c:out value="${notification.performanceReviewId}"/>"/>
+                </form>
                 <c:choose>
                     <c:when test="${notification.action != 'CLOSE'}">
                         <c:choose>
@@ -108,23 +132,32 @@
                                     </c:otherwise>
                                 </c:choose>
                             </c:when>
-
+                            <c:when test="${notification.action == 'AWAITING_APPROVAL'}">
+                                <%-- view a readonly version of the review with an approved checkbox only on the form  --%>
+                                <%-- edit the review, questionnaire --%>
+                                <%-- edit the review, questionnaire --%>
+                                <a href="javascript:postQuestionnaireTarget('<c:out value="notifUrl${notification.id}"/>');"><fmt:message key="worklist.edit"/></a>
+                                &nbsp;|&nbsp;<fmt:message key="worklist.appraisal.awaiting.approval"/>
+                            </c:when>
+                            <c:when test="${notification.action == 'APPROVE'}">
+                                <%-- view a readonly version of the review with an approved checkbox only on the form  --%>
+                                <%-- edit the review, questionnaire --%>
+                                <a href="javascript:postQuestionnaireTarget('<c:out value="viewQuestionnaireUrl${notification.id}"/>');"><fmt:message key="worklist.view"/></a>
+                                &nbsp;|&nbsp;<a href="javascript:respondNotificationWarning('approveApraisal<c:out value="${notification.id}"/>', '<c:out value="${approvewarning}"/>');"><fmt:message key="worklist.approval.invitation"/></a>
+                            </c:when>
+                            <c:when test="${notification.action == 'VERIFY'}">
+                                <%-- view a readonly version of the review with an approved checkbox only on the form  --%>
+                                <a href="javascript:postQuestionnaireTarget('<c:out value="verifyApraisal${notification.id}"/>');"><fmt:message key="worklist.view"/></a>
+                                &nbsp;|&nbsp;<a href="javascript:respondNotificationWarning('verifyApraisal<c:out value="${notification.id}"/>', '<c:out value="${verifywarning}"/>');"><fmt:message key="worklist.verify.invitation"/> </a>
+                            </c:when>
                             <c:otherwise>
                                 <%-- we have answer, complete, edit for the questionnaire or the appraisal --%>
-                                <%-- the process has completed and all we need to do is finish, we may still edit though --%>                                
+                                <%-- the process has completed and all we need to do is wait for approval, we may still edit though --%>
                                 <c:if test="${notification.actionable}">
                                     <c:choose>
                                         <c:when test="${notification.action == 'ANSWER'}">
                                             <%-- answer the review questionnaire --%>
                                             <a href="javascript:respondNotification('notifUrl<c:out value="${notification.id}"/>');"><fmt:message key="worklist.appraisal.answer.invitation"/> </a>
-                                        </c:when>
-                                        <c:when test="${notification.action == 'APPROVE' && isApproverUser}">
-                                            <%-- answer the review questionnaire --%>
-                                            <a href="javascript:respondNotification('notifUrl<c:out value="${notification.id}"/>');"><fmt:message key="worklist.appraisal.answer.invitation"/> </a>
-                                        </c:when>
-                                        <c:when test="${notification.action == 'APPROVE' && !isApproverUser}">
-                                            <%-- Just a message awaiting approval --%>
-                                            <fmt:message key="worklist.appraisal.awaiting.approval"/>
                                         </c:when>
                                         <c:otherwise>
                                             <%-- edit the review, questionnaire --%>

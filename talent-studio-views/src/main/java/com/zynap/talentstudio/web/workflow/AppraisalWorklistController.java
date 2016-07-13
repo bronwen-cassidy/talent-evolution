@@ -199,7 +199,7 @@ public class AppraisalWorklistController extends WorklistController {
         roleValues.remove(evaluateeRole);
         wrapper.setRoles(roleValues);
 
-        final PerformanceReview performanceReview = (PerformanceReview) performanceReviewService.findById(wrapper.getPerformanceId());
+        final PerformanceReview performanceReview = performanceReviewService.findById(wrapper.getPerformanceId());
         wrapper.setAppraisalReview(performanceReview);
         wrapper.setSubject(subject);
 
@@ -366,7 +366,7 @@ public class AppraisalWorklistController extends WorklistController {
      */
     protected void setSubjectData(WorklistWrapper wrapper) throws TalentStudioException {
 
-        if (wrapper.isManagerEvaluation()) {
+        if (wrapper.isManagerEvaluation() || wrapper.isApproveView()) {
             // need the artefact for the executive summary, and the objectives
             final Long subjectId = wrapper.getSubjectId();
             final Subject subject = subjectService.findById(subjectId);

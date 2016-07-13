@@ -17,9 +17,9 @@ public interface IWorkflowBasicCommander {
 
     void startQuestionnaireProcess(Long workflowId, Date expiryDate, Long userId);
 
-    void setNotificationActionable(Long notificationId, Long nextUserId, String actionable, String nextAction) throws TalentStudioException;
+    void setNotificationActionable(Long notificationId, String actionable, String nextAction) throws TalentStudioException;
 
-    void respondNotification(Long notificationId, String action, String responder, Long userId) throws TalentStudioException;
+    void respondNotification(Long notificationId, String action) throws TalentStudioException;
 
     void closeProcess(Long workflowId) throws TalentStudioException;
 
@@ -39,4 +39,10 @@ public interface IWorkflowBasicCommander {
     void reopenNotification(Long notificationId);
 
     void completeNotification(Long notificationId);
+
+    void createActionNotification(Long rootNotificationId, String nextAction, Long subjectId, Long managerId, Long recipientId);
+
+    void approveNotification(Long subjectId, Long hrId, Long performanceId);
+
+    void verifyNotification(Long subjectId, Long managersManagerId, Long performanceId);
 }

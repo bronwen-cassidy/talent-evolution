@@ -61,7 +61,7 @@ public abstract class DefaultService implements IZynapService {
         throw new UnsupportedOperationException("Disable not supported");
     }
 
-    public List findAll() throws TalentStudioException {
+    public <T> List<T> findAll() throws TalentStudioException {
         return getFinderDao().findAll();
     }    
 

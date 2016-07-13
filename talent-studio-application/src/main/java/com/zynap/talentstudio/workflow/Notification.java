@@ -210,14 +210,6 @@ public class Notification extends ZynapDomainObject {
         return rootId;
     }
 
-    public Long getNextUserId() {
-        return nextUserId;
-    }
-
-    public void setNextUserId(Long nextUserId) {
-        this.nextUserId = nextUserId;
-    }
-
     public void setRootId(Long rootId) {
         this.rootId = rootId;
     }
@@ -249,7 +241,10 @@ public class Notification extends ZynapDomainObject {
     public Integer getTarget() {
         // the target is determined by the current state and the next state of appraisals or questionnaires
         if(APPRAISAL_TYPE.equals(type)) {
-            if(Arrays.asList(appraisalActions).indexOf(action) < 2)
+            if(APPROVE.equals(action) || VERIFY.equals(action)) {
+                return 6;
+            }
+            else if(Arrays.asList(appraisalActions).indexOf(action) < 2)
                 return 5;
             else
                 return 2;
@@ -257,7 +252,16 @@ public class Notification extends ZynapDomainObject {
             return 2;
         }
     }
-    
+
+    /**
+     * works through the list of potential actions and finds the next valid one due.
+     *
+     * @param currentAction the action step that is currently active
+     * @param subType - whether this is the manager or evaluatee assement
+     *
+     * @return the next action in this workflow
+     * @see Notification#appraisalActions
+     */
     public static String getNextAction(String currentAction, String subType) {
 
         if (!CLOSE_ACTION.equals(currentAction)) {
@@ -270,6 +274,38 @@ public class Notification extends ZynapDomainObject {
             return actions.get((actions.indexOf(currentAction) + 1));
         }
         return CLOSE_ACTION;
+    }
+
+    public Long getHrId() {
+        return hrId;
+    }
+
+    public void setHrId(Long hrId) {
+        this.hrId = hrId;
+    }
+
+    public Long getManagersManagerId() {
+        return managersManagerId;
+    }
+
+    public void setManagersManagerId(Long managersManagerId) {
+        this.managersManagerId = managersManagerId;
+    }
+
+    public boolean isApproved() {
+        return approved;
+    }
+
+    public void setApproved(boolean approved) {
+        this.approved = approved;
+    }
+
+    public boolean isVerified() {
+        return verified;
+    }
+
+    public void setVerified(boolean verified) {
+        this.verified = verified;
     }
 
     public boolean isUserManaged() {
@@ -286,11 +322,16 @@ public class Notification extends ZynapDomainObject {
 
 
     private Long managerId;
+    private Long hrId;
+    private Long managersManagerId;
     private Long managerInstanceId;
     private Long evaluatorInstanceId;
     private Long performanceReviewId;
     private String type;
     private String subType;
+
+    private boolean approved;
+    private boolean verified;
 
     /**
      * Status defines the current state of this notification object. The status will range through the following states
@@ -316,7 +357,6 @@ public class Notification extends ZynapDomainObject {
     private Long launcherId;
     private Long recipientId;
     private Long rootId;
-    private Long nextUserId;
     private User recipient;
     private LookupValue role;
     private Subject subject;
@@ -328,11 +368,13 @@ public class Notification extends ZynapDomainObject {
 
     public static final String ANSWER = "ANSWER";
     public static final String CLOSE_ACTION = "CLOSE";
-    public static final String APPROVER = "NEXT_MANAGER";
+    public static final String VERIFY = "VERIFY";
+    public static final String VERIFIED = "VERIFIED";
+    public static final String APPROVE = "APPROVE";
+    public static final String APPROVED = "APPROVED";
+    public static final String AWAITING_APPROVAL = "AWAITING_APPROVAL";
 
-
-    // todo need to action after answer to approve this will be with the approver (hr or managers manager)
-    public static final String[] appraisalActions = new String[] {"ASSIGN_ROLES", "START", ANSWER, "COMPLETE", CLOSE_ACTION};
+    public static final String[] appraisalActions = new String[] {"ASSIGN_ROLES", "START", ANSWER, AWAITING_APPROVAL, "COMPLETE", CLOSE_ACTION};
     public static final String[] questionnaireActions = new String[] {ANSWER, "COMPLETE", CLOSE_ACTION};
 
     private boolean userManaged;

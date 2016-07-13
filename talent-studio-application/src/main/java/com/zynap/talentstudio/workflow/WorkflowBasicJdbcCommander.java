@@ -37,9 +37,9 @@ public class WorkflowBasicJdbcCommander extends JdbcDaoSupport implements IWorkf
         new StartWorkflowProc(getJdbcTemplate()).execute(workflowId, expiryDate, userId);
     }
 
-    public void setNotificationActionable(Long notificationId, Long nextUserId, String actionable, String nextAction) throws TalentStudioException {
+    public void setNotificationActionable(Long notificationId, String actionable, String nextAction) throws TalentStudioException {
         try {
-            new WorkflowSetNotificationActionable(getJdbcTemplate()).execute(notificationId, nextUserId, actionable, nextAction);
+            new WorkflowSetNotificationActionable(getJdbcTemplate()).execute(notificationId, actionable, nextAction);
         } catch (DataAccessException e) {
             throw new WorkflowException(e.getMessage(), e);
         }
@@ -47,9 +47,9 @@ public class WorkflowBasicJdbcCommander extends JdbcDaoSupport implements IWorkf
 
 
 
-    public void respondNotification(Long notificationId, String action, String responder, Long userId) throws TalentStudioException {
+    public void respondNotification(Long notificationId, String action) throws TalentStudioException {
         try {
-            new WorkflowRespondNotification(getJdbcTemplate()).execute(notificationId, action, responder, userId);
+            new WorkflowRespondNotification(getJdbcTemplate()).execute(notificationId, action);
         } catch (DataAccessException e) {
             throw new WorkflowException(e.getMessage(), e);
         }
@@ -69,6 +69,21 @@ public class WorkflowBasicJdbcCommander extends JdbcDaoSupport implements IWorkf
 
     public void completeNotification(Long notificationId) {
         new CompleteNotificationProcedure(getJdbcTemplate()).execute(notificationId);
+    }
+
+    @Override
+    public void createActionNotification(Long rootNotificationId, String nextAction, Long subjectId, Long managerId, Long recipientId) {
+        new CreateNotificationProcedure(getJdbcTemplate()).execute(rootNotificationId, nextAction, subjectId, managerId, recipientId);
+    }
+
+    @Override
+    public void approveNotification(Long subjectId, Long hrId, Long performanceId) {
+        new ApproveNotificationProcedure(getJdbcTemplate()).execute(subjectId, hrId, performanceId);
+    }
+
+    @Override
+    public void verifyNotification(Long subjectId, Long managersManagerId, Long performanceId) {
+        new VerifyNotificationProcedure(getJdbcTemplate()).execute(subjectId, managersManagerId, performanceId);
     }
 
     public void removeNotifications(Long subjectId) throws TalentStudioException {
@@ -179,7 +194,6 @@ public class WorkflowBasicJdbcCommander extends JdbcDaoSupport implements IWorkf
             setSql("wf_integration.set_actionable");
             setJdbcTemplate(template);
             declareParameter(new SqlParameter("nid_", Types.INTEGER));
-            declareParameter(new SqlParameter("next_user_id_", Types.INTEGER));
             declareParameter(new SqlParameter("actionable_", Types.VARCHAR));
             declareParameter(new SqlParameter("next_action_", Types.VARCHAR));
         }
@@ -200,16 +214,12 @@ public class WorkflowBasicJdbcCommander extends JdbcDaoSupport implements IWorkf
             setJdbcTemplate(template);
             declareParameter(new SqlParameter("nid", Types.INTEGER));
             declareParameter(new SqlParameter("next_action_", Types.VARCHAR));
-            declareParameter(new SqlParameter("responder", Types.VARCHAR));
-            declareParameter(new SqlParameter("user_id_", Types.INTEGER));
         }
 
-        public void execute(Long notificationId, String action, String responder, Long userId) {
+        public void execute(Long notificationId, String action) {
             Map<String, Object> in = new HashMap<String, Object>();
             in.put("nid", notificationId);
             in.put("next_action_", action);
-            in.put("responder", responder);
-            in.put("user_id_", userId);
             execute(in);
         }
 
@@ -259,7 +269,66 @@ public class WorkflowBasicJdbcCommander extends JdbcDaoSupport implements IWorkf
             execute(in);
         }
     }
+    private static class CreateNotificationProcedure extends StoredProcedure {
 
+        public CreateNotificationProcedure(JdbcTemplate template) {
+            setSql("wf_integration.create_notification");
+            setJdbcTemplate(template);
+            declareParameter(new SqlParameter("root_notification_id_", Types.INTEGER));
+            declareParameter(new SqlParameter("next_action_", Types.VARCHAR));
+            declareParameter(new SqlParameter("subject_id_", Types.INTEGER));
+            declareParameter(new SqlParameter("manager_id_", Types.INTEGER));
+            declareParameter(new SqlParameter("recipient_id_", Types.INTEGER));
+        }
+
+        public void execute(Long rootNotificationId, String nextAction, Long subjectId, Long managerId, Long recipientId) {
+            Map<String, Object> in = new HashMap<>();
+            in.put("root_notification_id_", rootNotificationId);
+            in.put("next_action_", nextAction);
+            in.put("subject_id_", subjectId);
+            in.put("manager_id_", managerId);
+            in.put("recipient_id_", recipientId);
+            execute(in);
+        }
+    }
+    private static class ApproveNotificationProcedure extends StoredProcedure {
+
+        public ApproveNotificationProcedure(JdbcTemplate template) {
+            setSql("wf_integration.approve_notification");
+            setJdbcTemplate(template);
+            /*subjectId, hrId, performanceId*/
+            declareParameter(new SqlParameter("subject_id_", Types.INTEGER));
+            declareParameter(new SqlParameter("hr_id_", Types.INTEGER));
+            declareParameter(new SqlParameter("performance_id_", Types.INTEGER));
+        }
+
+        public void execute(Long subjectId, Long hrId, Long performanceId) {
+            Map<String, Object> in = new HashMap<>();
+            in.put("subject_id_", subjectId);
+            in.put("hr_id_", hrId);
+            in.put("performance_id_", performanceId);
+            execute(in);
+        }
+    }
+    private static class VerifyNotificationProcedure extends StoredProcedure {
+
+        public VerifyNotificationProcedure(JdbcTemplate template) {
+            setSql("wf_integration.verify_notification");
+            setJdbcTemplate(template);
+            /*subjectId, hrId, performanceId*/
+            declareParameter(new SqlParameter("subject_id_", Types.INTEGER));
+            declareParameter(new SqlParameter("managers_manager_id_", Types.INTEGER));
+            declareParameter(new SqlParameter("performance_id_", Types.INTEGER));
+        }
+
+        public void execute(Long subjectId, Long managersManagerId, Long performanceId) {
+            Map<String, Object> in = new HashMap<>();
+            in.put("subject_id_", subjectId);
+            in.put("managers_manager_id_", managersManagerId);
+            in.put("performance_id_", performanceId);
+            execute(in);
+        }
+    }
     private static class WorkflowCloseProcedure extends StoredProcedure {
 
         public WorkflowCloseProcedure(JdbcTemplate template) {

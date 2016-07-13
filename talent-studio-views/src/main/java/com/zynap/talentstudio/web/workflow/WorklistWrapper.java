@@ -42,11 +42,11 @@ public class WorklistWrapper extends QuestionnaireWrapper {
         this.performanceReview = performanceReview;
     }
 
-    public List getNotificationList() {
+    public List<Notification> getNotificationList() {
         return notificationList;
     }
 
-    public void setNotificationList(List notificationList) {
+    public void setNotificationList(List<Notification> notificationList) {
         this.notificationList = notificationList;
     }
 
@@ -404,6 +404,26 @@ public class WorklistWrapper extends QuestionnaireWrapper {
         return currentUserId;
     }
 
+    public void setManagersManagerView(boolean managersManagerView) {
+        this.managersManagerView = managersManagerView;
+    }
+
+    public boolean isManagersManagerView() {
+        return managersManagerView;
+    }
+
+    public void setHrView(boolean hrView) {
+        this.hrView = hrView;
+    }
+
+    public boolean isHrView() {
+        return hrView;
+    }
+
+    public boolean isApproveView() {
+        return hrView || managersManagerView;
+    }
+
     private List<Notification> notificationList;
     private Long notificationId;
     private String action;
@@ -436,4 +456,7 @@ public class WorklistWrapper extends QuestionnaireWrapper {
     private PerformanceReview appraisalReview;
     private Subject subject;
     private Long currentUserId;
+
+    private boolean managersManagerView;
+    private boolean hrView;
 }

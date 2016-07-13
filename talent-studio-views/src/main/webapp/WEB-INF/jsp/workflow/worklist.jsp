@@ -40,7 +40,6 @@
                 <zynap:tabName name="objectiveinfo" value="${command.objective.label}"/>
             </c:if>
         </c:if>
-
     </c:if>
 
     <c:if test="${command.performanceRoles != null}">
@@ -48,13 +47,11 @@
         <zynap:tabName value="${tabLabel}" name="roles"/>
     </c:if>
 
-  
     <div id="worklist_span" style="display:<c:choose><c:when test="${command.activeTab == 'worklist'}">inline</c:when><c:otherwise>none</c:otherwise></c:choose>">
         <%@ include file="todolist.jsp"%>
     </div>
 
-
-    <c:if test="${command.questionnaire != null}">
+    <c:if test="${command.questionnaire != null && !command.approveView}">
         <div id="questionnaire_span" style="display:<c:choose><c:when test="${command.activeTab == 'questionnaire'}">inline</c:when><c:otherwise>none</c:otherwise></c:choose>">
             <c:set var="questionnaireGroups" value="${command.questionnaireGroups}" scope="request"/>
             <c:set var="previewMode" value="false" scope="request"/>
@@ -100,8 +97,35 @@
         </div>
     </c:if>
 
+    <c:if test="${command.questionnaire != null && command.approveView}">
+        <div id="questionnaire_span" style="display:<c:choose><c:when test="${command.activeTab == 'questionnaire'}">inline</c:when><c:otherwise>none</c:otherwise></c:choose>">
+            <c:set var="questionnaireGroups" value="${command.questionnaireGroups}" scope="request"/>
+            <c:set var="previewMode" value="false" scope="request"/>
+            <c:set var="managerAccessView" value="${command.performanceReview && command.approveView}" scope="request"/>
 
-   
+            <zynap:actionbox id="answerqbox">
+                <zynap:actionEntry>
+                    <form action="" method="post" name="qclose">
+                        <input type="hidden" name="_target4" value="4"/>
+                        <input class="actionbutton" type="button" value="<fmt:message key="close"/>" onclick="document.forms.qclose.submit();"/>
+                    </form>
+                </zynap:actionEntry>
+
+                <zynap:actionEntry>
+                    <%-- form used to review evaluators answers when the questionnaire is in view mode --%>
+                    <form action="" method="post" name="questionnaireForm">
+                        <input id="actId" type="hidden" name="action" value=""/>
+                        <input id="tarId" type="hidden" name="" value=""/>
+                        <input id="selGroupId" type="hidden" name="<%=WorklistController.SELECTED_GROUP_PARAM%>" value=""/>
+                    </form>
+                </zynap:actionEntry>
+                <zynap:actionEntry>
+                    <%@ include file="../questionnaires/view/pdfexportmenusnippet.jsp" %>
+                </zynap:actionEntry>
+            </zynap:actionbox>
+            <%@ include file="../questionnaires/view/viewquestionnairesnippet.jsp" %>
+        </div>
+    </c:if>
 
     <c:if test="${managerAccessView}">
         <div id="review_span" style="display:<c:choose><c:when test="${command.activeTab == 'review'}">inline</c:when><c:otherwise>none</c:otherwise></c:choose>">

@@ -103,11 +103,6 @@ public class QuestionnaireWorkflowService extends AbstractQuestionnaireService i
         workflowAdapter.setNotificationActionable(notificationId, actionable, nextAction);
     }
 
-    @Override
-    public void setNotificationActionable(Long notificationId, Long nextUserId, boolean actionable, String nextAction) throws TalentStudioException {
-        workflowAdapter.setNotificationActionable(notificationId, nextUserId, actionable, nextAction);
-    }
-
     protected IFinder getFinderDao() {
         return questionnaireDao;
     }

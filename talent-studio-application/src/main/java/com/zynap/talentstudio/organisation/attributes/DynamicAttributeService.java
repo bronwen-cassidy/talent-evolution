@@ -29,12 +29,12 @@ import java.util.*;
 @Transactional
 public class DynamicAttributeService extends DefaultService implements IDynamicAttributeService {
 
-    public Collection getActiveAttributes(String nodeType, boolean searchableOnly, String[] attributeTypes) {
+    public Collection<DynamicAttribute> getActiveAttributes(String nodeType, boolean searchableOnly, String[] attributeTypes) {
         return getActiveAttributes(nodeType, searchableOnly, attributeTypes, true);
     }
 
 
-    public Collection getActiveAttributes(String nodeType, boolean searchableOnly, String[] attributeTypes, boolean includeCalcFields) {
+    public Collection<DynamicAttribute> getActiveAttributes(String nodeType, boolean searchableOnly, String[] attributeTypes, boolean includeCalcFields) {
         return dynamicAttributeDao.getActiveAttributes(nodeType, searchableOnly, attributeTypes, includeCalcFields);
     }
 
