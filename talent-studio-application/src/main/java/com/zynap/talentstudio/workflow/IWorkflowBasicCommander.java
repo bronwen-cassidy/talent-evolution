@@ -42,7 +42,7 @@ public interface IWorkflowBasicCommander {
 
     void createActionNotification(Long rootNotificationId, String nextAction, Long subjectId, Long managerId, Long recipientId);
 
-    void approveNotification(Long subjectId, Long hrId, Long performanceId);
+    void approveNotification(Long subjectId, Long hrId, Long performanceId, Long notificationId);
 
     void verifyNotification(Long subjectId, Long managersManagerId, Long performanceId);
 }

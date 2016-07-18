@@ -118,7 +118,7 @@
         <zynap:form action="" method="post" name="questionnaireForm">
 
             <c:set var="tablesIndex" value="1" scope="request"/>
-            <c:set var="managerSelection" value="${command.userManagersCount > 1}" scope="request"/>
+            <c:set var="managerSelection" value="${command.userManagersCount > 0}" scope="request"/>
 
             <input id="actId" type="hidden" name="action" value=""/>
             <input id="tarId" type="hidden" name="" value=""/>

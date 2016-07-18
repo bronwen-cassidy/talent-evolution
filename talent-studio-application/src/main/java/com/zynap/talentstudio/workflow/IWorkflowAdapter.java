@@ -88,7 +88,7 @@ public interface IWorkflowAdapter {
 
     void completeNotification(Long notificationId);
 
-    void approveNotification(Long subjectId, Long hrId, Long performanceId);
+    void approveNotification(Long subjectId, Long hrId, Long performanceId, Long notificationId);
 
     void verifyNotification(Long subjectId, Long managersManagerId, Long performanceId);
 

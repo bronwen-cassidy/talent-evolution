@@ -241,7 +241,7 @@ public class Notification extends ZynapDomainObject {
     public Integer getTarget() {
         // the target is determined by the current state and the next state of appraisals or questionnaires
         if(APPRAISAL_TYPE.equals(type)) {
-            if(APPROVE.equals(action) || VERIFY.equals(action)) {
+            if(APPROVE.equals(action) || VERIFY.equals(action) || AWAITING_APPROVAL.equals(action)) {
                 return 6;
             }
             else if(Arrays.asList(appraisalActions).indexOf(action) < 2)
@@ -374,7 +374,7 @@ public class Notification extends ZynapDomainObject {
     public static final String APPROVED = "APPROVED";
     public static final String AWAITING_APPROVAL = "AWAITING_APPROVAL";
 
-    public static final String[] appraisalActions = new String[] {"ASSIGN_ROLES", "START", ANSWER, AWAITING_APPROVAL, "COMPLETE", CLOSE_ACTION};
+    public static final String[] appraisalActions = new String[] {"ASSIGN_ROLES", "START", ANSWER, "COMPLETE", CLOSE_ACTION};
     public static final String[] questionnaireActions = new String[] {ANSWER, "COMPLETE", CLOSE_ACTION};
 
     private boolean userManaged;

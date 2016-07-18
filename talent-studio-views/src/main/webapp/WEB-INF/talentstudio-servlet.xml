@@ -3215,6 +3215,7 @@
                 <value>worklistappraisals</value>
                 <value>worklistappraisals</value>
                 <value>worklistappraisals</value>
+                <value>worklistappraisals</value>
             </list>
         </property>
         <property name="displayConfigService" ref="displayConfigService"/>

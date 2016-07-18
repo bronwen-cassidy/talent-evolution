@@ -71,9 +71,10 @@ CREATE OR REPLACE PACKAGE WF_INTEGRATION AS
   -- approves the given subjects appraisal and removes the hr notification
   ------------------------------------------------------------------------------------------------------
   PROCEDURE approve_notification(
-      subject_id_     IN NUMBER
-    , hr_id_          IN NUMBER
-    , performance_id_ IN NUMBER
+      subject_id_      IN NUMBER
+    , hr_id_           IN NUMBER
+    , performance_id_  IN NUMBER     
+    , notification_id_ IN NUMBER
   );
   ------------------------------------------------------------------------------------------------------
   -- verifies the given subjects appraisal and removes the manager's manager's notification

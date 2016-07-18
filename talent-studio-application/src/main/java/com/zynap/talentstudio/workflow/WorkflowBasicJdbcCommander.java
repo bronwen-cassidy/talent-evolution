@@ -77,8 +77,8 @@ public class WorkflowBasicJdbcCommander extends JdbcDaoSupport implements IWorkf
     }
 
     @Override
-    public void approveNotification(Long subjectId, Long hrId, Long performanceId) {
-        new ApproveNotificationProcedure(getJdbcTemplate()).execute(subjectId, hrId, performanceId);
+    public void approveNotification(Long subjectId, Long hrId, Long performanceId, Long notificationId) {
+        new ApproveNotificationProcedure(getJdbcTemplate()).execute(subjectId, hrId, performanceId, notificationId);
     }
 
     @Override
@@ -300,13 +300,15 @@ public class WorkflowBasicJdbcCommander extends JdbcDaoSupport implements IWorkf
             declareParameter(new SqlParameter("subject_id_", Types.INTEGER));
             declareParameter(new SqlParameter("hr_id_", Types.INTEGER));
             declareParameter(new SqlParameter("performance_id_", Types.INTEGER));
+            declareParameter(new SqlParameter("notification_id_", Types.INTEGER));
         }
 
-        public void execute(Long subjectId, Long hrId, Long performanceId) {
+        public void execute(Long subjectId, Long hrId, Long performanceId, Long notificationId) {
             Map<String, Object> in = new HashMap<>();
             in.put("subject_id_", subjectId);
             in.put("hr_id_", hrId);
             in.put("performance_id_", performanceId);
+            in.put("notification_id_", notificationId);
             execute(in);
         }
     }

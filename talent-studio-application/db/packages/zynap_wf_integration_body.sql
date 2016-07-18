@@ -230,7 +230,8 @@ CREATE OR REPLACE PACKAGE BODY WF_INTEGRATION AS
     BEGIN
       UPDATE notifications
       SET actionable = actionable_
-      WHERE id = notification_id;
+      WHERE id = notification_id;     
+      
       UPDATE notifications
       SET action = next_action_
       WHERE id = notification_id;
@@ -559,22 +560,37 @@ CREATE OR REPLACE PACKAGE BODY WF_INTEGRATION AS
     END remove_notification;
   ------------------------------------------------------------------------
   -- Name: approve_notification
-  -- Description:
-  -- approves the appraisal workflow for the given subject
+  -- Description: approves the appraisal workflow for the given subject
   -- given by the parameter subject_id_
   ------------------------------------------------------------------------
 
   PROCEDURE approve_notification(
-      subject_id_     IN NUMBER
-    , hr_id_          IN NUMBER
-    , performance_id_ IN NUMBER
+      subject_id_      IN NUMBER
+    , hr_id_           IN NUMBER
+    , performance_id_  IN NUMBER
+    , notification_id_ IN NUMBER
   )
-  IS
+  IS   
+        
+    v_manager_id notifications.manager_id%type;
+    
     BEGIN
+      
+      select manager_id into v_manager_id from notifications where id = notification_id_;
+    
       UPDATE notifications
       SET APPROVED = 'T'
-      WHERE subject_id = subject_id_ AND HR_ID = hr_id_ AND PERFORMANCE_REVIEW_ID = performance_id_;
-      -- update the manager's notificaiton to indicate it can now be completed i.e. assign the next action
+      WHERE subject_id = subject_id_ AND HR_ID = hr_id_ AND PERFORMANCE_REVIEW_ID = performance_id_; 
+      
+      -- update the manager's notificaiton to indicate it can now be completed i.e. assign the next action 
+	  UPDATE notifications
+      SET ACTION = 'COMPLETE', ACTIONABLE = 'T'
+      WHERE recipient_id = v_manager_id 
+      AND HR_ID = hr_id_ 
+      AND PERFORMANCE_REVIEW_ID = performance_id_ 
+      AND SUBJECT_ID = subject_id_;      
+      
+      
       DELETE FROM notifications
       WHERE RECIPIENT_ID = hr_id_ AND PERFORMANCE_REVIEW_ID = performance_id_ AND subject_id = subject_id_;
 

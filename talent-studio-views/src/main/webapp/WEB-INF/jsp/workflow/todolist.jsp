@@ -98,7 +98,7 @@
                 </form>
                 <form method="post" action="" name="approveApraisal<c:out value="${notification.id}"/>" >
                     <input type="hidden" name="<%=ParameterConstants.DISABLE_COMMAND_DELETION%>" value="<%=ParameterConstants.UPDATE_COMMAND%>"/>
-                    <input type="hidden" name="_target7" value="7"/>
+                    <input type="hidden" name="_target15" value="15"/>
                     <input type="hidden" name="<%=WorkflowConstants.NOTIFICATION_ID_PARAM%>" value="<c:out value="${notification.id}"/>"/>
                     <input type="hidden" name="<%=WorkflowConstants.WORKFLOW_ID_PARAM_PREFIX%><c:out value="${notification.id}"/>" value="<c:out value="${notification.workflowId}"/>"/>
                     <input type="hidden" name="<%=WorkflowConstants.SUBJECT_ID_PARAM_PREFIX%><c:out value="${notification.id}"/>" value="<c:out value="${notification.subjectId}"/>"/>
@@ -107,7 +107,7 @@
                 </form>
                 <form method="post" action="" name="verifyApraisal<c:out value="${notification.id}"/>" >
                     <input type="hidden" name="<%=ParameterConstants.DISABLE_COMMAND_DELETION%>" value="<%=ParameterConstants.UPDATE_COMMAND%>"/>
-                    <input type="hidden" name="_target8" value="8"/>
+                    <input type="hidden" name="_target16" value="16"/>
                     <input type="hidden" name="<%=WorkflowConstants.NOTIFICATION_ID_PARAM%>" value="<c:out value="${notification.id}"/>"/>
                     <input type="hidden" name="<%=WorkflowConstants.WORKFLOW_ID_PARAM_PREFIX%><c:out value="${notification.id}"/>" value="<c:out value="${notification.workflowId}"/>"/>
                     <input type="hidden" name="<%=WorkflowConstants.SUBJECT_ID_PARAM_PREFIX%><c:out value="${notification.id}"/>" value="<c:out value="${notification.subjectId}"/>"/>
@@ -147,7 +147,7 @@
                             </c:when>
                             <c:when test="${notification.action == 'VERIFY'}">
                                 <%-- view a readonly version of the review with an approved checkbox only on the form  --%>
-                                <a href="javascript:postQuestionnaireTarget('<c:out value="verifyApraisal${notification.id}"/>');"><fmt:message key="worklist.view"/></a>
+                                <a href="javascript:postQuestionnaireTarget('<c:out value="viewQuestionnaireUrl${notification.id}"/>');"><fmt:message key="worklist.view"/></a>
                                 &nbsp;|&nbsp;<a href="javascript:respondNotificationWarning('verifyApraisal<c:out value="${notification.id}"/>', '<c:out value="${verifywarning}"/>');"><fmt:message key="worklist.verify.invitation"/> </a>
                             </c:when>
                             <c:otherwise>

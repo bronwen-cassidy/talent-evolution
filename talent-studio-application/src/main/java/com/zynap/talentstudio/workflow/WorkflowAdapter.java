@@ -60,8 +60,8 @@ public class WorkflowAdapter extends HibernateDaoSupport implements IWorkflowAda
     }
 
     @Override
-    public void approveNotification(Long subjectId, Long hrId, Long performanceId) {
-        workflowBasicCommander.approveNotification(subjectId, hrId, performanceId);
+    public void approveNotification(Long subjectId, Long hrId, Long performanceId, Long notificationId) {
+        workflowBasicCommander.approveNotification(subjectId, hrId, performanceId, notificationId);
     }
 
     @Override
@@ -99,9 +99,6 @@ public class WorkflowAdapter extends HibernateDaoSupport implements IWorkflowAda
     public void processApprovalNotification(Notification notification, String nextAction, Long managerId, Long subjectId, Long recipientId) throws TalentStudioException {
         // nothing to do if the notification is null
         if(notification == null) return;
-
-        // update the next action to approval or verification
-        workflowBasicCommander.respondNotification(notification.getId(), nextAction);
         // root notification_id
         workflowBasicCommander.createActionNotification(notification.getId(), nextAction, subjectId, managerId, recipientId);
     }

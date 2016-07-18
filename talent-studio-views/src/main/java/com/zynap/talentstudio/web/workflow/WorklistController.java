@@ -1,12 +1,5 @@
 package com.zynap.talentstudio.web.workflow;
 
-/**
- * Created by IntelliJ IDEA.
- * User: jsueiras
- * Date: 04-May-2005
- * Time: 09:51:01
- */
-
 import com.zynap.domain.UserPrincipal;
 import com.zynap.domain.admin.User;
 import com.zynap.exception.DomainObjectNotFoundException;
@@ -35,6 +28,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * Created by IntelliJ IDEA.
+ * User: jsueiras
+ * Date: 04-May-2005
+ * Time: 09:51:01
+ *
+ */
 public class WorklistController extends AnswerQuestionnaireController {
 
     public final void setWorkflowAdapter(IWorkflowAdapter workflowAdapter) {
@@ -76,7 +76,7 @@ public class WorklistController extends AnswerQuestionnaireController {
      *
      * @param request current HTTP request
      * @return instance of {@link WorklistWrapper}
-     * @throws Exception
+     * @throws Exception - any DomainObjectNotFoundException or TalentStudioException
      */
     protected final Object formBackingObject(HttpServletRequest request) throws Exception {
         WorklistWrapper wrapper = (WorklistWrapper) HistoryHelper.recoverCommand(request, WorklistWrapper.class);
@@ -102,7 +102,7 @@ public class WorklistController extends AnswerQuestionnaireController {
      * @param command  the WorklistWrapper
      * @param errors   the object containing binding errors
      * @return null
-     * @throws Exception
+     * @throws Exception - is not implemented
      */
     protected final ModelAndView processFinishInternal(HttpServletRequest request, HttpServletResponse response, Object command, Errors errors) throws Exception {
         return null;
@@ -161,7 +161,7 @@ public class WorklistController extends AnswerQuestionnaireController {
      * @param errors  the object containing binding errors
      * @param page    the page data is required for
      * @return Map
-     * @throws Exception
+     * @throws Exception - TalentStudioException
      */
     protected final Map referenceData(HttpServletRequest request, Object command, Errors errors, int page) throws Exception {
         WorklistWrapper wrapper = (WorklistWrapper) command;
@@ -232,28 +232,36 @@ public class WorklistController extends AnswerQuestionnaireController {
                     break;
                 case SAVE_QUESTIONNAIRE:
                     Long questionnaireId = wrapper.getQuestionnaireId();
-                    if(questionnaireId == null) break;
+                    if (questionnaireId == null) break;
 
                     Questionnaire questionnaire = questionnaireService.findById(questionnaireId);
-                    if (wrapper.getSelectedManagerId() != null) {
+                    notification = wrapper.getNotification();
+                    boolean shouldSetActionable = notification.getManagersManagerId() == null && notification.getHrId() == null;
+                    if (wrapper.getSelectedManagerIds() != null && wrapper.getSelectedManagerIds().length > 0) {
 
                         // update the current notification to indicate it is awaiting verification
-                        questionnaireWorkflowService.setNotificationActionable(wrapper.getNotificationId(), true, Notification.AWAITING_APPROVAL);
-                        workflowAdapter.processApprovalNotification(wrapper.getNotification(), Notification.VERIFY, userId, subjectId, wrapper.getSelectedManagerId());
+                        questionnaireWorkflowService.setNotificationActionable(wrapper.getNotificationId(), false, Notification.AWAITING_APPROVAL);
+                        for (int i = 0; i < wrapper.getSelectedManagerIds().length; i++) {
+                            workflowAdapter.processApprovalNotification(wrapper.getNotification(), Notification.VERIFY, userId, subjectId, wrapper.getSelectedManagerIds()[i]);
+                        }
                         // create a new notification
                         wrapper.setAction(Notification.AWAITING_APPROVAL);
+                        wrapper.setNotificationList(workflowAdapter.getNotifications(userId, performanceReview));
+                        shouldSetActionable = false;
                     }
+
                     // manager's veiw send to hr has been selected
                     if (wrapper.getHrUserId() != null) {
-                        // todo send to hr, make the hr notification update other notifications to indicate state
+
                         // updates the current notification to indicate awaiting approval
                         questionnaireWorkflowService.setNotificationActionable(wrapper.getNotificationId(), false, Notification.AWAITING_APPROVAL);
                         workflowAdapter.processApprovalNotification(wrapper.getNotification(), Notification.APPROVE, userId, subjectId, wrapper.getHrUserId());
+                        wrapper.setNotificationList(workflowAdapter.getNotifications(userId, performanceReview));
                         wrapper.setAction(Notification.AWAITING_APPROVAL);
+                        shouldSetActionable = false;
                     }
-
                     // todo complete can only happen if
-                    if((wrapper.getHrUser() == null && wrapper.getSelectedManagerId() == null) || wrapper.getNotification().isApproved()) {
+                    if (shouldSetActionable || notification.isApproved()) {
                         questionnaireWorkflowService.setNotificationActionable(wrapper.getNotificationId(), true, COMPLETE_WORKFLOW);
                     }
 
@@ -272,8 +280,9 @@ public class WorklistController extends AnswerQuestionnaireController {
                 case APPROVE_QUESTIONNAIRE:
                     // this notification needs to be removed for this person, all instances with the same subject_id and hr_id
                     // and performance_id need to be marked as approved
+                    setWorkflowParameters(wrapper, request);
                     notification = wrapper.getNotification();
-                    workflowAdapter.approveNotification(notification.getSubjectId(), notification.getHrId(), notification.getPerformanceReviewId());
+                    workflowAdapter.approveNotification(notification.getSubjectId(), notification.getHrId(), notification.getPerformanceReviewId(), notification.getId());
 
                     clearInfo(wrapper, true);
                     wrapper.setNotificationList(workflowAdapter.getNotifications(userId, performanceReview));
@@ -284,6 +293,7 @@ public class WorklistController extends AnswerQuestionnaireController {
 
                     // this notification needs to be removed for this person, all instances with the same subject_id and
                     // managers_manager_id and performance_id need to be marked as verified
+                    setWorkflowParameters(wrapper, request);
                     notification = wrapper.getNotification();
                     workflowAdapter.verifyNotification(notification.getSubjectId(), notification.getManagersManagerId(), notification.getPerformanceReviewId());
                     clearInfo(wrapper, true);
@@ -378,7 +388,7 @@ public class WorklistController extends AnswerQuestionnaireController {
             final Long userId = ZynapWebUtils.getUserId(request);
             User user = userService.findById(userId);
             Subject currentUsersSubject = subjectService.findByUserId(userId);
-            if(currentUsersSubject != null) {
+            if (currentUsersSubject != null) {
                 wrapper.setUserManagers(currentUsersSubject.getManagers());
             }
             setSubject(user, wrapper);
@@ -450,14 +460,14 @@ public class WorklistController extends AnswerQuestionnaireController {
     /**
      * Constants for notification-related targets.
      */
-    public static final int TODO_LIST = 0;
+    static final int TODO_LIST = 0;
     public static final int RESPOND_NOTIFICATION = 1;
-    public static final int OPEN_QUESTIONNAIRE = 2;
-    public static final int SAVE_QUESTIONNAIRE = 3;
-    public static final int CLOSE_FORM_TAB = 4;
-    public static final int VIEW_QUESTIONNAIRE = 6;
-    public static final int APPROVE_QUESTIONNAIRE = 7;
-    public static final int VERIFY_QUESTIONNAIRE = 8;
+    static final int OPEN_QUESTIONNAIRE = 2;
+    static final int SAVE_QUESTIONNAIRE = 3;
+    static final int CLOSE_FORM_TAB = 4;
+    private static final int VIEW_QUESTIONNAIRE = 6;
+    private static final int APPROVE_QUESTIONNAIRE = 15;
+    private static final int VERIFY_QUESTIONNAIRE = 16;
 
     /**
      * Constants for tabs.
