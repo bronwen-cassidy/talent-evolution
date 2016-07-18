@@ -607,13 +607,55 @@ CREATE OR REPLACE PACKAGE BODY WF_INTEGRATION AS
     , managers_manager_id_ IN NUMBER
     , performance_id_      IN NUMBER
   )
-  IS
-    BEGIN
+  IS  
+    v_workflow_id que_workflows.id%type;
+    v_num_hr_id number;    
+    v_notification_id notifications.id%type;
+    
+    BEGIN               
+    
+      select id into v_workflow_id 
+      from que_workflows 
+      where performance_id= performance_id_ 
+      and workflow_type = 'PERFORMANCE_REVIEW_MANAGER';
+      
+      select count(*) into v_num_hr_id
+      from que_workflows 
+      where performance_id = performance_id_
+      and workflow_type = 'PERFORMANCE_REVIEW_MANAGER'
+      and hr_user_id is not null;
+      
+      select id into v_notification_id 
+      from notifications
+      where recipient_id= managers_manager_id_
+      and PERFORMANCE_REVIEW_ID= performance_id_
+      and subject_id=subject_id_;
+       
       UPDATE notifications
       SET VERIFIED = 'T'
       WHERE subject_id = subject_id_ AND MANAGERS_MANAGER_ID = managers_manager_id_ AND
             PERFORMANCE_REVIEW_ID = performance_id_;
       -- update the manager's notificaiton to indicate it can now be completed i.e. assign the next action
+      
+      if v_num_hr_id < 1 then
+      	
+      	UPDATE notifications
+      	SET APPROVED = 'T'
+      	WHERE subject_id = subject_id_ 
+      	AND PERFORMANCE_REVIEW_ID = performance_id_;
+      	
+      	 UPDATE notifications
+	     SET ACTION = 'COMPLETE', ACTIONABLE = 'T'
+	     WHERE recipient_id = 
+	     	(select manager_id 
+	     	 from notifications 
+	     	 where id=v_notification_id)  
+	     AND PERFORMANCE_REVIEW_ID = performance_id_ 
+	     AND SUBJECT_ID = subject_id_;    
+	       		
+      end if;
+            
+      
       DELETE FROM notifications
       WHERE
         RECIPIENT_ID = managers_manager_id_ AND PERFORMANCE_REVIEW_ID = performance_id_ AND subject_id = subject_id_;

@@ -274,6 +274,7 @@ public class WorklistController extends AnswerQuestionnaireController {
                     wrapper.setActiveTab(WORKLIST_TAB);
                     break;
                 case VIEW_QUESTIONNAIRE:
+                    //todo handleOpenQuestionaire will be better in another method that just does view stuff
                     handleOpenQuestionaire(wrapper, request);
                     wrapper.setActiveTab(QUESTIONNAIRE_TAB);
                     break;
@@ -395,8 +396,12 @@ public class WorklistController extends AnswerQuestionnaireController {
             wrapper.setUserId(userId);
             // get questionnaire - if null, means there are no answers yet
             final Long role = wrapper.getRole();
-
-            Questionnaire questionnaire = questionnaireService.findQuestionnaireByWorkflow(workflowId, userId, wrapper.getSubjectId(), role);
+            Notification notification = wrapper.getNotification();
+            Long workflowUserId = userId;
+            if(notification != null && (Objects.equals(userId, notification.getHrId()) || Objects.equals(userId, notification.getManagersManagerId()))) {
+                workflowUserId = notification.getManagerId();
+            }
+            Questionnaire questionnaire = questionnaireService.findQuestionnaireByWorkflow(workflowId, workflowUserId, wrapper.getSubjectId(), role);
             final QuestionnaireWorkflow questionnaireWorkflow = questionnaireWorkflowService.findById(workflowId);
 
             final boolean create = (questionnaire == null);
@@ -413,7 +418,6 @@ public class WorklistController extends AnswerQuestionnaireController {
 
                 if (performanceReview) {
                     // mark the appraisal as having moved to the next phase
-                    final Notification notification = wrapper.getNotification();
                     if (notification != null) {
                         final Long subjectId = wrapper.getSubjectId();
                         workflowAdapter.processNotification(notification, wrapper.getAction(), userId, subjectId, role);
@@ -427,7 +431,7 @@ public class WorklistController extends AnswerQuestionnaireController {
             if (wrapper.isManagerEvaluation()) {
                 wrapper.setHrUser(questionnaireWorkflow.getHrUser());
             }
-            Notification notification = wrapper.getNotification();
+
             if (performanceReview && notification != null) {
                 wrapper.setManagersManagerView(Objects.equals(userId, notification.getManagersManagerId()));
                 wrapper.setHrView(Objects.equals(userId, notification.getHrId()));
