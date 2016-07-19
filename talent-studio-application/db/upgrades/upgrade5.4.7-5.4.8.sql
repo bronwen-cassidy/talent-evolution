@@ -6,6 +6,8 @@ prompt **************************** HAVE YOU BACKED UP YOUR DATABASE (Y/N)? ****
 prompt
 accept l_yes char prompt 'db backed up (y/n): '
 
+drop table UPGRADE_STATUS;
+
 create table versions
 ( version varchar2(100) not null, upgrade_date date default sysdate )
 /
