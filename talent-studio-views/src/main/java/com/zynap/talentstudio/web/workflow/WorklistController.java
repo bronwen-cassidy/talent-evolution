@@ -275,7 +275,7 @@ public class WorklistController extends AnswerQuestionnaireController {
                     break;
                 case VIEW_QUESTIONNAIRE:
                     //todo handleOpenQuestionaire will be better in another method that just does view stuff
-                    handleOpenQuestionaire(wrapper, request);
+                    handleViewQuestionaire(wrapper, request);
                     wrapper.setActiveTab(QUESTIONNAIRE_TAB);
                     break;
                 case APPROVE_QUESTIONNAIRE:
@@ -316,6 +316,43 @@ public class WorklistController extends AnswerQuestionnaireController {
         }
 
         wrapper.setNotificationList(workflowAdapter.getNotifications(userId, wrapper.isPerformanceReview()));
+    }
+
+    /**
+     * Only called for the HR and manager's manager views
+     * @param wrapper the form backing object
+     * @param request the request from which the workflow paramaters are read
+     * @throws Exception any TalentStudioException errors
+     */
+    private void handleViewQuestionaire(WorklistWrapper wrapper, HttpServletRequest request) throws Exception {
+        clearInfo(wrapper, true);
+        final Long workflowId = setWorkflowParameters(wrapper, request);
+        if (workflowId != null) {
+
+            final Long userId = ZynapWebUtils.getUserId(request);
+            User user = userService.findById(userId);
+
+            setSubject(user, wrapper);
+            wrapper.setUserId(userId);
+            Notification notification = wrapper.getNotification();
+
+            if(notification != null) {
+                Long workflowUserId = notification.getManagerId();
+                final Long role = wrapper.getRole();
+                Questionnaire questionnaire = questionnaireService.findQuestionnaireByWorkflow(workflowId, workflowUserId, wrapper.getSubjectId(), role);
+
+                // set questionnaire on wrapper and set active tab
+                refreshQuestionnaire(wrapper, questionnaire);
+                wrapper.setActiveTab(QUESTIONNAIRE_TAB);
+
+                if (performanceReview) {
+                    wrapper.setManagersManagerView(Objects.equals(userId, notification.getManagersManagerId()));
+                    wrapper.setHrView(Objects.equals(userId, notification.getHrId()));
+                }
+                // set additional subject data
+                setSubjectData(wrapper);
+            }
+        }
     }
 
     private boolean isRepondNotificationRequest(HttpServletRequest request) {
@@ -397,11 +434,7 @@ public class WorklistController extends AnswerQuestionnaireController {
             // get questionnaire - if null, means there are no answers yet
             final Long role = wrapper.getRole();
             Notification notification = wrapper.getNotification();
-            Long workflowUserId = userId;
-            if(notification != null && (Objects.equals(userId, notification.getHrId()) || Objects.equals(userId, notification.getManagersManagerId()))) {
-                workflowUserId = notification.getManagerId();
-            }
-            Questionnaire questionnaire = questionnaireService.findQuestionnaireByWorkflow(workflowId, workflowUserId, wrapper.getSubjectId(), role);
+            Questionnaire questionnaire = questionnaireService.findQuestionnaireByWorkflow(workflowId, userId, wrapper.getSubjectId(), role);
             final QuestionnaireWorkflow questionnaireWorkflow = questionnaireWorkflowService.findById(workflowId);
 
             final boolean create = (questionnaire == null);
