@@ -125,9 +125,9 @@ public class AppraisalWorklistController extends WorklistController {
         mailNotification.send(pair.getUrl(), ZynapWebUtils.getUser(request), current.getEvaluatorWorkflow(), participants.toArray(new User[participants.size()]));
     }
 
-    protected List<User> getParticipants(WorklistWrapper wrapper, PerformanceReview current) throws TalentStudioException {
+    private List<User> getParticipants(WorklistWrapper wrapper, PerformanceReview current) throws TalentStudioException {
         final List<PerformanceEvaluator> evaluators = performanceReviewService.getAssignedPerformanceEvaluators(current.getId(), wrapper.getSubjectId());
-        List<User> users = new ArrayList<User>();
+        List<User> users = new ArrayList<>();
         for (PerformanceEvaluator evaluator : evaluators) {
             final User evaluatorUser = evaluator.getUser();
             if(!users.contains(evaluatorUser)) users.add(evaluatorUser);
@@ -168,7 +168,7 @@ public class AppraisalWorklistController extends WorklistController {
      * @param request the servlet request
      * @throws TalentStudioException any errors
      */
-    protected void handleAssignRoles(WorklistWrapper wrapper, HttpServletRequest request) throws TalentStudioException {
+    private void handleAssignRoles(WorklistWrapper wrapper, HttpServletRequest request) throws TalentStudioException {
 
         clearInfo(wrapper, true);
         setWorkflowParameters(wrapper, request);
@@ -228,7 +228,7 @@ public class AppraisalWorklistController extends WorklistController {
         if (wrapper.getNotification().isUserManaged()) {
 
             List<Subject> managers = subject.getSubjectManagers();
-            List<NodeWrapper> wrappedManagers = new ArrayList<NodeWrapper>();
+            List<NodeWrapper> wrappedManagers = new ArrayList<>();
             for (Subject manager : managers) {
                 if (manager.getUser() != null) {
                     wrappedManagers.add(new NodeWrapper(manager));
@@ -247,10 +247,10 @@ public class AppraisalWorklistController extends WorklistController {
      *
      * @param request the servlet request
      * @param wrapper the worklist wrapper
-     * @param errors
+     * @param errors the error object
      * @throws TalentStudioException any errors
      */
-    protected void handleSaveRoles(HttpServletRequest request, WorklistWrapper wrapper, Errors errors) throws Exception {
+    private void handleSaveRoles(HttpServletRequest request, WorklistWrapper wrapper, Errors errors) throws Exception {
 
         wrapper.setSelectedManagerId(RequestUtils.getLongParameter(request, "selectedManagerId", null));
 
@@ -287,9 +287,9 @@ public class AppraisalWorklistController extends WorklistController {
      * @return List of {@link PerformanceEvaluator} objects
      * @throws TalentStudioException any errors
      */
-    protected List<PerformanceEvaluator> getModifiedEvaluatorRoles(WorklistWrapper worklistWrapper, boolean sendToEvaluatee) throws TalentStudioException {
+    private List<PerformanceEvaluator> getModifiedEvaluatorRoles(WorklistWrapper worklistWrapper, boolean sendToEvaluatee) throws TalentStudioException {
 
-        final List<PerformanceEvaluator> modifiedRoles = new ArrayList<PerformanceEvaluator>();
+        final List<PerformanceEvaluator> modifiedRoles = new ArrayList<>();
 
         // add evaluators for assigned roles
         final List<PerformanceEvaluatorWrapper> performanceRoles = worklistWrapper.getPerformanceRoles();
@@ -334,7 +334,7 @@ public class AppraisalWorklistController extends WorklistController {
     private Collection<PerformanceReviewQuestion> getEvaluationAnswers(QuestionnaireDefinitionModel definition, Collection<Questionnaire> questionnaires, String groupName) {
 
         final List<QuestionAttribute> questions = questionnaireHelper.getQuestions(definition, groupName);
-        final Collection<PerformanceReviewQuestion> performanceReviewQuestions = new ArrayList<PerformanceReviewQuestion>();
+        final Collection<PerformanceReviewQuestion> performanceReviewQuestions = new ArrayList<>();
 
         for (QuestionAttribute question : questions) {
             final PerformanceReviewQuestion performanceReviewQuestion = new PerformanceReviewQuestion(question.getLabel());
@@ -411,11 +411,11 @@ public class AppraisalWorklistController extends WorklistController {
     private static final String ASSIGN_ROLES_TAB = "roles";
     private static final String OBJECTIVEINFO_TAB = "objectiveinfo";
 
-    private final String APPRAISAL_MAIL = "APPRAISAL";
+    private static final String APPRAISAL_MAIL = "APPRAISAL";
 
     private IDisplayConfigService displayConfigService;
     private IObjectiveService objectiveService;
     protected IPerformanceReviewService performanceReviewService;
-    protected static final String START_REVIEW = "START";
+    private static final String START_REVIEW = "START";
     private static final String ROLE_DEL_INDX = "delIndx";
 }

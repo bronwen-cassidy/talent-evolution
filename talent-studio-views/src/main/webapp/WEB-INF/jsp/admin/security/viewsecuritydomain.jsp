@@ -61,34 +61,6 @@
 
 	    <tr>
 		    <td class="infolabel">
-			    <fmt:message key="securitydomain.users"/>&nbsp;:&nbsp;
-		    </td>
-		    <td class="infodata">
-                <table class="infotable" cellpadding="0" cellspacing="0">
-                    <thead>
-                        <tr><th><fmt:message key="user"/></th><th><fmt:message key="hr"/></th></tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach items="${model.users}" var="user">
-                            <tr>
-                                <td class="infodata">
-                                    <zynap:historyLink var="viewUserUrl" url="viewuser.htm">
-                                        <zynap:param name="node_id" value="${user.id}"/>
-                                    </zynap:historyLink>
-                                    <a href="<c:out value="${viewUserUrl}"/>"><c:out value="${user.loginInfo.username}"/></a>
-                                </td>
-                                <td class="infodata">
-                                    <img src="../images/${user.hr}.gif"/>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
-		    </td>
-	    </tr>
-
-	    <tr>
-		    <td class="infolabel">
 			    <fmt:message key="securitydomain.area"/>&nbsp;:&nbsp;
 		    </td>
 		    <td class="infodata">

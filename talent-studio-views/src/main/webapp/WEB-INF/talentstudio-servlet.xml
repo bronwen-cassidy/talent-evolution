@@ -85,6 +85,7 @@
                 <value>/.*importsubjects.htm</value>
                 <value>/.*exportsubjects.htm</value>
                 <value>/admin/uploadsuccess.htm</value>
+                <value>/talentarena/home.htm</value>
                 <value>/common/.*.htm</value>
             </list>
         </property>

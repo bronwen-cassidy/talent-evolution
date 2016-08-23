@@ -98,7 +98,7 @@
                 </form>
                 <form method="post" action="" name="approveApraisal<c:out value="${notification.id}"/>" >
                     <input type="hidden" name="<%=ParameterConstants.DISABLE_COMMAND_DELETION%>" value="<%=ParameterConstants.UPDATE_COMMAND%>"/>
-                    <input type="hidden" name="_target15" value="15"/>
+                    <input type="hidden" name="_target13" value="13"/>
                     <input type="hidden" name="<%=WorkflowConstants.NOTIFICATION_ID_PARAM%>" value="<c:out value="${notification.id}"/>"/>
                     <input type="hidden" name="<%=WorkflowConstants.WORKFLOW_ID_PARAM_PREFIX%><c:out value="${notification.id}"/>" value="<c:out value="${notification.workflowId}"/>"/>
                     <input type="hidden" name="<%=WorkflowConstants.SUBJECT_ID_PARAM_PREFIX%><c:out value="${notification.id}"/>" value="<c:out value="${notification.subjectId}"/>"/>

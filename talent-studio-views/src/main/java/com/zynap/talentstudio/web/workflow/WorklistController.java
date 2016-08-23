@@ -503,7 +503,7 @@ public class WorklistController extends AnswerQuestionnaireController {
     static final int SAVE_QUESTIONNAIRE = 3;
     static final int CLOSE_FORM_TAB = 4;
     private static final int VIEW_QUESTIONNAIRE = 6;
-    private static final int APPROVE_QUESTIONNAIRE = 15;
+    private static final int APPROVE_QUESTIONNAIRE = 13;
     private static final int VERIFY_QUESTIONNAIRE = 16;
 
     /**

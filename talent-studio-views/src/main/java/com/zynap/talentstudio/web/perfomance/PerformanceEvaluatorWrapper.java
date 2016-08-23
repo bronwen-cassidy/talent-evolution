@@ -4,6 +4,8 @@ import com.zynap.domain.admin.User;
 import com.zynap.talentstudio.performance.PerformanceEvaluator;
 import com.zynap.talentstudio.common.lookups.LookupValue;
 
+import java.io.Serializable;
+
 /**
  * Created by IntelliJ IDEA.
  * User: jsueiras
@@ -11,7 +13,7 @@ import com.zynap.talentstudio.common.lookups.LookupValue;
  * Time: 11:18:52
  * Wrapper used by Spring for setting appraisal roles.
  */
-public final class PerformanceEvaluatorWrapper {
+public final class PerformanceEvaluatorWrapper implements Serializable {
 
     public PerformanceEvaluatorWrapper(PerformanceEvaluator performanceEvaluator) {
         this.performanceEvaluator = performanceEvaluator;

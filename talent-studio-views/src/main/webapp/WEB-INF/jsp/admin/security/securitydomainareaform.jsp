@@ -22,23 +22,6 @@
                 </td>
             </tr>
             <tr>
-                <td class="infolabel"><fmt:message key="user.assign.hr"/>&nbsp;:&nbsp;</td>
-                <td>
-                    <table class="infotable" cellspacing="0" cellpadding="0">
-                        <c:forEach var="user" items="${command.selectedUsers}" varStatus="indexer">
-                            <tr>
-                                <td class="infolabel">
-                                    ${user.label}
-                                </td>
-                                <td class="infodata">
-                                    <form:checkbox path="command.selectedUsers[${indexer.index}].hr"/>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                    </table>
-                </td>
-            </tr>
-            <tr>
                 <td class="infobutton"></td>
                 <td class="infobutton">
                     <input class="inlinebutton" type="button" name="_cancel" value="<fmt:message key="cancel"/>" onclick="javascript:document.forms._cancel.submit();"/>

@@ -217,7 +217,17 @@ insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_P
 insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD) VALUES(PERMIT_SQ.nextval, 'AP', 'view', 'PROCESS', 'Access to Process Description','T', '/talentarena/processdescription.htm', null, null, null);
 
 -- my details
-insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD) VALUES(PERMIT_SQ.nextval, 'AP', 'view', 'DETAILS', 'Access to My Details','T', '/.*/viewmy*.*', null, null, null);
+insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD) VALUES(PERMIT_SQ.nextval, 'AP', 'view', 'DETAILS', 'Access to My Account','T', '/talentarena/viewmyaccount.htm', null, null, null);
+insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD) VALUES(PERMIT_SQ.nextval, 'AP', 'view', 'DETAILS', 'Access to My Details','T', '/talentarena/viewmydetails.htm', null, null, null);
+insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD) VALUES(PERMIT_SQ.nextval, 'AP', 'view', 'DETAILS', 'Access to My Team','T', '/talentarena/viewmyteam.htm', null, null, null);
+insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD) VALUES(PERMIT_SQ.nextval, 'AP', 'view', 'DETAILS', 'Access to My Portfolio','T', '/talentarena/viewmyportfolio.htm', null, null, null);
+insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD) VALUES(PERMIT_SQ.nextval, 'AP', 'view', 'DETAILS', 'Access to My Dashboard','T', '/talentarena/viewmydashboard.htm', null, null, null);
+
+insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD) VALUES(PERMIT_SQ.nextval, 'AP', 'view', 'DETAILS', 'Access to My Appraisal','T', '/talentarena/worklistappraisals.htm', null, null, null);
+insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD) VALUES(PERMIT_SQ.nextval, 'AP', 'view', 'DETAILS', 'Access to My Assessments','T', '/talentarena/worklistassessments.htm', null, null, null);
+insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD) VALUES(PERMIT_SQ.nextval, 'AP', 'view', 'DETAILS', 'Access to My Questionnaires','T', '/talentarena/worklistquestionnaires.htm', null, null, null);
+insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD) VALUES(PERMIT_SQ.nextval, 'AP', 'view', 'DETAILS', 'Access to My Messages','T', '/talentarena/worklistmessages.htm', null, null, null);
+
 insert into permits(ID, TYPE, ACTION, CONTENT, DESCRIPTION, IS_ACTIVE, URL, ID_PARAM, CLASS, METHOD) VALUES(PERMIT_SQ.nextval, 'AP', 'edit', 'DETAILS', 'Permission to Edit My Details','T', '/.*/editmydetails.htm', null, null, null);
 
 --my account
