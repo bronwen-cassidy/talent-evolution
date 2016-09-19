@@ -116,6 +116,7 @@ public final class QuestionnaireWorkflowWrapperBean implements Serializable {
 
         final PopulationDto population = (PopulationDto) IDomainUtils.findDomainObject(populations, populationId);
         questionnaireWorkflow.setPopulation(new Population(population.getId()));
+        questionnaireWorkflow.setHrUserId(hrUserId);
         assignGroup();
         return questionnaireWorkflow;
     }
@@ -230,11 +231,29 @@ public final class QuestionnaireWorkflowWrapperBean implements Serializable {
         return definitions;
     }
 
+    public Long getHrUserId() {
+        return hrUserId;
+    }
+
+    public void setHrUserId(Long hrUserId) {
+        this.hrUserId = hrUserId;
+    }
+
+    public String getHrUserLabel() {
+        return hrUserLabel;
+    }
+
+    public void setHrUserLabel(String hrUserLabel) {
+        this.hrUserLabel = hrUserLabel;
+    }
+
     private String infoForm;
     private Long populationId;
     private final QuestionnaireWorkflow questionnaireWorkflow;
     private final QuestionnaireDefinition questionnaireDefinition;
     private Collection populations;
+    private Long hrUserId;
+    private String hrUserLabel;
     // TS-2299 
     private boolean sendEmail;
     private String groupLabel;

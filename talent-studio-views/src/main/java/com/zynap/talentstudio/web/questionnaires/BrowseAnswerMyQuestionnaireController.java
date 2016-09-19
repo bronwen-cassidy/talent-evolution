@@ -7,6 +7,7 @@ package com.zynap.talentstudio.web.questionnaires;
 import com.zynap.domain.admin.User;
 import com.zynap.exception.PessimisticLockingFailureException;
 import com.zynap.exception.TalentStudioException;
+import com.zynap.talentstudio.messages.MessageItem;
 import com.zynap.talentstudio.organisation.subjects.NoSubjectForUserException;
 import com.zynap.talentstudio.organisation.subjects.Subject;
 import com.zynap.talentstudio.questionnaires.Questionnaire;
@@ -120,7 +121,7 @@ public class BrowseAnswerMyQuestionnaireController extends BrowseAnswerQuestionn
             if (!participants.isEmpty()) {
                 wrapper.setSendSuccess(true);
                 final Questionnaire questionnaire = wrapper.getQuestionnaire();
-                if (sendToInbox) messageService.create(questionnaire, false, ZynapWebUtils.getUser(request), participants);
+                if (sendToInbox) messageService.create(questionnaire, MessageItem.MANAGER_VIEW, ZynapWebUtils.getUser(request), participants);
 
                 if (sendEmail) {
                     UrlBeanPair pair;

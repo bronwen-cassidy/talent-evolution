@@ -146,7 +146,7 @@
             <c:if test="${isDynamic}">
                 <tr>
                         <%-- add two to num cols always --%>
-                    <td class="infodata" colspan="<c:out value="${numCols + 2}"/>">
+                    <td class="infodata" colspan="<c:out value="${numCols + 3}"/>">
                         <input type="button" class="inlinebutton"
                                name="add_dlibutton"
                                value="<fmt:message key="add"/>"

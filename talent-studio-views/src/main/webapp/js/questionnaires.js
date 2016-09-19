@@ -507,6 +507,7 @@ function addDynamicLineItemRow(tableId, uniqueGeneratorFieldId, queId) {
             } if (currentElem.nodeName == 'TEXTAREA') {
 
                 var itemIndex = eval(index) + increaseByOne;
+                currentElem.disabled = managerWriteOnly;
                 setElementNameId(currentElem, itemIndex, dynamicLevel);
                 addDynamicLineItemRowEvent(currentElem, queId, daId, eventNumber, lineItem, tableId, newRow.id);
 

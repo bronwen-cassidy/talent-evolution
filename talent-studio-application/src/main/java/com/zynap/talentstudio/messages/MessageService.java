@@ -32,26 +32,20 @@ public class MessageService extends DefaultService implements IMessageService {
      * Creates messages for the given questionnaire
      *
      * @param modifiedQuestionnaire - the modified questionaire
-     * @param managerView - is this a managers view
-     * @param fromUser - which user is sending this notification
-     * @param toUser - to whom is it going to
-     * @throws TalentStudioException
+     * @param viewType           - is this a managers view
+     * @param fromUser              - which user is sending this notification
+     * @param toUser                - to whom is it going to
+     * @throws TalentStudioException - db save errors
      */
-    public void create(Questionnaire modifiedQuestionnaire, boolean managerView, User fromUser, User toUser) throws TalentStudioException {
+    public void create(Questionnaire modifiedQuestionnaire, String viewType, User fromUser, User toUser) throws TalentStudioException {
 
-        create(modifiedQuestionnaire.getLabel(), modifiedQuestionnaire.getId(), managerView, fromUser, toUser);
+        create(modifiedQuestionnaire.getLabel(), modifiedQuestionnaire.getId(), viewType, fromUser, toUser);
     }
 
     @Override
-    public void create(String messageLabel, Long itemId, boolean managerView, User fromUser, User toUser) throws TalentStudioException {
+    public void create(String messageLabel, Long itemId, String viewType, User fromUser, User toUser) throws TalentStudioException {
         MessageItem inboxItem = new MessageItem();
-        if (managerView) {
-            // we are going to the subordinate who is the subject of the questionnaire
-            inboxItem.setViewType(MessageItem.INDIVIDUAL_VIEW);
-        } else {
-            // we are sending to our managers we need to ask the subject of the questionnaire who the maanger is.
-            inboxItem.setViewType(MessageItem.MANAGER_VIEW);
-        }
+        inboxItem.setViewType(viewType);
         inboxItem.setToUserId(toUser.getId());
         inboxItem.setDateReceived(new Date());
         inboxItem.setLabel(messageLabel);
@@ -62,13 +56,13 @@ public class MessageService extends DefaultService implements IMessageService {
         messageDao.create(inboxItem);
     }
 
-    public void create(Questionnaire modifiedQuestionnaire, boolean managerView, User user, List<User> participants) throws TalentStudioException {
-            create(modifiedQuestionnaire.getLabel(), modifiedQuestionnaire.getId(), managerView, user, participants);
+    public void create(Questionnaire modifiedQuestionnaire, String viewType, User user, List<User> participants) throws TalentStudioException {
+        create(modifiedQuestionnaire.getLabel(), modifiedQuestionnaire.getId(), viewType, user, participants);
     }
 
-    public void create(String queLabel, Long itemId, boolean managerView, User user, List<User> participants) throws TalentStudioException {
+    public void create(String queLabel, Long itemId, String viewType, User user, List<User> participants) throws TalentStudioException {
         for (User participant : participants) {
-            create(queLabel, itemId, managerView, user, participant);
+            create(queLabel, itemId, viewType, user, participant);
         }
     }
 
@@ -81,13 +75,13 @@ public class MessageService extends DefaultService implements IMessageService {
     }
 
     public void markAsRead(Long messageItemId) throws TalentStudioException {
-        MessageItem messageItem = (MessageItem) findById(messageItemId);
+        MessageItem messageItem = findById(messageItemId);
         messageItem.setStatus(MessageItem.STATUS_READ);
         messageDao.update(messageItem);
     }
 
     public void delete(Long messageItemId) throws TalentStudioException {
-        MessageItem messageItem = (MessageItem) findById(messageItemId);
+        MessageItem messageItem = findById(messageItemId);
         messageDao.delete(messageItem);
     }
 

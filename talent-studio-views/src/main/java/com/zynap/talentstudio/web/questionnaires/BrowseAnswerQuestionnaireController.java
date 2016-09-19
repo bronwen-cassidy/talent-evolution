@@ -6,6 +6,7 @@ import com.zynap.exception.TalentStudioException;
 import com.zynap.exception.DomainObjectNotFoundException;
 import com.zynap.talentstudio.mail.IMailNotification;
 import com.zynap.talentstudio.messages.IMessageService;
+import com.zynap.talentstudio.messages.MessageItem;
 import com.zynap.talentstudio.organisation.IOrganisationUnitService;
 import com.zynap.talentstudio.organisation.OrganisationUnit;
 import com.zynap.talentstudio.organisation.subjects.ISubjectService;
@@ -225,7 +226,7 @@ public class BrowseAnswerQuestionnaireController extends DefaultWizardFormContro
             if (!participants.isEmpty()) {
                 wrapper.setSendSuccess(true);
                 final Questionnaire questionnaire = wrapper.getQuestionnaire();
-                if (sendToInbox) messageService.create(questionnaire, true, ZynapWebUtils.getUser(request), participants);
+                if (sendToInbox) messageService.create(questionnaire, MessageItem.INDIVIDUAL_VIEW, ZynapWebUtils.getUser(request), participants);
                 if (sendEmail) {
                     UrlBeanPair pair;
                     if (sendToInbox) pair = mailNotifications.get(INBOX_MAIL);

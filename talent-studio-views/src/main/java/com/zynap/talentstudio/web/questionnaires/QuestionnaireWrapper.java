@@ -21,6 +21,7 @@ import java.util.List;
  */
 public class QuestionnaireWrapper implements Serializable {
     private static final long serialVersionUID = 8140178606331559713L;
+
     public Long getHrUserId() {
         return hrUserId;
     }
@@ -45,7 +46,12 @@ public class QuestionnaireWrapper implements Serializable {
             if(workflow != null && workflow.getPerformanceReview() != null) {
                 performanceReview = true;
             }            
+            if (workflow != null) {
+                this.hrUser = workflow.getHrUser();
+                this.hrUserId = workflow.getHrUserId();
+            }
         }
+        
         this.wrappedDynamicAttributes = wrappedDynamicAttributes;
     }
 
@@ -303,6 +309,14 @@ public class QuestionnaireWrapper implements Serializable {
         return sendErrorMessage;
     }
 
+    public void setHrView(boolean hrView) {
+        this.hrView = hrView;
+    }
+
+    public boolean isHrView() {
+        return hrView;
+    }
+
     private List<QuestionGroupWrapper> questionnaireGroups;
     protected Questionnaire questionnaire;
     private Long definitionId;
@@ -329,4 +343,5 @@ public class QuestionnaireWrapper implements Serializable {
 
     private User hrUser;
     private Long hrUserId;
+    private boolean hrView;
 }

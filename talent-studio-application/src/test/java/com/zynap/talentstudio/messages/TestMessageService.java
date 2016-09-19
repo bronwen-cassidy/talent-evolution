@@ -48,7 +48,7 @@ public class TestMessageService extends ZynapDatabaseTestCase {
         Questionnaire questionnaire = (Questionnaire) questionnaireService.findById(new Long(-26));
         final User fromUser = (User) userService.findById(new Long(-34));
         final User toUser = (User) userService.findById(new Long(-44));
-        messageService.create(questionnaire, true, fromUser, toUser);
+        messageService.create(questionnaire, MessageItem.INDIVIDUAL_VIEW, fromUser, toUser);
 
         // lets us find the message
         final List<MessageItem> messageItemList = messageService.findAll(new Long(-44));
@@ -64,10 +64,10 @@ public class TestMessageService extends ZynapDatabaseTestCase {
         // to employee
         final User toUser = (User) userService.findById(new Long(-34));
         // create first
-        messageService.create(questionnaire, true, fromUser1, toUser);
+        messageService.create(questionnaire, MessageItem.INDIVIDUAL_VIEW, fromUser1, toUser);
 
         // create the second
-        messageService.create(questionnaire, true, fromUser2, toUser);
+        messageService.create(questionnaire, MessageItem.INDIVIDUAL_VIEW, fromUser2, toUser);
 
         // lets us find the message
         final List<MessageItem> messageItemList = messageService.findAll(new Long(-34));
@@ -78,7 +78,7 @@ public class TestMessageService extends ZynapDatabaseTestCase {
         Questionnaire questionnaire = (Questionnaire) questionnaireService.findById(new Long(-26));
         final User fromUser = (User) userService.findById(new Long(-34));
         final User toUser = (User) userService.findById(new Long(-44));
-        messageService.create(questionnaire, true, fromUser, toUser);
+        messageService.create(questionnaire, MessageItem.INDIVIDUAL_VIEW, fromUser, toUser);
 
         // lets us find the message
         List<MessageItem> messageItemList = messageService.findAll(new Long(-44));
@@ -93,7 +93,7 @@ public class TestMessageService extends ZynapDatabaseTestCase {
         Questionnaire questionnaire = (Questionnaire) questionnaireService.findById(new Long(-26));
         final User fromUser = (User) userService.findById(new Long(-34));
         final User toUser = (User) userService.findById(new Long(-44));
-        messageService.create(questionnaire, true, fromUser, toUser);
+        messageService.create(questionnaire, MessageItem.INDIVIDUAL_VIEW, fromUser, toUser);
 
         Integer numUnread = messageService.countUnreadMessages(new Long(-44));
         assertEquals(new Integer(1), numUnread);

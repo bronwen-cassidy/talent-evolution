@@ -461,9 +461,6 @@ public class WorklistController extends AnswerQuestionnaireController {
             // set questionnaire on wrapper and set active tab
             refreshQuestionnaire(wrapper, questionnaire);
             wrapper.setActiveTab(QUESTIONNAIRE_TAB);
-            if (wrapper.isManagerEvaluation()) {
-                wrapper.setHrUser(questionnaireWorkflow.getHrUser());
-            }
 
             if (performanceReview && notification != null) {
                 wrapper.setManagersManagerView(Objects.equals(userId, notification.getManagersManagerId()));

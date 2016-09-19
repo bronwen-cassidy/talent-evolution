@@ -4,6 +4,7 @@ import com.zynap.domain.admin.User;
 import com.zynap.exception.TalentStudioException;
 import com.zynap.talentstudio.mail.IMailNotification;
 import com.zynap.talentstudio.messages.IMessageService;
+import com.zynap.talentstudio.messages.MessageItem;
 import com.zynap.talentstudio.organisation.subjects.ISubjectService;
 import com.zynap.talentstudio.organisation.subjects.Subject;
 import com.zynap.talentstudio.questionnaires.Questionnaire;
@@ -78,7 +79,7 @@ public class SendQuestionnaireNotificationController implements Controller,  Wor
 
                 try {
                     if (sendToInbox)
-                        messageService.create(queLabel, qId, managerView, ZynapWebUtils.getUser(request), participants);
+                        messageService.create(queLabel, qId, managerView ? MessageItem.INDIVIDUAL_VIEW : MessageItem.MANAGER_VIEW, ZynapWebUtils.getUser(request), participants);
                     if (sendEmail) {
                         UrlBeanPair pair;
                         if (sendToInbox) pair = mailNotifications.get(INBOX_MAIL);

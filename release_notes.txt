@@ -1,6 +1,10 @@
 release date: 
-release version 5.4.4
+release version 5.4.8
 -------------------------------------------
+
+TODO
+-------------------------------------------
+1) add hr selection in questionnaires (not for info-forms? - for either)
 
 New in this release:
 -------------------------------------------

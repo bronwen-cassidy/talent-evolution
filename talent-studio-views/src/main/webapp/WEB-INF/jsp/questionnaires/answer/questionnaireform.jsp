@@ -158,7 +158,7 @@
                             <td class="infolabel" style="width:50%" align="right">
                                 <span>
                                     <c:choose>
-                                        <c:when test="${command.managerView}"><fmt:message key="send.to.individual"/>&nbsp;:&nbsp;</c:when>
+                                        <c:when test="${command.managerView || command.hrView}"><fmt:message key="send.to.individual"/>&nbsp;:&nbsp;</c:when>
                                         <c:otherwise><fmt:message key="send.to.manager"/>&nbsp;:&nbsp;</c:otherwise>
                                     </c:choose>
                                 </span>
@@ -167,6 +167,18 @@
                                 <span><input type="checkbox" name="sendToInbox" id="sendIbx" <c:if test="${managerSelection}">disabled="true"</c:if>/></span>
                             </td>
                         </tr>
+                        <c:if test="${command.managerView && command.hrUserId != null && !command.hrView}">
+                            <tr>
+                                <td class="infolabel" style="width:50%" align="right">
+                                <span>
+                                    <fmt:message key="send.to.hr"/>&nbsp;:&nbsp;
+                                </span>
+                                </td>
+                                <td>
+                                    <span><input type="checkbox" name="sendToHr" id="sendIby"/></span>
+                                </td>
+                            </tr>   
+                        </c:if>
                         <tr>
                             <td class="infobutton" style="width:50%">&nbsp;</td>
                             <td class="infobutton" align="left" style="width:50%">

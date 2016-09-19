@@ -5,6 +5,7 @@ import com.zynap.exception.PessimisticLockingFailureException;
 import com.zynap.exception.TalentStudioException;
 import com.zynap.talentstudio.mail.IMailNotification;
 import com.zynap.talentstudio.messages.IMessageService;
+import com.zynap.talentstudio.messages.MessageItem;
 import com.zynap.talentstudio.organisation.IOrganisationUnitService;
 import com.zynap.talentstudio.organisation.OrganisationUnit;
 import com.zynap.talentstudio.organisation.attributes.IDynamicAttributeService;
@@ -66,6 +67,7 @@ public class AnswerQuestionnaireController extends DefaultWizardFormController i
             QuestionnaireWrapper questionnaireWrapper = questionnaireHelper.getQuestionnaireWrapper(questionnaireId, workflowId, user, subjectId, true);
             Questionnaire questionnaire = questionnaireWrapper.getQuestionnaire();
             questionnaireWrapper.setManagerView(managerView || (questionnaire.isManager()));
+            questionnaireWrapper.setHrView(user.getId().equals(questionnaireWrapper.getHrUserId()));
             questionnaireWrapper.setUserId(user.getId());
 
             if (managerView && questionnaire.getSubjectId() != null) {
@@ -137,33 +139,14 @@ public class AnswerQuestionnaireController extends DefaultWizardFormController i
         return refData;
     }
 
-    /**
-     * Save modified questionnaire.
-     * todo do not think this method is ever called, so remove if ya can
-     * @param request  the servlet request
-     * @param response the servlet response
-     * @param command  the command object {@link com.zynap.talentstudio.web.questionnaires.QuestionnaireWrapper}
-     * @param errors   the web page errors
-     * @return ModelAndView
-     * @throws Exception
-     */
-    protected ModelAndView processFinish(HttpServletRequest request, HttpServletResponse response, Object command, BindException errors) throws Exception {
-
-        final QuestionnaireWrapper wrapper = (QuestionnaireWrapper) command;
-        if (wrapper.isFatalErrors()) {
-            wrapper.setFatalErrors(false);
-            return showForm(request, response, errors);
-        }
-        return buildModelAndView(getSuccessView(), wrapper);
-    }
-
     private void processInboxNotification(HttpServletRequest request, QuestionnaireWrapper wrapper) throws TalentStudioException {
 
         final Questionnaire modifiedQuestionnaire = wrapper.getQuestionnaire();
         boolean sendToInbox = RequestUtils.getBooleanParameter(request, "sendToInbox", false);
+        boolean sendToHr = RequestUtils.getBooleanParameter(request, "sendToHr", false);
         boolean sendEmail = RequestUtils.getBooleanParameter(request, "sendEmail", false);
 
-        boolean process = sendEmail || sendToInbox;
+        boolean process = sendEmail || sendToInbox || sendToHr;
         if (process) {
             Long subjectId = modifiedQuestionnaire.getSubjectId();
             List<User> participants = new ArrayList<User>();
@@ -171,6 +154,8 @@ public class AnswerQuestionnaireController extends DefaultWizardFormController i
             if (managerView) {
                 User toUser = userService.findBySubjectId(subjectId);
                 if (toUser != null) participants.add(toUser);
+                if(wrapper.getHrUser() != null && sendToHr) participants.add(wrapper.getHrUser());
+                
             } else {
                 // find the manager
                 Subject subject = subjectService.findById(subjectId);
@@ -192,7 +177,8 @@ public class AnswerQuestionnaireController extends DefaultWizardFormController i
             }
             if (!participants.isEmpty()) {
                 wrapper.setSendSuccess(true);
-                if (sendToInbox) messageService.create(modifiedQuestionnaire, managerView, ZynapWebUtils.getUser(request), participants);
+                String viewType = managerView && !sendToHr ? MessageItem.INDIVIDUAL_VIEW : MessageItem.MANAGER_VIEW; 
+                if (sendToInbox || sendToHr) messageService.create(modifiedQuestionnaire, viewType, ZynapWebUtils.getUser(request), participants);
                 if (sendEmail) {
                     UrlBeanPair pair;
                     if (sendToInbox) pair = mailNotifications.get(INBOX_MAIL);

@@ -23,283 +23,294 @@ import java.util.List;
  */
 public class BrowseQuestionnaireWrapper implements Serializable {
 
-    private boolean fatalErrors;
-    private boolean sendFail;
-    private String sendErrorMessage;
+	public BrowseQuestionnaireWrapper(List<QuestionnaireDTO> results, QuestionnaireWrapper questionnaireWrapper, QuestionnaireDTO current, boolean myPortfolio) {
 
-    public BrowseQuestionnaireWrapper(List<QuestionnaireDTO> results, QuestionnaireWrapper questionnaireWrapper, QuestionnaireDTO current, boolean myPortfolio) {
+		this.results = results;
+		this.questionnaireWrapper = questionnaireWrapper;
+		this.current = current;
+		this.myPortfolio = myPortfolio;
+		this.questionnaireWrapper.setMyPortfolio(myPortfolio);
+	}
 
-        this.results = results;
-        this.questionnaireWrapper = questionnaireWrapper;
-        this.current = current;        
-        this.myPortfolio = myPortfolio;
-        this.questionnaireWrapper.setMyPortfolio(myPortfolio);
-    }
+	public QuestionnaireWrapper getQuestionnaireWrapper() {
+		return questionnaireWrapper;
+	}
 
-    public QuestionnaireWrapper getQuestionnaireWrapper() {
-        return questionnaireWrapper;
-    }
+	public void updateState(QuestionnaireWrapper wrapper, QuestionnaireDTO current) {
+		wrapper.setSendErrorMessage(questionnaireWrapper.getSendErrorMessage());
+		wrapper.setSendFail(questionnaireWrapper.isSendFail());
+		wrapper.setSendSuccess(questionnaireWrapper.isSendSuccess());
 
-    public void updateState(QuestionnaireWrapper wrapper, QuestionnaireDTO current) {
-        wrapper.setSendErrorMessage(questionnaireWrapper.getSendErrorMessage());
-        wrapper.setSendFail(questionnaireWrapper.isSendFail());
-        wrapper.setSendSuccess(questionnaireWrapper.isSendSuccess());
-        
-        this.questionnaireWrapper = wrapper;
-        this.current = current;
-        questionnaireWrapper.setSubjectUser(subjectUser);
-        questionnaireWrapper.setMyPortfolio(myPortfolio);
-    }
+		this.questionnaireWrapper = wrapper;
+		this.current = current;
+		questionnaireWrapper.setSubjectUser(subjectUser);
+		questionnaireWrapper.setMyPortfolio(myPortfolio);
+	}
 
-    public Questionnaire getQuestionnaire() {
-        return questionnaireWrapper.getQuestionnaire();
-    }
+	public Questionnaire getQuestionnaire() {
+		return questionnaireWrapper.getQuestionnaire();
+	}
 
-    public QuestionnaireWorkflow getWorkflow() {
-        return questionnaireWrapper.getWorkflow();
-    }
+	public QuestionnaireWorkflow getWorkflow() {
+		return questionnaireWrapper.getWorkflow();
+	}
 
-    public QuestionnaireDTO getCurrent() {
-        return current;
-    }
+	public QuestionnaireDTO getCurrent() {
+		return current;
+	}
 
-    public void setCurrent(QuestionnaireDTO current) {
-        this.current = current;
-    }
+	public void setCurrent(QuestionnaireDTO current) {
+		this.current = current;
+	}
 
-    public Long getFirst() {
-        Long firstId = getId(0);
-        if (firstId == null) return null;
-        return (questionnaireWrapper == null || !firstId.equals(questionnaireWrapper.getWorkflowId())) ? firstId : null;
-    }
+	public Long getFirst() {
+		Long firstId = getId(0);
+		if (firstId == null) return null;
+		return (questionnaireWrapper == null || !firstId.equals(questionnaireWrapper.getWorkflowId())) ? firstId : null;
+	}
 
-    public Long getLast() {
-        Long lastId = getId(results.size() - 1);
-        if (lastId == null) return null;
-        return (questionnaireWrapper == null || !lastId.equals(questionnaireWrapper.getWorkflowId())) ? lastId : null;
-    }
+	public Long getLast() {
+		Long lastId = getId(results.size() - 1);
+		if (lastId == null) return null;
+		return (questionnaireWrapper == null || !lastId.equals(questionnaireWrapper.getWorkflowId())) ? lastId : null;
+	}
 
-    public Long getId(int pos) {
-        if (results != null && !results.isEmpty())
-            try {
-                return results.get(pos).getWorkflowId();
-            } catch (IndexOutOfBoundsException e) {
-                return null;
-            }
-        return null;
-    }
+	public Long getId(int pos) {
+		if (results != null && !results.isEmpty())
+			try {
+				return results.get(pos).getWorkflowId();
+			} catch (IndexOutOfBoundsException e) {
+				return null;
+			}
+		return null;
+	}
 
-    public int getCurrentItemIndex() {
-        if (questionnaireWrapper != null && (results != null && !results.isEmpty())) {
-            return getIndex();
-        }
-        return -1;
-    }
+	public int getCurrentItemIndex() {
+		if (questionnaireWrapper != null && (results != null && !results.isEmpty())) {
+			return getIndex();
+		}
+		return -1;
+	}
 
-    public int getIndex() {
-        return results.indexOf(current);
-    }
+	public int getIndex() {
+		return results.indexOf(current);
+	}
 
-    public Long getPrevious() {
-        int index = getIndex();
-        if(index <= 0) return null;
-        else return getId(index - 1);
-    }
+	public Long getPrevious() {
+		int index = getIndex();
+		if (index <= 0) return null;
+		else return getId(index - 1);
+	}
 
-    public Long getNext() {
-        int index = getIndex();
-        if(index >= results.size() - 1) return null;
-        else return getId(index + 1);
-    }
+	public Long getNext() {
+		int index = getIndex();
+		if (index >= results.size() - 1) return null;
+		else return getId(index + 1);
+	}
 
-    public Long getCurrentIndex() {
-        if (questionnaireWrapper != null && results != null) {
-            int index = getIndex();
-            return new Long(index + 1);
-        }
-        return null;
-    }
+	public Long getCurrentIndex() {
+		if (questionnaireWrapper != null && results != null) {
+			int index = getIndex();
+			return new Long(index + 1);
+		}
+		return null;
+	}
 
-    public int getNumResults() {
-        return results != null ? results.size() : -1; 
-    }
+	public int getNumResults() {
+		return results != null ? results.size() : -1;
+	}
 
-    public String getQuestionnaireLabel() {
-        return questionnaireWrapper.getQuestionnaireLabel();
-    }
+	public String getQuestionnaireLabel() {
+		return questionnaireWrapper.getQuestionnaireLabel();
+	}
 
-    public Long getSubjectId() {
-        return subjectId;
-    }
+	public Long getSubjectId() {
+		return subjectId;
+	}
 
-    public boolean isNotificationBased() {
-        return questionnaireWrapper.isNotificationBased();
-    }
+	public boolean isNotificationBased() {
+		return questionnaireWrapper.isNotificationBased();
+	}
 
-    public final boolean isCompleted() {
-        return questionnaireWrapper.isCompleted();
-    }
+	public final boolean isCompleted() {
+		return questionnaireWrapper.isCompleted();
+	}
 
-    public boolean isWritePermission() {
-        return questionnaireWrapper.isWritePermission();
-    }
+	public boolean isWritePermission() {
+		return questionnaireWrapper.isWritePermission();
+	}
 
-    public boolean isMyPortfolio() {
-        return myPortfolio;
-    }
+	public boolean isMyPortfolio() {
+		return myPortfolio;
+	}
 
-    public Long getQuestionnaireId() {
-        return questionnaireWrapper.getQuestionnaireId();
-    }
+	public Long getQuestionnaireId() {
+		return questionnaireWrapper.getQuestionnaireId();
+	}
 
-    public Long getWorkflowId() {
-        return questionnaireWrapper.getWorkflowId();
-    }
+	public Long getWorkflowId() {
+		return questionnaireWrapper.getWorkflowId();
+	}
 
-    public boolean isPerformanceReview() {
-        return questionnaireWrapper.isPerformanceReview();
-    }
+	public boolean isPerformanceReview() {
+		return questionnaireWrapper.isPerformanceReview();
+	}
 
-    public List<QuestionGroupWrapper> getQuestionnaireGroups() {
-        return questionnaireWrapper.getQuestionnaireGroups();
-    }
+	public List<QuestionGroupWrapper> getQuestionnaireGroups() {
+		return questionnaireWrapper.getQuestionnaireGroups();
+	}
 
-    public QuestionnaireDefinition getQuestionnaireDefinition() {
-        return questionnaireWrapper.getQuestionnaireDefinition();
-    }
+	public QuestionnaireDefinition getQuestionnaireDefinition() {
+		return questionnaireWrapper.getQuestionnaireDefinition();
+	}
 
-    public List<QuestionnaireDTO> getResults() {
-        return results;
-    }
+	public List<QuestionnaireDTO> getResults() {
+		return results;
+	}
 
-    public QuestionnaireDTO findQuestionnaireDTO(Long workflowId) {
-        for (QuestionnaireDTO result : results) {
-            if(result.getWorkflowId().equals(workflowId)) return result;
-        }
-        return null;
-    }
+	public QuestionnaireDTO findQuestionnaireDTO(Long workflowId) {
+		for (QuestionnaireDTO result : results) {
+			if (result.getWorkflowId().equals(workflowId)) return result;
+		}
+		return null;
+	}
 
-    public void setSelectedManagerIds(Long[] managerIds) {
-        questionnaireWrapper.setSelectedManagerIds(managerIds);
-    }
+	public void setSelectedManagerIds(Long[] managerIds) {
+		questionnaireWrapper.setSelectedManagerIds(managerIds);
+	}
 
-    public Long[] getSelectedManagerIds() {
-        return questionnaireWrapper.getSelectedManagerIds();
-    }
+	public Long[] getSelectedManagerIds() {
+		return questionnaireWrapper.getSelectedManagerIds();
+	}
 
-    public boolean isManagerView() {
-        return !myPortfolio;
-    }
+	public boolean isManagerView() {
+		return !myPortfolio;
+	}
 
-    public void setMyPortfolio(boolean myPortfolio) {
-        this.myPortfolio = myPortfolio;
-    }
+	public void setMyPortfolio(boolean myPortfolio) {
+		this.myPortfolio = myPortfolio;
+	}
 
-    public String getErrorKey() {
-        return questionnaireWrapper.getErrorKey();
-    }
+	public String getErrorKey() {
+		return questionnaireWrapper.getErrorKey();
+	}
 
-    public void setErrorKey(String value) {
-        questionnaireWrapper.setErrorKey(value);        
-    }
+	public void setErrorKey(String value) {
+		questionnaireWrapper.setErrorKey(value);
+	}
 
-    public boolean isPositionPickerList() {
-        return questionnaireWrapper.isPositionPickerList();
-    }
+	public boolean isPositionPickerList() {
+		return questionnaireWrapper.isPositionPickerList();
+	}
 
-    public boolean isSubjectPickerList() {
-        return questionnaireWrapper.isSubjectPickerList();
-    }
+	public boolean isSubjectPickerList() {
+		return questionnaireWrapper.isSubjectPickerList();
+	}
 
-    public boolean isOrganisationPickerList() {
-         return questionnaireWrapper.isOrganisationPickerList();
-    }
+	public boolean isOrganisationPickerList() {
+		return questionnaireWrapper.isOrganisationPickerList();
+	}
 
-    public List<FormAttribute> getWrappedDynamicAttributes() {
-        return questionnaireWrapper.getWrappedDynamicAttributes();
-    }
+	public List<FormAttribute> getWrappedDynamicAttributes() {
+		return questionnaireWrapper.getWrappedDynamicAttributes();
+	}
 
-    public Long getDefinitionId() {
-        return questionnaireWrapper.getDefinitionId();
-    }
+	public Long getDefinitionId() {
+		return questionnaireWrapper.getDefinitionId();
+	}
 
-    public boolean isShowInboxInfo() {
-        questionnaireWrapper.setManagerView(!myPortfolio);
-        return questionnaireWrapper.isShowInboxInfo();
-    }
+	public boolean isShowInboxInfo() {
+		questionnaireWrapper.setManagerView(!myPortfolio);
+		return questionnaireWrapper.isShowInboxInfo();
+	}
 
-    public void setUserManagers(List<User> userManagers) {
-        this.userManagers = userManagers;
-    }
+	public void setUserManagers(List<User> userManagers) {
+		this.userManagers = userManagers;
+	}
 
-    public List<User> getUserManagers() {
-        return userManagers;
-    }
+	public List<User> getUserManagers() {
+		return userManagers;
+	}
 
-    public int getUserManagersCount(){
-        return userManagers.size();
-    }
+	public int getUserManagersCount() {
+		return userManagers.size();
+	}
 
-    public void setSubjectId(Long subjectId) {
-        this.subjectId = subjectId;
-    }
+	public void setSubjectId(Long subjectId) {
+		this.subjectId = subjectId;
+	}
 
-    public void setSendSuccess(boolean sendSuccess) {
-        questionnaireWrapper.setSendSuccess(sendSuccess);
-    }
+	public void setSendSuccess(boolean sendSuccess) {
+		questionnaireWrapper.setSendSuccess(sendSuccess);
+	}
 
-    public boolean isSendSuccess() {
-        return questionnaireWrapper.isSendSuccess();
-    }
+	public boolean isSendSuccess() {
+		return questionnaireWrapper.isSendSuccess();
+	}
 
-    public void setSubjectUser(User ownerUser) {
-        this.subjectUser = ownerUser;
-        questionnaireWrapper.setSubjectUser(ownerUser);
-    }
+	public void setSubjectUser(User ownerUser) {
+		this.subjectUser = ownerUser;
+		questionnaireWrapper.setSubjectUser(ownerUser);
+	}
 
-    public Long getUserId() {
-        return questionnaireWrapper.getUserId();
-    }
+	public void setFatalErrors(boolean fatalErrors) {
+		this.fatalErrors = fatalErrors;
+	}
 
-    public User getSubjectUser() {
-        return subjectUser;
-    }
+	public boolean isFatalErrors() {
+		return fatalErrors;
+	}
 
-    private List<QuestionnaireDTO> results;
-    private QuestionnaireWrapper questionnaireWrapper;
-    private QuestionnaireDTO current;
-    private boolean myPortfolio;
-    private List<User> userManagers;
-    private Long subjectId;
-    private User subjectUser;
+	public void setSendFail(boolean sendFail) {
+		questionnaireWrapper.setSendFail(sendFail);
+	}
 
-    public void setFatalErrors(boolean fatalErrors) {
-        this.fatalErrors = fatalErrors;
-    }
+	public boolean isSendFail() {
+		return questionnaireWrapper.isSendFail();
+	}
 
-    public boolean isFatalErrors() {
-        return fatalErrors;
-    }
+	public void setSendErrorMessage(String sendErrorMessage) {
+		questionnaireWrapper.setSendErrorMessage(sendErrorMessage);
+	}
 
-    public void setSendFail(boolean sendFail) {
-        questionnaireWrapper.setSendFail(sendFail);
-    }
+	public String getSendErrorMessage() {
+		return questionnaireWrapper.getSendErrorMessage();
+	}
 
-    public boolean isSendFail() {
-        return questionnaireWrapper.isSendFail();
-    }
+	public void resetSendState() {
+		setSendSuccess(false);
+		setSendFail(false);
+		setSendErrorMessage(null);
+	}
 
-    public void setSendErrorMessage(String sendErrorMessage) {
-        questionnaireWrapper.setSendErrorMessage(sendErrorMessage);
-    }
+	public boolean isHrView() {
+		return hrView;
+	}
 
-    public String getSendErrorMessage() {
-        return questionnaireWrapper.getSendErrorMessage();
-    }
+	public void setHrView(boolean hrView) {
+		this.hrView = hrView;
+	}
 
-    public void resetSendState() {
-        setSendSuccess(false);
-        setSendFail(false);
-        setSendErrorMessage(null);
-    }
+	private boolean fatalErrors;
+	private boolean sendFail;
+	private String sendErrorMessage;
+
+	public Long getUserId() {
+		return questionnaireWrapper.getUserId();
+	}
+
+	public User getSubjectUser() {
+		return subjectUser;
+	}
+
+	private List<QuestionnaireDTO> results;
+	private QuestionnaireWrapper questionnaireWrapper;
+	private QuestionnaireDTO current;
+	private boolean myPortfolio;
+	private List<User> userManagers;
+	private Long subjectId;
+	private User subjectUser;
+
+	private boolean hrView;
+
 }

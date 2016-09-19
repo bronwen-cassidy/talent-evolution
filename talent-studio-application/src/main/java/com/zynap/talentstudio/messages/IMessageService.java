@@ -21,16 +21,16 @@ public interface IMessageService {
 
     List<MessageItem> findAll (long userId);
 
-    void create(Questionnaire modifiedQuestionnaire, boolean managerView, User fromUser, User toUser) throws TalentStudioException;
+    void create(Questionnaire modifiedQuestionnaire, String viewType, User fromUser, User toUser) throws TalentStudioException;
 
     void markAsRead(Long messageItemId) throws TalentStudioException;
 
     void delete(Long messageItemId) throws TalentStudioException;
 
-    void create(Questionnaire modifiedQuestionnaire, boolean managerView, User user, List<User> participants) throws TalentStudioException;
-    void create(String messageLabel, Long itemId, boolean managerView, User user, List<User> participants) throws TalentStudioException;
+    void create(Questionnaire modifiedQuestionnaire, String viewType, User user, List<User> participants) throws TalentStudioException;
+    void create(String messageLabel, Long itemId, String viewType, User user, List<User> participants) throws TalentStudioException;
 
-    void create(String messageLabel, Long itemId, boolean managerView, User fromUser, User toUser) throws TalentStudioException;
+    void create(String messageLabel, Long itemId, String viewType, User fromUser, User toUser) throws TalentStudioException;
 
     void delete(String[] messageItemIds);
 
