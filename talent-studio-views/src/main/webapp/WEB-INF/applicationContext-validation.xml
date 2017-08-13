@@ -16,7 +16,10 @@
               <entry key="NUMBER">
                   <bean class="com.zynap.talentstudio.web.organisation.attributes.validators.IntegerAttributeValueValidator"/>
               </entry>
-              <entry key="DOUBLE">
+              <entry key="DECIMAL">
+                  <bean class="com.zynap.talentstudio.web.organisation.attributes.validators.DoubleAttributeValueValidator"/>
+              </entry>
+              <entry key="CURRENCY">
                   <bean class="com.zynap.talentstudio.web.organisation.attributes.validators.DoubleAttributeValueValidator"/>
               </entry>
               <entry key="DATE">

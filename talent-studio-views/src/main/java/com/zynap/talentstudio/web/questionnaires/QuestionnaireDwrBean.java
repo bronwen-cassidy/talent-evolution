@@ -113,6 +113,16 @@ public class QuestionnaireDwrBean {
     public AttributePersistenceResult saveUpdateDeleteQuestionnaireDate(Long queId, Long daId, Long attributeId, Integer dynamicPosition, String dateValue, Long queDefId, HttpServletRequest request) {
         return saveUpdateDeleteQuestionnaireGeneric(queId, daId, attributeId, dynamicPosition, dateValue, queDefId, request);
     }
+    
+    public AttributePersistenceResult saveDeleteQuestionnaireCurrency(Long queId, Long daId, Long attributeId, Integer dynamicPosition, String value, String currency, Long queDefId, HttpServletRequest request) {
+    	
+    	if(!StringUtils.hasText(currency) && StringUtils.hasText(value)) {
+		    AttributePersistenceResult result = new AttributePersistenceResult();
+		    result.setAttributeId(attributeId.toString());
+		    result.setErrorMessage(messageSource.getMessage("error.currency.required", null, getLocale(request)));
+	    }
+    	return saveUpdateDeleteQuestionnaireGeneric(queId, daId, attributeId, dynamicPosition, value, queDefId, request);
+    }
 
     public AttributePersistenceResult saveDeleteQuestionnaireCheckBox(Long queId, Long daId, Long attributeId, String value, String action, Long queDefId, Integer dynamicPosition, HttpServletRequest request) {
         assignUserSession(request);

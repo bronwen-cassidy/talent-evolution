@@ -23,7 +23,7 @@ public final class AttributeValuesCollection {
      * @param node
      */
     public AttributeValuesCollection(Node node) {
-        this.values = new HashMap<DynamicAttribute, AttributeValue>();
+        this.values = new HashMap<>();
 
         final Set<NodeExtendedAttribute> extendedAttributes = node.getExtendedAttributes();
         for (NodeExtendedAttribute nodeExtendedAttribute : extendedAttributes) {

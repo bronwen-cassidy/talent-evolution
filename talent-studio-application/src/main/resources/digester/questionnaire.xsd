@@ -108,6 +108,8 @@
                         <xs:enumeration value="Date"/>
                         <xs:enumeration value="Status"/>
                         <xs:enumeration value="Integer"/>
+                        <xs:enumeration value="Decimal"/>
+                        <xs:enumeration value="Currency"/>
                         <xs:enumeration value="Radio"/>
                         <xs:enumeration value="Checkbox"/>
                         <xs:enumeration value="PositiveInteger"/>

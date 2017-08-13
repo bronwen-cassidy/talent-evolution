@@ -6,6 +6,8 @@ package com.zynap.talentstudio.web.organisation.attributes;
  * Time: 15:43:33
  */
 
+import org.junit.Test;
+
 import com.zynap.talentstudio.AbstractHibernateTestCase;
 import com.zynap.talentstudio.organisation.attributes.DynamicAttribute;
 
@@ -13,12 +15,13 @@ import com.zynap.talentstudio.web.organisation.attributes.validators.DateTimeAtt
 import com.zynap.talentstudio.web.organisation.attributes.validators.ErrorMessageHandler;
 import com.zynap.talentstudio.web.organisation.attributes.validators.TimeAttributeValueValidator;
 
-public class TestAttributeWrapperBean extends AbstractHibernateTestCase {
+import static junit.framework.TestCase.assertNotNull;
+import static junit.framework.TestCase.assertNull;
+import static org.junit.Assert.assertEquals;
 
-    protected void setUp() throws Exception {
-        super.setUp();
-    }
-
+public class TestAttributeWrapperBean {
+	
+	@Test
     public void testSetDate() throws Exception {
         
         AttributeWrapperBean attributeWrapperBean = new AttributeWrapperBean("test1", null, new DynamicAttribute("1111", DynamicAttribute.DA_TYPE_DATE));
@@ -27,6 +30,7 @@ public class TestAttributeWrapperBean extends AbstractHibernateTestCase {
         assertEquals(real, attributeWrapperBean.getValue());
     }
 
+	@Test
     public void testSetNullOrEmptyDate() throws Exception {
 
         AttributeWrapperBean attributeWrapperBean = new AttributeWrapperBean("test2", null, new DynamicAttribute("1111", DynamicAttribute.DA_TYPE_DATE));
@@ -37,6 +41,7 @@ public class TestAttributeWrapperBean extends AbstractHibernateTestCase {
         assertEquals(BLANK_VALUE, value);
     }
 
+	@Test
     public void testSetDateTime() throws Exception {
 
         AttributeWrapperBean attributeWrapperBean = new AttributeWrapperBean("test3", null, new DynamicAttribute("1111", DynamicAttribute.DA_TYPE_DATETIMESTAMP));
@@ -50,6 +55,7 @@ public class TestAttributeWrapperBean extends AbstractHibernateTestCase {
         assertEquals(expected, attributeWrapperBean.getValue());
     }
 
+	@Test
     public void testSetDateAndHourNotMinute() throws Exception {
 
         AttributeWrapperBean attributeWrapperBean = new AttributeWrapperBean("test3", null, new DynamicAttribute("1111", DynamicAttribute.DA_TYPE_DATETIMESTAMP));
@@ -66,6 +72,7 @@ public class TestAttributeWrapperBean extends AbstractHibernateTestCase {
         assertNotNull("ErrorHandler has no error key, should have as errors should be detected.", errorMessageHandler.getErrorKey());
     }
 
+	@Test
     public void testSetDateAndMinuteNotHour() throws Exception {
 
         AttributeWrapperBean attributeWrapperBean = new AttributeWrapperBean("test3", null, new DynamicAttribute("1111", DynamicAttribute.DA_TYPE_DATETIMESTAMP));
@@ -83,6 +90,7 @@ public class TestAttributeWrapperBean extends AbstractHibernateTestCase {
 
     }
 
+	@Test
     public void testSetTime() throws Exception {
 
         AttributeWrapperBean attributeWrapperBean = new AttributeWrapperBean("test3", null, new DynamicAttribute("1111", DynamicAttribute.DA_TYPE_TIMESTAMP));
@@ -96,6 +104,7 @@ public class TestAttributeWrapperBean extends AbstractHibernateTestCase {
         assertNull("errors should have been null as there should have been no errors in the time set", errorMessageHandler);
     }
 
+	@Test
     public void testSetTimeNoMinutes() throws Exception {
 
         AttributeWrapperBean attributeWrapperBean = new AttributeWrapperBean("test3", null, new DynamicAttribute("1111", DynamicAttribute.DA_TYPE_TIMESTAMP));
@@ -109,7 +118,28 @@ public class TestAttributeWrapperBean extends AbstractHibernateTestCase {
         assertNotNull("ErrorHandler is null should have had errors no minutes on the time provided", errorMessageHandler);
         assertNotNull("ErrorHandler has no error key, should have as errors should be detected.", errorMessageHandler.getErrorKey());
     }
+    
+    @Test
+    public void testGetCurrencyValue() throws Exception {
+    	
+        AttributeWrapperBean attributeWrapperBean = new AttributeWrapperBean("currency", null, new DynamicAttribute("1111", DynamicAttribute.DA_TYPE_CURRENCY)); 
+        attributeWrapperBean.setValue("12000.00");
+        attributeWrapperBean.setCurrency("USD");
+        final String value = attributeWrapperBean.getValue();
+        assertEquals("12000.00", value);
+    }
 
+	@Test
+	public void testGetCurrencyDisplayValue() throws Exception {
+
+		AttributeWrapperBean attributeWrapperBean = new AttributeWrapperBean("currency", null, new DynamicAttribute("1111", DynamicAttribute.DA_TYPE_CURRENCY));
+		attributeWrapperBean.setValue("12000");
+		attributeWrapperBean.setCurrency("USD");
+		final String displayValue = attributeWrapperBean.getDisplayValue();
+		assertEquals("USD12,000.00", displayValue);
+	}
+
+	@Test
     public void testSetTimeNoHours() throws Exception {
 
         AttributeWrapperBean attributeWrapperBean = new AttributeWrapperBean("test3", null, new DynamicAttribute("1111", DynamicAttribute.DA_TYPE_TIMESTAMP));
@@ -124,6 +154,7 @@ public class TestAttributeWrapperBean extends AbstractHibernateTestCase {
         assertNotNull("ErrorHandler has no error key, should have as errors should be detected.", errorMessageHandler.getErrorKey());
     }
 
+	@Test
     public void testSetDateForATimeAttr() throws Exception {
 
         AttributeWrapperBean attributeWrapperBean = new AttributeWrapperBean("test3", null, new DynamicAttribute("1111", DynamicAttribute.DA_TYPE_TIMESTAMP));
@@ -132,6 +163,7 @@ public class TestAttributeWrapperBean extends AbstractHibernateTestCase {
         assertEquals(BLANK_VALUE, attributeWrapperBean.getValue());
     }
 
+	@Test
     public void testSetNullOrEmptySetDateTime() throws Exception {
 
         AttributeWrapperBean attributeWrapperBean = new AttributeWrapperBean("test1", null, new DynamicAttribute("1111", DynamicAttribute.DA_TYPE_DATETIMESTAMP));
@@ -142,6 +174,7 @@ public class TestAttributeWrapperBean extends AbstractHibernateTestCase {
         assertEquals(BLANK_VALUE, dateTime);
     }
 
+	@Test
     public void testClearValue() throws Exception {
 
         AttributeWrapperBean attributeWrapperBean = new AttributeWrapperBean("test1", null, new DynamicAttribute("1111", DynamicAttribute.DA_TYPE_DATETIMESTAMP));
@@ -164,6 +197,7 @@ public class TestAttributeWrapperBean extends AbstractHibernateTestCase {
         assertEquals(BLANK_VALUE, attributeWrapperBean.getDateTimeDateDisplayValue());
     }
 
+	@Test
     public void testGetDateTimeDateDisplayValue() throws Exception {
 
         AttributeWrapperBean attributeWrapperBean = new AttributeWrapperBean("test1", null, new DynamicAttribute("1111", DynamicAttribute.DA_TYPE_DATETIMESTAMP));

@@ -357,6 +357,10 @@ public class DynamicAttributeWrapper implements Serializable {
         return expressions;
     }
 
+    public boolean isCurrencyType() {
+        return attributeDefinition != null && (attributeDefinition.isCurrencyType());
+    }
+
     private DynamicAttribute attributeDefinition;
     private String maxHour;
     private String maxMinute;

@@ -118,6 +118,7 @@ public class AddDynamicAttributeController extends DefaultWizardFormController {
                 if (attribute.isSelectionType()) {
                     refData.put(ControllerConstants.LOOKUPS, getLookupManager().findActiveLookupTypes());
                 }
+                
                 break;
         }
         refData.put(ControllerConstants.TITLE, MESSAGE_KEY + page);
@@ -129,6 +130,9 @@ public class AddDynamicAttributeController extends DefaultWizardFormController {
 
         DynamicAttributeWrapper da = (DynamicAttributeWrapper) command;
         DynamicAttribute real = da.getModifiedAttributeDefinition();
+        if(da.isCurrencyType())  {
+            da.setRefersTo(ILookupManager.LOOKUP_TYPE_CURRENCY);
+        }
         try {
             dynamicAttributeService.create(real);
         } catch (DataIntegrityViolationException e) {

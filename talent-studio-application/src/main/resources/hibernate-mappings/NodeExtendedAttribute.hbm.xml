@@ -60,11 +60,8 @@
                 length="7"
                 />
 
-        <property
-                name="lineItemId"
-                type="java.lang.Long"
-                column="LINE_ITEM_ID"                
-                />
+        <property name="currency" type="java.lang.String" column="CURRENCY"/>
+        <property name="lineItemId" type="java.lang.Long" column="LINE_ITEM_ID"/>
         
         <property
                 name="maxDynamicPosition"

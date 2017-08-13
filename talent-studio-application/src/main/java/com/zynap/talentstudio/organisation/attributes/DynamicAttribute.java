@@ -30,7 +30,7 @@ import java.util.List;
 public final class DynamicAttribute extends ZynapDomainObject implements Comparable<DynamicAttribute>, Cloneable {
 
 
-    private static final long serialVersionUID = -6134155447591180278L;
+	private static final long serialVersionUID = -6134155447591180278L;
 
     /**
      * default constructor
@@ -181,7 +181,7 @@ public final class DynamicAttribute extends ZynapDomainObject implements Compara
     }
 
     public boolean isNumericType() {
-        return typeMatches(DA_TYPE_NUMBER) || typeMatches(DA_TYPE_DOUBLE);
+        return typeMatches(DA_TYPE_NUMBER) || typeMatches(DA_TYPE_DECIMAL);
     }
 
     public boolean isSumType() {
@@ -222,6 +222,10 @@ public final class DynamicAttribute extends ZynapDomainObject implements Compara
 
     public boolean isSubjectType() {
         return typeMatches(DA_TYPE_SUBJECT);
+    }
+
+    public boolean isCurrencyType() {
+        return typeMatches(DA_TYPE_CURRENCY);
     }
 
     public boolean isPositionType() {
@@ -416,7 +420,7 @@ public final class DynamicAttribute extends ZynapDomainObject implements Compara
         return decimalPlaces;
     }
 
-    /**
+	/**
      * persistent field.
      */
     private String externalRefLabel;
@@ -444,6 +448,7 @@ public final class DynamicAttribute extends ZynapDomainObject implements Compara
     private List<DynamicAttributeReference> children = new ArrayList<DynamicAttributeReference>();
 
     public static final String DA_TYPE_NUMBER = "NUMBER";
+    public static final String DA_TYPE_DECIMAL = "DECIMAL";
     public static final String DA_TYPE_DOUBLE = "DOUBLE";
     public static final String DA_TYPE_DATE = "DATE";
     public static final String DA_TYPE_TEXTFIELD = "TEXT";
@@ -464,16 +469,17 @@ public final class DynamicAttribute extends ZynapDomainObject implements Compara
 
     public static final String DA_TYPE_OU = "ORGANISATION";
     public static final String DA_TYPE_SUBJECT = "SUBJECT";
+    public static final String DA_TYPE_CURRENCY = "CURRENCY";
     public static final String DA_TYPE_POSITION = "POSITION";
 
     public static final String NODE_TYPE_FUNCTION = "FUNC";
     public static final String CURRENT_DATE = "currentdate";
 
-    public static final DynamicAttribute DA_TYPE_DOUBLE_O = new DynamicAttribute("", DA_TYPE_DOUBLE);
     public static final DynamicAttribute DA_TYPE_NUMBER_O = new DynamicAttribute("", DA_TYPE_NUMBER);
     public static final DynamicAttribute DA_TYPE_DATE_O = new DynamicAttribute("", DA_TYPE_DATE);
     public static final DynamicAttribute DA_TYPE_TEXTFIELD_O = new DynamicAttribute("", DA_TYPE_TEXTFIELD);
     public static final DynamicAttribute DA_TYPE_TEXTAREA_O = new DynamicAttribute("", DA_TYPE_TEXTAREA);
+    public static final DynamicAttribute DA_TYPE_CURRENCY_O = new DynamicAttribute("", DA_TYPE_CURRENCY);
     public static final DynamicAttribute DA_TYPE_STRUCT_O = new DynamicAttribute("", DA_TYPE_STRUCT);
     public static final DynamicAttribute DA_TYPE_MULTISELECT_O = new DynamicAttribute("", DA_TYPE_MULTISELECT);
 

@@ -29,20 +29,27 @@ EXEC zynap_lookup_sp.install_type( 'DATYPE', 'SYSTEM', 'Attribute Types', 'Attri
 EXEC zynap_lookup_sp.install_values( 'DATYPE', 'TEXT', 'Text', 'Single line text', 0, TRUE);
 EXEC zynap_lookup_sp.install_values( 'DATYPE', 'TEXTAREA', 'Text Block', 'Multiple line text block', 1, TRUE);
 EXEC zynap_lookup_sp.install_values( 'DATYPE', 'NUMBER', 'Number', 'Number', 2, TRUE);
-EXEC zynap_lookup_sp.install_values( 'DATYPE', 'DOUBLE', 'Double', 'Double Number', 3, TRUE);
-EXEC zynap_lookup_sp.install_values( 'DATYPE', 'DATE', 'Date', 'Date', 4, TRUE);
-EXEC zynap_lookup_sp.install_values( 'DATYPE', 'TIME', 'Time', 'Time', 5, TRUE);
-EXEC zynap_lookup_sp.install_values( 'DATYPE', 'DATETIME', 'Date ' || CHR(38) || ' Time', 'Date ' || CHR(38) || ' Time', 6, TRUE);
-EXEC zynap_lookup_sp.install_values( 'DATYPE', 'IMG', 'Image', 'Image', 7, TRUE);
-EXEC zynap_lookup_sp.install_values( 'DATYPE', 'STRUCT', 'Selection List', 'Drop-down selection list', 8, TRUE);
-EXEC zynap_lookup_sp.install_values( 'DATYPE', 'LINK', 'Link', 'Hyperlink', 9, TRUE);
+EXEC zynap_lookup_sp.install_values( 'DATYPE', 'DECIMAL', 'Decimal', 'Decimal Number', 3, TRUE);
+EXEC zynap_lookup_sp.install_values( 'DATYPE', 'CURRENCY', 'Currency', 'Currency', 4, TRUE);
+EXEC zynap_lookup_sp.install_values( 'DATYPE', 'DATE', 'Date', 'Date', 5, TRUE);
+EXEC zynap_lookup_sp.install_values( 'DATYPE', 'TIME', 'Time', 'Time', 6, TRUE);
+EXEC zynap_lookup_sp.install_values( 'DATYPE', 'DATETIME', 'Date ' || CHR(38) || ' Time', 'Date ' || CHR(38) || ' Time', 7, TRUE);
+EXEC zynap_lookup_sp.install_values( 'DATYPE', 'IMG', 'Image', 'Image', 8, TRUE);
+EXEC zynap_lookup_sp.install_values( 'DATYPE', 'STRUCT', 'Selection List', 'Drop-down selection list', 9, TRUE);
+EXEC zynap_lookup_sp.install_values( 'DATYPE', 'LINK', 'Link', 'Hyperlink', 10, TRUE);
 
---EXEC zynap_lookup_sp.install_values( 'DATYPE', 'OBJ', 'Reference to other objects', 'Object');
+
+insert into lookup_types(ID, DESCRIPTION, TYPE, IS_ACTIVE, IS_SYSTEM, LABEL) values ('CURRENCY','Currency Codes','SYSTEM','T','T','Currencies');
+insert into lookup_values(id, TYPE_ID, VALUE_ID, SHORT_DESC, DESCRIPTION)
+values (LOOKUPVALUE_SQ.nextval, 'CURRENCY', 'USD', 'USD', 'USD');
 
   -- Artefact types
 EXEC zynap_lookup_sp.install_type( 'ARTEFACTTYPE', 'SYSTEM', 'Artefacts that can have attributes', 'Artefact Type', TRUE);
 EXEC zynap_lookup_sp.install_values( 'ARTEFACTTYPE', 'S', 'Person', 'Person', 0, TRUE);
 EXEC zynap_lookup_sp.install_values( 'ARTEFACTTYPE', 'P', 'Position', 'Position', 1, TRUE);
+
+EXEC zynap_lookup_sp.install_type( 'CURRENCY', 'SYSTEM', 'Currency Codes', 'Currency Codes', TRUE);
+EXEC zynap_lookup_sp.install_values( 'CURRENCY', 'USD', 'USD', 'USD', 0, TRUE);
 
 --- position classification
 EXEC zynap_lookup_sp.install_type( 'CLASSIFICATION', 'SYSTEM', 'Position classification for a position', 'Classification', FALSE);

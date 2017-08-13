@@ -6,6 +6,8 @@ package com.zynap.talentstudio.organisation.attributes;
  * Time: 10:48:19
  */
 
+import org.junit.Test;
+
 import com.zynap.talentstudio.AbstractHibernateTestCase;
 import com.zynap.talentstudio.analysis.populations.IPopulationEngine;
 import com.zynap.talentstudio.common.lookups.ILookupManager;
@@ -97,6 +99,15 @@ public class TestAttributeValue extends AbstractHibernateTestCase {
         final String value = "some text";
         DynamicAttribute dynamicAttribute = DynamicAttribute.DA_TYPE_TEXTAREA_O;
         testDisplayValue(dynamicAttribute, value, value);
+    }
+    
+    @Test
+    public void testCurrency() throws Exception {
+        final String value = "100000.00";
+        DynamicAttribute dynamicAttribute = DynamicAttribute.DA_TYPE_CURRENCY_O;
+	    final AttributeValue attributeValue = AttributeValue.create(value,"USD", dynamicAttribute);
+	    final String displayValue = attributeValue.getDisplayValue();
+	    assertEquals("", displayValue);
     }
 
     public void testStructGetDisplayValue() throws Exception {

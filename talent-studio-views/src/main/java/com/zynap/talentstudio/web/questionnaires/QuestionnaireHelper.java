@@ -29,7 +29,6 @@ import com.zynap.talentstudio.web.organisation.GroupMapKey;
 import com.zynap.talentstudio.web.organisation.attributes.FormAttribute;
 import com.zynap.util.ArrayUtils;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
 
 import java.util.ArrayList;
@@ -74,7 +73,7 @@ public class QuestionnaireHelper {
      * @param questionnaireDefinition the questionnaire definition
      * @param questionnaire           can be null
      */
-    public void setQuestionnaireState(QuestionnaireWrapper questionnaireWrapper, QuestionnaireDefinition questionnaireDefinition, Questionnaire questionnaire) {
+    void setQuestionnaireState(QuestionnaireWrapper questionnaireWrapper, QuestionnaireDefinition questionnaireDefinition, Questionnaire questionnaire) {
 
         questionnaireWrapper.clearQuestionnaireState();
 
@@ -87,9 +86,7 @@ public class QuestionnaireHelper {
             final List<FormAttribute> formAttributes = createFormAttributes(questionnaireWrapper, questionnaire, questionGroup.getAbstractQuestions());
 
             // iterate and add to all attributes list
-            for (int i = 0; i < formAttributes.size(); i++) {
-                final FormAttribute formAttribute = formAttributes.get(i);
-
+            for (final FormAttribute formAttribute : formAttributes) {
                 // if dynamic line item wrapper
                 if (formAttribute instanceof LineItemWrapper) {
                     allAttributes.addAll(((LineItemWrapper) formAttribute).getQuestionWrappers());
@@ -160,7 +157,7 @@ public class QuestionnaireHelper {
      * @param includeDynamicLineItems  whether to include dynamic line items or not
      * @return List                    list of questionnaire definitions
      */
-    public List<QuestionnaireDefinition> filterQuestionnaireDefinitions(Collection<QuestionnaireDefinition> questionnaireDefinitions, String[] questionTypes, boolean includeDynamicLineItems) {
+    List<QuestionnaireDefinition> filterQuestionnaireDefinitions(Collection<QuestionnaireDefinition> questionnaireDefinitions, String[] questionTypes, boolean includeDynamicLineItems) {
 
         List<QuestionnaireDefinition> definitions = new ArrayList<QuestionnaireDefinition>();
 
@@ -226,7 +223,7 @@ public class QuestionnaireHelper {
      * @param questionId The question id
      * @return Question or null
      */
-    public QuestionAttribute findQuestion(List questions, Long questionId) {
+    private QuestionAttribute findQuestion(List questions, Long questionId) {
 
         QuestionAttribute question = null;
 
@@ -252,48 +249,6 @@ public class QuestionnaireHelper {
         }
 
         return question;
-    }
-
-    /**
-     * Find QuestionAttributeWrapperBeans that match specified question.
-     * <br/> For multiquestion will return all questions.
-     *
-     * @param wrappedDynamicAttributes the dynamic attributes which are wrapped
-     * @param question                 the question for which we wish to find the wrapper for
-     * @return List of QuestionAttributeWrapperBeans (never null)
-     */
-    public List<FormAttribute> findQuestionWrapperBeans(List wrappedDynamicAttributes, QuestionAttribute question) {
-
-        final List<FormAttribute> questionAttributeWrapperBeans = new ArrayList<FormAttribute>();
-        final List relatedQuestions = question.getLineItem().getQuestions();
-        for (int i = 0; i < relatedQuestions.size(); i++) {
-            final QuestionAttribute relatedQuestion = (QuestionAttribute) relatedQuestions.get(i);
-            final QuestionAttributeWrapperBean found = findQuestionWrapperBean(wrappedDynamicAttributes, relatedQuestion);
-            if (found != null) {
-                questionAttributeWrapperBeans.add(found);
-            }
-        }
-
-        return questionAttributeWrapperBeans;
-    }
-
-    /**
-     * Find QuestionAttributeWrapperBeans that match specified question.
-     * <br/> Will not work with multi questions.
-     *
-     * @param wrappedDynamicAttributes the wrapped dynamic attributes
-     * @param question                 the question for which we wish to find the wrapper for
-     * @return QuestionAttributeWrapperBean or null
-     */
-    public QuestionAttributeWrapperBean findQuestionWrapperBean(List wrappedDynamicAttributes, QuestionAttribute question) {
-
-        QuestionAttributeWrapperBean questionAttributeWrapperBean = null;
-
-        if (wrappedDynamicAttributes != null && !wrappedDynamicAttributes.isEmpty()) {
-            questionAttributeWrapperBean = (QuestionAttributeWrapperBean) CollectionUtils.find(wrappedDynamicAttributes, new QuestionAttributeWrapperBeanPredicate(question));
-        }
-
-        return questionAttributeWrapperBean;
     }
 
     /**
@@ -608,7 +563,7 @@ public class QuestionnaireHelper {
         return ArrayUtils.contains(questionTypes, dynamicAttribute.getType());
     }
 
-    public static List sortResults(Collection<QuestionnaireDTO> questionnaires) {
+    static List sortResults(Collection<QuestionnaireDTO> questionnaires) {
         Map<GroupMapKey, List<QuestionnaireDTO>> groupedInfoForms = new LinkedHashMap<GroupMapKey, List<QuestionnaireDTO>>();
         int index = 0;
         for (QuestionnaireDTO questionnaire : questionnaires) {
@@ -634,7 +589,7 @@ public class QuestionnaireHelper {
         return results;
     }
 
-    public static QuestionnaireDTO findCurrent(Long workflowId, List<QuestionnaireDTO> results) {
+    static QuestionnaireDTO findCurrent(Long workflowId, List<QuestionnaireDTO> results) {
         for (QuestionnaireDTO dto : results) {
             if (dto.getWorkflowId().equals(workflowId)) {
                 return dto;
@@ -650,7 +605,7 @@ public class QuestionnaireHelper {
 
         private final QuestionAttribute questionToFind;
 
-        public QuestionAttributeWrapperBeanPredicate(QuestionAttribute question) {
+        QuestionAttributeWrapperBeanPredicate(QuestionAttribute question) {
             super();
             this.questionToFind = question;
         }

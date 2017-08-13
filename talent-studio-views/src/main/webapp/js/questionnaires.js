@@ -116,6 +116,30 @@ function deleteQuestionnaireAttribute(attributeId) {
     questionnaireBean.deleteQuestionnaireAttribute(attributeId);
 }
 
+function saveUpdateDeleteQuestionnaireCurrency(fieldId, queId, daId, attrIdField, errorId) {
+    // check to see if this is the drop down or the text if it's the dropdown the field id will end with _curr
+    //1) substring to get field id
+    //2) check to see if the number has been filled in
+    //3) if yes save with currency and number otherwise wait
+    var attrElem = getElemById(attrIdField);
+    
+    var textValue = $('#'+fieldId).val();
+    var selectedCurrency = $('#' + fieldId+'_curr option:selected').text();
+    var queDefId = $("#queDefIdxx").val();
+    var dynamicLevel = parseLevel(attrElem.name);
+    var errorElem = getElemById(errorId);
+
+    clearError(errorElem);
+    
+    questionnaireBean.saveDeleteQuestionnaireCurrency(queId, daId, attrId, textValue, selectedCurrency, queDefId, dynamicLevel,
+            { callback:function(attributeResult) {
+                attrElem.value = attributeResult.attributeId;
+                displayError(attributeResult, errorElem);
+                displaySumEnums(attributeResult);
+            },async:false
+            });
+}
+
 function saveDeleteQuestionnaireCheckBox(fieldId, queId, daId, attrIdField, errorId) {
 
     var checkbox = getElemById(fieldId);

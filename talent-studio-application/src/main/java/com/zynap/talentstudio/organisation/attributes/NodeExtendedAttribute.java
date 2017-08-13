@@ -115,6 +115,14 @@ public class NodeExtendedAttribute extends ZynapDomainObject {
         this.lineItemId = lineItemId;
     }
 
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
     public Long getLineItemId() {
         return lineItemId;
     }
@@ -136,4 +144,5 @@ public class NodeExtendedAttribute extends ZynapDomainObject {
     private boolean disabled;
     private Long lineItemId;
     private Integer maxDynamicPosition;
+    private String currency;
 }

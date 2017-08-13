@@ -392,5 +392,8 @@ public class Question extends BaseQuestion implements Cloneable {
         dynamicAttributeTypeMappings.put("RADIO", DynamicAttribute.DA_TYPE_STRUCT);
         dynamicAttributeTypeMappings.put(QuestionAttribute.TYPE_CHECKBOX, DynamicAttribute.DA_TYPE_MULTISELECT);
         dynamicAttributeTypeMappings.put(TYPE_POSITIVEINTEGER, DynamicAttribute.DA_TYPE_NUMBER);
+        dynamicAttributeTypeMappings.put(DynamicAttribute.DA_TYPE_CURRENCY, DynamicAttribute.DA_TYPE_CURRENCY);
+        dynamicAttributeTypeMappings.put(DynamicAttribute.DA_TYPE_DECIMAL, DynamicAttribute.DA_TYPE_DECIMAL);
+        
     }
 }

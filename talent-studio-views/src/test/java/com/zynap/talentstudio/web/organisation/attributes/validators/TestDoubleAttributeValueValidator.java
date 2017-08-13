@@ -1,21 +1,27 @@
 package com.zynap.talentstudio.web.organisation.attributes.validators;
 
-import junit.framework.TestCase;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.zynap.talentstudio.organisation.attributes.DynamicAttribute;
 import com.zynap.talentstudio.web.organisation.attributes.AttributeWrapperBean;
+
+import static junit.framework.TestCase.assertFalse;
+import static junit.framework.TestCase.assertTrue;
 
 /**
  * Created by bronwen.
  * Date: 19/04/12
  * Time: 17:56
  */
-public class TestDoubleAttributeValueValidator extends TestCase {
+public class TestDoubleAttributeValueValidator {
 
+    @Before
     public void setUp() throws Exception {
-       doubleAttribute = new DynamicAttribute("tt", DynamicAttribute.DA_TYPE_DOUBLE);
+       doubleAttribute = new DynamicAttribute("tt", DynamicAttribute.DA_TYPE_DECIMAL);
     }
 
+    @Test
     public void testCheckValueType() throws Exception {
         DoubleAttributeValueValidator validator = new DoubleAttributeValueValidator();
         doubleAttribute.setDecimalPlaces(2);
@@ -24,6 +30,7 @@ public class TestDoubleAttributeValueValidator extends TestCase {
         boolean val = validator.checkValueType(bean);
         assertTrue(val);
     }
+    @Test
     public void testCheckValueTypeFail() throws Exception {
         DoubleAttributeValueValidator validator = new DoubleAttributeValueValidator();
         doubleAttribute.setDecimalPlaces(2);
@@ -32,6 +39,7 @@ public class TestDoubleAttributeValueValidator extends TestCase {
         boolean val = validator.checkValueType(bean);
         assertFalse(val);
     }
+    @Test
     public void testCheckValueTypeZero() throws Exception {
         DoubleAttributeValueValidator validator = new DoubleAttributeValueValidator();
         doubleAttribute.setDecimalPlaces(2);

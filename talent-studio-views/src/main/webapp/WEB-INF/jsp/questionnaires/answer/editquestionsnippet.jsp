@@ -38,7 +38,7 @@
         </spring:bind>
     </c:when>
 
-    <c:when test="${question.type == 'INTEGER' || question.type == 'POSITIVEINTEGER'}">
+    <c:when test="${question.type == 'INTEGER' || question.type == 'POSITIVEINTEGER' || question.type == 'DECIMAL'}">
         <spring:bind path="${prefix}.value">
             <input style="<c:out value="${cssStyle}"/>" class="question_text <c:out value="${ssClass}"/>" id="<c:out value="${fieldId}"/>" type="text" class="input_number" name="<c:out value="${status.expression}"/>"
                    value="<c:out value="${status.value}"/>" <c:out value="${titleAttr}" escapeXml="false"/>
@@ -147,6 +147,63 @@
         </spring:bind>
     </c:when>
 
+    <%-- todo test this in a dynamic line item --%>
+    <c:when test="${question.type == 'CURRENCY'}">
+
+        <span style="color:red; display:none;" id="<c:out value="${fieldId}"/>_error">&nbsp;</span>
+        <input id="<c:out value="${fieldId}_attid"/>" type="hidden" value="<c:out value="${question.attributeValueId}"/>"/>
+        <input name="daId" id="<c:out value="${fieldId}_daId"/>" type="hidden" value="<c:out value="${question.daId}"/>"/> <!-- needed - clonning-->
+        <!-- determine javascript function to attach - uses clonning, calculated top to bottom see questionnaire.js-->
+        <input name="eventJsId" id="<c:out value="${fieldId}_eventJsId"/>" type="hidden" value="1"/>
+        <input name="managerWriteOnly" id="<c:out value="${fieldId}_manwriteonly"/>" type="hidden" value="<c:out value="${disbledVar}"/>"/>
+        
+        <spring:bind path="${prefix}.value">
+            <input style="<c:out value="${cssStyle}"/>" class="question_text <c:out value="${ssClass}"/>" id="<c:out value="${fieldId}"/>" type="text" name="<c:out value="${status.expression}"/>"
+                   value="<c:out value="${status.value}"/>" <c:out value="${titleAttr}" escapeXml="false"/>
+                   <c:if test="${question.length != 0}">size="<c:out value="${question.length}"/>"</c:if>
+                   <c:if test="${disbledVar || queDisabled}">disabled="true"</c:if>
+                   onblur="javascript:saveUpdateDeleteQuestionnaireCurrency('<c:out value="${fieldId}"/>','<c:out value="${command.questionnaireId}"/>','<c:out value="${question.daId}"/>','<c:out value="${fieldId}_attid"/>','<c:out value="${fieldId}"/>_error');"
+
+            />
+            <%@ include file="../../includes/error_message.jsp" %>
+        </spring:bind>
+        
+        <spring:bind path="${prefix}.currency">
+            <select style="<c:out value="${cssStyle}"/>" id="<c:out value="${fieldId}_curr"/>"
+                    name="<c:out value="${status.expression}"/>" <c:out value="${titleAttr}" escapeXml="false"/>
+                    class="linkable <c:out value="${ssClass}"/>"
+                    onchange="javascript:saveUpdateDeleteQuestionnaireCurrency('<c:out value="${fieldId}_curr"/>','<c:out value="${command.questionnaireId}"/>','<c:out value="${question.daId}"/>','<c:out value="${fieldId}_attid"/>','<c:out value="${fieldId}"/>_error');"
+                    <c:if test="${disbledVar || queDisabled}">disabled="true"</c:if>>
+                <c:if test="${!question.hasBlank}">
+                    <c:choose>
+                        <c:when test="${question.attributeDefinition.mandatory}">
+                            <option value="" <c:if test="${question.value == null}">selected</c:if>><fmt:message key="please.select"/></option>
+                        </c:when>
+                        <c:otherwise>
+                            <option value="" <c:if test="${question.value == null}">selected</c:if>></option>
+                        </c:otherwise>
+                    </c:choose>
+                </c:if>
+                <c:forEach var="vals" items="${question.attributeDefinition.refersToType.lookupValues}">
+                    <c:set var="cssClass" value="not_linked"/>
+                    <c:if test="${vals.requires != null && vals.requires != ''}"><c:set var="cssClass" value="linked"/></c:if>
+                    <c:set var="ll_id" value="${vals.linkId}"/>
+                    <c:set var="ll_req" value="${vals.requires}"/>
+                    <c:if test="${dynamicIndex != -1}">
+                        <c:set var="ll_id" value="${vals.linkId}_${dynamicIndex}"/>
+                        <c:if test="${ll_req != ''}"><c:set var="ll_req" value="${vals.requires}_${dynamicIndex}"/></c:if>
+                    </c:if>
+                    <option id="pp_<c:out value="${ll_id}"/>" linkid="<c:out value="${ll_id}"/>"
+                            <c:if test="${vals.requires != null && vals.requires != ''}">requires="<c:out value="${ll_req}"/>"</c:if>
+                            class="<c:out value="${cssClass}"/>" value="<c:out value="${vals.id}"/>" <c:if test="${question.value == vals.label}">selected</c:if>>
+                        <c:if test="${!vals.blank}"><c:out value="${vals.label}"/></c:if>
+                    </option>
+                </c:forEach>
+            </select>
+            <%@ include file="../../includes/error_message.jsp" %>
+            
+        </spring:bind>
+    </c:when>
 
     <c:when test="${question.type == 'RADIO'}">
         <spring:bind path="${prefix}.value">

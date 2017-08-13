@@ -34,7 +34,7 @@ public final class ArtefactAttributeViewFormatter {
 
         String output = "";
         if (nodeExtendedAttribute != null) {
-            output = formatValue(nodeExtendedAttribute.getDynamicAttribute(), nodeExtendedAttribute.getValue(), nodeLabel);
+            output = formatValue(nodeExtendedAttribute.getDynamicAttribute(), nodeExtendedAttribute, nodeLabel);
         }
 
         return output;
@@ -48,8 +48,8 @@ public final class ArtefactAttributeViewFormatter {
      * @param nodeLabel
      * @return the display value or an empty string (not null)
      */
-    public static String formatValue(DynamicAttribute dynamicAttribute, String value, String nodeLabel) {
-
+    public static String formatValue(DynamicAttribute dynamicAttribute, NodeExtendedAttribute nodeExtendedAttribute, String nodeLabel) {
+        String value = nodeExtendedAttribute.getValue();
         String displayValue = value;
 
         if (StringUtils.hasText(value)) {
@@ -64,6 +64,8 @@ public final class ArtefactAttributeViewFormatter {
                 displayValue = getMultiSelectDisplayValue(dynamicAttribute, value);
             } else if (dynamicAttribute.isNodeType() || dynamicAttribute.isLastUpdatedByType()) {
                 displayValue = nodeLabel;
+            } else if(dynamicAttribute.isCurrencyType()) {
+                
             }
         }
 

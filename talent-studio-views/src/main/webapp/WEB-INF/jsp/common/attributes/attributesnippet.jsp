@@ -19,7 +19,7 @@
         </spring:bind>
     </c:if>
 
-    <c:if test="${attr.type == 'NUMBER' || attr.type == 'DOUBLE'}">
+    <c:if test="${attr.type == 'NUMBER' || attr.type == 'DECIMAL'}">
         <spring:bind path="${prefix}.value">
             <td class="infodata">
                 <input id="<c:out value="${fieldId}"/>" type="text" class="input_number" name="<c:out value="${status.expression}"/>" value="<c:out value="${status.value}"/>"/>
@@ -214,5 +214,38 @@
                 <%@ include file="../../includes/error_message.jsp" %>
             </td>
         </spring:bind>
+    </c:if>
+
+    <c:if test="${attr.type == 'CURRENCY'}">
+        
+            <td class="infodata">
+                <span class="left">
+                <spring:bind path="${prefix}.value">
+                    <input id="<c:out value="${fieldId}"/>" type="text" class="input_number" name="<c:out value="${status.expression}"/>" value="<c:out value="${status.value}"/>"/>
+                    <c:out value="${message}" escapeXml="false"/>
+                    <%@ include file="../../includes/error_message.jsp" %>
+                </spring:bind>
+                </span>
+                <span class="left">
+                <spring:bind path="${prefix}.currency">
+                    <select id="<c:out value="${fieldId}_sel"/>" name="<c:out value="${status.expression}"/>">
+                        <c:choose>
+                            <c:when test="${attr.mandatory && !modeSearch}">
+                                <option value="" <c:if test="${attr.value == null}">selected</c:if>><fmt:message key="please.select"/></option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="" <c:if test="${attr.value == null}">selected</c:if>></option>
+                            </c:otherwise>
+                        </c:choose>
+                        <c:forEach var="vals" items="${attr.activeLookupValues}">
+                            <option value="<c:out value="${vals.label}"/>" <c:if test="${attr.currency == vals.label}">selected</c:if>><c:out value="${vals.label}"/></option>
+                        </c:forEach>
+                    </select>
+                    <%@ include file="../../includes/error_message.jsp" %>
+                </spring:bind>
+                </span>
+                
+            </td>
+        
     </c:if>
 

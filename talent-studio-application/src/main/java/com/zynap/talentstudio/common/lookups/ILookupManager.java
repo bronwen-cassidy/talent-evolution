@@ -16,13 +16,14 @@ import java.util.List;
 public interface ILookupManager {
 
 
-    public static final String LOOKUP_TYPE_TITLE = "TITLE";
-    public static final String LOOKUP_TYPE_DA = "DATYPE";
-    public static final String LOOKUP_TYPE_CLASSIFICATION = "CLASSIFICATION";
-    public static final String LOOKUP_TYPE_PRIMARY_SUBJECT_ASSOC = "POSITIONSUBJECTASSOC";
-    public static final String LOOKUP_TYPE_SECONDARY_SUBJECT_ASSOC = "SECONDARYSUBJECTPOSASSOC";
-    public static final String LOOKUP_TYPE_PRIMARY_POSITION_ASSOC = "PRIMARY";
-    public static final String LOOKUP_TYPE_SECONDARY_POSITION_ASSOC = "SECONDARY";
+    String LOOKUP_TYPE_TITLE = "TITLE";
+    String LOOKUP_TYPE_CURRENCY = "CURRENCY";
+    String LOOKUP_TYPE_DA = "DATYPE";
+    String LOOKUP_TYPE_CLASSIFICATION = "CLASSIFICATION";
+    String LOOKUP_TYPE_PRIMARY_SUBJECT_ASSOC = "POSITIONSUBJECTASSOC";
+    String LOOKUP_TYPE_SECONDARY_SUBJECT_ASSOC = "SECONDARYSUBJECTPOSASSOC";
+    String LOOKUP_TYPE_PRIMARY_POSITION_ASSOC = "PRIMARY";
+    String LOOKUP_TYPE_SECONDARY_POSITION_ASSOC = "SECONDARY";
 
     /**
      * Get all modifiable lookup types. (lookup types which are not marked as system lookup types.)

@@ -71,12 +71,13 @@
 <c:if test="${command.type == 'NUMBER'}">
     <%@ include file="numberDASnippet.jsp" %>
 </c:if>
-<c:if test="${command.type == 'DOUBLE'}">
+<c:if test="${command.type == 'DECIMAL'}">
     <%@ include file="doubleDASnippet.jsp" %>
 </c:if>
 <c:if test="${command.type == 'TIME'}">
     <%@ include file="timeDASnippet.jsp" %>
 </c:if>
+
 <c:if test="${command.type == 'STRUCT' || command.type == 'MULTISELECT'}">
 
     <%-- If readOnly is true show name of selection type - editing not allowed --%>

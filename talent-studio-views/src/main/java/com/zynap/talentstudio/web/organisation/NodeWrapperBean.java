@@ -51,7 +51,7 @@ public abstract class NodeWrapperBean extends ZynapDomainObject implements Seria
     }
 
     public final List<FormAttribute> getWrappedDynamicAttributes() {
-        if (wrappedDynamicAttributes == null) wrappedDynamicAttributes = new ArrayList<FormAttribute>();
+        if (wrappedDynamicAttributes == null) wrappedDynamicAttributes = new ArrayList<>();
         return wrappedDynamicAttributes;
     }
 

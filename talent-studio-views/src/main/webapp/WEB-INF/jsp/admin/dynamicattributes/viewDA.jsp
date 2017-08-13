@@ -53,7 +53,7 @@
           </tr>
       </c:if>
 
-      <c:if test="${model.da.type != 'STRUCT' && model.da.type != 'MULTISELECT' && model.da.type != 'IMG' && model.da.type != 'LINK' && !model.da.calculated}">
+      <c:if test="${model.da.type != 'STRUCT' && model.da.type != 'CURRENCY' && model.da.type != 'MULTISELECT' && model.da.type != 'IMG' && model.da.type != 'LINK' && !model.da.calculated}">
       <!-- minsize -->
           <tr>
               <td class="infolabel"><fmt:message key="da.${model.da.type}.minsize"/>&nbsp;:&nbsp;</td>

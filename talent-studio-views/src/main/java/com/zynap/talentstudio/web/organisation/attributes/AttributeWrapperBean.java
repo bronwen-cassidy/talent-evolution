@@ -14,7 +14,11 @@ import com.zynap.talentstudio.util.FormatterFactory;
 import org.springframework.util.StringUtils;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.Collection;
+import java.util.Currency;
 import java.util.List;
 
 /**
@@ -97,7 +101,7 @@ public class AttributeWrapperBean implements Serializable, Comparable, Cloneable
 
         if (file != null) {
 
-            if (file.getFileSize().longValue() > 0) {
+            if (file.getFileSize() > 0) {
 
                 // set content on AttributeValue if file parameter has content
                 AttributeValueFile attfile = (AttributeValueFile) attributeValue;
@@ -155,6 +159,8 @@ public class AttributeWrapperBean implements Serializable, Comparable, Cloneable
                 return FormatterFactory.getDateFormatter().formatDateTimeAsString(getDateTime());
             } else if (attributeDefinition.isTime()) {
                 return getTime();
+            } else if (attributeDefinition.isCurrencyType()) {
+	            return formatCurrency();
             } else if (attributeDefinition.isNodeType() || attributeDefinition.isLastUpdatedByType()) {
                 return this.nodeLabel;
             } else {
@@ -163,7 +169,22 @@ public class AttributeWrapperBean implements Serializable, Comparable, Cloneable
         }
     }
 
-    public final String getDateTimeDateDisplayValue() {
+	private String formatCurrency() {
+		final String value = attributeValue.getValue();
+		if (StringUtils.hasText(value)) {
+			NumberFormat format = NumberFormat.getCurrencyInstance();
+			try {
+				Currency currency = Currency.getInstance(getCurrency());
+				format.setCurrency(currency);
+				return format.format(Double.valueOf(value));
+			} catch (Exception e) {
+				return value;
+			}
+		}
+		return value;
+	}
+
+	public final String getDateTimeDateDisplayValue() {
         final String value = getValue();
         if (StringUtils.hasText(value)) {
             String[] dates = StringUtils.tokenizeToStringArray(value, DynamicAttribute.DATE_TIME_DELIMITER);
@@ -325,7 +346,15 @@ public class AttributeWrapperBean implements Serializable, Comparable, Cloneable
         return minute;
     }
 
-    public final String getRangeMessage() {
+	public String getCurrency() {
+		return attributeValue.getCurrency();
+	}
+
+	public void setCurrency(String currency) {
+		attributeValue.setCurrency(currency);
+	}
+
+	public final String getRangeMessage() {
         return AttributeWrapperMessageResolver.getRangeMessage(attributeDefinition);
     }
 
