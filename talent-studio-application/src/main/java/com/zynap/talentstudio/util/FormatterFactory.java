@@ -21,7 +21,7 @@ import java.util.ResourceBundle;
  */
 public class FormatterFactory implements BeanFactoryAware {
 
-    private static String localeDefault;
+	private static String localeDefault;
     private static String defaultDisplayPattern;
     /* regardless of locale we store dates in a particular format */
     private static final String databasePattern = "yyyy-MM-dd";
@@ -51,12 +51,23 @@ public class FormatterFactory implements BeanFactoryAware {
         return instance.getDateFormatterInternal(locale);
     }
 
+	public static IFormatter getCurrencyFormatter() {
+		if (instance == null) {
+			instance = (FormatterFactory) beanFactory.getBean("formatterFactory");
+		}
+		return instance.getCurrencyFormatterInternal();
+	}
+
     public static IFormatter getDateFormatter(Locale locale) {
         if (instance == null) {
             instance = (FormatterFactory) beanFactory.getBean("formatterFactory");
         }
         return instance.getDateFormatterInternal(locale);
     }
+
+	public IFormatter getCurrencyFormatterInternal() {
+		return currencyFormatterInternal;
+	}
 
     private Formatter getDateFormatterInternal(Locale locale) {
 
@@ -106,4 +117,6 @@ public class FormatterFactory implements BeanFactoryAware {
 
     static BeanFactory beanFactory;
     private static final String DATE_FORMAT_KEY = "date.format";
+	private static IFormatter currencyFormatter;
+	private IFormatter currencyFormatterInternal;
 }

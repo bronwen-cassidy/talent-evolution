@@ -20,7 +20,7 @@
                   <bean class="com.zynap.talentstudio.web.organisation.attributes.validators.DoubleAttributeValueValidator"/>
               </entry>
               <entry key="CURRENCY">
-                  <bean class="com.zynap.talentstudio.web.organisation.attributes.validators.DoubleAttributeValueValidator"/>
+                  <bean class="com.zynap.talentstudio.web.organisation.attributes.validators.CurrencyAttributeValueValidator"/>
               </entry>
               <entry key="DATE">
                   <bean class="com.zynap.talentstudio.web.organisation.attributes.validators.DateAttributeValueValidator"/>

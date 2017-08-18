@@ -8,6 +8,7 @@ import com.zynap.talentstudio.common.lookups.LookupType;
 import com.zynap.talentstudio.common.lookups.LookupValue;
 import com.zynap.talentstudio.organisation.attributes.DynamicAttribute;
 import com.zynap.talentstudio.organisation.attributes.NodeExtendedAttribute;
+import com.zynap.talentstudio.util.CurrencyFormatter;
 import com.zynap.talentstudio.util.FormatterFactory;
 
 import org.springframework.util.StringUtils;
@@ -44,7 +45,6 @@ public final class ArtefactAttributeViewFormatter {
      * Format value correctly based on dynamic attribute type.
      *
      * @param dynamicAttribute
-     * @param value
      * @param nodeLabel
      * @return the display value or an empty string (not null)
      */
@@ -65,7 +65,7 @@ public final class ArtefactAttributeViewFormatter {
             } else if (dynamicAttribute.isNodeType() || dynamicAttribute.isLastUpdatedByType()) {
                 displayValue = nodeLabel;
             } else if(dynamicAttribute.isCurrencyType()) {
-                
+                displayValue = CurrencyFormatter.formatCurrency(nodeExtendedAttribute.getValue(), nodeExtendedAttribute.getCurrency());    
             }
         }
 

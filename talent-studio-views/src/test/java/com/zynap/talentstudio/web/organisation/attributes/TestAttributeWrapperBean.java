@@ -7,17 +7,27 @@ package com.zynap.talentstudio.web.organisation.attributes;
  */
 
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.internal.listeners.CollectCreatedMocks;
 
 import com.zynap.talentstudio.AbstractHibernateTestCase;
 import com.zynap.talentstudio.organisation.attributes.DynamicAttribute;
 
+import com.zynap.talentstudio.util.FormatterFactory;
+import com.zynap.talentstudio.util.IFormatter;
 import com.zynap.talentstudio.web.organisation.attributes.validators.DateTimeAttributeValueValidator;
 import com.zynap.talentstudio.web.organisation.attributes.validators.ErrorMessageHandler;
 import com.zynap.talentstudio.web.organisation.attributes.validators.TimeAttributeValueValidator;
 
+import org.springframework.beans.factory.BeanFactory;
+
+import java.text.Normalizer;
+
 import static junit.framework.TestCase.assertNotNull;
 import static junit.framework.TestCase.assertNull;
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class TestAttributeWrapperBean {
 	
@@ -200,7 +210,12 @@ public class TestAttributeWrapperBean {
 	@Test
     public void testGetDateTimeDateDisplayValue() throws Exception {
 
-        AttributeWrapperBean attributeWrapperBean = new AttributeWrapperBean("test1", null, new DynamicAttribute("1111", DynamicAttribute.DA_TYPE_DATETIMESTAMP));
+		final BeanFactory beanFactory = mock(BeanFactory.class);
+		final FormatterFactory factory = new FormatterFactory("EN", "dd MMM yyyy");
+		when(beanFactory.getBean("formatterFactory")).thenReturn(factory);
+		factory.setBeanFactory(beanFactory);
+
+		AttributeWrapperBean attributeWrapperBean = new AttributeWrapperBean("test1", null, new DynamicAttribute("1111", DynamicAttribute.DA_TYPE_DATETIMESTAMP));
 
         String date = "2000-01-31";
         String timeHrs = "01";

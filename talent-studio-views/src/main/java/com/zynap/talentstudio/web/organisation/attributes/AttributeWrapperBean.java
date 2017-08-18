@@ -2,23 +2,20 @@ package com.zynap.talentstudio.web.organisation.attributes;
 
 import com.zynap.common.util.UploadedFile;
 import com.zynap.talentstudio.analysis.AnalysisAttributeHelper;
+import com.zynap.talentstudio.calculations.Calculation;
 import com.zynap.talentstudio.organisation.Node;
 import com.zynap.talentstudio.organisation.attributes.AttributeValue;
 import com.zynap.talentstudio.organisation.attributes.AttributeValueFile;
-import com.zynap.talentstudio.calculations.Calculation;
 import com.zynap.talentstudio.organisation.attributes.DynamicAttribute;
 import com.zynap.talentstudio.organisation.attributes.IDynamicAttributeService;
 import com.zynap.talentstudio.organisation.attributes.NodeExtendedAttribute;
+import com.zynap.talentstudio.util.CurrencyFormatter;
 import com.zynap.talentstudio.util.FormatterFactory;
 
 import org.springframework.util.StringUtils;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.text.NumberFormat;
-import java.text.ParseException;
 import java.util.Collection;
-import java.util.Currency;
 import java.util.List;
 
 /**
@@ -160,7 +157,7 @@ public class AttributeWrapperBean implements Serializable, Comparable, Cloneable
             } else if (attributeDefinition.isTime()) {
                 return getTime();
             } else if (attributeDefinition.isCurrencyType()) {
-	            return formatCurrency();
+	            return CurrencyFormatter.formatCurrency(attributeValue.getValue(), attributeValue.getCurrency());
             } else if (attributeDefinition.isNodeType() || attributeDefinition.isLastUpdatedByType()) {
                 return this.nodeLabel;
             } else {
@@ -168,21 +165,6 @@ public class AttributeWrapperBean implements Serializable, Comparable, Cloneable
             }
         }
     }
-
-	private String formatCurrency() {
-		final String value = attributeValue.getValue();
-		if (StringUtils.hasText(value)) {
-			NumberFormat format = NumberFormat.getCurrencyInstance();
-			try {
-				Currency currency = Currency.getInstance(getCurrency());
-				format.setCurrency(currency);
-				return format.format(Double.valueOf(value));
-			} catch (Exception e) {
-				return value;
-			}
-		}
-		return value;
-	}
 
 	public final String getDateTimeDateDisplayValue() {
         final String value = getValue();

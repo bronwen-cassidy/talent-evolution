@@ -51,5 +51,5 @@ public class DoubleAttributeValueValidator extends IntegerAttributeValueValidato
         return errorMsg;
     }
 
-    private String errorMsg = "not.a.number";
+    String errorMsg = "not.a.number";
 }
