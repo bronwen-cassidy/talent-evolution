@@ -16,6 +16,7 @@
 
         <group name="Manager Rating" title="Manager Rating">
             <question id="3" type="Integer" name="Target Rating" title="Target Rating" hidden="true"/>
+
             <question id="10" type="Select" name="Manager Rating" title="Manager Rating" managerWrite="Y">
                 <answer value="100" text=" - " blank="true"/>
                 <answer value="1" text="1"/>
@@ -24,6 +25,9 @@
                 <answer value="4" text="4"/>
                 <answer value="5" text="5"/>
             </question>
+
+            <question id="88" type="Currency" name="Salay indicator" title="Salary"/>
+
             <question id="11" type="Sum" name="Manager Rating - Number" title="Manager Rating - Number" hidden="true">
                 <operand source="10"/>
             </question>

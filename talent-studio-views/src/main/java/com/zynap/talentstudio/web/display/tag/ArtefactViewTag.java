@@ -3,12 +3,14 @@
  */
 package com.zynap.talentstudio.web.display.tag;
 
+import com.zynap.domain.UserSession;
 import com.zynap.talentstudio.analysis.AnalysisAttributeHelper;
 import com.zynap.talentstudio.analysis.AnalysisParameter;
 import com.zynap.talentstudio.analysis.reports.Report;
 import com.zynap.talentstudio.analysis.reports.crosstab.Cell;
 import com.zynap.talentstudio.analysis.reports.crosstab.Row;
 import com.zynap.talentstudio.organisation.Node;
+import com.zynap.talentstudio.security.UserSessionFactory;
 import com.zynap.talentstudio.web.display.support.ArtefactViewModelBuilder;
 import com.zynap.talentstudio.web.utils.ZynapWebUtils;
 import com.zynap.talentstudio.web.utils.HtmlUtils;
@@ -20,11 +22,7 @@ import javax.servlet.jsp.JspException;
 
 import java.io.IOException;
 import java.text.MessageFormat;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Class or Interface description.
@@ -72,6 +70,12 @@ public final class ArtefactViewTag extends AbstractViewTag {
     }
 
     protected int doStartTagInternal() throws Exception {
+        HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
+        UserSession userSession = ZynapWebUtils.getUserSession((HttpServletRequest) pageContext.getRequest());
+        Locale locale = request.getLocale();
+        userSession.setLocale(locale);
+
+        UserSessionFactory.setUserSession(userSession);
 
         final StringBuffer output = new StringBuffer();
 
@@ -134,10 +138,11 @@ public final class ArtefactViewTag extends AbstractViewTag {
         try {
             pageContext.getOut().println(output.toString());
         } catch (IOException e) {
+            UserSessionFactory.setUserSession(null);
             throw new JspException(e);
         }
 
-
+        UserSessionFactory.setUserSession(null);
         return EVAL_PAGE;
     }
 

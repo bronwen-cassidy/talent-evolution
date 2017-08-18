@@ -33,3 +33,65 @@ extent management local uniform size  128M;
 
 import a dump
 ==============================================
+
+golden stored proc testing
+==============================================
+
+DECLARE
+  v_percent_utilisation NUMBER := 0;
+  v_loan_exposure Number;
+  V_COMMITMENT_AMOUNT NUMBER;
+
+BEGIN
+
+  with YY as (
+      select distinct(fac_id), commitment_amount
+      from RPT_EXT_PORTFOLIO_SUMMARY
+      where rpt_ext_id = 32165
+      and bank_office_id= '1006'
+      and record_type = 'F'
+      group by fac_id, commitment_amount
+  )
+  select nvl(sum(commitment_amount),0) into v_commitment_amount from YY;
+
+  with XX as (
+      select distinct(fac_id), TOTAL_OUTSTANDINGS
+      from RPT_EXT_PORTFOLIO_SUMMARY where rpt_ext_id = 32165
+                                           and bank_office_id= '1006'
+                                           and record_type = 'F'
+      group by fac_id, TOTAL_OUTSTANDINGS
+  )
+  select nvl(sum(TOTAL_OUTSTANDINGS),0) into v_loan_exposure from XX;
+
+	if v_commitment_amount != 0 then
+		v_percent_utilisation := (v_loan_exposure / v_commitment_amount) * 100;
+	end if;
+
+	dbms_output.put_line('test ' ||  v_percent_utilisation);
+
+end;
+
+=================================================================
+--auto query get the sessions to kill them
+select 'alter system kill session '''||sid||','||serial#||''';' from v$session where username = 'HSBC_QA_5';
+
+====================================================================
+start oracle step by step to identify a problem
+====================================================================
+> sqlplus /nolog
+
+SQL> connect / as sysdba
+
+Connected.
+
+SQL> shutdown abort
+
+ORACLE Instance shut down.
+
+SQL> startup nomount
+
+ORACLE Instance started
+
+SQL> alter database mount;
+
+SQL> alter database open;

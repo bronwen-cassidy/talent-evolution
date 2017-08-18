@@ -6,7 +6,10 @@ sqlplus system/Ta13ntman @createUserAndSchema.sql
 
 
 BUILD A PROJECT
-mvn clean install -Plive -Dclient=grupobimbo -Dmulti.tenant=false 
+mvn clean install -Plive -Dclient=grupobimbo -Dmulti.tenant=false
+
+grab a tomcat instance - version 7+
+copy all the jar files in the build directory to tomcat lib
 
 
 1) cewolf-1.0.pom provided in the docs directory must replace the pom that comes from cewolf this is to remove the 2 dependencies that are not compile time ones, 

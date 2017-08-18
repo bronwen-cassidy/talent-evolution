@@ -219,14 +219,14 @@
     <c:if test="${attr.type == 'CURRENCY'}">
         
             <td class="infodata">
-                <span class="left">
+                <span class="currency">
                 <spring:bind path="${prefix}.value">
                     <input id="<c:out value="${fieldId}"/>" type="text" class="input_number" name="<c:out value="${status.expression}"/>" value="<c:out value="${status.value}"/>"/>
                     <c:out value="${message}" escapeXml="false"/>
                     <%@ include file="../../includes/error_message.jsp" %>
                 </spring:bind>
                 </span>
-                <span class="left">
+                <span class="currency">
                 <spring:bind path="${prefix}.currency">
                     <select id="<c:out value="${fieldId}_sel"/>" name="<c:out value="${status.expression}"/>">
                         <c:choose>

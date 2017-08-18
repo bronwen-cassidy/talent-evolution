@@ -1,5 +1,5 @@
 <%@ page errorPage="systemerror.jsp" %>
-<%@ page buffer="32kb" %>
+<%@ page buffer="64kb" %>
 
 <%@ include file="../includes/include.jsp" %>
 

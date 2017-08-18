@@ -56,6 +56,11 @@
             <artifactId>ojdbc7</artifactId>
             <version>14.0.0</version>
         </dependency>
+	    <dependency>
+		    <groupId>commons-beanutils</groupId>
+		    <artifactId>commons-beanutils</artifactId>
+		    <version>1.8.3</version>
+	    </dependency>
     </dependencies>
 
     <build>

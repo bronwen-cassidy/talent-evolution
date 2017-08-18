@@ -147,7 +147,6 @@
         </spring:bind>
     </c:when>
 
-    <%-- todo test this in a dynamic line item --%>
     <c:when test="${question.type == 'CURRENCY'}">
 
         <span style="color:red; display:none;" id="<c:out value="${fieldId}"/>_error">&nbsp;</span>
@@ -158,6 +157,7 @@
         <input name="managerWriteOnly" id="<c:out value="${fieldId}_manwriteonly"/>" type="hidden" value="<c:out value="${disbledVar}"/>"/>
         
         <spring:bind path="${prefix}.value">
+            <span class="currency">
             <input style="<c:out value="${cssStyle}"/>" class="question_text <c:out value="${ssClass}"/>" id="<c:out value="${fieldId}"/>" type="text" name="<c:out value="${status.expression}"/>"
                    value="<c:out value="${status.value}"/>" <c:out value="${titleAttr}" escapeXml="false"/>
                    <c:if test="${question.length != 0}">size="<c:out value="${question.length}"/>"</c:if>
@@ -166,9 +166,11 @@
 
             />
             <%@ include file="../../includes/error_message.jsp" %>
+            </span>
         </spring:bind>
         
         <spring:bind path="${prefix}.currency">
+            <span class="currency">
             <select style="<c:out value="${cssStyle}"/>" id="<c:out value="${fieldId}_curr"/>"
                     name="<c:out value="${status.expression}"/>" <c:out value="${titleAttr}" escapeXml="false"/>
                     class="linkable <c:out value="${ssClass}"/>"
@@ -201,7 +203,7 @@
                 </c:forEach>
             </select>
             <%@ include file="../../includes/error_message.jsp" %>
-            
+            </span>
         </spring:bind>
     </c:when>
 

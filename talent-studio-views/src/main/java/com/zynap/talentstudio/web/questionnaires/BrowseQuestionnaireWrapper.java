@@ -12,6 +12,7 @@ import com.zynap.talentstudio.questionnaires.QuestionnaireWorkflow;
 import com.zynap.talentstudio.web.organisation.attributes.FormAttribute;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -283,6 +284,10 @@ public class BrowseQuestionnaireWrapper implements Serializable {
 		setSendErrorMessage(null);
 	}
 
+	public Long getHrUserId() {
+		return null;
+	}
+
 	public boolean isHrView() {
 		return hrView;
 	}
@@ -290,10 +295,6 @@ public class BrowseQuestionnaireWrapper implements Serializable {
 	public void setHrView(boolean hrView) {
 		this.hrView = hrView;
 	}
-
-	private boolean fatalErrors;
-	private boolean sendFail;
-	private String sendErrorMessage;
 
 	public Long getUserId() {
 		return questionnaireWrapper.getUserId();
@@ -303,11 +304,15 @@ public class BrowseQuestionnaireWrapper implements Serializable {
 		return subjectUser;
 	}
 
+	private boolean fatalErrors;
+	private boolean sendFail;
+	private String sendErrorMessage;
+
 	private List<QuestionnaireDTO> results;
 	private QuestionnaireWrapper questionnaireWrapper;
 	private QuestionnaireDTO current;
 	private boolean myPortfolio;
-	private List<User> userManagers;
+	private List<User> userManagers = new ArrayList<>();
 	private Long subjectId;
 	private User subjectUser;
 

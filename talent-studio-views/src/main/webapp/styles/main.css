@@ -1058,6 +1058,12 @@ td.infogroup {
     border-width: 2px;
 }
 
+.currency {
+    float: left;
+    display: inline;
+    padding:0 2px 0 2px;
+}
+
 .appraisalcalc {
     padding: 5px;
     border-style: solid;

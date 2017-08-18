@@ -1,0 +1,8 @@
+CREATE OR REPLACE TRIGGER test_loan_exposure
+AFTER UPDATE OF loan_exposure ON loan_accounts_calcs
+FOR EACH ROW
+BEGIN
+plj_lg.push('XXX', 'update_loan_accounts_calcs. loan_exposure’) ;
+plj_lg.d('ssssssssssssssssss ACCOUNT_ID:'||:old.account_id||' stage'||:old.stage||' :old. loan_exposure ||:old. loan_exposure ||' :new. loan_exposure'||:new.loan_exposure);
+plj_lg.pop;
+END;

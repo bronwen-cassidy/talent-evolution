@@ -104,7 +104,7 @@
                                         <c:if test="${question.hasHelpText}"><c:import url="../questionnaires/helptextinclude.jsp"/></c:if>
                                     </td>
                                     <td style="<c:out value="${question.cellStyle}"/>" class="questiondata" <c:out value="${titleAttr}" escapeXml="false"/>>
-                                        <%@include file="editquestionsnippet.jsp"%>
+                                        <c:import url="../questionnaires/answer/editquestionsnippet.jsp"/>
                                     </td>
                                 </tr>
                                 <c:set var="index" value="${index + 1}" scope="request"/>
