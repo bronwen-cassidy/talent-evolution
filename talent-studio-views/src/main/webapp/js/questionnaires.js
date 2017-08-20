@@ -116,22 +116,34 @@ function deleteQuestionnaireAttribute(attributeId) {
     questionnaireBean.deleteQuestionnaireAttribute(attributeId);
 }
 
-function saveUpdateDeleteQuestionnaireCurrency(fieldId, queId, daId, attrIdField, errorId) {
+function saveUpdateDeleteQuestionnaireCurrency(fieldId, currFieldId, queId, daId, attrIdField, errorId) {
     // check to see if this is the drop down or the text if it's the dropdown the field id will end with _curr
     //1) substring to get field id
     //2) check to see if the number has been filled in
     //3) if yes save with currency and number otherwise wait
     var attrElem = getElemById(attrIdField);
+    var errorElem = getElemById(errorId);
     
-    var textValue = $('#'+fieldId).val();
-    var selectedCurrency = $('#' + fieldId+'_curr option:selected').text();
+    var attrId = attrElem.value;
+    var selectedCurrency = $('#' + currFieldId+' option:selected').text().trim();
+    var inputFieldValue = $('#' + fieldId).val();
+    
+    if(!selectedCurrency) {
+        return false;
+    }
+    if(!(selectedCurrency && inputFieldValue)) {
+        attributeResult = {};
+        attributeResult.errorMessage="Both Currency and amount are required";
+        displayError(attributeResult, errorElem);
+        return false;
+    }
+    
     var queDefId = $("#queDefIdxx").val();
     var dynamicLevel = parseLevel(attrElem.name);
-    var errorElem = getElemById(errorId);
 
     clearError(errorElem);
     
-    questionnaireBean.saveDeleteQuestionnaireCurrency(queId, daId, attrId, textValue, selectedCurrency, queDefId, dynamicLevel,
+    questionnaireBean.saveDeleteQuestionnaireCurrency(queId, daId, attrId, dynamicLevel, inputFieldValue, selectedCurrency, queDefId,
             { callback:function(attributeResult) {
                 attrElem.value = attributeResult.attributeId;
                 displayError(attributeResult, errorElem);
@@ -226,7 +238,7 @@ function saveUpdateDeleteQuestionnaireGeneric(fieldId, queId, daId, attrIdField,
     if (completedComit) {
         completedComit = false;
         try {
-            questionnaireBean.saveUpdateDeleteQuestionnaireGeneric(queId, daId, attrId, dynamicPosition, textValue, queDefId,
+            questionnaireBean.saveUpdateDeleteQuestionnaireGeneric(queId, daId, attrId, dynamicPosition, textValue, "", queDefId,
                     { callback:function(attributeResult) {
                         attrElem.value = attributeResult.attributeId;
                         displayError(attributeResult, errorElem);

@@ -156,25 +156,25 @@
         <input name="eventJsId" id="<c:out value="${fieldId}_eventJsId"/>" type="hidden" value="1"/>
         <input name="managerWriteOnly" id="<c:out value="${fieldId}_manwriteonly"/>" type="hidden" value="<c:out value="${disbledVar}"/>"/>
         
-        <spring:bind path="${prefix}.value">
+        <div class="currency-block">
             <span class="currency">
+        <spring:bind path="${prefix}.value">
             <input style="<c:out value="${cssStyle}"/>" class="question_text <c:out value="${ssClass}"/>" id="<c:out value="${fieldId}"/>" type="text" name="<c:out value="${status.expression}"/>"
                    value="<c:out value="${status.value}"/>" <c:out value="${titleAttr}" escapeXml="false"/>
                    <c:if test="${question.length != 0}">size="<c:out value="${question.length}"/>"</c:if>
                    <c:if test="${disbledVar || queDisabled}">disabled="true"</c:if>
-                   onblur="javascript:saveUpdateDeleteQuestionnaireCurrency('<c:out value="${fieldId}"/>','<c:out value="${command.questionnaireId}"/>','<c:out value="${question.daId}"/>','<c:out value="${fieldId}_attid"/>','<c:out value="${fieldId}"/>_error');"
+                   onblur="javascript:saveUpdateDeleteQuestionnaireCurrency('<c:out value="${fieldId}"/>','<c:out value="${fieldId}_curr"/>','<c:out value="${command.questionnaireId}"/>','<c:out value="${question.daId}"/>','<c:out value="${fieldId}_attid"/>','<c:out value="${fieldId}"/>_error');"
 
             />
             <%@ include file="../../includes/error_message.jsp" %>
-            </span>
         </spring:bind>
-        
+            </span>
+        <span class="currency">
         <spring:bind path="${prefix}.currency">
-            <span class="currency">
             <select style="<c:out value="${cssStyle}"/>" id="<c:out value="${fieldId}_curr"/>"
                     name="<c:out value="${status.expression}"/>" <c:out value="${titleAttr}" escapeXml="false"/>
                     class="linkable <c:out value="${ssClass}"/>"
-                    onchange="javascript:saveUpdateDeleteQuestionnaireCurrency('<c:out value="${fieldId}_curr"/>','<c:out value="${command.questionnaireId}"/>','<c:out value="${question.daId}"/>','<c:out value="${fieldId}_attid"/>','<c:out value="${fieldId}"/>_error');"
+                    onchange="javascript:saveUpdateDeleteQuestionnaireCurrency('<c:out value="${fieldId}"/>','<c:out value="${fieldId}_curr"/>','<c:out value="${command.questionnaireId}"/>','<c:out value="${question.daId}"/>','<c:out value="${fieldId}_attid"/>','<c:out value="${fieldId}"/>_error');"
                     <c:if test="${disbledVar || queDisabled}">disabled="true"</c:if>>
                 <c:if test="${!question.hasBlank}">
                     <c:choose>
@@ -197,14 +197,16 @@
                     </c:if>
                     <option id="pp_<c:out value="${ll_id}"/>" linkid="<c:out value="${ll_id}"/>"
                             <c:if test="${vals.requires != null && vals.requires != ''}">requires="<c:out value="${ll_req}"/>"</c:if>
-                            class="<c:out value="${cssClass}"/>" value="<c:out value="${vals.id}"/>" <c:if test="${question.value == vals.label}">selected</c:if>>
+                            class="<c:out value="${cssClass}"/>" value="<c:out value="${vals.id}"/>" <c:if test="${question.currency == vals.label}">selected</c:if>>
                         <c:if test="${!vals.blank}"><c:out value="${vals.label}"/></c:if>
                     </option>
                 </c:forEach>
             </select>
             <%@ include file="../../includes/error_message.jsp" %>
-            </span>
+            
         </spring:bind>
+        </span>
+        </div>
     </c:when>
 
     <c:when test="${question.type == 'RADIO'}">

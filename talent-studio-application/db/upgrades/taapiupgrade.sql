@@ -15,55 +15,55 @@ insert into permits_roles select id, '1' from permits where url = '/admin/listad
 
 -- data imports to support taapi data
 insert into dynamic_attributes (id, type, artefact_type, is_active, is_searchable, is_mandatory, label, description, modified_label)
-values(da_sq.nextval, 'DOUBLE', 'S', 'T', 'T', 'F','actC', 'actC', 'actC');
+values(da_sq.nextval, 'DECIMAL', 'S', 'T', 'T', 'F','actC', 'actC', 'actC');
 insert into dynamic_attributes (id, type, artefact_type, is_active, is_searchable, is_mandatory, label, description, modified_label)
-values(da_sq.nextval, 'DOUBLE', 'S', 'T', 'T', 'F','actE', 'actE', 'actE');
+values(da_sq.nextval, 'DECIMAL', 'S', 'T', 'T', 'F','actE', 'actE', 'actE');
 insert into dynamic_attributes (id, type, artefact_type, is_active, is_searchable, is_mandatory, label, description, modified_label)
-values(da_sq.nextval, 'DOUBLE', 'S', 'T', 'T', 'F','actO', 'actO', 'actO');
+values(da_sq.nextval, 'DECIMAL', 'S', 'T', 'T', 'F','actO', 'actO', 'actO');
 insert into dynamic_attributes (id, type, artefact_type, is_active, is_searchable, is_mandatory, label, description, modified_label)
-values(da_sq.nextval, 'DOUBLE', 'S', 'T', 'T', 'F','actR', 'actR', 'actR');
+values(da_sq.nextval, 'DECIMAL', 'S', 'T', 'T', 'F','actR', 'actR', 'actR');
 insert into dynamic_attributes (id, type, artefact_type, is_active, is_searchable, is_mandatory, label, description, modified_label)
-values(da_sq.nextval, 'DOUBLE', 'S', 'T', 'T', 'F','Ambitions Benchmark', 'Ambitions Benchmark match', 'matchAMB');
+values(da_sq.nextval, 'DECIMAL', 'S', 'T', 'T', 'F','Ambitions Benchmark', 'Ambitions Benchmark match', 'matchAMB');
 insert into dynamic_attributes (id, type, artefact_type, is_active, is_searchable, is_mandatory, label, description, modified_label)
-values(da_sq.nextval, 'DOUBLE', 'S', 'T', 'T', 'F','Core Benchmark Match', 'The match to the core benchmark', 'matchCORE');
+values(da_sq.nextval, 'DECIMAL', 'S', 'T', 'T', 'F','Core Benchmark Match', 'The match to the core benchmark', 'matchCORE');
 insert into dynamic_attributes (id, type, artefact_type, is_active, is_searchable, is_mandatory, label, description, modified_label)
-values(da_sq.nextval, 'DOUBLE', 'S', 'T', 'T', 'F','Total Benchmark Match', 'Total Match to default Benchmark', 'matchTOTAL');
+values(da_sq.nextval, 'DECIMAL', 'S', 'T', 'T', 'F','Total Benchmark Match', 'Total Match to default Benchmark', 'matchTOTAL');
 insert into dynamic_attributes (id, type, artefact_type, is_active, is_searchable, is_mandatory, label, description, modified_label)
-values(da_sq.nextval, 'DOUBLE', 'S', 'T', 'T', 'F','modC', 'modC', 'modC');
+values(da_sq.nextval, 'DECIMAL', 'S', 'T', 'T', 'F','modC', 'modC', 'modC');
 insert into dynamic_attributes (id, type, artefact_type, is_active, is_searchable, is_mandatory, label, description, modified_label)
-values(da_sq.nextval, 'DOUBLE', 'S', 'T', 'T', 'F','modE', 'modE', 'modE');
+values(da_sq.nextval, 'DECIMAL', 'S', 'T', 'T', 'F','modE', 'modE', 'modE');
 insert into dynamic_attributes (id, type, artefact_type, is_active, is_searchable, is_mandatory, label, description, modified_label)
-values(da_sq.nextval, 'DOUBLE', 'S', 'T', 'T', 'F','modO', 'modO', 'modO');
+values(da_sq.nextval, 'DECIMAL', 'S', 'T', 'T', 'F','modO', 'modO', 'modO');
 insert into dynamic_attributes (id, type, artefact_type, is_active, is_searchable, is_mandatory, label, description, modified_label)
-values(da_sq.nextval, 'DOUBLE', 'S', 'T', 'T', 'F','modR', 'modR', 'modR');
+values(da_sq.nextval, 'DECIMAL', 'S', 'T', 'T', 'F','modR', 'modR', 'modR');
 insert into dynamic_attributes (id, type, artefact_type, is_active, is_searchable, is_mandatory, label, description, modified_label)
-values(da_sq.nextval, 'DOUBLE', 'S', 'T', 'T', 'F','rankALT', 'rankALT', 'rankALT');
+values(da_sq.nextval, 'DECIMAL', 'S', 'T', 'T', 'F','rankALT', 'rankALT', 'rankALT');
 insert into dynamic_attributes (id, type, artefact_type, is_active, is_searchable, is_mandatory, label, description, modified_label)
-values(da_sq.nextval, 'DOUBLE', 'S', 'T', 'T', 'F','rankAUT', 'rankAUT', 'rankAUT');
+values(da_sq.nextval, 'DECIMAL', 'S', 'T', 'T', 'F','rankAUT', 'rankAUT', 'rankAUT');
 insert into dynamic_attributes (id, type, artefact_type, is_active, is_searchable, is_mandatory, label, description, modified_label)
-values(da_sq.nextval, 'DOUBLE', 'S', 'T', 'T', 'F','rankCRE', 'rankCRE', 'rankCRE');
+values(da_sq.nextval, 'DECIMAL', 'S', 'T', 'T', 'F','rankCRE', 'rankCRE', 'rankCRE');
 insert into dynamic_attributes (id, type, artefact_type, is_active, is_searchable, is_mandatory, label, description, modified_label)
-values(da_sq.nextval, 'DOUBLE', 'S', 'T', 'T', 'F','rankECO', 'rankECO', 'rankECO');
+values(da_sq.nextval, 'DECIMAL', 'S', 'T', 'T', 'F','rankECO', 'rankECO', 'rankECO');
 insert into dynamic_attributes (id, type, artefact_type, is_active, is_searchable, is_mandatory, label, description, modified_label)
-values(da_sq.nextval, 'DOUBLE', 'S', 'T', 'T', 'F','rankIND', 'rankIND', 'rankIND');
+values(da_sq.nextval, 'DECIMAL', 'S', 'T', 'T', 'F','rankIND', 'rankIND', 'rankIND');
 insert into dynamic_attributes (id, type, artefact_type, is_active, is_searchable, is_mandatory, label, description, modified_label)
-values(da_sq.nextval, 'DOUBLE', 'S', 'T', 'T', 'F','rankPOL', 'rankPOL', 'rankPOL');
+values(da_sq.nextval, 'DECIMAL', 'S', 'T', 'T', 'F','rankPOL', 'rankPOL', 'rankPOL');
 insert into dynamic_attributes (id, type, artefact_type, is_active, is_searchable, is_mandatory, label, description, modified_label)
-values(da_sq.nextval, 'DOUBLE', 'S', 'T', 'T', 'F','rankTHE', 'rankTHE', 'rankTHE');
+values(da_sq.nextval, 'DECIMAL', 'S', 'T', 'T', 'F','rankTHE', 'rankTHE', 'rankTHE');
 insert into dynamic_attributes (id, type, artefact_type, is_active, is_searchable, is_mandatory, label, description, modified_label)
-values(da_sq.nextval, 'DOUBLE', 'S', 'T', 'T', 'F','scoreALT', 'scoreALT', 'scoreALT');
+values(da_sq.nextval, 'DECIMAL', 'S', 'T', 'T', 'F','scoreALT', 'scoreALT', 'scoreALT');
 insert into dynamic_attributes (id, type, artefact_type, is_active, is_searchable, is_mandatory, label, description, modified_label)
-values(da_sq.nextval, 'DOUBLE', 'S', 'T', 'T', 'F','scoreAUT', 'scoreAUT', 'scoreAUT');
+values(da_sq.nextval, 'DECIMAL', 'S', 'T', 'T', 'F','scoreAUT', 'scoreAUT', 'scoreAUT');
 insert into dynamic_attributes (id, type, artefact_type, is_active, is_searchable, is_mandatory, label, description, modified_label)
-values(da_sq.nextval, 'DOUBLE', 'S', 'T', 'T', 'F','scoreCRE', 'scoreCRE', 'scoreCRE');
+values(da_sq.nextval, 'DECIMAL', 'S', 'T', 'T', 'F','scoreCRE', 'scoreCRE', 'scoreCRE');
 insert into dynamic_attributes (id, type, artefact_type, is_active, is_searchable, is_mandatory, label, description, modified_label)
-values(da_sq.nextval, 'DOUBLE', 'S', 'T', 'T', 'F','scoreECO', 'scoreECO', 'scoreECO');
+values(da_sq.nextval, 'DECIMAL', 'S', 'T', 'T', 'F','scoreECO', 'scoreECO', 'scoreECO');
 insert into dynamic_attributes (id, type, artefact_type, is_active, is_searchable, is_mandatory, label, description, modified_label)
-values(da_sq.nextval, 'DOUBLE', 'S', 'T', 'T', 'F','scoreIND', 'scoreIND', 'scoreIND');
+values(da_sq.nextval, 'DECIMAL', 'S', 'T', 'T', 'F','scoreIND', 'scoreIND', 'scoreIND');
 insert into dynamic_attributes (id, type, artefact_type, is_active, is_searchable, is_mandatory, label, description, modified_label)
-values(da_sq.nextval, 'DOUBLE', 'S', 'T', 'T', 'F','scorePOL', 'scorePOL', 'scorePOL');
+values(da_sq.nextval, 'DECIMAL', 'S', 'T', 'T', 'F','scorePOL', 'scorePOL', 'scorePOL');
 insert into dynamic_attributes (id, type, artefact_type, is_active, is_searchable, is_mandatory, label, description, modified_label)
-values(da_sq.nextval, 'DOUBLE', 'S', 'T', 'T', 'F','scoreTHE', 'scoreTHE', 'scoreTHE');
+values(da_sq.nextval, 'DECIMAL', 'S', 'T', 'T', 'F','scoreTHE', 'scoreTHE', 'scoreTHE');
 insert into dynamic_attributes (id, type, artefact_type, is_active, is_searchable, is_mandatory, label, description, modified_label)
 values(da_sq.nextval, 'TEXTAREA', 'S', 'T', 'T', 'F','Tips for Communicating', 'Tips for Communicating with this person', '"tips_for_communicating"');
 

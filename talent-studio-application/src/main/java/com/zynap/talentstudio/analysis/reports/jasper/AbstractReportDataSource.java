@@ -41,7 +41,7 @@ import java.util.Set;
 public abstract class AbstractReportDataSource implements JRRewindableDataSource {
 
     protected AbstractReportDataSource(Report report, Collection<Object> nodes, Map<Long, QuestionAttributeValuesCollection> questionnaireAnswers, JasperDataSourceFactory factory, User currentUser) {
-        this.records = new ArrayList<Object>(nodes);
+        this.records = new ArrayList<>(nodes);
         this.questionnaireAnswers = questionnaireAnswers;
         this.currentUser = currentUser;
         this.report = report;

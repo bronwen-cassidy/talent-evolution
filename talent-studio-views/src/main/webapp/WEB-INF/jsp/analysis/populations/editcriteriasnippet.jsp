@@ -8,7 +8,7 @@
     </spring:bind>
 </c:if>
 
-<c:if test="${attrType == 'NUMBER' || attrType == 'SUM' || attrType == 'DOUBLE'}">
+<c:if test="${attrType == 'NUMBER' || attrType == 'SUM' || attrType == 'DECIMAL'}">
 <spring:bind path="${prefix}.value">
         <input id="id_<c:out value="${attr.attributeDefinition.id}"/>" type="text" class="input_number" name="<c:out value="${status.expression}"/>" value="<c:out value="${attr.value}"/>"/>
         <%@ include file="../../includes/error_message.jsp" %>

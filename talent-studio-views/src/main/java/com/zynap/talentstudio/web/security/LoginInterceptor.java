@@ -59,27 +59,13 @@ public final class LoginInterceptor extends HandlerInterceptorAdapter {
             return false;
 
         } else {
+	        UserSessionFactory.setUserSession(null);
             userSession.setLocale(request.getLocale());
             UserSessionFactory.setUserSession(userSession);
 
             // return true as it is ok to proceed
             return true;
         }
-    }
-
-    /**
-     * Resets {@link com.zynap.talentstudio.security.UserSessionFactory} copy of the UserSession to null to ensure
-     * that the one bound in the HttpSession gets used - ensures that changes to the one in the HttpSession are also applied to
-     * the {@link com.zynap.talentstudio.security.UserSessionFactory} copy.
-     *
-     * @param request current HTTP request
-     * @param response current HTTP response
-     * @param handler chosen handler to execute, for type and/or instance evaluation
-     * @param modelAndView The ModelAndView returned by the action that was invoked
-     * @throws Exception
-     */
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        UserSessionFactory.setUserSession(null);
     }
 
     /**

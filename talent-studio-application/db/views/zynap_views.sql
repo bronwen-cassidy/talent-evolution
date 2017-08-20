@@ -206,7 +206,7 @@ CREATE OR REPLACE VIEW SEARCH_TERMS_XY AS
           'T' as manager_read,
           'T' as individual_read
     from node_das nd, dynamic_attributes da, nodes n, user_node_domain_permits dp
-    where da.type in ('TEXT', 'TEXTAREA', 'LINK', 'NUMBER', 'DOUBLE', 'DATE', 'DATETIME','TEXTBOX', 'INTEGER', 'NUMBER')
+    where da.type in ('TEXT', 'TEXTAREA', 'LINK', 'NUMBER', 'DECIMAL,CURRENCY', 'DATE', 'DATETIME','TEXTBOX', 'INTEGER', 'NUMBER')
           and da.qd_id is null
           and nd.da_id = da.id
           and nd.node_id = dp.node_id
@@ -221,7 +221,7 @@ CREATE OR REPLACE VIEW SEARCH_TERMS_XY AS
       qw.manager_read as manager_read,
       qw.INDIVIDUAL_READ as individual_read
     from node_das nd, dynamic_attributes da, nodes n, user_node_domain_permits dp, questionnaires q, que_workflows qw
-    where da.type in ('TEXT', 'TEXTAREA', 'LINK', 'NUMBER', 'DOUBLE', 'DATE', 'DATETIME','TEXTBOX', 'INTEGER', 'NUMBER')
+    where da.type in ('TEXT', 'TEXTAREA', 'LINK', 'NUMBER', 'DECIMAL,CURRENCY', 'DATE', 'DATETIME','TEXTBOX', 'INTEGER', 'NUMBER')
           and da.qd_id is not null
           and nd.da_id = da.id
           and nd.node_id = n.id
@@ -280,7 +280,7 @@ CREATE OR REPLACE VIEW DATA_TERMS_XY AS
       SELECT DISTINCT
         (nd.value) AS label, nd.id as id
       FROM node_das nd, dynamic_attributes da
-      WHERE da.type IN ('TEXT', 'TEXTAREA', 'LINK', 'NUMBER', 'DOUBLE', 'DATE', 'DATETIME', 'TEXTBOX', 'INTEGER', 'NUMBER')
+      WHERE da.type IN ('TEXT', 'TEXTAREA', 'LINK', 'NUMBER', 'DECIMAL,CURRENCY', 'DATE', 'DATETIME', 'TEXTBOX', 'INTEGER', 'NUMBER')
             AND da.qd_id IS NULL
             AND nd.da_id = da.id
       UNION
@@ -288,7 +288,7 @@ CREATE OR REPLACE VIEW DATA_TERMS_XY AS
       SELECT DISTINCT
         (nd.value) AS label, nd.id as id
       FROM node_das nd, dynamic_attributes da, nodes n, questionnaires q
-      WHERE da.type IN ('TEXT', 'TEXTAREA', 'LINK', 'NUMBER', 'DOUBLE', 'DATE', 'DATETIME', 'TEXTBOX', 'INTEGER', 'NUMBER')
+      WHERE da.type IN ('TEXT', 'TEXTAREA', 'LINK', 'NUMBER', 'DECIMAL,CURRENCY', 'DATE', 'DATETIME', 'TEXTBOX', 'INTEGER', 'NUMBER')
             AND da.qd_id IS NOT NULL
             AND nd.da_id = da.id
             AND nd.node_id = n.id

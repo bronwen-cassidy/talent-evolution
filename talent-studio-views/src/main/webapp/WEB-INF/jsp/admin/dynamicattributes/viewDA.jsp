@@ -85,7 +85,7 @@
               </c:choose>
           </tr>
       </c:if>
-      <c:if test="${model.da.type == 'DOUBLE'}">
+      <c:if test="${model.da.type == 'DECIMAL'}">
           <tr>
               <td class="infolabel"><fmt:message key="da.number.decimal.palces"/>&nbsp;:&nbsp;</td>
               <td class="infodata"><c:out value="${model.da.decimalPlaces}"/></td>

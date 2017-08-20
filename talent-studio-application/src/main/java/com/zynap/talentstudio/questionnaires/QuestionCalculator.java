@@ -44,10 +44,10 @@ public class QuestionCalculator {
         // check for an existing answer
         final List<NodeExtendedAttribute> attributeList = service.findAttributes(root.getId(), questionnaireId);
         if (attributeList.isEmpty()) {
-            service.saveUpdateDeleteQuestionAttribute(questionnaireId, root.getId(), null, null, answer, modifiedBy);
+            service.saveUpdateDeleteQuestionAttribute(questionnaireId, root.getId(), null, null, answer, null, modifiedBy);
         } else {
             for (NodeExtendedAttribute attribute : attributeList) {
-                service.saveUpdateDeleteQuestionAttribute(questionnaireId, root.getId(), attribute.getId(), null, answer, modifiedBy);
+                service.saveUpdateDeleteQuestionAttribute(questionnaireId, root.getId(), attribute.getId(), null, answer, null, modifiedBy);
             }
         }
         return displayValue;

@@ -449,8 +449,7 @@ public final class DynamicAttribute extends ZynapDomainObject implements Compara
 
     public static final String DA_TYPE_NUMBER = "NUMBER";
     public static final String DA_TYPE_DECIMAL = "DECIMAL";
-    public static final String DA_TYPE_DOUBLE = "DOUBLE";
-    public static final String DA_TYPE_DATE = "DATE";
+	public static final String DA_TYPE_DATE = "DATE";
     public static final String DA_TYPE_TEXTFIELD = "TEXT";
     public static final String DA_TYPE_TEXTAREA = "TEXTAREA";
     public static final String DA_TYPE_STRUCT = "STRUCT";

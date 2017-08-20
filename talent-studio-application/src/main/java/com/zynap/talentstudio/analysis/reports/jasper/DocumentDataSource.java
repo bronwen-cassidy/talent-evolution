@@ -5,6 +5,7 @@ import net.sf.jasperreports.engine.JRField;
 import com.zynap.domain.admin.User;
 import com.zynap.talentstudio.analysis.AnalysisAttributeHelper;
 import com.zynap.talentstudio.analysis.AnalysisParameter;
+import com.zynap.talentstudio.analysis.reports.GroupingAttribute;
 import com.zynap.talentstudio.analysis.reports.Report;
 import com.zynap.talentstudio.organisation.Node;
 import com.zynap.talentstudio.organisation.portfolio.PortfolioItem;
@@ -16,6 +17,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 
 /**
  * User: amark
@@ -28,17 +30,22 @@ public class DocumentDataSource extends JRCollectionDataSource {
 
     public DocumentDataSource(Report report, Collection<Object> portfolioItems, JasperDataSourceFactory jasperDataSourceFactory, User user) {
         super(report, portfolioItems, null, jasperDataSourceFactory, null, null, 0, user);
-        // sort the portfolio items by the last modified date
-        Collections.sort(this.records, new Comparator<Object>() {
-            public int compare(Object o1, Object o2) {
-                PortfolioItem i1 = (PortfolioItem) o1;
-                PortfolioItem i2 = (PortfolioItem) o2;
-                return i1.getLastModified().compareTo(i2.getLastModified());
-            }
-        });
     }
 
-    public Object getFieldValue(JRField field) {
+	@Override
+	void sortResults(List<GroupingAttribute> groupedAttributeNames, String orderAttributeName, int orderDirection) {
+		super.sortResults(groupedAttributeNames, orderAttributeName, orderDirection);
+		// sort the portfolio items by the last modified date
+		Collections.sort(this.records, new Comparator<Object>() {
+			public int compare(Object o1, Object o2) {
+				PortfolioItem i1 = (PortfolioItem) o1;
+				PortfolioItem i2 = (PortfolioItem) o2;
+				return i1.getLastModified().compareTo(i2.getLastModified());
+			}
+		});
+	}
+
+	public Object getFieldValue(JRField field) {
 
         Object value = null;
 

@@ -29,7 +29,6 @@ import org.springframework.context.MessageSource;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -72,7 +71,7 @@ public class QuestionnaireDwrBean {
 
         boolean validating = !((attributeId != null && !StringUtils.hasText(value)));
         if (validating) {
-            if (!validateDynamicAttribute(daId, attributeId, value, request, result)) return result;
+            if (!validateDynamicAttribute(daId, attributeId, value, null, request, result)) return result;
         }
 
         try {
@@ -103,25 +102,25 @@ public class QuestionnaireDwrBean {
 
     /* all fields with list subject and date - use standard save, reason each being a method is in case change in validation procedure */
     public AttributePersistenceResult saveUpdateDeleteQuestionnaireList(Long queId, Long daId, Long attributeId, Integer dynamicPosition, String value, Long queDefId, HttpServletRequest request) {
-        return saveUpdateDeleteQuestionnaireGeneric(queId, daId, attributeId, dynamicPosition, value, queDefId, request);
+        return saveUpdateDeleteQuestionnaireGeneric(queId, daId, attributeId, dynamicPosition, value, null, queDefId, request);
     }
 
     public AttributePersistenceResult saveUpdateDeleteQuestionnaireSubject(Long queId, Long daId, Long attributeId, Integer dynamicPosition, String value, Long queDefId, HttpServletRequest request) {
-        return saveUpdateDeleteQuestionnaireGeneric(queId, daId, attributeId, dynamicPosition, value, queDefId, request);
+        return saveUpdateDeleteQuestionnaireGeneric(queId, daId, attributeId, dynamicPosition, value, null, queDefId, request);
     }
 
     public AttributePersistenceResult saveUpdateDeleteQuestionnaireDate(Long queId, Long daId, Long attributeId, Integer dynamicPosition, String dateValue, Long queDefId, HttpServletRequest request) {
-        return saveUpdateDeleteQuestionnaireGeneric(queId, daId, attributeId, dynamicPosition, dateValue, queDefId, request);
+        return saveUpdateDeleteQuestionnaireGeneric(queId, daId, attributeId, dynamicPosition, dateValue, null, queDefId, request);
     }
     
     public AttributePersistenceResult saveDeleteQuestionnaireCurrency(Long queId, Long daId, Long attributeId, Integer dynamicPosition, String value, String currency, Long queDefId, HttpServletRequest request) {
-    	
+        if(currency != null) currency = currency.trim();	
     	if(!StringUtils.hasText(currency) && StringUtils.hasText(value)) {
 		    AttributePersistenceResult result = new AttributePersistenceResult();
 		    result.setAttributeId(attributeId.toString());
 		    result.setErrorMessage(messageSource.getMessage("error.currency.required", null, getLocale(request)));
 	    }
-    	return saveUpdateDeleteQuestionnaireGeneric(queId, daId, attributeId, dynamicPosition, value, queDefId, request);
+    	return saveUpdateDeleteQuestionnaireGeneric(queId, daId, attributeId, dynamicPosition, value, currency, queDefId, request);
     }
 
     public AttributePersistenceResult saveDeleteQuestionnaireCheckBox(Long queId, Long daId, Long attributeId, String value, String action, Long queDefId, Integer dynamicPosition, HttpServletRequest request) {
@@ -137,7 +136,7 @@ public class QuestionnaireDwrBean {
 
         boolean validating = !((attributeId != null && !StringUtils.hasText(value)));
         if (validating) {
-            if (!validateDynamicAttribute(daId, attributeId, value, request, result)) return result;
+            if (!validateDynamicAttribute(daId, attributeId, value, null, request, result)) return result;
         }
 
         try {
@@ -179,7 +178,7 @@ public class QuestionnaireDwrBean {
     }
 
     public AttributePersistenceResult saveUpdateDeleteQuestionnairePosition(Long queId, Long daId, Long attributeId, Integer dynamicPosition, String value, Long queDefId, HttpServletRequest request) {
-        return saveUpdateDeleteQuestionnaireGeneric(queId, daId, attributeId, dynamicPosition, value, queDefId, request);
+        return saveUpdateDeleteQuestionnaireGeneric(queId, daId, attributeId, dynamicPosition, value, null, queDefId, request);
     }
 
     public AttributePersistenceResult saveUpdateDeleteQuestionnaireMultiSelect(Long queId, Long daId, Long attributeId, Integer dynamicPosition, String[] attributeIdValues, Long queDefId, HttpServletRequest request) {
@@ -225,7 +224,7 @@ public class QuestionnaireDwrBean {
         } 
     }
     
-    public AttributePersistenceResult saveUpdateDeleteQuestionnaireGeneric(Long queId, Long daId, Long attributeId, Integer dynamicPosition, String value, Long queDefId, HttpServletRequest request) {
+    public AttributePersistenceResult saveUpdateDeleteQuestionnaireGeneric(Long queId, Long daId, Long attributeId, Integer dynamicPosition, String value, String currency, Long queDefId, HttpServletRequest request) {
         assignUserSession(request);
 
         AttributePersistenceResult result = new AttributePersistenceResult();
@@ -239,11 +238,11 @@ public class QuestionnaireDwrBean {
 
         boolean validating = !((attributeId != null && !StringUtils.hasText(value)));
         if (validating) {
-            if (!validateDynamicAttribute(daId, attributeId, value, request, result)) return result;
+            if (!validateDynamicAttribute(daId, attributeId, value, currency, request, result)) return result;
         }
         try {
             User user = ZynapWebUtils.getUser(request);
-            Long attrId = questionnaireService.saveUpdateDeleteQuestionAttribute(queId, daId, attributeId, dynamicPosition, value, user);
+            Long attrId = questionnaireService.saveUpdateDeleteQuestionAttribute(queId, daId, attributeId, dynamicPosition, value, currency, user);
             result.setAttributeId(attrId != null ? attrId.toString() : "");
             dynamicCalculations(daId, queId, result, user);
 
@@ -307,9 +306,10 @@ public class QuestionnaireDwrBean {
         return result;
     }
 
-    private ErrorMessageHandler validateDynamicAttribute(String value, DynamicAttribute dynamicAttribute) {
+    private ErrorMessageHandler validateDynamicAttribute(String value, String currency, DynamicAttribute dynamicAttribute) {
         AttributeWrapperBean answer = new AttributeWrapperBean(dynamicAttribute);
         answer.setValue(value);
+        answer.setCurrency(currency);
         return validationFactory.getAttributeValidator(dynamicAttribute.getType()).validate(answer, null);
     }
 
@@ -321,7 +321,7 @@ public class QuestionnaireDwrBean {
         return false;
     }
 
-    private boolean validateDynamicAttribute(Long daId, Long attributeId, String value, HttpServletRequest request, AttributePersistenceResult result) {
+    private boolean validateDynamicAttribute(Long daId, Long attributeId, String value, String currency, HttpServletRequest request, AttributePersistenceResult result) {
         DynamicAttribute dynamicAttribute;
         try {
             dynamicAttribute = dynamicAttributeService.findById(daId);
@@ -330,7 +330,7 @@ public class QuestionnaireDwrBean {
             return false;
         }
 
-        final ErrorMessageHandler errorMessageHandler = validateDynamicAttribute(value, dynamicAttribute);
+        final ErrorMessageHandler errorMessageHandler = validateDynamicAttribute(value, currency, dynamicAttribute);
         String sAttributeId = "";
         if (attributeId != null) sAttributeId = String.valueOf(attributeId);
         result.setAttributeId(sAttributeId);

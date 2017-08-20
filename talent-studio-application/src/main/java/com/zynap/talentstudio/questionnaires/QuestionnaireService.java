@@ -17,7 +17,6 @@ import com.zynap.talentstudio.util.FormatterFactory;
 
 import org.springframework.util.StringUtils;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -71,7 +70,7 @@ public class QuestionnaireService extends DefaultService implements IQuestionnai
         questionnaireDao.unlockQuestionnaire(questionnaireId, userId);
     }
 
-    public Long saveUpdateDeleteQuestionAttribute(Long queId, Long daId, Long attributeId, Integer dynamicPosition, String value, User modifiedBy) throws TalentStudioException {
+    public Long saveUpdateDeleteQuestionAttribute(Long queId, Long daId, Long attributeId, Integer dynamicPosition, String value, String currency, User modifiedBy) throws TalentStudioException {
 
         boolean create = attributeId == null && StringUtils.hasText(value);
         boolean delete = (attributeId != null && !StringUtils.hasText(value));
@@ -96,6 +95,7 @@ public class QuestionnaireService extends DefaultService implements IQuestionnai
             newAttribute.setAddedBy(modifiedBy);
             newAttribute.setDateAdded(modifiedDate);
             newAttribute.setLineItemId(lineItemId);
+            newAttribute.setCurrency(currency);
             questionnaireDao.createAttribute(newAttribute);
 
             return newAttribute.getId();
@@ -107,6 +107,7 @@ public class QuestionnaireService extends DefaultService implements IQuestionnai
             //update
             final NodeExtendedAttribute updatedAttribute = questionnaireDao.findAttribute(attributeId);
             updatedAttribute.setValue(value);
+            updatedAttribute.setCurrency(currency);
             updatedAttribute.setDynamicPosition(attrDynamicPosition);
             updatedAttribute.setAddedBy(modifiedBy);
             updatedAttribute.setDateAdded(modifiedDate);

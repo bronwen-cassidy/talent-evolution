@@ -7,6 +7,7 @@ import com.zynap.talentstudio.analysis.AnalysisAttributeHelper;
 import com.zynap.talentstudio.analysis.AnalysisParameter;
 import com.zynap.talentstudio.analysis.QuestionAttributeValuesCollection;
 import com.zynap.talentstudio.analysis.populations.IPopulationEngine;
+import com.zynap.talentstudio.analysis.reports.GroupingAttribute;
 import com.zynap.talentstudio.analysis.reports.Report;
 import com.zynap.talentstudio.organisation.ArtefactAssociation;
 import com.zynap.talentstudio.organisation.Node;
@@ -32,17 +33,22 @@ public class AssociatedArtefactDataSource extends JRCollectionDataSource {
 
     public AssociatedArtefactDataSource(Report report, Collection<Object> artefactAssociations, JasperDataSourceFactory jasperDataSourceFactory, User user) {
         super(report, artefactAssociations, null, jasperDataSourceFactory, null, null, 0, user);
-        // sort the associations by the sort order of the type qualifier
-        Collections.sort(this.records, new Comparator<Object>() {
-            public int compare(Object o1, Object o2) {
-                ArtefactAssociation first = (ArtefactAssociation) o1;
-                ArtefactAssociation second = (ArtefactAssociation) o2;
-                return first.getQualifier().compareBySortOrder(second.getQualifier());
-            }
-        });
     }
 
-    public Object getFieldValue(JRField field) {
+	@Override
+	void sortResults(List<GroupingAttribute> groupedAttributeNames, String orderAttributeName, int orderDirection) {
+		super.sortResults(groupedAttributeNames, orderAttributeName, orderDirection);
+		
+		Collections.sort(this.records, new Comparator<Object>() {
+			public int compare(Object o1, Object o2) {
+				ArtefactAssociation first = (ArtefactAssociation) o1;
+				ArtefactAssociation second = (ArtefactAssociation) o2;
+				return first.getQualifier().compareBySortOrder(second.getQualifier());
+			}
+		});
+	}
+
+	public Object getFieldValue(JRField field) {
 
         Object value = null;
 

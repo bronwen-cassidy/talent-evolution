@@ -8,7 +8,7 @@
     </tree>
 
     <!-- indicates restrictions on attributes -->
-    <extendedattributes searchableOnly="false" type="NUMBER,DOUBLE,SUM"/>
+    <extendedattributes searchableOnly="false" type="NUMBER,DECIMAL,CURRENCY,SUM"/>
     <derivedattributes include="true"/>
     <dynamiclineitems include="true"/>
 

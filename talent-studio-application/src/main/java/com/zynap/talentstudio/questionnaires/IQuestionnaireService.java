@@ -85,7 +85,7 @@ public interface IQuestionnaireService extends IZynapService {
 
     Questionnaire findOrCreateQuestionnaire(Long workflowId, Long userId, Long subjectId) throws TalentStudioException;
 
-    Long saveUpdateDeleteQuestionAttribute(Long queId, Long daId, Long attributeId, Integer dynamicPosition, String value, User modifiedBy) throws TalentStudioException;
+    Long saveUpdateDeleteQuestionAttribute(Long queId, Long daId, Long attributeId, Integer dynamicPosition, String value, String currency, User modifiedBy) throws TalentStudioException;
 
     Long saveUpdateDeleteQuestionAttribute(Long queId, Long daId, Long attributeId, String value, User user) throws TalentStudioException;
 

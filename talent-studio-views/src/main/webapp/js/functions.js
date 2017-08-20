@@ -10,6 +10,11 @@ var DisplayFormat = "%%M%% Minutes, %%S%% Seconds.";
 var navTdId = "td_hideable";
 var thisTimeoutAmount;
 
+if (!String.prototype.trim) {
+    String.prototype.trim = function () {
+        return this.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
+    };
+}
 
 function disableButton(theButton)
 {

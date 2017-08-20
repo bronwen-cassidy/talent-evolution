@@ -82,7 +82,7 @@ public class JRCollectionDataSource extends AbstractReportDataSource {
      * @param orderAttributeName order-by-attribute id (can be null)
      * @param orderDirection the order direction 0 is descending, 1 is ascending
      */
-    private void sortResults(List<GroupingAttribute> groupedAttributeNames, String orderAttributeName, int orderDirection) {
+    void sortResults(List<GroupingAttribute> groupedAttributeNames, String orderAttributeName, int orderDirection) {
 
         ComparatorChain chain = null;
         int order = orderDirection == 0 ? DEFAULT_ORDER : orderDirection;
