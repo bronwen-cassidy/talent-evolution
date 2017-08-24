@@ -23,7 +23,7 @@ import java.util.List;
 public class ListQuestionnaireWorkflowsController extends ZynapDefaultFormController {
 
     protected Object formBackingObject(HttpServletRequest request) throws Exception {
-        List<QuestionnaireWorkflowDTO> allQueWorkflows = new ArrayList<QuestionnaireWorkflowDTO>(questionnaireWorkflowService.findAllQuestionnaireWorkflowDTOs());
+        List<QuestionnaireWorkflowDTO> allQueWorkflows = new ArrayList<>(questionnaireWorkflowService.findAllQuestionnaireWorkflowDTOs());
         return new QuestionnaireWorkflowListWrapper(allQueWorkflows);
     }
 

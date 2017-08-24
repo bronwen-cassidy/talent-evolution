@@ -1,9 +1,8 @@
 <%@ page errorPage="systemerror.jsp" %>
 <%@ page buffer="64kb" %>
-
 <%@ include file="../includes/include.jsp" %>
-
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta http-equiv="Content-type" content="text/html;charset=ISO-8859-1"/>
     <%--<meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>--%>

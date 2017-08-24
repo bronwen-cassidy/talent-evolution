@@ -9,6 +9,7 @@ import com.zynap.talentstudio.common.lookups.LookupValue;
 import com.zynap.talentstudio.organisation.attributes.DynamicAttribute;
 import com.zynap.talentstudio.organisation.attributes.NodeExtendedAttribute;
 import com.zynap.talentstudio.util.CurrencyFormatter;
+import com.zynap.talentstudio.util.DecimalFormatter;
 import com.zynap.talentstudio.util.FormatterFactory;
 
 import org.springframework.util.StringUtils;
@@ -66,6 +67,9 @@ public final class ArtefactAttributeViewFormatter {
                 displayValue = nodeLabel;
             } else if(dynamicAttribute.isCurrencyType()) {
                 displayValue = CurrencyFormatter.formatCurrency(nodeExtendedAttribute.getValue(), nodeExtendedAttribute.getCurrency());    
+            } else if (dynamicAttribute.isDecimalType()) {
+	            displayValue = DecimalFormatter.formatDecimal(value, dynamicAttribute.getDecimalPlaces());
+	            
             }
         }
 

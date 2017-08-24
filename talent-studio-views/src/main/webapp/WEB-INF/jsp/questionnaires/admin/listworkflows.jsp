@@ -45,7 +45,7 @@
         </display:column>
 
         <display:column property="population" title="${headerpopulation}" sortable="true" headerClass="sortable" class="pager"/>
-        
+
         <display:column decorator="com.zynap.talentstudio.web.utils.displaytag.DateDecorator" property="expiryDate" title="${headerenddate}" sortable="true" headerClass="sortable" class="pager"/>
         <display:column decorator="com.zynap.talentstudio.web.utils.displaytag.DateDecorator" property="lastRepublishedDate" title="${headerrepublisheddate}" sortable="true" headerClass="sortable" class="pager"/>
         <display:column title="${headerstatus}" headerClass="sortable" sortable="true" class="pager">
@@ -57,14 +57,15 @@
             <zynap:historyLink var="editqueurl" url="editquestionnairewf.htm">
                 <zynap:param name="<%= ParameterConstants.QUESTIONNAIRE_ID%>" value="${que.id}"/>
             </zynap:historyLink>
-            
+
             <span style="white-space: nowrap;">
                 <input type="button" value="<fmt:message key="edit"/>" onclick="location.href='<c:out value="${editqueurl}"/>'" />
                 <c:if test="${que.infoForm && !que.completed}">
-                    &nbsp;|&nbsp;<input type="button" value="<fmt:message key="republish"/>"
-                           onclick="republishWorkflow('<c:out value="${que.id}"/>', '<%= ZynapWebUtils.getUserId(request)%>', '<zynap:message code="republishing" javaScriptEscape="true"/>',
-                                '<zynap:message code="republished.at" javaScriptEscape="true"/>', '<zynap:message code="users.added" javaScriptEscape="true"/>',
-                                '<zynap:message code="users.removed" javaScriptEscape="true"/>');"/>
+                    &nbsp;|&nbsp;<input type="button" value="<fmt:message key="update"/>"
+                    onclick="republishWorkflow('<c:out value="${que.id}"/>', '<%= ZynapWebUtils.getUserId(request)%>', '<zynap:message code="republishing" javaScriptEscape="true"/>',
+                    '<zynap:message code="updated.at" javaScriptEscape="true"/>', '<zynap:message code="users.added" javaScriptEscape="true"/>',
+                    '<zynap:message code="users.removed" javaScriptEscape="true"/>');"/>
+                    &nbsp;|&nbsp;<input class="republishq" data-id="<c:out value="${que.id}"/>" type="button" value="<fmt:message key="republish"/>"/>
                 </c:if>
             </span>
         </display:column>
@@ -76,3 +77,15 @@
         </display:column>
     </display:table>
 </zynap:infobox>
+
+<script type="text/javascript" charset="UTF-8">
+
+    $(document).ready(function () {
+        $('.republishq').click( function() {
+            var queWfId = $(this).data('id');
+            var url = "questionnaires/republishQuestionnaire.htm?qId=" + queWfId;
+            $.get(url);
+        });
+    });
+
+</script>

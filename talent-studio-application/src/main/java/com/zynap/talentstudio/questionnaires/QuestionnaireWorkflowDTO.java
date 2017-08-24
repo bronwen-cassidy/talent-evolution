@@ -7,6 +7,7 @@
  */
 package com.zynap.talentstudio.questionnaires;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -16,7 +17,7 @@ import java.util.Date;
  * @version 0.1
  * @since 12-Nov-2007 12:06:38
  */
-public class QuestionnaireWorkflowDTO {
+public class QuestionnaireWorkflowDTO implements Serializable {
 
     public QuestionnaireWorkflowDTO(Long id, String label) {
         this.id = id;

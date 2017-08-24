@@ -52,10 +52,11 @@
 
         <display:column title="${headeraction}" class="pager" headerClass="sorted">
             <c:if test="${que.infoForm && !que.completed}">
-                <input type="button" value="<fmt:message key="republish"/>"
+                <input type="button" value="<fmt:message key="update"/>"
                        onclick="republishWorkflow('<c:out value="${que.id}"/>', '<%= ZynapWebUtils.getUserId(request)%>', '<zynap:message code="republishing" javaScriptEscape="true"/>',
-                                '<zynap:message code="republished.at" javaScriptEscape="true"/>', '<zynap:message code="users.added" javaScriptEscape="true"/>',
+                                '<zynap:message code="updated.at" javaScriptEscape="true"/>', '<zynap:message code="users.added" javaScriptEscape="true"/>',
                                 '<zynap:message code="users.removed" javaScriptEscape="true"/>');">
+                &nbsp;|&nbsp;<input class="republishq" data-id="<c:out value="${que.id}"/>" type="button" value="<fmt:message key="republish"/>"/>
             </c:if>
         </display:column>
 
@@ -66,3 +67,15 @@
         </display:column>
     </display:table>
 </zynap:infobox>
+
+<script type="text/javascript" charset="UTF-8">
+
+    $(document).ready(function () {
+        $('.republishq').click( function() {
+            var queWfId = $(this).data('id');
+            var url = "questionnaires/republishQuestionnaire.htm?qId=" + queWfId;
+            $.get(url);
+        });
+    });
+
+</script>

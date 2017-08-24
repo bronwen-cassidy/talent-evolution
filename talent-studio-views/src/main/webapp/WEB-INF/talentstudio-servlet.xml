@@ -11,8 +11,10 @@
                            http://www.springframework.org/schema/mvc
                            http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <context:component-scan base-package="com.zynap.talentstudio.views"/>
+    <!-- todo would be nice to have web under a sub directory of views -->
+    <context:component-scan base-package="com.zynap.talentstudio.web"/>
 
+    <mvc:annotation-driven />
 
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
@@ -229,6 +231,14 @@
     <bean id="viewResolver" class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
         <property name="basename" value="ts-views"/>
         <property name="defaultParentView" value="modelView"/>
+        <property name="order" value="0"/>
+    </bean>
+    
+    <bean id="urlViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="suffix" value=".jsp" />
+        <property name="prefix" value="WEB-INF/jsp" />
+        <property name="order" value="9999999"/>
     </bean>
 
     <!--

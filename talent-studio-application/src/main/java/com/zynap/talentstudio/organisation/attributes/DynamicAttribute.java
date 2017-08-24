@@ -184,6 +184,10 @@ public final class DynamicAttribute extends ZynapDomainObject implements Compara
         return typeMatches(DA_TYPE_NUMBER) || typeMatches(DA_TYPE_DECIMAL);
     }
 
+	public boolean isDecimalType() {
+		return typeMatches(DA_TYPE_DECIMAL);
+	}
+
     public boolean isSumType() {
         return typeMatches(DA_TYPE_SUM);
     }

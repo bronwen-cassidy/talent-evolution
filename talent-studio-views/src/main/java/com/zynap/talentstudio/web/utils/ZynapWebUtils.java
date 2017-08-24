@@ -29,6 +29,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
@@ -60,7 +61,11 @@ public final class ZynapWebUtils {
         return false;
     }
 
-    /**
+	public static Locale getUserLocale(HttpServletRequest request) {
+		return getUserSession(request) != null ? getUserSession(request).getLocale() : null;
+	}
+
+	/**
      * The logger.
      */
     private static final Log logger = LogFactory.getLog(ZynapWebUtils.class);

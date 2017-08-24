@@ -10,6 +10,7 @@ import com.zynap.talentstudio.organisation.attributes.DynamicAttribute;
 import com.zynap.talentstudio.organisation.attributes.IDynamicAttributeService;
 import com.zynap.talentstudio.organisation.attributes.NodeExtendedAttribute;
 import com.zynap.talentstudio.util.CurrencyFormatter;
+import com.zynap.talentstudio.util.DecimalFormatter;
 import com.zynap.talentstudio.util.FormatterFactory;
 
 import org.springframework.util.StringUtils;
@@ -158,6 +159,8 @@ public class AttributeWrapperBean implements Serializable, Comparable, Cloneable
                 return getTime();
             } else if (attributeDefinition.isCurrencyType()) {
 	            return CurrencyFormatter.formatCurrency(attributeValue.getValue(), attributeValue.getCurrency());
+            } else if (attributeDefinition.isDecimalType()) {
+	            return DecimalFormatter.formatDecimal(attributeValue.getValue(), attributeDefinition.getDecimalPlaces());
             } else if (attributeDefinition.isNodeType() || attributeDefinition.isLastUpdatedByType()) {
                 return this.nodeLabel;
             } else {

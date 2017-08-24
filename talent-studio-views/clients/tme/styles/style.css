@@ -90,6 +90,10 @@ div.arenatabs {
 	padding-bottom: 0px;
 }
 
+div.blogContent {
+    width: 350px;
+}
+
 .arenbar td {
 	background-color: #663366;
 	border-width: 0px;

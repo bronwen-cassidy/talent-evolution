@@ -5,6 +5,7 @@ import com.zynap.domain.admin.User;
 import com.zynap.talentstudio.analysis.populations.Population;
 import com.zynap.talentstudio.common.groups.Group;
 import com.zynap.talentstudio.performance.PerformanceReview;
+import com.zynap.talentstudio.util.FormatterFactory;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
@@ -17,7 +18,8 @@ import java.util.Set;
  */
 public class QuestionnaireWorkflow extends ZynapDomainObject {
 
-    private static final long serialVersionUID = 1160746921824169553L;
+
+	private static final long serialVersionUID = 1160746921824169553L;
 
     /**
      * default constructor.
@@ -204,6 +206,23 @@ public class QuestionnaireWorkflow extends ZynapDomainObject {
     public boolean isCompleted() {
         return STATUS_COMPLETED.equals(status);
     }
+
+	public QuestionnaireWorkflow copy(Long userId) {
+    	QuestionnaireWorkflow qw = new QuestionnaireWorkflow(label, workflowType, questionnaireDefinition, userId);
+    	qw.description = description;
+    	qw.closedDate = closedDate;
+    	qw.expiryDate = expiryDate;
+    	qw.group = group;
+    	qw.individualRead = individualRead;
+    	qw.individualWrite = individualWrite;
+    	qw.managerRead = managerRead;
+    	qw.managerWrite = managerWrite;
+    	qw.population = population;
+    	qw.startDate = new Date();
+    	qw.status = status;
+    	qw.active = active;
+		return qw;
+	}
 
     /**
      * Return true if workflow type not equals {@link #TYPE_INFO_FORM}.
