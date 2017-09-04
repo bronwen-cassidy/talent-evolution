@@ -53,13 +53,13 @@ BEGIN
         ( select lv.id from lookup_values lv, lookup_types lt, dynamic_attributes da
             where da.qd_id=que_def_id_
             and da.refers_to=lt.id
-            and lv.type_id=lt.id );
+            and lv.type_id=lt.id and lv.type_id <> 'CURRENCY');
 
      -- lookup_types
      delete from lookup_types where id in
         ( select lt.id from lookup_types lt, dynamic_attributes da
             where da.qd_id=que_def_id_
-            and da.refers_to=lt.id);
+            and da.refers_to=lt.id AND lt.id <> 'CURRENCY');
 
      -- dynamic_attributes       
      delete from node_das where da_id in (select id from dynamic_attributes where qd_id=que_def_id_);

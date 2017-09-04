@@ -277,7 +277,16 @@ public class QuestionnaireWorkflow extends ZynapDomainObject {
         this.lastRepublishedDate = lastRepublishedDate;
     }
 
-    /**
+	public String getParentLabel() {
+		return parentLabel;
+	}
+
+	public void setParentLabel(String parentLabel) {
+		this.parentLabel = parentLabel;
+	}
+
+
+	/**
      * The type - currently can be {@link #TYPE_INFO_FORM} or {@link #TYPE_QUESTIONNAIRE}.
      */
     private String workflowType;
@@ -379,4 +388,5 @@ public class QuestionnaireWorkflow extends ZynapDomainObject {
      */
     public static final String TYPE_MANAGER_APPRAISAL = "PERFORMANCE_REVIEW_MANAGER";
 
+	private String parentLabel;
 }

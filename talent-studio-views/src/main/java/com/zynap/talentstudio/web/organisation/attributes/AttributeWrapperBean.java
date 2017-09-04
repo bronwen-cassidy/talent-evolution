@@ -160,7 +160,8 @@ public class AttributeWrapperBean implements Serializable, Comparable, Cloneable
             } else if (attributeDefinition.isCurrencyType()) {
 	            return CurrencyFormatter.formatCurrency(attributeValue.getValue(), attributeValue.getCurrency());
             } else if (attributeDefinition.isDecimalType()) {
-	            return DecimalFormatter.formatDecimal(attributeValue.getValue(), attributeDefinition.getDecimalPlaces());
+	            final Integer decimalPlaces = attributeDefinition.getDecimalPlaces() != null ? attributeDefinition.getDecimalPlaces() : 0;
+	            return DecimalFormatter.formatDecimal(attributeValue.getValue(), decimalPlaces);
             } else if (attributeDefinition.isNodeType() || attributeDefinition.isLastUpdatedByType()) {
                 return this.nodeLabel;
             } else {

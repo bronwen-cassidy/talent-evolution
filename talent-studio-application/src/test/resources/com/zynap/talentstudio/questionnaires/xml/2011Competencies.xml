@@ -27,7 +27,7 @@
             </question>
 
             <question id="88" type="Currency" name="Salay indicator" title="Salary"/>
-            <question id="98" type="Decimal" name="Salay indicator" title="Salary"/>
+            <question id="98" type="Decimal" name="Salay amount as decimal" title="Salary Decimal" decimalPlaces="2"/>
 
             <question id="11" type="Sum" name="Manager Rating - Number" title="Manager Rating - Number" hidden="true">
                 <operand source="10"/>

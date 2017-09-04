@@ -44,3 +44,8 @@ function deleteDynamicLineItem(id, index) {
 function addBlogComment(index) {
     setHiddenValuesAndPost('questionnaireForm', targetFieldId, '13', 'deleteImage', index);
 }
+
+function republishQuestionnaire(queId) {
+    $("#rep_" + queId).attr("disabled","disabled");
+    $('.mask').addClass('ajax');
+}

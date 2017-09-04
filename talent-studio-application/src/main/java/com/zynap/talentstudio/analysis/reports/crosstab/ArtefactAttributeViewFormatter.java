@@ -68,8 +68,8 @@ public final class ArtefactAttributeViewFormatter {
             } else if(dynamicAttribute.isCurrencyType()) {
                 displayValue = CurrencyFormatter.formatCurrency(nodeExtendedAttribute.getValue(), nodeExtendedAttribute.getCurrency());    
             } else if (dynamicAttribute.isDecimalType()) {
-	            displayValue = DecimalFormatter.formatDecimal(value, dynamicAttribute.getDecimalPlaces());
-	            
+	            int decimalPlaces = dynamicAttribute.getDecimalPlaces() != null ? dynamicAttribute.getDecimalPlaces() : 0;
+	            displayValue = DecimalFormatter.formatDecimal(value, decimalPlaces);
             }
         }
 

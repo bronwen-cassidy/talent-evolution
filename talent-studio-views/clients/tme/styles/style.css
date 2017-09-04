@@ -85,9 +85,9 @@ div.arenatabs {
 	background-repeat: no-repeat;
 	border-width: 0px;
 	border-color: #004fad;
-	padding-left: 33px;
 	padding-top: 71px;
 	padding-bottom: 0px;
+    width:100%;
 }
 
 div.blogContent {
@@ -217,11 +217,11 @@ div.navigation {
 }
 
 .nav_manipulation {
-    	float: left;
+    float: left;
 	display: inline;
 	vertical-align: bottom;
 	margin-left: 0pt;
-	padding-left: 0pt;
+	padding-left: 33px;
 	padding-top: 10pt;
 	cursor: pointer;
 	color: white;
@@ -480,6 +480,10 @@ td.columnheader {
 .group td {
 	border-bottom: 0px;
         background-color: #FAEDBB;
+}
+
+tr.body-background {
+    background-color: #589AFF;
 }
 
 /********************************************************************************/

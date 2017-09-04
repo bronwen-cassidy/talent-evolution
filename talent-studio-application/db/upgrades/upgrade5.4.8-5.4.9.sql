@@ -18,6 +18,16 @@ values (LOOKUPVALUE_SQ.nextval, 'CURRENCY', 'USD', 'USD', 'USD', 1);
 
 alter table node_das add currency VARCHAR2(10 CHAR);
 
+--======================================
+@packages/zynap_node_spec.sql
+@packages/zynap_node_body.sql
+
+ALTER PACKAGE ZYNAP_NODE_SP COMPILE SPECIFICATION;
+ALTER PACKAGE ZYNAP_NODE_SP COMPILE BODY;
+
+
 insert into versions(version) values('5.4.8-5.4.9');
+
+alter table QUE_WORKFLOWS add parent_label varchar2(1000 CHAR);
 
 commit;

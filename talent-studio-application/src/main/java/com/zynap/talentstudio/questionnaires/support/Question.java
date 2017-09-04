@@ -271,11 +271,11 @@ public class Question extends BaseQuestion implements Cloneable {
 		this.sortOrder = sortOrder;
 	}
 
-	public Integer getDescimalPlaces() {
+	public Integer getDecimalPlaces() {
 		return dynamicAttribute.getDecimalPlaces();
 	}
 
-	public void setDescimalPlaces(Integer decimalPlaces) {
+	public void setDecimalPlaces(Integer decimalPlaces) {
 		dynamicAttribute.setDecimalPlaces(decimalPlaces);
 	}
 

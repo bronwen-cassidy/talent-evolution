@@ -1,6 +1,6 @@
 <%@ include file="../includes/include.jsp" %>
 
-<tr valign="top" class="noprint">
+<tr valign="top" class="noprint body-background">
     <td>
         <div class="arenatabs">
             <c:if test="${nav != null}">
