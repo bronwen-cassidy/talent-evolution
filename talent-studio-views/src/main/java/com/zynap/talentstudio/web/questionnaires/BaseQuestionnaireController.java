@@ -3,6 +3,7 @@
  */
 package com.zynap.talentstudio.web.questionnaires;
 
+import com.zynap.talentstudio.analysis.reports.IReportService;
 import com.zynap.talentstudio.questionnaires.IQuestionnaireService;
 import com.zynap.talentstudio.questionnaires.IQueWorkflowService;
 import com.zynap.talentstudio.questionnaires.IQueDefinitionService;
@@ -50,10 +51,15 @@ public abstract class BaseQuestionnaireController extends ZynapDefaultFormContro
         this.questionnaireHelper = questionnaireHelper;
     }
 
-    protected IQuestionnaireService questionnaireService;
+	public void setReportService(IReportService reportService) {
+		this.reportService = reportService;
+	}
+
+	protected IQuestionnaireService questionnaireService;
     protected IQueDefinitionService questionnaireDefinitionService;
     protected IQueWorkflowService questionnaireWorkflowService;
     protected QuestionnaireHelper questionnaireHelper;
+    protected IReportService reportService;
 
 
 }

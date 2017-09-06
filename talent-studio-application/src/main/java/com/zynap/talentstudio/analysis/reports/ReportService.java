@@ -26,6 +26,7 @@ import com.zynap.talentstudio.security.permits.PermitHelper;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -131,6 +132,22 @@ public class ReportService extends DefaultService implements IReportService {
 	@Override
 	public List<ProgressReport> findProgressReportDefinitions(Long questionnaireDefinitionId) throws HibernateException {
 		return reportDao.findProgressReportDefinitions(questionnaireDefinitionId);
+	}
+
+	@Override
+	public void deleteReportWorkflows(Long workflowId, Long questionnaireDefinitionId) throws HibernateException, TalentStudioException {
+		final List<ProgressReport> progressReports = findProgressReportDefinitions(questionnaireDefinitionId);
+		for (ProgressReport progressReport : progressReports) {
+			final Set<ReportWorkflow> workflows = progressReport.getWorkflows();
+			for (Iterator<ReportWorkflow> iterator = workflows.iterator(); iterator.hasNext(); ) {
+				ReportWorkflow next = iterator.next();
+				if(workflowId.equals(next.getWorkflow().getId())) {
+					iterator.remove();
+				}
+			}
+			progressReport.resetWorkflowPositions();
+			reportDao.update(progressReport);
+		}
 	}
 
 	public List<Report> findAppraisalReports(Long subjectId, String status) {

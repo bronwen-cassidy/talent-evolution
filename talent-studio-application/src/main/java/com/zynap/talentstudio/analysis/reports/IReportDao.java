@@ -47,4 +47,6 @@ public interface IReportDao extends IFinder, IModifiable {
     List<Report> findProgressReports(Long subjectId);
 
 	List<ProgressReport> findProgressReportDefinitions(Long questionnaireDefinitionId) throws HibernateException;
+
+	void deleteReportWorkflows(Long workflowId);
 }

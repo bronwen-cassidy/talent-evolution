@@ -109,6 +109,11 @@ public class HibernateReportDao extends HibernateCrudAdaptor implements IReportD
 				.setResultTransformer(new DistinctRootEntityResultTransformer()).list();
 	}
 
+	@Override
+	public void deleteReportWorkflows(Long workflowId) {
+		getHibernateTemplate().delete("from ReportWorkflow rw where rw.workflow.id = " + workflowId);
+	}
+
 	public Collection<ReportDto> findDrilldownReports(Long reportId, String populationType, Long userId, boolean publicOnly) {
 
         // check report id is not null - will happen with new reports

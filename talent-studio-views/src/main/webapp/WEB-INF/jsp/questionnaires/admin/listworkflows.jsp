@@ -65,7 +65,7 @@
                     onclick="republishWorkflow('<c:out value="${que.id}"/>', '<%= ZynapWebUtils.getUserId(request)%>', '<zynap:message code="republishing" javaScriptEscape="true"/>',
                     '<zynap:message code="updated.at" javaScriptEscape="true"/>', '<zynap:message code="users.added" javaScriptEscape="true"/>',
                     '<zynap:message code="users.removed" javaScriptEscape="true"/>');"/>
-                    &nbsp;|&nbsp;<input class="republishq" data-id="<c:out value="${que.id}"/>" type="button" value="<fmt:message key="republish"/>" 
+                    &nbsp;|&nbsp;<input class="republishq" id="rep_<c:out value="${que.id}"/>" type="button" value="<fmt:message key="republish"/>" 
                     onclick="republishQuestionnaire('<c:out value="${que.id}"/>'); window.location.href='questionnaires/republishQuestionnaire.htm?qId=<c:out value="${que.id}"/>';"/>
                 </c:if>
             </span>
@@ -78,5 +78,3 @@
         </display:column>
     </display:table>
 </zynap:infobox>
-
-<div class="mask"></div>

@@ -55,4 +55,15 @@ public abstract class HibernateCrudAdaptor extends HibernateFinderAdaptor implem
     public void delete(IDomainObject domainObject) throws TalentStudioException {
         getHibernateTemplate().delete(domainObject);
     }
+
+	/**
+	 * Does a delete when there are referenced objects
+	 *
+	 * @param domainObject - the object being deleted
+	 */
+	@Override
+	public void mergeDelete(IDomainObject domainObject) {
+		getHibernateTemplate().evict(domainObject);
+		getHibernateTemplate().delete(domainObject);
+	}
 }

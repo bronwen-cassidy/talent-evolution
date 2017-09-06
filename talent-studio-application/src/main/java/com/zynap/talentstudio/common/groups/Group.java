@@ -63,8 +63,8 @@ public class Group extends ZynapDomainObject implements Comparable<Group> {
     public int compareTo(Group other) {
         return getLabel().compareTo(other.getLabel());
     }
-
-    private String type;
+	
+	private String type;
     private Set<HomePage> homePages = new HashSet<HomePage>();
 
     public static final String TYPE_QUESTIONNAIRE = "QUESTIONNAIRE";

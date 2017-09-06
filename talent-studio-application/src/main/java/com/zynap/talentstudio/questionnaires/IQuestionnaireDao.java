@@ -3,6 +3,7 @@
  */
 package com.zynap.talentstudio.questionnaires;
 
+import com.zynap.domain.IDomainObject;
 import com.zynap.domain.admin.User;
 import com.zynap.exception.TalentStudioException;
 import com.zynap.talentstudio.common.IFinder;

@@ -83,11 +83,18 @@ public class ProgressReport extends Report {
 
     public void addReportWorkflow(ReportWorkflow reportWorkflow) {
         reportWorkflow.setReport(this);
-        reportWorkflow.setPosition(new Integer(workflows.size()));
+        reportWorkflow.setPosition(workflows.size());
         workflows.add(reportWorkflow);
     }
 
-    private Set<ReportWorkflow> workflows = new LinkedHashSet<ReportWorkflow>();
+	void resetWorkflowPositions() {
+    	int index = 0;
+		for (ReportWorkflow workflow : workflows) {
+			workflow.setPosition(index++);	
+		}
+	}
+
+	private Set<ReportWorkflow> workflows = new LinkedHashSet<ReportWorkflow>();
     private QuestionnaireDefinition questionnaireDefinition;
     private Long questionnaireDefinitionId;
 }

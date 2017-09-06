@@ -47,5 +47,4 @@ function addBlogComment(index) {
 
 function republishQuestionnaire(queId) {
     $("#rep_" + queId).attr("disabled","disabled");
-    $('.mask').addClass('ajax');
 }

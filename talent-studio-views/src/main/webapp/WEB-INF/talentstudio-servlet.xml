@@ -1333,6 +1333,7 @@
         <property name="successView" value="viewquestionnairedefinition.htm"/>
         <property name="questionnaireService" ref="questionnaireService"/>
         <property name="questionnaireWorkflowService" ref="queWorkflowService"/>
+        <property name="reportService" ref="reportService"/>
     </bean>
 
     <bean id="closeQuestionnaireWorkflowController" class="com.zynap.talentstudio.web.questionnaires.CloseQuestionnaireWorkflowController">

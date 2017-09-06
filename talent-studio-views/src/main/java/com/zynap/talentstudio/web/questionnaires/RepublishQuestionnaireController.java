@@ -30,8 +30,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/admin/questionnaires")
 public class RepublishQuestionnaireController {
-	
-	
+
+
 	private IQueWorkflowService questionnaireWorkflowService;
 	private IReportService reportService;
 	private final Log logger = LogFactory.getLog(getClass());
@@ -42,27 +42,29 @@ public class RepublishQuestionnaireController {
 		this.reportService = reportService;
 	}
 
-	@RequestMapping(value="/republishQuestionnaire.htm", method = RequestMethod.GET)
+	@RequestMapping(value = "/republishQuestionnaire.htm", method = RequestMethod.GET)
 	public String republishQuestionnaire(HttpServletRequest request, @RequestParam("qId") Long queWorkflowId) {
 		try {
 			final QuestionnaireWorkflow workflow = questionnaireWorkflowService.findWorkflowById(queWorkflowId);
 			QuestionnaireWorkflow newWorkflow = republishNewWorkflow(request, workflow);
 			updateProgressReports(newWorkflow);
-			
+
 		} catch (TalentStudioException e) {
 			logger.error(e.getMessage(), e);
 		}
 		return "redirect:/admin/listqueworkflows.htm";
 	}
-	
-	@RequestMapping(value="/republishDefQuestionnaire.htm", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/republishDefQuestionnaire.htm", method = RequestMethod.GET)
 	public String republishDefQuestionnaire(HttpServletRequest request, @RequestParam("qId") Long queWorkflowId) {
-		QuestionnaireWorkflow workflow = new QuestionnaireWorkflow();
+		QuestionnaireWorkflow workflow = null;
 		try {
 			workflow = questionnaireWorkflowService.findWorkflowById(queWorkflowId);
-			QuestionnaireWorkflow newWorkflow = republishNewWorkflow(request, workflow);
-			updateProgressReports(newWorkflow);
-			
+			if(workflow.isInfoForm()) {
+				QuestionnaireWorkflow newWorkflow = republishNewWorkflow(request, workflow);
+				updateProgressReports(newWorkflow);
+			}
+
 		} catch (TalentStudioException e) {
 			logger.error(e.getMessage(), e);
 		}
@@ -91,15 +93,13 @@ public class RepublishQuestionnaireController {
 		final DateFormat dateInstance = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM, request.getLocale());
 		String today = dateInstance.format(new Date());
 		String parentlabel = StringUtils.hasText(workflow.getParentLabel()) ? workflow.getParentLabel() : workflow.getLabel();
-		
+
 		newWorkflow.setLabel(parentlabel + " - " + today);
 		newWorkflow.setParentLabel(parentlabel);
 		try {
 			questionnaireWorkflowService.create(newWorkflow);
-		} catch (TalentStudioException e) {
-			today = dateInstance.format(new Date());
-			newWorkflow.setLabel(parentlabel + " - " + today);
-			questionnaireWorkflowService.create(newWorkflow);
+		} catch (Throwable e) {
+			logger.debug(e.getMessage(), e);
 		}
 		questionnaireWorkflowService.startWorkflow(newWorkflow);
 		return newWorkflow;

@@ -46,7 +46,7 @@
         <many-to-one
                 name="workflow"
                 class="com.zynap.talentstudio.questionnaires.QuestionnaireWorkflow"
-                not-null="false"               
+                not-null="false"
                 >
             <column name="WORKFLOW_ID"/>
         </many-to-one>

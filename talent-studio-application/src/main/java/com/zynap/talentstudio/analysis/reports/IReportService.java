@@ -61,4 +61,6 @@ public interface IReportService extends IZynapService {
     List<Report> findProgressReports(Long subjectId);
 
 	List<ProgressReport> findProgressReportDefinitions(Long questionnaireDefinitionId) throws HibernateException;
+
+	void deleteReportWorkflows(Long workflowId, Long questionnaireDefinitionId) throws HibernateException, TalentStudioException;
 }

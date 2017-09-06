@@ -96,7 +96,8 @@ public class QuestionnaireWorkflowService extends AbstractQuestionnaireService i
      */
     public void delete(QuestionnaireWorkflow questionnaireWorkflow) throws TalentStudioException {
         closeWorkflowProcess(questionnaireWorkflow);
-        questionnaireDao.delete(questionnaireWorkflow);
+        QuestionnaireWorkflow queWorkflow = questionnaireDao.findById(questionnaireWorkflow.getId());
+        questionnaireDao.mergeDelete(queWorkflow);
     }
 
     public void setNotificationActionable(Long notificationId, boolean actionable, String nextAction) throws TalentStudioException {
