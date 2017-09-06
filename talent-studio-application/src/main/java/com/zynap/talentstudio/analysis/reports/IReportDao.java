@@ -3,6 +3,8 @@
  */
 package com.zynap.talentstudio.analysis.reports;
 
+import net.sf.hibernate.HibernateException;
+
 import com.zynap.domain.QueryParameter;
 import com.zynap.exception.TalentStudioException;
 import com.zynap.talentstudio.common.IFinder;
@@ -43,4 +45,6 @@ public interface IReportDao extends IFinder, IModifiable {
     void deleteParticipants(Long reportId) throws TalentStudioException;
 
     List<Report> findProgressReports(Long subjectId);
+
+	List<ProgressReport> findProgressReportDefinitions(Long questionnaireDefinitionId) throws HibernateException;
 }

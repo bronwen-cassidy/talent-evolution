@@ -3,6 +3,8 @@
  */
 package com.zynap.talentstudio.analysis.reports;
 
+import net.sf.hibernate.HibernateException;
+
 import com.zynap.domain.QueryParameter;
 import com.zynap.exception.TalentStudioException;
 import com.zynap.talentstudio.arenas.MenuSection;
@@ -57,4 +59,6 @@ public interface IReportService extends IZynapService {
     List<ReportDto> findReports(Map<String, QueryParameter> parameters);
 
     List<Report> findProgressReports(Long subjectId);
+
+	List<ProgressReport> findProgressReportDefinitions(Long questionnaireDefinitionId) throws HibernateException;
 }

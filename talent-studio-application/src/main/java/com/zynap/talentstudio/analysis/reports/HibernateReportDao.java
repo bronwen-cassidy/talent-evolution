@@ -3,6 +3,12 @@
  */
 package com.zynap.talentstudio.analysis.reports;
 
+import net.sf.hibernate.Criteria;
+import net.sf.hibernate.HibernateException;
+import net.sf.hibernate.Session;
+import net.sf.hibernate.expression.Expression;
+import net.sf.hibernate.transform.DistinctRootEntityResultTransformer;
+
 import com.zynap.domain.IDomainObject;
 import com.zynap.domain.QueryParameter;
 import com.zynap.exception.TalentStudioException;
@@ -95,7 +101,15 @@ public class HibernateReportDao extends HibernateCrudAdaptor implements IReportD
         return reportResults;
     }
 
-    public Collection<ReportDto> findDrilldownReports(Long reportId, String populationType, Long userId, boolean publicOnly) {
+	@Override
+	public List<ProgressReport> findProgressReportDefinitions(Long questionnaireDefinitionId) throws HibernateException {
+		Session session = getSession(false);
+		final Criteria criteria = session.createCriteria(ProgressReport.class);
+		return criteria.add(Expression.eq("questionnaireDefinitionId", questionnaireDefinitionId))
+				.setResultTransformer(new DistinctRootEntityResultTransformer()).list();
+	}
+
+	public Collection<ReportDto> findDrilldownReports(Long reportId, String populationType, Long userId, boolean publicOnly) {
 
         // check report id is not null - will happen with new reports
         final boolean hasReportId = (reportId != null);

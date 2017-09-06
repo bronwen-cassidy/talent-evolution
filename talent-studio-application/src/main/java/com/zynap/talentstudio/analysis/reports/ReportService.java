@@ -3,6 +3,8 @@
  */
 package com.zynap.talentstudio.analysis.reports;
 
+import net.sf.hibernate.HibernateException;
+
 import com.zynap.domain.IDomainObject;
 import com.zynap.domain.QueryParameter;
 import com.zynap.exception.TalentStudioException;
@@ -126,7 +128,12 @@ public class ReportService extends DefaultService implements IReportService {
         return reportDao.findProgressReports(subjectId);
     }
 
-    public List<Report> findAppraisalReports(Long subjectId, String status) {
+	@Override
+	public List<ProgressReport> findProgressReportDefinitions(Long questionnaireDefinitionId) throws HibernateException {
+		return reportDao.findProgressReportDefinitions(questionnaireDefinitionId);
+	}
+
+	public List<Report> findAppraisalReports(Long subjectId, String status) {
         return reportDao.findAppraisalReports(subjectId, status);
     }
 

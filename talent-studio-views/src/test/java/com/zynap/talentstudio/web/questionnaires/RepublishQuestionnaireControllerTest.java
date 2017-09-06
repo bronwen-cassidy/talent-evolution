@@ -16,7 +16,7 @@ public class RepublishQuestionnaireControllerTest {
 	@Test
 	public void republishQuestionnaire() throws Exception {
 
-		final DateFormat dateInstance = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT, Locale.CANADA);
+		final DateFormat dateInstance = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM, Locale.CANADA);
 		final String format = dateInstance.format(new Date());
 		System.out.println("format = " + format);
 	}
