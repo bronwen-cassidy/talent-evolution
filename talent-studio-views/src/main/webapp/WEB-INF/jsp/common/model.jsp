@@ -20,9 +20,11 @@
 
     <%@ include file="../includes/stylesheets.jsp" %>
 
-    <script src="<c:url value="/js/jquery-1.7.2.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/js/vendor/jquery.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/js/vendor/foundation.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/js/vendor/what-input.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/js/jquery-ui-1.8.21.custom.min.js"/>" type="text/javascript"></script>
-
+                                                                                                                 
     <script src="<c:url value="/dwr/engine.js"/>" type="text/javascript"></script>
 
     <script src="<c:url value="/dwr/interface/navSessionBean.js"/>" type="text/javascript"></script>
@@ -61,6 +63,11 @@
     <c:if test="${decoration != null}">
         <%@ include file="/help/topimage.html" %>
     </c:if>
+
+    <div class="row">
+        <div class="small-3 columns">3 columns</div>
+        <div class="small-9 columns">9 columns</div>
+    </div>
 
     <tr style="height:100%;" valign="top">
         <td>

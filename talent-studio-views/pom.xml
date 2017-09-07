@@ -260,6 +260,9 @@
                         <exclude>**/jquery.tablesorter.pager.js</exclude>
                         <exclude>**/questionnaires.js</exclude>
                         <exclude>**/functions.js</exclude>
+                        <exclude>**/foundation.js</exclude>
+                        <exclude>**/jquery.js</exclude>
+                        <exclude>**/what-input.js</exclude>
                         <exclude>**/popups.js</exclude>
                     </excludes>
                     <nosuffix>true</nosuffix>
