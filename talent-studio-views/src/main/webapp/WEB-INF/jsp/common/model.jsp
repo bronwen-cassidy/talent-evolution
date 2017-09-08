@@ -5,7 +5,6 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-type" content="text/html;charset=ISO-8859-1"/>
-    <%--<meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>--%>
 
     <fmt:message key="${title}" var="title" scope="request"/>
     <title><fmt:message key="application.title"/> - <c:out value="${title}"/></title>
@@ -20,11 +19,11 @@
 
     <%@ include file="../includes/stylesheets.jsp" %>
 
+    <script src="<c:url value="/js/vendor/modernizr.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/js/vendor/jquery.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/js/vendor/foundation.min.js"/>" type="text/javascript"></script>
-    <script src="<c:url value="/js/vendor/what-input.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/js/jquery-ui-1.8.21.custom.min.js"/>" type="text/javascript"></script>
-                                                                                                                 
+
     <script src="<c:url value="/dwr/engine.js"/>" type="text/javascript"></script>
 
     <script src="<c:url value="/dwr/interface/navSessionBean.js"/>" type="text/javascript"></script>
@@ -46,71 +45,70 @@
 
 <body OnLoad="placeFocus(self); <c:if test="${!nopoll}">pollTimeOut('<c:out value="${pageContext.session.maxInactiveInterval * 1000}"/>', '<c:out value="${timeoutMsg}"/>', '<c:url value="/logout.htm"/>');</c:if>">
 
-<table style="height:100%;" width="100%" cellspacing="0" cellpadding="0">
-
-    <c:if test="${top != null}">
-        <c:import url="${top}"/>
-    </c:if>
-
-    <c:if test="${userinfo != null}">
-        <c:import url="${userinfo}"/>
-    </c:if>
-
-    <c:if test="${arenanav != null}">
-        <c:import url="${arenanav}"/>
-    </c:if>
-
-    <c:if test="${decoration != null}">
-        <%@ include file="/help/topimage.html" %>
-    </c:if>
-
+<c:if test="${userPrincipal != null}">
     <div class="row">
-        <div class="small-3 columns">3 columns</div>
-        <div class="small-9 columns">9 columns</div>
+        <div class="medium-12 column">
+            <c:if test="${not sessionScope.permitsDone}">
+                <div id="permitsDoneDV" class="loading" style="display:block;"><fmt:message key="permits.loading"/></div>
+            </c:if>
+        </div>
     </div>
+</c:if>
 
-    <tr style="height:100%;" valign="top">
-        <td>
-            <table style="height:100%;" width="100%" cellspacing="0" cellpadding="0">
-                <tr>
-                    <c:set var="navflag" value="nonav"/>
-                    <c:if test="${nav != null}">
-                        <td valign="top" class="navigation noprint">
-                            <div id="td_hideable" class="navigation"
-                                <c:choose>
-                                    <c:when test="${navigationVisible == null || navigationVisible}">style="display:block;" </c:when>
-                                    <c:otherwise>style="display:none;"</c:otherwise>
-                                </c:choose>
-                            >
-                                <c:import url="${nav}"/>
-                            </div>
-                        </td>
-                        <c:set var="navflag" value="nav"/>
-                    </c:if>
-                    <td class="content" id="<c:out value="${navflag}"/>">
-                        <c:if test="${sessionScope.userSession != null}"><input id="defaultNavOUId" type="hidden" name="default.navigator.ou.id" value="<c:out value="${sessionScope.userSession.organisationUnitId}"/>"/></c:if>
-                        <c:if test="${content != null}"><c:import url="${content}"/></c:if>
-                    </td>
-                </tr>
-            </table>
-        </td>
-    </tr>
+<c:if test="${userinfo != null}">
+    <c:import url="${userinfo}"/>
+</c:if>
 
-    <c:if test="${decoration != null}">
-        <%@ include file="/help/bottomimage.html" %>
+<c:if test="${arenanav != null}">
+    <c:import url="${arenanav}"/>
+</c:if>
+
+<c:if test="${decoration != null}">
+    <div class="row full-width top-decoration">
+        <div class="medium-12 column text-center top_image"></div>
+    </div>
+</c:if>
+
+<div class="row full-width">
+    <c:set var="navflag" value="nonav"/>
+    <c:if test="${nav != null}">
+        <div class="medium-2 column">
+            <div id="td_hideable" class="navigation"
+                    <c:choose>
+                        <c:when test="${navigationVisible == null || navigationVisible}">style="display:block;" </c:when>
+                        <c:otherwise>style="display:none;"</c:otherwise>
+                    </c:choose>
+            >
+                <c:import url="${nav}"/>
+            </div>
+            <c:set var="navflag" value="nav"/>
+        </div>
     </c:if>
+    <div id="<c:out value="${navflag}"/>" class="column content <c:choose><c:when test="${nav != null}">medium-10</c:when><c:otherwise>medium-12</c:otherwise></c:choose>">
+        <c:if test="${sessionScope.userSession != null}"><input id="defaultNavOUId" type="hidden" name="default.navigator.ou.id" value="<c:out value="${sessionScope.userSession.organisationUnitId}"/>"/></c:if>
+        <c:if test="${content != null}"><c:import url="${content}"/></c:if>
+    </div>
+</div>
 
-    <c:if test="${footer != null}">
-        <c:import url="${footer}"/>
-    </c:if>
+<c:if test="${decoration != null}">
+    <div class="row full-width bottom-decoration">
+        <div class="medium-12 column text-center bottom_image"></div>
+    </div>
+</c:if>
 
-</table>
+<c:if test="${footer != null}">
+    <c:import url="${footer}"/>
+</c:if>
 
 <c:if test="${not nopoll}">
     <zynap:popup id="sessionExpWarning" closeFunction="popupHideWarning('sessionExpWarning', 'sessionExpWarningIframe')">
         <%@include file="sessionwarning.jsp" %>
     </zynap:popup>
 </c:if>
+
+<script>
+    $(document).foundation();
+</script>
 
 </body>
 </html>

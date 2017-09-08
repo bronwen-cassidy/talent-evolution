@@ -38,10 +38,11 @@ span.userinfo {
 	padding-left: 150px;
 }
 
-td.footer {
+.footer {
 	font-size: 0.8em;
 	color: white;
 	background-color: #636563;
+	width:100%;
 	border: none;
 	padding: 5px 10px 5px 120px;
 }
@@ -71,22 +72,17 @@ a.logout:hover {
 	color: red;
 }
 
-td.userinfodata {
+.userinfodata {
     font-size: 12px;
     font-weight: bold;
     background-color: #589AFF;
-    padding-left: 500px;
     color: #FFFFFF;
 }
 
 div.arenatabs {
 	background-color: #589AFF;
-	background-image: url(../images/TStudio.web_rev.png);
-	background-repeat: no-repeat;
 	border-width: 0px;
 	border-color: #004fad;
-	padding-top: 71px;
-	padding-bottom: 0px;
     width:100%;
 }
 
@@ -115,6 +111,10 @@ img.OrgChartPicEntry {
     height: 36px;
 }
 
+.tabs-title > a {
+	padding: 0.5rem 0.75rem;
+}
+
 td.arena_tabbar_space {
 	padding: 0px;
 }
@@ -123,7 +123,7 @@ img.arena_tabbar_space {
 	width: 0px;
 }
 
-table.arena_tabbar td.arena_active_tab {
+ul.arena_tabbar li.arena_active_tab {
 	border-style: solid;
 	border-width: 1px 0px 0px 1px;
 	border-color: #ffb366;
@@ -132,20 +132,31 @@ table.arena_tabbar td.arena_active_tab {
 	padding: 5px 10px 5px 10px;
 }
 
-td.arena_inactive_tab {
+ul.arena_tabbar li.arena_active_tab a.tab {
+	background-color: #ffb366;
+}
+li.arena_inactive_tab {
 	border-width: 1px 0px 1px 1px;
-	border-color: #99C2FF;
+	border-color: #004fad;
 	color: white;
 	padding: 5px 10px 5px 10px;
 }
 
-td.arena_inactive_tab.hover {
+.tabs {
+	border: 1px solid #004fad;
+	background: #99C2FF;
+}
+ul.arena_tabbar li.arena_inactive_tab.hover {
+	background-color: #ffb366;
+	border-color: #ffb366;
+}
+ul.arena_tabbar li.arena_inactive_tab.hover a.tab {
 	background-color: #ffb366;
 	border-color: #ffb366;
 	color: white;
 }
 
-td.arena_inactive_tab.no_hover {
+li.arena_inactive_tab.no_hover {
 	background-color: #99C2FF;
 	color: black;
 }
@@ -182,7 +193,7 @@ table.tab_tabbar td.tab_active_tab {
 	color: #36597a;	
 }
 
-td.tab_inactive_tab {
+li.tab_inactive_tab {
 	border-width: 0px 1px 0px 0px;
 	border-color: white;
 	color: #36597a;
@@ -217,10 +228,6 @@ div.navigation {
 }
 
 .nav_manipulation {
-    float: left;
-	display: inline;
-	vertical-align: bottom;
-	margin-left: 0pt;
 	padding-left: 33px;
 	padding-top: 10pt;
 	cursor: pointer;
@@ -645,6 +652,7 @@ textarea {
 
 .header-right{
     background-image: url(../images/TStudio.web.png);
+    float:left;
 }
 
 
@@ -671,4 +679,18 @@ font-weight: bold;
 .crosstabcelldata {
 font-weight: bold;
 font-size: 2em;
+}
+
+.top-decoration {
+    background-color: white;
+    height:15%;
+}
+
+.arena-nav-row {
+    background-color: #589AFF;
+}
+
+.top_image {
+    background-size: 400px 350px;
+    background: url(../images/TScope.rgb.jpg) no-repeat center;
 }

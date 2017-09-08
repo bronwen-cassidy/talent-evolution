@@ -168,6 +168,8 @@ function showHideNav() {
             navSessionBean.setNavHidden();
         }
     }
+    
+    $('#nav').toggleClass('medium-12', 'medium-10');
 }
 
 function setDefaultReadPermissions(searchable, individual_write, manager_write, selected, itemsToCheck)
