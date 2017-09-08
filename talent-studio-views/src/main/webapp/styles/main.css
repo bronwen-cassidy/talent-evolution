@@ -30,9 +30,7 @@ h2 {
     font-size: 1.1em;
     font-weight: bold;
     color: #004FAD;
-    background-image: url(../images/blue_line.jpg);
-    background-repeat: no-repeat;
-    background-position: bottom left;
+    background: url(../images/blue_line.jpg) no-repeat bottom left;
 }
 
 a, a:active, a:visited {
@@ -183,17 +181,11 @@ select {
 
 fieldset {
     margin: 5px;
-    padding-top: 0;
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-bottom: 5px;
+    padding: 0 5px 5px;
 }
 
 legend {
-    padding-top: 0;
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-bottom: 5px;
+    padding: 0 5px 5px;
     font-weight: bold;
 }
 
@@ -261,20 +253,16 @@ ul.ui-selectable {
 li.ui-selectable {
     margin: 3px 3px 3px 3px;
     padding: 3px 3px 3px 3px;
-    list-style-type: none;
-    list-style-position: outside;
+    list-style: none outside;
     text-align: left;
-    border-color: lightslategray;
-    border-style: outset;
-    border-width: 1px;
+    border: 1px outset lightslategray;
     cursor: move;
 }
 
 li.ui-selected {
     margin: 1px 0 1px 0;
     padding: 1px 0 1px 0;
-    list-style-type: none;
-    list-style-position: inside;
+    list-style: none inside;
     text-align: left;
 }
 
@@ -309,26 +297,21 @@ li.selectable {
 }
 
 .treeitem {
-    list-style-type: none;
-    list-style-image: none;
+    list-style: none none;
     margin: 0 0 0 0;
 }
 
 li.treebranchclosed {
-    list-style-type: none;
-    list-style-image: none;
+    list-style: none none;
     padding-left: 25px;
-    background: transparent url(../images/plus.gif) no-repeat;
-    background-position: 0 5px;
+    background: transparent url(../images/plus.gif) no-repeat 0 5px;
     cursor: pointer;
 }
 
 li.treebranchopen {
-    list-style-type: none;
-    list-style-image: none;
+    list-style: none none;
     padding-left: 25px;
-    background: transparent url(../images/minus.gif) no-repeat;
-    background-position: 0 5px;
+    background: transparent url(../images/minus.gif) no-repeat 0 5px;
     cursor: pointer;
 }
 
@@ -356,21 +339,16 @@ li.treebranchopen {
 }
 
 .header-left {
-    margin-top: 0;
-    margin-right: 0;
-    margin-bottom: 0;
-    margin-left: 5px;
+    margin: 0 0 0 5px;
     height: 120px;
     width: 387px;
-    background-repeat: no-repeat;
-    background-image: url(../images/TScope.rgb.jpg);
+    background: url(../images/TScope.rgb.jpg) no-repeat;
 }
 
 .header-right {
-    background-image: url(../images/TStudio.web.png);
     height: 101px;
     width: 309px;
-    background-repeat: no-repeat;
+    background: url(../images/TStudio.web.png) no-repeat;
 }
 
 /********************************************************************************/
@@ -383,9 +361,8 @@ td.footer {
     font-size: 0.9em;
     background-color: #F0E4BE;
     color: black;
-    border-style: solid;
-    border-width: 1px 0 0 0;
-    border-color: #9A9A9A;
+    border: 0 solid #9A9A9A;
+    border-top-width: 1px;
 }
 
 .copyright {
@@ -459,9 +436,8 @@ div.arenatabs {
     width: 100%;
     height: 100%;
     background-color: #88BBEE;
-    border-style: solid;
-    border-width: 0 0 10px 0;
-    border-color: #D5D5D5;
+    border: 0 solid #D5D5D5;
+    border-bottom-width: 10px;
     padding-top: 3px;
     padding-left: 0;
     margin-left: 0;
@@ -494,9 +470,8 @@ table.arena_tabbar {
 }
 
 .arena_tabbar td {
-    border-style: solid;
-    border-width: 0 0 1px 0;
-    border-color: #9A9A9A;
+    border: 0 solid #9A9A9A;
+    border-bottom-width: 1px;
     padding: 0;
 }
 
@@ -536,17 +511,14 @@ td.arena_tab {
 }
 
 td.arena_active_tab {
-    border-style: outset;
-    border-width: 3px 3px 0 3px;
-    border-color: #D5D5D5;
+    border: 3px outset #D5D5D5;
+    border-bottom-width: 0;
     background-color: #D5D5D5;
     color: #444488;
 }
 
 td.arena_inactive_tab {
-    border-style: solid;
-    border-width: 1px 1px 1px 1px;
-    border-color: #9A9A9A;
+    border: 1px solid #9A9A9A;
     color: #666666;
 }
 
@@ -580,9 +552,8 @@ table.tab_tabbar {
 }
 
 .tab_tabbar td {
-    border-style: solid;
-    border-width: 0 0 1px 0;
-    border-color: #9A9A9A;
+    border: 0 solid #9A9A9A;
+    border-bottom-width: 1px;
     padding: 0;
 }
 
@@ -619,8 +590,7 @@ td.tab_tab {
     font-family: Verdana, Arial, Helvetica, sans-serif;
     font-size: 0.9em;
     padding: 3px 6px 3px 6px;
-    border-style: solid;
-    border-color: #9A9A9A;
+    border: solid #9A9A9A;
     color: #444488;
 }
 
@@ -660,9 +630,8 @@ table.tab_tabbar .tab_inactive_tab.no_hover {
 
 table.tab_page_border {
     width: 100%;
-    border-style: solid;
-    border-width: 0 1px 1px 1px;
-    border-color: #9A9A9A;
+    border: 1px solid #9A9A9A;
+    border-top-width: 0;
 }
 
 td.tab_page_border {
@@ -693,7 +662,6 @@ td.navigation {
     padding-bottom: 0;
     margin-top: 0;
     padding-top: 0;
-
     height: 100%;
 }
 
@@ -733,20 +701,14 @@ div.navigation {
 .navigation_main_item {
     /*white-space: nowrap;*/
     width: 220px;
-    padding-left: 5px;
-    padding-right: 3px;
-    padding-top: 10px;
-    padding-bottom: 4px;
+    padding: 10px 3px 4px 5px;
     cursor: pointer;
     font-weight: bold;
 }
 
 .navigation_sub_item {
     /*white-space: nowrap;*/
-    padding-left: 25px;
-    padding-right: 3px;
-    padding-top: 1px;
-    padding-bottom: 1px;
+    padding: 1px 3px 1px 25px;
     cursor: pointer;
     font-size: 0.9em;
 }
@@ -824,17 +786,15 @@ th.artefact {
     background-color: #EEEEFF;
     padding: 2px;
     font-weight: bold;
-    border-style: solid;
-    border-color: lightgray;
-    border-width: 1px 1px 0 1px;
+    border: 1px solid lightgray;
+    border-bottom-width: 0;
 }
 
 td.artefact {
     background-color: #EEEEFF;
     padding: 5px;
-    border-style: solid;
-    border-color: lightgray;
-    border-width: 0 1px 1px 1px;
+    border: 1px solid lightgray;
+    border-top-width: 0;
 }
 
 /********************************************************************************/
@@ -845,10 +805,7 @@ table.infobox {
     width: 100%;
     background-color: #9A9A9A;
     padding: 0;
-    margin-top: 0;
-    margin-bottom: 0;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
 }
 
 table.infobox#ib_policy {
@@ -954,9 +911,7 @@ td.execImg {
 
 img.execImg {
     width: 100px;
-    border-style: solid;
-    border-color: white;
-    border-width: 2px;
+    border: 2px solid white;
 }
 
 img.clickable {
@@ -984,9 +939,7 @@ div#noPhotograph {
     width: 100%;
     border-collapse: collapse;
     padding: 0;
-    border-style: solid;
-    border-color: white;
-    border-width: 2px;
+    border: 2px solid white;
     background-color: #EEEEFF;
 }
 
@@ -1000,9 +953,7 @@ td.infogroup {
     font-weight: bold;
     color: green;
     background-color: #DDDDFF;
-    border-style: solid;
-    border-color: white;
-    border-width: 2px;
+    border: 2px solid white;
 }
 
 .infosubheading {
@@ -1010,9 +961,7 @@ td.infogroup {
     vertical-align: top;
     color: white;
     background-color: #88bbee;
-    border-style: solid;
-    border-color: white;
-    border-width: 2px;
+    border: 2px solid white;
     font-weight: bold;
 }
 
@@ -1020,9 +969,7 @@ td.infogroup {
     padding: 5px;
     vertical-align: top;
     color: green;
-    border-style: solid;
-    border-color: white;
-    border-width: 2px;
+    border: 2px solid white;
 }
 
 .infolabel {
@@ -1030,18 +977,14 @@ td.infogroup {
     vertical-align: top;
     white-space: nowrap;
     color: darkblue;
-    border-style: solid;
-    border-color: white;
-    border-width: 2px;
+    border: 2px solid white;
 }
 
 .questionlabel {
     padding: 5px;
     vertical-align: top;
     color: darkblue;
-    border-style: solid;
-    border-color: white;
-    border-width: 2px;
+    border: 2px solid white;
     width: 30%;
 }
 
@@ -1053,9 +996,7 @@ td.infogroup {
     padding: 5px;
     vertical-align: top;
     color: black;
-    border-style: solid;
-    border-color: white;
-    border-width: 2px;
+    border: 2px solid white;
 }
 
 .currency-block {
@@ -1071,14 +1012,12 @@ td.infogroup {
 
 .appraisalcalc {
     padding: 5px;
-    border-style: solid;
-    border-color: black;
+    border: solid black;
 }
 
 .appraisalque {
     padding: 5px;
-    border-style: solid;
-    border-color: gray;
+    border: solid gray;
 }
 
 .infodata .deleteButton {
@@ -1089,9 +1028,7 @@ td.infogroup {
     padding: 5px;
     vertical-align: top;
     color: black;
-    border-style: solid;
-    border-color: white;
-    border-width: 2px;
+    border: 2px solid white;
 }
 
 .infomessage {
@@ -1128,8 +1065,7 @@ div.blogContent {
     background-color: white;
     height: 60px;
     width: 90%;
-    border-style: solid;
-    border-color: #D5D5D5;
+    border: solid #D5D5D5;
     float: left;
 }
 
@@ -1139,8 +1075,7 @@ div.comments {
     background-color: white;
     height: 250px;
     width: 150px;
-    border-style: solid;
-    border-color: #D5D5D5;
+    border: solid #D5D5D5;
     float: left;
 }
 
@@ -1158,9 +1093,7 @@ table.actionbox {
     background-color: black;
     padding: 0;
     margin: 0 0 10px 0;
-    border-style: solid;
-    border-color: #9A9A9A;
-    border-width: 1px 1px 1px 1px;
+    border: 1px solid #9A9A9A;
 }
 
 td.actionbox {
@@ -1195,35 +1128,6 @@ input.inlinebutton {
 input.partnerbutton {
     cursor: pointer;
     color: darkred;
-}
-
-/********************************************************************************/
-
-/* Used for "style buttons" on the CSS style editor page */
-
-td.stylebutton {
-    background-color: #9A9A9A;
-    border-style: solid;
-    border-color: black;
-    border-width: 1px;
-    padding: 2px;
-    width: 100%;
-    text-align: center;
-    vertical-align: middle;
-    font-size: 0.9em;
-    font-weight: bold;
-}
-
-a.stylebutton {
-    color: darkblue;
-}
-
-a.stylebutton:visited {
-    color: darkred;
-}
-
-a.stylebutton:hover {
-    color: white;
 }
 
 /********************************************************************************/
@@ -1307,9 +1211,7 @@ td.pager {
     padding: 2px 4px 2px 4px;
     text-align: left;
     vertical-align: top;
-    border-style: solid;
-    border-color: white;
-    border-width: 2px;
+    border: 2px solid white;
 }
 
 /*th.sorted {*/
@@ -1317,11 +1219,8 @@ td.pager {
 
 th.sorted, th.sortable {
     padding: 4px 4px 4px 4px;
-    background-repeat: no-repeat;
-    background-position: right;
-    border-style: solid;
-    border-color: white;
-    border-width: 2px;
+    background: no-repeat right;
+    border: 2px solid white;
 }
 
 th.sortable {
@@ -1368,9 +1267,7 @@ div.popup {
     top: 0;
     left: 0;
     background-color: #DDDDDD;
-    border-style: outset;
-    border-width: medium;
-    border-color: lightgray;
+    border: medium outset lightgray;
     padding: 2px;
     overflow: visible;
 }
@@ -1414,31 +1311,23 @@ td.calendarPopupControls {
 }
 
 .calendarPopupControl {
-    border-color: white;
-    border-width: 2px;
-    border-style: outset;
+    border: 2px outset white;
     cursor: pointer;
 }
 
 .calendarPopupControlOver {
-    border-color: gray;
-    border-width: 2px;
-    border-style: outset;
+    border: 2px outset gray;
     cursor: pointer;
 }
 
 .popupControl {
-    border-color: white;
-    border-width: 2px;
-    border-style: outset;
+    border: 2px outset white;
     cursor: pointer;
     float: right;
 }
 
 .popupControlOver {
-    border-color: gray;
-    border-width: 2px;
-    border-style: outset;
+    border: 2px outset gray;
     cursor: pointer;
     float: right;
 }
@@ -1476,9 +1365,7 @@ td.CalControls {
 
 .CalControl {
     padding: 1px 1px 2px 2px;
-    border-style: outset;
-    border-width: 2px;
-    border-color: white;
+    border: 2px outset white;
     cursor: pointer;
 }
 
@@ -1486,9 +1373,7 @@ td.CalControls {
 
 .CalControlOver {
     padding: 1px 1px 2px 2px;
-    border-style: outset;
-    border-width: 2px;
-    border-color: gray;
+    border: 2px outset gray;
     cursor: pointer;
 }
 
@@ -1500,9 +1385,7 @@ td.CalControls {
     position: absolute;
     top: 0;
     left: 0;
-    border-width: 3px;
-    border-style: outset;
-    border-color: white;
+    border: 3px outset white;
     background-color: white;
     cursor: pointer;
 }
@@ -1523,9 +1406,7 @@ td.CalControls {
 .CalBody {
     padding: 0;
     background-color: whitesmoke;
-    border-style: solid;
-    border-width: 1px;
-    border-color: gray;
+    border: 1px solid gray;
 }
 
 /* Attributes of day names at top of calendar body */
@@ -1571,9 +1452,8 @@ td.CalToday {
     color: black;
     text-align: center;
     background-color: whitesmoke;
-    border-style: solid;
-    border-width: 0 1px 1px 1px;
-    border-color: gray;
+    border: 1px solid gray;
+    border-top-width: 0;
 }
 
 a.CalToday {
@@ -1623,9 +1503,7 @@ iframe.serverPopup {
 
 .popupTreeArea {
     background-color: whitesmoke;
-    border-style: inset;
-    border-width: thin;
-    border-color: lightgray;
+    border: thin inset lightgray;
     height: 100%;
     width: 100%;
 }
@@ -1674,9 +1552,7 @@ table.OrgChart {
 }
 
 table.OrgChartBox {
-    border-style: ridge;
-    border-width: thin;
-    border-color: gray;
+    border: thin ridge gray;
     margin-left: 10px;
     margin-right: 10px;
 }
@@ -1698,9 +1574,8 @@ th.OrgChartParentBox {
 td.OrgChartBox {
     padding: 5px;
     background-color: white;
-    border-color: #FFFFFF;
-    border-style: solid;
-    border-width: 1px 0 0 0;
+    border: 0 solid #FFFFFF;
+    border-top-width: 1px;
 }
 
 img.OrgChartEntry {
@@ -1723,10 +1598,7 @@ span.OrgChartEntry {
 }
 
 div.OrgChartColoured {
-    padding-top: 2px;
-    padding-bottom: 2px;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding: 2px 5px;
     margin: 2px 0 2px 0;
 }
 
@@ -1765,9 +1637,7 @@ table.crosstabnav {
 td.crosstabaxisheader {
     text-align: center;
     vertical-align: top;
-    border-color: #C3C3C3;
-    border-style: solid;
-    border-width: 1px;
+    border: 1px solid #C3C3C3;
     font-weight: bold;
     font-size: 1.1em;
 }
@@ -1788,9 +1658,7 @@ td.crosstabcolumnheader {
     padding: 10px;
     text-align: center;
     vertical-align: top;
-    border-color: #c3c3c3;
-    border-style: solid;
-    border-width: 1px;
+    border: 1px solid #c3c3c3;
     background-color: #CCFFCC;
     font-weight: bold;
 }
@@ -1798,9 +1666,7 @@ td.crosstabcolumnheader {
 td.crosstabrowheader {
     padding: 10px;
     text-align: left;
-    border-color: #c3c3c3;
-    border-style: solid;
-    border-width: 1px;
+    border: 1px solid #c3c3c3;
     background-color: #DDFFDD;
     font-weight: bold;
 }
@@ -1815,8 +1681,7 @@ td.crosstabrowheader {
     text-align: left;
     font-weight: bold;
     background-color: #FFFFFF;
-    border-style: solid;
-    border-width: 1px;
+    border: 1px solid;
     padding: 10px;
     width: 50%;
 }
@@ -1825,8 +1690,7 @@ td.crosstabrowheader {
     text-align: left;
     font-weight: bold;
     background-color: #FFFFFF;
-    border-style: solid;
-    border-width: 1px;
+    border: 1px solid;
     padding: 10px;
     width: 50%;
 }
@@ -1836,15 +1700,12 @@ td.crosstabdata {
     vertical-align: top;
     padding: 10px;
     text-align: center;
-    border-color: white;
-    border-style: solid;
-    border-width: 1px;
+    border: 1px solid white;
 }
 
 table.crosstabdetail {
     width: 100%;
-    border-style: none;
-    border-width: 0;
+    border: 0 none;
 }
 
 td.crosstabcell {
@@ -1887,9 +1748,7 @@ img.more {
 
 .reportColourPicker {
     background-color: #EEEEFF;
-    border-style: inset;
-    border-width: thin;
-    border-color: lightgray;
+    border: thin inset lightgray;
     height: 15em;
     width: 25em;
     z-index: 2;
@@ -1908,9 +1767,7 @@ td.columnheader {
     margin: 0 0 5px 0;
     background-color: #CCFFCC;
     padding: 4px 4px 4px 4px;
-    border-style: solid;
-    border-color: white;
-    border-width: 2px;
+    border: 2px solid white;
 }
 
 td.dataCell {
@@ -1934,9 +1791,7 @@ td.emptyCell {
     top: 0;
     left: 0;
     background-color: #DDDDDD;
-    border-style: outset;
-    border-width: medium;
-    border-color: lightgray;
+    border: medium outset lightgray;
     padding: 2px;
 }
 
@@ -1949,9 +1804,7 @@ td.emptyCell {
     height: 35px;
     position: relative;
     background-color: #B1C2CA;
-    border-style: solid;
-    border-color: darkgray;
-    border-width: 3px;
+    border: 3px solid darkgray;
 }
 
 .dhtmlgoodies_window .top_buttons {
@@ -1979,13 +1832,9 @@ td.emptyCell {
 }
 
 .clearPopupControl {
-    border-color: white;
-    border-width: 2px;
-    border-style: outset;
+    border: 2px outset white;
     cursor: pointer;
-    /*position: relative;*/
     top: 15px;
-    /*right: 33px;*/
     float: right;
     font-weight: bold;
 }
@@ -2002,9 +1851,7 @@ td.emptyCell {
 }
 
 .imagePopupControl {
-    border-color: white;
-    border-width: 2px;
-    border-style: outset;
+    border: 2px outset white;
     cursor: pointer;
     position: relative;
     top: -12px;
@@ -2012,9 +1859,7 @@ td.emptyCell {
 }
 
 .imagePopupControlOver {
-    border-color: gray;
-    border-width: 2px;
-    border-style: outset;
+    border: 2px outset gray;
     cursor: pointer;
     position: relative;
     top: -12px;
@@ -2022,10 +1867,7 @@ td.emptyCell {
 }
 
 .dhtmlgoodies_windowContent {
-    padding-left: 5px;
-    padding-right: 2px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding: 10px 2px 10px 5px;
     border-right: 3px solid #B1C2CA;
     border-left: 3px solid #B1C2CA;
     height: 22em;
@@ -2071,12 +1913,8 @@ td.emptyCell {
 }
 
 .bordered {
-    border-top: 2px;
-    border-left: 2px;
-    border-right: 2px;
-    border-bottom: 1px;
-    border-color: black;
-    border-style: groove;
+    border: 2px groove black;
+    border-bottom-width: 1px;
     margin-bottom: 10px;
 }
 
@@ -2113,9 +1951,7 @@ iframe.dashboard {
 }
 
 a.edit-img {
-    background-image: url(../images/table-edit.png);
-    background-repeat: no-repeat;
-    background-position: bottom left;
+    background: url(../images/table-edit.png) no-repeat bottom left;
 }
 
 .button {
@@ -2161,15 +1997,4 @@ img.square-20 {
 /*============================================ reporting chart styles =====================================================*/
 
 /*============================================= function styles ============================================================*/
-.mask {
-    display:none;
-}
 
-.mask .ajax {
-    display: block;
-    width: 100%;
-    height: 100%;
-    position: relative;
-    z-index: 1000;
-    background-image: url(../images/icons/ajax-loader.gif);
-}
