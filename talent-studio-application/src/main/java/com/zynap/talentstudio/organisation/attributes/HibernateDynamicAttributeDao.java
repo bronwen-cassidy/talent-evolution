@@ -3,10 +3,14 @@
  */
 package com.zynap.talentstudio.organisation.attributes;
 
+import net.sf.hibernate.NonUniqueObjectException;
+
 import com.zynap.domain.IDomainObject;
 import com.zynap.exception.TalentStudioException;
 import com.zynap.talentstudio.common.HibernateCrudAdaptor;
 import com.zynap.util.ArrayUtils;
+
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
@@ -27,7 +31,6 @@ public class HibernateDynamicAttributeDao extends HibernateCrudAdaptor implement
     }
 
     public Collection<DynamicAttribute> getActiveAttributes(String nodeType, boolean searchableOnly, String[] attributeTypes, boolean includeCalculated) {
-
         // default parameters
         Object[] parameters = new Object[]{nodeType};
 
@@ -53,7 +56,16 @@ public class HibernateDynamicAttributeDao extends HibernateCrudAdaptor implement
         // order by
         query.append(" order by upper(attribute.label)");
 
-        return getHibernateTemplate().find(query.toString(), parameters);
+	    try {
+		    return getHibernateTemplate().find(query.toString(), parameters);
+	    } catch (DataAccessException e) {
+		    final Throwable throwable = e.getCause();
+		    if(throwable instanceof NonUniqueObjectException) {
+			    getHibernateTemplate().flush();
+			    getHibernateTemplate().clear();
+			    return getHibernateTemplate().find(query.toString(), parameters);
+		    } else throw e;
+	    }
     }
 
 

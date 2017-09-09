@@ -4,6 +4,8 @@
 package com.zynap.talentstudio.common;
 
 import net.sf.hibernate.NonUniqueObjectException;
+import net.sf.hibernate.Session;
+import net.sf.hibernate.SessionFactory;
 
 import com.zynap.domain.IDomainObject;
 import com.zynap.exception.TalentStudioException;
@@ -25,7 +27,9 @@ public abstract class HibernateCrudAdaptor extends HibernateFinderAdaptor implem
      * @param domainObject
      */
     public final IDomainObject create(IDomainObject domainObject) {
+    	
         getHibernateTemplate().save(domainObject);
+	    getHibernateTemplate().flush();
         return domainObject;
     }
 
@@ -42,6 +46,7 @@ public abstract class HibernateCrudAdaptor extends HibernateFinderAdaptor implem
             if(throwable instanceof NonUniqueObjectException) {
                 getHibernateTemplate().evict(domainObject);
                 getHibernateTemplate().update(domainObject);
+	            getHibernateTemplate().flush();
             } else throw e;
         }
     }
@@ -54,6 +59,7 @@ public abstract class HibernateCrudAdaptor extends HibernateFinderAdaptor implem
      */
     public void delete(IDomainObject domainObject) throws TalentStudioException {
         getHibernateTemplate().delete(domainObject);
+	    getHibernateTemplate().flush();
     }
 
 	/**
@@ -65,5 +71,6 @@ public abstract class HibernateCrudAdaptor extends HibernateFinderAdaptor implem
 	public void mergeDelete(IDomainObject domainObject) {
 		getHibernateTemplate().evict(domainObject);
 		getHibernateTemplate().delete(domainObject);
+		getHibernateTemplate().flush();
 	}
 }
