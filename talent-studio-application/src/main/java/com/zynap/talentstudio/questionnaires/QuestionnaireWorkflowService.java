@@ -97,7 +97,7 @@ public class QuestionnaireWorkflowService extends AbstractQuestionnaireService i
     public void delete(QuestionnaireWorkflow questionnaireWorkflow) throws TalentStudioException {
         closeWorkflowProcess(questionnaireWorkflow);
         QuestionnaireWorkflow queWorkflow = questionnaireDao.findById(questionnaireWorkflow.getId());
-        questionnaireDao.mergeDelete(queWorkflow);
+        questionnaireDao.delete(queWorkflow);
     }
 
     public void setNotificationActionable(Long notificationId, boolean actionable, String nextAction) throws TalentStudioException {
@@ -131,7 +131,7 @@ public class QuestionnaireWorkflowService extends AbstractQuestionnaireService i
 
     public RepublishResults republishWorkflow(Long queId, Long userId) throws TalentStudioException {
 
-        QuestionnaireWorkflow queWorkflow = (QuestionnaireWorkflow) this.findById(queId);
+        QuestionnaireWorkflow queWorkflow = this.findById(queId);
 
 
         final Date republishedDate = new Date();

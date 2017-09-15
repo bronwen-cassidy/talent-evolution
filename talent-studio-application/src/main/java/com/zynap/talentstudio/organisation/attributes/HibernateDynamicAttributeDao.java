@@ -61,8 +61,6 @@ public class HibernateDynamicAttributeDao extends HibernateCrudAdaptor implement
 	    } catch (DataAccessException e) {
 		    final Throwable throwable = e.getCause();
 		    if(throwable instanceof NonUniqueObjectException) {
-			    getHibernateTemplate().flush();
-			    getHibernateTemplate().clear();
 			    return getHibernateTemplate().find(query.toString(), parameters);
 		    } else throw e;
 	    }

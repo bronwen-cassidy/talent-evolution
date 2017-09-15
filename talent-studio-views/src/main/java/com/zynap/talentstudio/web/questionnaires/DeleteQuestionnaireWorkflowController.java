@@ -44,6 +44,7 @@ public class DeleteQuestionnaireWorkflowController extends BaseQuestionnaireCont
         QuestionnaireWorkflow workflow = (QuestionnaireWorkflow) command;
         try {
         	reportService.deleteReportWorkflows(workflow.getId(), workflow.getQuestionnaireDefinition().getId());
+        	workflow = questionnaireWorkflowService.findWorkflowById(workflow.getId());
             questionnaireWorkflowService.delete(workflow);
         } catch (DataIntegrityViolationException e) {
             errors.reject("error.delete.questionnaire.dependencies", "Cannot delete the questionnaire as it is in use in the system");

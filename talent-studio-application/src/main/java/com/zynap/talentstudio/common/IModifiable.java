@@ -38,10 +38,4 @@ public interface IModifiable {
      * @throws TalentStudioException
      */
     void delete(IDomainObject domainObject) throws TalentStudioException;
-
-	/**
-	 * Does a delete when there are referenced objects
-	 * @param domainObject - the object being deleted
-	 */
-	void mergeDelete(IDomainObject domainObject);
 }
