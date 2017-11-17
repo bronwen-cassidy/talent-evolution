@@ -252,8 +252,8 @@ public class SubjectService extends DefaultService implements ISubjectService {
     }
 
 
-    public Node findNodeById(Long id) throws TalentStudioException {
-        return (Node) subjectDao.findById(Node.class, id);
+    public Subject findNodeById(Long id) throws TalentStudioException {
+        return subjectDao.findById(Node.class, id);
     }
 
     public void setUserDao(IUserDao userDao) {

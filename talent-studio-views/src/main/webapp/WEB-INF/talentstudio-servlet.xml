@@ -409,10 +409,6 @@
                 <prop key="/admin/addhomepages.htm">addHomePagesController</prop>
                 <prop key="/admin/edithomepages.htm">editHomePagesController</prop>
 
-                <!--<prop key="/admin/listhomepages.htm"></prop>-->
-                <!--<prop key="/admin/viewhomepages.htm"></prop>-->
-                <!--<prop key="/admin/deletehomepages.htm">homePagesMultiController</prop>-->
-
                 <!-- search -->
                 <prop key="/common/wordlist.htm">searchTermController</prop>
 
@@ -905,9 +901,7 @@
     </bean>
 
     <!-- Controller for arena home pages -->
-    <bean id="arenaHomePageController" class="com.zynap.talentstudio.web.arena.HomePageController">
-        <property name="arenaManager" ref="arenaManager"/>
-    </bean>
+    <bean id="arenaHomePageController" class="com.zynap.talentstudio.web.arena.HomePageController"/>
 
     <bean id="homePageController" class="com.zynap.talentstudio.web.HomePageViewController"/>
 

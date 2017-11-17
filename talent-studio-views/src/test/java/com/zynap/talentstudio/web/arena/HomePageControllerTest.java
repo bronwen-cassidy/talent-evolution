@@ -1,12 +1,15 @@
 package com.zynap.talentstudio.web.arena;
 
-import com.zynap.talentstudio.organisation.attributes.IDynamicAttributeService;
-import com.zynap.talentstudio.security.homepages.HomePage;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+
+import com.zynap.talentstudio.organisation.attributes.IDynamicAttributeService;
+import com.zynap.talentstudio.security.homepages.HomePage;
+
+import org.springframework.ui.ExtendedModelMap;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -77,12 +80,12 @@ public class HomePageControllerTest {
         when(dynamicAttrService.getAllSubjectAttributes(-6L)).thenReturn(results);
 
         String content = "http://www.google.com?username=$username&password=$password";
-        Map<String, Object> model = new HashMap<>();
+	    ExtendedModelMap model = new ExtendedModelMap();
         HomePage homePage = new HomePage("Home", "DemoCompany");
         homePage.setUrl(content);
-        homePageController.buildModel("dontcare", homePage, model, -6L);
+        homePageController.buildModel("dontcare", homePage, model, -6L, null);
         String expected = "http://www.google.com?username=brendaa&password=helooooo";
-        String actual = ((HomePage) model.get("homePage")).getUrl();
+        String actual = ((HomePage) model.asMap().get("homePage")).getUrl();
 
         assertEquals(expected, actual);
 
