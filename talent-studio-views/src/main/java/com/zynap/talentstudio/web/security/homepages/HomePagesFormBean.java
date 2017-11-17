@@ -6,6 +6,7 @@ package com.zynap.talentstudio.web.security.homepages;
 
 import com.zynap.talentstudio.common.groups.Group;
 import com.zynap.talentstudio.security.homepages.HomePage;
+import com.zynap.talentstudio.util.KeyValueElement;
 
 import org.springframework.util.StringUtils;
 
@@ -22,12 +23,15 @@ import java.util.List;
  */
 public class HomePagesFormBean implements Serializable {
 
-    private List<String> internalUrls;
+	public void setDisplayableTabs(KeyValueElement... homePageTabViews) {
+		this.homePageTabViews = homePageTabViews;
+	}
 
-    public HomePagesFormBean() {
-    }
+	public KeyValueElement[] getHomePageTabViews() {
+		return homePageTabViews;
+	}
 
-    public List<HomePageWrapperBean> getHomePages() {
+	public List<HomePageWrapperBean> getHomePages() {
         return homePages;
     }
 
@@ -46,6 +50,10 @@ public class HomePagesFormBean implements Serializable {
     public Group getGroup() {
         return group;
     }
+
+	public void setInternalUrls(List<String> internalUrls) {
+		this.internalUrls = internalUrls;
+	}
 
     public Group getCreatedHomePages() {
         group.getHomePages().clear();
@@ -94,8 +102,7 @@ public class HomePagesFormBean implements Serializable {
     private List<HomePageWrapperBean> homePages = new ArrayList<HomePageWrapperBean>();
     private Group group;
     private boolean editing = false;
+	private List<String> internalUrls;
 
-    public void setInternalUrls(List<String> internalUrls) {
-        this.internalUrls = internalUrls;
-    }
+	private KeyValueElement[] homePageTabViews;
 }

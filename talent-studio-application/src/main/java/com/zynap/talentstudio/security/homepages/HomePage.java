@@ -107,10 +107,19 @@ public class HomePage extends ZynapDomainObject {
         return fileExtension != null && fileExtension.endsWith("vm");
     }
 
-    private String arenaId;
+	public void setTabView(String tabView) {
+		this.tabView = tabView;
+	}
+
+	public String getTabView() {
+		return tabView;
+	}
+
+	private String arenaId;
     private byte[] data;
     private String url;
     private Group group;
     private boolean internalUrl;
     private String fileExtension;
+	private String tabView;
 }

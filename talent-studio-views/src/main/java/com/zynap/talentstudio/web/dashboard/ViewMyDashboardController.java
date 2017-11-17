@@ -6,8 +6,6 @@ package com.zynap.talentstudio.web.dashboard;
 
 import com.zynap.domain.UserSession;
 import com.zynap.talentstudio.analysis.populations.IPopulationEngine;
-import com.zynap.talentstudio.dashboard.Dashboard;
-import com.zynap.talentstudio.dashboard.DashboardItem;
 import com.zynap.talentstudio.dashboard.IDashboardService;
 import com.zynap.talentstudio.display.IDisplayConfigService;
 import com.zynap.talentstudio.organisation.Node;
@@ -32,8 +30,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.util.HashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -54,24 +50,10 @@ public class ViewMyDashboardController extends ZynapDefaultFormController {
         Subject subject;
         try {
             subject = subjectService.findByUserId(userId);
-            List<Dashboard> dashboards = dashboardService.findPersonalDashboards(subject);
-            if (!dashboards.isEmpty()) {
-                Set<SubjectDashboardWrapper> subjectDashboardItems = new LinkedHashSet<SubjectDashboardWrapper>();
-                for (Dashboard dashboard : dashboards) {
-                    final List<DashboardItem> dashboardItems = dashboard.getDashboardItems();
-                    for (DashboardItem dashboardItem : dashboardItems) {
-                        SubjectDashboardWrapper dw = new SubjectDashboardWrapper(dashboardItem.getId());
-                        if (!subjectDashboardItems.contains(dw)) {
-                            // build the info we need and add it if this is a chart we need the chart filler otherwsie we need the tabular filler
-                            dashboardBuilder.buildDashboardItem(dw, subject, dashboardItem, populationEngine, true);
-                            subjectDashboardItems.add(dw);
-                        }
-                    }
-                }
-
-                wrapper.setDashboards(subjectDashboardItems);
-            }
-
+	        final Set<SubjectDashboardWrapper> subjectDashboardWrappers = dashboardBuilder.buildSubjectDashboards(subject, dashboardService, populationEngine);
+	        if (!subjectDashboardWrappers.isEmpty()) {
+		        wrapper.setDashboards(subjectDashboardWrappers);
+	        }
         } catch (Exception e) {
             throw new InvalidSubmitException(request.getSession(), null, request.getRequestURI(), false, getClass().getName());
         }
@@ -83,7 +65,7 @@ public class ViewMyDashboardController extends ZynapDefaultFormController {
         return wrapper;
     }
 
-    protected SubjectWrapperBean createNodeWrapper(Node node) {
+	protected SubjectWrapperBean createNodeWrapper(Node node) {
 
         Subject subject = (Subject) node;
         subject.setHasAccess(true);

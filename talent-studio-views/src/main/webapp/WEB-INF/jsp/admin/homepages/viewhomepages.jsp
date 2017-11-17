@@ -23,6 +23,9 @@
                         <c:when test="${page.hasUpload}">
                             <fmt:message key="uploaded.file.name"/>
                         </c:when>
+                        <c:when test="${page.selectedTabView != null}">
+                            <c:out value="${page.selectedTabView}"/>
+                        </c:when>
                         <c:otherwise>
                             <c:out value="${page.url}"/>
                         </c:otherwise>

@@ -3,6 +3,7 @@ package com.zynap.talentstudio.web.organisation;
 import com.zynap.domain.IDomainObject;
 import com.zynap.talentstudio.organisation.Node;
 import com.zynap.talentstudio.web.common.AbstractBrowseWrapper;
+import com.zynap.talentstudio.web.dashboard.DashboardViewable;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
@@ -17,7 +18,7 @@ import java.util.Map;
  * Date: 04-May-2005
  * Time: 09:36:27
  */
-public class BrowseNodeWrapper extends AbstractBrowseWrapper {
+public class BrowseNodeWrapper extends AbstractBrowseWrapper implements DashboardViewable {
 
     public BrowseNodeWrapper(NodeSearchQueryWrapper queryWrapper, List results, NodeWrapperBean nodeWrapperBean) {
         nodeWrapper = nodeWrapperBean;

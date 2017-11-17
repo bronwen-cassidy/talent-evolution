@@ -117,15 +117,15 @@ public class BrowseSubjectController extends BrowseNodeController {
         return browseNodeWrapper;
     }
 
-    public Map referenceData(HttpServletRequest request, Object command, Errors errors, int page) throws Exception {
+    public Map<String, Object> referenceData(HttpServletRequest request, Object command, Errors errors, int page) throws Exception {
 
         BrowseNodeWrapper wrapper = (BrowseNodeWrapper) command;
-        Map model = super.referenceData(request, command, errors, page);
+        Map<String, Object> model = super.referenceData(request, command, errors, page);
 
         final Long userId = ZynapWebUtils.getUserId(request);
         final Group userGroup = ZynapWebUtils.getUserGroup(request);
         model.put(ControllerConstants.POPULATIONS, getAnalysisService().findAllByGroup(IPopulationEngine.P_SUB_TYPE_, userId, userGroup));
-        model.put(ControllerConstants.SUPER_USER, new Boolean(ZynapWebUtils.isSuperUser(request)));
+        model.put(ControllerConstants.SUPER_USER, ZynapWebUtils.isSuperUser(request));
 
         if (wrapper.getContentView() != null && wrapper.getContentView().isHasPersonalReportsView()) {
             model.put(ControllerConstants.APPRAISAL_REPORTS, appraisalReportBuilder.buildResults(wrapper.getNodeId()));
@@ -141,7 +141,7 @@ public class BrowseSubjectController extends BrowseNodeController {
         return model;
     }
 
-    protected void addDashboardView(HttpServletRequest request, BrowseNodeWrapper wrapper, Map model) throws TalentStudioException {
+    protected void addDashboardView(HttpServletRequest request, BrowseNodeWrapper wrapper, Map<String, Object> model) throws TalentStudioException {
         final Group userGroup = ZynapWebUtils.getUserGroup(request);
         final Node node = wrapper.getNode();
         if (wrapper.getContentView().isHasDashboardView() && node != null) {

@@ -103,26 +103,13 @@ public class PersonalDetailsController extends BrowseSubjectController {
             wrapper.setNodeWrapper(null);
     }
 
-    protected void addDashboardView(HttpServletRequest request, BrowseNodeWrapper wrapper, Map model) throws TalentStudioException {
+    protected void addDashboardView(HttpServletRequest request, BrowseNodeWrapper wrapper, Map<String, Object> model) throws TalentStudioException {
         
         final Node node = wrapper.getNode();
         if (wrapper.isHasDashboardView() && node != null) {
             Subject subject = (Subject) node;
-            List<Dashboard> dashboards = dashboardService.findPersonalDashboards(subject);
-            if (!dashboards.isEmpty()) {
-                Set<SubjectDashboardWrapper> subjectDashboardItems = new LinkedHashSet<SubjectDashboardWrapper>();
-                for (Dashboard dashboard : dashboards) {
-                    final List<DashboardItem> dashboardItems = dashboard.getDashboardItems();
-                    for (DashboardItem dashboardItem : dashboardItems) {
-                        SubjectDashboardWrapper dw = new SubjectDashboardWrapper(dashboardItem.getId());
-                        if (!subjectDashboardItems.contains(dw)) {
-                            // build the info we need and add it if this is a chart we need the chart filler otherwsie we need the tabular filler
-                            dashboardBuilder.buildDashboardItem(dw, subject, dashboardItem, populationEngine, true);
-                            subjectDashboardItems.add(dw);
-                        }
-                    }
-                }
-
+	        final Set<SubjectDashboardWrapper> subjectDashboardItems = dashboardBuilder.buildSubjectDashboards(subject, dashboardService, populationEngine);
+            if (!subjectDashboardItems.isEmpty()) {
                 model.put("dashboards", subjectDashboardItems);
             }
         }

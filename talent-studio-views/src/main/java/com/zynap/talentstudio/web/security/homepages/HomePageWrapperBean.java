@@ -7,6 +7,7 @@ package com.zynap.talentstudio.web.security.homepages;
 import com.zynap.common.util.UploadedFile;
 import com.zynap.talentstudio.arenas.Arena;
 import com.zynap.talentstudio.security.homepages.HomePage;
+import com.zynap.talentstudio.util.KeyValueElement;
 
 import org.springframework.util.StringUtils;
 
@@ -16,7 +17,6 @@ import java.io.Serializable;
  * User: amark
  * Date: 16-Mar-2005
  * Time: 16:09:27
- * Todo: save the filename as well
  */
 public class HomePageWrapperBean implements Serializable {
 
@@ -31,12 +31,14 @@ public class HomePageWrapperBean implements Serializable {
             this.data = new UploadedFile();
         }
         this.url = homePage.getUrl();
+        this.selectedTabView = homePage.getTabView();
     }
 
     public HomePage getModifiedHomePage() {
         this.homePage.setData(data.isFileEmpty() ? null : data.getBlobValue());
         this.homePage.setUrl(StringUtils.hasText(url) ? url : null);
         this.homePage.setFileExtension(fileExtension);
+        this.homePage.setTabView(selectedTabView);
         return homePage;
     }
 
@@ -51,7 +53,15 @@ public class HomePageWrapperBean implements Serializable {
         return data;
     }
 
-    public boolean isHasUpload() {
+	public String getSelectedTabView() {
+		return selectedTabView;
+	}
+
+	public void setSelectedTabView(String selectedTabView) {
+		this.selectedTabView = selectedTabView;
+	}
+
+	public boolean isHasUpload() {
         return !data.isFileEmpty();
     }
 
@@ -80,6 +90,7 @@ public class HomePageWrapperBean implements Serializable {
     private HomePage homePage;
     private Arena arena;
     private String url;
+    private String selectedTabView;
 
     private String fileExtension;
 }

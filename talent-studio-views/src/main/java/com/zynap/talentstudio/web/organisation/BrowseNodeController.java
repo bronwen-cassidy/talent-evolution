@@ -115,7 +115,7 @@ public abstract class BrowseNodeController extends DefaultWizardFormController {
         }
     }
 
-    protected Map referenceData(HttpServletRequest request, Object command, Errors errors, int page) throws Exception {
+    protected Map<String, Object> referenceData(HttpServletRequest request, Object command, Errors errors, int page) throws Exception {
 
         Map<String, Object> refData = new HashMap<String, Object>();
         final Long userId = ZynapWebUtils.getUserId(request);

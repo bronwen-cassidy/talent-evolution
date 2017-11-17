@@ -39,6 +39,7 @@ public class EditHomePagesController extends AddHomePagesController {
         // all home pages have the same group just take the first one
         homePagesFormBean.setGroup(homePages.get(0).getGroup());
         homePagesFormBean.setEditing(true);
+        homePagesFormBean.setDisplayableTabs(getHomePageTabViews());
         homePagesFormBean.setInternalUrls(internalUrls);
         return homePagesFormBean;
     }

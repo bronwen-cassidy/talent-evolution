@@ -15,8 +15,10 @@ import com.zynap.talentstudio.analysis.reports.ChartReportAttribute;
 import com.zynap.talentstudio.analysis.reports.Report;
 import com.zynap.talentstudio.analysis.reports.chart.ChartDataStructure;
 import com.zynap.talentstudio.analysis.reports.chart.ChartSlice;
+import com.zynap.talentstudio.dashboard.Dashboard;
 import com.zynap.talentstudio.dashboard.DashboardChartValue;
 import com.zynap.talentstudio.dashboard.DashboardItem;
+import com.zynap.talentstudio.dashboard.IDashboardService;
 import com.zynap.talentstudio.organisation.attributes.NodeExtendedAttribute;
 import com.zynap.talentstudio.organisation.subjects.Subject;
 import com.zynap.talentstudio.web.analysis.populations.PopulationUtils;
@@ -28,11 +30,15 @@ import com.zynap.talentstudio.web.analysis.reports.managers.ChartReportFiller;
 import com.zynap.talentstudio.web.analysis.reports.managers.ProgressReportFiller;
 import com.zynap.talentstudio.web.analysis.reports.managers.SpiderChartReportFiller;
 import com.zynap.talentstudio.web.analysis.reports.managers.TabularReportFiller;
+import com.zynap.talentstudio.web.dashboard.DashboardViewable;
+import com.zynap.talentstudio.web.dashboard.MyDashboardWrapper;
+import com.zynap.talentstudio.web.dashboard.ViewMyDashboardController;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -157,7 +163,26 @@ public class SubjectDashboardBuilder implements Serializable {
         dw.setExpectedProducer(producer);
     }
 
-    private ChartReportFiller chartReportFiller;
+	public Set<SubjectDashboardWrapper> buildSubjectDashboards(Subject subject, IDashboardService dashboardService, IPopulationEngine populationEngine) throws TalentStudioException {
+		List<Dashboard> dashboards = dashboardService.findPersonalDashboards(subject);
+		Set<SubjectDashboardWrapper> subjectDashboardItems = new LinkedHashSet<>();
+		if (!dashboards.isEmpty()) {
+		    for (Dashboard dashboard : dashboards) {
+		        final List<DashboardItem> dashboardItems = dashboard.getDashboardItems();
+		        for (DashboardItem dashboardItem : dashboardItems) {
+		            SubjectDashboardWrapper dw = new SubjectDashboardWrapper(dashboardItem.getId());
+		            if (!subjectDashboardItems.contains(dw)) {
+		                // build the info we need and add it if this is a chart we need the chart filler otherwsie we need the tabular filler
+		                buildDashboardItem(dw, subject, dashboardItem, populationEngine, true);
+		                subjectDashboardItems.add(dw);
+		            }
+		        }
+		    }
+		}
+		return subjectDashboardItems;
+	}
+
+	private ChartReportFiller chartReportFiller;
     private TabularReportFiller tabularReportFiller;
     private ProgressReportFiller progressReportFiller;
     private SpiderChartReportFiller spiderChartReportFiller;

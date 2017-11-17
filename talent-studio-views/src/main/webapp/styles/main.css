@@ -98,6 +98,10 @@ span.rangeMessage {
     color: green;
 }
 
+.max-width {
+    width: 100%;
+}
+
 /* Used for checkbox and radio buttons to get vertical or horizontal alignment */
 
 span.horizontalOptions {

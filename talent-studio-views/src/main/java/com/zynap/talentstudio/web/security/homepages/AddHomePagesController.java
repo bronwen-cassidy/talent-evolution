@@ -1,4 +1,4 @@
-/* 
+ /* 
  * Copyright (c) Zynap Ltd. 2006
  * All rights reserved.
  */
@@ -10,6 +10,7 @@ import com.zynap.talentstudio.arenas.IArenaManager;
 import com.zynap.talentstudio.common.groups.Group;
 import com.zynap.talentstudio.common.groups.IGroupService;
 import com.zynap.talentstudio.security.homepages.HomePage;
+import com.zynap.talentstudio.util.KeyValueElement;
 import com.zynap.talentstudio.web.common.DefaultWizardFormController;
 import com.zynap.talentstudio.web.common.ParameterConstants;
 import com.zynap.talentstudio.web.utils.beans.UploadedFilePropertyEditor;
@@ -50,7 +51,8 @@ public class AddHomePagesController extends DefaultWizardFormController {
     protected Object formBackingObject(HttpServletRequest request) throws Exception {
 
         HomePagesFormBean homePagesFormBean = new HomePagesFormBean();
-        List<HomePageWrapperBean> arenaHomePages = new ArrayList<HomePageWrapperBean>();
+        
+        List<HomePageWrapperBean> arenaHomePages = new ArrayList<>();
         // add in a new set of home pages
         Collection<Arena> arenas = arenaManager.getSortedArenas();
         for (Arena arena : arenas) {
@@ -59,12 +61,17 @@ public class AddHomePagesController extends DefaultWizardFormController {
         homePagesFormBean.setHomePages(arenaHomePages);
         homePagesFormBean.setGroup(new Group(null, null, Group.TYPE_HOMEPAGE));
         homePagesFormBean.setInternalUrls(internalUrls);
+        
+        homePagesFormBean.setDisplayableTabs(getHomePageTabViews());
         return homePagesFormBean;
     }
 
-    protected void onBindAndValidateInternal(HttpServletRequest request, Object command, Errors errors, int page) throws Exception {
-        HomePagesFormBean homePagesFormBean = (HomePagesFormBean) command;
+	protected KeyValueElement[] getHomePageTabViews() {
+		return new KeyValueElement[] {new KeyValueElement<>("DASHBOARD", "Dashboard")};
+	}
 
+	protected void onBindAndValidateInternal(HttpServletRequest request, Object command, Errors errors, int page) throws Exception {
+        HomePagesFormBean homePagesFormBean = (HomePagesFormBean) command;
         if (isFinishRequest(request)) {
             getValidator().validate(command, errors);
         }
@@ -80,7 +87,6 @@ public class AddHomePagesController extends DefaultWizardFormController {
 
     protected ModelAndView processFinish(HttpServletRequest request, HttpServletResponse response, Object command, BindException errors) throws Exception {
         HomePagesFormBean homePagesFormBean = (HomePagesFormBean) command;
-
         try {
             groupService.createOrUpdate(homePagesFormBean.getCreatedHomePages());
         } catch (DataAccessException e) {

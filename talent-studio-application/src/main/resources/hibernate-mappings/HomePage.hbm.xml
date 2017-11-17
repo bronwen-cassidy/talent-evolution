@@ -30,6 +30,7 @@
         <property name="fileExtension" type="java.lang.String" column="FILE_EXTENSION" length="10"/>
         <property name="internalUrl" type="true_false" column="IS_INTERNAL_URL"/>
         <property name="data" type="org.springframework.orm.hibernate.support.BlobByteArrayType" column="FILE_UPLOAD"/>
+        <property name="tabView" type="java.lang.String" column="TAB_VIEW"/>
 
         <many-to-one
                 name="group"

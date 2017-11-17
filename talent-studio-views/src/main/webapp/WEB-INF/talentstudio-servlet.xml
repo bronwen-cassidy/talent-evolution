@@ -14,7 +14,7 @@
     <!-- todo would be nice to have web under a sub directory of views -->
     <context:component-scan base-package="com.zynap.talentstudio.web"/>
 
-    <mvc:annotation-driven />
+    <mvc:annotation-driven/>
 
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
@@ -40,7 +40,7 @@
                 <value>/WEB-INF/classes/messages</value>
             </list>
         </property>
-        <property name="cacheSeconds" value="300"/>        
+        <property name="cacheSeconds" value="300"/>
     </bean>
 
     <!-- ReloadableResourceBundleMessageSource containing paths to files that contain arena home page and menu section text -->
@@ -104,7 +104,7 @@
             </description>
             <list>
                 <value>/home.htm</value>
-                <value>/image/.*.htm</value>                
+                <value>/image/.*.htm</value>
             </list>
         </property>
         <property name="accessDeniedURL" value="/common/accessDeniedView.htm">
@@ -142,7 +142,7 @@
                 <!-- excluded as the following opens in a new window -->
                 <value>/.*runexportcsvprogressreport.htm</value>
                 <value>/.*runexportpdfprogressreport.htm</value>
-                
+
                 <!-- excluded because these are nested ajax calss part of an outer history maintaining scope -->
                 <value>/.*browseviewsubjectportfolio.htm</value>
                 <value>/.*browseviewsubjectprogress.htm</value>
@@ -233,13 +233,15 @@
         <property name="defaultParentView" value="modelView"/>
         <property name="order" value="0"/>
     </bean>
-    
+
     <bean id="urlViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-        <property name="suffix" value=".jsp" />
-        <property name="prefix" value="WEB-INF/jsp" />
+        <property name="suffix" value=".jsp"/>
+        <property name="prefix" value="WEB-INF/jsp"/>
         <property name="order" value="9999999"/>
     </bean>
+
+    <bean id="handlerMapping" class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
 
     <!--
           - This bean resolves specific types of exception to corresponding error views.
@@ -293,7 +295,6 @@
                 <prop key="/picker/crosstabreportpicker.htm">crosstabReportPickerController</prop>
                 <prop key="/picker/chartreportpicker.htm">chartReportPickerController</prop>
                 <!-- the googie spell checker-->
-                <prop key="/googiespellchecker.htm">googieSpellCheckerController</prop>
                 <prop key="/loadpermits.htm">loadPermitsController</prop>
                 <!-- callback url has to ignore login checks and security checks there are none!! -->
                 <prop key="/**/editsubjectcallback.htm">subjectMultiController</prop>
@@ -324,6 +325,32 @@
         </property>
     </bean>
 
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/admin/*homepages.htm"/>
+            <ref bean="loginInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/admin/*homepages.htm"/>
+            <ref local="arenaInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/admin/*homepages.htm"/>
+            <ref local="securityInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/admin/*homepages.htm"/>
+            <ref local="historyInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/admin/*homepages.htm"/>
+            <ref local="navigationInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/admin/*homepages.htm"/>
+            <ref local="questionnaireInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
     <!--
          - A url mapper that secures access by authentication and authorization interceptors
         -->
@@ -381,10 +408,11 @@
                 <!-- home pages -->
                 <prop key="/admin/addhomepages.htm">addHomePagesController</prop>
                 <prop key="/admin/edithomepages.htm">editHomePagesController</prop>
-                <prop key="/admin/listhomepages.htm">homePagesMultiController</prop>
-                <prop key="/admin/viewhomepages.htm">homePagesMultiController</prop>
-                <prop key="/admin/deletehomepages.htm">homePagesMultiController</prop>
-                
+
+                <!--<prop key="/admin/listhomepages.htm"></prop>-->
+                <!--<prop key="/admin/viewhomepages.htm"></prop>-->
+                <!--<prop key="/admin/deletehomepages.htm">homePagesMultiController</prop>-->
+
                 <!-- search -->
                 <prop key="/common/wordlist.htm">searchTermController</prop>
 
@@ -922,7 +950,7 @@
 
     <!-- aload permits controller -->
     <bean id="loadPermitsController" class="com.zynap.talentstudio.web.security.policy.LoadPermitsController">
-        <property name="userService" ref="userService"/>    
+        <property name="userService" ref="userService"/>
     </bean>
 
     <!-- =========== Admin Controllers =========== -->
@@ -1070,21 +1098,21 @@
     </bean>
 
     <!-- Home pages controllers -->
-    <bean id="homePagesMultiController" class="com.zynap.talentstudio.web.security.homepages.HomePagesMultiController">
-        <property name="methodNameResolver">
-            <bean id="homePagesMethodResolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
-                <property name="mappings">
-                    <props>
-                        <prop key="/admin/viewhomepages.htm">viewHomePages</prop>
-                        <prop key="/admin/listhomepages.htm">listHomePages</prop>
-                        <prop key="/admin/deletehomepages.htm">deleteHomePages</prop>
-                    </props>
-                </property>
-            </bean>
-        </property>
-        <property name="groupService" ref="groupService"/>
-        <property name="arenaManager" ref="arenaManager"/>
-    </bean>
+    <!--<bean id="homePagesMultiController" class="com.zynap.talentstudio.web.security.homepages.HomePagesMultiController">-->
+    <!--<property name="methodNameResolver">-->
+    <!--<bean id="homePagesMethodResolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">-->
+    <!--<property name="mappings">-->
+    <!--<props>-->
+    <!--<prop key="/admin/viewhomepages.htm">viewHomePages</prop>-->
+    <!--<prop key="/admin/listhomepages.htm">listHomePages</prop>-->
+    <!--<prop key="/admin/deletehomepages.htm">deleteHomePages</prop>-->
+    <!--</props>-->
+    <!--</property>-->
+    <!--</bean>-->
+    <!--</property>-->
+    <!--<property name="groupService" ref="groupService"/>-->
+    <!--<property name="arenaManager" ref="arenaManager"/>-->
+    <!--</bean>-->
 
     <bean id="addHomePagesController" class="com.zynap.talentstudio.web.security.homepages.AddHomePagesController">
         <property name="pages">
@@ -1104,7 +1132,7 @@
                 <value>viewmyhomepagedashboard.htm</value>
                 <value>viewmyhomepageportfolio.htm</value>
                 <value>viewmyhomepagedetails.htm</value>
-            </list> 
+            </list>
         </property>
     </bean>
 
@@ -1136,7 +1164,7 @@
             </list>
         </property>
     </bean>
-    
+
     <bean id="searchTermController" class="com.zynap.talentstudio.web.search.SearchController">
         <property name="methodNameResolver">
             <bean id="searchTermMethodResolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
@@ -1146,7 +1174,7 @@
                     </props>
                 </property>
             </bean>
-        </property>    
+        </property>
         <property name="searchTermService" ref="searchTermService"/>
     </bean>
 
@@ -1426,10 +1454,6 @@
         <property name="populationEngine" ref="populationEngine"/>
     </bean>
 
-    <bean id="googieSpellCheckerController" class="com.zynap.talentstudio.web.questionnaires.GoogieSpellCheckerController">
-        <property name="spellCheckService" ref="spellCheckService"/>
-    </bean>
-
     <bean id="viewMyExecSummaryQuestionnairePdfController" parent="viewQuestionnairePdfController">
         <property name="mySummary" value="true"/>
     </bean>
@@ -1682,7 +1706,7 @@
     <bean id="addOrganisationController" class="com.zynap.talentstudio.web.organisation.organisationunit.AddOrganisationController" parent="editOrganisationController">
         <property name="formView" value="addorganisation"/>
         <property name="cancelViewConfig" ref="addMenuViewConfig"/>
-    </bean>    
+    </bean>
 
     <bean id="deleteOrganisationController" class="com.zynap.talentstudio.web.organisation.organisationunit.DisableOrganisationController">
         <property name="sessionForm" value="true"/>
@@ -1721,7 +1745,7 @@
                 <!-- Indicates that only orgbuilder arena view will include edit / delete buttons -->
                 <value>orgbuilder</value>
             </list>
-        </property>        
+        </property>
     </bean>
 
     <!-- ##################################### REPORTING CHART SETTINGS CONTROLLERS ##################################### -->
@@ -2264,7 +2288,7 @@
     <bean id="tabularReportFiller" class="com.zynap.talentstudio.web.analysis.reports.managers.TabularReportFiller">
         <property name="dataSourceFactory" ref="dataSourceFactory"/>
     </bean>
-    
+
     <bean id="metricReportFiller" class="com.zynap.talentstudio.web.analysis.reports.managers.MetricReportFiller" parent="tabularReportFiller"/>
     <bean id="crossTabReportFiller" class="com.zynap.talentstudio.web.analysis.reports.managers.CrossTabReportFiller" parent="tabularReportFiller"/>
     <bean id="chartReportFiller" class="com.zynap.talentstudio.web.analysis.reports.managers.ChartReportFiller"/>
@@ -2340,7 +2364,7 @@
     <bean id="editChartReportController" class="com.zynap.talentstudio.web.analysis.reports.ChartReportWizardController" parent="addChartReportController">
         <property name="pages">
             <list>
-                <value>editchartreport</value>                   
+                <value>editchartreport</value>
                 <value>editchartcolumns</value>
                 <value>editchartvalues</value>
             </list>
@@ -2370,7 +2394,7 @@
                 <value>editspiderchartgroups</value>
                 <value>editspiderchartattributes</value>
             </list>
-        </property>        
+        </property>
         <property name="editing" value="true"/>
     </bean>
     <bean id="deleteChartReportController" parent="deleteReportController">
@@ -2790,7 +2814,7 @@
             <bean class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
                 <property name="mappings">
                     <props>
-                        <prop key="/analysis/listprogressreports.htm">listProgressReports</prop>                        
+                        <prop key="/analysis/listprogressreports.htm">listProgressReports</prop>
                         <prop key="/analysis/runviewprogressreport.htm">viewProgressReport</prop>
                     </props>
                 </property>
@@ -3702,7 +3726,7 @@
             <bean id="dashboardMultiMethodNameResolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
                 <property name="mappings">
                     <props>
-                        <prop key="/admin/listdashboards.htm">listDashboards</prop>                        
+                        <prop key="/admin/listdashboards.htm">listDashboards</prop>
                         <prop key="/admin/viewdashboard.htm">viewDashboard</prop>
                         <prop key="/admin/deletedashboard.htm">deleteDashboard</prop>
                         <prop key="/admin/viewitemdashboard.htm">viewDashboardItem</prop>

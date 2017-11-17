@@ -4,28 +4,28 @@
  */
 package com.zynap.talentstudio.web.security.homepages;
 
-import com.zynap.exception.TalentStudioException;
 import com.zynap.talentstudio.arenas.Arena;
 import com.zynap.talentstudio.arenas.IArenaManager;
 import com.zynap.talentstudio.common.groups.Group;
 import com.zynap.talentstudio.common.groups.IGroupService;
 import com.zynap.talentstudio.security.homepages.HomePage;
 import com.zynap.talentstudio.web.common.ParameterConstants;
-import com.zynap.talentstudio.web.utils.RequestUtils;
-import com.zynap.talentstudio.web.utils.mvc.ZynapRedirectView;
 import com.zynap.talentstudio.web.utils.controller.ZynapMultiActionController;
+import com.zynap.talentstudio.web.utils.mvc.ZynapRedirectView;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Class or Interface description.
@@ -34,61 +34,50 @@ import java.util.Set;
  * @version 0.1
  * @since 26-Nov-2007 10:15:34
  */
+@Controller
 public class HomePagesMultiController extends ZynapMultiActionController {
 
-    public ModelAndView viewHomePages(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@Autowired
+	public HomePagesMultiController(IGroupService groupService, IArenaManager arenaManager) {
+		this.groupService = groupService;
+		this.arenaManager = arenaManager;
+	}
 
-        Long groupId = RequestUtils.getRequiredLongParameter(request, ParameterConstants.GROUP_ID);
+	@RequestMapping("/admin/viewhomepages.htm")
+    public String viewHomePages(@RequestParam(ParameterConstants.GROUP_ID) Long groupId, Model model) throws Exception {
+		
         Group group = groupService.findById(groupId);
-
         final Collection<Arena> arenas = arenaManager.getArenas();
 
-        final List<HomePage> homePages = new ArrayList<HomePage>(group.getHomePages());
-        List<HomePageWrapperBean> homePageWrappers = new ArrayList<HomePageWrapperBean>();
+        final List<HomePage> homePages = new ArrayList<>(group.getHomePages());
+        List<HomePageWrapperBean> homePageWrappers = new ArrayList<>();
 
         for(Arena arena : arenas) {
             final HomePage homePage = findHomePage(arena.getArenaId(), homePages);
             homePageWrappers.add(new HomePageWrapperBean(homePage, arena));
         }
-
-        Map<String, Object> model = new HashMap<String, Object>();
-        model.put(GROUP, group);
-        model.put(HOME_PAGES, homePageWrappers);
-        return new ModelAndView(VIEW_HOMEPAGES_URL, model);
+		
+        model.addAttribute(GROUP, group);
+        model.addAttribute(HOME_PAGES, homePageWrappers);
+        
+        return VIEW_HOMEPAGES_URL;
     }
 
-    public ModelAndView listHomePages(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@RequestMapping("/admin/listhomepages.htm")
+    public String listHomePages(Model model) throws Exception {
         // get all the groups for the home pages
-        List<Group> groups = groupService.find(Group.TYPE_HOMEPAGE);        
-        Map<String, Object> model = new HashMap<String, Object>();
-        model.put(GROUPS, groups);
-        return new ModelAndView(LIST_HOMEPAGES_URL, model);
+        List<Group> groups = groupService.find(Group.TYPE_HOMEPAGE);
+        model.addAttribute(GROUPS, groups);
+        return LIST_HOMEPAGES_URL;
     }
 
-    public ModelAndView deleteHomePages(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        Long groupId = RequestUtils.getRequiredLongParameter(request, ParameterConstants.GROUP_ID);
+	@RequestMapping("/admin/deletehomepages.htm")
+    public ModelAndView deleteHomePages(@RequestParam(ParameterConstants.GROUP_ID) Long groupId) throws Exception {
         groupService.delete(groupId);
         return new ModelAndView(new ZynapRedirectView(LIST_HOMEPAGES_REDIRECT_URL));
     }
 
-    public void setGroupService(IGroupService groupService) {
-        this.groupService = groupService;
-    }
-
-    public void setArenaManager(IArenaManager arenaManager) {
-        this.arenaManager = arenaManager;
-    }
-
-    public static Arena getArena(String arenaId, Collection<Arena> arenas) throws TalentStudioException {
-        for(Arena arena : arenas) {
-            if(arena.getArenaId().equals(arenaId)) {
-                return arena;
-            }
-        }
-        return null;
-    }
-
-    public static HomePage findHomePage(String arenaId, List<HomePage> homePages) {
+	static HomePage findHomePage(String arenaId, List<HomePage> homePages) {
         for(HomePage homePage : homePages) {
             if(arenaId.equals(homePage.getArenaId())) {
                 return homePage;
