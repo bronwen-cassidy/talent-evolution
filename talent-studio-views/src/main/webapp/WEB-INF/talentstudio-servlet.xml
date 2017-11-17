@@ -88,6 +88,7 @@
                 <value>/.*exportsubjects.htm</value>
                 <value>/admin/uploadsuccess.htm</value>
                 <value>/talentarena/home.htm</value>
+                <value>/talentarena/.*dashboard.htm</value>
                 <value>/common/.*.htm</value>
             </list>
         </property>
@@ -328,10 +329,12 @@
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/admin/*homepages.htm"/>
+            <mvc:mapping path="/**/editmydashboard.htm"/>
             <ref bean="loginInterceptor"/>
         </mvc:interceptor>
         <mvc:interceptor>
             <mvc:mapping path="/admin/*homepages.htm"/>
+            <mvc:mapping path="/**/editmydashboard.htm"/>
             <ref local="arenaInterceptor"/>
         </mvc:interceptor>
         <mvc:interceptor>
@@ -340,10 +343,12 @@
         </mvc:interceptor>
         <mvc:interceptor>
             <mvc:mapping path="/admin/*homepages.htm"/>
+            <mvc:mapping path="/**/editmydashboard.htm"/>
             <ref local="historyInterceptor"/>
         </mvc:interceptor>
         <mvc:interceptor>
             <mvc:mapping path="/admin/*homepages.htm"/>
+            <mvc:mapping path="/**/editmydashboard.htm"/>
             <ref local="navigationInterceptor"/>
         </mvc:interceptor>
         <mvc:interceptor>
@@ -408,10 +413,6 @@
                 <!-- home pages -->
                 <prop key="/admin/addhomepages.htm">addHomePagesController</prop>
                 <prop key="/admin/edithomepages.htm">editHomePagesController</prop>
-
-                <!--<prop key="/admin/listhomepages.htm"></prop>-->
-                <!--<prop key="/admin/viewhomepages.htm"></prop>-->
-                <!--<prop key="/admin/deletehomepages.htm">homePagesMultiController</prop>-->
 
                 <!-- search -->
                 <prop key="/common/wordlist.htm">searchTermController</prop>
@@ -905,9 +906,7 @@
     </bean>
 
     <!-- Controller for arena home pages -->
-    <bean id="arenaHomePageController" class="com.zynap.talentstudio.web.arena.HomePageController">
-        <property name="arenaManager" ref="arenaManager"/>
-    </bean>
+    <bean id="arenaHomePageController" class="com.zynap.talentstudio.web.arena.HomePageController"/>
 
     <bean id="homePageController" class="com.zynap.talentstudio.web.HomePageViewController"/>
 

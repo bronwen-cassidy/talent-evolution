@@ -4,6 +4,7 @@
  */
 package com.zynap.talentstudio.security.homepages;
 
+import com.zynap.common.util.StringUtil;
 import com.zynap.domain.ZynapDomainObject;
 import com.zynap.talentstudio.common.groups.Group;
 
@@ -114,6 +115,12 @@ public class HomePage extends ZynapDomainObject {
 	public String getTabView() {
 		return tabView;
 	}
+	
+	public boolean isDashboard() {
+    	return DASHBOARD.equals(tabView);
+	}
+
+	private static final String DASHBOARD = "DASHBOARD";
 
 	private String arenaId;
     private byte[] data;

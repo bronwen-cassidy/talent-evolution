@@ -26,7 +26,7 @@ public class OrganisationViewDwrBean {
                                       String viewSubjectUrl, int cellCount, String viewType, Long userId) {
         try {
             Node node = subjectService.findNodeById(nodeId);
-            Report report = (Report) reportService.findById(reportId);
+            Report report = reportService.findById(reportId);
             ArtefactViewQuestionnaireHelper helper = new ArtefactViewQuestionnaireHelper(populationEngine);
             ArtefactViewBuilder viewBuilder = new ArtefactViewBuilder(imageUrl, imageMessage, noImageMessage, checkNodeAccess, viewPositionUrl, viewSubjectUrl, node);
             return viewBuilder.buildOutput(report, userId, viewType, helper, cellCount, labelStyle, fieldStyle);

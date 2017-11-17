@@ -78,6 +78,7 @@ public final class UserPrincipal implements Serializable {
         for (HomePage hp : pages) {
             HomePage homePage = new HomePage(hp.getArenaId(), hp.getData(), hp.getUrl(), hp.getLabel(), hp.isInternalUrl());
             homePage.setFileExtension(hp.getFileExtension());
+            homePage.setTabView(hp.getTabView());
             homePages.put(hp.getArenaId(), homePage);
         }
     }

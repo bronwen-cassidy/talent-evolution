@@ -60,7 +60,7 @@ public interface ISubjectService extends IZynapService {
      */
     Collection<SubjectDTO> findTeam(Long userId) throws TalentStudioException;
 
-    Node findNodeById(Long id) throws TalentStudioException;
+    Subject findNodeById(Long id) throws TalentStudioException;
 
     boolean checkNodeAccess(Node node, Long userId);
 

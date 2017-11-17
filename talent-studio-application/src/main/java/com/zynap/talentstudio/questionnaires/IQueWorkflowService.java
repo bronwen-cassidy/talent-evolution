@@ -46,4 +46,5 @@ public interface IQueWorkflowService extends IZynapService, IQuestionnaireCommon
 
     void reload(Long workflowId) throws TalentStudioException;
 
+	List<QuestionnaireWorkflowDTO> findRepublishableWorkflows(Long subjectId);
 }

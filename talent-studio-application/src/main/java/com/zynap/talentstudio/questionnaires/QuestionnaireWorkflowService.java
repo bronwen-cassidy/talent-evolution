@@ -77,7 +77,13 @@ public class QuestionnaireWorkflowService extends AbstractQuestionnaireService i
         questionnaireDao.reload(workflow);
     }
 
-    /**
+	@Override
+	public List<QuestionnaireWorkflowDTO> findRepublishableWorkflows(Long subjectId) {
+    	QuestionnaireWorkflowSpecification spec = new RepublishableWorkflowSpecification(subjectId);
+		return questionnaireDao.query(spec);
+	}
+
+	/**
      * Marks questionnaires associated with workflow as completed and sets date completed to current date.
      * <br/> Only applies to info forms.
      *
