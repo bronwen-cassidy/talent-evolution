@@ -25,9 +25,10 @@ alter table node_das add currency VARCHAR2(10 CHAR);
 ALTER PACKAGE ZYNAP_NODE_SP COMPILE SPECIFICATION;
 ALTER PACKAGE ZYNAP_NODE_SP COMPILE BODY;
 
+alter table QUE_WORKFLOWS add parent_label varchar2(1000 CHAR);
 
 insert into versions(version) values('5.4.8-5.4.9');
 
-alter table QUE_WORKFLOWS add parent_label varchar2(1000 CHAR);
+
 
 commit;

@@ -19,6 +19,7 @@ import com.zynap.domain.admin.User;
 import com.zynap.exception.DomainObjectNotFoundException;
 import com.zynap.exception.PessimisticLockingFailureException;
 import com.zynap.exception.TalentStudioException;
+import com.zynap.talentstudio.common.Specification;
 import com.zynap.talentstudio.organisation.Node;
 import com.zynap.talentstudio.organisation.attributes.DynamicAttribute;
 import com.zynap.talentstudio.organisation.attributes.NodeExtendedAttribute;
@@ -515,7 +516,15 @@ public class HibernateQuestionnaireDao extends ZynapPersistenceSupport implement
         return getHibernateTemplate().find(query.toString());
     }
 
-    /**
+	@Override
+	public List<QuestionnaireWorkflowDTO> query(Specification spec) {
+
+		String query = "select " + spec.select() + " from " + spec.from() +
+				" where " + spec.toCriteria();
+		return getHibernateTemplate().find(query);
+	}
+
+	/**
      * Finds the workflows that are manager write, not completed and is an info form
      *
      * @return questionnaires that are searchable and editable
@@ -538,7 +547,7 @@ public class HibernateQuestionnaireDao extends ZynapPersistenceSupport implement
                 .append(" from QuestionnaireWorkflow workflow left join fetch workflow.group")
                 .append(" where workflow.workflowType in ('INFO_FORM', 'QUESTIONNARE_GENERAL') ");
         Set<QuestionnaireWorkflowDTO> workflows = new HashSet<QuestionnaireWorkflowDTO>(getHibernateTemplate().find(query.toString()));
-        return new ArrayList<QuestionnaireWorkflowDTO>(workflows);
+        return new ArrayList<>(workflows);
     }
 
     public Collection<QuestionnaireWorkflowDTO> findAllWorkflowDTOs() {
@@ -549,7 +558,7 @@ public class HibernateQuestionnaireDao extends ZynapPersistenceSupport implement
                 .append(" from QuestionnaireWorkflow workflow left join fetch workflow.group")
                 .append(" order by workflow.label ");
         Set<QuestionnaireWorkflowDTO> workflows = new HashSet<QuestionnaireWorkflowDTO>(getHibernateTemplate().find(query.toString()));
-        return new ArrayList<QuestionnaireWorkflowDTO>(workflows);
+        return new ArrayList<>(workflows);
     }
 
     /**

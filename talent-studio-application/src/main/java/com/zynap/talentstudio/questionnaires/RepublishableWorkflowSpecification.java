@@ -1,6 +1,6 @@
 package com.zynap.talentstudio.questionnaires;
 
-import net.sf.hibernate.expression.Criterion;
+import com.zynap.talentstudio.common.Specification;
 
 /**
  *  Builds a query that add criteria to find all questionnaire workflows that the given user is involved in.
@@ -10,7 +10,7 @@ import net.sf.hibernate.expression.Criterion;
  *      that are involved in republishing.
  *  </p>
  */
-public class RepublishableWorkflowSpecification implements QuestionnaireWorkflowSpecification {
+public class RepublishableWorkflowSpecification implements Specification {
 
 
 	public RepublishableWorkflowSpecification(Long subjectId) {
@@ -18,10 +18,22 @@ public class RepublishableWorkflowSpecification implements QuestionnaireWorkflow
 	}
 
 	@Override
-	public Criterion toCriteria() {
-		return null;
+	public String toCriteria() {
+		return "participant.subject.id = " + subjectId + " and workflow.parentLabel = null";
+	}
+
+	@Override
+	public String select() {
+		return "new " + QuestionnaireWorkflowDTO.class.getName() + "(workflow.id, workflow.label)";
+	}
+
+	public String from () {
+		return "QuestionnaireWorkflow workflow, WorkflowParticipant participant";
+	}
+	
+	public String[] prefix () {
+		return new String[] {"workflow", "participant"};
 	}
 
 	private Long subjectId;
-
 }

@@ -33,6 +33,7 @@ public class EditMyDashboardAddChart {
 	@RequestMapping(value = "editmydashboard.htm", method = RequestMethod.GET)
 	public String showEditMyDashbaordView(HttpServletRequest request, Model model) {
 		List<QuestionnaireWorkflowDTO> workflows = questionnaireWorkflowService.findRepublishableWorkflows(ZynapWebUtils.getUser(request).getSubjectId());
+		model.addAttribute("workflows", workflows);
 		return "editmydashboard";
 	}
 	
