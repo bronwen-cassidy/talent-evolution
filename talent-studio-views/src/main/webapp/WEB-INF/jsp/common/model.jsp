@@ -5,6 +5,8 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-type" content="text/html;charset=ISO-8859-1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
     <%--<meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>--%>
 
     <fmt:message key="${title}" var="title" scope="request"/>
@@ -22,6 +24,7 @@
 
     <script src="<c:url value="/js/jquery-1.7.2.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/js/jquery-ui-1.8.21.custom.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/js/kube.min.js"/>" type="text/javascript"></script>
 
     <script src="<c:url value="/dwr/engine.js"/>" type="text/javascript"></script>
 

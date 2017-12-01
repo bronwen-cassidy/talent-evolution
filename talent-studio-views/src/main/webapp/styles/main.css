@@ -114,6 +114,22 @@ span.verticalOptions {
     display: block;
 }
 
+/* attempt to start mimicking the bootstrap so when we can move it will be easier */
+span.column {
+    display:inline;
+    float:left;
+    margin-top:5px;
+    border: 2px solid white;
+}
+
+span.col-50 {
+    width:49%;
+}
+
+span.col-25 {
+    width:24%;
+}
+
 /*
  * These input classes are required because IE does not understand the CSS2
  * selection by attribute mechanism, so all <input> tags should have the appropriate
