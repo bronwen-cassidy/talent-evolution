@@ -25,6 +25,8 @@ public interface IDashboardService extends IZynapService {
     void delete(Long dashboardId) throws TalentStudioException;
 
     void createOrUpdate(Dashboard result) throws TalentStudioException;
+    
+    void createOrUpdate(Dashboard result, Long subjectId) throws TalentStudioException;
 
     List<Dashboard> findSubjectDashboards(Group userGroup, Collection<Role> userRoles, Subject subject);
 

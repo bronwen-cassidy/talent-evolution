@@ -17,8 +17,10 @@ import com.zynap.talentstudio.questionnaires.support.RepublishResults;
 
 import org.apache.commons.collections.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -81,7 +83,7 @@ public class QuestionnaireWorkflowService extends AbstractQuestionnaireService i
 	@Override
 	public List<QuestionnaireWorkflowDTO> findRepublishableWorkflows(Long subjectId) {
     	Specification spec = new RepublishableWorkflowSpecification(subjectId);
-		return questionnaireDao.query(spec);
+		return new ArrayList<>(new HashSet<>(questionnaireDao.query(spec)));
 	}
 
 	/**

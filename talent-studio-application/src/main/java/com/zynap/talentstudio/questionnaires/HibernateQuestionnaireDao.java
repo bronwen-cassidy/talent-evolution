@@ -519,7 +519,7 @@ public class HibernateQuestionnaireDao extends ZynapPersistenceSupport implement
 	@Override
 	public List<QuestionnaireWorkflowDTO> query(Specification spec) {
 
-		String query = "select " + spec.select() + " from " + spec.from() +
+		String query = "select distinct " + spec.select() + " from " + spec.from() +
 				" where " + spec.toCriteria();
 		return getHibernateTemplate().find(query);
 	}

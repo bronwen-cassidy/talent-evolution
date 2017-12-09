@@ -39,7 +39,7 @@ public final class ColumnWrapperBean extends AnalysisAttributeWrapperBean {
             if (column.isFormula()) {
                 functionWrapperBean = new FunctionWrapperBean(column.getCalculation());
             }
-            this.columnDisplayImages = new ArrayList<ColumnDisplayImage>(column.getColumnDisplayImages());
+            this.columnDisplayImages = new ArrayList<>(column.getColumnDisplayImages());
         }
     }
 

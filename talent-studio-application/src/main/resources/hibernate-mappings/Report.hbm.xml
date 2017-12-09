@@ -4,13 +4,6 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
 
 <hibernate-mapping>
-    <!-- 
-        Created by the Middlegen Hibernate plugin 2.1
-
-        http://boss.bekk.no/boss/middlegen/
-        http://www.hibernate.org/
-    -->
-
     <class
             name="com.zynap.talentstudio.analysis.reports.Report"
             table="REPORTS"
@@ -125,7 +118,6 @@
         <!-- bi-directional one-to-many association to Column -->
         <list
                 name="columns"
-                lazy="false"
                 inverse="true"
                 cascade="all-delete-orphan"
                 outer-join="true"
@@ -184,7 +176,6 @@
         <subclass name="com.zynap.talentstudio.analysis.reports.SubjectDisplayReport" discriminator-value="S" dynamic-insert="true" dynamic-update="true"/>
         <subclass name="com.zynap.talentstudio.analysis.reports.PositionDisplayReport" discriminator-value="P" dynamic-insert="true" dynamic-update="true"/>
         <subclass name="com.zynap.talentstudio.analysis.reports.TabularReport" discriminator-value="STANDARD" dynamic-insert="true" dynamic-update="true"/>
-
         <subclass name="com.zynap.talentstudio.analysis.reports.ProgressReport" discriminator-value="PROGRESS" dynamic-insert="true" dynamic-update="true">
 
             <property name="questionnaireDefinitionId"
@@ -241,6 +232,7 @@
                 <index column="POSITION"/>
                 <one-to-many class="com.zynap.talentstudio.analysis.reports.ChartReportAttribute"/>
             </list>
+
         </subclass>
 
         <subclass name="com.zynap.talentstudio.analysis.reports.CrossTabReport" discriminator-value="CROSSTAB" dynamic-insert="true" dynamic-update="true">

@@ -3,6 +3,7 @@
  */
 package com.zynap.talentstudio.questionnaires;
 
+import com.zynap.talentstudio.organisation.attributes.DynamicAttribute;
 import com.zynap.talentstudio.questionnaires.support.ITreeElement;
 
 import java.io.Serializable;
@@ -20,8 +21,7 @@ import java.util.List;
  */
 public class QuestionnaireDefinitionModel implements Serializable, ITreeElement {
 
-    private static final long serialVersionUID = -8990939404873739691L;
-
+	private static final long serialVersionUID = -8990939404873739691L;
 
     public QuestionnaireDefinitionModel() {
     }

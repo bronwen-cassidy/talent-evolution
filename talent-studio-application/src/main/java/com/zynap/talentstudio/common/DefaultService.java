@@ -122,7 +122,7 @@ public abstract class DefaultService implements IZynapService {
             }
 
             Set<Node> simpleResults = new HashSet<Node>(populationEngine.find(mockPopulation, userId));
-            results = new ArrayList<Node>(simpleResults);
+            results = new ArrayList<>(simpleResults);
         }
         return results;
     }

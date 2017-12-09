@@ -19,7 +19,7 @@ public class RepublishableWorkflowSpecification implements Specification {
 
 	@Override
 	public String toCriteria() {
-		return "participant.primaryKey.subjectId = " + subjectId + " and workflow.parentLabel = null";
+		return "participant.primaryKey.subjectId = " + subjectId + " and workflow.parentLabel is null";
 	}
 
 	@Override

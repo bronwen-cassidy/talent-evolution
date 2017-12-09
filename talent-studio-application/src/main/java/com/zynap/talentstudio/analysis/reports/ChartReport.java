@@ -62,8 +62,28 @@ public class ChartReport extends Report {
     public boolean isSpiderChartType() {
         return SPIDER_CHART.equals(chartType);
     }
+    
+    public boolean isSeriesChartType() {
+        return SERIES_CHART.equals(chartType);
+    }
 
-    public List<AnalysisParameter> getQuestionnaireAttributes() {
+	public ChartReportAttribute getxAxisAttribute() {
+		return xAxisAttribute;
+	}
+
+	public void setxAxisAttribute(ChartReportAttribute xAxisAttribute) {
+		this.xAxisAttribute = xAxisAttribute;
+	}
+
+	public ChartReportAttribute getyAxisAttribute() {
+		return yAxisAttribute;
+	}
+
+	public void setyAxisAttribute(ChartReportAttribute yAxisAttribute) {
+		this.yAxisAttribute = yAxisAttribute;
+	}
+
+	public List<AnalysisParameter> getQuestionnaireAttributes() {
         List<AnalysisParameter> attributes = new ArrayList<AnalysisParameter>();
         if (isSpiderChartType()) {
             for (Column column : getColumns()) {
@@ -85,10 +105,14 @@ public class ChartReport extends Report {
 
     /* used in chart reports, this is the list of forms that the answer count will be determined from */
     private List<ChartReportAttribute> chartReportAttributes = new ArrayList<ChartReportAttribute>();
+    private ChartReportAttribute xAxisAttribute;
+    private ChartReportAttribute yAxisAttribute;
     private String chartType;
+    
 
     public static final String BAR_CHART = "BAR";
     public static final String PIE_CHART = "PIE";
     public static final String SPIDER_CHART = "SPIDER";
+    public static final String SERIES_CHART = "SERIES";
 
 }

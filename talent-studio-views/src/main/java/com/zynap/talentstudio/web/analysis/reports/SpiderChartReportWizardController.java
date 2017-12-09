@@ -49,7 +49,7 @@ public class SpiderChartReportWizardController extends BaseReportsWizardControll
         String reportIdParameter = request.getParameter(ParameterConstants.REPORT_ID);
         ChartReport report;
         if (reportIdParameter != null) {
-            report = (ChartReport) reportService.findById(new Long(reportIdParameter));
+            report = reportService.findById(new Long(reportIdParameter));
         } else {
             report = new ChartReport();
             report.setUserId(userSession.getId());

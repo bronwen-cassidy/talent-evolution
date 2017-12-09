@@ -243,7 +243,8 @@ public class Population extends ZynapDomainObject implements Cloneable {
         return this.activeCriteria.equals(INACTIVE_ONLY);
     }
 
-    private boolean forSearching;
+	public static final Long DUMMY_POPULATION_ID = -10L;
+	private boolean forSearching;
     private String[] orderColumns;
     private List<GroupingAttribute> orderAttributes = new ArrayList<GroupingAttribute>();
     private List<GroupingAttribute> groupingAttributes = new ArrayList<GroupingAttribute>();
