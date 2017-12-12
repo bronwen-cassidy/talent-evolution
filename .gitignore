@@ -8,6 +8,7 @@ target
 distribution
 .idea
 .ideaDataSources
+dataSources
 config-inspection.log
 talent-studio-views/src/main/webapp/images/Thumbs.db
 talent-studio-views/src/main/webapp/images/tree/Thumbs.db

@@ -42,6 +42,8 @@ public abstract class HibernateAbstractResolver extends HibernateDaoSupport {
 
     public abstract List findPersonalQuestionnaireAnswers(List<AnalysisParameter> attributes, Long nodeId, Long userId) throws TalentStudioException;
 
+    public abstract List findPersonalQuestionnaireAnswers(List<AnalysisParameter> attributes, List<Long> workflowIds, Long nodeId);
+    
     protected abstract List find(Population population, Long userId) throws TalentStudioException;
 
     protected abstract Page find(Population population, Long userId, int start, int end, int numRecords) throws TalentStudioException;

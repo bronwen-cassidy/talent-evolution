@@ -83,7 +83,7 @@ public class HomePageControllerTest {
 	    ExtendedModelMap model = new ExtendedModelMap();
         HomePage homePage = new HomePage("Home", "DemoCompany");
         homePage.setUrl(content);
-        homePageController.buildModel("dontcare", homePage, model, -6L, null);
+        homePageController.buildModel("dontcare", homePage, model, userId, -6L, null);
         String expected = "http://www.google.com?username=brendaa&password=helooooo";
         String actual = ((HomePage) model.asMap().get("homePage")).getUrl();
 

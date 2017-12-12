@@ -19,7 +19,7 @@ import com.zynap.domain.admin.User;
 import com.zynap.exception.DomainObjectNotFoundException;
 import com.zynap.exception.PessimisticLockingFailureException;
 import com.zynap.exception.TalentStudioException;
-import com.zynap.talentstudio.common.Specification;
+import com.zynap.talentstudio.common.QuerySpecification;
 import com.zynap.talentstudio.organisation.Node;
 import com.zynap.talentstudio.organisation.attributes.DynamicAttribute;
 import com.zynap.talentstudio.organisation.attributes.NodeExtendedAttribute;
@@ -37,6 +37,7 @@ import org.springframework.jdbc.object.StoredProcedure;
 import org.springframework.orm.ObjectRetrievalFailureException;
 import org.springframework.orm.hibernate.HibernateCallback;
 import org.springframework.orm.hibernate.HibernateTemplate;
+import org.springframework.util.StringUtils;
 
 import java.sql.Types;
 import java.text.DateFormat;
@@ -515,12 +516,16 @@ public class HibernateQuestionnaireDao extends ZynapPersistenceSupport implement
         query.append(questionnaireWorkflowId);
         return getHibernateTemplate().find(query.toString());
     }
+    
+	public <T> List<T> query(QuerySpecification spec) {
 
-	@Override
-	public List<QuestionnaireWorkflowDTO> query(Specification spec) {
-
-		String query = "select distinct " + spec.select() + " from " + spec.from() +
-				" where " + spec.toCriteria();
+    	// todo String query = spec.select().from().where().and().orderBy().build();
+		
+    	String query = "select distinct " + spec.select() + " from " + spec.from() +
+				" where " + spec.where();
+		if(StringUtils.hasText(spec.orderBy())) {
+			query += " order by " + spec.orderBy();
+		}
 		return getHibernateTemplate().find(query);
 	}
 

@@ -9,7 +9,7 @@ import com.zynap.domain.IDomainObject;
 import com.zynap.exception.TalentStudioException;
 import com.zynap.talentstudio.common.IFinder;
 import com.zynap.talentstudio.common.IModifiable;
-import com.zynap.talentstudio.common.Specification;
+import com.zynap.talentstudio.common.QuerySpecification;
 import com.zynap.talentstudio.organisation.subjects.Subject;
 import com.zynap.talentstudio.performance.IPerformanceReviewService;
 import com.zynap.talentstudio.performance.PerformanceReview;
@@ -82,8 +82,15 @@ public class QuestionnaireWorkflowService extends AbstractQuestionnaireService i
 
 	@Override
 	public List<QuestionnaireWorkflowDTO> findRepublishableWorkflows(Long subjectId) {
-    	Specification spec = new RepublishableWorkflowSpecification(subjectId);
-		return new ArrayList<>(new HashSet<>(questionnaireDao.query(spec)));
+    	QuerySpecification spec = new RepublishableWorkflowQuery(subjectId);
+		final List<QuestionnaireWorkflowDTO> query = questionnaireDao.query(spec);
+		return new ArrayList<>(new HashSet<>(query));
+	}
+
+	@Override
+	public List<Long> findAllRelatedWorkflows(Long parentWorkflowId) {
+    	QuerySpecification query = new FindChildrenWorkflowQuery(parentWorkflowId);
+		return questionnaireDao.query(query);
 	}
 
 	/**

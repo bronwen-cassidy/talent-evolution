@@ -46,6 +46,8 @@ public interface IPopulationEngine {
 
     List<NodeExtendedAttribute> findPersonalQuestionnaireAttributeAnswers(List<AnalysisParameter> attributes, Node node, Long userId) throws TalentStudioException;
 
+	List<NodeExtendedAttribute> findPersonalQuestionnaireAttributeAnswers(List<AnalysisParameter> attributes, List<Long> workflowIds, Node node) throws TalentStudioException;
+    
     Population getAllPositionsPopulation();
 
     Population getAllSubjectsPopulation();

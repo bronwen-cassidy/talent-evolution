@@ -29,6 +29,9 @@
                 <c:when test="${filledReport.spiderChart}">
                     <%@include file="viewspiderchartsnippet.jsp" %>        
                 </c:when>
+                <c:when test="${filledReport.seriesChart}">
+                    <%@include file="viewserieschart.jsp" %>
+                </c:when>
                 <c:when test="${dashboardItem.report.chartReport}">
                     <fieldset>
                         <legend><c:out value="${dashboardItem.label}"/></legend>

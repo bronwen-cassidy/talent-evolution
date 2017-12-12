@@ -5,11 +5,13 @@ import sun.misc.MessageUtils;
 /**
  *
  */
-public interface Specification {
+public interface QuerySpecification {
 
-	String toCriteria();
+	String where();
 
 	String from();
 
 	String select();
+	
+	String orderBy();
 }

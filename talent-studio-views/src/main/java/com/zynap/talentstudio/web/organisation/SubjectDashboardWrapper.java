@@ -5,8 +5,13 @@
 package com.zynap.talentstudio.web.organisation;
 
 import com.zynap.talentstudio.dashboard.DashboardItem;
+import com.zynap.talentstudio.organisation.attributes.NodeExtendedAttribute;
+import com.zynap.talentstudio.questionnaires.Questionnaire;
 import com.zynap.talentstudio.web.analysis.reports.cewolf.producers.AbstractChartProducer;
 import com.zynap.talentstudio.web.analysis.reports.data.FilledReport;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Class or Interface description.
@@ -66,7 +71,7 @@ public class SubjectDashboardWrapper {
         return expectedProducer;
     }
 
-    private Long dashboardItemId;
+	private Long dashboardItemId;
     private FilledReport filledReport;
     private DashboardItem dashboardItem;
     private AbstractChartProducer expectedProducer;

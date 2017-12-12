@@ -3010,17 +3010,11 @@
     </bean>
 
     <bean id="viewMyDashboardController" class="com.zynap.talentstudio.web.dashboard.ViewMyDashboardController">
-        <property name="subjectService" ref="subjectService"/>
-        <property name="positionService" ref="positionService"/>
-        <property name="dynamicAttributeService" ref="dynamicAttrService"/>
-        <property name="dashboardService" ref="dashboardService"/>
-        <property name="dashboardBuilder" ref="dashboardBuilder"/>
-        <property name="populationEngine" ref="populationEngine"/>
-        <property name="displayConfigService" ref="displayConfigService"/>
         <property name="commandClass" value="com.zynap.talentstudio.web.dashboard.MyDashboardWrapper"/>
         <property name="sessionForm" value="true"/>
         <property name="formView" value="viewmydashboardhome"/>
     </bean>
+    
     <bean id="viewMyHomePageDashboardController" parent="viewMyDashboardController">
         <property name="formView" value="viewmyhomepagedashboard"/>
     </bean>

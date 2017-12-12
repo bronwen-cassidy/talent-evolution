@@ -37,6 +37,10 @@ public abstract class FilledReport implements Serializable {
     public boolean isPieChart() {
         return false;
     }
+    
+    public boolean isSeriesChart() {
+    	return false;
+    }
 
     public boolean isBarChart() {
         return false;

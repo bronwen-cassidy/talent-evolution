@@ -161,6 +161,37 @@ public final class HibernateSimplePopulationResolver extends HibernateAbstractRe
         return getHibernateTemplate().find(sql.toString());
     }
 
+	public List findPersonalQuestionnaireAnswers(List<AnalysisParameter> attributes, List<Long> workflowIds, Long nodeId) {
+
+		final String nodeAlias = "n";
+		final String queAlias = "q";
+		final String davAlias = "def";
+		final String qwfAlias = "qwf";
+
+		final Class populationClass = Subject.class;
+
+		// buidl query root
+		StringBuffer sql = getQuestionnaireQueryRoot(populationClass, nodeAlias);
+
+		// add a "where" clause
+		sql.append(WHERE);
+		
+		List<String> attributeIds = new ArrayList<>();
+		for (AnalysisParameter attribute : attributes) {
+			attributeIds.add(attribute.getName());
+		}
+		
+		addQuestionnaireQueryRestrictions(sql, queAlias, nodeAlias, davAlias, qwfAlias, workflowIds, attributeIds);
+
+		// add restriction to only get the questionnaires for the specified nodeId
+		sql.append(AND).append(nodeAlias).append(".id = ").append(nodeId);
+
+		// add grouping
+		addOrderingForQuestionnairesAnswers(sql);
+
+		return getHibernateTemplate().find(sql.toString());
+	}
+
     /**
      * Run a query to get data for a tabular report.
      * <br/> Returns the nodes - presentation layer components then get the appropriate values for the specified columns.

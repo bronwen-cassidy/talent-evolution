@@ -47,6 +47,14 @@ public class QuestionnaireWorkflow extends ZynapDomainObject {
 		this.workflowType = workflowType;
 	}
 
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+
 	public Date getStartDate() {
 		return this.startDate;
 	}
@@ -157,6 +165,14 @@ public class QuestionnaireWorkflow extends ZynapDomainObject {
 
 	public void setIndividualRead(boolean individualRead) {
 		this.individualRead = individualRead;
+	}
+
+	public Long getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(Long parentId) {
+		this.parentId = parentId;
 	}
 
 	/**
@@ -315,16 +331,12 @@ public class QuestionnaireWorkflow extends ZynapDomainObject {
 	 * The description.
 	 */
 	private String description;
-
 	private boolean managerWrite;
-
 	private boolean managerRead;
-
 	private boolean individualWrite;
-
 	private boolean individualRead;
-
 	private Date lastRepublishedDate;
+	private Date createdDate;
 
 	/**
 	 * The definition that the workflow belongs to.
@@ -389,4 +401,5 @@ public class QuestionnaireWorkflow extends ZynapDomainObject {
 	public static final String TYPE_MANAGER_APPRAISAL = "PERFORMANCE_REVIEW_MANAGER";
 
 	private String parentLabel;
+	private Long parentId;
 }

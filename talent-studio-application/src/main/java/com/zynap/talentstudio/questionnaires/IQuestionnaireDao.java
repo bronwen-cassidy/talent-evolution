@@ -3,12 +3,11 @@
  */
 package com.zynap.talentstudio.questionnaires;
 
-import com.zynap.domain.IDomainObject;
 import com.zynap.domain.admin.User;
 import com.zynap.exception.TalentStudioException;
 import com.zynap.talentstudio.common.IFinder;
 import com.zynap.talentstudio.common.IModifiable;
-import com.zynap.talentstudio.common.Specification;
+import com.zynap.talentstudio.common.QuerySpecification;
 import com.zynap.talentstudio.organisation.subjects.Subject;
 import com.zynap.talentstudio.organisation.attributes.NodeExtendedAttribute;
 import com.zynap.talentstudio.organisation.attributes.DynamicAttribute;
@@ -169,7 +168,7 @@ public interface IQuestionnaireDao extends IFinder, IModifiable {
 
     Integer countNumAppraisals(Long userId) throws TalentStudioException;
 
-    Integer countNumQuestionnaires(final Long userId) throws TalentStudioException;
+    Integer countNumQuestionnaires(Long userId) throws TalentStudioException;
 
-	List<QuestionnaireWorkflowDTO> query(Specification spec);
+	<T> List<T> query(QuerySpecification spec);
 }

@@ -574,7 +574,7 @@ public class QuestionnaireHelper {
                 GroupMapKey key = new GroupMapKey(groupName, String.valueOf(index));
                 List<QuestionnaireDTO> questionnaireDTOs = groupedInfoForms.get(key);
                 if (questionnaireDTOs == null) {
-                    questionnaireDTOs = new ArrayList<QuestionnaireDTO>();
+                    questionnaireDTOs = new ArrayList<>();
                     groupedInfoForms.put(key, questionnaireDTOs);
                     index++;
                 }

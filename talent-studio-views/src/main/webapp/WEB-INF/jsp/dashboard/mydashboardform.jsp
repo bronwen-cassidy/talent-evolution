@@ -2,9 +2,9 @@
 
 <zynap:infobox title="${title}">
 
-    <form:form method="post" action="/talentarena/dashboards/savemydashboard" modelAttribute="command">
+    <form:form method="post" action="savemydashboard.htm" modelAttribute="command">
         <div id="workflows" class="row">	
-            <span class="column col-3">
+            <span class="column col-6">
                 <div class="infomessage">Please select the form containing the attributes you wish to chart</div>
                  <form:select path="workflowId" id="wrkflow-select">
                      <form:option value="-1">Please Select</form:option>
@@ -15,12 +15,20 @@
            </span>
         </div>
 
-        <div id="attributes" class="row">
+        <div id="chart-label" class="row">	
+            <span class="column col-6">
+                <div class="infomessage">Please enter a label for the chart</div>
+                <form:input path="chartLabel"/>
+           </span>
+        </div>
 
+        <div id="attributes">
+            
         </div>
 
         <div id="submit-row" class="row">
             <input type="submit" value="<fmt:message key="save"/>"/>
+            <input type="button" id="frmcancel" value="<fmt:message key="cancel"/>"/>
         </div>
 
     </form:form>
@@ -32,9 +40,13 @@
     $(function () {
         $('#wrkflow-select').on('change', function () {
             var workflowId = $('#wrkflow-select').val();
-            $.get('/talentarena/dashboards/loadattributes.htm?ts=' + new Date().getTime(), {wfId: workflowId}, function (data) {
+            $.get('loadattributes.htm?ts=' + new Date().getTime(), {wfId: workflowId}, function (data) {
                 $('#attributes').html(data);
             });
+        });
+        
+        $('#frmcancel').on('click', function() {
+            $.get('cancelview.htm?ts=' + new Date().getTime());   
         });
     });
 

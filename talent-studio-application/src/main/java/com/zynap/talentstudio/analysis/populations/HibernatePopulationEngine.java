@@ -90,6 +90,10 @@ public class HibernatePopulationEngine implements IPopulationEngine, Initializin
         return CollectionUtils.removeDuplicates(populationResolver.findPersonalQuestionnaireAnswers(attributes, node.getId(), userId));
     }
 
+	public List<NodeExtendedAttribute> findPersonalQuestionnaireAttributeAnswers(List<AnalysisParameter> attributes, List<Long> workflowIds, Node node) throws TalentStudioException {
+		return CollectionUtils.removeDuplicates(populationResolver.findPersonalQuestionnaireAnswers(attributes, workflowIds, node.getId()));
+	}
+
     public Population getAllPositionsPopulation() {
         Population p = new Population();
         p.setLabel("All Positions");

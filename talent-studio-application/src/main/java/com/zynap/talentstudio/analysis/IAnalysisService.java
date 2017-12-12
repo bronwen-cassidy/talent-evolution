@@ -7,10 +7,12 @@ import com.zynap.domain.IDomainObject;
 import com.zynap.exception.TalentStudioException;
 import com.zynap.talentstudio.analysis.populations.Population;
 import com.zynap.talentstudio.analysis.populations.PopulationDto;
+import com.zynap.talentstudio.common.IZynapService;
 import com.zynap.talentstudio.common.groups.Group;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Class or Interface description.
@@ -19,9 +21,7 @@ import java.util.Collection;
  * @version $Revision: $
  *          $Id: $
  */
-public interface IAnalysisService {
-
-    public IDomainObject findById(Serializable id) throws TalentStudioException;
+public interface IAnalysisService extends IZynapService {
 
     Population create(Population population, Long userId) throws TalentStudioException;
 

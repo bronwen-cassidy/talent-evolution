@@ -49,7 +49,7 @@ public class QuestionnaireDTO implements Serializable, Comparable {
      * @param workflowId     the worklfow id
      * @param label          the workflow/questionnaire's label
      * @param workflowType   the workflow type i.e. INFO_FORM
-     * @param status
+     * @param status          completed, in progress open, not started
      * @param completeByDate the date the workflow is to be completed (may be null i.e. never completes)
      * @param completedDate  the date the questionnaire was completed (may be null i.e. not yet completed)
      * @param role           the role, if this is an appraisal.
@@ -72,7 +72,7 @@ public class QuestionnaireDTO implements Serializable, Comparable {
 
         this(id, workflowId, label, workflowType, status, completeByDate, individualWrite, managerWrite, completedDate, role);
         this.groupLabel = groupLabel;
-        this.isCompleted = new Boolean(queStatus);
+        this.isCompleted = queStatus;
     }
 
     public Long getId() {
@@ -166,7 +166,7 @@ public class QuestionnaireDTO implements Serializable, Comparable {
     }
 
     private boolean isOpen() {
-        if(QuestionnaireWorkflow.TYPE_QUESTIONNAIRE.equals(workflowType) && isCompleted != null) return !isCompleted.booleanValue();
+        if(QuestionnaireWorkflow.TYPE_QUESTIONNAIRE.equals(workflowType) && isCompleted != null) return !isCompleted;
         return status.equals(QuestionnaireWorkflow.STATUS_OPEN) || status.equals(QuestionnaireWorkflow.STATUS_PENDING) || status.equals(QuestionnaireWorkflow.STATUS_PUBLISHED);
     }
 
@@ -174,10 +174,9 @@ public class QuestionnaireDTO implements Serializable, Comparable {
 
         final QuestionnaireDTO other = (QuestionnaireDTO) o;
 
-        int comparison;
+        int comparison = this.workflowId.compareTo(other.getWorkflowId());
 
         if (isAnyAppraisal()) {
-            comparison = this.workflowId.compareTo(other.getWorkflowId());
 
             // only check roles for same workflow
             if (comparison == 0) {
@@ -192,7 +191,7 @@ public class QuestionnaireDTO implements Serializable, Comparable {
             }
         } else {
             String tempLabel = label == null ? "" : label;
-            comparison = tempLabel.compareTo(other.label);
+            comparison += tempLabel.compareTo(other.label);
         }
 
         return comparison;
@@ -205,12 +204,10 @@ public class QuestionnaireDTO implements Serializable, Comparable {
 
         final QuestionnaireDTO other = (QuestionnaireDTO) command;
         if (QuestionnaireWorkflow.TYPE_INFO_FORM.equals(workflowType)) {
-            if (!workflowId.equals(other.workflowId)) return false;
-            return true;
+	        return workflowId.equals(other.workflowId);
         } else {
             // this is a questionnaire or appraisal, always have ids by the time they get into portfolios
-            if (id != null ? !id.equals(other.id) : other.id != null) return false;
-            return true;
+	        return id != null ? id.equals(other.id) : other.id == null;
         }
     }
 

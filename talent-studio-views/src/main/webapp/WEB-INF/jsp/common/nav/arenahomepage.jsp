@@ -11,6 +11,9 @@
                         <td class="artefact">
                             <c:set var="dashboardHeading" value="${tabContent.label}" scope="request"/>
                             <c:set var="dashboards" value="${dashboards}" scope="request"/>
+                            <a href="dashboards/editmydashboard.htm?uid=<c:out value="${userId}"/>">
+                                <fmt:message key="add.series.chart"/>
+                            </a>
                             <c:import url="../common/subjects/viewsubjectdashboard.jsp"/>
                         </td>
                     </tr>

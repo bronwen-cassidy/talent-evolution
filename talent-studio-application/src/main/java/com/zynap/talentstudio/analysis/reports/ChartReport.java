@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (c) Zynap Ltd. 2006
  * All rights reserved.
  */
@@ -7,7 +7,9 @@ package com.zynap.talentstudio.analysis.reports;
 import com.zynap.talentstudio.analysis.AnalysisParameter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Class or Interface description.
@@ -18,101 +20,91 @@ import java.util.List;
  */
 public class ChartReport extends Report {
 
-    public ChartReport() {
-    }
-
-    public ChartReport(Long id) {
-        super(id);
-    }
-
-    public List<ChartReportAttribute> getChartReportAttributes() {
-        return chartReportAttributes;
-    }
-
-    public void setChartReportAttributes(List<ChartReportAttribute> chartReportAttributes) {
-        this.chartReportAttributes = chartReportAttributes;
-    }
-
-    public void addQuestionnaireWorkflow(ChartReportAttribute questionnaireWorkflow) {
-        this.chartReportAttributes.add(questionnaireWorkflow);
-    }
-
-    public void addChartReportAttribute(ChartReportAttribute chartReportAttribute) {
-        chartReportAttribute.setReport(this);
-        chartReportAttribute.setPosition(chartReportAttributes.size());
-        chartReportAttributes.add(chartReportAttribute);
-    }
-
-    public boolean isChartReport() {
-        return true;
-    }
-
-    public String getChartType() {
-        return chartType;
-    }
-
-    public void setChartType(String chartType) {
-        this.chartType = chartType;
-    }
-
-    public boolean isPieChartType() {
-        return PIE_CHART.equals(chartType);
-    }
-
-    public boolean isSpiderChartType() {
-        return SPIDER_CHART.equals(chartType);
-    }
-    
-    public boolean isSeriesChartType() {
-        return SERIES_CHART.equals(chartType);
-    }
-
-	public ChartReportAttribute getxAxisAttribute() {
-		return xAxisAttribute;
+	public ChartReport() {
 	}
 
-	public void setxAxisAttribute(ChartReportAttribute xAxisAttribute) {
-		this.xAxisAttribute = xAxisAttribute;
+	public ChartReport(Long id) {
+		super(id);
 	}
 
-	public ChartReportAttribute getyAxisAttribute() {
-		return yAxisAttribute;
+	public List<ChartReportAttribute> getChartReportAttributes() {
+		return chartReportAttributes;
 	}
 
-	public void setyAxisAttribute(ChartReportAttribute yAxisAttribute) {
-		this.yAxisAttribute = yAxisAttribute;
+	public void setChartReportAttributes(List<ChartReportAttribute> chartReportAttributes) {
+		this.chartReportAttributes = chartReportAttributes;
+	}
+
+	public void addQuestionnaireWorkflow(ChartReportAttribute questionnaireWorkflow) {
+		this.chartReportAttributes.add(questionnaireWorkflow);
+	}
+
+	public void addChartReportAttribute(ChartReportAttribute chartReportAttribute) {
+		chartReportAttribute.setReport(this);
+		chartReportAttribute.setPosition(chartReportAttributes.size());
+		chartReportAttributes.add(chartReportAttribute);
+	}
+
+	public boolean isChartReport() {
+		return true;
+	}
+
+	public String getChartType() {
+		return chartType;
+	}
+
+	public void setChartType(String chartType) {
+		this.chartType = chartType;
+	}
+
+	public boolean isPieChartType() {
+		return PIE_CHART.equals(chartType);
+	}
+
+	public boolean isSpiderChartType() {
+		return SPIDER_CHART.equals(chartType);
+	}
+
+	public boolean isSeriesChartType() {
+		return SERIES_CHART.equals(chartType);
 	}
 
 	public List<AnalysisParameter> getQuestionnaireAttributes() {
-        List<AnalysisParameter> attributes = new ArrayList<AnalysisParameter>();
-        if (isSpiderChartType()) {
-            for (Column column : getColumns()) {
-                for (ChartColumnAttribute attribute : column.getChartColumnAttributes()) {
-                    if (attribute.getAnalysisParameter().isQuestionnaireAttribute()) {
-                        attributes.add(attribute.getAnalysisParameter());
-                    }
-                }
-            }
-        } else {            
-            for (ChartReportAttribute attribute : chartReportAttributes) {
-                if (attribute.getAnalysisParameter().isQuestionnaireAttribute()) {
-                    attributes.add(attribute.getAnalysisParameter());
-                }
-            }
-        }
-        return attributes;
-    }
+		List<AnalysisParameter> attributes = new ArrayList<AnalysisParameter>();
+		if (isSpiderChartType()) {
+			for (Column column : getColumns()) {
+				for (ChartColumnAttribute attribute : column.getChartColumnAttributes()) {
+					if (attribute.getAnalysisParameter().isQuestionnaireAttribute()) {
+						attributes.add(attribute.getAnalysisParameter());
+					}
+				}
+			}
+		} else {
+			for (ChartReportAttribute attribute : chartReportAttributes) {
+				if (attribute.getAnalysisParameter().isQuestionnaireAttribute()) {
+					attributes.add(attribute.getAnalysisParameter());
+				}
+			}
+		}
+		return attributes;
+	}
 
-    /* used in chart reports, this is the list of forms that the answer count will be determined from */
-    private List<ChartReportAttribute> chartReportAttributes = new ArrayList<ChartReportAttribute>();
-    private ChartReportAttribute xAxisAttribute;
-    private ChartReportAttribute yAxisAttribute;
-    private String chartType;
-    
+	public Map<String, AnalysisParameter> getXYChartAttributes() {
+		Map<String, AnalysisParameter> attributes = new HashMap<>();
+		for (Column column : getColumns()) {
+			attributes.put(column.getColumnSource(), column.getAnalysisParameter());
+		}
+		return attributes;
+	}
 
-    public static final String BAR_CHART = "BAR";
-    public static final String PIE_CHART = "PIE";
-    public static final String SPIDER_CHART = "SPIDER";
-    public static final String SERIES_CHART = "SERIES";
+	/* used in chart reports, this is the list of forms that the answer count will be determined from */
+	private List<ChartReportAttribute> chartReportAttributes = new ArrayList<ChartReportAttribute>();
+	private String chartType;
+
+
+	public static final String BAR_CHART = "BAR";
+	public static final String PIE_CHART = "PIE";
+	public static final String SPIDER_CHART = "SPIDER";
+	public static final String SERIES_CHART = "SERIES";
 
 }

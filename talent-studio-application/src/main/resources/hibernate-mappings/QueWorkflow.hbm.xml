@@ -33,7 +33,9 @@
         <property name="workflowType" type="java.lang.String" column="WORKFLOW_TYPE" length="240"/>
         <property name="label" type="java.lang.String" column="LABEL" length="100"/>
         <property name="parentLabel" type="java.lang.String" column="PARENT_LABEL" length="1000"/>
+        <property name="parentId" type="java.lang.Long" column="PARENT_ID"/>
         <property name="startDate" type="java.util.Date" column="START_DATE" length="7"/>
+        <property name="createdDate" type="java.util.Date" column="CREATED_DATE" length="7"/>
         <property name="expiryDate" type="java.util.Date" column="EXPIRED_DATE" length="7"/>
         <property name="closedDate" type="java.util.Date" column="CLOSED_DATE" length="7"/>
         <property name="status" type="java.lang.String" column="STATUS" length="20"/>

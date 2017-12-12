@@ -154,7 +154,7 @@ td.arena_inactive_tab.hover {
 
 td.arena_inactive_tab.no_hover {
 	border-style: double;
-	border-width: 0px 0px 0px 0px
+	border-width: 0px 0px 0px 0px;
 	border-color: #589aff;
 	background-color: #589aff;
 	color: black;
@@ -558,7 +558,7 @@ table.tab_tabbar td.tab_active_tab {
 
 .tab_active_tab a, .tab_active_tab a:active, .tab_active_tab a:visited, .tab_active_tab a:hover {
 	text-decoration: none;
-	color: 086980;
+	color: #086980;
 	cursor: text;
 }
 
@@ -580,7 +580,7 @@ table.tab_tabbar .tab_inactive_tab.no_hover {
 }
 
 .tab_inactive_tab a:hover {
-	color: 086980;	
+	color: #086980;	
 }
 
 /* Surround of the tab page */

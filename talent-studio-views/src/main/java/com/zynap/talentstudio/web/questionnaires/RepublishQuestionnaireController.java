@@ -93,6 +93,7 @@ public class RepublishQuestionnaireController {
 		final DateFormat dateInstance = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM, request.getLocale());
 		String today = dateInstance.format(new Date());
 		String parentlabel = StringUtils.hasText(workflow.getParentLabel()) ? workflow.getParentLabel() : workflow.getLabel();
+		Long parentId = workflow.getParentId() != null ? workflow.getParentId() : workflow.getId(); 
 
 		newWorkflow.setLabel(parentlabel + " - " + today);
 		newWorkflow.setParentLabel(parentlabel);

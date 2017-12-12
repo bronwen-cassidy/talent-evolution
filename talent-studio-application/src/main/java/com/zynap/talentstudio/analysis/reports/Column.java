@@ -344,7 +344,10 @@ public class Column extends BasicAnalysisAttribute implements Cloneable {
         chartColumnAttributes.remove(chartColumnAttribute);
     }
 
-    private String columnSource = "NA";
+	public static final String X_AXIS_SOURCE = "X-AXIS";
+	public static final String Y_AXIS_SOURCE = "Y-AXIS";
+
+	private String columnSource = "NA";
     public static final String NO_VALUE = "_NULL_";
 
     /* this is used in chart reports to determine the colour of the bar or pie when generating the chart */    

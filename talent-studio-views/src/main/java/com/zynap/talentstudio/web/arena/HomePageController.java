@@ -14,6 +14,8 @@ import com.zynap.talentstudio.organisation.Node;
 import com.zynap.talentstudio.organisation.attributes.IDynamicAttributeService;
 import com.zynap.talentstudio.organisation.subjects.ISubjectService;
 import com.zynap.talentstudio.organisation.subjects.Subject;
+import com.zynap.talentstudio.questionnaires.IQueWorkflowService;
+import com.zynap.talentstudio.questionnaires.IQuestionnaireService;
 import com.zynap.talentstudio.security.homepages.HomePage;
 import com.zynap.talentstudio.web.dashboard.MyDashboardWrapper;
 import com.zynap.talentstudio.web.organisation.DisplayContentWrapper;
@@ -52,7 +54,7 @@ public class HomePageController implements Controller {
 	@Autowired
 	public HomePageController(IArenaManager arenaManager, IDynamicAttributeService dynamicAttrService, SubjectDashboardBuilder dashboardBuilder,
 	                          IDashboardService dashboardService, IPopulationEngine populationEngine, IDisplayConfigService displayConfigService,
-	                          ISubjectService subjectService) {
+	                          ISubjectService subjectService, IQueWorkflowService queWorkflowService, IQuestionnaireService questionnaireService) {
 		this.arenaManager = arenaManager;
 		this.dynamicAttrService = dynamicAttrService;
 		this.dashboardBuilder = dashboardBuilder;
@@ -60,9 +62,11 @@ public class HomePageController implements Controller {
 		this.populationEngine = populationEngine;
 		this.displayConfigService = displayConfigService;
 		this.subjectService = subjectService;
+		this.queWorkflowService = queWorkflowService;
+		this.questionnaireService = questionnaireService;
 	}
 
-	//@RequestMapping(value={"", "/", "welcome"}) todo map all the home urls
+	//@RequestMapping(value={"", "/", "welcome"}) 
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		// default time out 20 mins
@@ -70,7 +74,7 @@ public class HomePageController implements Controller {
 
 		UserSession userSession = ZynapWebUtils.getUserSession(request);
 		final String currentArenaId = userSession.getCurrentArenaId();
-
+		Long userId = userSession.getUser().getId();
 		// get current details
 		String arenaHomePage = "";
 		try {
@@ -94,13 +98,13 @@ public class HomePageController implements Controller {
 		Map<String, Object> model = new HashMap<>();
 		Long subjectId = userSession.getSubjectId();
 
-		buildModel(arenaHomePage, homePage, model, subjectId, request);
+		buildModel(arenaHomePage, homePage, model, subjectId, userId, request);
 
 		// redirect to view - consists of arena id + _home eg: adminmodule_home
 		return new ModelAndView(currentArenaId.toLowerCase() + "_home", model);
 	}
 
-	void buildModel(String arenaHomePage, HomePage homePage, Map<String, Object> model, Long subjectId, HttpServletRequest request) {
+	void buildModel(String arenaHomePage, HomePage homePage, Map<String, Object> model, Long subjectId, Long userId, HttpServletRequest request) {
 		if (homePage != null) {
 			if (homePage.isVelocityTemplate()) {
 				model.put("velocityContent", evaluateVelocityContent(homePage.getContent(), subjectId));
@@ -110,7 +114,8 @@ public class HomePageController implements Controller {
 
 				try {
 					Subject subject = subjectService.findNodeById(subjectId);
-					Set<SubjectDashboardWrapper> subjectDashboardItems = dashboardBuilder.buildSubjectDashboards(subject, dashboardService, populationEngine);
+					Set<SubjectDashboardWrapper> subjectDashboardItems = dashboardBuilder.buildSubjectDashboards(subject, dashboardService,
+							populationEngine, queWorkflowService, questionnaireService);
 					if (!subjectDashboardItems.isEmpty()) {
 						DisplayContentWrapper displayConfigView = MyPortfolioHelper.getPersonalExecSummaryViews(displayConfigService, request, Node.SUBJECT_UNIT_TYPE_);
 
@@ -129,6 +134,7 @@ public class HomePageController implements Controller {
 			}
 			model.put("homePage", homePage);
 			model.put("arenaContext", arenaHomePage);
+			model.put("userId", userId);
 		}
 	}
 
@@ -152,6 +158,8 @@ public class HomePageController implements Controller {
 	private final IPopulationEngine populationEngine;
 	private final IDisplayConfigService displayConfigService;
 	private final ISubjectService subjectService;
+	private final IQueWorkflowService queWorkflowService;
+	private final IQuestionnaireService questionnaireService;
 
 	private IDynamicAttributeService dynamicAttrService;
 	protected final Log logger = LogFactory.getLog(getClass());

@@ -13,15 +13,18 @@ import com.zynap.talentstudio.organisation.attributes.IDynamicAttributeService;
 import com.zynap.talentstudio.organisation.positions.IPositionService;
 import com.zynap.talentstudio.organisation.subjects.ISubjectService;
 import com.zynap.talentstudio.organisation.subjects.Subject;
+import com.zynap.talentstudio.questionnaires.IQueWorkflowService;
+import com.zynap.talentstudio.questionnaires.IQuestionnaireService;
 import com.zynap.talentstudio.web.common.exceptions.InvalidSubmitException;
+import com.zynap.talentstudio.web.controller.ZynapDefaultFormController;
 import com.zynap.talentstudio.web.display.support.ArtefactViewQuestionnaireHelper;
 import com.zynap.talentstudio.web.organisation.SubjectDashboardBuilder;
 import com.zynap.talentstudio.web.organisation.SubjectDashboardWrapper;
 import com.zynap.talentstudio.web.organisation.subjects.SubjectWrapperBean;
 import com.zynap.talentstudio.web.portfolio.MyPortfolioHelper;
 import com.zynap.talentstudio.web.utils.ZynapWebUtils;
-import com.zynap.talentstudio.web.controller.ZynapDefaultFormController;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindException;
 import org.springframework.validation.Errors;
 import org.springframework.web.servlet.ModelAndView;
@@ -42,7 +45,22 @@ import java.util.Set;
  */
 public class ViewMyDashboardController extends ZynapDefaultFormController {
 
-    protected Object formBackingObject(HttpServletRequest request) throws Exception {
+	@Autowired
+	public ViewMyDashboardController(ISubjectService subjectService, IPositionService positionService, IDynamicAttributeService dynamicAttrService,
+	                                 IDashboardService dashboardService, IPopulationEngine populationEngine, IDisplayConfigService displayConfigService,
+	                                 SubjectDashboardBuilder dashboardBuilder, IQueWorkflowService queWorkflowService, IQuestionnaireService questionnaireService) {
+		this.subjectService = subjectService;
+		this.positionService = positionService;
+		this.dynamicAttributeService = dynamicAttrService;
+		this.dashboardService = dashboardService;
+		this.populationEngine = populationEngine;
+		this.displayConfigService = displayConfigService;
+		this.dashboardBuilder = dashboardBuilder;
+		this.queWorkflowService = queWorkflowService;
+		this.questionnaireService = questionnaireService;
+	}
+
+	protected Object formBackingObject(HttpServletRequest request) throws Exception {
 
         final UserSession userSession = ZynapWebUtils.getUserSession(request);
         MyDashboardWrapper wrapper = new MyDashboardWrapper();
@@ -50,7 +68,8 @@ public class ViewMyDashboardController extends ZynapDefaultFormController {
         Subject subject;
         try {
             subject = subjectService.findByUserId(userId);
-	        final Set<SubjectDashboardWrapper> subjectDashboardWrappers = dashboardBuilder.buildSubjectDashboards(subject, dashboardService, populationEngine);
+	        final Set<SubjectDashboardWrapper> subjectDashboardWrappers = dashboardBuilder.buildSubjectDashboards(subject, dashboardService, 
+			        populationEngine, queWorkflowService, questionnaireService);
 	        if (!subjectDashboardWrappers.isEmpty()) {
 		        wrapper.setDashboards(subjectDashboardWrappers);
 	        }
@@ -65,7 +84,7 @@ public class ViewMyDashboardController extends ZynapDefaultFormController {
         return wrapper;
     }
 
-	protected SubjectWrapperBean createNodeWrapper(Node node) {
+	private SubjectWrapperBean createNodeWrapper(Node node) {
 
         Subject subject = (Subject) node;
         subject.setHasAccess(true);
@@ -77,7 +96,7 @@ public class ViewMyDashboardController extends ZynapDefaultFormController {
 
     protected Map referenceData(HttpServletRequest request, Object command, Errors errors) throws Exception {
 
-        Map<String, Object> refData = new HashMap<String, Object>();
+        Map<String, Object> refData = new HashMap<>();
         final Long userId = ZynapWebUtils.getUserId(request);
 
         ArtefactViewQuestionnaireHelper artefactViewQuestionnaireHelper = new ArtefactViewQuestionnaireHelper(populationEngine);
@@ -95,39 +114,14 @@ public class ViewMyDashboardController extends ZynapDefaultFormController {
         return showForm(request, response, errors);
     }
 
-    public void setSubjectService(ISubjectService subjectService) {
-        this.subjectService = subjectService;
-    }
+	private final IQuestionnaireService questionnaireService;
 
-    public void setDashboardService(IDashboardService dashboardService) {
-        this.dashboardService = dashboardService;
-    }
-
-    public void setDashboardBuilder(SubjectDashboardBuilder dashboardBuilder) {
-        this.dashboardBuilder = dashboardBuilder;
-    }
-
-    public void setPopulationEngine(IPopulationEngine populationEngine) {
-        this.populationEngine = populationEngine;
-    }
-
-    public void setDisplayConfigService(IDisplayConfigService displayConfigService) {
-        this.displayConfigService = displayConfigService;
-    }
-
-    public void setPositionService(IPositionService positionService) {
-        this.positionService = positionService;
-    }
-
-    public void setDynamicAttributeService(IDynamicAttributeService dynamicAttributeService) {
-        this.dynamicAttributeService = dynamicAttributeService;
-    }
-
-    private ISubjectService subjectService;
+	private ISubjectService subjectService;
     private IPositionService positionService;
     private IDynamicAttributeService dynamicAttributeService;
     private IDashboardService dashboardService;
     private IPopulationEngine populationEngine;
     private IDisplayConfigService displayConfigService;
-    protected SubjectDashboardBuilder dashboardBuilder;
+    private SubjectDashboardBuilder dashboardBuilder;
+    private IQueWorkflowService queWorkflowService;
 }
