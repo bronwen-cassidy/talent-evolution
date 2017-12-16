@@ -3,13 +3,16 @@
  */
 package com.zynap.talentstudio.common.lookups;
 
+import com.zynap.common.util.StringUtil;
 import com.zynap.domain.ZynapDomainObject;
 import com.zynap.talentstudio.util.collections.DomainObjectCollectionHelper;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
+import org.apache.commons.collections.Transformer;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -113,6 +116,21 @@ public class LookupType extends ZynapDomainObject {
             }
         });
     }
+
+	/**
+	 * Get the active lookup values only.
+	 * @return Collection containing LookupValue objects
+	 */
+	public String getConcatenatedActiveLookupValues() {
+		final Collection<LookupValue> activeLookupValues = getActiveLookupValues();
+		List<String> result = new ArrayList(CollectionUtils.transformedCollection(activeLookupValues, new Transformer() {
+			@Override
+			public Object transform(Object o) {
+				return ((LookupValue)o).getLabel();
+			}
+		}));
+		return org.springframework.util.StringUtils.arrayToCommaDelimitedString(result.toArray(new String[result.size()]));
+	}
 
     public boolean getUneditable() {
         return uneditable;

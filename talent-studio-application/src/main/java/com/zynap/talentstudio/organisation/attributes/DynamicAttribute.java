@@ -319,6 +319,10 @@ public final class DynamicAttribute extends ZynapDomainObject implements Compara
     public boolean supportsMultipleAnswers() {
         return isMultiSelectionType() || isDynamic() || isBlogComment();
     }
+    
+    public boolean isEnumerationType() {
+        return getRefersToType() != null;
+    }
 
     public boolean typeMatches(final String expectedType) {
         return expectedType.equals(type);
@@ -496,5 +500,4 @@ public final class DynamicAttribute extends ZynapDomainObject implements Compara
     public static final String DA_TYPE_SELECT = "SELECT";
     public static final String TIME_DELIMITER = ":";
     public static final String DATE_TIME_DELIMITER = " ";
-
 }

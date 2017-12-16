@@ -36,6 +36,14 @@ public class ChartPoint {
 		return yAxis != null ? yAxis.getDisplayValue() : "0";
 	}
 
+	public AttributeWrapperBean getxAxis() {
+		return xAxis;
+	}
+
+	public AttributeWrapperBean getyAxis() {
+		return yAxis;
+	}
+
 	private final AttributeWrapperBean xAxis;
 	private final AttributeWrapperBean yAxis;
 }

@@ -9,6 +9,7 @@ import com.zynap.talentstudio.analysis.reports.ChartReport;
 import com.zynap.talentstudio.analysis.reports.GroupingAttribute;
 import com.zynap.talentstudio.analysis.reports.Report;
 import com.zynap.talentstudio.analysis.reports.jasper.JasperDataSourceFactory;
+import com.zynap.talentstudio.organisation.attributes.DynamicAttribute;
 import com.zynap.talentstudio.organisation.attributes.NodeExtendedAttribute;
 import com.zynap.talentstudio.questionnaires.Questionnaire;
 import com.zynap.talentstudio.web.analysis.reports.cewolf.processors.SpiderCategoryURLGenerator;
@@ -31,7 +32,7 @@ import java.util.Map;
  */
 public class SeriesChartReportFiller {
 
-	public FilledReport fillReport(ChartReport chartReport, Map<Questionnaire, ChartPoint> seriesChartReportAnswers) {
-		return new FilledSeriesChartReport(chartReport, seriesChartReportAnswers);
+	public FilledReport fillReport(ChartReport chartReport, Map<Questionnaire, ChartPoint> seriesChartReportAnswers, DynamicAttribute xAxisAttribute, DynamicAttribute yAxisAttribute) {
+		return new FilledSeriesChartReport(chartReport, seriesChartReportAnswers, xAxisAttribute, yAxisAttribute);
 	}
 }

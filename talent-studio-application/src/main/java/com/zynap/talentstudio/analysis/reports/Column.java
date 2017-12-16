@@ -344,6 +344,14 @@ public class Column extends BasicAnalysisAttribute implements Cloneable {
         chartColumnAttributes.remove(chartColumnAttribute);
     }
 
+	public DynamicAttribute getDynamicAttribute() {
+		return dynamicAttribute;
+	}
+
+	public void setDynamicAttribute(DynamicAttribute dynamicAttribute) {
+		this.dynamicAttribute = dynamicAttribute;
+	}
+
 	public static final String X_AXIS_SOURCE = "X-AXIS";
 	public static final String Y_AXIS_SOURCE = "Y-AXIS";
 
@@ -370,4 +378,5 @@ public class Column extends BasicAnalysisAttribute implements Cloneable {
     private Set<ChartColumnAttribute> chartColumnAttributes = new LinkedHashSet<ChartColumnAttribute>();
     private Calculation calculation;
 
+	private DynamicAttribute dynamicAttribute;
 }

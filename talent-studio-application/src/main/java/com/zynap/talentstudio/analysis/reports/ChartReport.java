@@ -97,6 +97,24 @@ public class ChartReport extends Report {
 		return attributes;
 	}
 
+	public Column getXAxisColumn() {
+		for (Column column : getColumns()) {
+			if(Column.X_AXIS_SOURCE.equals(column.getColumnSource())) {
+				return column;
+			}
+		}
+		return null;
+	}
+
+	public Column getYAxisColumn() {
+		for (Column column : getColumns()) {
+			if(Column.Y_AXIS_SOURCE.equals(column.getColumnSource())) {
+				return column;
+			}
+		}
+		return null;
+	}
+
 	/* used in chart reports, this is the list of forms that the answer count will be determined from */
 	private List<ChartReportAttribute> chartReportAttributes = new ArrayList<ChartReportAttribute>();
 	private String chartType;

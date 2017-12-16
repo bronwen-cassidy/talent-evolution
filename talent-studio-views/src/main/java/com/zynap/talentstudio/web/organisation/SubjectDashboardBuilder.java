@@ -21,6 +21,8 @@ import com.zynap.talentstudio.dashboard.DashboardChartValue;
 import com.zynap.talentstudio.dashboard.DashboardItem;
 import com.zynap.talentstudio.dashboard.IDashboardService;
 import com.zynap.talentstudio.organisation.attributes.AttributeValue;
+import com.zynap.talentstudio.organisation.attributes.DynamicAttribute;
+import com.zynap.talentstudio.organisation.attributes.IDynamicAttributeService;
 import com.zynap.talentstudio.organisation.attributes.NodeExtendedAttribute;
 import com.zynap.talentstudio.organisation.subjects.Subject;
 import com.zynap.talentstudio.questionnaires.IQueWorkflowService;
@@ -76,8 +78,8 @@ public class SubjectDashboardBuilder implements Serializable {
         this.spiderChartReportFiller = spiderChartReportFiller;
     }
 
-    public void buildDashboardItem(SubjectDashboardWrapper dw, Subject subject, DashboardItem dashboardItem, 
-                                   IPopulationEngine populationEngine, IQueWorkflowService queWorkflowService, IQuestionnaireService questionnaireService,
+    public void buildDashboardItem(SubjectDashboardWrapper dw, Subject subject, DashboardItem dashboardItem, IPopulationEngine populationEngine, 
+                                   IQueWorkflowService queWorkflowService, IQuestionnaireService questionnaireService, IDynamicAttributeService dynamicAttributeService,
                                    boolean personal) throws TalentStudioException {
         dw.setDashboardItem(dashboardItem);
         List<Subject> nodes = new ArrayList<>();
@@ -101,10 +103,14 @@ public class SubjectDashboardBuilder implements Serializable {
             } else if (chartReport.getChartType().equals(ChartReport.SERIES_CHART)) {
                 // find all the answers from all the que workflows where the parent = workflowId
 	            Map<String, AnalysisParameter> xyChartAttributes = chartReport.getXYChartAttributes();
+	            
+	            DynamicAttribute xAxisAttribute = dynamicAttributeService.findById(Long.valueOf(xyChartAttributes.get(Column.X_AXIS_SOURCE).getDynamicAttributeId()));
+	            DynamicAttribute yAxisAttribute = dynamicAttributeService.findById(Long.valueOf(xyChartAttributes.get(Column.Y_AXIS_SOURCE).getDynamicAttributeId()));
+			            
 	            final Map<Questionnaire, ChartPoint> seriesChartReportAnswers = getSeriesChartReportAnswers(subject, populationEngine, 
 			            xyChartAttributes, queWorkflowService, questionnaireService);
 	            SeriesChartReportFiller filler = new SeriesChartReportFiller();
-	            FilledReport filledReport = filler.fillReport(chartReport, seriesChartReportAnswers);
+	            FilledReport filledReport = filler.fillReport(chartReport, seriesChartReportAnswers, xAxisAttribute, yAxisAttribute);
 	            dw.setFilledReport(filledReport);
             } else {
                 List<NodeExtendedAttribute> answers = getChartReportAnswers(subject, populationEngine, personal, report, population);
@@ -233,7 +239,8 @@ public class SubjectDashboardBuilder implements Serializable {
     }
 
 	public Set<SubjectDashboardWrapper> buildSubjectDashboards(Subject subject, IDashboardService dashboardService, IPopulationEngine populationEngine,
-	                                                           IQueWorkflowService queWorkflowService, IQuestionnaireService questionnaireService) throws TalentStudioException {
+	                                                           IQueWorkflowService queWorkflowService, IQuestionnaireService questionnaireService,
+	                                                           IDynamicAttributeService dynamicAttributeService) throws TalentStudioException {
 		List<Dashboard> dashboards = dashboardService.findPersonalDashboards(subject);
 		Set<SubjectDashboardWrapper> subjectDashboardItems = new LinkedHashSet<>();
 		if (!dashboards.isEmpty()) {
@@ -243,7 +250,7 @@ public class SubjectDashboardBuilder implements Serializable {
 		            SubjectDashboardWrapper dw = new SubjectDashboardWrapper(dashboardItem.getId());
 		            if (!subjectDashboardItems.contains(dw)) {
 		                // build the info we need and add it if this is a chart we need the chart filler otherwsie we need the tabular filler
-		                buildDashboardItem(dw, subject, dashboardItem, populationEngine, queWorkflowService, questionnaireService, true);
+		                buildDashboardItem(dw, subject, dashboardItem, populationEngine, queWorkflowService, questionnaireService, dynamicAttributeService, true);
 		                subjectDashboardItems.add(dw);
 		            }
 		        }
