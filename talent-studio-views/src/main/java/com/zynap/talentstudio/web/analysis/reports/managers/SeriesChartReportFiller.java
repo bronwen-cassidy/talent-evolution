@@ -32,7 +32,6 @@ import java.util.Map;
 public class SeriesChartReportFiller {
 
 	public FilledReport fillReport(ChartReport chartReport, Map<Questionnaire, ChartPoint> seriesChartReportAnswers) {
-		FilledSeriesChartReport filledReport = new FilledSeriesChartReport(chartReport, seriesChartReportAnswers);
-		return filledReport;
+		return new FilledSeriesChartReport(chartReport, seriesChartReportAnswers);
 	}
 }

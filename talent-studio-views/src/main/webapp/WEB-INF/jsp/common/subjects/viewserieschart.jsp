@@ -18,7 +18,11 @@
     $(function() {
         
         var trace1 = {
-            x: ['aaaa', 'bbbbb', 'ccccc', 'dddddd'],
+            x: [
+                <c:forEach var="x-val" items="${filledReport.seriesChartReportAnswers}" varStatus="indexer">
+                    'aaaa', 'bbbbb', 'ccccc', 'dddddd'
+                </c:forEach>
+            ],
             y: ['first', 'second', 'third', 'fourth'],
             mode: 'lines',
             type: 'scatter',
@@ -28,6 +32,12 @@
         var data = [trace1];
         
         var layout = {
+            // xaxis: {
+            //     range: [ 1, 22]
+            // },
+            // yaxis: {
+            //     range: [-6, 6]
+            // },
             legend: {"orientation": "h"},
             title:'Full cusum LLR for 2 Odds'
         };
