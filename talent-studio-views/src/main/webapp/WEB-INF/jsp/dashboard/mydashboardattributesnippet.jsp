@@ -17,7 +17,7 @@
         <div class="infomessage"><fmt:message key="please.select.y.axis.attribute"/></div>	
         <form:select path="command.yAxisAttributeId" id="y-attrs">
             <form:option value="-1"><fmt:message key="please.select"/></form:option>
-            <c:forEach var="attr" items="${attributes}">
+            <c:forEach var="attr" items="${series}">
                 <form:option value="${attr.id}" label="${attr.label}"/>
             </c:forEach>
         </form:select>

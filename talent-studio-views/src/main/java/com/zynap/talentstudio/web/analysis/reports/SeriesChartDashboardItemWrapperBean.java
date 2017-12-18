@@ -7,8 +7,11 @@ import com.zynap.talentstudio.common.AccessType;
 import com.zynap.talentstudio.dashboard.Dashboard;
 import com.zynap.talentstudio.dashboard.DashboardItem;
 import com.zynap.talentstudio.organisation.attributes.DynamicAttribute;
+import com.zynap.talentstudio.web.Pair;
+import com.zynap.talentstudio.web.organisation.attributes.AttributeWrapperBean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -105,7 +108,7 @@ public class SeriesChartDashboardItemWrapperBean implements Serializable {
 	public void setAttributes(List<DynamicAttribute> attributes) {
 		this.attributes = attributes;
 	}
-
+	
 	public String getChartLabel() {
 		return chartLabel;
 	}
@@ -113,6 +116,14 @@ public class SeriesChartDashboardItemWrapperBean implements Serializable {
 	public void setChartLabel(String chartLabel) {
 		this.chartLabel = chartLabel;
 	}
+
+	public int addSeries() {
+		int index = series.size();
+		series.add(new Pair<Long, String>());
+		return index;
+	}
+	
+	
 
 	private final Long userId;
 	private final String name;
@@ -124,6 +135,7 @@ public class SeriesChartDashboardItemWrapperBean implements Serializable {
 	private String yAxisLabel;
 	private String chartLabel;
 	private Long workflowId;
+	private List<Pair<Long, String>> series = new ArrayList<>();
 
 	private List<DynamicAttribute> attributes;
 }

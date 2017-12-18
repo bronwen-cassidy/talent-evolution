@@ -59,22 +59,35 @@ public class EditMyDashboardAddChartController {
 	
 	@RequestMapping(value = "loadattributes.htm", method = RequestMethod.GET)
 	public String loadAttributes(@RequestParam("wfId") Long workflowId, Model model,@ModelAttribute("command") SeriesChartDashboardItemWrapperBean command) throws TalentStudioException {
-		QuestionnaireWorkflow workflow = questionnaireWorkflowService.findWorkflowById(workflowId);
-		
-		List<DynamicAttribute> attributes = workflow.getQuestionnaireDefinition().getDynamicAttributes();
-		List<DynamicAttribute> filteredAttributes = new ArrayList<>();
-		
-		for (DynamicAttribute attribute : attributes) {
-			if(!(attribute.isBlogComment() || attribute.isCalculated() || attribute.isDynamic() || attribute.isFunctionType() || attribute.isBlogComment())) {
-				filteredAttributes.add(attribute);	
-			}
-		}
+		List<DynamicAttribute> filteredAttributes = buildAttributeList(workflowId);
 		
 		command.setAttributes(filteredAttributes);
 		model.addAttribute("attributes", filteredAttributes);
 		return "mydashboardattributes";
 	}
-	
+
+	@RequestMapping(value = "addseries.htm", method = RequestMethod.GET)
+	public String addSeries(@RequestParam("wfId") Long workflowId, Model model, @ModelAttribute("command") SeriesChartDashboardItemWrapperBean command) throws TalentStudioException {
+		List<DynamicAttribute> filteredAttributes = buildAttributeList(workflowId);
+		model.addAttribute("series", filteredAttributes);
+		model.addAttribute("index", command.addSeries());
+		return "mydashboardseries";
+	}
+
+	private List<DynamicAttribute> buildAttributeList(Long workflowId) throws TalentStudioException {
+		QuestionnaireWorkflow workflow = questionnaireWorkflowService.findWorkflowById(workflowId);
+
+		List<DynamicAttribute> attributes = workflow.getQuestionnaireDefinition().getDynamicAttributes();
+		List<DynamicAttribute> filteredAttributes = new ArrayList<>();
+
+		for (DynamicAttribute attribute : attributes) {
+			if(!(attribute.isBlogComment() || attribute.isCalculated() || attribute.isDynamic() || attribute.isFunctionType() || attribute.isBlogComment())) {
+				filteredAttributes.add(attribute);
+			}
+		}
+		return filteredAttributes;
+	}
+
 	@RequestMapping(value = "savemydashboard", method = RequestMethod.POST)
 	public String saveDashboard(HttpServletRequest request, @ModelAttribute("command") SeriesChartDashboardItemWrapperBean command) throws TalentStudioException {
 		final Report chartReport = command.getModifiedReport();

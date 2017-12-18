@@ -26,8 +26,13 @@
             
         </div>
 
+        <div id="series">
+
+        </div>
+
         <div id="submit-row" class="row">
             <input type="submit" value="<fmt:message key="save"/>"/>
+            <input type="button" id="frmadd" value="<fmt:message key="add"/>"/>
             <input type="button" id="frmcancel" value="<fmt:message key="cancel"/>"/>
         </div>
 
@@ -47,6 +52,13 @@
         
         $('#frmcancel').on('click', function() {
             $.get('cancelview.htm?ts=' + new Date().getTime());   
+        });
+
+        $('#frmadd').on('click', function() {
+            var workflowId = $('#wrkflow-select').val();
+            $.get('addseries.htm?ts=' + new Date().getTime(), {wfId: workflowId}, function(data) {
+                $('#series').append(data);    
+            });
         });
     });
 
