@@ -31,4 +31,6 @@ public interface IDashboardService extends IZynapService {
     List<Dashboard> findSubjectDashboards(Group userGroup, Collection<Role> userRoles, Subject subject);
 
     List<Dashboard> findPersonalDashboards(Subject subject);
+
+	DashboardItem findDashboardItem(Long itemId) throws TalentStudioException;
 }

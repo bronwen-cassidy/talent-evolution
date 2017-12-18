@@ -61,7 +61,7 @@ public class Series {
 
 	private void appendString(StringBuilder result, AttributeWrapperBean attributeWrapperBean) {
 		if(attributeWrapperBean == null) {
-			if(result.indexOf("No Data") == -1) result.append("'No Data'");	
+			result.append("'No Data'");	
 		} else {
 			result.append("'").append(attributeWrapperBean.getDisplayValue()).append("'");
 		}

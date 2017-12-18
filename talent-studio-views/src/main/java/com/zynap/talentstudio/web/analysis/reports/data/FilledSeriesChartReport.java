@@ -61,7 +61,7 @@ public class FilledSeriesChartReport extends FilledReport {
 		return xAxisColumn.getLabel();
 	}
 
-	private static final String NO_ANSWER = "No Datar";
+	private static final String NO_ANSWER = "No Data";
 
 	private final List<Series> seriesChartReportAnswers;
 	private final ChartReport report;

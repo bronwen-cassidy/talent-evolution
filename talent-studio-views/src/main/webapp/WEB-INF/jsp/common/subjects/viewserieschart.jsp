@@ -5,12 +5,10 @@
 <%@ include file="../../includes/include.jsp" %>
 <script src="<c:url value="/js/plotly-latest.min.js"/>" type="text/javascript"></script>
 
-<fieldset>
+<fieldset id="itemRowId-<c:out value="${dashboardItem.id}"/>">
     <legend><c:out value="${dashboardItem.label}"/></legend>
-    <c:if test="${dashboardItem.description != null && dashboardItem != ''}">
-        <div class="infomessage"><c:out value="${dashboardItem.description}"/></div>
-    </c:if>
-
+    <button id="deleteme-<c:out value="${dashboardItem.id}"/>" class="remove-dashboard-item" value="X">X</button>
+    
     <div id="chart_<c:out value="${dashboardItem.id}"/>">
 
     </div>
@@ -46,14 +44,29 @@
     %>
         var layout = {
             xaxis: {
-                autorange: false
+                title: '<%= filledReport.getXAxisLabel() %>'
+                , autorange: false
                 , categoryorder: 'array'
                 , categoryarray: [<%= filledReport.getxAxisRange() %>]
             },
-            title: '<%= filledReport.getXAxisLabel()  %>'
+            title: '<%= item.getLabel() %>'
             ,showlegend: true
         };
         Plotly.newPlot('chart_<c:out value="${dashboardItem.id}"/>', data, layout);
+    });
+    
+    $(function() {
+        $('.remove-dashboard-item').unbind('click');
+        
+        $('.remove-dashboard-item').on('click', function() {
+            var elemId = $(this).attr("id");
+            var itemId = elemId.substring(elemId.indexOf('-') + 1, elemId.length);
+            
+            $("#itemRowId-" + itemId).hide();
+            
+            $.get('dashboards/removemydashboard.htm?ts=' + new Date().getTime(), {iId: itemId});
+        });
+        
     });
 
 </script>

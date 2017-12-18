@@ -77,7 +77,12 @@ public class DashboardService extends DefaultService implements IDashboardServic
         return dashboardDao.findPersonalDashboards(subject);
     }
 
-    public void setDashboardDao(IDashboardDao dashboardDao) {
+	@Override
+	public DashboardItem findDashboardItem(Long itemId) throws TalentStudioException {
+		return dashboardDao.findById(DashboardItem.class, itemId);
+	}
+
+	public void setDashboardDao(IDashboardDao dashboardDao) {
         this.dashboardDao = dashboardDao;
     }
 

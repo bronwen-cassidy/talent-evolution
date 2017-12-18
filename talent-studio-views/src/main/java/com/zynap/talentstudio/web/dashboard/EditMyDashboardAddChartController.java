@@ -8,6 +8,7 @@ import com.zynap.talentstudio.analysis.reports.ChartReport;
 import com.zynap.talentstudio.analysis.reports.IReportService;
 import com.zynap.talentstudio.analysis.reports.Report;
 import com.zynap.talentstudio.dashboard.Dashboard;
+import com.zynap.talentstudio.dashboard.DashboardItem;
 import com.zynap.talentstudio.dashboard.IDashboardService;
 import com.zynap.talentstudio.organisation.attributes.DynamicAttribute;
 import com.zynap.talentstudio.organisation.attributes.IDynamicAttributeService;
@@ -62,14 +63,12 @@ public class EditMyDashboardAddChartController {
 		
 		List<DynamicAttribute> attributes = workflow.getQuestionnaireDefinition().getDynamicAttributes();
 		List<DynamicAttribute> filteredAttributes = new ArrayList<>();
-		filteredAttributes.add((DynamicAttribute) dynamicAttributeService.findById(DynamicAttribute.PUBLISHED_DATE_DA_ID));
 		
 		for (DynamicAttribute attribute : attributes) {
 			if(!(attribute.isBlogComment() || attribute.isCalculated() || attribute.isDynamic() || attribute.isFunctionType() || attribute.isBlogComment())) {
 				filteredAttributes.add(attribute);	
 			}
 		}
-		// always add the date attribute which represents the published date of the workkflow
 		
 		command.setAttributes(filteredAttributes);
 		model.addAttribute("attributes", filteredAttributes);
@@ -87,6 +86,19 @@ public class EditMyDashboardAddChartController {
 		dashboardService.createOrUpdate(modifiedDashboard, ZynapWebUtils.getUserSession(request).getSubjectId());
 		
 		return "redirect:/talentarena/home.htm";
+	}
+
+	@RequestMapping(value = "removemydashboard", method = RequestMethod.GET)
+	public void removeDashboardItem(@RequestParam("iId") Long itemId) {
+		try {
+			DashboardItem item = dashboardService.findDashboardItem(itemId);
+			Dashboard dashboard = item.getDashboard();
+			final Report report = item.getReport();
+			dashboardService.delete(dashboard.getId());
+			reportService.delete(report);
+		} catch (TalentStudioException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@RequestMapping(value = "cancelview.htm", method = RequestMethod.GET)

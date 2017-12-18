@@ -10,6 +10,7 @@ import com.zynap.talentstudio.common.groups.Group;
 import com.zynap.talentstudio.security.roles.Role;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -100,7 +101,14 @@ public class Dashboard extends ZynapDomainObject {
         return PERSONAL_TYPE.equals(type);
     }
 
-    private String type;
+	public void removeDashboardItem(DashboardItem item) {
+		for (Iterator<DashboardItem> iterator = dashboardItems.iterator(); iterator.hasNext(); ) {
+			DashboardItem next = iterator.next();
+			if(item.getId().equals(next.getId())) iterator.remove();
+		}
+	}
+
+	private String type;
     private Set<Group> groups = new LinkedHashSet<Group>();
     private Set<Role> roles = new LinkedHashSet<Role>();
     private List<DashboardItem> dashboardItems = new ArrayList<DashboardItem>();

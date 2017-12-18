@@ -59,7 +59,7 @@ public class SeriesChartDashboardItemWrapperBean implements Serializable {
 				return attribute.getType();
 			}
 		}
-		return null;
+		return DynamicAttribute.PUBLISHED_DATE_ATTR.getType();
 	}
 
 	public String getxAxisAttributeId() {

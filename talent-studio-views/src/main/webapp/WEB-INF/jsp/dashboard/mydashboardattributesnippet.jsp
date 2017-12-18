@@ -7,6 +7,7 @@
         <div class="infomessage"><fmt:message key="please.select.x.axis.attribute"/></div>
         <form:select path="command.xAxisAttributeId" id="x-attrs">
             <form:option value="-1"><fmt:message key="please.select"/></form:option>
+            <form:option value="-222">Published Date</form:option>
             <c:forEach var="attr" items="${attributes}">
                 <form:option value="${attr.id}" label="${attr.label}"/>
             </c:forEach>                       
