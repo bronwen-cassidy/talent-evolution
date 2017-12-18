@@ -6,6 +6,7 @@ import com.zynap.domain.admin.User;
 import com.zynap.exception.TalentStudioException;
 import com.zynap.talentstudio.analysis.QuestionAttributeValuesCollection;
 import com.zynap.talentstudio.analysis.reports.ChartReport;
+import com.zynap.talentstudio.analysis.reports.Column;
 import com.zynap.talentstudio.analysis.reports.GroupingAttribute;
 import com.zynap.talentstudio.analysis.reports.Report;
 import com.zynap.talentstudio.analysis.reports.jasper.JasperDataSourceFactory;
@@ -19,6 +20,7 @@ import com.zynap.talentstudio.web.analysis.reports.data.FilledReport;
 import com.zynap.talentstudio.web.analysis.reports.data.FilledSeriesChartReport;
 import com.zynap.talentstudio.web.analysis.reports.data.FilledSpiderChartReport;
 import com.zynap.talentstudio.web.organisation.ChartPoint;
+import com.zynap.talentstudio.web.organisation.Series;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +34,7 @@ import java.util.Map;
  */
 public class SeriesChartReportFiller {
 
-	public FilledReport fillReport(ChartReport chartReport, Map<Questionnaire, ChartPoint> seriesChartReportAnswers, DynamicAttribute xAxisAttribute, DynamicAttribute yAxisAttribute) {
-		return new FilledSeriesChartReport(chartReport, seriesChartReportAnswers, xAxisAttribute, yAxisAttribute);
+	public FilledReport fillReport(ChartReport chartReport, List<Series> seriesChartReportAnswers, DynamicAttribute xAxisAttribute, Column xAxisColumn) {
+		return new FilledSeriesChartReport(chartReport, seriesChartReportAnswers, xAxisAttribute, xAxisColumn);
 	}
 }

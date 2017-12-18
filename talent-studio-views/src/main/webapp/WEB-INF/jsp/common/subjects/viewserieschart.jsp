@@ -1,5 +1,7 @@
 <%@ page import="com.zynap.talentstudio.dashboard.DashboardItem" %>
 <%@ page import="com.zynap.talentstudio.web.analysis.reports.data.FilledSeriesChartReport" %>
+<%@ page import="com.zynap.talentstudio.web.organisation.Series" %>
+<%@ page import="java.util.List" %>
 <%@ include file="../../includes/include.jsp" %>
 <script src="<c:url value="/js/plotly-latest.min.js"/>" type="text/javascript"></script>
 
@@ -22,46 +24,35 @@
         <%
             DashboardItem item = (DashboardItem) pageContext.getAttribute("dashboardItem");
             FilledSeriesChartReport filledReport = (FilledSeriesChartReport) pageContext.getAttribute("filledReport");
+            final List<Series> seriesChartReportAnswers = filledReport.getSeriesChartReportAnswers();
+            int index = 0;
+            for (Series s : seriesChartReportAnswers) {
+                index++;   
         %>
-
-        var trace1 = {
+        var data = [];
+        
+        var trace<%=index%> = {
             
-            x: [
-                <%= filledReport.getxAxisValues() %>
-            ].map(function(y) {
-                return y.toString();
-            }),
-            y: [
-                <%= filledReport.getyAxisValues() %>
-            ].map(function(y) {
-                return y.toString();
-            }),
+            x: [ <%= s.getXAnswers() %> ],
+            y: [<%= s.getYAnswers() %>],
             mode: 'lines+markers',
             type: 'scatter',
-            name: '<%= item.getLabel() %>',
-            showlegend: true
+            name: '<%= s.getSeriesName() %>'
         };
-
-        var data = [trace1];
-
+        
+        data.push(trace<%=index%>);
+    <%
+        }
+    %>
         var layout = {
-             xaxis: {
-                 title: '<%= filledReport.getXAxisLabel()  %>'
-                 , autorange: false
-                 , type: 'category'
-                 , categoryorder: 'array'
-                 , categoryarray: [<%= filledReport.getxAxisRange() %>]
-             },
-             yaxis: {
-                 title: '<%= filledReport.getYAxisLabel()  %>'
-                 , autorange: false
-                 , type: 'category'
-                 , categoryorder: 'array'
-                 , categoryarray: [<%= filledReport.getyAxisRange() %>]
-             },
-            legend: {"orientation": "h"}
+            xaxis: {
+                autorange: false
+                , categoryorder: 'array'
+                , categoryarray: [<%= filledReport.getxAxisRange() %>]
+            },
+            title: '<%= filledReport.getXAxisLabel()  %>'
+            ,showlegend: true
         };
-
         Plotly.newPlot('chart_<c:out value="${dashboardItem.id}"/>', data, layout);
     });
 

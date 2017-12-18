@@ -89,32 +89,17 @@ public class ChartReport extends Report {
 		return attributes;
 	}
 
-	public Map<String, AnalysisParameter> getXYChartAttributes() {
-		Map<String, AnalysisParameter> attributes = new HashMap<>();
+	public Map<String, List<Column>> getXYChartAttributes() {
+		Map<String, List<Column>> attributes = new HashMap<>();
 		for (Column column : getColumns()) {
-			attributes.put(column.getColumnSource(), column.getAnalysisParameter());
+			List<Column> columns = attributes.get(column.getColumnSource());
+			if(columns == null) columns = new ArrayList<>();
+			columns.add(column);
+			attributes.put(column.getColumnSource(), columns);
 		}
 		return attributes;
 	}
-
-	public Column getXAxisColumn() {
-		for (Column column : getColumns()) {
-			if(Column.X_AXIS_SOURCE.equals(column.getColumnSource())) {
-				return column;
-			}
-		}
-		return null;
-	}
-
-	public Column getYAxisColumn() {
-		for (Column column : getColumns()) {
-			if(Column.Y_AXIS_SOURCE.equals(column.getColumnSource())) {
-				return column;
-			}
-		}
-		return null;
-	}
-
+	
 	/* used in chart reports, this is the list of forms that the answer count will be determined from */
 	private List<ChartReportAttribute> chartReportAttributes = new ArrayList<ChartReportAttribute>();
 	private String chartType;

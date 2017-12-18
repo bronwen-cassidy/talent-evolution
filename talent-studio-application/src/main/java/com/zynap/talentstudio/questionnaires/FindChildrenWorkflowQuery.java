@@ -23,7 +23,7 @@ public class FindChildrenWorkflowQuery implements QuerySpecification {
 
 	@Override
 	public String select() {
-		return "workflow.id";
+		return "workflow";
 	}
 
 	@Override

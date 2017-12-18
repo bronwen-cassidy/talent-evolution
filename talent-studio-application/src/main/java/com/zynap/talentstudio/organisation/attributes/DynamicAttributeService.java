@@ -90,10 +90,6 @@ public class DynamicAttributeService extends DefaultService implements IDynamicA
         return dynamicAttributeDao.getTypedAttributes(nodeType, attributeType);
     }
 
-    public <T> T findById(Long id) throws TalentStudioException {
-        return dynamicAttributeDao.findById(id);
-    }
-
     public Collection<DynamicAttribute> getAllActiveAttributes(String nodeType, boolean includeCalculatedAttributes) {
         return dynamicAttributeDao.getAllActiveAttributes(nodeType, includeCalculatedAttributes);
     }

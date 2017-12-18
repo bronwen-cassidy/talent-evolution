@@ -321,7 +321,7 @@ public final class DynamicAttribute extends ZynapDomainObject implements Compara
     }
     
     public boolean isEnumerationType() {
-        return getRefersToType() != null;
+        return !DA_TYPE_CURRENCY.equals(type) && getRefersToType() != null;
     }
 
     public boolean typeMatches(final String expectedType) {
@@ -481,6 +481,8 @@ public final class DynamicAttribute extends ZynapDomainObject implements Compara
 
     public static final String NODE_TYPE_FUNCTION = "FUNC";
     public static final String CURRENT_DATE = "currentdate";
+    
+    public static Long PUBLISHED_DATE_DA_ID = -222L;
 
     public static final DynamicAttribute DA_TYPE_NUMBER_O = new DynamicAttribute("", DA_TYPE_NUMBER);
     public static final DynamicAttribute DA_TYPE_DATE_O = new DynamicAttribute("", DA_TYPE_DATE);
@@ -497,6 +499,8 @@ public final class DynamicAttribute extends ZynapDomainObject implements Compara
     public static final DynamicAttribute DA_TYPE_OU_0 = new DynamicAttribute("", DA_TYPE_OU);
     
     public static final DynamicAttributeDTO DATE_OF_BITH_ATTR = new DynamicAttributeDTO(DA_TYPE_DATE, "Date of Birth", new Long(-200), Node.SUBJECT_UNIT_TYPE_, "", "dateofbirth", null);
+    public static final DynamicAttribute PUBLISHED_DATE_ATTR = new DynamicAttribute(PUBLISHED_DATE_DA_ID, "Published Date", DA_TYPE_DATE);
+    
     public static final String DA_TYPE_SELECT = "SELECT";
     public static final String TIME_DELIMITER = ":";
     public static final String DATE_TIME_DELIMITER = " ";

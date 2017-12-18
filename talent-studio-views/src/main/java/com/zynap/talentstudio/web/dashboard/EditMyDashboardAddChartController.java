@@ -3,7 +3,6 @@ package com.zynap.talentstudio.web.dashboard;
 import com.zynap.domain.UserSession;
 import com.zynap.domain.admin.User;
 import com.zynap.exception.TalentStudioException;
-import com.zynap.talentstudio.analysis.IAnalysisService;
 import com.zynap.talentstudio.analysis.populations.Population;
 import com.zynap.talentstudio.analysis.reports.ChartReport;
 import com.zynap.talentstudio.analysis.reports.IReportService;
@@ -11,7 +10,7 @@ import com.zynap.talentstudio.analysis.reports.Report;
 import com.zynap.talentstudio.dashboard.Dashboard;
 import com.zynap.talentstudio.dashboard.IDashboardService;
 import com.zynap.talentstudio.organisation.attributes.DynamicAttribute;
-import com.zynap.talentstudio.organisation.subjects.ISubjectService;
+import com.zynap.talentstudio.organisation.attributes.IDynamicAttributeService;
 import com.zynap.talentstudio.questionnaires.IQueWorkflowService;
 import com.zynap.talentstudio.questionnaires.QuestionnaireWorkflow;
 import com.zynap.talentstudio.questionnaires.QuestionnaireWorkflowDTO;
@@ -42,10 +41,11 @@ public class EditMyDashboardAddChartController {
 
 	@Autowired
 	public EditMyDashboardAddChartController(IQueWorkflowService queWorkflowService, IDashboardService dashboardService,
-	                                         IReportService reportService) {
+	                                         IReportService reportService, IDynamicAttributeService dynamicAttrService) {
 		this.questionnaireWorkflowService = queWorkflowService;
 		this.dashboardService = dashboardService;
 		this.reportService = reportService;
+		this.dynamicAttributeService = dynamicAttrService;
 	}
 
 	@RequestMapping(value = "editmydashboard.htm", method = RequestMethod.GET)
@@ -62,11 +62,15 @@ public class EditMyDashboardAddChartController {
 		
 		List<DynamicAttribute> attributes = workflow.getQuestionnaireDefinition().getDynamicAttributes();
 		List<DynamicAttribute> filteredAttributes = new ArrayList<>();
+		filteredAttributes.add((DynamicAttribute) dynamicAttributeService.findById(DynamicAttribute.PUBLISHED_DATE_DA_ID));
+		
 		for (DynamicAttribute attribute : attributes) {
-			if(!(attribute.isBlogComment() || attribute.isCalculated() || attribute.isDynamic() || attribute.isFunctionType())) {
+			if(!(attribute.isBlogComment() || attribute.isCalculated() || attribute.isDynamic() || attribute.isFunctionType() || attribute.isBlogComment())) {
 				filteredAttributes.add(attribute);	
 			}
 		}
+		// always add the date attribute which represents the published date of the workkflow
+		
 		command.setAttributes(filteredAttributes);
 		model.addAttribute("attributes", filteredAttributes);
 		return "mydashboardattributes";
@@ -99,6 +103,7 @@ public class EditMyDashboardAddChartController {
 	}
 
 	private final IReportService reportService;
+	private final IDynamicAttributeService dynamicAttributeService;
 	private IQueWorkflowService questionnaireWorkflowService;
 	private IDashboardService dashboardService;
 
