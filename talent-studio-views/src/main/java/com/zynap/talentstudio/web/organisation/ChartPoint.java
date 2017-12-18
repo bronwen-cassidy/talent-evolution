@@ -7,6 +7,7 @@ package com.zynap.talentstudio.web.organisation;
 import com.zynap.talentstudio.analysis.reports.Column;
 import com.zynap.talentstudio.organisation.attributes.AttributeValue;
 import com.zynap.talentstudio.organisation.attributes.NodeExtendedAttribute;
+import com.zynap.talentstudio.web.analysis.reports.data.FilledSeriesChartReport;
 import com.zynap.talentstudio.web.organisation.attributes.AttributeWrapperBean;
 
 import java.util.ArrayList;
@@ -29,11 +30,11 @@ public class ChartPoint {
 	}
 	
 	public String getXValue() {
-		return xAxis != null ? xAxis.getDisplayValue() : "0";
+		return xAxis != null ? xAxis.getDisplayValue() : null;
 	}
 
 	public String getYValue() {
-		return yAxis != null ? yAxis.getDisplayValue() : "0";
+		return yAxis != null ? yAxis.getDisplayValue() : null;
 	}
 
 	public AttributeWrapperBean getxAxis() {

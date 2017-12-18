@@ -109,7 +109,7 @@ public class PersonalDetailsController extends BrowseSubjectController {
         if (wrapper.isHasDashboardView() && node != null) {
             Subject subject = (Subject) node;
 	        final Set<SubjectDashboardWrapper> subjectDashboardItems = dashboardBuilder.buildSubjectDashboards(subject, dashboardService, populationEngine, 
-			        queWorkflowService, questionnaireService);
+			        queWorkflowService, questionnaireService, getDynamicAttributeService());
             if (!subjectDashboardItems.isEmpty()) {
                 model.put("dashboards", subjectDashboardItems);
             }

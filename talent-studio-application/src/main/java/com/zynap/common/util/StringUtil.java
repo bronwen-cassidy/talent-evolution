@@ -7,6 +7,7 @@ import org.springframework.util.StringUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.Collection;
 
 /**
  * Class or Interface description.
@@ -122,6 +123,20 @@ public final class StringUtil {
         if(!StringUtils.hasText(input)) return input;
         return StringUtils.deleteAny(input, "&?!-<>\\/ ");
     }
+    
+    public static <E> String listToDelimitedString(Collection<E> items, String delimiter) {
+    	return wrappedListToDelimitedString(items, delimiter, "");
+    }
+
+	public static <E> String wrappedListToDelimitedString(Collection<E> items, String delimiter, String wrapper) {
+		StringBuilder builder = new StringBuilder();
+		int index = 1;
+		for (E item : items) {
+			builder.append(wrapper).append(item).append(wrapper);
+			if(index++ < items.size()) builder.append(delimiter);
+		}
+		return builder.toString();
+	}
 
     public static Long[] convertToLongArray(String[] input) {
         if(input.length < 1) return new Long[0];

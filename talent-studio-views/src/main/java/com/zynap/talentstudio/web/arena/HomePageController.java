@@ -98,13 +98,13 @@ public class HomePageController implements Controller {
 		Map<String, Object> model = new HashMap<>();
 		Long subjectId = userSession.getSubjectId();
 
-		buildModel(arenaHomePage, homePage, model, subjectId, userId, request);
-
+		buildModel(arenaHomePage, homePage, model, subjectId, request);
+		model.put("userId", userId);
 		// redirect to view - consists of arena id + _home eg: adminmodule_home
 		return new ModelAndView(currentArenaId.toLowerCase() + "_home", model);
 	}
 
-	void buildModel(String arenaHomePage, HomePage homePage, Map<String, Object> model, Long subjectId, Long userId, HttpServletRequest request) {
+	void buildModel(String arenaHomePage, HomePage homePage, Map<String, Object> model, Long subjectId, HttpServletRequest request) {
 		if (homePage != null) {
 			if (homePage.isVelocityTemplate()) {
 				model.put("velocityContent", evaluateVelocityContent(homePage.getContent(), subjectId));
@@ -115,7 +115,7 @@ public class HomePageController implements Controller {
 				try {
 					Subject subject = subjectService.findNodeById(subjectId);
 					Set<SubjectDashboardWrapper> subjectDashboardItems = dashboardBuilder.buildSubjectDashboards(subject, dashboardService,
-							populationEngine, queWorkflowService, questionnaireService);
+							populationEngine, queWorkflowService, questionnaireService, dynamicAttrService);
 					if (!subjectDashboardItems.isEmpty()) {
 						DisplayContentWrapper displayConfigView = MyPortfolioHelper.getPersonalExecSummaryViews(displayConfigService, request, Node.SUBJECT_UNIT_TYPE_);
 
@@ -134,7 +134,7 @@ public class HomePageController implements Controller {
 			}
 			model.put("homePage", homePage);
 			model.put("arenaContext", arenaHomePage);
-			model.put("userId", userId);
+			
 		}
 	}
 

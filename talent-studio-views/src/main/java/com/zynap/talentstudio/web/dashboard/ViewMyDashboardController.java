@@ -69,7 +69,7 @@ public class ViewMyDashboardController extends ZynapDefaultFormController {
         try {
             subject = subjectService.findByUserId(userId);
 	        final Set<SubjectDashboardWrapper> subjectDashboardWrappers = dashboardBuilder.buildSubjectDashboards(subject, dashboardService, 
-			        populationEngine, queWorkflowService, questionnaireService);
+			        populationEngine, queWorkflowService, questionnaireService, dynamicAttributeService);
 	        if (!subjectDashboardWrappers.isEmpty()) {
 		        wrapper.setDashboards(subjectDashboardWrappers);
 	        }

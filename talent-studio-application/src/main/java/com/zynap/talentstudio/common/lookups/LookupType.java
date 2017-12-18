@@ -9,13 +9,16 @@ import com.zynap.talentstudio.util.collections.DomainObjectCollectionHelper;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
-import org.apache.commons.collections.Transformer;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -85,7 +88,7 @@ public class LookupType extends ZynapDomainObject {
     }
 
     public List<LookupValue> getLookupValues() {
-        if (lookupValues == null) lookupValues = new LinkedList<LookupValue>();
+        if (lookupValues == null) lookupValues = new LinkedList<>();
         return lookupValues;
     }
 
@@ -121,15 +124,19 @@ public class LookupType extends ZynapDomainObject {
 	 * Get the active lookup values only.
 	 * @return Collection containing LookupValue objects
 	 */
-	public String getConcatenatedActiveLookupValues() {
-		final Collection<LookupValue> activeLookupValues = getActiveLookupValues();
-		List<String> result = new ArrayList(CollectionUtils.transformedCollection(activeLookupValues, new Transformer() {
+	public List<String> getConcatenatedActiveLookupValues() {
+		final List<LookupValue> activeLookupValues = getLookupValues();
+		Collections.sort(activeLookupValues, new Comparator<LookupValue>() {
 			@Override
-			public Object transform(Object o) {
-				return ((LookupValue)o).getLabel();
+			public int compare(LookupValue o1, LookupValue o2) {
+				return new Integer(o1.getSortOrder()).compareTo(o2.getSortOrder());
 			}
-		}));
-		return org.springframework.util.StringUtils.arrayToCommaDelimitedString(result.toArray(new String[result.size()]));
+		});
+		List<String> result = new ArrayList<>();
+		for(LookupValue lv : activeLookupValues) {
+			if(!result.contains(lv.getLabel())) result.add(lv.getLabel());
+		}
+		return result;
 	}
 
     public boolean getUneditable() {

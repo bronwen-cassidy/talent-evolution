@@ -1,8 +1,5 @@
-<%@ page import="com.zynap.talentstudio.questionnaires.Questionnaire" %>
-<%@ page import="com.zynap.talentstudio.web.organisation.ChartPoint" %>
-<%@ page import="java.util.Map" %>
-<%@ page import="com.zynap.talentstudio.web.analysis.reports.data.FilledSeriesChartReport" %>
 <%@ page import="com.zynap.talentstudio.dashboard.DashboardItem" %>
+<%@ page import="com.zynap.talentstudio.web.analysis.reports.data.FilledSeriesChartReport" %>
 <%@ include file="../../includes/include.jsp" %>
 <script src="<c:url value="/js/plotly-latest.min.js"/>" type="text/javascript"></script>
 
@@ -28,19 +25,18 @@
         %>
 
         var trace1 = {
-
-            <% Map<Questionnaire, ChartPoint> data = filledReport.getSeriesChartReportAnswers(); %>
+            
             x: [
-                <%= filledReport.getxAxisRange() %>
+                <%= filledReport.getxAxisValues() %>
             ].map(function(y) {
                 return y.toString();
             }),
             y: [
-                <%= filledReport.getyAxisRange() %>
+                <%= filledReport.getyAxisValues() %>
             ].map(function(y) {
                 return y.toString();
             }),
-            mode: 'lines',
+            mode: 'lines+markers',
             type: 'scatter',
             name: '<%= item.getLabel() %>',
             showlegend: true
@@ -52,12 +48,16 @@
              xaxis: {
                  title: '<%= filledReport.getXAxisLabel()  %>'
                  , autorange: false
-                 , range: [<%= filledReport.getxAxisRange() %>]
+                 , type: 'category'
+                 , categoryorder: 'array'
+                 , categoryarray: [<%= filledReport.getxAxisRange() %>]
              },
              yaxis: {
                  title: '<%= filledReport.getYAxisLabel()  %>'
                  , autorange: false
-                 , range: [<%= filledReport.getyAxisRange() %>]
+                 , type: 'category'
+                 , categoryorder: 'array'
+                 , categoryarray: [<%= filledReport.getyAxisRange() %>]
              },
             legend: {"orientation": "h"}
         };

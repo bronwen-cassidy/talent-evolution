@@ -157,7 +157,7 @@ public class BrowseSubjectController extends BrowseNodeController {
                         SubjectDashboardWrapper dw = new SubjectDashboardWrapper(dashboardItem.getId());
                         if (!subjectDashboardItems.contains(dw)) {
                             // build the info we need and add it if this is a chart we need the chart filler otherwsie we need the tabular filler
-                            dashboardBuilder.buildDashboardItem(dw, subject, dashboardItem, populationEngine, queWorkflowService, questionnaireService, false);
+                            dashboardBuilder.buildDashboardItem(dw, subject, dashboardItem, populationEngine, queWorkflowService, questionnaireService, getDynamicAttributeService(), false);
                             subjectDashboardItems.add(dw);
                         }
                     }

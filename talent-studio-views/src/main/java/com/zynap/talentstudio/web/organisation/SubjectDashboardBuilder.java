@@ -92,34 +92,41 @@ public class SubjectDashboardBuilder implements Serializable {
 
         if (report.isChartReport()) {
             ChartReport chartReport = (ChartReport) report;
-            if (chartReport.getChartType().equals(ChartReport.SPIDER_CHART)) {
-                List<AnalysisParameter> questionnaireAttributes = report.getQuestionnaireAttributes();
-                Map<Long, QuestionAttributeValuesCollection> answers = null;
-                if (!questionnaireAttributes.isEmpty()) {
-                    answers = populationEngine.findQuestionnaireAnswers(questionnaireAttributes, population, IDomainObject.ROOT_USER_ID);
-                }
-                final FilledReport filledReport = spiderChartReportFiller.fillReport(report, IDomainObject.ROOT_USER_ID, nodes, answers);
-                dw.setFilledReport(filledReport);
-            } else if (chartReport.getChartType().equals(ChartReport.SERIES_CHART)) {
-                // find all the answers from all the que workflows where the parent = workflowId
-	            Map<String, AnalysisParameter> xyChartAttributes = chartReport.getXYChartAttributes();
-	            
-	            DynamicAttribute xAxisAttribute = dynamicAttributeService.findById(Long.valueOf(xyChartAttributes.get(Column.X_AXIS_SOURCE).getDynamicAttributeId()));
-	            DynamicAttribute yAxisAttribute = dynamicAttributeService.findById(Long.valueOf(xyChartAttributes.get(Column.Y_AXIS_SOURCE).getDynamicAttributeId()));
-			            
-	            final Map<Questionnaire, ChartPoint> seriesChartReportAnswers = getSeriesChartReportAnswers(subject, populationEngine, 
-			            xyChartAttributes, queWorkflowService, questionnaireService);
-	            SeriesChartReportFiller filler = new SeriesChartReportFiller();
-	            FilledReport filledReport = filler.fillReport(chartReport, seriesChartReportAnswers, xAxisAttribute, yAxisAttribute);
-	            dw.setFilledReport(filledReport);
-            } else {
-                List<NodeExtendedAttribute> answers = getChartReportAnswers(subject, populationEngine, personal, report, population);
-                final FilledReport filledReport = chartReportFiller.fillReport(report, nodes, answers);
-                dw.setFilledReport(filledReport);
-                if (dashboardItem.hasChartValues()) {
-                    buildExpected(dw, dashboardItem, report);
-                }
-            }
+	        switch (chartReport.getChartType()) {
+		        case ChartReport.SPIDER_CHART: {
+			        List<AnalysisParameter> questionnaireAttributes = report.getQuestionnaireAttributes();
+			        Map<Long, QuestionAttributeValuesCollection> answers = null;
+			        if (!questionnaireAttributes.isEmpty()) {
+				        answers = populationEngine.findQuestionnaireAnswers(questionnaireAttributes, population, IDomainObject.ROOT_USER_ID);
+			        }
+			        final FilledReport filledReport = spiderChartReportFiller.fillReport(report, IDomainObject.ROOT_USER_ID, nodes, answers);
+			        dw.setFilledReport(filledReport);
+			        break;
+		        }
+		        case ChartReport.SERIES_CHART: {
+			        // find all the answers from all the que workflows where the parent = workflowId
+			        Map<String, AnalysisParameter> xyChartAttributes = chartReport.getXYChartAttributes();
+
+			        DynamicAttribute xAxisAttribute = dynamicAttributeService.findById(Long.valueOf(xyChartAttributes.get(Column.X_AXIS_SOURCE).getDynamicAttributeId()));
+			        DynamicAttribute yAxisAttribute = dynamicAttributeService.findById(Long.valueOf(xyChartAttributes.get(Column.Y_AXIS_SOURCE).getDynamicAttributeId()));
+
+			        final Map<Questionnaire, ChartPoint> seriesChartReportAnswers = getSeriesChartReportAnswers(subject, populationEngine,
+					        xyChartAttributes, queWorkflowService, questionnaireService);
+			        SeriesChartReportFiller filler = new SeriesChartReportFiller();
+			        FilledReport filledReport = filler.fillReport(chartReport, seriesChartReportAnswers, xAxisAttribute, yAxisAttribute);
+			        dw.setFilledReport(filledReport);
+			        break;
+		        }
+		        default: {
+			        List<NodeExtendedAttribute> answers = getChartReportAnswers(subject, populationEngine, personal, report, population);
+			        final FilledReport filledReport = chartReportFiller.fillReport(report, nodes, answers);
+			        dw.setFilledReport(filledReport);
+			        if (dashboardItem.hasChartValues()) {
+				        buildExpected(dw, dashboardItem, report);
+			        }
+			        break;
+		        }
+	        }
         } else {
             List<AnalysisParameter> questionnaireAttributes = report.getQuestionnaireAttributes();
             Map<Long, QuestionAttributeValuesCollection> answers = new HashMap<>();
@@ -168,14 +175,15 @@ public class SubjectDashboardBuilder implements Serializable {
 		    final Collection<Questionnaire> questionnaires = questionnaireService.findQuestionnaires(workflowId, subject.getId());
 		    Questionnaire q;
 		    if(questionnaires.isEmpty()) { 
-		    	q = new Questionnaire(UUID.randomUUID().getLeastSignificantBits(), new QuestionnaireWorkflow(workflowId), null);
+		    	q = new Questionnaire(UUID.randomUUID().getLeastSignificantBits(), new QuestionnaireWorkflow(workflowId), subject.getUser());
 		    	results.put(q, new ChartPoint(null, null));
 		    } else {
 		    	q = questionnaires.iterator().next();
 		    	NodeExtendedAttribute x = findAttribute(q.getId(), xAxisAnswers);
 		    	NodeExtendedAttribute y = findAttribute(q.getId(), yAxisAnswers);
 		    	
-		    	ChartPoint point = new ChartPoint(x != null ? new AttributeWrapperBean(AttributeValue.create(x)) : null,
+		    	ChartPoint point = new ChartPoint(
+		    			x != null ? new AttributeWrapperBean(AttributeValue.create(x)) : null,
 					    y != null ? new AttributeWrapperBean(AttributeValue.create(y)) : null);
 		    	results.put(q, point);
 		    }
@@ -183,9 +191,9 @@ public class SubjectDashboardBuilder implements Serializable {
 	    return results;
     }
 
-	private NodeExtendedAttribute findAttribute(Long nodeId, List<NodeExtendedAttribute> xAxisAnswers) {
-		for (NodeExtendedAttribute xAxisAnswer : xAxisAnswers) {
-			if(xAxisAnswer.getNode().getId().equals(nodeId)) return xAxisAnswer;
+	private NodeExtendedAttribute findAttribute(Long nodeId, List<NodeExtendedAttribute> axisAnswers) {
+		for (NodeExtendedAttribute axis : axisAnswers) {
+			if(axis.getNode().getId().equals(nodeId)) return axis;
 		}
 		return null;
 	}

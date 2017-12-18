@@ -4,16 +4,12 @@
  */
 package com.zynap.talentstudio.web.analysis.reports.data;
 
-import com.zynap.talentstudio.analysis.AnalysisAttributeHelper;
+import com.zynap.common.util.StringUtil;
 import com.zynap.talentstudio.analysis.reports.ChartReport;
 import com.zynap.talentstudio.analysis.reports.Column;
 import com.zynap.talentstudio.organisation.attributes.DynamicAttribute;
-import com.zynap.talentstudio.organisation.attributes.NodeExtendedAttribute;
 import com.zynap.talentstudio.questionnaires.Questionnaire;
-import com.zynap.talentstudio.util.FormatterFactory;
 import com.zynap.talentstudio.web.organisation.ChartPoint;
-
-import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,7 +36,7 @@ public class FilledSeriesChartReport extends FilledReport {
 		this.yAxisAttribute = yAxisAttribute;
 		this.xAxisRange = buildXAxisRange();
 		this.yAxisRange = buildYAxisRange();
-
+		buildAxisValues();
 	}
 
 	public boolean isPieChart() {
@@ -49,10 +45,6 @@ public class FilledSeriesChartReport extends FilledReport {
 
 	public boolean isSeriesChart() {
 		return true;
-	}
-
-	public Map<Questionnaire, ChartPoint> getSeriesChartReportAnswers() {
-		return seriesChartReportAnswers;
 	}
 
 	public ChartReport getReport() {
@@ -67,14 +59,6 @@ public class FilledSeriesChartReport extends FilledReport {
 		return yAxisColumn.getLabel();
 	}
 
-	public Column getxAxisColumn() {
-		return xAxisColumn;
-	}
-
-	public Column getyAxisColumn() {
-		return yAxisColumn;
-	}
-
 	public String getxAxisRange() {
 		return xAxisRange;
 	}
@@ -83,39 +67,70 @@ public class FilledSeriesChartReport extends FilledReport {
 		return yAxisRange;
 	}
 
+	public String getxAxisValues() {
+		return xAxisValues;
+	}
+
+	public String getyAxisValues() {
+		return yAxisValues;
+	}
+
 	private String buildXAxisRange() {
 		if (xAxisAttribute.isEnumerationType()) {
-			return xAxisAttribute.getRefersToType().getConcatenatedActiveLookupValues();
+			xAxisRangeValues = xAxisAttribute.getRefersToType().getConcatenatedActiveLookupValues();
+			xAxisRangeValues.add(NO_ANSWER);
+			return StringUtil.wrappedListToDelimitedString(xAxisRangeValues, ",", "'");
 		}
-
-		List<String> results = new ArrayList<>();
-
+		
+		xAxisRangeValues = new ArrayList<>();
 		for (ChartPoint chartPoint : seriesChartReportAnswers.values()) {
-			results.add(chartPoint.getXValue());
+			String xValue = chartPoint.getXValue();
+			if(!xAxisRangeValues.contains(xValue) && xValue != null) xAxisRangeValues.add(xValue);
 		}
-
-		sortRange(results, xAxisAttribute.isNumericType());
-		return StringUtils.arrayToCommaDelimitedString(results.toArray());
+		
+		sortRange(xAxisRangeValues, xAxisAttribute.isNumericType());
+		if(xAxisRangeValues.isEmpty()) xAxisRangeValues.add(NO_ANSWER);
+		return StringUtil.wrappedListToDelimitedString(xAxisRangeValues, ",", "'");
 	}
 
 	private String buildYAxisRange() {
 
-		// need the dynamicAttribute 
 		if (yAxisAttribute.isEnumerationType()) {
-			return yAxisAttribute.getRefersToType().getConcatenatedActiveLookupValues();
+			yAxisRangeValues = yAxisAttribute.getRefersToType().getConcatenatedActiveLookupValues();
+			yAxisRangeValues.add(NO_ANSWER);
+			return StringUtil.wrappedListToDelimitedString(yAxisRangeValues, ",", "'");
 		}
-
-		List<String> results = new ArrayList<>();
-
+		
+		yAxisRangeValues = new ArrayList<>();
 		for (ChartPoint chartPoint : seriesChartReportAnswers.values()) {
-			results.add(chartPoint.getYValue());
+			String yValue = chartPoint.getYValue();
+			if(!yAxisRangeValues.contains(yValue) && yValue != null) yAxisRangeValues.add(yValue);
 		}
 
-		sortRange(results, yAxisAttribute.isNumericType());
-		return StringUtils.arrayToCommaDelimitedString(results.toArray());
+		sortRange(yAxisRangeValues, yAxisAttribute.isNumericType());
+		if(yAxisRangeValues.isEmpty()) yAxisRangeValues.add(NO_ANSWER);
+		return StringUtil.wrappedListToDelimitedString(yAxisRangeValues, ",", "'");
+	}
+
+	private void buildAxisValues() {
+		List<String> x = new ArrayList<>();
+		List<String> y = new ArrayList<>();
+		
+		for (ChartPoint chartPoint : seriesChartReportAnswers.values()) {
+			final String xValue = chartPoint.getXValue();
+			final String yValue = chartPoint.getYValue();
+			x.add(xValue != null ? xValue : NO_ANSWER);
+			y.add(yValue != null ? yValue : NO_ANSWER);
+		}
+		x.add(NO_ANSWER);
+		y.add(NO_ANSWER);
+
+		yAxisValues = StringUtil.wrappedListToDelimitedString(y, ",", "'");
+		xAxisValues = StringUtil.wrappedListToDelimitedString(x, ",", "'");
 	}
 
 	private void sortRange(List<String> results, final boolean numericType) {
+
 		Collections.sort(results, new Comparator<String>() {
 			@Override
 			public int compare(String o1, String o2) {
@@ -128,6 +143,8 @@ public class FilledSeriesChartReport extends FilledReport {
 		});
 	}
 
+	private static final String NO_ANSWER = "No Answer";
+
 
 	private final Map<Questionnaire, ChartPoint> seriesChartReportAnswers;
 	private final ChartReport report;
@@ -136,5 +153,9 @@ public class FilledSeriesChartReport extends FilledReport {
 	private final DynamicAttribute xAxisAttribute;
 	private final DynamicAttribute yAxisAttribute;
 	private String xAxisRange;
+	private List<String> xAxisRangeValues;
+	private String xAxisValues;
 	private String yAxisRange;
+	private List<String> yAxisRangeValues;
+	private String yAxisValues;
 }
