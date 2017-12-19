@@ -19,6 +19,7 @@
             <span class="column col-6">
                 <div class="infomessage">Please enter a label for the chart</div>
                 <form:input path="chartLabel"/>
+                <form:errors path="chartLabel" cssClass="error"/>
            </span>
         </div>
 

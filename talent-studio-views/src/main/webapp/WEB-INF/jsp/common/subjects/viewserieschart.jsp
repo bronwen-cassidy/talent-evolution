@@ -9,7 +9,7 @@
     <legend><c:out value="${dashboardItem.label}"/></legend>
     <button id="deleteme-<c:out value="${dashboardItem.id}"/>" class="remove-dashboard-item" value="X">X</button>
     
-    <div id="chart_<c:out value="${dashboardItem.id}"/>">
+    <div id="chart_<c:out value="${dashboardItem.id}"/>" class="col-9">
 
     </div>
 
@@ -51,6 +51,7 @@
             },
             title: '<%= item.getLabel() %>'
             ,showlegend: true
+            ,autosize: true
         };
         Plotly.newPlot('chart_<c:out value="${dashboardItem.id}"/>', data, layout);
     });

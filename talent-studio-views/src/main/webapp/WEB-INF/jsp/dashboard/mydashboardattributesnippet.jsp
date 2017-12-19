@@ -6,21 +6,23 @@
     <span class="column col-3">
         <div class="infomessage"><fmt:message key="please.select.x.axis.attribute"/></div>
         <form:select path="command.xAxisAttributeId" id="x-attrs">
-            <form:option value="-1"><fmt:message key="please.select"/></form:option>
+            <form:option value=""><fmt:message key="please.select"/></form:option>
             <form:option value="-222">Published Date</form:option>
             <c:forEach var="attr" items="${attributes}">
                 <form:option value="${attr.id}" label="${attr.label}"/>
             </c:forEach>                       
          </form:select>
+        <form:errors path="command.xAxisAttributeId" cssClass="error"/>
     </span>
     <span class="column col-3">
         <div class="infomessage"><fmt:message key="please.select.y.axis.attribute"/></div>	
         <form:select path="command.yAxisAttributeId" id="y-attrs">
             <form:option value="-1"><fmt:message key="please.select"/></form:option>
-            <c:forEach var="attr" items="${series}">
+            <c:forEach var="attr" items="${attributes}">
                 <form:option value="${attr.id}" label="${attr.label}"/>
             </c:forEach>
         </form:select>
+        <form:errors path="command.yAxisAttributeId" cssClass="error"/>
     </span>
     
 </div>
@@ -29,11 +31,13 @@
     <span class="column col-3">
         <div class="infomessage"><fmt:message key="please.select.x.axis.label"/></div>
         <form:input path="command.xAxisLabel" id="x-axis-label"/>
+        <form:errors path="command.xAxisLabel" cssClass="error"/>
     </span>
 
     <span class="column col-3">
         <div class="infomessage"><fmt:message key="please.select.y.axis.label"/></div>
         <form:input path="command.yAxisLabel" id="y-axis-label"/>
+        <form:errors path="command.yAxisLabel" cssClass="error"/>
     </span>
 </div>
 

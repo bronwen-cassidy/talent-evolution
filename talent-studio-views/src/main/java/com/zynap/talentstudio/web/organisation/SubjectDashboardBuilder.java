@@ -175,22 +175,13 @@ public class SubjectDashboardBuilder implements Serializable {
 
 				if (!questionnaires.isEmpty()) {
 					Questionnaire q = questionnaires.iterator().next();
-
-					AttributeValue attributeValue = q.getDynamicAttributeValues().get(new DynamicAttribute(yAxisColumn.getDynamicAttributeId(), yAxisColumn.getLabel(), yAxisColumn.getColumnType()));
-					AttributeWrapperBean yAnswer = null;
-					if (attributeValue != null) {
-						yAnswer = new AttributeWrapperBean(attributeValue);
-					} 
+					AttributeWrapperBean yAnswer = getAttributeWrapperBean(yAxisColumn, q); 
 					 
 					AttributeWrapperBean xAnswer = null;
 					if (DynamicAttribute.PUBLISHED_DATE_DA_ID.equals(xAxisParameter.getDynamicAttributeId())) {
-						xAnswer = new AttributeWrapperBean(AttributeValue.create(FormatterFactory.getDateFormatter().formatDateAsString(workflow.getCreatedDate()), PUBLISHED_DATE_ATTR));
+						xAnswer = new AttributeWrapperBean(AttributeValue.create(workflow.getCreatedDate().toString(), PUBLISHED_DATE_ATTR));
 					} else {
-						DynamicAttribute xdynamicAttribute = new DynamicAttribute(xAxisParameter.getDynamicAttributeId());
-						final AttributeValue xValue = q.getDynamicAttributeValues().get(xdynamicAttribute);
-						if (xValue != null) {
-							xAnswer = new AttributeWrapperBean(xValue);
-						}
+						xAnswer = getAttributeWrapperBean(xAxisParameter, q);
 					}
 					series.add(yAnswer, xAnswer);
 				}
@@ -198,6 +189,15 @@ public class SubjectDashboardBuilder implements Serializable {
 			result.add(series);
 		}
 		return result;
+	}
+
+	private AttributeWrapperBean getAttributeWrapperBean(Column axisColumn, Questionnaire q) {
+		AttributeValue value = q.getDynamicAttributeValues().get(new DynamicAttribute(axisColumn.getDynamicAttributeId(), axisColumn.getLabel(), axisColumn.getColumnType()));
+		AttributeWrapperBean answer = null;
+		if (value != null) {
+			answer = new AttributeWrapperBean(value);
+		}
+		return answer;
 	}
 
 	private List<QuestionnaireWorkflow> findWorkflows(AnalysisParameter analysisParameter, IQueWorkflowService queWorkflowService) {

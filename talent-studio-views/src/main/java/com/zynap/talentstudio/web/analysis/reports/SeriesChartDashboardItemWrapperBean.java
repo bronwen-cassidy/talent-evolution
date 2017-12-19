@@ -10,6 +10,9 @@ import com.zynap.talentstudio.organisation.attributes.DynamicAttribute;
 import com.zynap.talentstudio.web.Pair;
 import com.zynap.talentstudio.web.organisation.attributes.AttributeWrapperBean;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,16 +56,16 @@ public class SeriesChartDashboardItemWrapperBean implements Serializable {
 		chartReport.setLabel(chartLabel);
 		chartReport.addColumn(xAxisColumn);
 		chartReport.addColumn(yAxisColumn);
+		int index = 2;
+		for (Pair<Long, String> item : series) {
+			final String attributeName = item.getKey().toString();
+			chartReport.addColumn(new Column(item.getValue(), attributeName, index++, findType(attributeName), Column.Y_AXIS_SOURCE));
+		}
 		return chartReport;
 	}
 
-	private String findType(String attributeId) {
-		for (DynamicAttribute attribute : attributes) {
-			if(String.valueOf(attribute.getId()).equals(attributeId)) {
-				return attribute.getType();
-			}
-		}
-		return DynamicAttribute.PUBLISHED_DATE_ATTR.getType();
+	public Long getUserId() {
+		return userId;
 	}
 
 	public String getxAxisAttributeId() {
@@ -122,8 +125,23 @@ public class SeriesChartDashboardItemWrapperBean implements Serializable {
 		series.add(new Pair<Long, String>());
 		return index;
 	}
-	
-	
+
+	public List<Pair<Long, String>> getSeries() {
+		return series;
+	}
+
+	public void setSeries(List<Pair<Long, String>> series) {
+		this.series = series;
+	}
+
+	private String findType(String attributeId) {
+		for (DynamicAttribute attribute : attributes) {
+			if(String.valueOf(attribute.getId()).equals(attributeId)) {
+				return attribute.getType();
+			}
+		}
+		return DynamicAttribute.PUBLISHED_DATE_ATTR.getType();
+	}
 
 	private final Long userId;
 	private final String name;
@@ -133,6 +151,7 @@ public class SeriesChartDashboardItemWrapperBean implements Serializable {
 	private Dashboard dashboard;
 	private String xAxisLabel;
 	private String yAxisLabel;
+	@NotEmpty
 	private String chartLabel;
 	private Long workflowId;
 	private List<Pair<Long, String>> series = new ArrayList<>();
