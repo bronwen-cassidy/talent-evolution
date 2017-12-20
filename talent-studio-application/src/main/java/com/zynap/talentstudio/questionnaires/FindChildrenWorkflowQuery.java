@@ -13,7 +13,7 @@ public class FindChildrenWorkflowQuery implements QuerySpecification {
 
 	@Override
 	public String where() {
-		return "workflow.parentId = " + parentWorkflowId;
+		return "(workflow.parentId=" + parentWorkflowId + " or workflow.id=" + parentWorkflowId + ")";
 	}
 
 	@Override
@@ -23,7 +23,7 @@ public class FindChildrenWorkflowQuery implements QuerySpecification {
 
 	@Override
 	public String select() {
-		return "workflow";
+		return "new " + QuestionnaireWorkflowDTO.class.getName() + "(workflow.id, workflow.label, workflow.createdDate)";
 	}
 
 	@Override

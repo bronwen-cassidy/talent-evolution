@@ -20,16 +20,14 @@ import com.zynap.talentstudio.web.utils.ZynapWebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +49,7 @@ public class EditMyDashboardAddChartController {
 	}
 
 	@RequestMapping(value = "editmydashboard.htm", method = RequestMethod.GET)
-	public String showEditMyDashbaordView(HttpServletRequest request, @RequestParam("uid") Long userId, Model model) {
+	public String showEditMyDashbaordView(HttpServletRequest request, Model model) {
 		List<QuestionnaireWorkflowDTO> workflows = questionnaireWorkflowService.findRepublishableWorkflows(ZynapWebUtils.getUserSession(request).getSubjectId());
 		model.addAttribute("workflows", workflows);
 		return "editmydashboard";
@@ -59,8 +57,8 @@ public class EditMyDashboardAddChartController {
 	
 	@RequestMapping(value = "loadattributes.htm", method = RequestMethod.GET)
 	public String loadAttributes(@RequestParam("wfId") Long workflowId, Model model,@ModelAttribute("command") SeriesChartDashboardItemWrapperBean command) throws TalentStudioException {
+		if(workflowId == null) return "";
 		List<DynamicAttribute> filteredAttributes = buildAttributeList(workflowId);
-		
 		command.setAttributes(filteredAttributes);
 		model.addAttribute("attributes", filteredAttributes);
 		return "mydashboardattributes";
@@ -76,7 +74,7 @@ public class EditMyDashboardAddChartController {
 
 
 	@RequestMapping(value = "savemydashboard", method = RequestMethod.POST)
-	public String saveDashboard(HttpServletRequest request, @ModelAttribute("command") SeriesChartDashboardItemWrapperBean command) throws TalentStudioException {
+	public String saveDashboard(HttpServletRequest request, @ModelAttribute("command") SeriesChartDashboardItemWrapperBean command, SessionStatus status) throws TalentStudioException {
 		final Report chartReport = command.getModifiedReport();
 		reportService.create(chartReport);
 		
@@ -84,7 +82,7 @@ public class EditMyDashboardAddChartController {
 		modifiedDashboard.setPopulationId(Population.DUMMY_POPULATION_ID);
 		// 1 save the report
 		dashboardService.createOrUpdate(modifiedDashboard, ZynapWebUtils.getUserSession(request).getSubjectId());
-		
+		status.setComplete();
 		return "redirect:/talentarena/home.htm";
 	}
 
@@ -101,8 +99,9 @@ public class EditMyDashboardAddChartController {
 		}
 	}
 
-	@RequestMapping(value = "cancelview.htm", method = RequestMethod.GET)
-	public String cancelView() {
+	@RequestMapping(value = "canceladddashboard.htm", method = RequestMethod.GET)
+	public String cancelView(SessionStatus status) {
+		status.setComplete();
 		return "redirect:/talentarena/home.htm";
 	}
 

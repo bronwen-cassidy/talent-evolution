@@ -28,8 +28,7 @@ import com.zynap.talentstudio.organisation.subjects.Subject;
 import com.zynap.talentstudio.questionnaires.IQueWorkflowService;
 import com.zynap.talentstudio.questionnaires.IQuestionnaireService;
 import com.zynap.talentstudio.questionnaires.Questionnaire;
-import com.zynap.talentstudio.questionnaires.QuestionnaireWorkflow;
-import com.zynap.talentstudio.util.FormatterFactory;
+import com.zynap.talentstudio.questionnaires.QuestionnaireWorkflowDTO;
 import com.zynap.talentstudio.web.analysis.populations.PopulationUtils;
 import com.zynap.talentstudio.web.analysis.reports.cewolf.producers.AbstractChartProducer;
 import com.zynap.talentstudio.web.analysis.reports.cewolf.producers.BarChartProducer;
@@ -160,7 +159,7 @@ public class SubjectDashboardBuilder implements Serializable {
 		List<Column> yAxisColumns = xyChartAttributes.get(Column.Y_AXIS_SOURCE);
 
 		// always the same workflow  - there is only one
-		List<QuestionnaireWorkflow> workflows = findWorkflows(xAxisParameter.getAnalysisParameter(), queWorkflowService);
+		List<QuestionnaireWorkflowDTO> workflows = findWorkflows(xAxisParameter.getAnalysisParameter(), queWorkflowService);
 		
 		List<Series> result = new ArrayList<>();
 		//t odo need to find the published date attribute for each of the workflows
@@ -169,7 +168,7 @@ public class SubjectDashboardBuilder implements Serializable {
 			Series series = new Series(yAxisColumn);
 			
 			// workflows represent x axis
-			for (QuestionnaireWorkflow workflow : workflows) {
+			for (QuestionnaireWorkflowDTO workflow : workflows) {
 
 				final Collection<Questionnaire> questionnaires = questionnaireService.findQuestionnaires(workflow.getId(), subject.getId());
 
@@ -177,7 +176,7 @@ public class SubjectDashboardBuilder implements Serializable {
 					Questionnaire q = questionnaires.iterator().next();
 					AttributeWrapperBean yAnswer = getAttributeWrapperBean(yAxisColumn, q); 
 					 
-					AttributeWrapperBean xAnswer = null;
+					AttributeWrapperBean xAnswer;
 					if (DynamicAttribute.PUBLISHED_DATE_DA_ID.equals(xAxisParameter.getDynamicAttributeId())) {
 						xAnswer = new AttributeWrapperBean(AttributeValue.create(workflow.getCreatedDate().toString(), PUBLISHED_DATE_ATTR));
 					} else {
@@ -200,16 +199,9 @@ public class SubjectDashboardBuilder implements Serializable {
 		return answer;
 	}
 
-	private List<QuestionnaireWorkflow> findWorkflows(AnalysisParameter analysisParameter, IQueWorkflowService queWorkflowService) {
+	private List<QuestionnaireWorkflowDTO> findWorkflows(AnalysisParameter analysisParameter, IQueWorkflowService queWorkflowService) {
 		final Long questionnaireWorkflowId = analysisParameter.getQuestionnaireWorkflowId();
-		List<QuestionnaireWorkflow> workflows = queWorkflowService.findAllRelatedWorkflows(questionnaireWorkflowId);
-		QuestionnaireWorkflow root;
-		try {
-			root = queWorkflowService.findById(questionnaireWorkflowId);
-		} catch (TalentStudioException e) {
-			return workflows;
-		}
-		workflows.add(0, root);
+		List<QuestionnaireWorkflowDTO> workflows = queWorkflowService.findAllRelatedWorkflows(questionnaireWorkflowId);
 		return workflows;
 	}
 

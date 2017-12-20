@@ -9,7 +9,7 @@
     <legend><c:out value="${dashboardItem.label}"/></legend>
     <button id="deleteme-<c:out value="${dashboardItem.id}"/>" class="remove-dashboard-item" value="X">X</button>
     
-    <div id="chart_<c:out value="${dashboardItem.id}"/>" class="col-9">
+    <div id="chart_<c:out value="${dashboardItem.id}"/>" class="col-10 scroll-x centered">
 
     </div>
 
@@ -18,7 +18,7 @@
 <script type="text/javascript">
 
     $(function() {
-
+        var data = [];
         <%
             DashboardItem item = (DashboardItem) pageContext.getAttribute("dashboardItem");
             FilledSeriesChartReport filledReport = (FilledSeriesChartReport) pageContext.getAttribute("filledReport");
@@ -27,7 +27,6 @@
             for (Series s : seriesChartReportAnswers) {
                 index++;   
         %>
-        var data = [];
         
         var trace<%=index%> = {
             

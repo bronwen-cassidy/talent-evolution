@@ -519,7 +519,7 @@ public class HibernateQuestionnaireDao extends ZynapPersistenceSupport implement
     
 	public <T> List<T> query(QuerySpecification spec) {
 
-    	// todo String query = spec.select().from().where().and().orderBy().build();
+    	// String query = spec.select().from().where().and().orderBy().build();
 		
     	String query = "select distinct " + spec.select() + " from " + spec.from() +
 				" where " + spec.where();

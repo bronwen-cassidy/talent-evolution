@@ -23,7 +23,10 @@
     <%@ include file="../includes/stylesheets.jsp" %>
 
     <script src="<c:url value="/js/jquery-1.7.2.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/js/jquery.validate.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/js/additional-methods.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/js/jquery-ui-1.8.21.custom.min.js"/>" type="text/javascript"></script>
+    
     <script src="<c:url value="/js/kube.min.js"/>" type="text/javascript"></script>
 
     <script src="<c:url value="/dwr/engine.js"/>" type="text/javascript"></script>

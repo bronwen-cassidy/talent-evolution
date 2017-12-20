@@ -48,5 +48,5 @@ public interface IQueWorkflowService extends IZynapService, IQuestionnaireCommon
 
 	List<QuestionnaireWorkflowDTO> findRepublishableWorkflows(Long subjectId);
 
-	List<QuestionnaireWorkflow> findAllRelatedWorkflows(Long parentWorkflowId);
+	List<QuestionnaireWorkflowDTO> findAllRelatedWorkflows(Long parentWorkflowId);
 }

@@ -228,8 +228,7 @@ ul {
 }
 
 .centered {
-    margin-left: auto;
-    margin-right: auto;
+    margin:auto;
 }
 
 .left {
@@ -2012,6 +2011,11 @@ img.square-20 {
 .question_table {
     width:100%;
     table-layout:fixed;
+}
+
+.scroll-x {
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 
 /*============================================ reporting chart styles =====================================================*/

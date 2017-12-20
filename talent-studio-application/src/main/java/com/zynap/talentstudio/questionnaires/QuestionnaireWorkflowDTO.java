@@ -24,6 +24,12 @@ public class QuestionnaireWorkflowDTO implements Serializable {
         this.label = label;
     }
 
+	public QuestionnaireWorkflowDTO(Long id, String label, Date createdDate) {
+		this.id = id;
+		this.label = label;
+		this.createdDate = createdDate;
+	}
+
     public QuestionnaireWorkflowDTO(Long id, String label, String workflowType, String groupLabel, Date startDate,
                                     Date lastRepublishedDate, Date expiryDate, String status, String definitionLabel,
                                     Long definitionId, String populationLabel) {
@@ -102,7 +108,15 @@ public class QuestionnaireWorkflowDTO implements Serializable {
         return result;
     }
 
-    public Date getLastRepublishedDate() {
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public Date getLastRepublishedDate() {
         return lastRepublishedDate;
     }
 
@@ -114,7 +128,9 @@ public class QuestionnaireWorkflowDTO implements Serializable {
         return startDate;
     }
 
-    private Long id;
+	private Date createdDate;
+
+	private Long id;
     private String label;
     private String groupLabel;
     private Date expiryDate;

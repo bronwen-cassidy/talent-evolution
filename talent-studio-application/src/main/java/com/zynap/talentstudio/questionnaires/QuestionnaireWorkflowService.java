@@ -88,7 +88,7 @@ public class QuestionnaireWorkflowService extends AbstractQuestionnaireService i
 	}
 
 	@Override
-	public List<QuestionnaireWorkflow> findAllRelatedWorkflows(Long parentWorkflowId) {
+	public List<QuestionnaireWorkflowDTO> findAllRelatedWorkflows(Long parentWorkflowId) {
     	QuerySpecification query = new FindChildrenWorkflowQuery(parentWorkflowId);
 		return questionnaireDao.query(query);
 	}
