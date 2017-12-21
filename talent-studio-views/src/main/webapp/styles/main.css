@@ -115,7 +115,7 @@ span.verticalOptions {
 }
 
 /* attempt to start mimicking the bootstrap so when we can move it will be easier */
-span.column {
+.column {
     display:inline;
     float:left;
     margin-top:5px;
@@ -124,6 +124,10 @@ span.column {
 
 span.col-50 {
     width:49%;
+}
+
+.col-30 {
+    width:31%;
 }
 
 span.col-25 {
@@ -1957,7 +1961,6 @@ td.emptyCell {
 }
 
 iframe.dashboard {
-
     width: 100%;
     height: 100%;
     overflow: hidden;
@@ -2016,6 +2019,15 @@ img.square-20 {
 .scroll-x {
     overflow-x: auto;
     overflow-y: hidden;
+}
+
+.row {
+    width: 80%;
+}
+
+.column > input, .column > select {
+    display:table-cell;
+    width:49%;
 }
 
 /*============================================ reporting chart styles =====================================================*/

@@ -25,7 +25,9 @@ values (-10, -10, 'Dummy Population', 'Private', 'Population for individual dash
 alter table QUE_WORKFLOWS add created_date DATE default sysdate;
 
 -- next session
-insert into DYNAMIC_ATTRIBUTES(id, label, MODIFIED_LABEL, TYPE, ARTEFACT_TYPE,UNIQUE_NUMBER) VALUES (-222, 'Published Date', 'PUBDATE12', 'DATE', 'S', -111222);
+insert into DYNAMIC_ATTRIBUTES(id, label, MODIFIED_LABEL, TYPE, ARTEFACT_TYPE,UNIQUE_NUMBER) VALUES (-222, 'Published Date', 'PUBDATE12', 'DATE', 'R', -111222);
+alter table REPORT_COLUMNS add DISPLAY_AS VARCHAR2(200);
+
 
 insert into versions(version) values('5.4.9-5.5.0');
 

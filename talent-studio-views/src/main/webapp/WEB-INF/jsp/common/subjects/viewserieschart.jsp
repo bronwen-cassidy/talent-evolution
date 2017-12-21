@@ -32,8 +32,10 @@
             
             x: [ <%= s.getXAnswers() %> ],
             y: [<%= s.getYAnswers() %>],
+            <% if(s.getDisplayAs().equals(Series.SCATTER)) {%>
             mode: 'lines+markers',
-            type: 'scatter',
+            <% } %>
+            type: '<%= s.getDisplayAs() %>',
             name: '<%= s.getSeriesName() %>'
         };
         

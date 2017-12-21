@@ -315,7 +315,15 @@ public class Column extends BasicAnalysisAttribute implements Cloneable {
         return value;
     }
 
-    public void setValue(String value) {
+	public String getDisplayAs() {
+		return displayAs;
+	}
+
+	public void setDisplayAs(String displayAs) {
+		this.displayAs = displayAs;
+	}
+
+	public void setValue(String value) {
         this.value = value;
     }
 
@@ -360,6 +368,7 @@ public class Column extends BasicAnalysisAttribute implements Cloneable {
 
     /* this is used in chart reports to determine the colour of the bar or pie when generating the chart */    
     private String displayColour;
+    private String displayAs;
     private Report report;
     private Integer position;
     private Integer weighting;

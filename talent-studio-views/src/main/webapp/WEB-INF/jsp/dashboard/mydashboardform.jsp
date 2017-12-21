@@ -4,7 +4,7 @@
 
     <form:form method="post" action="savemydashboard.htm" modelAttribute="command" id="mydashboardchartform">
         <div id="workflows" class="row">	
-            <span class="column col-6">
+            <span class="column col-50">
                 <div class="infomessage">Please select the form containing the attributes you wish to chart</div>
                  <form:select path="workflowId" id="wrkflow-select" class="validate[required]">
                      <form:option value=""><fmt:message key="please.select"/></form:option>
@@ -16,7 +16,7 @@
         </div>
 
         <div id="chart-label" class="row">	
-            <span class="column col-6">
+            <span class="column col-50">
                 <div class="infomessage"><fmt:message key="label.for.chart"/></div>
                 <form:input path="chartLabel" required="yes"/>
            </span>

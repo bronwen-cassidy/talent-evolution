@@ -23,6 +23,7 @@ public class Series {
 	public Series(Column yAxisAttribute) {
 		this.yAxisAttribute = yAxisAttribute;
 		this.answers = new ArrayList<>();
+		this.displayAs = yAxisAttribute.getDisplayAs() != null ? yAxisAttribute.getDisplayAs() : SCATTER;
 	}
 
 	public void add(AttributeWrapperBean yAnswer, AttributeWrapperBean xAnswer) {
@@ -36,7 +37,11 @@ public class Series {
 	public String getSeriesName() {
 		return yAxisAttribute.getLabel();
 	}
-	
+
+	public String getDisplayAs() {
+		return displayAs;
+	}
+
 	public String getXAnswers() {
 		StringBuilder result = new StringBuilder();
 		int i = 1;
@@ -67,6 +72,10 @@ public class Series {
 		}
 	}
 
-	private final Column yAxisAttribute;
+	public static final String SCATTER = "scatter";
+	public static final String BAR = "bar";
+
+	private Column yAxisAttribute;
+	private String displayAs;
 	private List<ChartPoint> answers; 
 }

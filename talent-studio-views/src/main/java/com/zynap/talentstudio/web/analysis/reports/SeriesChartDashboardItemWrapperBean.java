@@ -7,13 +7,10 @@ import com.zynap.talentstudio.common.AccessType;
 import com.zynap.talentstudio.dashboard.Dashboard;
 import com.zynap.talentstudio.dashboard.DashboardItem;
 import com.zynap.talentstudio.organisation.attributes.DynamicAttribute;
-import com.zynap.talentstudio.web.Pair;
-import com.zynap.talentstudio.web.organisation.attributes.AttributeWrapperBean;
+import com.zynap.talentstudio.web.Trio;
+import com.zynap.talentstudio.web.organisation.Series;
 
 import org.springframework.util.StringUtils;
-
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -51,6 +48,7 @@ public class SeriesChartDashboardItemWrapperBean implements Serializable {
 		Column yAxisColumn = new Column(yAxisLabel, yAxisAttributeId, 1, findType(yAxisAttributeId), Column.Y_AXIS_SOURCE);
 		xAxisColumn.setQuestionnaireWorkflowId(workflowId);
 		yAxisColumn.setQuestionnaireWorkflowId(workflowId);
+		yAxisColumn.setDisplayAs(StringUtils.hasText(displayAs) ? displayAs : Series.SCATTER);
 		
 		ChartReport chartReport = new ChartReport();
 		chartReport.setAccessType(AccessType.PRIVATE);
@@ -60,12 +58,14 @@ public class SeriesChartDashboardItemWrapperBean implements Serializable {
 		chartReport.addColumn(xAxisColumn);
 		chartReport.addColumn(yAxisColumn);
 		int index = 2;
-		for (Pair<String, String> item : series) {
+		for (Trio<String, String, String> item : series) {
 			String attributeName = item.getKey();
 			String value = item.getValue();
+			String type = item.getType();
 			if (StringUtils.hasText(attributeName) && StringUtils.hasText(value)) {
 				Column column = new Column(value, attributeName, index++, findType(attributeName), Column.Y_AXIS_SOURCE);
 				column.setQuestionnaireWorkflowId(workflowId);
+				column.setDisplayAs(type);
 				chartReport.addColumn(column);
 			}
 		}
@@ -124,21 +124,29 @@ public class SeriesChartDashboardItemWrapperBean implements Serializable {
 		return chartLabel;
 	}
 
+	public String getDisplayAs() {
+		return displayAs;
+	}
+
+	public void setDisplayAs(String displayAs) {
+		this.displayAs = displayAs;
+	}
+
 	public void setChartLabel(String chartLabel) {
 		this.chartLabel = chartLabel;
 	}
 
 	public int addSeries() {
 		int index = series.size();
-		series.add(new Pair<String, String>());
+		series.add(new Trio<String, String, String>());
 		return index;
 	}
 
-	public List<Pair<String, String>> getSeries() {
+	public List<Trio<String, String, String>> getSeries() {
 		return series;
 	}
 
-	public void setSeries(List<Pair<String, String>> series) {
+	public void setSeries(List<Trio<String, String, String>> series) {
 		this.series = series;
 	}
 
@@ -161,7 +169,8 @@ public class SeriesChartDashboardItemWrapperBean implements Serializable {
 	private String yAxisLabel;
 	private String chartLabel;
 	private Long workflowId;
-	private List<Pair<String, String>> series = new ArrayList<>();
+	private List<Trio<String, String, String>> series = new ArrayList<>();
 
 	private List<DynamicAttribute> attributes;
+	private String displayAs;
 }

@@ -30,26 +30,10 @@
             </generator>
         </id>
 
-        <property
-                name="label"
-                type="java.lang.String"
-                column="LABEL"
-                length="255"
-                />
-
-        <property
-                name="columnType"
-                type="java.lang.String"
-                column="COLUMN_TYPE"
-                length="255"
-                />
-
-        <property
-                name="attributeName"
-                type="java.lang.String"
-                column="REF_VALUE"
-                length="255"
-                />
+        <property name="label" type="java.lang.String" column="LABEL" length="255"/>
+        <property name="displayAs" type="java.lang.String" column="DISPLAY_AS" length="200"/>
+        <property name="columnType" type="java.lang.String" column="COLUMN_TYPE" length="255"/>
+        <property name="attributeName" type="java.lang.String" column="REF_VALUE" length="255"/>
         <property
                 name="value"
                 type="java.lang.String"

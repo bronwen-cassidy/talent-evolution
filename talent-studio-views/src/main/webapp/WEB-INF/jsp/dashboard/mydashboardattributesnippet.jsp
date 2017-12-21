@@ -3,7 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <div class="row">
-    <span class="column col-6">
+    <span class="column col-50">
         <div class="infomessage"><fmt:message key="please.select.x.axis.attribute"/></div>
         <form:select path="command.xAxisAttributeId" id="x-attrs" required="yes">
             <form:option value=""><fmt:message key="please.select"/></form:option>
@@ -14,7 +14,7 @@
          </form:select>
         <form:errors path="command.xAxisAttributeId" cssClass="error"/>
     </span>
-    <span class="column col-6">
+    <span class="column col-50">
         <div class="infomessage"><fmt:message key="please.select.y.axis.attribute"/></div>	
         <form:select path="command.yAxisAttributeId" id="y-attrs" required="yes">
             <form:option value="-1"><fmt:message key="please.select"/></form:option>
@@ -23,18 +23,27 @@
             </c:forEach>
         </form:select>
     </span>
-    
 </div>
 <div class="row">
 
-    <span class="column col-6">
+    <span class="column col-50">
         <div class="infomessage"><fmt:message key="please.select.x.axis.label"/></div>
         <form:input path="command.xAxisLabel" id="x-axis-label" required="yes"/>
     </span>
 
-    <span class="column col-6">
+    <span class="column col-50">
         <div class="infomessage"><fmt:message key="please.select.y.axis.label"/></div>
         <form:input path="command.yAxisLabel" id="y-axis-label" required="yes"/>
+    </span>
+</div>
+
+<div class="row">
+    <span class="column col-50">
+        <div class="infomessage"><fmt:message key="please.select.chart.type"/></div>	
+        <form:select path="command.displayAs" id="y-type">
+            <form:option value="scatter"><fmt:message key="line.chart"/></form:option>
+            <form:option value="bar"><fmt:message key="bar.chart"/></form:option>
+        </form:select>
     </span>
 </div>
 
