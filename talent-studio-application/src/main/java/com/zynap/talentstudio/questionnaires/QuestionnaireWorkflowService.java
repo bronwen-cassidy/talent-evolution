@@ -31,7 +31,7 @@ import java.util.List;
  * @since 08-Mar-2007 16:48:34
  */
 
-public class QuestionnaireWorkflowService extends AbstractQuestionnaireService implements IQueWorkflowService {
+public class QuestionnaireWorkflowService<T extends QuestionnaireWorkflow> extends AbstractQuestionnaireService implements IQueWorkflowService {
 
     public List findAll() throws TalentStudioException {
         return (List) questionnaireDao.findAllWorkflows();
@@ -72,8 +72,8 @@ public class QuestionnaireWorkflowService extends AbstractQuestionnaireService i
 
     /**
      * Needed to refresh the hibernate records, unfortunately the reload is via a stored procedure and is therefore not visible to hibernate
-     * @param workflowId
-     * @throws TalentStudioException
+     * @param workflowId the workflow
+     * @throws TalentStudioException  when the item is not found
      */
     public void reload(Long workflowId) throws TalentStudioException {
         QuestionnaireWorkflow workflow = findWorkflowById(workflowId);
@@ -192,10 +192,10 @@ public class QuestionnaireWorkflowService extends AbstractQuestionnaireService i
         return fullNames;
     }
 
-    public <T> T findById(Long questionnaireWorkflowId) throws TalentStudioException {
+    public QuestionnaireWorkflow findById(Long questionnaireWorkflowId) throws TalentStudioException {
         final QuestionnaireWorkflow questionnaireWorkflow = questionnaireDao.findById(questionnaireWorkflowId);
         questionnaireWorkflow.getQuestionnaireDefinition().getDynamicAttributes();
-        return (T) questionnaireWorkflow;
+        return questionnaireWorkflow;
     }
 
     public QuestionnaireWorkflow findWorkflowById(Long queWorkflowId) throws TalentStudioException {

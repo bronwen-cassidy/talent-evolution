@@ -97,6 +97,7 @@ public class RepublishQuestionnaireController {
 
 		newWorkflow.setLabel(parentlabel + " - " + today);
 		newWorkflow.setParentLabel(parentlabel);
+		newWorkflow.setParentId(parentId);
 		try {
 			questionnaireWorkflowService.create(newWorkflow);
 		} catch (Throwable e) {
